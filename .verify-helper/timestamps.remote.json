@@ -17,6 +17,7 @@
 "test/yosupo/lowest_common_ancestor.test.cpp": "2026-06-15 11:56:15 +0900",
 "test/yosupo/many_aplusb_128bit.test.cpp": "2026-06-15 11:56:15 +0900",
 "test/yosupo/matching_on_bipartite_graph.test.cpp": "2026-06-15 11:56:15 +0900",
+"test/yosupo/matrix_product.test.cpp": "2026-06-15 14:31:15 +0900",
 "test/yosupo/minimum_spanning_tree.test.cpp": "2026-06-15 11:56:15 +0900",
 "test/yosupo/number_of_substrings.test.cpp": "2026-06-15 11:56:15 +0900",
 "test/yosupo/point_add_range_sum.test.cpp": "2026-06-15 11:56:15 +0900",
