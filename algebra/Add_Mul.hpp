@@ -23,5 +23,5 @@ struct Add_Mul {
   static S minus(S x) { return -x; }
   static S recip(S x) requires is_modint_v<T> { return 1 / x; }
 
-  And_Mul() = delete;
+  Add_Mul() = delete;
 };

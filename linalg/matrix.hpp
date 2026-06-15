@@ -58,7 +58,7 @@ public:
       }
     }
     return res;
-  }  
+  }
   friend matrix operator*(const matrix& lhs, const matrix& rhs) {
     assert(lhs.w == rhs.h);
     matrix res(lhs.h, rhs.w);
