@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/kth_root_integer"
 
-#include "../../number/general.hpp"
+#include "../../number/isqrt.hpp"
 #include <bits/stdc++.h>
 
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
