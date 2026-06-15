@@ -105,7 +105,7 @@ public:
     return r;
   }
   mint inv() const {
-    auto eg = ext_gcd(v, m);
+    auto eg = ext_gcd(v, mod());
     assert(eg.first == 1);
     return eg.second;
   }
