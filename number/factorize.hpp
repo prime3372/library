@@ -6,8 +6,8 @@
 #include <random>
 #include <utility>
 #include <vector>
-#include "general.hpp"
 #include "is_prime.hpp"
+#include "isqrt.hpp"
 
 namespace internal {
 
@@ -49,7 +49,7 @@ long long pollard_rho(long long n) {
   }
 }
 
-}
+} // namespace internal
 
 std::vector<std::pair<long long, int>> factorize(long long n) {
   assert(1 <= n);

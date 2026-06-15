@@ -1,6 +1,6 @@
 #pragma once
 
-#include "general.hpp"
+#include "pow_mod.hpp"
 
 // Cipolla's algorithm
 constexpr long long sqrt_mod(long long a, long long p) {

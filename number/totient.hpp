@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cassert>
-#include "general.hpp"
+#include <numeric>
 
 std::vector<int> totient(int n) {
   assert(0 <= n);

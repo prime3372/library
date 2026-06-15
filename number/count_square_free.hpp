@@ -2,7 +2,7 @@
 
 #include <cassert>
 #include <vector>
-#include "general.hpp"
+#include "isqrt.hpp"
 #include "mobius.hpp"
 
 // Jakub Pawlewicz,

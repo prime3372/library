@@ -1,6 +1,6 @@
 #pragma once
 
-#include "general.hpp"
+#include "pow_mod.hpp"
 
 // M. Forisek and J. Jancina,
 // Fast Primality Testing for Integers That Fit into a Machine Word

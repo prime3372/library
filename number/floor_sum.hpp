@@ -29,7 +29,7 @@ constexpr unsigned long long floor_sum_unsigned(unsigned long long n,
   return ans;
 }
 
-}
+} // namespace internal
 
 constexpr long long floor_sum(int n, int m, long long a, long long b) {
   assert(0 <= n && 1 <= m);
