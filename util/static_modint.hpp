@@ -3,6 +3,7 @@
 #include <cassert>
 #include <iostream>
 #include <type_traits>
+#include "../number/is_prime.hpp"
 #include "type_traits.hpp"
 
 template <int m> requires (1 <= m) struct static_modint {
@@ -78,6 +79,10 @@ public:
     return r;
   }
   mint inv() const {
+    if constexpr (prime) {
+      assert(v);
+      return pow(umod() - 2);
+    }
     int x0 = 0, x1 = 1;
     int g0 = m, g1 = v;
     while (g1) {
@@ -116,6 +121,7 @@ public:
 private:
   unsigned int v;
   constexpr unsigned int umod() { return m; }
+  static constexpr bool prime = is_prime(m);
 };
 
 using modint998244353 = static_modint<998244353>;
