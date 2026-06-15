@@ -1,0 +1,20 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "oj-bundle current file",
+            "type": "shell",
+            "command": "python -m onlinejudge_bundle.main ${file} -I ${workspaceFolder} > ${workspaceFolder}/submission.cpp ; code ${workspaceFolder}/submission.cpp",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
