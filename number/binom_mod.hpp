@@ -6,8 +6,7 @@
 template <class mint> struct binom_mod {
 public:
   binom_mod() : binom_mod(1) {}
-  explicit binom_mod(int _N) {
-    N = _N;
+  explicit binom_mod(int _N) : N(_N) {
     if (_N < 1) _N = 1;
     f.resize(_N + 1);
     finv.resize(_N + 1);

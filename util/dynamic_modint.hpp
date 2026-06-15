@@ -4,6 +4,7 @@
 #include <iostream>
 #include <utility>
 #include <type_traits>
+#include "../number/ext_gcd.hpp"
 #include "type_traits.hpp"
 
 namespace internal {
@@ -104,17 +105,9 @@ public:
     return r;
   }
   mint inv() const {
-    int x0 = 0, x1 = 1;
-    int g0 = mod(), g1 = v;
-    while (g1) {
-      int q = g0 / g1;
-      x0 -= x1 * q;
-      g0 -= g1 * q;
-      std::swap(x0, x1);
-      std::swap(g0, g1);
-    }
-    assert(g0 == 1);
-    return x0;
+    auto eg = ext_gcd(v, m);
+    assert(eg.first == 1);
+    return eg.second;
   }
 
   friend mint operator+(const mint& lhs, const mint& rhs) { return mint(lhs) += rhs; }

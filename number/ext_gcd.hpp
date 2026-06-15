@@ -3,7 +3,7 @@
 #include <cassert>
 #include <utility>
 
-constexpr std::pair<long long, long long> inv_gcd(long long a, long long b) {
+constexpr std::pair<long long, long long> ext_gcd(long long a, long long b) {
   assert(1 <= b);
   a = a < 0 ? a % b + b : a % b;
   long long g0 = b, g1 = a;
@@ -20,8 +20,8 @@ constexpr std::pair<long long, long long> inv_gcd(long long a, long long b) {
 }
 
 constexpr long long inv_mod(long long x, long long m) {
-  assert(2 <= m);
-  auto z = inv_gcd(x, m);
+  assert(1 <= m);
+  auto z = ext_gcd(x, m);
   assert(z.first == 1);
   return z.second;
 }

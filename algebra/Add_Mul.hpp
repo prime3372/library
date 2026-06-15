@@ -21,7 +21,7 @@ struct Add_Mul {
   static S zero() { return 0; }
   static S one() { return 1; }
   static S minus(S x) { return -x; }
-  static S recip(S x) requires is_modint_v<T> { return 1 / x; }
+  static S recip(S x) requires std::is_floating_point_v<T> || is_modint_v<T> { return 1 / x; }
 
   Add_Mul() = delete;
 };

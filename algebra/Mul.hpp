@@ -9,6 +9,6 @@ struct Mul {
   using S = T;
   static S op(S x, S y) { return x * y; }
   static S e() { return 1; }
-  static S inv(S x) requires is_modint_v<T> { return 1 / x; }
+  static S inv(S x) requires std::is_floating_point_v<T> || is_modint_v<T> { return 1 / x; }
   Mul() = delete;
 };

@@ -4,8 +4,7 @@
 #include <type_traits>
 #include "Assign.hpp"
 
-template <class T, T infty>
-  requires std::is_arithmetic_v<T>
+template <class T, T infty> requires std::is_arithmetic_v<T>
 struct Max_Assign {
   using S = T;
   static S op(S x, S y) { return std::max(x, y); }

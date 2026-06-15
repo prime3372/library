@@ -3,8 +3,7 @@
 #include <algorithm>
 #include <type_traits>
 
-template <class T, T infty>
-  requires std::is_arithmetic_v<T>;
+template <class T, T infty> requires std::is_arithmetic_v<T>;
 struct Max {
   using S = T;
   static S op(S x, S y) { return std::max(x, y); }

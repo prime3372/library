@@ -2,7 +2,7 @@
 
 #include <cassert>
 #include <utility>
-#include "inv_mod.hpp"
+#include "ext_gcd.hpp"
 
 std::pair<long long, long long> crt(const std::vector<long long>& r,
                                     const std::vector<long long>& m) {
@@ -22,7 +22,7 @@ std::pair<long long, long long> crt(const std::vector<long long>& r,
       continue;
     }
 
-    auto [g, im] = inv_gcd(m0, m1);
+    auto [g, im] = ext_gcd(m0, m1);
     if ((r1 - r0) % g) return {0, 0};
 
     long long u1 = m1 / g;
