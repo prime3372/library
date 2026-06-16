@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <cstddef>
 #include <vector>
 #include "dynamic_fenwick_tree.hpp"
 

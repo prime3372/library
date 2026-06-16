@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <cstddef>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -33,6 +34,9 @@ public:
 
   dynamic_bitset() : n(0) {}
   explicit dynamic_bitset(size_t _n) : n(_n), a((_n + 63) / 64, 0) {}
+  explicit dynamic_bitset(size_t _n, bool b) : n(_n), a((_n + 63) / 64, b ? (unsigned long long)(-1) : 0) {
+    if (b && n % 64) a.back() &= mask(n % 64) - 1;
+  }
   explicit dynamic_bitset(const std::string& s) : n(s.size()), a((s.size() + 63) / 64) {
     for (size_t i = 0; i < n; i++) {
       assert(s[n - 1 - i] == '0' || s[n - 1 - i] == '1');

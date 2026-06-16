@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <cstddef>
 #include <memory>
 #include <vector>
 #include "../algebra/concepts.hpp"
@@ -32,7 +33,7 @@ public:
   template <bool (*f)(S)> size_t max_right(size_t l) const {
     return max_right(l, [](S x) { return f(x); });
   }
-  template <class F> size_t max_right(int l, const F& f) const {
+  template <class F> size_t max_right(size_t l, const F& f) const {
     assert(l <= n);
     assert(f(M::e()));
     S product = M::e();

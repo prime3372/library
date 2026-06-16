@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <cstddef>
 #include "hash_map.hpp"
 
 template <class T> struct dynamic_fenwick_tree {
