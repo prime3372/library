@@ -2,8 +2,10 @@
 
 #include <cassert>
 #include <vector>
+#include "../util/type_traits.hpp"
 
-template <class mint> struct binom_mod {
+template <class mint> requires is_modint_v<mint>
+struct binom_mod {
 public:
   binom_mod() : binom_mod(1) {}
   explicit binom_mod(int _N) : N(_N) {

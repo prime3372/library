@@ -4,7 +4,8 @@
 #include "factorize.hpp"
 
 long long primitive_root(long long p) {
-  if (p == 2) return 1;  
+  assert(2 <= p);
+  if (p == 2) return 1;
   auto fs = factorize(p - 1);
   for (int g = 2; g < p; g++) {
     bool ok = true;
