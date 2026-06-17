@@ -2,7 +2,7 @@
 
 #include <cassert>
 #include <vector>
-#include "../algebra/concepts.hpp"
+#include "../algebra/monoid.hpp"
 
 template <monoid M> struct slide_window_aggregation {
   using S = typename M::S;

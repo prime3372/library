@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Assign.hpp"
-#include "concepts.hpp"
+#include "monoid.hpp"
 #include "Range.hpp"
 
 template <monoid M> struct Range_Assign {

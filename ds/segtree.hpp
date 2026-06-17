@@ -5,7 +5,7 @@
 #include <cassert>
 #include <type_traits>
 #include <vector>
-#include "../algebra/concepts.hpp"
+#include "../algebra/monoid.hpp"
 
 template <monoid M> struct segtree {
   using S = typename M::S;

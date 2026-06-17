@@ -3,7 +3,7 @@
 #include <array>
 #include <cassert>
 #include "../algebra/Add_Mul.hpp"
-#include "../algebra/concepts.hpp"
+#include "../algebra/semiring.hpp"
 #include "../util/type_traits.hpp"
 
 template <class R, int h, int w> struct matrix_array {

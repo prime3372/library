@@ -4,7 +4,7 @@
 #include <cassert>
 #include <iterator>
 #include <vector>
-#include "../algebra/concepts.hpp"
+#include "../algebra/monoid.hpp"
 
 template <monoid M> struct slide_window_aggregation_deque {
   using S = typename M::S;

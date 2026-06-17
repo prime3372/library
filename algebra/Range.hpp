@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstddef>
-#include "concepts.hpp"
+#include "monoid.hpp"
 
 template <monoid M> struct Range {
   struct S {

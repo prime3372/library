@@ -6,7 +6,7 @@
 #include <cstddef>
 #include <memory>
 #include <vector>
-#include "../algebra/concepts.hpp"
+#include "../algebra/monoid.hpp"
 
 template <monoid M> struct dynamic_segtree {
   using S = typename M::S;

@@ -8,7 +8,7 @@
 #include <cstddef>
 #include <memory>
 #include <vector>
-#include "../algebra/concepts.hpp"
+#include "../algebra/acted_monoid.hpp"
 
 template <acted_monoid M> struct dynamic_lazy_segtree {
   using S = typename M::S;

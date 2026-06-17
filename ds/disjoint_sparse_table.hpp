@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <cassert>
 #include <vector>
-#include "../algebra/concepts.hpp"
+#include "../algebra/monoid.hpp"
 
 template <monoid M> struct disjoint_sparse_table {
   using S = typename M::S;
