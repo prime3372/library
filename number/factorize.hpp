@@ -9,6 +9,8 @@
 #include "is_prime.hpp"
 #include "isqrt.hpp"
 
+namespace internal {
+
 // Pollard's rho algorithm
 long long pollard_rho(long long n) {
   assert(2 <= n);
@@ -48,13 +50,15 @@ long long pollard_rho(long long n) {
   }
 }
 
+} // namespace internal
+
 std::vector<std::pair<long long, int>> factorize(long long n) {
   assert(1 <= n);
   if (n == 1) return {};
 
   std::vector<long long> fac;
   auto _factorize = [&](auto self, long long x) -> void {
-    long long d = pollard_rho(x);
+    long long d = internal::pollard_rho(x);
     if (d == x) {
       fac.push_back(d);
       return;

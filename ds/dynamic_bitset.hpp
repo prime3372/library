@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <bit>
 #include <cassert>
 #include <cstddef>
 #include <iostream>
@@ -83,9 +84,9 @@ public:
     if (r == 0) return 0;
     size_t res = 0;
     for (size_t i = 0; i < r / 64; i++) {
-      res += __builtin_popcountll(a[i]);
+      res += std::popcount(a[i]);
     }
-    res += __builtin_popcountll(a[(r - 1) / 64] & (mask(r % 64) - 1));
+    res += std::popcount(a[(r - 1) / 64] & (mask(r % 64) - 1));
     return res;
   }
 
@@ -95,9 +96,9 @@ public:
     size_t j = i / 64;
     unsigned long long first = a[j];
     first &= (unsigned long long)(-1) << (i % 64);
-    if (first != 0) return j * 64 + __builtin_ctzll(first);
+    if (first) return j * 64 + std::countr_zero(first);
     while (++j < a.size()) {
-      if (a[j] != 0) return j * 64 + __builtin_ctzll(a[j]);
+      if (a[j]) return j * 64 + std::countr_zero(a[j]);
     }
     return n;
   }
@@ -126,14 +127,16 @@ public:
       std::fill(a.begin(), a.end(), 0);
       return *this;
     }
-    size_t block_shift = shift / 64;
-    size_t bit_shift = shift % 64;
+
+    size_t block_shift = shift / 64;    
     if (block_shift > 0) {
       for (size_t i = a.size() - 1; i >= block_shift; i--) {
         a[i] = a[i - block_shift]; 
       }
       std::fill(a.begin(), a.begin() + block_shift, 0);
     }
+
+    size_t bit_shift = shift % 64;
     if (bit_shift > 0) {
       for (size_t i = a.size() - 1; i > block_shift; i--) {
         a[i] <<= bit_shift;
@@ -141,6 +144,7 @@ public:
       }
       a[block_shift] <<= bit_shift;
     }
+
     if (n % 64) a.back() &= mask(n % 64) - 1;
     return *this;
   }
@@ -150,14 +154,16 @@ public:
       std::fill(a.begin(), a.end(), 0);
       return *this;
     }
+
     size_t block_shift = shift / 64;
-    size_t bit_shift = shift % 64;
     if (block_shift > 0) {
       for (size_t i = 0; i < a.size() - block_shift; i++) {
         a[i] = a[i + block_shift];
       }
       std::fill(a.end() - block_shift, a.end(), 0);
     }
+
+    size_t bit_shift = shift % 64;
     if (bit_shift > 0) {
       for (size_t i = 0; i < a.size() - block_shift - 1; i++) {
         a[i] >>= bit_shift;
@@ -165,6 +171,7 @@ public:
       }
       a[a.size() - block_shift - 1] >>= bit_shift;
     }
+
     return *this;
   }
 

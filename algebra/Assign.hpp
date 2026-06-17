@@ -3,8 +3,7 @@
 #include <algorithm>
 #include <type_traits>
 
-template <class T>
-struct Assign {
+template <class T> struct Assign {
   struct S {
     T val;
     bool id;

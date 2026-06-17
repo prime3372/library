@@ -5,7 +5,7 @@
 
 template <class T> struct cumsum {
 public:
-  cumsum() {}
+  cumsum() : n(0) {}
   cumsum(int _n) : n(_n), a(_n) {}
   cumsum(int _n, T x) : n(_n), a(_n, x) {}
 

@@ -3,6 +3,8 @@
 #include <cassert>
 #include <utility>
 
+namespace internal {
+
 constexpr unsigned long long floor_sum_unsigned(unsigned long long n,
                                                 unsigned long long m,
                                                 unsigned long long a,
@@ -27,6 +29,8 @@ constexpr unsigned long long floor_sum_unsigned(unsigned long long n,
   return ans;
 }
 
+} // namespace internal
+
 constexpr long long floor_sum(int n, int m, long long a, long long b) {
   assert(0 <= n && 1 <= m);
   unsigned long long ans = 0;
@@ -40,5 +44,5 @@ constexpr long long floor_sum(int n, int m, long long a, long long b) {
     ans -= 1ULL * n * ((r_b - b) / m);
     b = r_b;
   }
-  return ans + floor_sum_unsigned(n, m, a, b);
+  return ans + internal::floor_sum_unsigned(n, m, a, b);
 }
