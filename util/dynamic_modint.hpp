@@ -4,31 +4,9 @@
 #include <iostream>
 #include <utility>
 #include <type_traits>
+#include "../number/barrett.hpp"
 #include "../number/ext_gcd.hpp"
 #include "type_traits.hpp"
-
-namespace internal {
-
-struct barrett {
-public:
-  explicit barrett(unsigned int _m) : m(_m), im((unsigned long long)(-1) / _m + 1) {}
-
-  unsigned int umod() const { return m; }
-
-  unsigned int mul(unsigned int a, unsigned int b) const {
-    unsigned long long z = a;
-    z *= b;
-    unsigned long long x = (unsigned long long)(((unsigned __int128)z * im) >> 64);
-    unsigned long long y = x * m;
-    return (unsigned int)(z - y + (z < y ? m : 0));
-  }
-
-private:
-   unsigned int m;
-   unsigned long long im;
-};
-
-} // namespace internal
 
 template <int id> struct dynamic_modint {
   using mint = dynamic_modint;
@@ -36,7 +14,7 @@ template <int id> struct dynamic_modint {
 public:
   static void set_mod(int m) {
     assert(1 <= m);
-    bt = internal::barrett(m);
+    bt = barrett(m);
   }
   static int mod() { return bt.umod(); }
 
@@ -134,10 +112,10 @@ public:
 
 private:
   unsigned int v;
-  static internal::barrett bt;
+  static barrett bt;
   static unsigned int umod() { return bt.umod(); }
 };
-template <int id> internal::barrett dynamic_modint<id>::bt(998244353);
+template <int id> barrett dynamic_modint<id>::bt(998244353);
 
 using modint = dynamic_modint<-1>;
 

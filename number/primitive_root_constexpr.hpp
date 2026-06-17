@@ -2,8 +2,6 @@
 
 #include "pow_mod.hpp"
 
-namespace internal {
-
 constexpr int primitive_root_constexpr(int m) {
   if (m == 2) return 1;
   if (m == 167772161) return 3;
@@ -34,6 +32,4 @@ constexpr int primitive_root_constexpr(int m) {
     }
     if (ok) return g;
   }
-}
-
 }
