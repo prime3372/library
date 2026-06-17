@@ -10,8 +10,8 @@ int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, q;
-  cin >> n>> q;
-  doubling_lca<int> g(n);
+  cin >> n >> q;
+  doubling_lca g(n);
   rep(i, 1, n) {
     int p;
     cin >> p;

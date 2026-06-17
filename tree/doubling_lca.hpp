@@ -6,25 +6,25 @@
 #include <utility>
 #include <vector>
 
-template <class T> struct doubling_lca {
+struct doubling_lca {
 public:
   doubling_lca() : doubling_lca(0) {}
-  explicit doubling_lca(int _n) : n(_n), initialized(false), g(_n), dep(_n), co(_n) {
+  explicit doubling_lca(int _n) : n(_n), initialized(false), g(_n), dep(_n) {
     log = 1;
     while ((1 << log) < n) log++;
     par = std::vector<std::vector<int>>(log, std::vector<int>(n));
   }
 
-  void add_edge(int a, int b, T c = 0) {
+  void add_edge(int a, int b) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
-    g[a].push_back(edge{b, c});
-    g[b].push_back(edge{a, c});
+    g[a].push_back(b);
+    g[b].push_back(a);
   }
 
   void init(int r = 0) {
     assert(0 <= r && r < n);
-    dfs(r, r, 0, 0);
+    dfs(r, r, 0);
     for (int i = 0; i < log - 1; i++) {
       for (int v = 0; v < n; v++) {
         par[i + 1][v] = par[i][par[i][v]];
@@ -95,30 +95,21 @@ public:
     return pre;
   }
 
-  T dist(int a, int b) {
-    int c = lca(a, b);
-    return co[a] + co[b] - co[c] * 2;
-  }
-
 private:
   int n, root, log;
   bool initialized;
-  struct edge {
-    int to;
-    T cost;
-  };
-  std::vector<std::vector<edge>> g;
+
+  std::vector<std::vector<int>> g;
   std::vector<int> dep;
-  std::vector<T> co;
+
   std::vector<std::vector<int>> par;
 
-  void dfs(int v, int pv, int d, T c) {
+  void dfs(int v, int pv, int d) {
     par[0][v] = pv;
     dep[v] = d;
-    co[v] = c;
-    for (auto e : g[v]) {
-      if (e.to == pv) continue;
-      dfs(e.to, v, d + 1, c + e.cost);
+    for (int nv : g[v]) {
+      if (nv == pv) continue;
+      dfs(nv, v, d + 1);
     }
   }
 };

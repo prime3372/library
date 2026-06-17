@@ -11,7 +11,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  doubling_lca<int> g(n);
+  doubling_lca g(n);
   rep(i, 0, n - 1) {
     int u, v;
     cin >> u >> v;
