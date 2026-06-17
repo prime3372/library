@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <type_traits>
 #include <vector>
 #include "../algebra/concepts.hpp"
 
@@ -12,10 +13,11 @@ template <acted_monoid M> struct lazy_segtree {
 public:
   lazy_segtree() : lazy_segtree(0) {}
   explicit lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, M::e())) {}
-  explicit lazy_segtree(const std::vector<S>& v) : n(int(v.size())) {
-    lg = 0;
-    while ((1 << lg) < n) lg++;
-    size = 1 << lg;
+  template <class T>
+    requires std::is_convertible_v<T, S>
+  explicit lazy_segtree(const std::vector<T>& v) : n(int(v.size())) {
+    size = (int)std::bit_ceil((unsigned int)n);
+    log = std::countr_zero((unsigned int)size);
     d = std::vector<S>(2 * size);
     lz = std::vector<F>(size);
     for (int i = 0; i < n; i++) d[size + i] = v[i];
@@ -25,15 +27,15 @@ public:
   void set(int i, S x) {
     assert(0 <= i && i < n);
     i += size;
-    for (int j = lg; j >= 1; j--) push(i >> j);
+    for (int j = log; j >= 1; j--) push(i >> j);
     d[i] = x;
-    for (int j = 1; j <= lg; j++) update(i >> j);
+    for (int j = 1; j <= log; j++) update(i >> j);
   }
 
   S operator[](int i) {
     assert(0 <= i && i < n);
     i += size;
-    for (int j = lg; j >= 1; j--) push(i >> j);
+    for (int j = log; j >= 1; j--) push(i >> j);
     return d[i];
   }
 
@@ -44,7 +46,7 @@ public:
     l += size;
     r += size;
 
-    for (int i = lg; i >= 1; i--) {
+    for (int i = log; i >= 1; i--) {
       if (((l >> i) << i) != l) push(l >> i);
       if (((r >> i) << i) != r) push((r - 1) >> i);
     }
@@ -65,9 +67,9 @@ public:
   void apply(int i, F f) {
     assert(0 <= i && i < n);
     i += size;
-    for (int j = lg; j >= 1; j--) push(i >> j);
+    for (int j = log; j >= 1; j--) push(i >> j);
     d[i] = M::mapping(f, d[i]);
-    for (int j = 1; j <= lg; j++) update(i >> j);
+    for (int j = 1; j <= log; j++) update(i >> j);
   }
 
   void apply(int l, int r, F f) {
@@ -77,7 +79,7 @@ public:
     l += size;
     r += size;
 
-    for (int i = lg; i >= 1; i--) {
+    for (int i = log; i >= 1; i--) {
       if (((l >> i) << i) != l) push(l >> i);
       if (((r >> i) << i) != r) push((r - 1) >> i);
     }
@@ -94,7 +96,7 @@ public:
       r = _r;
     }
 
-    for (int i = 1; i <= lg; i++) {
+    for (int i = 1; i <= log; i++) {
       if (((l >> i) << i) != l) update(l >> i);
       if (((r >> i) << i) != r) update((r - 1) >> i);
     }
@@ -109,10 +111,10 @@ public:
     assert(g(M::e()));
     if (l == n) return n;
     l += size;
-    for (int i = lg; i >= 1; i--) push(l >> i);
+    for (int i = log; i >= 1; i--) push(l >> i);
     S product = M::e();
     do {
-      while (!(l & 1)) l >>= 1;
+      while (l % 2 == 0) l >>= 1;
       if (!g(M::op(product, d[l]))) {
         while (l < size) {
           push(l);
@@ -139,11 +141,11 @@ public:
     assert(g(M::e()));
     if (r == 0) return 0;
     r += size;
-    for (int i = lg; i >= 1; i--) push((r - 1) >> i);
+    for (int i = log; i >= 1; i--) push((r - 1) >> i);
     S product = M::e();
     do {
       r--;
-      while (r > 1 && (r & 1)) r >>= 1;
+      while (r > 1 && r % 2) r >>= 1;
       if (!g(M::op(d[r], product))) {
         while (r < size) {
           push(r);
@@ -161,7 +163,7 @@ public:
   }
 
 private:
-  int n, size, lg;
+  int n, size, log;
   std::vector<S> d;
   std::vector<F> lz;
 

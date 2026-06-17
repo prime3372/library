@@ -10,9 +10,9 @@ template <class T> struct doubling_lca {
 public:
   doubling_lca() : doubling_lca(0) {}
   explicit doubling_lca(int _n) : n(_n), initialized(false), g(_n), dep(_n), co(_n) {
-    lg = 1;
-    while ((1 << lg) < n) lg++;
-    par = std::vector<std::vector<int>>(lg, std::vector<int>(n));
+    log = 1;
+    while ((1 << log) < n) log++;
+    par = std::vector<std::vector<int>>(log, std::vector<int>(n));
   }
 
   void add_edge(int a, int b, T c = 0) {
@@ -25,7 +25,7 @@ public:
   void init(int r = 0) {
     assert(0 <= r && r < n);
     dfs(r, r, 0, 0);
-    for (int i = 0; i < lg - 1; i++) {
+    for (int i = 0; i < log - 1; i++) {
       for (int v = 0; v < n; v++) {
         par[i + 1][v] = par[i][par[i][v]];
       }
@@ -49,7 +49,7 @@ public:
     if (dep[a] > dep[b]) std::swap(a, b);
     b = up(b, dep[b] - dep[a]);
     if (a == b) return a;
-    for (int i = lg - 1; i >= 0; i--) {
+    for (int i = log - 1; i >= 0; i--) {
       int na = par[i][a], nb = par[i][b];
       if (na != nb) {
         a = na;
@@ -101,7 +101,7 @@ public:
   }
 
 private:
-  int n, root, lg;
+  int n, root, log;
   bool initialized;
   struct edge {
     int to;

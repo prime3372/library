@@ -13,7 +13,7 @@ struct Sum_Affine {
   static S e() { return Sum<T>::e(); }
 
   using F = typename Affine<T>::S;
-  static S mapping(F f, S x) { return {f.a * x.val + f.b * x.len, x.len}; }
+  static S mapping(F f, S x) { return S{f.a * x.val + f.b * x.len, x.len}; }
   static F composition(F g, F f) { return Affine<T>::op(f, g); }
   static F id() { return Affine<T>::e(); }
 

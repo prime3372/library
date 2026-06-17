@@ -5,7 +5,7 @@
 #include "Sum.hpp"
 #include "../util/type_traits.hpp"
 
-template <class T, T infty>
+template <class T, T identity>
   requires std::is_arithmetic_v<T> || is_modint_v<T>
 struct Sum_Assign {
   using S = typename Sum<T>::S;
@@ -13,8 +13,8 @@ struct Sum_Assign {
   static S e() { return Sum<T>::e(); }
 
   using F = typename Assign<T>::S;
-  static S mapping(F f, S x) { return f.id ? x : {f.val * x.len, x.len}; }
-  static F composition(F g, F f) { return g.id ? f : g; }
+  static S mapping(F f, S x) { return f.id ? x : f.val; }
+  static F composition(F g, F f) { return Assign<T>::op(f, g); }
   static F id() { return Assign<T>::e(); }
 
   Sum_Assign() = delete;

@@ -9,7 +9,7 @@
 using namespace std;
 using mint = modint998244353;
 using M = Sum_Affine<mint>;
-using S = Sum_Affine<mint>::S;
+using S = M::S;
 
 int main() {
   ios_base::sync_with_stdio(false);

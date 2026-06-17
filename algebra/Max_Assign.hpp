@@ -4,15 +4,15 @@
 #include <type_traits>
 #include "Assign.hpp"
 
-template <class T, T low> requires std::is_arithmetic_v<T>
+template <class T, T lower> requires std::is_arithmetic_v<T>
 struct Max_Assign {
   using S = T;
   static S op(S x, S y) { return std::max(x, y); }
-  static S e() { return low; }
+  static S e() { return lower; }
 
   using F = typename Assign<T>::S;
   static S mapping(F f, S x) { return f.id ? x : f.val; }
-  static F composition(F g, F f) { return g.id ? f : g; }
+  static F composition(F g, F f) { return Assign<T>::op(f, g); }
   static F id() { return Assign<T>::e(); }
   
   Max_Assign() = delete;

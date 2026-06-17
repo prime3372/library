@@ -1,7 +1,9 @@
 #pragma once
 
 #include <algorithm>
+#include <bit>
 #include <cassert>
+#include <type_traits>
 #include <vector>
 #include "../algebra/concepts.hpp"
 
@@ -11,10 +13,11 @@ template <monoid M> struct segtree {
 public:
   segtree() : segtree(0) {}
   explicit segtree(int n) : segtree(std::vector<S>(n, M::e())) {}
-  explicit segtree(const std::vector<S>& v) : n(int(v.size())) {
-    lg = 0;
-    while ((1 << lg) < n) lg++;
-    size = 1 << lg;
+  template <class T>
+    requires std::is_convertible_v<T, S>
+  explicit segtree(const std::vector<T>& v) : n(int(v.size())) {
+    size = (int)std::bit_ceil((unsigned int)n);
+    log = std::countr_zero((unsigned int)size);
     d = std::vector<S>(2 * size);
     for (int i = 0; i < n; i++) d[size + i] = v[i];
     for (int i = size - 1; i >= 1; i--) update(i);
@@ -24,7 +27,7 @@ public:
     assert(0 <= i && i < n);
     i += size;
     d[i] = x;
-    for (int j = 1; j <= lg; j++) update(i >> j);
+    for (int j = 1; j <= log; j++) update(i >> j);
   }
 
   S operator[](int i) const {
@@ -60,7 +63,7 @@ public:
     l += size;
     S product = M::e();
     do {
-      while (!(l & 1)) l >>= 1;
+      while (l % 2 == 0) l >>= 1;
       if (!f(M::op(product, d[l]))) {
         while (l < size) {
           l = 2 * l;
@@ -89,7 +92,7 @@ public:
     S product = M::e();
     do {
       r--;
-      while (r > 1 && (r & 1)) r >>= 1;
+      while (r > 1 && r % 2) r >>= 1;
       if (!f(M::op(d[r], product))) {
         while (r < size) {
           r = 2 * r + 1;
@@ -106,7 +109,7 @@ public:
   }
 
 private:
-  int n, size, lg;
+  int n, size, log;
   std::vector<S> d;
 
   void update(int k) {

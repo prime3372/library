@@ -5,19 +5,21 @@
 #include "Range.hpp"
 
 template <monoid M> struct Range_Assign {
+  using T = typename M::S;
+
   using S = typename Range<M>::S;
   static S op(S x, S y) { return Range<M>::op(x, y); }
   static S e() { return Range<M>::e(); }
 
-  struct F = typename Assign<typename M::S>::S;
-  static S mapping(F f, S x) { return f.id ? x : {pow(f.val, x.len), x.len}; }
-  static F composition(F g, F f) { return g.id ? f : g; }
-  static F id() { return Assign<typename M::S>::e(); }
+  using F = typename Assign<T>::S;
+  static S mapping(F f, S x) { return f.id ? x : S{pow(f.val, x.len), x.len}; }
+  static F composition(F g, F f) { return Assign<T>::op(f, g); }
+  static F id() { return Assign<T>::e(); }
 
-  static typename M::S pow(typename M::S x, size_t n) {
-    typename M::S r = M::e();
+  static T pow(T x, size_t n) {
+    T r = M::e();
     while (n) {
-      r = M::op(r, x);
+      if (n & 1) r = M::op(r, x);
       x = M::op(x, x);
       n >>= 1;
     }

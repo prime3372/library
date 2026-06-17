@@ -12,11 +12,11 @@ public:
   disjoint_sparse_table() {}
   explicit disjoint_sparse_table(const std::vector<S>& _a) : a(_a) {
     n = int(a.size());
-    lg = 0;
-    while ((1 << lg) < n) lg++;
+    log = 0;
+    while ((1 << log) < n) log++;
 
-    table.resize(lg);
-    for (int k = 0; k < lg; k++) {
+    table.resize(log);
+    for (int k = 0; k < log; k++) {
       table[k] = a;
       int w = 1 << k;
       for (int l = 0; l < n; l += 2 * w) {
@@ -30,10 +30,10 @@ public:
       }
     }
 
-    lgs.resize(1 << lg);
-    for (int k = 0; k < lg; k++) {
+    logs.resize(1 << log);
+    for (int k = 0; k < log; k++) {
       for (int i = 1 << k; i < 1 << (k + 1); i++) {
-        lgs[i] = k;
+        logs[i] = k;
       }
     }
   }
@@ -46,13 +46,13 @@ public:
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= n);
     if (r - l == 1) return a[l];
-    int k = lgs[l ^ (r - 1)];
+    int k = logs[l ^ (r - 1)];
     return M::op(table[k][l], table[k][r - 1]);
   }
 
 private:
-  int n, lg;
+  int n, log;
   std::vector<S> a;
   std::vector<std::vector<S>> table;
-  std::vector<int> lgs;
+  std::vector<int> logs;
 };

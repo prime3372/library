@@ -1,7 +1,7 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/range_affine_point_get"
+#define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum_large_array"
 
 #include "../../algebra/Sum_Affine.hpp"
-#include "../../ds/lazy_segtree.hpp"
+#include "../../ds/dynamic_lazy_segtree.hpp"
 #include "../../util/static_modint.hpp"
 #include <bits/stdc++.h>
 
@@ -14,14 +14,10 @@ using S = M::S;
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
-  int n, q;
+  size_t n;
+  int q;
   cin >> n >> q;
-  vector<S> a(n);
-  rep(i, 0, n) {
-    cin >> a[i].val;
-    a[i].len = 1;
-  }
-  lazy_segtree<M> seg(a);
+  dynamic_lazy_segtree<M> seg(n, {0, 1});
   while (q--) {
     bool t;
     cin >> t;
@@ -31,9 +27,9 @@ int main() {
       cin >> l >> r >> b >> c;
       seg.apply(l, r, {b, c});
     } else {
-      int p;
-      cin >> p;
-      cout << seg[p].val << "\n";
+      int l, r;
+      cin >> l >> r;
+      cout << seg.prod(l, r).val << "\n";
     }
   }
 }
