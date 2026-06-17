@@ -3,7 +3,7 @@
 #include <cassert>
 #include "factorize.hpp"
 
-constexpr long long primitive_root(long long p) {
+long long primitive_root(long long p) {
   if (p == 2) return 1;  
   auto fs = factorize(p - 1);
   for (int g = 2; g < p; g++) {
