@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/number_of_substrings"
 
-#include "../../string/suffix_array.hpp"
+#include "../../string/lcp_array.hpp"
 #include <bits/stdc++.h>
 
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
