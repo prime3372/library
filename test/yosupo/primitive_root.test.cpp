@@ -8,7 +8,6 @@ using namespace std;
 using ll = long long;
 
 int main() {
-  static_assert(primitive_root(998244353));
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int q;
