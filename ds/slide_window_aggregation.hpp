@@ -8,7 +8,7 @@ template <monoid M> struct slide_window_aggregation {
   using S = typename M::S;
 
 public:
-  slide_window_aggregation() : prod0(), prod1() {}
+  slide_window_aggregation() : prod0(M::e()), prod1(M::e()) {}
 
   void push(S x) { push1(x); }
   void pop() {
