@@ -11,6 +11,7 @@
 struct dynamic_bitset {
 public:
   struct ref {
+    friend struct dynamic_bitset;
   public:
     operator bool() const { return (*d & mask(pos)) != 0; }
     ref& flip() {
@@ -22,15 +23,14 @@ public:
       else *d &= ~mask(pos);
       return *this;
     }
-    ref& operator=(const ref& r) { return *this = (bool)r; }
+    ref& operator=(const ref& other) { return *this = (bool)other; }
+  private:
+    unsigned long long* d;
+    size_t pos;
     ref(dynamic_bitset& b, size_t i) {
       d = b.a.data() + i / 64;
       pos = i % 64;
     }
-
-  private:
-    unsigned long long* d;
-    size_t pos;
   };
 
   dynamic_bitset() : n(0) {}

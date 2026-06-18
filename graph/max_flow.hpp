@@ -9,7 +9,7 @@
 
 template <std::integral Cap> struct max_flow {
 public:
-  max_flow() : n(0) {}
+  max_flow() : max_flow(0) {}
   explicit max_flow(int _n) : n(_n), g(_n) {}
 
   int add_edge(int from, int to) { return add_edge(from, to, 1); }

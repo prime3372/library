@@ -12,6 +12,8 @@ template <class R> struct matrix {
 
 public:
   struct row {
+    friend struct matrix;
+  public:
     S& operator[](int j) {
       assert(0 <= j && j < w);
       return d[j];
@@ -28,10 +30,10 @@ public:
       assert(w == r.w);
       d = r.d;
     }
-    row(int _w) : w(_w), d(_w, R::zero()) {}
   private:
     int w;
     std::vector<S> d;
+    row(int _w) : w(_w), d(_w, R::zero()) {}
   };
 
   matrix() : h(0), w(0) {}

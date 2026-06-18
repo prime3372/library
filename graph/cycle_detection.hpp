@@ -6,8 +6,8 @@
 
 template <bool is_directed> struct cycle_detection {
 public:  
-  cycle_detection() : n(0), m(0) {}
-  explicit cycle_detection(int _n) : n(_n), m(0), g(_n) {}
+  cycle_detection() : cycle_detection(0) {}
+  explicit cycle_detection(int _n) : n(_n), g(_n) {}
 
   int add_edge(int from, int to) {
     assert(0 <= from && from < n);
@@ -17,7 +17,7 @@ public:
     return m++;
   }
 
-  int len;
+  int len = 0;
   std::vector<int> vertices, edges;
 
   cycle_detection& detect() {
@@ -47,7 +47,7 @@ public:
   }
 
 private:
-  int n, m;
+  int n, m = 0;
   struct edge {
     int id, to;
   };

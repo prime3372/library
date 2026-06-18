@@ -8,15 +8,16 @@
 template <class T> struct dynamic_fenwick_tree_2d {
 public: 
   struct ref {
+    friend struct dynamic_fenwick_tree_2d;
   public:
     T operator[](size_t j) const {
       assert(j < ptr->w);
       return ptr->sum(i, j, i + 1, j + 1);
     }
-    ref(const dynamic_fenwick_tree_2d<T>* _ptr, int _i) : ptr(_ptr), i(_i) {}
   private:
     const dynamic_fenwick_tree_2d<T>* ptr;
     int i;
+    ref(const dynamic_fenwick_tree_2d<T>* _ptr, int _i) : ptr(_ptr), i(_i) {}
   };
 
   dynamic_fenwick_tree_2d() : h(0), w(0) {}

@@ -9,7 +9,7 @@
 template <class T> struct dijkstra {
 public:
   dijkstra() : dijkstra(0) {}
-  explicit dijkstra(int _n) : n(_n), m(0), g(_n), d(_n), prev_v(_n), prev_e(_n) {}
+  explicit dijkstra(int _n) : n(_n), g(_n), d(_n), prev_v(_n), prev_e(_n) {}
 
   int add_edge(int from, int to, T cost) {
     assert(0 <= from && to < n);
@@ -60,7 +60,7 @@ public:
   }
 
 private:
-  int n, m;
+  int n, m = 0;
   struct edge {
     int id, to;
     T cost;

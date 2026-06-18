@@ -5,10 +5,20 @@
 #include <vector>
 
 struct perm {
+public:
   perm(int _n) : n(_n), p(_n) {
     std::iota(p.begin(), p.end(), 0);
   }
   perm(std::vector<int> _p) : n(_n), p(_p) {}
+
+  int& operator[](int i) {
+    assert(0 <= i && i < n);
+    return p[i];
+  }
+  int operator[](int i) const {
+    assert(0 <= i && i < n);
+    return p[i];
+  }
 
   friend perm operator+(const perm& q, const perm& p) {
     assert(p.n == q.n);

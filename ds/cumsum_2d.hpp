@@ -6,6 +6,7 @@
 template <class T> struct cumsum_2d {
 public:
   struct row {
+    friend struct cumsum_2d;
   public:
     T& operator[](int j) {
       assert(0 <= j && j < w);
@@ -15,11 +16,11 @@ public:
       assert(0 <= j && j < w);
       return d[j];
     }
-    row(int _w) : w(_w) {}
-    row(int _w, T x) : w(_w), d(_w, x) {}
   private:
     int w;
     std::vector<T> d;
+    row(int _w) : w(_w) {}
+    row(int _w, T x) : w(_w), d(_w, x) {}
   };
 
   cumsum_2d() : h(0), w(0) {}

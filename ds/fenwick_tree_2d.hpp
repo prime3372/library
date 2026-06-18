@@ -7,18 +7,19 @@
 template <class T> struct fenwick_tree_2d {
 public:
   struct ref {
+    friend struct fenwick_tree_2d;
   public:
     T operator[](int j) const {
       assert(0 <= j && j < ptr->w);
       return ptr->sum(i, j, i + 1, j + 1);
     }
-    ref(const fenwick_tree_2d<T>* _ptr, int _i) : ptr(_ptr), i(_i) {}
   private:
     const fenwick_tree_2d<T>* ptr;
     int i;
+    ref(const fenwick_tree_2d<T>* _ptr, int _i) : ptr(_ptr), i(_i) {}
   };
 
-  fenwick_tree_2d() : h(0), w(0) {}
+  fenwick_tree_2d() : fenwick_tree_2d(0, 0) {}
   fenwick_tree_2d(int _h, int _w) : h(_h), w(_w), fw(_h) {
     for (int i = 0; i < h; i++) {
       fw[i] = fenwick_tree<T>(w);

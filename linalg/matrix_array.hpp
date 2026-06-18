@@ -6,38 +6,55 @@
 #include "../algebra/semiring.hpp"
 #include "../util/type_traits.hpp"
 
+namespace internal {
+
+template <class R, int w>
+struct row {
+  using S = typename R::S;
+public:
+  S& operator[](int j) {
+    assert(0 <= j && j < w);
+    return d[j];
+  }
+  const S& operator[](int j) const {
+    assert(0 <= j && j < w);
+    return d[j];
+  }
+  void swap(const row& r) {
+    d.swap(r.d);
+  }
+  row& operator=(const row& r) {
+    d = r.d;
+    return *this;
+  }
+  row() {
+    std::fill(d.begin(), d.end(), R::zero());
+  }
+private:
+  std::array<S, w> d;
+};
+
+} // namespace internal
+
 template <class R, int h, int w> struct matrix_array {
   static_assert(semiring<R>);
   using S = typename R::S;
 
-  struct row {
-    S& operator[](int j) {
-      assert(0 <= j && j < w);
-      return d[j];
-    }
-    const S& operator[](int j) const {
-      assert(0 <= j && j < w);
-      return d[j];
-    }
-    void swap(const row& r) {
-      d.swap(r.d);
-    }
-    row& operator=(const row& r) {
-      d = r.d;
-    }
-    row() {
-      std::fill(d.begin(), d.end(), R::zero());
-    }
-  private:
-    std::array<S, w> d;
-  };
-
-  matrix_array() {
-    std::fill(d.begin(), d.end(), row());
+  matrix_array() : d{} {
+    std::fill(d.begin(), d.end(), internal::row<R, w>());
   }
 
   constexpr int height() const { return h; }
   constexpr int width() const { return w; }
+
+  internal::row<R, w>& operator[](int i) {
+    assert(0 <= i && i < h);
+    return d[i];
+  }
+  const internal::row<R, w>& operator[](int i) const {
+    assert(0 <= i && i < h);
+    return d[i];
+  }
 
   friend matrix_array operator+(const matrix_array& lhs, const matrix_array& rhs) {
     matrix_array res;
@@ -71,7 +88,7 @@ template <class R, int h, int w> struct matrix_array {
   }
 
 private:
-  std::array<row, h> d;
+  std::array<internal::row<R, w>, h> d;
 };
 
 template <semiring R, int l, int m, int n>
