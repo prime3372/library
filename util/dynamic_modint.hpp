@@ -16,7 +16,7 @@ public:
     assert(1 <= m);
     bt = barrett(m);
   }
-  static int mod() { return bt.umod(); }
+  static int mod() const { return bt.umod(); }
 
   dynamic_modint() : v(0) {}
   template <class T> requires std::is_signed_v<T>
@@ -113,7 +113,7 @@ public:
 private:
   unsigned int v;
   static barrett bt;
-  static unsigned int umod() { return bt.umod(); }
+  static unsigned int umod() const { return bt.umod(); }
 };
 template <int id> barrett dynamic_modint<id>::bt(998244353);
 

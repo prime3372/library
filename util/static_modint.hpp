@@ -11,7 +11,7 @@ template <int m> requires (1 <= m) struct static_modint {
   using mint = static_modint;
 
 public:
-  static constexpr int mod() { return m; }
+  static constexpr int mod() const { return m; }
 
   static_modint() : v(0) {}
   template <class T> requires std::is_signed_v<T>
@@ -114,7 +114,7 @@ public:
 
 private:
   unsigned int v;
-  constexpr unsigned int umod() { return m; }
+  constexpr unsigned int umod() const { return m; }
   static constexpr bool prime = is_prime(m);
 };
 
