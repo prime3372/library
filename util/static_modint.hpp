@@ -16,9 +16,9 @@ public:
   static_modint() : v(0) {}
   template <class T> requires std::is_signed_v<T>
   static_modint(T _v) {
-    long long x = (long long)(_v % (long long)umod());
+    long long x = (long long)(_v % (long long)(umod()));
     if (x < 0) x += umod();
-    v = (unsigned int)x;
+    v = (unsigned int)(x);
   }
   template <class T> requires std::is_unsigned_v<T>
   static_modint(T _v) {

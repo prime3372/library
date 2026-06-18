@@ -27,5 +27,5 @@ constexpr long long sqrt_mod(long long a, long long p) {
     if (e & 1) x = mul(x, t);
     t = mul(t, t);
   }
-  return (long long)x.re;
+  return (long long)(x.re);
 }

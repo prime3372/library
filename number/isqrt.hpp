@@ -17,8 +17,7 @@ constexpr unsigned long long icbrt(unsigned long long x) {
   return y;
 }
 
-constexpr unsigned long long kth_root(unsigned long long x,
-                                      unsigned long long k) {
+constexpr unsigned long long kth_root(unsigned long long x, int k) {
   assert(k);
   if (x <= 1 || k == 1) return x;
   if (64 <= k) return 1;

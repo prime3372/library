@@ -4,10 +4,10 @@
 #include <concepts>
 #include <type_traits>
 
-template <std::integral T, std::integral U>
-constexpr std::common_type_t<T, U, long long> ipow(T x, U n) {
+template <std::integral T>
+constexpr std::common_type_t<T, long long> ipow(T x, int n) {
   assert(0 <= n);
-  std::common_type_t<T, U, long long> r = 1, t = x;
+  std::common_type_t<T, long long> r = 1, t = x;
   while (n) {
     if (n & 1) r *= t;
     t *= t;

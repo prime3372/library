@@ -16,8 +16,8 @@ public:
   template <class T>
     requires std::is_convertible_v<T, S>
   explicit lazy_segtree(const std::vector<T>& v) : n(int(v.size())) {
-    size = (int)std::bit_ceil((unsigned int)n);
-    log = std::countr_zero((unsigned int)size);
+    size = (int)std::bit_ceil((unsigned int)(n));
+    log = std::countr_zero((unsigned int)(size));
     d = std::vector<S>(2 * size);
     lz = std::vector<F>(size);
     for (int i = 0; i < n; i++) d[size + i] = v[i];

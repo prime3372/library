@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include "factorize.hpp"
+#include "pow_mod.hpp"
 
 long long primitive_root(long long p) {
   assert(2 <= p);
