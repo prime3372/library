@@ -29,9 +29,9 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
   }
 
   std::vector<int> nindex(n), nrank(n);
-  for (int k = 0; (1 << k) < n; k++) {
+  for (int step = 0; (1 << step) < n; step++) {
     for (int i = 0; i < n; i++) {
-      index[i] -= 1 << k;
+      index[i] -= 1 << step;
       if (index[i] < 0) index[i] += n;
     }
     std::fill(cnt.begin(), cnt.begin() + num_of_ranks, 0);
@@ -48,8 +48,8 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
     num_of_ranks = 1;
     nrank[nindex[0]] = 0;
     for (int i = 1; i < n; i++) {
-      std::pair<int, int> cur = {rank[nindex[i]], rank[(nindex[i] + (1 << k)) % n]};
-      std::pair<int, int> prev = {rank[nindex[i - 1]], rank[(nindex[i - 1] + (1 << k)) % n]};
+      std::pair<int, int> cur = {rank[nindex[i]], rank[(nindex[i] + (1 << step)) % n]};
+      std::pair<int, int> prev = {rank[nindex[i - 1]], rank[(nindex[i - 1] + (1 << step)) % n]};
       if (cur != prev) num_of_ranks++;
       nrank[nindex[i]] = num_of_ranks - 1;
     }
