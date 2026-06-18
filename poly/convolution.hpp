@@ -7,8 +7,6 @@
 #include "../number/pow_mod.hpp"
 #include "../util/type_traits.hpp"
 
-#include <iostream>
-
 namespace internal {
 
 constexpr int primitive_root_ntt(int p) {
