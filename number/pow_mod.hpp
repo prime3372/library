@@ -10,7 +10,8 @@ template <std::integral Mod> requires (sizeof(Mod) <= 4)
 constexpr long long pow_mod(long long x, long long n, Mod m) {
   assert(0 <= n && 1 <= m);
   if consteval {
-    long long r = 1, y = x < 0 ? x % m + m : x % m;
+    long long r = 1;
+    long long y = x < 0 ? x % m + m : x % m;
     while (n) {
       if (n & 1) r = r * y % m;
       y = y * y % m;
@@ -33,7 +34,8 @@ constexpr long long pow_mod(long long x, long long n, Mod m) {
 
 constexpr long long pow_mod(long long x, long long n, long long m) {
   assert(0 <= n && 1 <= m);
-  __int128 r = 1, y = x < 0 ? x % m + m : x % m;
+  __int128 r = 1;
+  __int128 y = x < 0 ? x % m + m : x % m;
   while (n) {
     if (n & 1) r = r * y % m;
     y = y * y % m;
