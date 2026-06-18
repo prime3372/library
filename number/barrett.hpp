@@ -1,6 +1,6 @@
 #pragma once
 
-// Barett reduction
+// Barrett reduction
 struct barrett {
 public:
   explicit barrett(unsigned int _m) : m(_m), im((unsigned long long)(-1) / _m + 1) {}
