@@ -88,7 +88,7 @@ private:
     return res;
   }
   
-  void set(node_ptr& p, size_t a, size_t b, int dep, size_t i, const S& x) {
+  void set(node_ptr& p, size_t a, size_t b, int dep, size_t i, S x) {
     if (!p) p = std::make_unique<node>(initial_vals[dep]);
     if (b - a == 1) {
       p->val = x;
@@ -119,7 +119,7 @@ private:
   }
 
   template <class F>
-  size_t max_right(const node_ptr& p, size_t a, size_t b, int dep, S& product, size_t l, const F& f) {
+  size_t max_right(const node_ptr& p, size_t a, size_t b, int dep, S& product, size_t l, F f) {
     if (b <= l) return b;
     if (n <= a) return n;
     if (l <= a && b <= n) {
@@ -147,7 +147,7 @@ private:
   }
 
   template <class F>
-  size_t min_left(const node_ptr& p, size_t a, size_t b, int dep, S& product, size_t r, const F& f) {
+  size_t min_left(const node_ptr& p, size_t a, size_t b, int dep, S& product, size_t r, F f) {
     if (r <= a) return a;
     if (b <= r) {
       S val = p ? p->val : initial_vals[dep];

@@ -208,7 +208,7 @@ private:
   }
 
   template <class F>
-  size_t min_left(node_ptr& p, size_t a, size_t b, int dep, S& product, size_t r, const F& f) {
+  size_t min_left(node_ptr& p, size_t a, size_t b, int dep, S& product, size_t r, F f) {
     if (r <= a) return a;
     if (b <= r) {
       S val = p ? p->val : initial_vals[dep];
