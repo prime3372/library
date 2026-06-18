@@ -124,4 +124,4 @@ using modint1000000007 = static_modint<1000000007>;
 template <int m>
 struct is_modint<static_modint<m>> : public std::true_type {};
 template <int m>
-struct is_static_modint<static_modint<m>> : public std::false_type {};
+struct is_static_modint<static_modint<m>> : public std::true_type {};
