@@ -1,10 +1,16 @@
 #pragma once
 
-#include <type_traits>
-#include "Add.hpp"
-#include "Range.hpp"
-#include "../util/type_traits.hpp"
+#include <cstddef>
+#include "monoid.hpp"
 
-template <class T>
-  requires std::is_arithmetic_v<T> || is_modint_v<T>
-using Sum = Range<Add<T>>;
+template <class T> struct Sum {
+  struct S {
+    T val;
+    size_t len;
+    S() : val(0), len(0) {}
+    S(T v, size_t l) : val(v), len(l) {}
+  };
+  static S op(S x, S y) { return {x.val + y.val, x.len + y.len}; }
+  static S e() { return S(); }
+  Range() = delete;
+};

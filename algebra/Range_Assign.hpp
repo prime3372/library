@@ -7,9 +7,14 @@
 template <monoid M> struct Range_Assign {
   using T = typename M::S;
 
-  using S = typename Range<M>::S;
-  static S op(S x, S y) { return Range<M>::op(x, y); }
-  static S e() { return Range<M>::e(); }
+  struct S {
+    T val;
+    size_t len;
+    S() : val(M::e()), len(0) {}
+    S(T v, size_t l) : val(v), len(l) {}
+  };
+  static S op(S x, S y) { return S{M::op(x.val, y.val), x.len + y.len}; }
+  static S e() { return S(); }
 
   using F = typename Assign<T>::F;
   static S mapping(F f, S x) { return f.id ? x : S{pow(f.val, x.len), x.len}; }
