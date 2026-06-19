@@ -4,14 +4,14 @@
 #include <type_traits>
 
 template <class T> struct Assign {
-  struct S {
+  struct F {
     T val;
     bool id;
-    S() : val(), id(true) {}
-    S(T v) : val(v), id(false) {}
+    F() : val(), id(true) {}
+    F(T v) : val(v), id(false) {}
   };
-  static S op(S f, S g) { return g.id ? f : g; }
-  static S e() { return S(); }
+  static F composition(F g, F f) { return g.id ? f : g; }
+  static F id() { return F(); }
   
   Assign() = delete;
 };

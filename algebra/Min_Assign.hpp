@@ -10,10 +10,10 @@ struct Min_Assign {
   static S op(S x, S y) { return std::min(x, y); }
   static S e() { return upper; }
 
-  using F = typename Assign<T>::S;
+  using F = typename Assign<T>::F;
   static S mapping(F f, S x) { return f.id ? x : f.val; }
-  static F composition(F g, F f) { return Assign<T>::op(f, g); }
-  static F id() { return Assign<T>::e(); }
+  static F composition(F g, F f) { return Assign<T>::composition(g, f); }
+  static F id() { return Assign<T>::id(); }
 
   Min_Assign() = delete;
 };

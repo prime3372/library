@@ -11,10 +11,10 @@ template <monoid M> struct Range_Assign {
   static S op(S x, S y) { return Range<M>::op(x, y); }
   static S e() { return Range<M>::e(); }
 
-  using F = typename Assign<T>::S;
+  using F = typename Assign<T>::F;
   static S mapping(F f, S x) { return f.id ? x : S{pow(f.val, x.len), x.len}; }
-  static F composition(F g, F f) { return Assign<T>::op(f, g); }
-  static F id() { return Assign<T>::e(); }
+  static F composition(F g, F f) { return Assign<T>::composition(g, f); }
+  static F id() { return Assign<T>::id(); }
 
   static T pow(T x, size_t n) {
     T r = M::e();
