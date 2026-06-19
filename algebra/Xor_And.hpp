@@ -6,6 +6,7 @@ template <std::integral T> struct Xor_And {
   using S = T;
   static S op(S x, S y) { return x ^ y; }
   static S e() { return 0; }
+
   using F = T;
   static S mapping(F f, S x) { return f ^ x; }
   static F composition(F g, F f) { return g & f; }
