@@ -12,5 +12,4 @@ template <class T> struct Sum {
   };
   static S op(S x, S y) { return {x.val + y.val, x.len + y.len}; }
   static S e() { return S(); }
-  Range() = delete;
 };
