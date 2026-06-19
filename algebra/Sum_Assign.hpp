@@ -5,7 +5,7 @@
 #include "Sum.hpp"
 #include "../util/type_traits.hpp"
 
-template <class T, T identity>
+template <class T>
   requires std::is_arithmetic_v<T> || is_modint_v<T>
 struct Sum_Assign {
   using S = typename Sum<T>::S;
