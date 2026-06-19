@@ -2,27 +2,26 @@
 
 #include <cassert>
 #include <vector>
-#include "../algebra/monoid.hpp"
+#include "../algebra/monoid_with_mapping.hpp"
 
-template <monoid M,
-          class E,
-          typename M::S(*put_edge)(typename M::S, E),
-          typename M::S(*put_vertex)(typename M::S, int)>
-struct rerooting_dp {
+template <monoid_with_mapping M> struct rerooting_dp {
   using S = typename M::S;
+  using F = typename M::F;
 
 public:
   rerooting_dp() : rerooting_dp(0) {}
-  explicit rerooting_dp(int _n) : dp(_n), ans(_n), n(_n), g(_n) {}
+  explicit rerooting_dp(int _n) : rerooting_dp(std::vector<S>(_n, M::e())) {}
+  explicit rerooting_dp(int _n, S v) : rerooting_dp(std::vector<S>(_n, v)) {}
+  explicit rerooting_dp(const std::vector<S>& v) : n(int(v.size())), g(int(v.size())), vals(v) {}
 
-  void add_edge(int from, int to, E weight) { add_edge(from, to, weight, weight); }
-  void add_edge(int from, int to, E weight, E rweight) {
+  void add_edge(int from, int to, F f) { add_edge(from, to, f, f); }
+  void add_edge(int from, int to, F f, F rf) {
     assert(0 <= from && from < n);
     assert(0 <= to && to < n);
     int from_id = int(g[from].size());
     int to_id = int(g[to].size());
-    g[from].push_back(edge{to, to_id, weight});
-    g[to].push_back(edge{from, from_id, rweight});
+    g[from].push_back(edge{to, to_id, f});
+    g[to].push_back(edge{from, from_id, rf});
   }
 
   std::vector<std::vector<S>> dp;
@@ -31,19 +30,22 @@ public:
   rerooting_dp& build() {
     assert(1 <= n);
 
-    int now_ord = 0;
     std::vector<int> par(n, -1), ord(n);
-    auto dfs = [&](auto self, int v, int pv) -> void {
-      par[v] = pv;
-      ord[now_ord++] = v;
-      for (edge _e : g[v]) {
-        if (_e.to != pv) self(self, _e.to, v);;
+    {
+      int now_ord = 0;
+      auto dfs = [&](auto self, int v, int pv) -> void {
+        par[v] = pv;
+        ord[now_ord++] = v;
+        for (edge e : g[v]) {
+          if (e.to != pv) self(self, e.to, v);;
+        }
+      };
+      for (int i = 0; i < n; i++) {
+        if (par[i] == -1) dfs(dfs, i, i);
       }
-    };
-    for (int i = 0; i < n; i++) {
-      if (par[i] == -1) dfs(dfs, i, i);
     }
 
+    dp.resize(n);
     for (int v = 0; v < n; v++) {
       dp[v].resize(g[v].size());
     }
@@ -60,9 +62,10 @@ public:
       }
       if (par_id == -1) continue;
       int rev = g[v][par_id].rev;
-      dp[par[v]][rev] = put_edge(put_vertex(cum, v), g[par[v]][rev].w);
+      dp[par[v]][rev] = M::mapping(g[par[v]][rev].f, M::op(cum, vals[v]));
     }
 
+    ans.resize(n);
     for (int i = 0; i < n; i++) {
       int v = ord[i];
       std::vector<S> rcum(g[v].size() + 1);
@@ -74,11 +77,10 @@ public:
       S cum = M::e();
       for (int j = 0; j < int(g[v].size()); j++) {
         int to = g[v][j].to, rev = g[v][j].rev;
-        dp[to][rev] = put_edge(put_vertex(M::op(cum, rcum[j + 1]), v),
-                                          g[to][rev].w);
+        dp[to][rev] = M::mapping(g[to][rev].f, M::op(M::op(cum, rcum[j + 1]), vals[v]));
         cum = M::op(cum, dp[v][j]);
       }
-      ans[v] = put_vertex(cum, v);
+      ans[v] = M::op(cum, vals[v]);
     }
     return *this;
   }
@@ -87,7 +89,8 @@ private:
   int n;
   struct edge {
     int to, rev;
-    E w;
+    F f;
   };
   std::vector<std::vector<edge>> g;
+  std::vector<S> vals;
 };
