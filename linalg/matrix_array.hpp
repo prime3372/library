@@ -27,7 +27,7 @@ public:
     d = r.d;
     return *this;
   }
-  row() {
+  row() : d{} {
     std::fill(d.begin(), d.end(), R::zero());
   }
 private:
