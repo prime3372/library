@@ -20,7 +20,7 @@ public:
 
   centroid_decomposition& build(int s = 0) {
     assert(0 <= s && s < n);
-    root = build_dfs(s);
+    root = decomposite(s);
     return *this;
   }
 
@@ -45,12 +45,12 @@ private:
     return v;
   }
 
-  int build_dfs(int v) {
+  int decomposite(int v) {
     int cur = centroid(v, -1, size(v, -1) / 2);
     removed[cur] = true;
     for (int to : g[cur]) {
       if (!removed[to]) {
-        int nxt = build_dfs(to);
+        int nxt = decomposite(to);
         tree[cur].push_back(nxt);
       }
     }
