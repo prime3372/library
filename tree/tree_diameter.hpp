@@ -6,7 +6,7 @@
 
 template <class T> struct tree_diameter {
 public:
-  tree_diameter(int n) : n(n), g(n) {}
+  explicit tree_diameter(int n) : n(n), g(n) {}
   
   int add_edge(int u, int v, T c = 1) {
     assert(0 <= u && u < n);

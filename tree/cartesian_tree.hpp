@@ -8,7 +8,7 @@ template <class T, bool root_is_max = false> struct cartesian_tree {
   std::vector<int> left, right, parent;
   
   cartesian_tree() {}
-  cartesian_tree(const std::vector<T>& a) {
+  explicit cartesian_tree(const std::vector<T>& a) {
     assert(!a.empty());
     int n = int(a.size());
     left = right = std::vector<int>(n, -1);

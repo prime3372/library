@@ -4,7 +4,7 @@
 
 struct centroid_decomposition {
 public:
-  centroid_decomposition(int _n) : root(-1), tree(_n), sub(_n), removed(_n), n(_n), g(_n) {}
+  explicit centroid_decomposition(int _n) : root(-1), tree(_n), sub(_n), removed(_n), n(_n), g(_n) {}
 
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
