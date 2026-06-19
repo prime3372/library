@@ -13,9 +13,8 @@ template <acted_monoid M> struct lazy_segtree {
 public:
   lazy_segtree() : lazy_segtree(0) {}
   explicit lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, M::e())) {}
-  template <class T>
-    requires std::is_convertible_v<T, S>
-  explicit lazy_segtree(const std::vector<T>& v) : n(int(v.size())) {
+  explicit lazy_segtree(int n, S v) : lazy_segtree(std::vector<S>(n, v)) {}
+  explicit lazy_segtree(const std::vector<S>& v) : n(int(v.size())) {
     size = (int)std::bit_ceil((unsigned int)(n));
     log = std::countr_zero((unsigned int)(size));
     d = std::vector<S>(2 * size);

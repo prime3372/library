@@ -13,9 +13,8 @@ template <monoid M> struct segtree {
 public:
   segtree() : segtree(0) {}
   explicit segtree(int n) : segtree(std::vector<S>(n, M::e())) {}
-  template <class T>
-    requires std::is_convertible_v<T, S>
-  explicit segtree(const std::vector<T>& v) : n(int(v.size())) {
+  explicit segtree(int n, S v) : segtree(std::vector<S>(n, v)) {}
+  explicit segtree(const std::vector<S>& v) : n(int(v.size())) {
     size = (int)std::bit_ceil((unsigned int)(n));
     log = std::countr_zero((unsigned int)(size));
     d = std::vector<S>(2 * size);
