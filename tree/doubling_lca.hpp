@@ -59,15 +59,15 @@ public:
     return par[0][a];
   }
 
-  int len(int a, int b) {
+  int dist(int a, int b) {
     int c = lca(a, b);
     return dep[a] + dep[b] - dep[c] * 2;
   }
 
   int jump(int s, int t, int k) {
-    int l = len(s, t);
+    int l = dist(s, t);
     if (l < k) return -1;
-    return k < len(s, lca(s, t)) ? up(s, k) : up(t, l - k);
+    return k < dist(s, lca(s, t)) ? up(s, k) : up(t, l - k);
   }
 
   std::vector<int> path(int s, int t) const {
