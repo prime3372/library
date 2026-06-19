@@ -7,12 +7,12 @@ constexpr long long sqrt_mod(long long a, long long p) {
   a = a < 0 ? a % p + p : a % p;
   if (a <= 1) return a;
   if (pow_mod(a, (p - 1) / 2, p) != 1) return -1;
-  
+
   long long b = 0;
   while (pow_mod(b * b - a, (p - 1) / 2, p) == 1) b++;
   long long c = (b * b - a) % p;
   if (c < 0) c += p;
-  
+
   struct K {
     __int128 re, im;
   };

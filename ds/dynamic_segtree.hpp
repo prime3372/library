@@ -87,7 +87,7 @@ private:
     }
     return res;
   }
-  
+
   void set(node_ptr& p, size_t a, size_t b, int dep, size_t i, S x) {
     if (!p) p = std::make_unique<node>(initial_vals[dep]);
     if (b - a == 1) {
