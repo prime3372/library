@@ -4,7 +4,7 @@
 
 struct centroid_decomposition {
 public:
-  explicit centroid_decomposition(int _n) : root(-1), tree(_n), sub(_n), removed(_n), n(_n), g(_n) {}
+  explicit centroid_decomposition(int _n) : root(-1), tree(_n), size(_n), removed(_n), n(_n), g(_n) {}
 
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
@@ -15,7 +15,7 @@ public:
 
   int root;
   std::vector<std::vector<int>> tree;
-  std::vector<int> sub;
+  std::vector<int> size;
   std::vector<bool> removed;
 
   centroid_decomposition& build(int s = 0) {
@@ -28,25 +28,25 @@ private:
   int n;
   std::vector<std::vector<int>> g;
 
-  int size(int v, int pv) {
-    sub[v] = 1;
+  int calc_size(int v, int pv) {
+    size[v] = 1;
     for (int nv : g[v]) {
       if (nv == pv || removed[nv]) continue;
-      sub[v] += size(nv, v);
+      size[v] += calc_size(nv, v);
     }
-    return sub[v];
+    return size[v];
   }
 
-  int centroid(int v, int pv, int mid) {
+  int find_centroid(int v, int pv, int mid) {
     for (int nv : g[v]) {
       if (nv == pv || removed[nv]) continue;
-      if (sub[nv] > mid) return centroid(nv, v, mid);
+      if (size[nv] > mid) return find_centroid(nv, v, mid);
     }
     return v;
   }
 
   int decomposite(int v) {
-    int cur = centroid(v, -1, size(v, -1) / 2);
+    int cur = find_centroid(v, -1, calc_size(v, -1) / 2);
     removed[cur] = true;
     for (int to : g[cur]) {
       if (!removed[to]) {

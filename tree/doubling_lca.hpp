@@ -9,7 +9,7 @@
 struct doubling_lca {
 public:
   doubling_lca() : doubling_lca(0) {}
-  explicit doubling_lca(int _n) : n(_n), initialized(false), g(_n), dep(_n) {
+  explicit doubling_lca(int _n) : n(_n), g(_n), dep(_n) {
     log = 1;
     while ((1 << log) < n) log++;
     par = std::vector<std::vector<int>>(log, std::vector<int>(n));
@@ -97,7 +97,7 @@ public:
 
 private:
   int n, root, log;
-  bool initialized;
+  bool initialized = false;
 
   std::vector<std::vector<int>> g;
   std::vector<int> dep;
