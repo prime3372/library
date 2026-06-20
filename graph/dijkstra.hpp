@@ -15,16 +15,15 @@ public:
     assert(0 <= from && to < n);
     assert(0 <= from && to < n);
     assert(0 <= cost);
-    g[from].push_back(edge{m, to, cost});
+    g[from].push_back(edge{to, m, cost});
     return m++;
   }  
 
   void search(int from) {
     assert(0 <= from && from < n);
     std::fill(d.begin(), d.end(), -1);
-    std::priority_queue<std::tuple<T, int, int, int>,
-                        std::vector<std::tuple<T, int, int, int>>,
-                        std::greater<std::tuple<T, int, int, int>>> q;
+    using visit = std::tuple<T, int, int, int>;
+    std::priority_queue<visit, std::vector<visit>, std::greater<visit>> q;
     q.emplace(0, from, from, -1);
     while (!q.empty()) {
       auto [c, v, pv, pe] = q.top();
@@ -62,7 +61,7 @@ public:
 private:
   int n, m = 0;
   struct edge {
-    int id, to;
+    int to, id;
     T cost;
   };
   std::vector<std::vector<edge>> g;

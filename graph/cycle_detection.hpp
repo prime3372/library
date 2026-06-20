@@ -12,8 +12,8 @@ public:
   int add_edge(int from, int to) {
     assert(0 <= from && from < n);
     assert(0 <= to && to < n);
-    g[from].push_back(edge{m, to});
-    if constexpr (!is_directed) g[to].push_back(edge{m, from});
+    g[from].push_back(edge{to, m});
+    if constexpr (!is_directed) g[to].push_back(edge{from, m});
     return m++;
   }
 
@@ -49,7 +49,7 @@ public:
 private:
   int n, m = 0;
   struct edge {
-    int id, to;
+    int to, id;
   };
   std::vector<std::vector<edge>> g;
 };

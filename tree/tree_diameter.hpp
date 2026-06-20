@@ -13,8 +13,8 @@ public:
     assert(0 <= v && v < n);
     int m = int(pos.size());
     pos.push_back(c);
-    g[u].push_back(edge{m, v, c});
-    g[v].push_back(edge{m, u, c});
+    g[u].push_back(edge{v, m, c});
+    g[v].push_back(edge{u, m, c});
     return m;
   }
   
@@ -48,7 +48,7 @@ public:
 private:
   int n;
   struct edge {
-    int id, to;
+    int to, id;
     T cost;
   };
   std::vector<T> pos;
