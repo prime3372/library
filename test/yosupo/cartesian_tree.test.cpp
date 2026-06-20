@@ -13,6 +13,6 @@ int main() {
   cin >> n;
   std::vector<int> a(n);
   rep(i, 0, n) cin >> a[i];
-  cartesian_tree cart(a);
+  cartesian_tree<false> cart(a);
   for (int p : cart.parent) cout << p << " ";
 }
