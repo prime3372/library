@@ -9,9 +9,9 @@ constexpr bool is_prime(long long n) {
   if (n % 2 == 0) return false; 
   long long d = n - 1;
   while (d % 2 == 0) d /= 2;
-  for (long long w : {2, 325, 9375, 28178, 450775, 9780504, 1795265022}) {
-    if (w % n == 0) continue;
-    __int128 y = pow_mod(w, d, n);
+  for (long long a : {2, 325, 9375, 28178, 450775, 9780504, 1795265022}) {
+    if (a % n == 0) continue;
+    __int128 y = pow_mod(a, d, n);
     if (y == 1) continue;
     bool ok = false;
     for (long long t = d; t != n - 1; t *= 2) {

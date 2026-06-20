@@ -6,8 +6,8 @@
 #include <type_traits>
 #include "barrett.hpp"
 
-template <std::integral Mod> requires (sizeof(Mod) <= 4)
-constexpr long long pow_mod(long long x, long long n, Mod m) {
+template <std::integral T> requires (sizeof(T) <= 4)
+constexpr long long pow_mod(long long x, long long n, T m) {
   assert(0 <= n && 1 <= m);
   if (m == 1) return 0;
   barrett bt((unsigned int)(m));
