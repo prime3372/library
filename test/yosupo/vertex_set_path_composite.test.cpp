@@ -26,12 +26,11 @@ int main() {
     hld.add_edge(u, v);
   }
   hld.build();
-  auto par = hld.parent, in = hld.in, rin = in, head = hld.head;  
-  rep(i, 0, n) rin[i] = n - 1 - rin[i];
+  auto id = hld.id, head = hld.head, next = hld.next;
   segtree<M> seg(n), rseg(n);
   rep(i, 0, n) {
-    seg.set(in[i], f[i]);
-    rseg.set(rin[i], f[i]);
+    seg.set(id[i], f[i]);
+    rseg.set(n - 1 - id[i], f[i]);
   }
   while (q--) {
     bool t;
@@ -40,27 +39,25 @@ int main() {
       int p;
       mint c, d;
       cin >> p >> c >> d;
-      seg.set(in[p], {c, d});
-      rseg.set(rin[p], {c, d});
+      seg.set(id[p], {c, d});
+      rseg.set(n - 1 - id[p], {c, d});
     } else {
       int u, v;
       mint x;
       cin >> u >> v >> x;
+      u = id[u]; v = id[v];
       M::S l = {1, 0}, r = {1, 0};
       while (head[u] != head[v]) {
-        if (in[u] < in[v]) {
-          r = M::op(seg.prod(in[head[v]], in[v] + 1), r);
-          v = par[head[v]];
+        if (u < v) {
+          r = M::op(seg.prod(head[v], v + 1), r);
+          v = next[v];
         } else {
-          l = M::op(l, rseg.prod(rin[u], rin[head[u]] + 1));
-          u = par[head[u]];
+          l = M::op(l, rseg.prod(n - 1 - u, n - head[u]));
+          u = next[u];
         }
       }
-      if (in[u] < in[v]) {
-        l = M::op(l, seg.prod(in[u], in[v] + 1));
-      } else {
-        l = M::op(l, rseg.prod(rin[u], rin[v] + 1));
-      }
+      if (u < v) l = M::op(l, seg.prod(u, v + 1));
+      else l = M::op(l, rseg.prod(n - 1 - u, n - v));      
       M::S ans = M::op(l, r);
       cout << ans.a * x + ans.b << "\n";
     }

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_subtree_sum"
 
 #include "../../ds/fenwick_tree.hpp"
-#include "../../tree/hl_decomposition.hpp"
+#include "../../tree/euler_tour.hpp"
 #include <bits/stdc++.h>
 
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
@@ -14,15 +14,15 @@ int main() {
   int n, q;
   cin >> n >> q;
   std::vector<ll> a(n);
-  hl_decomposition hld(n);
   rep(i, 0, n) cin >> a[i];
+  euler_tour et(n);
   rep(i, 1, n) {
     int p;
     cin >> p;
-    hld.add_edge(i, p);
+    et.add_edge(i, p);
   }
-  hld.build();
-  auto par = hld.parent, in = hld.in, out = hld.out;
+  et.build();
+  auto in = et.in, out = et.out;
   fenwick_tree<ll> fw(n);
   rep(i, 0, n) fw.add(in[i], a[i]);
   while (q--) {

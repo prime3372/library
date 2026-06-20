@@ -6,8 +6,7 @@
 struct hl_decomposition {
 public:
   hl_decomposition() : hl_decomposition(0) {}
-  explicit hl_decomposition(int _n) : parent(_n), size(_n), tour(_n), in(_n), out(_n), head(_n),
-                                      n(_n), g(_n) {}
+  explicit hl_decomposition(int _n) : id(_n), vertex(_n), head(_n), next(_n), n(_n), g(_n) {}
 
   void add_edge(int a, int b) {
     assert(0 <= a && a < n);
@@ -16,11 +15,13 @@ public:
     g[b].push_back(a);
   }
 
-  std::vector<int> parent, size, tour, in, out, head;
+  std::vector<int> id, vertex, head, next;
 
   hl_decomposition& build(int r = 0) {
+    assert(0 <= r && r < n);
+    std::vector<int> par(n), size(n);
     auto first_dfs = [&](auto self, int v, int pv) -> void {
-      parent[v] = pv;
+      par[v] = pv;
       size[v] = 1;
       if (!g[v].empty() && g[v][0] == pv) {
         std::swap(g[v][0], g[v].back());
@@ -36,14 +37,14 @@ public:
 
     int k = 0;
     auto second_dfs = [&](auto self, int v, int pv) -> void {
-      in[v] = k;
-      tour[k++] = v;
+      id[v] = k;
+      vertex[k++] = v;
       for (int nv : g[v]) {
         if (nv == pv) continue;
-        head[nv] = g[v][0] == nv ? head[v] : nv;
+        head[k] = g[v][0] == nv ? head[id[v]] : k;
+        next[k] = g[v][0] == nv ? next[id[v]] : id[v];
         self(self, nv, v);
       }
-      out[v] = k;
     };
     second_dfs(second_dfs, r, r);
     return *this;
