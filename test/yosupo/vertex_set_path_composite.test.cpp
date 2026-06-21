@@ -28,9 +28,10 @@ int main() {
   hld.build();
   auto id = hld.id, head = hld.head, next = hld.next;
   segtree<M> seg(n), rseg(n);
+  auto rev = [&](int i) { return n - 1 - i; };
   rep(i, 0, n) {
     seg.set(id[i], f[i]);
-    rseg.set(n - 1 - id[i], f[i]);
+    rseg.set(rev(id[i]), f[i]);
   }
   while (q--) {
     bool t;
@@ -40,7 +41,7 @@ int main() {
       mint c, d;
       cin >> p >> c >> d;
       seg.set(id[p], {c, d});
-      rseg.set(n - 1 - id[p], {c, d});
+      rseg.set(rev(id[p]), {c, d});
     } else {
       int u, v;
       mint x;
@@ -52,12 +53,12 @@ int main() {
           r = M::op(seg.prod(head[v], v + 1), r);
           v = next[v];
         } else {
-          l = M::op(l, rseg.prod(n - 1 - u, n - head[u]));
+          l = M::op(l, rseg.prod(rev(u), rev(head[u]) + 1));
           u = next[u];
         }
       }
       if (u < v) l = M::op(l, seg.prod(u, v + 1));
-      else l = M::op(l, rseg.prod(n - 1 - u, n - v));      
+      else l = M::op(l, rseg.prod(rev(u), rev(v) + 1));
       M::S ans = M::op(l, r);
       cout << ans.a * x + ans.b << "\n";
     }
