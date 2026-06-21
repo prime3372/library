@@ -25,7 +25,11 @@
         "-g",
         "${file}",
         "-o",
-        "${fileDirname}\\${fileBasenameNoExtension}.exe"
+        "${fileDirname}\\${fileBasenameNoExtension}.exe",
+        "-std=c++23",
+        "-O2",
+        "-Wall",
+        "-Wextra"
       ],
       "options": {
         "cwd": "${fileDirname}"

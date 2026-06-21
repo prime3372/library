@@ -112,10 +112,9 @@ public:
 
 private:
   unsigned int v;
-  static barrett bt;
+  inline static barrett bt = barrett(998244353);
   static unsigned int umod() { return bt.umod(); }
 };
-template <int id> barrett dynamic_modint<id>::bt(998244353);
 
 using modint = dynamic_modint<-1>;
 
