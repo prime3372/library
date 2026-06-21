@@ -94,4 +94,3 @@ private:
   std::vector<std::vector<edge>> g;
   std::vector<S> vals;
 };
-
