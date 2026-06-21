@@ -84,13 +84,13 @@ public:
       }
     };
 
-    auto dfs = [&](this auto& self, int v, Cap up) {
+    auto dfs = [&](auto self, int v, Cap up) {
       if (v == s) return up;
       Cap res = 0;
       for (int& i = iter[v]; i < int(g[v].size()); i++) {
         auto e = g[v][i];
         if (g[e.to][e.rev].cap == 0 || level[v] <= level[e.to]) continue;
-        Cap d = self(e.to, std::min(up - res, g[e.to][e.rev].cap));
+        Cap d = self(self, e.to, std::min(up - res, g[e.to][e.rev].cap));
         g[v][i].cap += d;
         g[e.to][e.rev].cap -= d;
         res += d;
@@ -105,7 +105,7 @@ public:
       bfs();
       if (level[t] == -1) break;
       std::fill(iter.begin(), iter.end(), 0);
-      flow += dfs(t, flow_limit - flow);
+      flow += dfs(dfs, t, flow_limit - flow);
     }
     return flow;
   }

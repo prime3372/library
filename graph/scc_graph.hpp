@@ -19,12 +19,12 @@ public:
     int now_ord = 0, group_num = 0;
     std::vector<int> visited, low(n), ord(n, -1), id(n);
     visited.reserve(n);
-    auto dfs = [&](this auto& self, int v) -> void {
+    auto dfs = [&](auto self, int v) -> void {
       low[v] = ord[v] = now_ord++;
       visited.push_back(v);
       for (int to : g[v]) {
         if (ord[to] == -1) {
-          self(to);
+          self(self, to);
           low[v] = std::min(low[v], low[to]);
         } else {
           low[v] = std::min(low[v], ord[to]);
@@ -42,7 +42,7 @@ public:
       }
     };
     for (int i = 0; i < n; i++) {
-      if (ord[i] == -1) dfs(i);
+      if (ord[i] == -1) dfs(dfs, i);
     }
     for (int& x : id) {
       x = group_num - 1 - x;

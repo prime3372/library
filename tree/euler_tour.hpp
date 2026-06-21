@@ -21,16 +21,16 @@ public:
     assert(0 <= r && r < n);
     tour = in = out = std::vector<int>(n);
     int k = 0;
-    auto dfs = [&](this auto& self, int v, int pv) -> void {
+    auto dfs = [&](auto self, int v, int pv) -> void {
       in[v] = k;
       tour[k++] = v;
       for (int nv : g[v]) {
         if (nv == pv) continue;
-        self(nv, v);
+        self(self, nv, v);
       }
       out[v] = k;
     };
-    dfs(r, r);
+    dfs(dfs, r, r);
     return *this;
   }
 

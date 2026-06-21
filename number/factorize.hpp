@@ -57,16 +57,16 @@ std::vector<std::pair<long long, int>> factorize(long long n) {
   if (n == 1) return {};
 
   std::vector<long long> fac;
-  auto _factorize = [&](this auto& self, long long x) -> void {
+  auto _factorize = [&](auto self, long long x) -> void {
     long long d = internal::pollard_rho(x);
     if (d == x) {
       fac.push_back(d);
       return;
     }
-    self(d);
-    self(x / d);
+    self(self, d);
+    self(self, x / d);
   };
-  _factorize(n);
+  _factorize(_factorize, n);
   std::sort(fac.begin(), fac.end());
 
   std::vector<std::pair<long long, int>> ans;
