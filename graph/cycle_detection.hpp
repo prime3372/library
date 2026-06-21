@@ -21,6 +21,8 @@ public:
   std::vector<int> vertices, edges;
 
   cycle_detection& detect() {
+    vertices.clear();
+    edges.clear();
     std::vector<int> visited(n);
     auto dfs = [&](auto self, int v, int id) -> int {
       if (visited[v] == 1) return v;

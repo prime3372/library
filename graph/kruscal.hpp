@@ -15,36 +15,38 @@ template <class T> struct kruscal {
     assert(0 <= u && u < n);
     assert(0 <= v && v < n);
     int m = int(edges.size());
-    edges.emplace_back(cost, m, u, v);
+    edges.emplace_back(cost, u, v, m);
     return m;
   }
 
-  std::pair<T, std::vector<int>> min() {
+  T min() {
     std::sort(edges.begin(), edges.end());
     return greedy();
   }
 
-  std::pair<T, std::vector<int>> max() {
+  T max() {
     std::sort(edges.rbegin(), edges.rend());
     return greedy();
   }
+
+  const std::vector<int>& mst() { return tree; }
 
 private:
   int n;
   std::vector<edge> edges;
   std::vector<int> tree;
 
-  std::pair<T, std::vector<int>> greedy() {
+  T greedy() {
     T cost = 0;
     union_find uf(n);
     tree.clear();
-    for (auto [c, id, u, v] : edges) {
+    for (auto [c, u, v, id] : edges) {
       if (!uf.same(u, v)) {
         uf.unite(u, v);
         cost += c;
         tree.push_back(id);
       }
     }
-    return {cost, tree};
+    return cost;
   }
 };

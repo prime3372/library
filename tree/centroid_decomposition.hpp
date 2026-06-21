@@ -4,7 +4,7 @@
 
 struct centroid_decomposition {
 public:
-  explicit centroid_decomposition(int _n) : root(-1), tree(_n), size(_n), removed(_n), n(_n), g(_n) {}
+  explicit centroid_decomposition(int _n) : n(_n), g(_n) {}
 
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
@@ -13,13 +13,16 @@ public:
     g[v].push_back(u);
   }
 
-  int root;
+  int root = -1;
   std::vector<std::vector<int>> tree;
   std::vector<int> size;
   std::vector<bool> removed;
 
   centroid_decomposition& build(int s = 0) {
     assert(0 <= s && s < n);
+    tree.assign(n);
+    size.assign(n);
+    remove.assign(n)
     root = decomposite(s);
     return *this;
   }

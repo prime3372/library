@@ -6,7 +6,7 @@
 struct euler_tour {
 public:
   euler_tour() : euler_tour(0) {}
-  explicit euler_tour(int _n) : tour(_n), in(_n), out(_n), n(_n), g(_n) {}
+  explicit euler_tour(int _n) : n(_n), g(_n) {}
 
   void add_edge(int a, int b) {
     assert(0 <= a && a < n);
@@ -19,6 +19,7 @@ public:
 
   euler_tour& build(int r = 0) {
     assert(0 <= r && r < n);
+    tour = in = out = std::vector<int>(n);
     int k = 0;
     auto dfs = [&](auto self, int v, int pv) -> void {
       in[v] = k;

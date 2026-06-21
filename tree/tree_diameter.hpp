@@ -26,6 +26,9 @@ public:
   std::vector<int> vertices, edges;
   
   tree_diameter& build(int s = 0) {
+    vertices.clear();
+    edges.clear();
+
     int t = farthest(s), u = farthest(t);
     auto construct = [&](auto self, int v, int pv) -> bool {
       vertices.push_back(v);
@@ -40,6 +43,7 @@ public:
       return false;
     };
     construct(construct, t, -1);
+
     dist = 0;
     for (int i : edges) dist += pos[i];
     return *this;
