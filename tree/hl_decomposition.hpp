@@ -6,7 +6,8 @@
 struct hl_decomposition {
 public:
   hl_decomposition() : hl_decomposition(0) {}
-  explicit hl_decomposition(int _n) : n(_n), g(_n) {}
+  explicit hl_decomposition(int _n) : id(_n), vertex(_n), head(_n), next(_n), size(_n),
+                                      n(_n), g(_n) {}
 
   void add_edge(int a, int b) {
     assert(0 <= a && a < n);
@@ -19,7 +20,6 @@ public:
 
   hl_decomposition& build(int r = 0) {
     assert(0 <= r && r < n);
-    id = vertex = head = next = size = std::vector<int>(n);
 
     auto first_dfs = [&](auto self, int v, int pv) -> void {
       size[v] = 1;
