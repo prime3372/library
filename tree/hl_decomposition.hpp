@@ -21,32 +21,32 @@ public:
     assert(0 <= r && r < n);
     id = vertex = head = next = size = std::vector<int>(n);
 
-    auto first_dfs = [&](auto self, int v, int pv) -> void {
+    auto first_dfs = [&](this auto& self, int v, int pv) -> void {
       size[v] = 1;
       if (!g[v].empty() && g[v][0] == pv) {
         std::swap(g[v][0], g[v].back());
       }
       for (int& nv : g[v]) {
         if (nv == pv) continue;
-        self(self, nv, v);
+        self(nv, v);
         size[v] += size[nv];
         if (size[nv] > size[g[v][0]]) std::swap(g[v][0], nv);
       }
     };
-    first_dfs(first_dfs, r, r);
+    first_dfs(r, r);
 
     int k = 0;
-    auto second_dfs = [&](auto self, int v, int pv) -> void {
+    auto second_dfs = [&](this auto& self, int v, int pv) -> void {
       id[v] = k;
       vertex[k++] = v;
       for (int nv : g[v]) {
         if (nv == pv) continue;
         head[k] = g[v][0] == nv ? head[id[v]] : k;
         next[k] = g[v][0] == nv ? next[id[v]] : id[v];
-        self(self, nv, v);
+        self(nv, v);
       }
     };
-    second_dfs(second_dfs, r, r);
+    second_dfs(r, r);
     return *this;
   }
 

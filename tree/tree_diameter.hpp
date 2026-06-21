@@ -30,19 +30,19 @@ public:
     edges.clear();
 
     int t = farthest(s), u = farthest(t);
-    auto construct = [&](auto self, int v, int pv) -> bool {
+    auto construct = [&](this auto& self, int v, int pv) -> bool {
       vertices.push_back(v);
       if (v == u) return true;
       for (auto e : g[v]) {
         if (e.to == pv) continue;
         edges.push_back(e.id);
-        if (self(self, e.to, v)) return true;
+        if (self(e.to, v)) return true;
         edges.pop_back();
       }
       vertices.pop_back();
       return false;
     };
-    construct(construct, t, -1);
+    construct(t, -1);
 
     dist = 0;
     for (int i : edges) dist += pos[i];

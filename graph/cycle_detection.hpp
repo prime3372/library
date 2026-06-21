@@ -24,12 +24,12 @@ public:
     vertices.clear();
     edges.clear();
     std::vector<int> visited(n);
-    auto dfs = [&](auto self, int v, int id) -> int {
+    auto dfs = [&](this auto& self, int v, int id) -> int {
       if (visited[v] == 1) return v;
       visited[v] = 1;
       for (auto e : g[v]) {
         if (visited[e.to] == -1 || e.id == id) continue;
-        int ret = self(self, e.to, e.id);
+        int ret = self(e.to, e.id);
         if (ret == -1) continue;
         if (ret == n) return n;
         vertices.push_back(v);
@@ -40,7 +40,7 @@ public:
       return -1;
     };
     for (int v = 0; v < n; v++) {
-      if (!visited[v] && dfs(dfs, v, -1) == n) break;
+      if (!visited[v] && dfs(v, -1) == n) break;
     }
     std::reverse(vertices.begin(), vertices.end());
     std::reverse(edges.begin(), edges.end());

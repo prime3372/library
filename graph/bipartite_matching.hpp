@@ -100,13 +100,13 @@ private:
       }
     }
 
-    auto dfs = [&](auto self, int v) -> void {
+    auto dfs = [&](this auto& self, int v) -> void {
       if (colored[v]) return;
       colored[v] = true;
-      for (int nv : g[v]) self(self, nv);
+      for (int nv : g[v]) self(nv);
     };
     for (int i = 0; i < l; i++) {
-      if (start[i]) dfs(dfs, i);
+      if (start[i]) dfs(i);
     }
   }
 };
