@@ -19,7 +19,6 @@ public:
 
   euler_tour& build(int r = 0) {
     assert(0 <= r && r < n);
-    int k = 0;
     auto dfs = [&](auto self, int v, int pv) -> void {
       in[v] = k;
       tour[k++] = v;
@@ -34,6 +33,6 @@ public:
   }
 
 private:
-  int n;
+  int n, k = 0;
   std::vector<std::vector<int>> g;
 };

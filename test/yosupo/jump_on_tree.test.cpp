@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/jump_on_tree"
 
-#include "../../tree/doubling_lca.hpp"
+#include "../../tree/tree_lca.hpp"
 #include <bits/stdc++.h>
 
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
@@ -11,7 +11,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  doubling_lca g(n);
+  tree_lca g(n);
   rep(i, 0, n - 1) {
     int u, v;
     cin >> u >> v;
