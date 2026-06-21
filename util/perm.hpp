@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cassert>
 #include <numeric>
 #include <vector>
 
@@ -9,7 +10,7 @@ public:
   perm(int _n) : n(_n), p(_n) {
     std::iota(p.begin(), p.end(), 0);
   }
-  perm(std::vector<int> _p) : n(_n), p(_p) {}
+  perm(std::vector<int> _p) : n(int(_p.size())), p(_p) {}
 
   int& operator[](int i) {
     assert(0 <= i && i < n);
@@ -22,8 +23,8 @@ public:
 
   friend perm operator+(const perm& q, const perm& p) {
     assert(p.n == q.n);
-    perm r(n);
-    for (int i = 0; i < n; i++) r[i] = q[p[i]];
+    perm r(p.n);
+    for (int i = 0; i < p.n; i++) r[i] = q[p[i]];
     return r;
   }
   perm operator-() const {

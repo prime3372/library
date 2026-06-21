@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <numeric>
+#include <vector>
 
 std::vector<int> totient(int n) {
   assert(0 <= n);
