@@ -125,3 +125,4 @@ template <int m>
 struct is_modint<static_modint<m>> : public std::true_type {};
 template <int m>
 struct is_static_modint<static_modint<m>> : public std::true_type {};
+
