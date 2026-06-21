@@ -15,14 +15,13 @@ public:
     g[b].push_back(a);
   }
 
-  std::vector<int> id, vertex, head, next, parent, size;
+  std::vector<int> id, vertex, head, next, size;
 
   hl_decomposition& build(int r = 0) {
     assert(0 <= r && r < n);
-    id = vertex = head = next = parent = size = std::vector<int>(n);
+    id = vertex = head = next = size = std::vector<int>(n);
 
     auto first_dfs = [&](auto self, int v, int pv) -> void {
-      par[v] = pv;
       size[v] = 1;
       if (!g[v].empty() && g[v][0] == pv) {
         std::swap(g[v][0], g[v].back());

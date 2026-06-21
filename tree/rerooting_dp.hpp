@@ -45,7 +45,7 @@ public:
       }
     }
 
-    dp.assign(n);
+    dp = std::vector<std::vector<S>>(n);
     for (int v = 0; v < n; v++) {
       dp[v].resize(g[v].size());
     }
@@ -65,7 +65,7 @@ public:
       dp[par[v]][rev] = M::mapping(g[par[v]][rev].f, M::op(cum, vals[v]));
     }
 
-    ans.assign(n);
+    ans = std::vector<S>(n);
     for (int i = 0; i < n; i++) {
       int v = ord[i];
       std::vector<S> rcum(g[v].size() + 1);

@@ -19,7 +19,7 @@ int main() {
     cin >> a >> b >> c;
     g.add_edge(a, b, c);
   }
-  auto mst = g.min();
-  cout << mst.first << "\n";
-  rep(i, 0, n - 1) cout << mst.second[i] << " ";
+  cout << g.min() << "\n";
+  auto mst = g.mst();
+  rep(i, 0, n - 1) cout << mst[i] << " ";
 }
