@@ -25,7 +25,7 @@ public:
   void init(int r = 0) {
     assert(0 <= r && r < n);
     hld.build(r);
-    dfs(r, r, 0);
+    dfs(r, -1, 0);
     initialized = true;
   }
 

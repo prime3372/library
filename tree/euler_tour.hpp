@@ -28,7 +28,7 @@ public:
       }
       out[v] = k;
     };
-    dfs(dfs, r, r);
+    dfs(dfs, r, -1);
     return *this;
   }
 

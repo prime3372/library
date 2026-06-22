@@ -35,7 +35,7 @@ public:
         if (size[nv] > size[g[v][0]]) std::swap(g[v][0], nv);
       }
     };
-    first_dfs(first_dfs, r, r);
+    first_dfs(first_dfs, r, -1);
 
     auto second_dfs = [&](auto self, int v, int pv) -> void {
       id[v] = k;
@@ -48,7 +48,7 @@ public:
       }
     };
     head[k] = next[k] = k;
-    second_dfs(second_dfs, r, r);
+    second_dfs(second_dfs, r, -1);
     return *this;
   }
 
