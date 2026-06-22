@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
+#define PROBLEM "https://judge.yosupo.jp/problem/rectangle_add_point_get"
 
 #include "../../ds/dynamic_fenwick_tree_2d.hpp"
 #include "../../util/coordinate_compression.hpp"
