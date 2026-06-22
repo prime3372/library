@@ -5,7 +5,6 @@
 #include "../../util/static_modint.hpp"
 #include <bits/stdc++.h>
 
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
 using namespace std;
 using mint = modint998244353;
 using M = Sum_Affine<mint>;
