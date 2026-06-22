@@ -59,6 +59,21 @@ public:
     return sum(hr, wr) - sum(hr, wl) - sum(hl, wr) + sum(hl, wl);
   }
 
+  void imos_add(int hl, size_t wl, int hr, size_t wr, T x) {
+    assert(0 <= hl && hl <= hr && hr <= h);
+    assert(wl <= wr && wr <= w);
+    if (hl < h && wl < w) add(hl, wl, x);
+    if (hl < h && wr < w) add(hl, wr, -x);
+    if (hr < h && wl < w) add(hr, wl, -x);
+    if (hr < h && wr < w) add(hr, wr, x);
+  }
+
+  T imos_get(int i, size_t j) const {
+    assert(0 <= i && i < h);
+    assert(j < w);
+    return sum(i + 1, j + 1);
+  }
+
 private:
   int h;
   size_t w;

@@ -38,6 +38,17 @@ public:
     return s;
   }
 
+  void imos_add(size_t l, size_t r, T x) {
+    assert(l <= r && r <= n);
+    if (l < n) add(l, x);
+    if (r < n) add(r, -x);
+  }
+
+  T imos_get(size_t i) const {
+    assert(i < n);
+    return sum(i + 1);
+  }
+
   size_t lower_bound(T w) const {
     if (w <= 0) return 0;
     size_t lb = 0, k = 1;

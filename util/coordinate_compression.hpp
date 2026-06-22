@@ -7,7 +7,9 @@
 template <class T> struct coordinate_compression {
 public:
   coordinate_compression() {}
-  explicit coordinate_compression(const std::vector<T>& xs) {
+  explicit coordinate_compression(const std::vector<T>& xs) { add(xs); }
+
+  void add(const std::vector<T>& xs) {
     for (T x : xs) add(x);
   }
 

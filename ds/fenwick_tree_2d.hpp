@@ -58,6 +58,21 @@ public:
     return sum(hr, wr) - sum(hr, wl) - sum(hl, wr) + sum(hl, wl);
   }
 
+  void imos_add(int hl, int wl, int hr, int wr, T x) {
+    assert(0 <= hl && hl <= hr && hr <= h);
+    assert(0 <= wl && wl <= wr && wr <= w);
+    if (hl < h && wl < w) add(hl, wl, x);
+    if (hl < h && wr < w) add(hl, wr, -x);
+    if (hr < h && wl < w) add(hr, wl, -x);
+    if (hr < h && wr < w) add(hr, wr, x);
+  }
+
+  T imos_get(int i, int j) const {
+    assert(0 <= i && i < h);
+    assert(0 <= j && j < w);
+    return sum(i + 1, j + 1);
+  }
+
 private:
   int h, w;
   std::vector<fenwick_tree<T>> fw;
