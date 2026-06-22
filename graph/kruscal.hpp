@@ -7,7 +7,8 @@
 
 template <class T> struct kruscal {
   using edge = std::tuple<T, int, int, int>;
- public:
+
+public:
   kruscal() : kruscal(0) {}
   explicit kruscal(int _n) : n(_n) {}
 
