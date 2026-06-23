@@ -50,6 +50,6 @@
 "test/yosupo/union_find_with_potential.test.cpp": "2026-06-22 00:11:25 +0900",
 "test/yosupo/vertex_add_path_sum.test.cpp": "2026-06-23 13:12:03 +0900",
 "test/yosupo/vertex_add_subtree_sum.test.cpp": "2026-06-23 13:12:03 +0900",
-"test/yosupo/vertex_set_path_composite.test.cpp": "2026-06-23 13:12:03 +0900",
+"test/yosupo/vertex_set_path_composite.test.cpp": "2026-06-23 14:14:28 +0900",
 "test/yosupo/z_algorithm.test.cpp": "2026-06-15 11:56:15 +0900"
 }
