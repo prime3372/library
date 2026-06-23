@@ -12,6 +12,15 @@ using ll = long long;
 using mint = modint998244353;
 using M = Affine<mint>;
 
+template <class T>
+  requires std::is_arithmetic_v<T> || is_modint_v<T>
+struct _Affine {
+  using S = M::S;
+  static S op(S g, S f) { return {g.a * f.a, g.a * f.b + g.b}; }
+  static S e() { return S(); }
+};
+using _M = _Affine<mint>;
+
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
@@ -27,11 +36,11 @@ int main() {
   }
   hld.build();
   auto id = hld.id, head = hld.head, next = hld.next;
-  segtree<M> seg(n), rseg(n);
-  auto rev = [&](int i) { return n - 1 - i; };
+  segtree<M> seg(n);
+  segtree<_M> rseg(n);
   rep(i, 0, n) {
     seg.set(id[i], f[i]);
-    rseg.set(rev(id[i]), f[i]);
+    rseg.set(id[i], f[i]);
   }
   while (q--) {
     bool t;
@@ -41,7 +50,7 @@ int main() {
       mint c, d;
       cin >> p >> c >> d;
       seg.set(id[p], {c, d});
-      rseg.set(rev(id[p]), {c, d});
+      rseg.set(id[p], {c, d});
     } else {
       int u, v;
       mint x;
@@ -53,12 +62,12 @@ int main() {
           r = M::op(seg.prod(head[v], v + 1), r);
           v = next[v];
         } else {
-          l = M::op(l, rseg.prod(rev(u), rev(head[u]) + 1));
+          l = M::op(l, rseg.prod(head[u], u + 1));
           u = next[u];
         }
       }
-      if (u < v) l = M::op(l, seg.prod(u, v + 1));
-      else l = M::op(l, rseg.prod(rev(u), rev(v) + 1));
+      if (u < v) r = M::op(seg.prod(u, v + 1), r);
+      else l = M::op(l, rseg.prod(v, u + 1));
       M::S ans = M::op(l, r);
       cout << ans.a * x + ans.b << "\n";
     }
