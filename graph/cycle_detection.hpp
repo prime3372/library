@@ -17,7 +17,7 @@ public:
     return m++;
   }
 
-  int len = 0;
+  int len = -1;
   std::vector<int> vertices, edges;
 
   cycle_detection& detect() {
