@@ -5,7 +5,7 @@
 
 std::vector<int> enumerate_primes(int n) {
   assert(0 <= n);
-  std::vector<int> ps;  
+  std::vector<int> ps;
   std::vector<bool> prime(n + 1, true);
   for (int i = 2; i <= n; i++) {
     if (!prime[i]) continue;
