@@ -1,0 +1,34 @@
+{
+  "chat.disableAIFeatures": true,
+  "cph.general.defaultLanguage": "cpp",
+  "cph.general.defaultLanguageTemplateFileLocation": "C:\\Users\\syunr\\cptemplate\\template.cpp",
+  "cph.general.firstTime": false,
+  "cph.general.hideStderrorWhenCompiledOK": false,
+  "cph.general.ignoreSTDERROR": true,
+  "cph.language.cpp.Args": "-std=c++23 -g -O2 -Wall -Wextra",
+  "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+  "C_Cpp.default.includePath": [
+    "${workspaceFolder}/**",
+    "C:/msys64/mingw64/include",
+  ],
+  "C_Cpp.default.intelliSenseMode": "gcc-x64",
+  "C_Cpp.default.cppStandard": "c++23",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "debug.onTaskErrors": "showErrors",
+  "editor.tabSize": 2,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "entity.name.function.preprocessor.cpp",        
+        "settings": {
+          "foreground": "#e7b2b5",
+        }
+      }
+    ],
+  },
+  "explorer.confirmDelete": false,
+  "git.confirmSync": false,
+  "git.suggestSmartCommit": false,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "workbench.colorTheme": "Dark Modern",
+}
