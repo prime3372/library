@@ -22,7 +22,7 @@ public:
       assert(0 <= j && j < w);
       return d[j];
     }
-    void swap(const row& r) {
+    void swap(row& r) {
       assert(w == r.w);
       d.swap(r.d);
     }

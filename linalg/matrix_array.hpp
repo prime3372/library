@@ -20,7 +20,7 @@ public:
     assert(0 <= j && j < w);
     return d[j];
   }
-  void swap(const row& r) {
+  void swap(row& r) {
     d.swap(r.d);
   }
   row& operator=(const row& r) {
