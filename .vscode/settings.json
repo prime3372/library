@@ -5,7 +5,7 @@
   "cph.general.firstTime": false,
   "cph.general.hideStderrorWhenCompiledOK": false,
   "cph.general.ignoreSTDERROR": true,
-  "cph.language.cpp.Args": "-std=c++23 -g -O2 -Wall -Wextra",
+  "cph.language.cpp.Args": "-g -O2 -std=c++23 -Wall -Wextra",
   "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\g++.exe",
   "C_Cpp.default.includePath": [
     "${workspaceFolder}/**",
