@@ -34,7 +34,7 @@
     {
       "label": "run random test (judge)",
       "type": "shell",
-      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ judge.cpp -o judge.exe -O2 -std=c++23; for($i=1; $i -le 20; $i++){cmd /c '.\\gen.exe > inout.txt && .\\sol.exe < inout.txt >> inout.txt && .\\judge.exe < inout.txt'; if($LASTEXITCODE -ne 0) { code inout.txt; break }; }; rm gen.exe; rm sol.exe; rm judge.exe",
+      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ judge.cpp -o judge.exe -O2 -std=c++23; for($i=1; $i -le 20; $i++){ cmd /c '.\\gen.exe > inout.txt && .\\sol.exe < inout.txt >> inout.txt && .\\judge.exe < inout.txt'; if($LASTEXITCODE -ne 0) { code inout.txt; break }; }; rm gen.exe; rm sol.exe; rm judge.exe",
       "group": {
           "kind": "test",
           "isDefault": true
