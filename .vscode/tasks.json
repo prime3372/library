@@ -2,43 +2,67 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "type": "shell",
       "label": "oj-bundle current file",
-      "command": "python -m onlinejudge_bundle.main ${file} -I ${workspaceFolder} > ${workspaceFolder}/submission.cpp ; code ${workspaceFolder}/submission.cpp",
+      "type": "shell",
+      "command": "python -m onlinejudge_bundle.main ${file} -I ${workspaceFolder} > ${workspaceFolder}/submission.cpp; code ${workspaceFolder}/submission.cpp",
       "group": {
         "kind": "build",
         "isDefault": true
       },
       "presentation": {
+        "focus": true,
         "panel": "shared",
-        "clear": true
-      }
+        "clear": true,
+        "close": true
+      },
+      "problemMatcher": []
     },
     {
-      "type": "shell",
       "label": "C++ compile and run",
-      "command": "g++ ${file} -fdiagnostics-color=always -g -std=c++23 -o ${fileBasenameNoExtension}.exe -O2 -Wall -Wextra ; .\\${fileBasenameNoExtension}.exe ; rm ${fileBasenameNoExtension}.exe",
+      "type": "shell",
+      "command": "g++ ${file} -fdiagnostics-color=always -g -o ${fileBasenameNoExtension}.exe -O2 -std=c++23 -Wall -Wextra; ./${fileBasenameNoExtension}.exe; rm ${fileBasenameNoExtension}.exe",
       "group": {
         "kind": "build",
         "isDefault": false
       },
       "presentation": {
+        "focus": true,
         "panel": "shared",
         "clear": true
-      }
+      },
+      "problemMatcher": []
     },
     {
+      "label": "run random test (compare)",
       "type": "shell",
-      "label": "C++ random test",
-      "command": "g++ ${file} -fdiagnostics-color=always -g -std=c++23 -o ${fileBasenameNoExtension}.exe -O2 -Wall -Wextra ; .\\${fileBasenameNoExtension}.exe ; ${fileBasenameNoExtension}.exe > ${fileBasenameNoExtension}.txt ; rm ${fileBasenameNoExtension}.exe",
+      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ ans.cpp -o ans.exe -O2 -std=c++23; while($true) {cmd /c '.\\gen.exe > in.txt && .\\sol.exe < in.txt > out.txt && .\\ans.exe < in.txt > ans.txt'; if(Compare-Object (Get-Content out.txt) (Get-Content ans.txt)) { break }; }; code in.txt out.txt ans.txt; rm gen.exe; rm sol.exe; rm ans.exe",
       "group": {
-        "kind": "build",
+        "kind": "test",
         "isDefault": false
       },
       "presentation": {
+        "focus": true,
         "panel": "shared",
-        "clear": true
-      }
+        "clear": true,
+        "close": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "run random test (judge)",
+      "type": "shell",
+      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ judge.cpp -o judge.exe -O2 -std=c++23; while($true) {cmd /c '.\\gen.exe > inout.txt && .\\sol.exe < inout.txt >> inout.txt && .\\judge.exe < inout.txt'; if($LASTEXITCODE -ne 0) { break; }; }; code inout.txt; rm gen.exe; rm sol.exe; rm ans.exe",
+      "group": {
+          "kind": "test",
+          "isDefault": true
+      },
+      "presentation": {
+          "focus": true,
+          "panel": "shared",
+          "clear": true,
+          "close": true
+      },
+      "problemMatcher": []
     }
   ]
 }
