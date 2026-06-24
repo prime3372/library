@@ -12,7 +12,7 @@
       "presentation": {
         "panel": "shared",
         "clear": true
-      },
+      }
     },
     {
       "type": "shell",
@@ -25,7 +25,20 @@
       "presentation": {
         "panel": "shared",
         "clear": true
+      }
+    },
+    {
+      "type": "shell",
+      "label": "C++ random test",
+      "command": "g++ ${file} -fdiagnostics-color=always -g -std=c++23 -o ${fileBasenameNoExtension}.exe -O2 -Wall -Wextra ; .\\${fileBasenameNoExtension}.exe ; ${fileBasenameNoExtension}.exe > ${fileBasenameNoExtension}.txt ; rm ${fileBasenameNoExtension}.exe",
+      "group": {
+        "kind": "build",
+        "isDefault": false
       },
+      "presentation": {
+        "panel": "shared",
+        "clear": true
+      }
     }
   ]
 }
