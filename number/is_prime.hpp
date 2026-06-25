@@ -9,10 +9,10 @@
 template <std::integral T> requires(sizeof(T) <= 4)
 constexpr bool is_prime(T n) {
   if (n <= 2) return n == 2;
-  if (n % 2 == 0) return false; 
-  barrett bt((unsigned int)(n));
+  if (n % 2 == 0) return false;
   long long d = (long long)(n) - 1;
   while (d % 2 == 0) d /= 2;
+  barrett bt((unsigned int)(n));
 
   for (long long a : {2, 7, 61}) {
     if (a % n == 0) continue;
