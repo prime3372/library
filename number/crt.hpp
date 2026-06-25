@@ -18,7 +18,7 @@ std::pair<long long, long long> crt(const std::vector<long long>& r, const std::
       std::swap(m0, m1);
     }
     // we want to find (m, r) s.t. z % m0 = r0 and z % m1 = r1 <=> z % m = r
-    // let (x, y) satisfy z = m0*x + r0 = m1*y + r1 ...[1]
+    // let (x, y) satisfies z = m0*x + r0 = m1*y + r1 ...[1]
 
     if (m0 % m1 == 0) { // by[1]: m0 = 0 (mod m1) -> r0 = r1 (mod m1)
       if (r0 % m1 != r1) return {0, 0};
