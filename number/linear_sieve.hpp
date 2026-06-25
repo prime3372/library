@@ -21,8 +21,8 @@ public:
   }
 
   bool is_prime(int k) const {
-    assert(1 <= k && k <= n);
-    return f[k] == k;
+    assert(k <= n);
+    return k < 2 ? false : f[k] == k;
   }
 
   const std::vector<int>& primes() const { return ps; }
