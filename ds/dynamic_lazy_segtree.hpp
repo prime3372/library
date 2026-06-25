@@ -16,8 +16,8 @@ public:
   dynamic_lazy_segtree() : dynamic_lazy_segtree(0) {}
   explicit dynamic_lazy_segtree(size_t _n) : dynamic_lazy_segtree(_n, M::e()) {}
   explicit dynamic_lazy_segtree(size_t _n, S v) : n(_n) {
-    size = std::bit_ceil(n);
-    log = std::countr_zero(size);
+    sz = std::bit_ceil(n);
+    log = std::countr_zero(sz);
     initial_vals.resize(log + 1);
     for (int i = log; i >= 0; i--) {
       initial_vals[i] = v;
@@ -27,29 +27,29 @@ public:
 
   void set(size_t i, S x) {
     assert(i < n);
-    set(root, 0, size, 0, i, x);
+    set(root, 0, sz, 0, i, x);
   }
 
   S operator[](size_t i) {
     assert(i < n);
-    return get(root, 0, size, 0, i);
+    return get(root, 0, sz, 0, i);
   }
 
   S prod(size_t l, size_t r) {
     assert(l <= r && r <= n);
-    return prod(root, 0, size, 0, l, r);
+    return prod(root, 0, sz, 0, l, r);
   }
 
   S all_prod() { return root ? root->val : initial_vals[0]; }
 
   void apply(size_t i, F f) {
     assert(i < n);
-    apply(root, 0, size, 0, i, f);
+    apply(root, 0, sz, 0, i, f);
   }
 
   void apply(size_t l, size_t r, F f) {
     assert(l <= r && r <= n);
-    apply(root, 0, size, 0, l, r, f);
+    apply(root, 0, sz, 0, l, r, f);
   }
 
   template <bool (*f)(S)> size_t max_right(size_t l) {
@@ -59,7 +59,7 @@ public:
     assert(l <= n);
     assert(f(M::e()));
     S product = M::e();
-    return max_right(root, 0, size, 0, product, l, f);
+    return max_right(root, 0, sz, 0, product, l, f);
   }
 
   template <bool (*f)(S)> size_t min_left(size_t r) {
@@ -69,7 +69,7 @@ public:
     assert(r <= n);
     assert(f(M::e()));
     S product = M::e();
-    return min_left(root, 0, size, 0, product, r, f);
+    return min_left(root, 0, sz, 0, product, r, f);
   }
 
   size_t size() const { return n; }
@@ -84,7 +84,7 @@ private:
     bool lzflag;
     node(S v) : val(v), lz(M::id()), left(nullptr), right(nullptr), lzflag(false) {}
   };
-  size_t n, size;
+  size_t n, sz;
   int log;
   node_ptr root;
   std::vector<S> initial_vals;

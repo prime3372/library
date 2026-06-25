@@ -14,18 +14,18 @@ public:
   lazy_segtree() : lazy_segtree(0) {}
   explicit lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, M::e())) {}
   explicit lazy_segtree(int n, S v) : lazy_segtree(std::vector<S>(n, v)) {}
-  explicit lazy_segtree(const std::vector<S>& v) : n(int(v.size())) {
-    size = (int)std::bit_ceil((unsigned int)(n));
-    log = std::countr_zero((unsigned int)(size));
-    d = std::vector<S>(2 * size);
-    lz = std::vector<F>(size);
-    for (int i = 0; i < n; i++) d[size + i] = v[i];
-    for (int i = size - 1; i >= 1; i--) update(i);
+  explicit lazy_segtree(const std::vector<S>& v) : n(int(v.sz())) {
+    sz = (int)std::bit_ceil((unsigned int)(n));
+    log = std::countr_zero((unsigned int)(sz));
+    d = std::vector<S>(2 * sz);
+    lz = std::vector<F>(sz);
+    for (int i = 0; i < n; i++) d[sz + i] = v[i];
+    for (int i = sz - 1; i >= 1; i--) update(i);
   }
 
   void set(int i, S x) {
     assert(0 <= i && i < n);
-    i += size;
+    i += sz;
     for (int j = log; j >= 1; j--) push(i >> j);
     d[i] = x;
     for (int j = 1; j <= log; j++) update(i >> j);
@@ -33,7 +33,7 @@ public:
 
   S operator[](int i) {
     assert(0 <= i && i < n);
-    i += size;
+    i += sz;
     for (int j = log; j >= 1; j--) push(i >> j);
     return d[i];
   }
@@ -42,8 +42,8 @@ public:
     assert(0 <= l && l <= r && r <= n);
     if (l == r) return M::e();
 
-    l += size;
-    r += size;
+    l += sz;
+    r += sz;
 
     for (int i = log; i >= 1; i--) {
       if (((l >> i) << i) != l) push(l >> i);
@@ -65,7 +65,7 @@ public:
 
   void apply(int i, F f) {
     assert(0 <= i && i < n);
-    i += size;
+    i += sz;
     for (int j = log; j >= 1; j--) push(i >> j);
     d[i] = M::mapping(f, d[i]);
     for (int j = 1; j <= log; j++) update(i >> j);
@@ -75,8 +75,8 @@ public:
     assert(0 <= l && l <= r && r <= n);
     if (l == r) return;
 
-    l += size;
-    r += size;
+    l += sz;
+    r += sz;
 
     for (int i = log; i >= 1; i--) {
       if (((l >> i) << i) != l) push(l >> i);
@@ -109,13 +109,13 @@ public:
     assert(0 <= l && l <= n);
     assert(g(M::e()));
     if (l == n) return n;
-    l += size;
+    l += sz;
     for (int i = log; i >= 1; i--) push(l >> i);
     S product = M::e();
     do {
       while (l % 2 == 0) l >>= 1;
       if (!g(M::op(product, d[l]))) {
-        while (l < size) {
+        while (l < sz) {
           push(l);
           l = 2 * l;
           if (g(M::op(product, d[l]))) {
@@ -123,7 +123,7 @@ public:
             l++;
           }
         }
-        return l - size;
+        return l - sz;
       }
       product = M::op(product, d[l]);
       l++;
@@ -139,14 +139,14 @@ public:
     assert(0 <= r && r <= n);
     assert(g(M::e()));
     if (r == 0) return 0;
-    r += size;
+    r += sz;
     for (int i = log; i >= 1; i--) push((r - 1) >> i);
     S product = M::e();
     do {
       r--;
       while (r > 1 && r % 2) r >>= 1;
       if (!g(M::op(d[r], product))) {
-        while (r < size) {
+        while (r < sz) {
           push(r);
           r = 2 * r + 1;
           if (g(M::op(d[r], product))) {
@@ -154,7 +154,7 @@ public:
             r--;
           }
         }
-        return r + 1 - size;
+        return r + 1 - sz;
       }
       product = M::op(d[r], product);
     } while ((r & -r) != r);
@@ -164,7 +164,7 @@ public:
   int size() const { return n; }
 
 private:
-  int n, size, log;
+  int n, sz, log;
   std::vector<S> d;
   std::vector<F> lz;
 
@@ -173,7 +173,7 @@ private:
   }
   void all_apply(int k, F f) {
     d[k] = M::mapping(f, d[k]);
-    if (k < size) lz[k] = M::composition(f, lz[k]);
+    if (k < sz) lz[k] = M::composition(f, lz[k]);
   }
   void push(int k) {
     all_apply(2 * k, lz[k]);

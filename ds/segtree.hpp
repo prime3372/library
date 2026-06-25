@@ -14,31 +14,31 @@ public:
   segtree() : segtree(0) {}
   explicit segtree(int n) : segtree(std::vector<S>(n, M::e())) {}
   explicit segtree(int n, S v) : segtree(std::vector<S>(n, v)) {}
-  explicit segtree(const std::vector<S>& v) : n(int(v.size())) {
-    size = (int)std::bit_ceil((unsigned int)(n));
-    log = std::countr_zero((unsigned int)(size));
-    d = std::vector<S>(2 * size);
-    for (int i = 0; i < n; i++) d[size + i] = v[i];
-    for (int i = size - 1; i >= 1; i--) update(i);
+  explicit segtree(const std::vector<S>& v) : n(int(v.sz())) {
+    sz = (int)std::bit_ceil((unsigned int)(n));
+    log = std::countr_zero((unsigned int)(sz));
+    d = std::vector<S>(2 * sz);
+    for (int i = 0; i < n; i++) d[sz + i] = v[i];
+    for (int i = sz - 1; i >= 1; i--) update(i);
   }
 
   void set(int i, S x) {
     assert(0 <= i && i < n);
-    i += size;
+    i += sz;
     d[i] = x;
     for (int j = 1; j <= log; j++) update(i >> j);
   }
 
   S operator[](int i) const {
     assert(0 <= i && i < n);
-    return d[i + size];
+    return d[i + sz];
   }
 
   S prod(int l, int r) const {
     assert(0 <= l && l <= r && r <= n);
     S prodl = M::e(), prodr = M::e();
-    l += size;
-    r += size;
+    l += sz;
+    r += sz;
 
     while (l < r) {
       if (l & 1) prodl = M::op(prodl, d[l++]);
@@ -59,19 +59,19 @@ public:
     assert(0 <= l && l <= n);
     assert(f(M::e()));
     if (l == n) return n;
-    l += size;
+    l += sz;
     S product = M::e();
     do {
       while (l % 2 == 0) l >>= 1;
       if (!f(M::op(product, d[l]))) {
-        while (l < size) {
+        while (l < sz) {
           l = 2 * l;
           if (f(M::op(product, d[l]))) {
             product = M::op(product, d[l]);
             l++;
           }
         }
-        return l - size;
+        return l - sz;
       }
       product = M::op(product, d[l]);
       l++;
@@ -87,20 +87,20 @@ public:
     assert(0 <= r && r <= n);
     assert(f(M::e()));
     if (r == 0) return 0;
-    r += size;
+    r += sz;
     S product = M::e();
     do {
       r--;
       while (r > 1 && r % 2) r >>= 1;
       if (!f(M::op(d[r], product))) {
-        while (r < size) {
+        while (r < sz) {
           r = 2 * r + 1;
           if (f(M::op(d[r], product))) {
             product = M::op(d[r], product);
             r--;
           }
         }
-        return r + 1 - size;
+        return r + 1 - sz;
       }
       product = M::op(d[r], product);
     } while ((r & -r) != r);
@@ -110,7 +110,7 @@ public:
   int size() const { return n; }
 
 private:
-  int n, size, log;
+  int n, sz, log;
   std::vector<S> d;
 
   void update(int k) {
