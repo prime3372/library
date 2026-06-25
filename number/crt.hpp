@@ -32,21 +32,17 @@ std::pair<long long, long long> crt(const std::vector<long long>& r, const std::
     //        -> (r1 - r0) % g = 0
 
     long long u1 = m1 / g;
-    // m0*im = g (mod m1)
-    // -> (m0/g)*im = 1 (mod u1)
-    // -> im = inv(m0/g) (mod u1) ...[2]
-
     long long x0 = (r1 - r0) / g % u1 * im % u1;
     if (x0 < 0) x0 += u1;
     // m0*x + r0 = r1 (mod m1)
     // -> (m0/g)*x = (r1 - r0)/g (mod u1)
-    // -> x = (r1 - r0)/g*im (mod u1) by[2]
+    // -> x = (r1 - r0)/g*im (mod u1)
     // so let x0 = (r1 - r0)/g*im % u1
 
     // z = m0*(x0 + u1*k) + r0 = m0*x0 + r0 + m0*u1*k
-    // -> z % (m0*u1) = m0*x0
+    // -> z % (m0*u1) = m0*x0 + r0
 
-    // now suppose z % (m0*u1) = m0*x0, then
+    // now suppose z % (m0*u1) = m0*x0 + r0, then
     // z % m0 = r0
     // z % m1 = (m0*x + r0) % m1 = (m1*y + r1) % m1 = r1 (note that m0*u1 = lcm(m0, m1))
     // therefore m = m0*u1, r = m0*x0 + r0
