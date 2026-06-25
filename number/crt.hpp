@@ -17,6 +17,7 @@ std::pair<long long, long long> crt(const std::vector<long long>& r, const std::
       std::swap(r0, r1);
       std::swap(m0, m1);
     }
+    
     if (m0 % m1 == 0) {
       if (r0 % m1 != r1) return {0, 0};
       continue;
