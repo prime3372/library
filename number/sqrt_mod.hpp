@@ -3,6 +3,7 @@
 #include "pow_mod.hpp"
 
 // Cipolla's Algorithm
+// https://en.wikipedia.org/wiki/Cipolla%27s_algorithm
 constexpr long long sqrt_mod(long long a, long long p) {
   a = a < 0 ? a % p + p : a % p;
   if (a <= 1) return a;
