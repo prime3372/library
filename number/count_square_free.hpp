@@ -5,8 +5,7 @@
 #include "isqrt.hpp"
 #include "mobius.hpp"
 
-// Jakub Pawlewicz,
-// Counting Square-Free Numbers
+// https://smsxgz.github.io/post/pe/counting_square_free_numbers/
 long long count_square_free(long long n) {
   assert(0 <= n);
   long long ans = 0;
