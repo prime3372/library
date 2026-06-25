@@ -77,6 +77,8 @@ public:
     return ub;
   }
 
+  size_t size() const { return n; }
+
 private:
   size_t n;
   hash_map<T> d;

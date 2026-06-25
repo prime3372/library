@@ -37,6 +37,8 @@ public:
     return -parent_or_size[find(a)];
   }
 
+  int size() const { return n; }
+
   std::vector<std::vector<int>> groups() {
     std::vector<int> root(n), group_size(n);
     for (int i = 0; i < n; i++) {

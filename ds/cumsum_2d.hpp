@@ -74,6 +74,9 @@ public:
     if (hr < h && wr < w) d[hr][wr] += x;
   }
 
+  int height() const { return h; }
+  int width() const { return w; }
+
 private:
   int h, w;
   bool accumulated = false;

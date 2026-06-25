@@ -50,6 +50,8 @@ public:
     return M::op(table[k][l], table[k][r - 1]);
   }
 
+  int size() const { return n; }
+
 private:
   int n, log;
   std::vector<S> a;

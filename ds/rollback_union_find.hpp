@@ -41,6 +41,8 @@ public:
     return -parent_or_size[find(a)];
   }
 
+  int size() const { return n; }
+
   void undo() {
     parent_or_size[history.back().first] = history.back().second;
     history.pop_back();

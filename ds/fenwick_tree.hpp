@@ -76,6 +76,8 @@ public:
     return ub;
   }
 
+  int size() const { return n; }
+
 private:
   int n;
   std::vector<T> d;

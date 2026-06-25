@@ -44,6 +44,8 @@ public:
     if (r < n) a[r] -= x;
   }
 
+  int size() const { return n; }
+
 private:
   int n;
   bool accumulated = false;

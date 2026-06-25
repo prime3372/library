@@ -61,6 +61,8 @@ public:
     return min_left(root, 0, size, 0, product, r, f);
   }
 
+  size_t size() const { return n; }
+
 private:
   struct node;
   using node_ptr = std::unique_ptr<node>;

@@ -42,6 +42,8 @@ public:
     assert(0 <= a && a < n);
     return -parent_or_size[find(a)];
   }
+
+  int size() const { return n; }
   
   T weight(int a) {
     assert(0 <= a && a < n);

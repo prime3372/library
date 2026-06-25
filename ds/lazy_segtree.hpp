@@ -161,6 +161,8 @@ public:
     return 0;
   }
 
+  int size() const { return n; }
+
 private:
   int n, size, log;
   std::vector<S> d;

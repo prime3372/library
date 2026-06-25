@@ -74,6 +74,9 @@ public:
     return sum(i + 1, j + 1);
   }
 
+  int height() const { return h; }
+  size_t width() const { return w; }
+
 private:
   int h;
   size_t w;
