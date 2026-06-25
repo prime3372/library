@@ -12,14 +12,11 @@ using ll = long long;
 using mint = modint998244353;
 using M = Affine<mint>;
 
-template <class T>
-  requires std::is_arithmetic_v<T> || is_modint_v<T>
-struct _Affine {
+struct Rev_M {
   using S = M::S;
   static S op(S g, S f) { return {g.a * f.a, g.a * f.b + g.b}; }
   static S e() { return S(); }
 };
-using _M = _Affine<mint>;
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -37,7 +34,7 @@ int main() {
   hld.build();
   auto id = hld.id, head = hld.head, next = hld.next;
   segtree<M> seg(n);
-  segtree<_M> rseg(n);
+  segtree<Rev_M> rseg(n);
   rep(i, 0, n) {
     seg.set(id[i], f[i]);
     rseg.set(id[i], f[i]);
