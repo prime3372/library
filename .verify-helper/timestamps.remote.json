@@ -50,6 +50,7 @@
 "test/yosupo/union_find.test.cpp": "2026-06-25 10:55:12 +0900",
 "test/yosupo/union_find_with_potential.test.cpp": "2026-06-25 10:55:12 +0900",
 "test/yosupo/vertex_add_path_sum.test.cpp": "2026-06-25 10:55:12 +0900",
+"test/yosupo/vertex_add_range_contour_sum_on_tree.test.cpp": "2026-06-25 11:10:06 +0900",
 "test/yosupo/vertex_add_subtree_sum.test.cpp": "2026-06-25 10:55:12 +0900",
 "test/yosupo/vertex_set_path_composite.test.cpp": "2026-06-25 11:04:31 +0900",
 "test/yosupo/z_algorithm.test.cpp": "2026-06-15 11:56:15 +0900"
