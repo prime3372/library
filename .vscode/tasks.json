@@ -55,9 +55,9 @@
         "isDefault": true
       },
       "presentation": {
-        "reveal": "never",
         "panel": "shared",
         "clear": true,
+        "close": true
       },
       "problemMatcher": []
     }
