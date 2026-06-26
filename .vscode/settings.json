@@ -1,7 +1,7 @@
 {
   "chat.disableAIFeatures": true,
   "cph.general.defaultLanguage": "cpp",
-  "cph.general.defaultLanguageTemplateFileLocation": "C:\\Users\\syunr\\cptemplate\\template.cpp",
+  "cph.general.defaultLanguageTemplateFileLocation": "C:\\Users\\syunr\\cp\\cptemplate\\template.cpp",
   "cph.general.firstTime": false,
   "cph.general.hideStderrorWhenCompiledOK": false,
   "cph.general.ignoreSTDERROR": true,
