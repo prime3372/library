@@ -40,7 +40,7 @@ constexpr long long sqrt_mod(long long n, long long p) {
   // z^2 = (a + w)^(p + 1) = (a + w)(a + w)^p = (a + w)(a - w) = a^2 - w^2 = n (in F_p^2)
   // therefore z, -z are sqrt(n) in F_p^2
   // with Lagrange's theorem, polynomial of degree 2 has at most 2 roots in any field K, so z, -z are also sqrt(n) in F_p
-  // (note that we have already checked that n is a square in F_p)
+  // note that we have already checked that n is a square in F_p
 
   return (long long)(z.re);
 }
