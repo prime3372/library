@@ -2,10 +2,12 @@
 
 #include <algorithm>
 #include <bit>
+#include <concepts>
 #include <vector>
 #include "../number/is_prime.hpp"
 #include "../number/pow_mod.hpp"
 #include "../util/type_traits.hpp"
+#include "../util/static_modint.hpp"
 
 namespace internal {
 
@@ -104,4 +106,17 @@ std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
   for (int i = 0; i < n + m - 1; i++) a[i] *= iz;
 
   return a;
+}
+
+template <int mod = 998244353, std::integral T>
+std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
+  using mint = static_modint<mod>;
+  int n = int(a.size()), m = int(b.size());
+  std::vector<mint> _a(n), _b(m);
+  for (int i = 0; i < n; i++) _a[i] = mint(a[i]);
+  for (int i = 0; i < m; i++) _b[i] = mint(b[i]);
+  auto _c = convolution(std::move(_a), std::move(_b));
+  std::vector<T> c(n + m - 1);
+  for (int i = 0; i < n; i++) c[i] = _c[i].val();
+  return c;
 }
