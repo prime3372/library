@@ -22,7 +22,7 @@ std::vector<long long> convolution_ll(std::vector<long long> a, std::vector<long
   auto c3 = convolution<MOD3>(a, b);
 
   long long x;
-  __int128 z;
+  __int128 r;
   std::vector<long long> c(n + m - 1);
   for (int i = 0; i < n + m - 1; i++) {
     x = (c2[i] - c1[i]) % MOD2 * i1 % MOD2;
@@ -31,9 +31,9 @@ std::vector<long long> convolution_ll(std::vector<long long> a, std::vector<long
 
     x = (c3[i] - c1[i]) % MOD3 * i2 % MOD3;
     if (x < 0) x += MOD3;
-    z = c1[i] + __int128(x) * MOD1 * MOD2;
-    if (z > MOD / 2) z -= MOD;
-    c1[i] = (long long)(z);
+    r = c1[i] + __int128(x) * MOD1 * MOD2;
+    if (r > MOD / 2) r -= MOD;
+    c1[i] = (long long)(r);
   }
   return c1;
 }
