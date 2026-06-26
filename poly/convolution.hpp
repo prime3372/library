@@ -63,6 +63,12 @@ template <class mint, int g> void ntt(std::vector<mint>& a) {
     if (i < bitrev[i]) std::swap(a[i], a[bitrev[i]]);
   }
 
+  // start a = [0] [4] [2] [6] [1] [5] [3] [7]
+  // step1 a = [0   4] [2   6] [1   5] [3   7]
+  // step2 a = [0   2   4   6] [1   3   5   7]
+  // step3 a = [0   1   2   3   4   5   6   7]
+  // where [i_0 ... i_k] denotes NTT of a[i_0,...,i_k]
+
   for (int step = 1; step <= log; step++) {
     int width = 1 << step;
     int half = width / 2;
@@ -117,6 +123,6 @@ std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
   for (int i = 0; i < m; i++) _b[i] = mint(b[i]);
   auto _c = convolution(std::move(_a), std::move(_b));
   std::vector<T> c(n + m - 1);
-  for (int i = 0; i < n; i++) c[i] = _c[i].val();
+  for (int i = 0; i < n + m - 1; i++) c[i] = _c[i].val();
   return c;
 }
