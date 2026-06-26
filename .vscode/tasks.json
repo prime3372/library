@@ -19,7 +19,7 @@
     {
       "label": "setup random test",
       "type": "shell",
-      "command": "Get-Content 'C:/Users/syunr/cptemplate/generator.cpp' | Set-Content 'gen.cpp'; Get-Content 'C:/Users/syunr/cptemplate/template.cpp' | Set-Content 'ans.cpp'; code gen.cpp ans.cpp",
+      "command": "Get-Content 'C:/Users/syunr/cp/cptemplate/generator.cpp' | Set-Content 'gen.cpp'; Get-Content 'C:/Users/syunr/cp/cptemplate/template.cpp' | Set-Content 'ans.cpp'; code gen.cpp ans.cpp",
       "presentation": {
         "panel": "shared",
         "clear": true,
@@ -30,7 +30,7 @@
     {
       "label": "run random test (compare)",
       "type": "shell",
-      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ ans.cpp -o ans.exe -O2 -std=c++23; for($i=1; $i -le 20; $i++){ cmd /c '.\\gen.exe > in.txt'; Start-Sleep -Seconds 0.5; cmd /c '.\\sol.exe < in.txt > out.txt'; Start-Sleep -Seconds 0.5; cmd /c '.\\ans.exe < in.txt > ans.txt'; Start-Sleep -Seconds 0.5; (Get-Content -Path 'out.txt') -replace ' +$' | Set-Content -Path 'out.txt'; (Get-Content -Path 'ans.txt') -replace ' +$' | Set-Content -Path 'ans.txt'; (Get-Content -Path 'out.txt' -Raw) -replace '(\r?\n)+$' | Set-Content -Path 'out.txt'; (Get-Content -Path 'ans.txt' -Raw) -replace '(\r?\n)+$' | Set-Content -Path 'ans.txt'; if(Compare-Object (Get-Content out.txt) (Get-Content ans.txt)) { Write-Host 'Test' $i '[WA]'; code in.txt out.txt ans.txt; break } else { Write-Host 'Test' $i '[AC]' }; }; rm gen.exe; rm sol.exe; rm ans.exe",
+      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ ans.cpp -o ans.exe -O2 -std=c++23; for ($i=1; $i -le 20; $i++) { cmd /c '.\\gen.exe > in.txt && .\\sol.exe < in.txt > out.txt && .\\ans.exe < in.txt > ans.txt'; C:/Users/syunr/cp/cpchecker/checker.exe out.txt ans.txt; if ($LASTEXITCODE -ne 0) { Write-Host 'Test' $i '[WA]'; code in.txt out.txt ans.txt; break } else { Write-Host 'Test' $i '[AC]' }; }; rm gen.exe; rm sol.exe; rm ans.exe",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -44,7 +44,7 @@
     {
       "label": "run random test (judge)",
       "type": "shell",
-      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ ans.cpp -o ans.exe -O2 -std=c++23; for($i=1; $i -le 20; $i++){ cmd /c '.\\gen.exe > in.txt'; Start-Sleep -Seconds 0.5; cmd /c '.\\sol.exe < in.txt > out.txt'; Start-Sleep -Seconds 0.5; Get-Content 'in.txt' | Set-Content 'inout.txt'; Get-Content 'out.txt' | Add-Content 'inout.txt'; cmd /c '.\\ans.exe < inout.txt'; Start-Sleep -Seconds 0.5; if($LASTEXITCODE -ne 0) { Write-Host 'Test' $i 'WA'; code in.txt out.txt; break } else { Write-Host 'Test' $i 'AC' }; }; rm gen.exe; rm sol.exe; rm ans.exe; rm inout.txt",
+      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ ans.cpp -o ans.exe -O2 -std=c++23; for ($i=1; $i -le 20; $i++) { cmd /c '.\\gen.exe > in.txt && .\\sol.exe < in.txt > out.txt'; Get-Content 'in.txt' | Set-Content 'inout.txt'; Get-Content 'out.txt' | Add-Content 'inout.txt'; cmd /c '.\\ans.exe < inout.txt'; if ($LASTEXITCODE -ne 0) { Write-Host 'Test' $i 'WA'; code in.txt out.txt; break } else { Write-Host 'Test' $i 'AC' }; }; rm gen.exe; rm sol.exe; rm ans.exe; rm inout.txt",
       "group": {
           "kind": "test",
           "isDefault": true
@@ -58,7 +58,7 @@
     {
       "label": "bundle current file",
       "type": "shell",
-      "command": "python -m onlinejudge_bundle.main ${file} -I ${workspaceFolder} > ${workspaceFolder}/submit.cpp; code ${workspaceFolder}/submit.cpp",
+      "command": "python -m onlinejudge_bundle.main ${file} -I ${workspaceFolder} > submit.cpp; code submit.cpp",
       "group": {
         "kind": "build",
         "isDefault": true
