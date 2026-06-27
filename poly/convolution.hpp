@@ -146,9 +146,9 @@ std::vector<long long> convolution(std::vector<long long> a, std::vector<long lo
   auto c2 = convolution<MOD2>(a, b);
   auto c3 = convolution<MOD3>(a, b);
 
+  // restore the true value using CRT
   long long x;
   __int128 r;
-  std::vector<long long> c(n + m - 1);
   for (int i = 0; i < n + m - 1; i++) {
     x = (c2[i] - c1[i]) % MOD2 * i1 % MOD2;
     if (x < 0) x += MOD2;
