@@ -17,6 +17,21 @@
       "problemMatcher": []
     },
     {
+      "label": "bundle current file",
+      "type": "shell",
+      "command": "python -m onlinejudge_bundle.main ${file} -I ${workspaceFolder} > submit.cpp; code submit.cpp",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "panel": "shared",
+        "clear": true,
+        "close": true
+      },
+      "problemMatcher": []
+    },
+  {
       "label": "setup random test",
       "type": "shell",
       "command": "Get-Content 'template/template.cpp' | Set-Content 'gen.cpp'; Get-Content 'template/template.cpp' | Set-Content 'ans.cpp'; code gen.cpp ans.cpp",
@@ -30,7 +45,7 @@
     {
       "label": "run random test (compare tokens)",
       "type": "shell",
-      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ ans.cpp -o ans.exe -O2 -std=c++23; g++ checker/compare_tokens.cpp -o checker.exe -std=c++23; for ($i=1; $i -le 20; $i++) { cmd /c '.\\gen.exe > in.txt && .\\sol.exe < in.txt > out.txt && .\\ans.exe < in.txt > ans.txt'; ./checker.exe out.txt ans.txt; if ($LASTEXITCODE -ne 0) { code in.txt out.txt ans.txt; break } }; rm gen.exe; rm sol.exe; rm ans.exe; rm checker.exe",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test.ps1 checker/compare_tokens.cpp ${file} gen.cpp ans.cpp",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -44,7 +59,21 @@
     {
       "label": "run random test (max error 1e-6)",
       "type": "shell",
-      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ ans.cpp -o ans.exe -O2 -std=c++23; g++ checker/max_error_1e-6.cpp -o ./checker.exe -std=c++23; for ($i=1; $i -le 20; $i++) { cmd /c '.\\gen.exe > in.txt && .\\sol.exe < in.txt > out.txt && .\\ans.exe < in.txt > ans.txt'; ./checker.exe out.txt ans.txt; if ($LASTEXITCODE -ne 0) { code in.txt out.txt ans.txt; break } }; rm gen.exe; rm sol.exe; rm ans.exe; rm checker.exe",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test.ps1 checker/max_error_1e-6.cpp ${file} gen.cpp ans.cpp",
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "panel": "shared",
+        "clear": true,
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "run random test (max error 1e-9)",
+      "type": "shell",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test.ps1 checker/max_error_1e-9.cpp ${file} gen.cpp ans.cpp",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -58,7 +87,7 @@
     {
       "label": "run random test (interactive)",
       "type": "shell",
-      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; for ($i=1; $i -le 20; $i++) { python checker/interactive.py '.\\gen.exe' '.\\sol.exe'; if($LASTEXITCODE -ne 0) { Write-Host 'Test' $i 'WA'; code in.txt out.txt; break } else { Write-Host 'Test' $i 'AC' } }",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test_interactive.ps1 ${file} gen.cpp",
       "group": {
         "kind": "test",
         "isDefault": true
@@ -68,33 +97,18 @@
         "clear": true
       },
       "problemMatcher": []
-    },    
+    },
     {
       "label": "run random test (custom judge)",
       "type": "shell",
-      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ judge.cpp -o judge.exe -O2 -std=c++23; for ($i=1; $i -le 20; $i++) { cmd /c '.\\gen.exe > in.txt && .\\sol.exe < in.txt > out.txt'; Get-Content 'in.txt' | Set-Content 'inout.txt'; Get-Content 'out.txt' | Add-Content 'inout.txt'; cmd /c '.\\judge.exe < inout.txt'; if ($LASTEXITCODE -ne 0) { Write-Host 'Test' $i 'WA'; code in.txt out.txt; break } else { Write-Host 'Test' $i 'AC' }; }; rm gen.exe; rm sol.exe; rm judge.exe; rm inout.txt",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test_custom_judge.ps1 ${file} gen.cpp judge.cpp",
       "group": {
-          "kind": "test",
-          "isDefault": true
-      },
-      "presentation": {
-          "panel": "shared",
-          "clear": true,
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "bundle current file",
-      "type": "shell",
-      "command": "python -m onlinejudge_bundle.main ${file} -I ${workspaceFolder} > submit.cpp; code submit.cpp",
-      "group": {
-        "kind": "build",
+        "kind": "test",
         "isDefault": true
       },
       "presentation": {
         "panel": "shared",
-        "clear": true,
-        "close": true
+        "clear": true
       },
       "problemMatcher": []
     }
