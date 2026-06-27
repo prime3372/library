@@ -40,6 +40,7 @@
 "test/yosupo/shortest_path.test.cpp": "2026-06-27 16:39:29 +0900",
 "test/yosupo/sort_points_by_argument.test.cpp": "2026-06-27 16:39:29 +0900",
 "test/yosupo/sqrt_mod.test.cpp": "2026-06-27 03:24:30 +0900",
+"test/yosupo/static_range_sum.test.cpp": "2026-06-27 19:18:19 +0900",
 "test/yosupo/static_rmq.test.cpp": "2026-06-27 16:39:29 +0900",
 "test/yosupo/strongly_connected_components.test.cpp": "2026-06-27 16:39:29 +0900",
 "test/yosupo/suffix_array.test.cpp": "2026-06-27 16:39:29 +0900",
