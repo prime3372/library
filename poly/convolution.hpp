@@ -63,6 +63,7 @@ template <class mint, int g> void ntt(std::vector<mint>& a) {
     if (i < bitrev[i]) std::swap(a[i], a[bitrev[i]]);
   }
 
+  // example: n = 8
   // start a = [0] [4] [2] [6] [1] [5] [3] [7]
   // step1 a = [0   4] [2   6] [1   5] [3   7]
   // step2 a = [0   2   4   6] [1   3   5   7]
