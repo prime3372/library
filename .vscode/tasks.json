@@ -19,7 +19,7 @@
     {
       "label": "setup random test",
       "type": "shell",
-      "command": "Get-Content 'C:/Users/syunr/cp/cptemplate/generator.cpp' | Set-Content 'gen.cpp'; Get-Content 'C:/Users/syunr/cp/cptemplate/template.cpp' | Set-Content 'ans.cpp'; code gen.cpp ans.cpp",
+      "command": "Get-Content 'C:/Users/syunr/cplibrary/template/template.cpp' | Set-Content 'gen.cpp'; Get-Content 'C:/Users/syunr/cplibrary/template/template.cpp' | Set-Content 'ans.cpp'; code gen.cpp ans.cpp",
       "presentation": {
         "panel": "shared",
         "clear": true,
@@ -28,9 +28,9 @@
       "problemMatcher": []
     },
     {
-      "label": "run random test (compare)",
+      "label": "run random test (compare tokens)",
       "type": "shell",
-      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ ans.cpp -o ans.exe -O2 -std=c++23; for ($i=1; $i -le 20; $i++) { cmd /c '.\\gen.exe > in.txt && .\\sol.exe < in.txt > out.txt && .\\ans.exe < in.txt > ans.txt'; C:/Users/syunr/cp/cpchecker/checker.exe out.txt ans.txt; if ($LASTEXITCODE -ne 0) { Write-Host 'Test' $i '[WA]'; code in.txt out.txt ans.txt; break } else { Write-Host 'Test' $i '[AC]' }; }; rm gen.exe; rm sol.exe; rm ans.exe",
+      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ ans.cpp -o ans.exe -O2 -std=c++23; for ($i=1; $i -le 20; $i++) { cmd /c '.\\gen.exe > in.txt && .\\sol.exe < in.txt > out.txt && .\\ans.exe < in.txt > ans.txt'; C:/Users/syunr/cplibrary/checker/compare_tokens.exe out.txt ans.txt; if ($LASTEXITCODE -ne 0) { code in.txt out.txt ans.txt; break } }; rm gen.exe; rm sol.exe; rm ans.exe",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -42,9 +42,22 @@
       "problemMatcher": []
     },
     {
-      "label": "run random test (judge)",
+      "label": "run random test (max error 1e-6)",
       "type": "shell",
-      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ ans.cpp -o ans.exe -O2 -std=c++23; for ($i=1; $i -le 20; $i++) { cmd /c '.\\gen.exe > in.txt && .\\sol.exe < in.txt > out.txt'; Get-Content 'in.txt' | Set-Content 'inout.txt'; Get-Content 'out.txt' | Add-Content 'inout.txt'; cmd /c '.\\ans.exe < inout.txt'; if ($LASTEXITCODE -ne 0) { Write-Host 'Test' $i 'WA'; code in.txt out.txt; break } else { Write-Host 'Test' $i 'AC' }; }; rm gen.exe; rm sol.exe; rm ans.exe; rm inout.txt",
+      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ ans.cpp -o ans.exe -O2 -std=c++23; for ($i=1; $i -le 20; $i++) { cmd /c '.\\gen.exe > in.txt && .\\sol.exe < in.txt > out.txt && .\\ans.exe < in.txt > ans.txt'; C:/Users/syunr/cplibrary/checker/max_error_1e-6.exe out.txt ans.txt; if ($LASTEXITCODE -ne 0) { code in.txt out.txt ans.txt; break } }; rm gen.exe; rm sol.exe; rm ans.exe",
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "panel": "shared",
+        "clear": true,
+      },
+      "problemMatcher": []
+    },    {
+      "label": "run random test (custom judge)",
+      "type": "shell",
+      "command": "g++ gen.cpp -o gen.exe -O2 -std=c++23; g++ ${file} -o sol.exe -O2 -std=c++23; g++ judge.cpp -o judge.exe -O2 -std=c++23; for ($i=1; $i -le 20; $i++) { cmd /c '.\\gen.exe > in.txt && .\\sol.exe < in.txt > out.txt'; Get-Content 'in.txt' | Set-Content 'inout.txt'; Get-Content 'out.txt' | Add-Content 'inout.txt'; cmd /c '.\\judge.exe < inout.txt'; if ($LASTEXITCODE -ne 0) { Write-Host 'Test' $i 'WA'; code in.txt out.txt; break } else { Write-Host 'Test' $i 'AC' }; }; rm gen.exe; rm sol.exe; rm judge.exe; rm inout.txt",
       "group": {
           "kind": "test",
           "isDefault": true
