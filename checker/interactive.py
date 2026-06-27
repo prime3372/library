@@ -21,14 +21,14 @@ def main():
     p_gen = subprocess.Popen(cmd_gen, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
     p_sol = subprocess.Popen(cmd_sol, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
 
-    t1 = threading.Thread(target=pipe_stream, args=(p_gen.stdout, p_sol.stdin, 'in.txt'))
-    t2 = threading.Thread(target=pipe_stream, args=(p_sol.stdout, p_gen.stdin, 'out.txt'))
+    t_in = threading.Thread(target=pipe_stream, args=(p_gen.stdout, p_sol.stdin, 'in.txt'))
+    t_out = threading.Thread(target=pipe_stream, args=(p_sol.stdout, p_gen.stdin, 'out.txt'))
 
-    t1.start()
-    t2.start()
+    t_in.start()
+    t_out.start()
 
     p_sol.wait()
-    t2.join()
+    t_out.join()
 
     try:
         p_gen.stdin.close()
@@ -36,7 +36,7 @@ def main():
         pass
 
     p_gen.wait()
-    t1.join()
+    t_in.join()
 
     sys.exit(p_gen.returncode)
 
