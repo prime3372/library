@@ -20,8 +20,8 @@ int main(int argc, char* argv[]) {
   int token_count = 0;
 
   while (true) {
-    bool has_t1 = static_cast<bool>(f1 >> t1);
-    bool has_t2 = static_cast<bool>(f2 >> t2);
+    bool has_t1 = bool(f1 >> t1);
+    bool has_t2 = bool(f2 >> t2);
     if (!has_t1 && !has_t2) {
       std::cout << "ok " << token_count << " tokens" << std::endl;
       return 0;
