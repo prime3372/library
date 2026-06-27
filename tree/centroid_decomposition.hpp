@@ -3,11 +3,6 @@
 #include <cassert>
 #include <vector>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
-using namespace std;
-using ll = long long;
-
 struct centroid_decomposition {
 public:
   centroid_decomposition() : centroid_decomposition(0) {}
