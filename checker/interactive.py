@@ -2,9 +2,6 @@ import sys
 import subprocess
 import threading
 
-transcript = []
-transcript_lock = threading.Lock()
-
 def pipe_stream(src, dst, log_file):
     with open(log_file, 'w', buffering=1) as f:
         for line in iter(src.readline, ''):
@@ -13,18 +10,15 @@ def pipe_stream(src, dst, log_file):
             dst.write(line)
             dst.flush()
             f.write(line)
-            
-            with transcript_lock:
-                clean_line = line.rstrip('\n')
 
 def main():
     if len(sys.argv) < 3:
         sys.exit(1)
-        
+
     cmd_gen = sys.argv[1]
     cmd_sol = sys.argv[2]
 
-    p_gen = subprocess.Popen(cmd_gen, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    p_gen = subprocess.Popen(cmd_gen, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
     p_sol = subprocess.Popen(cmd_sol, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
 
     t1 = threading.Thread(target=pipe_stream, args=(p_gen.stdout, p_sol.stdin, 'in.txt'))
