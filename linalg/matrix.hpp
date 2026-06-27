@@ -6,8 +6,9 @@
 #include "../algebra/semiring.hpp"
 #include "../util/type_traits.hpp"
 
-template <class R> struct matrix {
-  static_assert(semiring<R>);
+template <class> struct matrix;
+
+template <semiring R> struct matrix<R> {
   using S = typename R::S;
 
 public:

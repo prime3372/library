@@ -36,8 +36,9 @@ private:
 
 } // namespace internal
 
-template <class R, int h, int w> struct matrix_array {
-  static_assert(semiring<R>);
+template <class, int, int> struct matrix_array;
+
+template <semiring R, int h, int w> struct matrix_array<R, h, w> {
   using S = typename R::S;
 
   matrix_array() : d{} {
