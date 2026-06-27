@@ -45,5 +45,13 @@
 "test/yosupo/strongly_connected_components.test.cpp": "2026-06-27 23:56:17 +0900",
 "test/yosupo/suffix_array.test.cpp": "2026-06-27 23:56:17 +0900",
 "test/yosupo/sum_of_floor_of_linear.test.cpp": "2026-06-27 23:56:17 +0900",
-"test/yosupo/tree_diameter.test.cpp": "2026-06-27 23:56:17 +0900"
+"test/yosupo/tree_diameter.test.cpp": "2026-06-27 23:56:17 +0900",
+"test/yosupo/tree_path_composite_sum.test.cpp": "2026-06-27 23:56:17 +0900",
+"test/yosupo/union_find.test.cpp": "2026-06-27 23:56:17 +0900",
+"test/yosupo/union_find_with_potential.test.cpp": "2026-06-27 23:56:17 +0900",
+"test/yosupo/vertex_add_path_sum.test.cpp": "2026-06-27 23:56:17 +0900",
+"test/yosupo/vertex_add_range_contour_sum_on_tree.test.cpp": "2026-06-27 23:56:17 +0900",
+"test/yosupo/vertex_add_subtree_sum.test.cpp": "2026-06-27 23:56:17 +0900",
+"test/yosupo/vertex_set_path_composite.test.cpp": "2026-06-27 23:56:17 +0900",
+"test/yosupo/z_algorithm.test.cpp": "2026-06-27 23:56:17 +0900"
 }
