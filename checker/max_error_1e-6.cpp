@@ -32,12 +32,12 @@ int main(int argc, char* argv[]) {
     token_count++;
 
     if (has_t1 && !has_t2) {
-      std::cout << "wrong answer Unexpected EOF in the participants output" << std::endl;
+      std::cout << "wrong answer Participant output contains extra tokens" << std::endl;
       return 1;
     }
 
     if (!has_t1 && has_t2) {
-      std::cout << "wrong answer Participant output contains extra tokens" << std::endl;
+      std::cout << "wrong answer Unexpected EOF in the participants output" << std::endl;
       return 1;
     }
 
