@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_sum"
 
-#include "../../ds/cumsum.hpp"
+#include "cumsum.hpp"
 #include <bits/stdc++.h>
 
 #define rep(i, a, b) for (int i = (a); i < (b); i++)
