@@ -2,8 +2,8 @@
 
 #include "../../number/binom_mod.hpp"
 #include "../../util/dynamic_modint.hpp"
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {

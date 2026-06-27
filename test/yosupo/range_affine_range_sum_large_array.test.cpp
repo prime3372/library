@@ -3,8 +3,8 @@
 #include "../../algebra/Sum_Affine.hpp"
 #include "../../ds/dynamic_lazy_segtree.hpp"
 #include "../../util/static_modint.hpp"
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 using namespace std;
 using mint = modint998244353;
 using M = Sum_Affine<mint>;

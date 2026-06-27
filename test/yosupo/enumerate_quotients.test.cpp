@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_quotients"
 
 #include "../../number/enumerate_quotients.hpp"
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
 

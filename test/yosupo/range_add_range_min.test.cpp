@@ -2,8 +2,8 @@
 
 #include "../../algebra/Min_Add.hpp"
 #include "../../ds/lazy_segtree.hpp"
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
 using ll = long long;

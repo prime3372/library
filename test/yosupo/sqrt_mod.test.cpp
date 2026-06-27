@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sqrt_mod"
 
 #include "../../number/sqrt_mod.hpp"
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
 

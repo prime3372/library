@@ -2,8 +2,8 @@
 
 #include "../../linalg/matrix.hpp"
 #include "../../util/static_modint.hpp"
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
 using ll = long long;
@@ -15,7 +15,7 @@ int main() {
   int n;
   ll k;
   cin >> n >> k;
-  matrix<mint> a(n, n);
+  matrix<Add_Mul<mint>> a(n, n);
   rep(i, 0, n) rep(j, 0, n) cin >> a[i][j];
   auto b = a.pow(k);
   rep(i, 0, n) {

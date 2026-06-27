@@ -2,8 +2,8 @@
 
 #include "../../ds/dynamic_fenwick_tree_2d.hpp"
 #include "../../util/coordinate_compression.hpp"
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
 using ll = long long;

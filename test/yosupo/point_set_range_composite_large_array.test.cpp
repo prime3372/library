@@ -3,8 +3,8 @@
 #include "../../algebra/Affine.hpp"
 #include "../../ds/dynamic_segtree.hpp"
 #include "../../util/static_modint.hpp"
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 using namespace std;
 using mint = modint998244353;
 using M = Affine<mint>;

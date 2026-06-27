@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_palindromes"
 
 #include "../../string/rolling_hash.hpp"
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
 

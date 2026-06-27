@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sum_of_floor_of_linear"
 
 #include "../../number/floor_sum.hpp"
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 using namespace std;
 using ll = long long;
 
