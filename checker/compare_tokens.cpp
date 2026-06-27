@@ -8,42 +8,42 @@ int main(int argc, char* argv[]) {
     return 2;
   }
 
-  std::ifstream f1(argv[1]);
-  std::ifstream f2(argv[2]);
+  std::ifstream f_out(argv[1]);
+  std::ifstream f_ans(argv[2]);
 
-  if (!f1.is_open() || !f2.is_open()) {
+  if (!f_out.is_open() || !f_ans.is_open()) {
     std::cerr << "error opening files" << std::endl;
     return 2;
   }
 
-  std::string t1, t2;
+  std::string t_out, t_ans;
   int token_count = 0;
 
   while (true) {
-    bool has_t1 = bool(f1 >> t1);
-    bool has_t2 = bool(f2 >> t2);
-    if (!has_t1 && !has_t2) {
+    bool has_t_out = bool(f_out >> t_out);
+    bool has_t_ans = bool(f_ans >> t_ans);
+    if (!has_t_out && !has_t_ans) {
       std::cout << "ok " << token_count << " tokens" << std::endl;
       return 0;
     }   
     token_count++;
 
-    if (has_t1 && !has_t2) {
+    if (has_t_out && !has_t_ans) {
       std::cout << "wrong answer Participant output contains extra tokens" << std::endl;
       return 1;
     }
 
-    if (!has_t1 && has_t2) {
+    if (!has_t_out && has_t_ans) {
       std::cout << "wrong answer Unexpected EOF in the participants output" << std::endl;
       return 1;
     }
 
-    if (t1 != t2) {
+    if (t_out != t_ans) {
       std::cout << "wrong answer " << token_count;
       std::cout << (token_count % 10 == 1 ? "st " : token_count % 10 == 2 ? "nd " : token_count == 3 ? "rd " : "th ");
       std::cout << "words differ - ";
-      std::cout << "expected: '" << t2 << "', ";
-      std::cout << "found: '" << t1 << "'" << std::endl; 
+      std::cout << "expected: '" << t_ans << "', ";
+      std::cout << "found: '" << t_out << "'" << std::endl; 
       return 1;
     }
   }
