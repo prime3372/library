@@ -3,7 +3,7 @@
 #include "../../graph/two_sat.hpp"
 #include <bits/stdc++.h>
 
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
+#define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
 
 int main() {
@@ -31,7 +31,7 @@ int main() {
   }
   cout << "s SATISFIABLE" << "\n";
   cout << "v ";
-  rep(i, 0, int(ans.size())) {
+  rep(i, 0, ans.size()) {
     cout << (ans[i] ? i + 1: -i - 1) << " ";
   }
   cout << "0" << "\n";

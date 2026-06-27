@@ -3,7 +3,7 @@
 #include "../../number/enumerate_primes.hpp"
 #include <bits/stdc++.h>
 
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
+#define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
 
 int main() {
@@ -17,7 +17,7 @@ int main() {
     ans.push_back(ps[a * i + b]);
   }
   cout << ps.size() << " " << ans.size() << "\n";
-  rep(i, 0, (int)ans.size()) {
+  rep(i, 0, ans.size()) {
     cout << ans[i] << " ";
   }
 }

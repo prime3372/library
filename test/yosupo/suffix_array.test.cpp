@@ -3,7 +3,7 @@
 #include "../../string/suffix_array.hpp"
 #include <bits/stdc++.h>
 
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
+#define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
 
 int main() {
@@ -12,7 +12,7 @@ int main() {
   string s;
   cin >> s;
   auto sa = suffix_array(s);
-  rep(i, 1, int(sa.size())) {
+  rep(i, 1, sa.size()) {
     cout << sa[i] << " ";
   }
 }

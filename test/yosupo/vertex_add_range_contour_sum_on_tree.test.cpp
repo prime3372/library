@@ -5,7 +5,7 @@
 #include "../../tree/tree_lca.hpp"
 #include <bits/stdc++.h>
 
-#define rep(i, a, b) for (int i = (a); i < (b); i++)
+#define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
 using ll = long long;
 
