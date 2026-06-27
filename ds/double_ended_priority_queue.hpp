@@ -27,7 +27,7 @@ template <class T> struct double_ended_priority_queue {
 
   void pop_min() {
     assert(!empty());
-	  if (size() == 1) {
+	  if (int(d.size()) == 3) {
 	    d.pop_back();
       return;
 	  }
@@ -37,7 +37,7 @@ template <class T> struct double_ended_priority_queue {
   }
   void pop_max() {
     assert(!empty());
-	  if (size() <= 2) {
+	  if (int(d.size()) <= 4) {
 	    d.pop_back(); 
       return;
 	  }
