@@ -11,4 +11,4 @@ for ($i = 1; $i -le 20; $i++) {
   Write-Host "Test" $i "AC"
 }
 
-rm sol.exe; rm gen.exe
+Remove-Item sol.exe; Remove-Item gen.exe

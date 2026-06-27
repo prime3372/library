@@ -28,4 +28,4 @@ for ($i = 1; $i -le 20; $i++) {
   Write-Host "Test" $i "AC"
 }
 
-rm gen.exe; rm sol.exe; rm judge.exe; rm inout.txt
+Remove-Item gen.exe; Remove-Item sol.exe; Remove-Item judge.exe; Remove-Item inout.txt

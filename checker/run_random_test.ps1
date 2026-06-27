@@ -33,4 +33,4 @@ for ($i = 1; $i -le 20; $i++) {
   }
 }
 
-rm gen.exe; rm sol.exe; rm ans.exe; rm checker.exe
+Remove-Item gen.exe; Remove-Item sol.exe; Remove-Item ans.exe; Remove-Item checker.exe
