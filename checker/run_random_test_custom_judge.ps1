@@ -26,9 +26,9 @@ for ($i = 1; $i -le 20; $i++) {
   }
 
   # run sol.exe
-  $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
   $p_sol = Start-Process -FilePath .\sol.exe -RedirectStandardInput in.txt -RedirectStandardOutput out.txt -PassThru -WindowStyle Hidden
   $dummy = $p_sol.Handle
+  $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
   if (-not $p_sol.WaitForExit($timeout)) {
     # time out
     $p_sol.Kill()
