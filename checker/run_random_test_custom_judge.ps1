@@ -17,7 +17,7 @@ do {
     $dummy = $p_gen.Handle
     if (-not $p_gen.WaitForExit($timeout)) {
       $p_gen.Kill()
-      Write-Host "Test" $i "Failed:" "Time Out" $gen -ForegroundColor Blue
+      Write-Host "Test" $i "Failed:" "Timed Out" $gen -ForegroundColor Blue
       code in.txt
       break
     }
@@ -62,7 +62,7 @@ do {
     $dummy = $p_ans.Handle
     if (-not $p_ans.WaitForExit($timeout)) {
       $p_ans.Kill()
-      Write-Host "Test" $i "Failed:" "Time Out" $ans -ForegroundColor Blue
+      Write-Host "Test" $i "Failed:" "Timed Out" $ans -ForegroundColor Blue
       code in.txt out.txt
       break
     }
