@@ -4,7 +4,7 @@
     {
       "label": "C++ compile and run",
       "type": "shell",
-      "command": "g++ ${file} -fdiagnostics-color=always -g -o ${fileBasenameNoExtension}.exe -O2 -std=c++23 -Wall -Wextra; ./${fileBasenameNoExtension}.exe; rm ${fileBasenameNoExtension}.exe",
+      "command": "g++ ${file} -g -o ${fileBasenameNoExtension}.exe -O2 -std=c++23 -Wall -Wextra; ./${fileBasenameNoExtension}.exe; rm ${fileBasenameNoExtension}.exe",
       "group": {
         "kind": "build",
         "isDefault": false
