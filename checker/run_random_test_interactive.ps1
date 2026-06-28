@@ -1,4 +1,4 @@
-#arguments
+# arguments
 $sol = $Args[0]
 $gen = $Args[1]
 
