@@ -47,21 +47,25 @@ for ($i = 1; $i -le 20; $i++) {
   $p_sol = Start-Process -FilePath .\sol.exe -RedirectStandardInput in.txt -RedirectStandardOutput out.txt -PassThru -WindowStyle Hidden
   $dummy = $p_sol.Handle
   if (-not $p_sol.WaitForExit($timeout)) {
+    # time out
     $p_sol.Kill()
+    Write-Host "Test" $i "TLE" ">" $timeout "ms" -ForegroundColor Yellow
+    code in.txt out.txt ans.txt
+    break
   }
   $stopwatch.Stop()
   $time = $stopwatch.ElapsedMilliseconds
 
-  # TLE check
-  if ($time -gt $timelimit) {
-    Write-Host "Test" $i "TLE" ">" $timelimit "ms" -ForegroundColor Yellow
+  # RE check
+  if ($p_sol.ExitCode -ne 0) {
+    Write-Host "Test" $i "RE" $time "ms" -ForegroundColor Magenta
     code in.txt out.txt ans.txt
     break
   }
 
-  # RE check
-  if ($p_sol.ExitCode -ne 0) {
-    Write-Host "Test" $i "RE" $time "ms" -ForegroundColor Magenta
+  # TLE check
+  if ($time -gt $timelimit) {
+    Write-Host "Test" $i "TLE" $time "ms" -ForegroundColor Yellow
     code in.txt out.txt ans.txt
     break
   }
