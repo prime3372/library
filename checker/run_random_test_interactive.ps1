@@ -1,8 +1,12 @@
-g++ $Args[0] -o sol.exe -O2 -std=c++23;
-g++ $Args[1] -o gen.exe -O2 -std=c++23;
+#arguments
+$sol = $Args[0]
+$gen = $Args[1]
+
+g++ $sol -o sol.exe -O2 -std=c++23;
+g++ $gen -o gen.exe -O2 -std=c++23;
 
 for ($i = 1; $i -le 20; $i++) {
-  python checker/interactive.py ".\\gen.exe" ".\\sol.exe"
+  python checker/interactive.py ".\\sol.exe" ".\\gen.exe"
   if ($LASTEXITCODE -ne 0) {
     Write-Host "Test" $i "WA"
     code in.txt out.txt

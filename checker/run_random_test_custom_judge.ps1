@@ -1,31 +1,76 @@
-g++ $Args[0] -o sol.exe -O2 -std=c++23
-g++ $Args[1] -o gen.exe -O2 -std=c++23
-g++ $Args[2] -o judge.exe -O2 -std=c++23
+#arguments
+$checker = $Args[0]
+$sol = $Args[1]
+$gen = $Args[2]
+$judge = $Args[3]
+$timelimit = $Args[4]
+$timeout = $Args[5]
+
+g++ $sol -o sol.exe -O2 -std=c++23
+g++ $gen -o gen.exe -O2 -std=c++23
+g++ $judge -o judge.exe -O2 -std=c++23
 
 for ($i = 1; $i -le 20; $i++) {
-  cmd /c ".\\gen.exe > in.txt"
-  if ($LASTEXITCODE -ne 0) {
-    Write-Host "Test" $i "Fail"
+  # run gen.exe
+  $p_gen = Start-Process -FilePath .\gen.exe -RedirectStandardOutput in.txt -PassThru -WindowStyle Hidden
+  $dummy = $p_gen.Handle
+  if (-not $p_gen.WaitForExit($timeout)) {
+    $p_gen.Kill()
+    Write-Host "Test" $i "Failed:" "Time Out" $gen -ForegroundColor Blue
+    code in.txt
+    break
+  }
+  if ($p_gen.ExitCode -ne 0) {
+    Write-Host "Test" $i "Failed:" "Runtime Error" $gen -ForegroundColor Blue
     code in.txt
     break
   }
 
-  cmd /c ".\\sol.exe < in.txt > out.txt"
-  if ($LASTEXITCODE -ne 0) {
-    Write-Host "Test" $i "RE"
-    code in.txt out.txt
+  # run sol.exe
+  $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+  $p_sol = Start-Process -FilePath .\sol.exe -RedirectStandardInput in.txt -RedirectStandardOutput out.txt -PassThru -WindowStyle Hidden
+  $dummy = $p_sol.Handle
+  if (-not $p_sol.WaitForExit($timeout)) {
+    $p_sol.Kill()   
+  }
+  $stopwatch.Stop()
+  $time = $stopwatch.ElapsedMilliseconds
+
+  # TLE check
+  if ($time -gt $timelimit) {
+    Write-Host "Test" $i "TLE" ">" $timelimit "ms" -ForegroundColor Yellow
+    code in.txt out.txt ans.txt
     break
   }
 
+  # RE check
+  if ($p_sol.ExitCode -ne 0) {
+    Write-Host "Test" $i "RE" $time "ms" -ForegroundColor Magenta
+    code in.txt out.txt ans.txt
+    break
+  }
+
+  # run judge.exe
   Get-Content "in.txt" | Set-Content "inout.txt"
   Get-Content "out.txt" | Add-Content "inout.txt"
-  cmd /c ".\\judge.exe < inout.txt"
-  if ($LASTEXITCODE -ne 0) {
-    Write-Host "Test" $i "WA"
+  $p_judge = Start-Process -FilePath .\judge.exe -RedirectStandardInput inout.txt -PassThru -WindowStyle Hidden
+  $dummy = $p_judge.Handle
+  if (-not $p_judge.WaitForExit($timeout)) {
+    $p_judge.Kill()
+    Write-Host "Test" $i "Failed:" "Time Out" $judge -ForegroundColor Blue
     code in.txt out.txt
     break
   }
-  Write-Host "Test" $i "AC"
+  Remove-Item inout.txt
+
+  # WA check
+  if ($p_judge.ExitCode -ne 0) {
+    Write-Host "Test" $i "WA" $time "ms" -ForegroundColor Red
+    code in.txt out.txt
+    break
+  }
+
+  Write-Host "Test" $i "AC" $time "ms" -ForegroundColor Green
 }
 
-Remove-Item gen.exe; Remove-Item sol.exe; Remove-Item judge.exe; Remove-Item inout.txt
+Remove-Item sol.exe; Remove-Item gen.exe; Remove-Item judge.exe

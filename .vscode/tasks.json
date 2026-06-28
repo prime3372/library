@@ -45,7 +45,7 @@
     {
       "label": "run random test (compare tokens)",
       "type": "shell",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test.ps1 checker/compare_tokens.cpp ${file} gen.cpp ans.cpp",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test.ps1 checker/compare_tokens.cpp ${file} gen.cpp ans.cpp 5000 6000",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -59,7 +59,7 @@
     {
       "label": "run random test (max error 1e-6)",
       "type": "shell",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test.ps1 checker/max_error_1e-6.cpp ${file} gen.cpp ans.cpp",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test.ps1 checker/max_error_1e-6.cpp ${file} gen.cpp ans.cpp 5000 6000",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -73,7 +73,7 @@
     {
       "label": "run random test (max error 1e-9)",
       "type": "shell",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test.ps1 checker/max_error_1e-9.cpp ${file} gen.cpp ans.cpp",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test.ps1 checker/max_error_1e-9.cpp ${file} gen.cpp ans.cpp 5000 6000",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -101,7 +101,7 @@
     {
       "label": "run random test (custom judge)",
       "type": "shell",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test_custom_judge.ps1 ${file} gen.cpp judge.cpp",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test_custom_judge.ps1 ${file} gen.cpp judge.cpp 5000 6000",
       "group": {
         "kind": "test",
         "isDefault": true
