@@ -28,19 +28,19 @@ struct polynomial<mint> {
   };
 
   polynomial& operator+=(const polynomial& rhs) {
-    static_assert(mod() == rhs.mod(), "modulo must be same.");
+    static_assert(mod() == rhs.mod(), "modulo must be the same.");
     if (rhs.size() > size()) f.resize(rhs.size());
     for (int i = 0; i < rhs.size(); i++) f[i] += rhs[i];
     return *this;
   }
   polynomial& operator-=(const polynomial& rhs) {
-    static_assert(mod() == rhs.mod(), "modulo must be same.");
+    static_assert(mod() == rhs.mod(), "modulo must be the same.");
     if (rhs.size() > size()) f.resize(rhs.size());
     for (int i = 0; i < rhs.size(); i++) f[i] -= rhs[i];
     return *this;
   }
   polynomial& operator*=(const polynomial& rhs) {
-    static_assert(mod() == rhs.mod(), "modulo must be same.");
+    static_assert(mod() == rhs.mod(), "modulo must be the same.");
     f = convolution(f, rhs.f);
     return *this;
   }
