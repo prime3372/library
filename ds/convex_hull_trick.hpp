@@ -8,8 +8,10 @@ public:
   convex_hull_trick() {}
 
   void add(T a, T b) {
-    if constexpr (is_max) assert(ls.empty() || ls.back().a <= a);
-    else assert(ls.empty() || a <= ls.back().a);
+    if (!ls.emtpy()) {
+      if constexpr (is_max) assert(ls.back().a <= a);
+      else assert(a <= ls.back().a);
+    }
     line l(a, b);
     while (ls.size() >= 2) {
       const line& l1 = ls[ls.size() - 2];
