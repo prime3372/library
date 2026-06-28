@@ -1,10 +1,9 @@
 #arguments
-$checker = $Args[0]
-$sol = $Args[1]
-$gen = $Args[2]
-$judge = $Args[3]
-$timelimit = $Args[4]
-$timeout = $Args[5]
+$sol = $Args[0]
+$gen = $Args[1]
+$judge = $Args[2]
+$timelimit = $Args[3]
+$timeout = $Args[4]
 
 g++ $sol -o sol.exe -O2 -std=c++23
 g++ $gen -o gen.exe -O2 -std=c++23
@@ -34,7 +33,7 @@ for ($i = 1; $i -le 20; $i++) {
     # time out
     $p_sol.Kill()
     Write-Host "Test" $i "TLE" ">" $timeout "ms" -ForegroundColor Yellow
-    code in.txt out.txt ans.txt
+    code in.txt out.txt
     break
   }
   $stopwatch.Stop()
@@ -43,14 +42,14 @@ for ($i = 1; $i -le 20; $i++) {
   # RE check
   if ($p_sol.ExitCode -ne 0) {
     Write-Host "Test" $i "RE" $time "ms" -ForegroundColor Magenta
-    code in.txt out.txt ans.txt
+    code in.txt out.txt
     break
   }
 
   # TLE check
   if ($time -gt $timelimit) {
     Write-Host "Test" $i "TLE" $time "ms" -ForegroundColor Yellow
-    code in.txt out.txt ans.txt
+    code in.txt out.txt
     break
   }
 
@@ -65,7 +64,6 @@ for ($i = 1; $i -le 20; $i++) {
     code in.txt out.txt
     break
   }
-  Remove-Item inout.txt
 
   # WA check
   if ($p_judge.ExitCode -ne 0) {
@@ -77,4 +75,4 @@ for ($i = 1; $i -le 20; $i++) {
   Write-Host "Test" $i "AC" $time "ms" -ForegroundColor Green
 }
 
-Remove-Item sol.exe; Remove-Item gen.exe; Remove-Item judge.exe
+Remove-Item sol.exe; Remove-Item gen.exe; Remove-Item judge.exe; Remove-Item inout.txt
