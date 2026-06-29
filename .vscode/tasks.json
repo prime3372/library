@@ -101,7 +101,7 @@
     {
       "label": "run random test (custom judge)",
       "type": "shell",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test_custom_judge.ps1 ${file} gen.cpp ans.cpp 5000 10000",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test_custom_judge.ps1 ${file} gen.cpp judge.cpp 5000 10000",
       "group": {
         "kind": "test",
         "isDefault": true

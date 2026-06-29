@@ -1,7 +1,7 @@
 # arguments
 $sol = $Args[0]
 $gen = $Args[1]
-$ans = $Args[2]
+$judge = $Args[2]
 $timelimit = $Args[3]
 $timeout = $Args[4]
 
@@ -9,7 +9,7 @@ do {
 
   g++ $sol -o sol.exe -O2 -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
   g++ $gen -o gen.exe -O2 -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
-  g++ $ans -o ans.exe -O2 -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
+  g++ $judge -o judge.exe -O2 -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
 
   for ($i = 1; $i -le 20; $i++) {
     # run gen.exe
@@ -55,20 +55,20 @@ do {
       break
     }
 
-    # run ans.exe
+    # run judge.exe
     Get-Content "in.txt" | Set-Content "inout.txt"
     Get-Content "out.txt" | Add-Content "inout.txt"
-    $p_ans = Start-Process -FilePath .\ans.exe -RedirectStandardInput inout.txt -PassThru -WindowStyle Hidden
-    $dummy = $p_ans.Handle
-    if (-not $p_ans.WaitForExit($timeout)) {
-      $p_ans.Kill()
-      Write-Host "Test" $i "Failed:" "Timed Out" $ans -ForegroundColor Blue
+    $p_judge = Start-Process -FilePath .\judge.exe -RedirectStandardInput inout.txt -PassThru -WindowStyle Hidden
+    $dummy = $p_judge.Handle
+    if (-not $p_judge.WaitForExit($timeout)) {
+      $p_judge.Kill()
+      Write-Host "Test" $i "Failed:" "Timed Out" $judge -ForegroundColor Blue
       code in.txt out.txt
       break
     }
 
     # WA check
-    if ($p_ans.ExitCode -ne 0) {
+    if ($p_judge.ExitCode -ne 0) {
       Write-Host "Test" $i "WA" $time "ms" -ForegroundColor Red
       code in.txt out.txt
       break
@@ -81,5 +81,5 @@ do {
 
 Remove-Item sol.exe -ErrorAction SilentlyContinue
 Remove-Item gen.exe -ErrorAction SilentlyContinue
-Remove-Item ans.exe -ErrorAction SilentlyContinue
+Remove-Item judge.exe -ErrorAction SilentlyContinue
 Remove-Item inout.txt -ErrorAction SilentlyContinue
