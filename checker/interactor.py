@@ -1,6 +1,14 @@
+from enum import Enum
 import sys
 import subprocess
 import threading
+
+timeout_sec = 5
+_ac = 0
+_wa = 1
+_re = 2
+_tle = 3
+_fail = 4
 
 def pipe_stream(src, dst, log_file):
     with open(log_file, 'w', buffering=1) as f:
@@ -18,11 +26,10 @@ def pipe_stream(src, dst, log_file):
 
 def main():
     if len(sys.argv) < 3:
-        sys.exit(4)
+        sys.exit(_fail)
 
     cmd_gen = sys.argv[1]
     cmd_sol = sys.argv[2]
-    timeout_sec = 5
 
     p_gen = subprocess.Popen(cmd_gen, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
     p_sol = subprocess.Popen(cmd_sol, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
@@ -36,7 +43,7 @@ def main():
     try:
         p_sol.wait(timeout=timeout_sec)
     except subprocess.TimeoutExpired:
-        sys.exit(3)
+        sys.exit(_tle)
 
     t_out.join()
 
@@ -49,12 +56,12 @@ def main():
     t_in.join()
 
     if p_sol.returncode != 0:
-        sys.exit(2)
+        sys.exit(_re)
 
-    if (p_gen.returncode != 0):
-        sys.exit(1)
+    if p_gen.returncode != 0:
+        sys.exit(_wa)
 
-    sys.exit(0)
+    sys.exit(_ac)
 
 if __name__ == '__main__':
     main()
