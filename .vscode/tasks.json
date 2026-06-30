@@ -34,7 +34,7 @@
     {
       "label": "setup random test",
       "type": "shell",
-      "command": "Get-Content 'template/template.cpp' | Set-Content 'gen.cpp'; Get-Content 'template/template.cpp' | Set-Content 'ans.cpp'; code gen.cpp ans.cpp",
+      "command": "Get-Content 'template/template.cpp' | Set-Content 'gen.cpp'; Get-Content 'template/template.cpp' | Set-Content 'ans.cpp'; Get-Content 'template/template.cpp' | Set-Content 'che.cpp'; code gen.cpp ans.cpp che.cpp",
       "presentation": {
         "panel": "shared",
         "clear": true,
@@ -45,7 +45,7 @@
     {
       "label": "run random test (compare tokens)",
       "type": "shell",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test.ps1 checker/compare_tokens.cpp ${file} gen.cpp ans.cpp 5000 10000",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/judge.ps1 ${file} gen.cpp ans.cpp checker/wcmp.cpp",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -59,7 +59,7 @@
     {
       "label": "run random test (max error 1e-6)",
       "type": "shell",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test.ps1 checker/max_error_1e-6.cpp ${file} gen.cpp ans.cpp 5000 10000",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/judge.ps1 ${file} gen.cpp ans.cpp checker/rcmp6.cpp",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -73,7 +73,7 @@
     {
       "label": "run random test (max error 1e-9)",
       "type": "shell",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test.ps1 checker/max_error_1e-9.cpp ${file} gen.cpp ans.cpp 5000 10000",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/judge.ps1 ${file} gen.cpp ans.cpp checker/rcmp9.cpp",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -85,9 +85,9 @@
       "problemMatcher": []
     },
     {
-      "label": "run random test (interactive)",
+      "label": "run random test (custom judge)",
       "type": "shell",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test_interactive.ps1 ${file} gen.cpp",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/judge.ps1 ${file} gen.cpp ans.cpp che.cpp",
       "group": {
         "kind": "test",
         "isDefault": true
@@ -99,9 +99,9 @@
       "problemMatcher": []
     },
     {
-      "label": "run random test (custom judge)",
+      "label": "run random test (interactive)",
       "type": "shell",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/run_random_test_custom_judge.ps1 ${file} gen.cpp judge.cpp 5000 10000",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker/judge_interactive.ps1 ${file} gen.cpp",
       "group": {
         "kind": "test",
         "isDefault": true
