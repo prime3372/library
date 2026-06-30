@@ -3,12 +3,7 @@ import sys
 import subprocess
 import threading
 
-timeout_sec = 5
-_ac = 0
-_wa = 1
-_re = 2
-_tle = 3
-_fail = 4
+timeout_sec = 5.0
 
 def pipe_stream(src, dst, log_file):
     with open(log_file, 'w', buffering=1) as f:
@@ -25,11 +20,13 @@ def pipe_stream(src, dst, log_file):
             f.write(line)
 
 def main():
-    if len(sys.argv) < 3:
-        sys.exit(_fail)
+    if len(sys.argv) < 4:
+        print('FAIL too few arguments')
+        sys.exit(2)
 
     cmd_gen = sys.argv[1]
     cmd_sol = sys.argv[2]
+    testnum = sys.argv[3]
 
     p_gen = subprocess.Popen(cmd_gen, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
     p_sol = subprocess.Popen(cmd_sol, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
@@ -43,7 +40,12 @@ def main():
     try:
         p_sol.wait(timeout=timeout_sec)
     except subprocess.TimeoutExpired:
-        sys.exit(_tle)
+        subprocess.run(['taskkill', '/F', '/T', '/PID', str(p_sol.pid)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(['taskkill', '/F', '/T', '/PID', str(p_gen.pid)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        t_out.join()
+        t_in.join()
+        print('Test', testnum, 'TLE')
+        sys.exit(1)
 
     t_out.join()
 
@@ -51,17 +53,27 @@ def main():
         p_gen.stdin.close()
     except Exception:
         pass
+    
+    try:
+        p_gen.wait(timeout=timeout_sec)
+    except subprocess.TimeoutExpired:
+        subprocess.run(['taskkill', '/F', '/T', '/PID', str(p_gen.pid)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        t_in.join()
+        print('Test', testnum, 'FAIL the judge program timed out')
+        sys.exit(2)
 
-    p_gen.wait()
     t_in.join()
 
     if p_sol.returncode != 0:
-        sys.exit(_re)
+        print('Test', testnum, 'RE')
+        sys.exit(1)
 
     if p_gen.returncode != 0:
-        sys.exit(_wa)
+        print('Test', testnum, 'WA')
+        sys.exit(1)
 
-    sys.exit(_ac)
+    print('Test', testnum, 'AC')
+    sys.exit(0)
 
 if __name__ == '__main__':
     main()
