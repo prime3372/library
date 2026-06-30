@@ -26,13 +26,13 @@ int main() {
   }
   auto ans = sat.solve();
   if (ans.empty()) {
-    cout << "s UNSATISFIABLE" << "\n";
+    cout << "s UNSATISFIABLE\n";
     return 0;
   }
-  cout << "s SATISFIABLE" << "\n";
+  cout << "s SATISFIABLE\n";
   cout << "v ";
   rep(i, 0, ans.size()) {
     cout << (ans[i] ? i + 1: -i - 1) << " ";
   }
-  cout << "0" << "\n";
+  cout << "0\n";
 }
