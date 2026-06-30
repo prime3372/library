@@ -6,7 +6,7 @@ public:
   explicit constexpr barrett64(unsigned long long _m) : m(_m) {
     unsigned __int128 im = (unsigned __int128)(-1) / _m + 1;
     ih = im >> 64;
-    il = (im << 64) >> 64;
+    il = (unsigned long long)(im);
     ih_il = ih + il;
   }
 
