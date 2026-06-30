@@ -43,6 +43,10 @@ int main(int argc, char** argv) {
     return 1;
   }
 
-  std::cout << "ok " << t_cnt << " numbers" << std::endl;
+  if (t_cnt == 1) {
+    std::cout << "ok '" << t_out << "'" << std::endl;
+  } else {
+    std::cout << "ok " << t_cnt << " numbers" << std::endl;
+  }
   return 0;
 }
