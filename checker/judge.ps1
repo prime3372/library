@@ -16,6 +16,8 @@ do {
   g++ $ans -o ans.exe -O2 -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
   g++ $che -o che.exe -O2 -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
 
+  Start-Sleep -Milliseconds 10 # Start-Sleep is necessary because runtime errors can occur if compilation completes very quickly.
+
   for ($i = 1; $i -le $casesnum; $i++) {
     # run gen.exe
     $p_gen = Start-Process -FilePath .\gen.exe -NoNewWindow -RedirectStandardOutput in.txt -PassThru
