@@ -11,9 +11,9 @@ int main() {
   cin.tie(nullptr);
   int q;
   cin >> q;
-  hash_map<ll> mp;
+  hash_map<ll, ll> mp;
   while (q--) {
-    int t;
+    bool t;
     cin >> t;
     if (!t) {
       ll k, v;

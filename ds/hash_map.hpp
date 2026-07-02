@@ -2,16 +2,17 @@
 
 #include <cassert>
 #include <cstddef>
+#include <functional>
 #include <random>
 #include <utility>
 #include <vector>
-#include "random/rng.hpp"
+#include "../random/rng.hpp"
 
-template <class T> struct hash_map {
+template <class Key, class Val> struct hash_map {
 public:
-  hash_map() : cap(8), sz(0), keys(cap), vals(cap), used(cap), r(mt64()), shift(61), default_value(T()) {}
+  hash_map() : cap(8), sz(0), keys(cap), vals(cap), used(cap), r(mt64()), shift(61), default_value() {}
 
-  T& operator[](size_t k) {
+  Val& operator[](Key k) {
     unsigned int i = index(k);
     if (used[i]) return vals[i];
     if (sz + sz / 4 >= cap) {
@@ -24,18 +25,18 @@ public:
     return vals[i] = default_value;
   }
 
-  T operator[](size_t k) const {
+  Val operator[](Key k) const {
     unsigned int i = index(k);
     return used[i] ? vals[i] : default_value;
   }
 
-  bool count(size_t k) const {
+  bool count(Key k) const {
     unsigned int i = index(k);
     return used[i];
   }
 
-  std::vector<std::pair<size_t, T>> enumerate() const {
-    std::vector<std::pair<size_t, T>> res;
+  std::vector<std::pair<Key, Val>> enumerate() const {
+    std::vector<std::pair<Key, Val>> res;
     for (unsigned int i = 0; i < cap; i++) {
       if (used[i]) res.emplace_back(keys[i], vals[i]);
     }
@@ -44,21 +45,21 @@ public:
 
   int size() const { return int(sz); }
 
-  void set_default(const T& v) { default_value = v; }
+  void set_default(const Val& v) { default_value = v; }
 
 private:
   unsigned int cap, sz;
-  std::vector<size_t> keys;
-  std::vector<T> vals;
+  std::vector<Key> keys;
+  std::vector<Val> vals;
   std::vector<bool> used;
   unsigned long long r;
   unsigned int shift;
-  T default_value;
+  Val default_value;
 
-  unsigned int hash(size_t k) const { return (k * r) >> shift; }
+  unsigned int get_hash(Key k) const { return (std::hash<Key>()(k) * r) >> shift; }
 
-  size_t index(size_t k) const {
-    unsigned int hs = hash(k);
+  unsigned int index(Key k) const {
+    unsigned int hs = get_hash(k);
     while (used[hs] && keys[hs] != k) hs = (hs + 1) & (cap - 1);
     return hs;
   }
@@ -66,12 +67,12 @@ private:
   void extend() {
     cap <<= 1;
     shift--;
-    std::vector<size_t> k(cap);
-    std::vector<T> v(cap);
+    std::vector<Key> k(cap);
+    std::vector<Val> v(cap);
     std::vector<bool> u(cap);
     for (int i = 0; i < int(keys.size()); i++) {
       if (!used[i]) continue;
-      unsigned int hs = hash(keys[i]);
+      unsigned int hs = get_hash(keys[i]);
       while (u[hs]) hs = (hs + 1) & (cap - 1);
       k[hs] = keys[i];
       v[hs] = vals[i];

@@ -81,5 +81,5 @@ public:
 
 private:
   size_t n;
-  hash_map<T> d;
+  hash_map<size_t, T> d;
 };
