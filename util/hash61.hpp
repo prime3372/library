@@ -4,7 +4,7 @@
 #include <array>
 #include <random>
 #include <type_traits>
-#include "random/rng.hpp"
+#include "../random/rng.hpp"
 
 struct hash61 {
 public:
