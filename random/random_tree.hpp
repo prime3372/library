@@ -11,16 +11,16 @@ std::vector<std::pair<int, int>> random_tree(int n) {
   if (n == 1) return {};
 
   std::vector<int> par(n, -1);
-  for (int i = 1; i < n; i++) par[i] = mt32() % (i - 1);
+  for (int i = 1; i < n; i++) par[i] = mt32() % i;
   
   std::vector<std::pair<int, int>> edges(n - 1);
-  for (int i = 0; i < n - 1; i++) {
-    edges[i] = {i, par[i - 1]};
+  for (int i = 1; i < n; i++) {
+    edges[i - 1] = {i, par[i]};
   }
 
   std::shuffle(edges.begin(), edges.end(), mt32);
-  for (int i = 0; i < n - 1; i++) {
-    if (mt32() % 2) std::swap(edges[i].first, edges[i].second);
+  for (auto& e : edges) {
+    if (mt32() % 2) std::swap(e.first, e.second);
   }
   return edges;
 }
