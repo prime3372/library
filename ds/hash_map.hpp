@@ -8,7 +8,7 @@
 #include <vector>
 #include "../random/rng.hpp"
 
-template <class Key, class Val> struct hash_map {
+template <class Key, class Val, class Hash = std::hash<Key>> struct hash_map {
 public:
   hash_map() : cap(8), sz(0), keys(cap), vals(cap), used(cap), r(mt64()), shift(61), default_value() {}
 
@@ -48,6 +48,7 @@ public:
   void set_default(const Val& v) { default_value = v; }
 
 private:
+  static Hash hash_func;
   unsigned int cap, sz;
   std::vector<Key> keys;
   std::vector<Val> vals;
@@ -56,7 +57,7 @@ private:
   unsigned int shift;
   Val default_value;
 
-  unsigned int get_hash(Key k) const { return (std::hash<Key>()(k) * r) >> shift; }
+  unsigned int get_hash(Key k) const { return (hash_func(k) * r) >> shift; }
 
   unsigned int index(Key k) const {
     unsigned int hs = get_hash(k);
