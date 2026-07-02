@@ -1,4 +1,11 @@
 {
+  "C_Cpp.default.compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
+  "C_Cpp.default.includePath": [
+    "${workspaceFolder}/**",
+    "C:/msys64/mingw64/include",
+  ],
+  "C_Cpp.default.intelliSenseMode": "gcc-x64",
+  "C_Cpp.default.cppStandard": "c++23",
   "chat.disableAIFeatures": true,
   "cph.general.defaultLanguage": "cpp",
   "cph.general.defaultLanguageTemplateFileLocation": "C:/Users/syunr/cplibrary/template/template.cpp",
@@ -7,13 +14,6 @@
   "cph.general.ignoreSTDERROR": true,
   "cph.general.timeOut": 10000,
   "cph.language.cpp.Args": "-g -O2 -std=c++23 -Wall -Wextra",
-  "C_Cpp.default.compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
-  "C_Cpp.default.includePath": [
-    "${workspaceFolder}/**",
-    "C:/msys64/mingw64/include",
-  ],
-  "C_Cpp.default.intelliSenseMode": "gcc-x64",
-  "C_Cpp.default.cppStandard": "c++23",
   "diffEditor.ignoreTrimWhitespace": false,
   "debug.onTaskErrors": "showErrors",
   "editor.inlineSuggest.enabled": false,
