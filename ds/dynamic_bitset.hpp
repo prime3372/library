@@ -26,45 +26,45 @@ public:
     ref& operator=(const ref& other) { return *this = (bool)other; }
   private:
     unsigned long long* d;
-    size_t pos;
-    ref(dynamic_bitset& b, size_t i) {
+    int pos;
+    ref(dynamic_bitset& b, int i) {
       d = b.a.data() + i / 64;
       pos = i % 64;
     }
   };
 
-  dynamic_bitset() : n(0) {}
-  explicit dynamic_bitset(size_t _n) : n(_n), a((_n + 63) / 64, 0) {}
-  explicit dynamic_bitset(size_t _n, bool b) : n(_n), a((_n + 63) / 64, b ? (unsigned long long)(-1) : 0) {
+  dynamic_bitset() : dynamic_bitset(0) {}
+  explicit dynamic_bitset(int _n) : n(_n), a((_n + 63) / 64, 0) {}
+  explicit dynamic_bitset(int _n, bool b) : n(_n), a((_n + 63) / 64, b ? (unsigned long long)(-1) : 0) {
     if (b && n % 64) a.back() &= mask(n % 64) - 1;
   }
-  explicit dynamic_bitset(const std::string& s) : n(s.size()), a((s.size() + 63) / 64) {
-    for (size_t i = 0; i < n; i++) {
+  explicit dynamic_bitset(const std::string& s) : n(int(s.size())), a((int(s.size()) + 63) / 64) {
+    for (int i = 0; i < n; i++) {
       assert(s[n - 1 - i] == '0' || s[n - 1 - i] == '1');
       a[i / 64] |= (unsigned long long)(s[n - 1 - i] - '0') << (i % 64);
     }
   }
 
-  ref operator[](size_t i) {
-    assert(i < n);
+  ref operator[](int i) {
+    assert(0 <= i && i < n);
     return ref(*this, i);
   }
-  bool operator[](size_t i) const {
-    assert(i < n);
+  bool operator[](int i) const {
+    assert(0 <= i && i < n);
     return (a[i / 64] & mask(i % 64)) != 0;
   }
 
   dynamic_bitset& flip() { return flip(n); }
-  dynamic_bitset& flip(size_t l, size_t r) {
-    assert(l <= r && r <= n);
+  dynamic_bitset& flip(int l, int r) {
+    assert(0 <= l && l <= r && r <= n);
     flip(r);
     flip(l);
     return *this;
   }
-  dynamic_bitset& flip(size_t r) {
-    assert(r <= n);
+  dynamic_bitset& flip(int r) {
+    assert(0 <= r && r <= n);
     if (r == 0) return *this;
-    for (size_t i = 0; i < r / 64; i++) {
+    for (int i = 0; i < r / 64; i++) {
       a[i] = ~a[i];
     }
     a[(r - 1) / 64] ^= mask(r % 64) - 1;
@@ -74,71 +74,87 @@ public:
     return dynamic_bitset(*this).flip();
   }
 
-  size_t count() const { return count(n); }
-  size_t count(size_t l, size_t r) const {
-    assert(l <= r && r <= n);
+  int count() const { return count(n); }
+  int count(int l, int r) const {
+    assert(0 <= l && l <= r && r <= n);
     return count(r) - count(l);
   }
-  size_t count(size_t r) const {
-    assert(r <= n);
+  int count(int r) const {
+    assert(0 <= r && r <= n);
     if (r == 0) return 0;
-    size_t res = 0;
-    for (size_t i = 0; i < r / 64; i++) {
+    int res = 0;
+    for (int i = 0; i < r / 64; i++) {
       res += std::popcount(a[i]);
     }
     res += std::popcount(a[(r - 1) / 64] & (mask(r % 64) - 1));
     return res;
   }
 
-  size_t find(size_t i) const {
-    assert(i <= n);
-    if (i == n) return n;
-    size_t j = i / 64;
-    unsigned long long first = a[j];
-    first &= (unsigned long long)(-1) << (i % 64);
-    if (first) return j * 64 + std::countr_zero(first);
-    while (++j < a.size()) {
+  int next(int i) const {
+    assert(0 <= i && i < n);
+    int j = i / 64;
+    if (i % 64 != 63) {
+      unsigned long long start = a[j];
+      start &= (unsigned long long)(-1) << (i % 64 + 1);
+      if (start) return j * 64 + std::countr_zero(start);
+    }
+    while (++j < int(a.size())) {
       if (a[j]) return j * 64 + std::countr_zero(a[j]);
     }
     return n;
   }
+  int prev(int i) const {
+    assert(0 <= i && i < n);
+    int j = i / 64;
+    if (i % 64 != 0) {
+      unsigned long long start = a[j];
+      start &= (unsigned long long)(-1) >> (64 - i % 64);
+      if (start) return j * 64 + 63 - std::countl_zero(start);
+    }
+    while (--j >= 0) {
+      if (a[j]) return j * 64 + 63 - std::countl_zero(a[j]);
+    }
+    return -1;
+  }
 
-  size_t size() const { return n; }
+  int size() const { return n; }
 
   dynamic_bitset& operator^=(const dynamic_bitset& rhs) {
     assert(n == rhs.n);
-    for (size_t i = 0; i < a.size(); i++) a[i] ^= rhs.a[i];
+    for (int i = 0; i < int(a.size()); i++) a[i] ^= rhs.a[i];
     return *this;
   }
   dynamic_bitset& operator|=(const dynamic_bitset& rhs) {
     assert(n == rhs.n);
-    for (size_t i = 0; i < a.size(); i++) a[i] |= rhs.a[i];
+    for (int i = 0; i < int(a.size()); i++) a[i] |= rhs.a[i];
     return *this;
   }
   dynamic_bitset& operator&=(const dynamic_bitset& rhs) {
     assert(n == rhs.n);
-    for (size_t i = 0; i < a.size(); i++) a[i] &= rhs.a[i];
+    for (int i = 0; i < int(a.size()); i++) a[i] &= rhs.a[i];
     return *this;
   }
 
-  dynamic_bitset& operator<<=(size_t shift) {
+  dynamic_bitset& operator<<=(int shift) {
+    assert(0 <= shift);
+
     if (n == 0) return *this;
     if (shift >= n) {
       std::fill(a.begin(), a.end(), 0);
       return *this;
     }
 
-    size_t block_shift = shift / 64;    
+    int block_shift = shift / 64;    
     if (block_shift > 0) {
-      for (size_t i = a.size() - 1; i >= block_shift; i--) {
+      for (int i = int(a.size()) - 1; i >= block_shift; i--) {
         a[i] = a[i - block_shift]; 
       }
       std::fill(a.begin(), a.begin() + block_shift, 0);
     }
 
-    size_t bit_shift = shift % 64;
+    int bit_shift = shift % 64;
     if (bit_shift > 0) {
-      for (size_t i = a.size() - 1; i > block_shift; i--) {
+      for (int i = int(a.size()) - 1; i > block_shift; i--) {
         a[i] <<= bit_shift;
         if (i) a[i] |= a[i - 1] >> (64 - bit_shift);
       }
@@ -148,24 +164,26 @@ public:
     if (n % 64) a.back() &= mask(n % 64) - 1;
     return *this;
   }
-  dynamic_bitset& operator>>=(size_t shift) {
+  dynamic_bitset& operator>>=(int shift) {
+    assert(0 <= shift);
+
     if (n == 0) return *this;
     if (shift >= n) {
       std::fill(a.begin(), a.end(), 0);
       return *this;
     }
 
-    size_t block_shift = shift / 64;
+    int block_shift = shift / 64;
     if (block_shift > 0) {
-      for (size_t i = 0; i < a.size() - block_shift; i++) {
+      for (int i = 0; i < int(a.size()) - block_shift; i++) {
         a[i] = a[i + block_shift];
       }
       std::fill(a.end() - block_shift, a.end(), 0);
     }
 
-    size_t bit_shift = shift % 64;
+    int bit_shift = shift % 64;
     if (bit_shift > 0) {
-      for (size_t i = 0; i < a.size() - block_shift - 1; i++) {
+      for (int i = 0; i < int(a.size()) - block_shift - 1; i++) {
         a[i] >>= bit_shift;
         a[i] |= a[i + 1] << (64 - bit_shift);
       }
@@ -178,22 +196,23 @@ public:
   friend dynamic_bitset operator^(const dynamic_bitset& lhs, const dynamic_bitset& rhs) { return dynamic_bitset(lhs) ^= rhs; }
   friend dynamic_bitset operator|(const dynamic_bitset& lhs, const dynamic_bitset& rhs) { return dynamic_bitset(lhs) |= rhs; }
   friend dynamic_bitset operator&(const dynamic_bitset& lhs, const dynamic_bitset& rhs) { return dynamic_bitset(lhs) &= rhs; }
-  friend dynamic_bitset operator<<(const dynamic_bitset& lhs, size_t shift) { return dynamic_bitset(lhs) <<= shift; }
-  friend dynamic_bitset operator>>(const dynamic_bitset& lhs, size_t shift) { return dynamic_bitset(lhs) >>= shift; }
+  friend dynamic_bitset operator<<(const dynamic_bitset& lhs, int shift) { return dynamic_bitset(lhs) <<= shift; }
+  friend dynamic_bitset operator>>(const dynamic_bitset& lhs, int shift) { return dynamic_bitset(lhs) >>= shift; }
 
   friend std::istream& operator>>(std::istream& is, dynamic_bitset& x) {
     std::string t;
     is >> t;
-    x = dynamic_bitset(t); return is;
+    x = dynamic_bitset(t);
+    return is;
   }
   friend std::ostream& operator<<(std::ostream& os, const dynamic_bitset& x) {
-    for (size_t i = 0; i < x.n; i++) os << x[x.n - 1 - i];
+    for (int i = x.n - 1; i >= 0; i--) os << x[i];
     return os;
   }
 
 private:
-  size_t n;
+  int n;
   std::vector<unsigned long long> a;
 
-  static constexpr unsigned long long mask(size_t pos) { return 1ULL << pos; }
+  static constexpr unsigned long long mask(int pos) { return 1ULL << pos; }
 };
