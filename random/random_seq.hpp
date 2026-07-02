@@ -10,7 +10,7 @@ template <std::integral T> std::vector<T> random_seq(int n, T l, T r, bool sorte
   assert(0 <= n && (n == 0 || l < r));
   std::vector<T> seq(n);
   for (int i = 0; i < n; i++) {
-    seq[i] = mt64 % (r - l) + l;
+    seq[i] = mt64() % (r - l) + l;
   }
   if (sorted) std::sort(res.begin(), res.end());
   return seq;
