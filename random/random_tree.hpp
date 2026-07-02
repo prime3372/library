@@ -5,6 +5,7 @@
 #include <utility>
 #include <vector>
 #include "rng.hpp"
+#include "random_seq.hpp"
 
 std::vector<std::pair<int, int>> random_tree(int n) {
   assert(1 <= n);
@@ -15,12 +16,9 @@ std::vector<std::pair<int, int>> random_tree(int n) {
   
   std::vector<std::pair<int, int>> edges(n - 1);
   for (int i = 1; i < n; i++) {
-    edges[i - 1] = {i, par[i]};
+    edges[i - 1] = {par[i], i};
   }
 
   std::shuffle(edges.begin(), edges.end(), mt32);
-  for (auto& e : edges) {
-    if (mt32() % 2) std::swap(e.first, e.second);
-  }
   return edges;
 }
