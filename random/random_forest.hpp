@@ -19,8 +19,5 @@ std::vector<std::pair<int, int>> random_forest(int n) {
   }
 
   std::shuffle(edges.begin(), edges.end(), mt32);
-  for (auto& e : edges) {
-    if (mt32() % 2) std::swap(e.first, e.second);
-  }
   return edges;
 }
