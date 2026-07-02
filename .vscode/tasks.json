@@ -19,7 +19,7 @@
     {
       "label": "bundle current file",
       "type": "shell",
-      "command": "python -m onlinejudge_bundle.main ${file} -I ${workspaceFolder} > submit.cpp; code submit.cpp",
+      "command": "oj-bundle ${file} > submit.cpp; code submit.cpp",
       "group": {
         "kind": "build",
         "isDefault": true
