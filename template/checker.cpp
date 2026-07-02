@@ -13,4 +13,7 @@ int main(int argc, char* argv[]) {
   std::ifstream f_in(argv[1]);
   std::ifstream f_out(argv[2]);
   std::ifstream f_ans(argv[3]);
+
+  string dummy;
+  check(!(f_out >> dummy));
 }
