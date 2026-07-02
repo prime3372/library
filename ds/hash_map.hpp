@@ -5,10 +5,11 @@
 #include <random>
 #include <utility>
 #include <vector>
+#include "random/rng.hpp"
 
 template <class T> struct hash_map {
 public:
-  hash_map() : cap(8), sz(0), keys(cap), vals(cap), used(cap), r(rand()), shift(61), default_value(T()) {}
+  hash_map() : cap(8), sz(0), keys(cap), vals(cap), used(cap), r(mt64()), shift(61), default_value(T()) {}
 
   T& operator[](size_t k) {
     unsigned int i = index(k);
@@ -53,12 +54,6 @@ private:
   unsigned long long r;
   unsigned int shift;
   T default_value;
-
-  static unsigned long long rand() {
-    static std::random_device seed_gen;
-    static std::mt19937_64 mt(seed_gen());
-    return mt();
-  }
 
   unsigned int hash(size_t k) const { return (k * r) >> shift; }
 

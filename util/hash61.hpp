@@ -4,16 +4,15 @@
 #include <array>
 #include <random>
 #include <type_traits>
+#include "random/rng.hpp"
 
 struct hash61 {
 public:
   static hash61 get_base() {
-    static std::random_device seed_gen;
-    static std::mt19937_64 mt(seed_gen());
     hash61 hs;
     for (int i = 0; i < num_of_base; i++) {
       do {
-        hs.v[i] = mt() % m;
+        hs.v[i] = mt64() % m;
       } while (!is_primitive(hs.v[i]));
     }
     return hs;

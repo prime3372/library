@@ -8,6 +8,7 @@
 #include <vector>
 #include "is_prime.hpp"
 #include "isqrt.hpp"
+#include "random/rng.hpp"
 
 namespace internal {
 
@@ -17,15 +18,13 @@ long long pollard_rho(long long n) {
   if (n % 2 == 0) return 2;
   if (is_prime(n)) return n;
 
-  static std::random_device seed_gen;
-  static std::mt19937_64 mt(seed_gen());
   long long r;
   auto f = [&](__int128 x) { return (long long)((x * x + r) % n); };  
 
   int m = int(kth_root(n, 8));
   while (true) {
     long long x = 0, y = 0, x_tmp, y_tmp, q = 1, d = 1;
-    r = mt() % (n - 2) + 2;
+    r = mt64() % (n - 2) + 2;
     while (d == 1) {
       x_tmp = x;
       y_tmp = y;
