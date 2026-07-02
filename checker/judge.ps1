@@ -79,7 +79,7 @@ do {
     $dummy = $p_che.Handle
     if (-not $p_che.WaitForExit($timeout)) {
       $p_che.Kill()
-      Write-Host "Test" $i "FAIL" "Timed Out" $ans -ForegroundColor Blue
+      Write-Host "Test" $i "FAIL" "Timed Out" $che -ForegroundColor Blue
       code in.txt out.txt ans.txt
       break
     }
@@ -89,7 +89,7 @@ do {
       break
     }
     if ($p_che.ExitCode -ne 0) {
-      Write-Host "Test" $i "FAIL" -ForegroundColor Blue
+      Write-Host "Test" $i "FAIL" "Runtime Error" $che -ForegroundColor Blue
       code in.txt out.txt ans.txt
       break
     }
