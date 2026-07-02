@@ -16,7 +16,7 @@ std::vector<std::pair<int, int>> random_tree(int n) {
   
   std::vector<std::pair<int, int>> edges(n - 1);
   for (int i = 1; i < n; i++) {
-    edges[i - 1] = {par[i], i};
+    edges[i - 1] = {i, par[i]};
   }
 
   std::shuffle(edges.begin(), edges.end(), mt32);
