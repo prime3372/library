@@ -4,7 +4,7 @@
     {
       "label": "C++ compile and run",
       "type": "shell",
-      "command": "g++ ${file} -g -o ${fileBasenameNoExtension}.exe -O2 -std=c++23 -Wall -Wextra; ./${fileBasenameNoExtension}.exe; rm ${fileBasenameNoExtension}.exe -ErrorAction SilentlyContinue",
+      "command": "g++ ${file} -g -o ${fileBasenameNoExtension}.exe -O2 -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { Exit }; ./${fileBasenameNoExtension}.exe; rm ${fileBasenameNoExtension}.exe -ErrorAction SilentlyContinue",
       "group": {
         "kind": "build",
         "isDefault": false
