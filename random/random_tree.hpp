@@ -38,9 +38,9 @@ std::vector<std::pair<int, int>> random_forest(int n) {
   std::vector<int> par(n);
   for (int i = 0; i < n; i++) par[i] = mt32() % (i + 1);
 
-  std::vector<std::pair<int, int>> edges(n - 1);
+  std::vector<std::pair<int, int>> edges;
   for (int i = 0; i < n; i++) {
-    if (par[i] != i) edges[i] = {par[i], i};
+    if (par[i] != i) edges.emplace_back(par[i], i);
   }
 
   std::shuffle(edges.begin(), edges.end(), mt32);
