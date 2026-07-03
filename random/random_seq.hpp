@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cassert>
 #include <concepts>
+#include <numeric>
 #include <vector>
 #include "rng.hpp"
 
