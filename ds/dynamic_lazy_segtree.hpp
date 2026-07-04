@@ -7,7 +7,7 @@
 #include <memory>
 #include <vector>
 
-#include "../algebra/acted_monoid.hpp"
+#include "algebra/acted_monoid.hpp"
 
 namespace cp {
 

@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_point_get"
 
-#include "../../algebra/sum_affine.hpp"
-#include "../../ds/lazy_segtree.hpp"
-#include "../../util/static_modint.hpp"
+#include "algebra/sum_affine.hpp"
+#include "ds/lazy_segtree.hpp"
+#include "util/static_modint.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

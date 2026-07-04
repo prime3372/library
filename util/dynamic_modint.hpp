@@ -5,8 +5,8 @@
 #include <utility>
 #include <type_traits>
 
-#include "../number/barrett.hpp"
-#include "../number/ext_gcd.hpp"
+#include "number/barrett.hpp"
+#include "number/ext_gcd.hpp"
 #include "type_traits.hpp"
 
 namespace cp {

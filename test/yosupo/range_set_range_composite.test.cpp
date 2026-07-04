@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_set_range_composite"
 
-#include "../../algebra/affine.hpp"
-#include "../../algebra/assign.hpp"
-#include "../../ds/lazy_segtree.hpp"
-#include "../../util/static_modint.hpp"
+#include "algebra/affine.hpp"
+#include "algebra/assign.hpp"
+#include "ds/lazy_segtree.hpp"
+#include "util/static_modint.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

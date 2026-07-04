@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite"
 
-#include "../../algebra/affine.hpp"
-#include "../../ds/segtree.hpp"
-#include "../../util/static_modint.hpp"
+#include "algebra/affine.hpp"
+#include "ds/segtree.hpp"
+#include "util/static_modint.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

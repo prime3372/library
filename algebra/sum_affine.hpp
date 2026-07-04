@@ -4,7 +4,7 @@
 #include <type_traits>
 
 #include "affine.hpp"
-#include "../util/type_traits.hpp"
+#include "util/type_traits.hpp"
 
 namespace cp {
 

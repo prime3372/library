@@ -3,7 +3,7 @@
 #include <cassert>
 #include <vector>
 
-#include "../util/hash61.hpp"
+#include "util/hash61.hpp"
 
 namespace cp {
 

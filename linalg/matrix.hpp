@@ -4,9 +4,9 @@
 #include <type_traits>
 #include <vector>
 
-#include "../algebra/add_mul.hpp"
-#include "../algebra/semiring.hpp"
-#include "../util/type_traits.hpp"
+#include "algebra/add_mul.hpp"
+#include "algebra/semiring.hpp"
+#include "util/type_traits.hpp"
 
 namespace cp {
 

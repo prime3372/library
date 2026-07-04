@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
 
-#include "../../algebra/affine.hpp"
-#include "../../ds/segtree.hpp"
-#include "../../util/static_modint.hpp"
-#include "../../tree/hl_decomposition.hpp"
+#include "algebra/affine.hpp"
+#include "ds/segtree.hpp"
+#include "util/static_modint.hpp"
+#include "tree/hl_decomposition.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

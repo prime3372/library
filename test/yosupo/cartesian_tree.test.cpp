@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
 
-#include "../../tree/cartesian_tree.hpp"
+#include "tree/cartesian_tree.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

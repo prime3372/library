@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
 
-#include "../../algebra/affine.hpp"
-#include "../../ds/slide_window_aggregation.hpp"
-#include "../../util/static_modint.hpp"
+#include "algebra/affine.hpp"
+#include "ds/slide_window_aggregation.hpp"
+#include "util/static_modint.hpp"
 
 #include <bits/stdc++.h>
 using namespace std;

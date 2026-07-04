@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite_large_array"
 
-#include "../../algebra/affine.hpp"
-#include "../../ds/dynamic_segtree.hpp"
-#include "../../util/static_modint.hpp"
+#include "algebra/affine.hpp"
+#include "ds/dynamic_segtree.hpp"
+#include "util/static_modint.hpp"
 
 #include <bits/stdc++.h>
 using namespace std;

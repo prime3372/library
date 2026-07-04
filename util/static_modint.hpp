@@ -4,8 +4,8 @@
 #include <iostream>
 #include <type_traits>
 
-#include "../number/ext_gcd.hpp"
-#include "../number/is_prime.hpp"
+#include "number/ext_gcd.hpp"
+#include "number/is_prime.hpp"
 #include "type_traits.hpp"
 
 namespace cp {

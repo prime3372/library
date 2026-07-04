@@ -3,7 +3,7 @@
 #include <cassert>
 #include <vector>
 
-#include "../util/type_traits.hpp"
+#include "util/type_traits.hpp"
 
 namespace cp {
 

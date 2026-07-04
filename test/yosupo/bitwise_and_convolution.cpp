@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/bitwise_and_convolution"
 
-#include "../../util/static_modint.hpp"
-#include "../../setfunc/and_convolution.hpp"
+#include "util/static_modint.hpp"
+#include "setfunc/and_convolution.hpp"
 
 #include <bits/stdc++.h>
 using namespace std;

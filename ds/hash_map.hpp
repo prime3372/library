@@ -7,7 +7,7 @@
 #include <utility>
 #include <vector>
 
-#include "../random/rng.hpp"
+#include "random/rng.hpp"
 
 namespace cp {
 

@@ -9,7 +9,7 @@
 
 #include "is_prime.hpp"
 #include "isqrt.hpp"
-#include "../random/rng.hpp"
+#include "random/rng.hpp"
 
 namespace cp {
 

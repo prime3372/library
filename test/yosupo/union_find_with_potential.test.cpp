@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind_with_potential"
 
-#include "../../ds/union_find_with_potential.hpp"
-#include "../../util/static_modint.hpp"
+#include "ds/union_find_with_potential.hpp"
+#include "util/static_modint.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

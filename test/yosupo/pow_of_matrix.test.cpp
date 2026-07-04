@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/pow_of_matrix"
 
-#include "../../linalg/matrix.hpp"
-#include "../../util/static_modint.hpp"
+#include "linalg/matrix.hpp"
+#include "util/static_modint.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

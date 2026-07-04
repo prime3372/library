@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sort_points_by_argument"
 
-#include "../../geom/point.hpp"
+#include "geom/point.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

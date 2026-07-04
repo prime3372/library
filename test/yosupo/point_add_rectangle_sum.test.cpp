@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
 
-#include "../../ds/dynamic_fenwick_tree_2d.hpp"
-#include "../../util/coordinate_compression.hpp"
+#include "ds/dynamic_fenwick_tree_2d.hpp"
+#include "util/coordinate_compression.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

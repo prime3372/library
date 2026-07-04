@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_range_contour_sum_on_tree"
 
-#include "../../ds/fenwick_tree.hpp"
-#include "../../tree/centroid_decomposition.hpp"
-#include "../../tree/tree_lca.hpp"
+#include "ds/fenwick_tree.hpp"
+#include "tree/centroid_decomposition.hpp"
+#include "tree/tree_lca.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

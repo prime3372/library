@@ -7,8 +7,8 @@ $casesnum = 20
 
 do {
 
-  g++ $sol -o sol.exe -O2 -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
-  g++ $gen -o gen.exe -O2 -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
+  g++ $sol -O2 -o sol.exe -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
+  g++ $gen -O2 -o gen.exe -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
 
   for ($i = 1; $i -le $casesnum; $i++) {
     python checker/interactor.py ".\\gen.exe" ".\\sol.exe" $i

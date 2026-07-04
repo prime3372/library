@@ -4,9 +4,9 @@
 #include <cassert>
 #include <type_traits>
 
-#include "../algebra/add_mul.hpp"
-#include "../algebra/semiring.hpp"
-#include "../util/type_traits.hpp"
+#include "algebra/add_mul.hpp"
+#include "algebra/semiring.hpp"
+#include "util/type_traits.hpp"
 
 namespace cp {
 

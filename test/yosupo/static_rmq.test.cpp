@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 
-#include "../../algebra/min.hpp"
-#include "../../ds/disjoint_sparse_table.hpp"
+#include "algebra/min.hpp"
+#include "ds/disjoint_sparse_table.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

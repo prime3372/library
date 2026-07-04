@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
 
-#include "../../algebra/max.hpp"
-#include "../../ds/segtree.hpp"
+#include "algebra/max.hpp"
+#include "ds/segtree.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_add_range_min"
 
-#include "../../algebra/min_add.hpp"
-#include "../../ds/lazy_segtree.hpp"
+#include "algebra/min_add.hpp"
+#include "ds/lazy_segtree.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

@@ -5,7 +5,7 @@
 #include <random>
 #include <type_traits>
 
-#include "../random/rng.hpp"
+#include "random/rng.hpp"
 
 namespace cp {
 

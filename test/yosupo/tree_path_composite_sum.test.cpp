@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_path_composite_sum"
 
-#include "../../algebra/sum_affine.hpp"
-#include "../../tree/rerooting_dp.hpp"
-#include "../../util/static_modint.hpp"
+#include "algebra/sum_affine.hpp"
+#include "tree/rerooting_dp.hpp"
+#include "util/static_modint.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

@@ -4,7 +4,7 @@
 #include <cassert>
 #include <vector>
 
-#include "../algebra/monoid.hpp"
+#include "algebra/monoid.hpp"
 
 namespace cp {
 

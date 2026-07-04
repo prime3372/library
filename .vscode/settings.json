@@ -1,14 +1,14 @@
 {
   "C_Cpp.default.compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
   "C_Cpp.default.includePath": [
-    "${workspaceFolder}/**",
     "C:/msys64/mingw64/include",
+    "C:/cp/library"
   ],
   "C_Cpp.default.intelliSenseMode": "gcc-x64",
   "C_Cpp.default.cppStandard": "c++23",
-  "chat.disableAIFeatures": true,
+  "chat.disableAIFeatures": false,
   "cph.general.defaultLanguage": "cpp",
-  "cph.general.defaultLanguageTemplateFileLocation": "C:/Users/syunr/cplibrary/template/template.cpp",
+  "cph.general.defaultLanguageTemplateFileLocation": "C:/cp/library/template/template.cpp",
   "cph.general.firstTime": false,
   "cph.general.hideStderrorWhenCompiledOK": false,
   "cph.general.ignoreSTDERROR": true,
@@ -21,7 +21,7 @@
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
-        "scope": "entity.name.function.preprocessor.cpp",        
+        "scope": "entity.name.function.preprocessor.cpp",
         "settings": {
           "foreground": "#e7b2b5",
         }

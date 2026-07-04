@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cycle_detection"
 
-#include "../../graph/cycle_detection.hpp"
+#include "graph/cycle_detection.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

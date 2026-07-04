@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum_large_array"
 
-#include "../../algebra/sum_affine.hpp"
-#include "../../ds/dynamic_lazy_segtree.hpp"
-#include "../../util/static_modint.hpp"
+#include "algebra/sum_affine.hpp"
+#include "ds/dynamic_lazy_segtree.hpp"
+#include "util/static_modint.hpp"
 
 #include <bits/stdc++.h>
 using namespace std;

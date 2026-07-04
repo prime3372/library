@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <concepts>
 
-#include "../ds/hash_map.hpp"
-#include "../util/hash_combine.hpp"
+#include "ds/hash_map.hpp"
+#include "util/hash_combine.hpp"
 #include "rng.hpp"
 
 namespace cp {

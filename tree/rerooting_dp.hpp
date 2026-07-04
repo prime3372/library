@@ -3,7 +3,7 @@
 #include <cassert>
 #include <vector>
 
-#include "../algebra/monoid_with_mapping.hpp"
+#include "algebra/monoid_with_mapping.hpp"
 
 namespace cp {
 

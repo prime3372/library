@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 
-#include "../../ds/hash_map.hpp"
+#include "ds/hash_map.hpp"
 
 #include <bits/stdc++.h>
 using namespace std;

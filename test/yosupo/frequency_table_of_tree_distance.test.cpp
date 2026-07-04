@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
 
-#include "../../poly/polynomial.hpp"
-#include "../../tree/centroid_decomposition.hpp"
+#include "poly/polynomial.hpp"
+#include "tree/centroid_decomposition.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

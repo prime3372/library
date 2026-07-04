@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "convolution.hpp"
-#include "../util/type_traits.hpp"
+#include "util/type_traits.hpp"
 
 namespace cp {
 

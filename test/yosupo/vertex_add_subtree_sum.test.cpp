@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_subtree_sum"
 
-#include "../../ds/fenwick_tree.hpp"
-#include "../../tree/euler_tour.hpp"
+#include "ds/fenwick_tree.hpp"
+#include "tree/euler_tour.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)

@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/minimum_spanning_tree"
 
-#include "../../graph/kruscal.hpp"
+#include "graph/kruscal.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
