@@ -7,6 +7,8 @@
 
 #include "barrett.hpp"
 
+namespace cp {
+
 template <std::integral T> requires (sizeof(T) <= 4)
 constexpr long long pow_mod(long long x, long long n, T m) {
   assert(0 <= n && 1 <= m);
@@ -33,3 +35,5 @@ constexpr long long pow_mod(long long x, long long n, long long m) {
   }
   return (long long)(r);
 }
+
+} // namespace cp

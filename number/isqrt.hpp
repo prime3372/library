@@ -3,6 +3,8 @@
 #include <cassert>
 #include <cmath>
 
+namespace cp {
+
 constexpr unsigned long long isqrt(unsigned long long x) {
   unsigned long long y = (unsigned long long)std::sqrt(x);
   while (y && y > x / y) y--;
@@ -34,3 +36,5 @@ constexpr unsigned long long kth_root(unsigned long long x, int k) {
   while (check(y + 1)) y++;
   return y;
 }
+
+} // namespace cp

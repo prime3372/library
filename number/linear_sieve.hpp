@@ -4,6 +4,8 @@
 #include <utility>
 #include <vector>
 
+namespace cp {
+
 struct linear_sieve {
 public:
   linear_sieve() : linear_sieve(0) {}
@@ -45,3 +47,5 @@ private:
   int n;
   std::vector<int> f, ps;
 };
+
+} // namespace cp

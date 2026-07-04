@@ -4,6 +4,8 @@
 #include <concepts>
 #include <type_traits>
 
+namespace cp {
+
 template <std::integral T>
 constexpr std::common_type_t<T, long long> ipow(T x, int n) {
   assert(0 <= n);
@@ -15,3 +17,5 @@ constexpr std::common_type_t<T, long long> ipow(T x, int n) {
   }
   return r;
 }
+
+} // namespace cp

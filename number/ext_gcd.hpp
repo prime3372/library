@@ -3,6 +3,8 @@
 #include <cassert>
 #include <utility>
 
+namespace cp {
+
 constexpr std::pair<long long, long long> ext_gcd(long long a, long long b) {
   assert(1 <= b);
   a = a < 0 ? a % b + b : a % b;
@@ -25,3 +27,5 @@ constexpr long long inv_mod(long long x, long long m) {
   assert(z.first == 1);
   return z.second;
 }
+
+} // namespace cp

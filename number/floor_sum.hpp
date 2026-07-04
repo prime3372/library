@@ -3,6 +3,8 @@
 #include <cassert>
 #include <utility>
 
+namespace cp {
+
 namespace internal {
 
 constexpr unsigned long long floor_sum_unsigned(unsigned long long n,
@@ -46,3 +48,5 @@ constexpr long long floor_sum(int n, int m, long long a, long long b) {
   }
   return ans + internal::floor_sum_unsigned(n, m, a, b);
 }
+
+} // namespace cp

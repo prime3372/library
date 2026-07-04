@@ -6,6 +6,8 @@
 #include "isqrt.hpp"
 #include "mobius.hpp"
 
+namespace cp {
+
 // https://smsxgz.github.io/post/pe/counting_square_free_numbers/
 long long count_square_free(long long n) {
   assert(0 <= n);
@@ -39,3 +41,5 @@ long long count_square_free(long long n) {
   ans += Mxi_sum - 1LL * (Imax - 1) * M[D];
   return ans;
 }
+
+} // namespace cp

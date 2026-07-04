@@ -5,6 +5,8 @@
 
 #include "../util/type_traits.hpp"
 
+namespace cp {
+
 template <class mint> requires is_modint_v<mint>
 struct binom_mod {
 public:
@@ -56,3 +58,5 @@ private:
   int N;
   std::vector<mint> f, finv;
 };
+
+} // namespace cp

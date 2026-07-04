@@ -1,5 +1,7 @@
 #pragma once
 
+namespace cp {
+
 // Barrett reduction
 struct barrett {
 public:
@@ -28,3 +30,5 @@ private:
   unsigned int m;
   unsigned long long im;
 };
+
+} // namespace cp

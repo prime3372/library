@@ -7,6 +7,8 @@
 
 #include "factorize.hpp"
 
+namespace cp {
+
 std::vector<long long> enumerate_divisors(long long n) {
   assert(1 <= n);
   std::vector<std::pair<long long, int>> fs = factorize(n);
@@ -25,3 +27,5 @@ std::vector<long long> enumerate_divisors(long long n) {
   std::sort(ans.begin(), ans.end());
   return ans;
 }
+
+} // namespace cp

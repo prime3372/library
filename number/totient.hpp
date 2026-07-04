@@ -4,6 +4,8 @@
 #include <numeric>
 #include <vector>
 
+namespace cp {
+
 std::vector<int> totient(int n) {
   assert(0 <= n);
   std::vector<int> ans(n + 1);
@@ -16,3 +18,5 @@ std::vector<int> totient(int n) {
   }
   return ans;
 }
+
+} // namespace cp

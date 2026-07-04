@@ -3,6 +3,8 @@
 #include <cassert>
 #include <vector>
 
+namespace cp {
+
 std::vector<int> enumerate_primes(int n) {
   assert(0 <= n);
   std::vector<int> ps;
@@ -16,3 +18,5 @@ std::vector<int> enumerate_primes(int n) {
   }
   return ps;
 }
+
+} // namespace cp

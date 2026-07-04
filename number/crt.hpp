@@ -6,6 +6,8 @@
 
 #include "ext_gcd.hpp"
 
+namespace cp {
+
 std::pair<long long, long long> crt(const std::vector<long long>& r, const std::vector<long long>& m) {
   assert(r.size() == m.size());
   int n = int(r.size());
@@ -56,3 +58,5 @@ std::pair<long long, long long> crt(const std::vector<long long>& r, const std::
   }
   return {r0, m0};
 }
+
+} // namespace cp

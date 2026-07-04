@@ -5,6 +5,8 @@
 #include "barrett.hpp"
 #include "pow_mod.hpp"
 
+namespace cp {
+
 // M. Forisek and J. Jancina,
 // Fast Primality Testing for Integers That Fit into a Machine Word
 template <std::integral T> requires(sizeof(T) <= 4)
@@ -56,3 +58,5 @@ constexpr bool is_prime(long long n) {
   }
   return true;
 }
+
+} // namespace cp

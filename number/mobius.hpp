@@ -3,6 +3,8 @@
 #include <cassert>
 #include <vector>
 
+namespace cp {
+
 std::vector<int> mobius(int n) {
   assert(0 <= n);
   std::vector<int> ans(n + 1, 1);
@@ -21,3 +23,5 @@ std::vector<int> mobius(int n) {
   ans[0] = 0;
   return ans;
 }
+
+} // namespace cp

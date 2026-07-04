@@ -11,6 +11,8 @@
 #include "isqrt.hpp"
 #include "../random/rng.hpp"
 
+namespace cp {
+
 namespace internal {
 
 // Pollard's rho algorithm
@@ -77,3 +79,5 @@ std::vector<std::pair<long long, int>> factorize(long long n) {
   }
   return ans;
 }
+
+} // namespace cp

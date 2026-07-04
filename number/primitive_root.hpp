@@ -5,6 +5,8 @@
 #include "factorize.hpp"
 #include "pow_mod.hpp"
 
+namespace cp {
+
 long long primitive_root(long long p) {
   assert(2 <= p);
   if (p == 2) return 1;
@@ -21,3 +23,5 @@ long long primitive_root(long long p) {
   }
   assert(false);
 }
+
+} // namespace cp

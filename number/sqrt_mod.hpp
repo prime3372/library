@@ -2,6 +2,8 @@
 
 #include "pow_mod.hpp"
 
+namespace cp {
+
 // Cipolla's Algorithm
 // https://en.wikipedia.org/wiki/Cipolla%27s_algorithm
 constexpr long long sqrt_mod(long long n, long long p) {
@@ -44,3 +46,5 @@ constexpr long long sqrt_mod(long long n, long long p) {
 
   return (long long)(z.re);
 }
+
+} // namespace cp
