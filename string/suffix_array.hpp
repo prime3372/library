@@ -34,24 +34,19 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
     int w = 1 << step;
 
     std::fill(cnt.begin(), cnt.begin() + num_of_ranks, 0);
-    for (int i = 0; i < n; i++) {
-      cnt[rank[i]]++;
-    }
-    for (int i = 1; i < num_of_ranks; i++) {
-      cnt[i] += cnt[i - 1];
-    }
-    for (int i = 0; i < n; i++) {
-      index[i] -= w;
-      if (index[i] < 0) index[i] += n;
-    }
+    for (int i = 0; i < n; i++) cnt[rank[i]]++;
+    for (int i = 1; i < num_of_ranks; i++) cnt[i] += cnt[i - 1];
+
     for (int i = n - 1; i >= 0; i--) {
-      nindex[--cnt[rank[index[i]]]] = index[i]; // order[index[i]] = --cnt[rank[index[i]]]
+      int j = index[i] - w;
+      if (j < 0) j += n;
+      nindex[--cnt[rank[j]]] = j; // order[index[i] - w] = --cnt[rank[index[i] - w]]
     }
 
     num_of_ranks = 1;
     nrank[nindex[0]] = 0;
     for (int i = 1; i < n; i++) {
-      std::pair<int, int> cur = {rank[nindex[i]], rank[(nindex[i] + w) % n]};
+      std::pair<int, int> cur =  {rank[nindex[i]],     rank[(nindex[i] + w) % n]    };
       std::pair<int, int> prev = {rank[nindex[i - 1]], rank[(nindex[i - 1] + w) % n]};
       if (cur != prev) num_of_ranks++;
       nrank[nindex[i]] = num_of_ranks - 1;
