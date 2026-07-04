@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_path_composite_sum"
 
-#include "../../algebra/Sum_Affine.hpp"
+#include "../../algebra/sum_affine.hpp"
 #include "../../tree/rerooting_dp.hpp"
 #include "../../util/static_modint.hpp"
 
@@ -9,8 +9,8 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using S = typename Sum_Affine<mint>::S;
-using F = typename Sum_Affine<mint>::F;
+using S = typename sum_affine<mint>::S;
+using F = typename sum_affine<mint>::F;
 
 int main() {
   int n;
@@ -21,7 +21,7 @@ int main() {
     cin >> ai;
     a[i] = S{ai, 1};
   }
-  rerooting_dp<Sum_Affine<mint>> rerooting(a);
+  rerooting_dp<sum_affine<mint>> rerooting(a);
   rep(i, 0, n - 1) {
     int u, v;
     mint b, c;

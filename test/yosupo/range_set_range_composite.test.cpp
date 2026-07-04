@@ -10,8 +10,8 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
+using A = affine<mint>::S;
 using M = assign<affine<mint>>;
-using Aff = affine<mint>::S;
 using S = M::S;
 using F = M::F;
 
@@ -34,7 +34,7 @@ int main() {
       int l, r;
       mint c, d;
       cin >> l >> r >> c >> d;
-      seg.apply(l, r, F{{c, d}});
+      seg.apply(l, r, F{A{c, d}});
     } else {
       int l, r;
       mint x;

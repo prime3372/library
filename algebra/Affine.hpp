@@ -11,8 +11,8 @@ template <class T>
 struct affine {
   struct S {
     T a, b;
-    S() : a(1), b(0) {}
-    S(T _a, T _b) : a(_a), b(_b) {}
+    constexpr S() : a(1), b(0) {}
+    constexpr S(T _a, T _b) : a(_a), b(_b) {}
   };
   static constexpr S op(S f, S g) { return {g.a * f.a, g.a * f.b + g.b}; }
   static constexpr S e() { return S(); }

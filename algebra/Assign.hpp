@@ -1,10 +1,11 @@
 #pragma once
 
+#include <cstddef>
 #include "monoid.hpp"
 
 namespace cp {
 
-template <monoid M, typename M::S identity> struct assign {
+template <monoid M> struct assign {
   using T = typename M::S;
 
   struct S {
@@ -16,10 +17,15 @@ template <monoid M, typename M::S identity> struct assign {
   static constexpr S op(S x, S y) { return S{M::op(x.val, y.val), x.len + y.len}; }
   static constexpr S e() { return S(); }
 
-  using F = typename assign<T>::F;
-  static constexpr S mapping(F f, S x) { return f == identity ? x : S{pow(f.val, x.len), x.len}; }
-  static constexpr F composition(F g, F f) { return g == identity ? f : g; }
-  static constexpr F id() { return identity; }
+  struct F {
+    T val;
+    bool id;
+    F() : val(), id(true) {}
+    F(T v) : val(v), id(false) {}
+  };
+  static constexpr S mapping(F f, S x) { return f.id ? x : S{pow(f.val, x.len), x.len}; }
+  static constexpr F composition(F g, F f) { return g.id ? f : g; }
+  static constexpr F id() { return F(); }
 
   static constexpr T pow(T x, size_t n) {
     T r = M::e();
