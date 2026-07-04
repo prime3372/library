@@ -2,13 +2,13 @@
   "C_Cpp.default.compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
   "C_Cpp.default.includePath": [
     "C:/msys64/mingw64/include",
-    "C:/cp/library"
+    "${workspaceFolder}"
   ],
   "C_Cpp.default.intelliSenseMode": "gcc-x64",
   "C_Cpp.default.cppStandard": "c++23",
   "chat.disableAIFeatures": false,
   "cph.general.defaultLanguage": "cpp",
-  "cph.general.defaultLanguageTemplateFileLocation": "C:/cp/library/template/template.cpp",
+  "cph.general.defaultLanguageTemplateFileLocation": "${workspaceFolder}/template/template.cpp",
   "cph.general.firstTime": false,
   "cph.general.hideStderrorWhenCompiledOK": false,
   "cph.general.ignoreSTDERROR": true,
