@@ -1,11 +1,4 @@
 {
-  "C_Cpp.default.compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
-  "C_Cpp.default.includePath": [
-    "C:/msys64/mingw64/include",
-    "${workspaceFolder}"
-  ],
-  "C_Cpp.default.intelliSenseMode": "gcc-x64",
-  "C_Cpp.default.cppStandard": "c++23",
   "chat.disableAIFeatures": false,
   "cph.general.defaultLanguage": "cpp",
   "cph.general.defaultLanguageTemplateFileLocation": "${workspaceFolder}/template/template.cpp",
@@ -13,7 +6,7 @@
   "cph.general.hideStderrorWhenCompiledOK": false,
   "cph.general.ignoreSTDERROR": true,
   "cph.general.timeOut": 10000,
-  "cph.language.cpp.Args": "-g -O2 -std=c++23 -Wall -Wextra",
+  "cph.language.cpp.Args": "-D_GLIBCXX_DEBUG -I ${workspaceFolder} -O2 -std=c++23 -Wall -Wextra",
   "diffEditor.ignoreTrimWhitespace": false,
   "debug.onTaskErrors": "showErrors",
   "editor.inlineSuggest.enabled": false,
