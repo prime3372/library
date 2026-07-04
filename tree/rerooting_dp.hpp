@@ -2,7 +2,10 @@
 
 #include <cassert>
 #include <vector>
+
 #include "../algebra/monoid_with_mapping.hpp"
+
+namespace cp {
 
 template <monoid_with_mapping M> struct rerooting_dp {
   using S = typename M::S;
@@ -94,3 +97,5 @@ private:
   std::vector<std::vector<edge>> g;
   std::vector<S> vals;
 };
+
+} // namespace cp

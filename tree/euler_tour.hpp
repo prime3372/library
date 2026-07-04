@@ -3,6 +3,8 @@
 #include <utility>
 #include <vector>
 
+namespace cp {
+
 struct euler_tour {
 public:
   euler_tour() : euler_tour(0) {}
@@ -36,3 +38,5 @@ private:
   int n, k = 0;
   std::vector<std::vector<int>> g;
 };
+
+} // namespace cp

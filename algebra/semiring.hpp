@@ -2,6 +2,8 @@
 
 #include <concepts>
 
+namespace cp {
+
 template <class R>
 concept semiring = requires {
   typename R::S;
@@ -11,3 +13,5 @@ concept semiring = requires {
   {R::zero()} -> std::same_as<typename R::S>;
   {R::one()} -> std::same_as<typename R::S>;
 };
+
+} // namespace cp

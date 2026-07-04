@@ -4,11 +4,14 @@
 #include <bit>
 #include <concepts>
 #include <vector>
+
 #include "../number/ext_gcd.hpp"
 #include "../number/is_prime.hpp"
 #include "../number/pow_mod.hpp"
 #include "../util/type_traits.hpp"
 #include "../util/static_modint.hpp"
+
+namespace cp {
 
 namespace internal {
 
@@ -162,3 +165,5 @@ std::vector<long long> convolution(std::vector<long long> a, std::vector<long lo
   }
   return c1;
 }
+
+} // namespace cp

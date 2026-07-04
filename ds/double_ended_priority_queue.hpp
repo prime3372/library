@@ -6,6 +6,8 @@
 #include <utility>
 #include <vector>
 
+namespace cp {
+
 // even index -> min heap, odd index -> max heap
 template <class T> struct double_ended_priority_queue {
 
@@ -103,3 +105,5 @@ private:
     return cur;
   }
 };
+
+} // namespace cp

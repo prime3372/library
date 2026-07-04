@@ -3,8 +3,11 @@
 #include <cassert>
 #include <concepts>
 #include <vector>
+
 #include "convolution.hpp"
 #include "../util/type_traits.hpp"
+
+namespace cp {
 
 template <class> struct polynomial;
 
@@ -127,3 +130,5 @@ template <> struct polynomial<long long> {
 private: 
   std::vector<long long> f;
 };
+
+} // namespace cp

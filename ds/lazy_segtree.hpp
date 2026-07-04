@@ -4,7 +4,10 @@
 #include <cassert>
 #include <type_traits>
 #include <vector>
+
 #include "../algebra/acted_monoid.hpp"
+
+namespace cp {
 
 template <acted_monoid M> struct lazy_segtree {
   using S = typename M::S;
@@ -181,3 +184,5 @@ private:
     lz[k] = M::id();
   }
 };
+
+} // namespace cp

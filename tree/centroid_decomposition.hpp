@@ -3,6 +3,8 @@
 #include <cassert>
 #include <vector>
 
+namespace cp {
+
 struct centroid_decomposition {
 public:
   centroid_decomposition() : centroid_decomposition(0) {}
@@ -80,3 +82,5 @@ private:
     return c;
   }
 };
+
+} // namespace cp

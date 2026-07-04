@@ -3,7 +3,10 @@
 #include <cassert>
 #include <utility>
 #include <vector>
+
 #include "max_flow.hpp"
+
+namespace cp {
 
 struct bipartite_matching {
 public: 
@@ -110,3 +113,5 @@ private:
     }
   }
 };
+
+} // namespace cp

@@ -2,6 +2,8 @@
 
 #include <vector>
 
+namespace cp {
+
 template <class Str> std::vector<int> z_algorithm(const Str& s) {
   int n = int(s.size());
   if (n == 0) return {};
@@ -15,3 +17,5 @@ template <class Str> std::vector<int> z_algorithm(const Str& s) {
   z[0] = n;
   return z;
 }
+
+} // namespace cp

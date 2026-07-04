@@ -3,9 +3,12 @@
 #include <cassert>
 #include <iostream>
 #include <type_traits>
+
 #include "../number/ext_gcd.hpp"
 #include "../number/is_prime.hpp"
 #include "type_traits.hpp"
+
+namespace cp {
 
 template <int m> requires (1 <= m) struct static_modint {
   using mint = static_modint;
@@ -125,3 +128,5 @@ template <int m>
 struct is_modint<static_modint<m>> : public std::true_type {};
 template <int m>
 struct is_static_modint<static_modint<m>> : public std::true_type {};
+
+} // namespace cp

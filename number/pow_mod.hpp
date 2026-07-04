@@ -4,6 +4,7 @@
 #include <concepts>
 #include <utility>
 #include <type_traits>
+
 #include "barrett.hpp"
 
 template <std::integral T> requires (sizeof(T) <= 4)

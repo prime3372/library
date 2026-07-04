@@ -6,7 +6,10 @@
 #include <cstddef>
 #include <memory>
 #include <vector>
+
 #include "../algebra/monoid.hpp"
+
+namespace cp {
 
 template <monoid M> struct dynamic_segtree {
   using S = typename M::S;
@@ -175,3 +178,5 @@ private:
     return test > c ? test : min_left(p->left, a, c, dep + 1, product, r, f);
   }
 };
+
+} // namespace cp

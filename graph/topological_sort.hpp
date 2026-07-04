@@ -4,6 +4,8 @@
 #include <queue>
 #include <vector>
 
+namespace cp {
+
 std::vector<int> topological_sort(const std::vector<std::vector<int>>& g) {
   int n = int(g.size());
   std::vector<int> in_deg(n);
@@ -30,3 +32,5 @@ std::vector<int> topological_sort(const std::vector<std::vector<int>>& g) {
   if (int(res.size()) != n) return {};
   return res;
 }
+
+} // namespace cp

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+
 #include "factorize.hpp"
 #include "pow_mod.hpp"
 

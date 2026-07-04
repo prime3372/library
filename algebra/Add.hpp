@@ -1,14 +1,20 @@
 #pragma once
 
 #include <type_traits>
+
 #include "../util/type_traits.hpp"
+
+namespace cp {
+
+template <class> struct add {};
 
 template <class T>
   requires std::is_arithmetic_v<T> || is_modint_v<T>
-struct Add {
+struct add<T> {
   using S = T;
-  static S op(S x, S y) { return x + y; }
-  static S e() { return 0; }
-  static S inv(S x) { return -x; }
-  Add() = delete;
+  static constexpr S op(S x, S y) { return x + y; }
+  static constexpr S e() { return 0; }
+  static constexpr S inv(S x) { return -x; }
 };
+
+} // namespace cp

@@ -2,7 +2,10 @@
 
 #include <cassert>
 #include <vector>
+
 #include "../algebra/monoid.hpp"
+
+namespace cp {
 
 template <monoid M> struct slide_window_aggregation {
   using S = typename M::S;
@@ -47,3 +50,5 @@ private:
     prod1 = M::e();
   }
 };
+
+} // namespace cp

@@ -3,6 +3,7 @@
 #include <cassert>
 #include <numeric>
 #include <vector>
+
 #include "isqrt.hpp"
 
 std::vector<long long> enumerate_quotients(long long n) {

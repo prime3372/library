@@ -3,6 +3,8 @@
 #include <utility>
 #include <vector>
 
+namespace cp {
+
 struct hl_decomposition {
 public:
   hl_decomposition() : hl_decomposition(0) {}
@@ -56,3 +58,5 @@ private:
   std::vector<std::vector<int>> g;
   std::vector<int> size;
 };
+
+} // namespace cp

@@ -6,7 +6,10 @@
 #include <cstddef>
 #include <memory>
 #include <vector>
+
 #include "../algebra/acted_monoid.hpp"
+
+namespace cp {
 
 template <acted_monoid M> struct dynamic_lazy_segtree {
   using S = typename M::S;
@@ -235,3 +238,5 @@ private:
     return test > c ? test : min_left(p->left, a, c, dep + 1, product, r, f);
   }
 };
+
+} // namespace cp

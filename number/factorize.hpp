@@ -6,6 +6,7 @@
 #include <random>
 #include <utility>
 #include <vector>
+
 #include "is_prime.hpp"
 #include "isqrt.hpp"
 #include "../random/rng.hpp"

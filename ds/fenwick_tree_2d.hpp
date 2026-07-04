@@ -2,7 +2,10 @@
 
 #include <cassert>
 #include <vector>
+
 #include "fenwick_tree.hpp"
+
+namespace cp {
 
 template <class T> struct fenwick_tree_2d {
 public:
@@ -80,3 +83,5 @@ private:
   int h, w;
   std::vector<fenwick_tree<T>> fw;
 };
+
+} // namespace cp

@@ -6,6 +6,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+using namespace cp;
 using mint = modint998244353;
 using M = Sum_Affine<mint>;
 using S = M::S;

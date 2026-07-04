@@ -3,6 +3,8 @@
 #include <cassert>
 #include <vector>
 
+namespace cp {
+
 template <class T> struct fenwick_tree {
 public:
   fenwick_tree() : n(0) {}
@@ -82,3 +84,5 @@ private:
   int n;
   std::vector<T> d;
 };
+
+} // namespace cp

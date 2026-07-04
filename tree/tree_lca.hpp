@@ -5,9 +5,10 @@
 #include <iterator>
 #include <utility>
 #include <vector>
+
 #include "hl_decomposition.hpp"
 
-#include <iostream>
+namespace cp {
 
 struct tree_lca {
 public:
@@ -86,3 +87,5 @@ private:
     }
   }
 };
+
+} // namespace cp

@@ -7,6 +7,7 @@
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
+using namespace cp;
 using mint = modint998244353;
 using S = typename Sum_Affine<mint>::S;
 using F = typename Sum_Affine<mint>::F;

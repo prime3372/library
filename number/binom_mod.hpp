@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <vector>
+
 #include "../util/type_traits.hpp"
 
 template <class mint> requires is_modint_v<mint>

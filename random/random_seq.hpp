@@ -5,7 +5,10 @@
 #include <concepts>
 #include <numeric>
 #include <vector>
+
 #include "rng.hpp"
+
+namespace cp {
 
 template <std::integral T> std::vector<T> random_seq(int n, T l, T r, bool sorted = false) {
   assert(0 <= n && (n == 0 || l < r));
@@ -33,3 +36,5 @@ std::vector<int> random_perm(int n) {
   std::shuffle(p.begin(), p.end(), mt32);
   return p;
 }
+
+} // namespace cp

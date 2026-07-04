@@ -5,6 +5,8 @@
 #include <numeric>
 #include <vector>
 
+namespace cp {
+
 struct perm {
 public:
   perm(int _n) : n(_n), p(_n) {
@@ -28,9 +30,9 @@ public:
     return r;
   }
   perm operator-() const {
-    perm r(n);
-    for (int i = 0; i < n; ++i) r[p[i]] = i;
-    return r;
+    perm q(n);
+    for (int i = 0; i < n; ++i) q[p[i]] = i;
+    return q;
   }
   friend perm operator-(const perm& q, const perm& p) {
     assert(p.n == q.n);
@@ -43,3 +45,5 @@ private:
   int n;
   std::vector<int> p;
 };
+
+} // namespace cp

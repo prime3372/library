@@ -2,7 +2,10 @@
 
 #include <cassert>
 #include <cstddef>
+
 #include "hash_map.hpp"
+
+namespace cp {
 
 template <class T> struct dynamic_fenwick_tree {
 public:
@@ -83,3 +86,5 @@ private:
   size_t n;
   hash_map<size_t, T> d;
 };
+
+} // namespace cp

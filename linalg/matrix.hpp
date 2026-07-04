@@ -1,19 +1,25 @@
 #pragma once
 
 #include <cassert>
+#include <type_traits>
 #include <vector>
-#include "../algebra/Add_Mul.hpp"
+
+#include "../algebra/add_mul.hpp"
 #include "../algebra/semiring.hpp"
 #include "../util/type_traits.hpp"
 
-template <class> struct matrix;
+namespace cp {
 
-template <semiring R> struct matrix<R> {
+template <class T>
+   requires (semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>)
+struct matrix {
+  using R = std::conditional_t<semiring<T>, T, add_mul<T>>;
   using S = typename R::S;
 
 public:
   struct row {
     friend struct matrix;
+
   public:
     S& operator[](int j) {
       assert(0 <= j && j < w);
@@ -23,14 +29,17 @@ public:
       assert(0 <= j && j < w);
       return d[j];
     }
+
     void swap(row& r) {
       assert(w == r.w);
       d.swap(r.d);
     }
+
     row& operator=(const row& r) {
       assert(w == r.w);
       d = r.d;
     }
+
   private:
     int w;
     std::vector<S> d;
@@ -102,7 +111,6 @@ private:
 };
 
 template <class T>
-  requires std::is_arithmetic_v<T> || is_modint_v<T>
-struct matrix<T> : matrix<Add_Mul<T>> {
-  using matrix<Add_Mul<T>>::matrix;
-};
+struct is_matrix<matrix<T>> : std::true_type {};
+
+} // namespace cp

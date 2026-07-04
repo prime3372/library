@@ -4,6 +4,8 @@
 #include <cassert>
 #include <vector>
 
+namespace cp {
+
 template <class T> struct coordinate_compression {
 public:
   coordinate_compression() {}
@@ -50,3 +52,5 @@ private:
   bool initialized = false;
   std::vector<T> d;
 };
+
+} // namespace cp

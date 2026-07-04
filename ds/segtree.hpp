@@ -5,7 +5,10 @@
 #include <cassert>
 #include <type_traits>
 #include <vector>
+
 #include "../algebra/monoid.hpp"
+
+namespace cp {
 
 template <monoid M> struct segtree {
   using S = typename M::S;
@@ -117,3 +120,5 @@ private:
     d[k] = M::op(d[2 * k], d[2 * k + 1]);
   }
 };
+
+} // namespace cp

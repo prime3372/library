@@ -2,7 +2,10 @@
 
 #include <cassert>
 #include <vector>
+
 #include "scc_graph.hpp"
+
+namespace cp {
 
 struct two_sat {
 public:
@@ -30,3 +33,5 @@ private:
   int n;
   scc_graph scc;
 };
+
+} // namespace cp

@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+namespace cp {
+
 struct dynamic_bitset {
 public:
   struct ref {
@@ -216,3 +218,5 @@ private:
 
   static constexpr unsigned long long mask(int pos) { return 1ULL << pos; }
 };
+
+} // namespace cp

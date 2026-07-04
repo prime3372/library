@@ -4,6 +4,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+using namespace cp;
 using ll = long long;
 
 int main() {

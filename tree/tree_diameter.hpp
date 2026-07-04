@@ -4,6 +4,8 @@
 #include <utility>
 #include <vector>
 
+namespace cp {
+
 template <class T> struct tree_diameter {
 public:
   explicit tree_diameter(int n) : n(n), g(n) {}
@@ -69,3 +71,5 @@ private:
     return res;
   };
 };
+
+} // namespace cp

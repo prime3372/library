@@ -4,6 +4,8 @@
 #include <cmath>
 #include <iostream>
 
+namespace cp {
+
 struct point {
 public:
   long double x, y;
@@ -89,3 +91,5 @@ public:
 private:
   static constexpr long double eps = 1e-9;
 };
+
+} // namespace cp

@@ -4,6 +4,8 @@
 #include <cassert>
 #include <vector>
 
+namespace cp {
+
 template <bool is_directed> struct cycle_detection {
 public:  
   cycle_detection() : cycle_detection(0) {}
@@ -55,3 +57,5 @@ private:
   };
   std::vector<std::vector<edge>> g;
 };
+
+} // namespace cp

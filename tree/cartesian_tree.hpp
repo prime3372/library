@@ -3,6 +3,8 @@
 #include <cassert>
 #include <vector>
 
+namespace cp {
+
 template <bool root_is_max> struct cartesian_tree {
   int root;
   std::vector<int> left, right, parent;
@@ -45,3 +47,5 @@ template <bool root_is_max> struct cartesian_tree {
     parent[root] = root;
   }
 };
+
+} // namespace cp

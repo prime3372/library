@@ -5,6 +5,8 @@
 #include <utility>
 #include <vector>
 
+namespace cp {
+
 struct rollback_union_find {
 public:
   rollback_union_find() : rollback_union_find(0) {}
@@ -77,3 +79,5 @@ private:
   std::vector<int> parent_or_size;
   std::vector<std::pair<int, int> > history;
 };
+
+} // namespace cp

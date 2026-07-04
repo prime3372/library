@@ -4,6 +4,7 @@
 #include <cassert>
 #include <utility>
 #include <vector>
+
 #include "factorize.hpp"
 
 std::vector<long long> enumerate_divisors(long long n) {

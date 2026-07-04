@@ -1,6 +1,7 @@
 #pragma once
 
 #include <concepts>
+
 #include "barrett.hpp"
 #include "pow_mod.hpp"
 

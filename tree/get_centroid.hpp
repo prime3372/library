@@ -3,6 +3,8 @@
 #include <cassert>
 #include <vector>
 
+namespace cp {
+
 int get_centroid(const std::vector<std::vector<int>>& g, int s = 0) {
   int n = int(g.size());
   assert(0 <= s && s < n);
@@ -24,3 +26,5 @@ int get_centroid(const std::vector<std::vector<int>>& g, int s = 0) {
   };
   return centroid(centroid, s, -1);
 }
+
+} // namespace cp

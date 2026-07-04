@@ -3,7 +3,10 @@
 #include <cassert>
 #include <cstddef>
 #include <vector>
+
 #include "dynamic_fenwick_tree.hpp"
+
+namespace cp {
 
 template <class T> struct dynamic_fenwick_tree_2d {
 public: 
@@ -82,3 +85,5 @@ private:
   size_t w;
   std::vector<dynamic_fenwick_tree<T>> fw;
 };
+
+} // namespace cp

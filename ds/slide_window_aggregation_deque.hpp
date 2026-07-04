@@ -4,7 +4,10 @@
 #include <cassert>
 #include <iterator>
 #include <vector>
+
 #include "../algebra/monoid.hpp"
+
+namespace cp {
 
 template <monoid M> struct slide_window_aggregation_deque {
   using S = typename M::S;
@@ -63,3 +66,5 @@ private:
     for (int i = s0; i < n; i++) push1(a[i]);
   }
 };
+
+} // namespace cp

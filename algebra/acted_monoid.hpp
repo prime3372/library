@@ -1,7 +1,10 @@
 #pragma once
 
 #include <concepts>
+
 #include "monoid.hpp"
+
+namespace cp {
 
 template <class M>
 concept acted_monoid = monoid<M> && requires {
@@ -11,3 +14,5 @@ concept acted_monoid = monoid<M> && requires {
   {M::composition(g, f)} -> std::same_as<typename M::F>;
   {M::id()} -> std::same_as<typename M::F>;
 };
+
+} // namespace cp

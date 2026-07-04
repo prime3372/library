@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
+using namespace cp;
 using ll = long long;
 #define check(expr) do { \
                       if (!(expr)) { \

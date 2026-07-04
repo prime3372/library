@@ -1,7 +1,10 @@
 #pragma once
 
 #include <vector>
+
 #include "subset_zeta_mobius.hpp"
+
+namespace cp {
 
 template <class T>
 std::vector<T> or_convolution(int n, const std::vector<T>& a, const std::vector<T>& b){
@@ -11,3 +14,5 @@ std::vector<T> or_convolution(int n, const std::vector<T>& a, const std::vector<
   for (int u = 0; u < (1 << n); u++) d[u] = za[u] * zb[u];
   return subset_mobius(n, d);
 }
+
+} // namespace cp

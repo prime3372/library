@@ -7,6 +7,8 @@
 #include <queue>
 #include <vector>
 
+namespace cp {
+
 template <std::integral Cap> struct max_flow {
 public:
   max_flow() : max_flow(0) {}
@@ -137,3 +139,5 @@ private:
   std::vector<std::pair<int, int>> pos;
   std::vector<std::vector<_edge>> g;
 };
+
+} // namespace cp

@@ -4,7 +4,10 @@
 #include <array>
 #include <random>
 #include <type_traits>
+
 #include "../random/rng.hpp"
+
+namespace cp {
 
 struct hash61 {
 public:
@@ -95,3 +98,5 @@ private:
     return r;
   }
 };
+
+} // namespace cp

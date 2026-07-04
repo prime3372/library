@@ -4,6 +4,8 @@
 #include <cassert>
 #include <vector>
 
+namespace cp {
+
 struct union_find {
 public:
   union_find() : n(0) {}
@@ -66,3 +68,5 @@ private:
     return parent_or_size[a] = _find(parent_or_size[a]);
   }
 };
+
+} // namespace cp

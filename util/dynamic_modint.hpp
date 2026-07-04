@@ -4,9 +4,12 @@
 #include <iostream>
 #include <utility>
 #include <type_traits>
+
 #include "../number/barrett.hpp"
 #include "../number/ext_gcd.hpp"
 #include "type_traits.hpp"
+
+namespace cp {
 
 template <int id> struct dynamic_modint {
   using mint = dynamic_modint;
@@ -122,3 +125,5 @@ template <int id>
 struct is_modint<dynamic_modint<id>> : std::true_type {};
 template <int id>
 struct is_dynamic_modint<dynamic_modint<id>> : std::true_type {};
+
+} // namespace cp

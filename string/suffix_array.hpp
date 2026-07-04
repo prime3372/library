@@ -4,6 +4,8 @@
 #include <utility>
 #include <vector>
 
+namespace cp {
+
 // https://cp-algorithms.com/string/suffix-array.html O(NlogN) approach
 template <class Str> std::vector<int> suffix_array(const Str& s) {
   int n = int(s.size()) + 1;
@@ -59,3 +61,5 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
   }
   return index;
 }
+
+} // namespace cp

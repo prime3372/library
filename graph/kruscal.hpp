@@ -3,7 +3,10 @@
 #include <cassert>
 #include <utility>
 #include <vector>
+
 #include "../ds/union_find.hpp"
+
+namespace cp {
 
 template <class T> struct kruscal {
   using edge = std::tuple<T, int, int, int>;
@@ -51,3 +54,5 @@ private:
     return cost;
   }
 };
+
+} // namespace cp

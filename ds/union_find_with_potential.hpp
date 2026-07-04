@@ -5,6 +5,8 @@
 #include <utility>
 #include <vector>
 
+namespace cp {
+
 template <class T> struct union_find_with_potential {
 public:
   union_find_with_potential() : n(0) {}
@@ -68,3 +70,5 @@ private:
     return parent_or_size[a] = r;
   }
 };
+
+} // namespace cp

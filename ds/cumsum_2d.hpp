@@ -3,6 +3,8 @@
 #include <cassert>
 #include <vector>
 
+namespace cp {
+
 template <class T> struct cumsum_2d {
 public:
   struct row {
@@ -83,3 +85,5 @@ private:
   std::vector<row> d;
   std::vector<std::vector<T>> cum;
 };
+
+} // namespace cp

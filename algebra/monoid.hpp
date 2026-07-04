@@ -2,6 +2,8 @@
 
 #include <concepts>
 
+namespace cp {
+
 template <class M>
 concept monoid = requires {
   typename M::S;
@@ -9,3 +11,5 @@ concept monoid = requires {
   {M::op(x, y)} -> std::same_as<typename M::S>;
   {M::e()} -> std::same_as<typename M::S>;
 };
+
+} // namespace cp

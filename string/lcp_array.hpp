@@ -1,7 +1,10 @@
 #pragma once
 
 #include <vector>
+
 #include "suffix_array.hpp"
+
+namespace cp {
 
 // Kasai's algorithm
 template <class Str> std::vector<int> lcp_array(const Str& s, std::vector<int> sa = {}) {
@@ -22,3 +25,5 @@ template <class Str> std::vector<int> lcp_array(const Str& s, std::vector<int> s
   }
   return lcp;
 }
+
+} // namespace cp

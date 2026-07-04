@@ -4,6 +4,8 @@
 #include <cassert>
 #include <vector>
 
+namespace cp {
+
 struct scc_graph {
 public:
   scc_graph() : scc_graph(0) {}
@@ -68,3 +70,5 @@ private:
   int n;
   std::vector<std::vector<int>> g;
 };
+
+} // namespace cp

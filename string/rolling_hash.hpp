@@ -2,7 +2,10 @@
 
 #include <cassert>
 #include <vector>
+
 #include "../util/hash61.hpp"
+
+namespace cp {
 
 template <class Str> struct rolling_hash {
 public:
@@ -35,3 +38,5 @@ private:
   std::vector<hash61> hs, pw;
   inline static hash61 basis = [](){ return hash61::get_base(); }();
 };
+
+} // namespace cp

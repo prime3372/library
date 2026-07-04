@@ -4,8 +4,11 @@
 #include <cassert>
 #include <utility>
 #include <vector>
+
 #include "rng.hpp"
 #include "random_seq.hpp"
+
+namespace cp {
 
 std::vector<std::pair<int, int>> random_tree(int n, int root = 0) {
   assert(1 <= n);
@@ -46,3 +49,5 @@ std::vector<std::pair<int, int>> random_forest(int n) {
   std::shuffle(edges.begin(), edges.end(), mt32);
   return edges;
 }
+
+} // namespace cp

@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 
+namespace cp {
+
 std::istream& operator>>(std::istream& is, __int128& val) {
   std::string s;
   if (is >> s) {
@@ -61,3 +63,5 @@ std::ostream& operator<<(std::ostream& os, unsigned __int128 val) {
   std::reverse(s.begin(), s.end());
   return os << s;
 }
+
+} // namespace cp

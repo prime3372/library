@@ -6,7 +6,10 @@
 #include <random>
 #include <utility>
 #include <vector>
+
 #include "../random/rng.hpp"
+
+namespace cp {
 
 template <class Key, class Val, class Hash = std::hash<Key>> struct hash_map {
 public:
@@ -84,3 +87,5 @@ private:
     used.swap(u);
   }
 };
+
+} // namespace cp

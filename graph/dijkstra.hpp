@@ -6,6 +6,8 @@
 #include <queue>
 #include <tuple>
 
+namespace cp {
+
 template <class T> struct dijkstra {
 public:
   dijkstra() : dijkstra(0) {}
@@ -68,3 +70,5 @@ private:
   std::vector<T> d;
   std::vector<int> prev_v, prev_e;
 };
+
+} // namespace cp

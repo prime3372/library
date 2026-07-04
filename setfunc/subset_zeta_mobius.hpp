@@ -3,6 +3,8 @@
 #include <cassert>
 #include <vector>
 
+namespace cp {
+
 template <class T> std::vector<T> subset_zeta(int n, std::vector<T> a) {
   assert(0 <= n);
   for (int i = 0; i < n; i++) {
@@ -28,3 +30,5 @@ template <class T> std::vector<T> subset_mobius(int n, std::vector<T> a) {
   }
   return a;
 }
+
+} // namespace cp

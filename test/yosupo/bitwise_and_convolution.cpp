@@ -5,6 +5,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+using namespace cp;
 using mint = modint998244353;
 
 int main() {

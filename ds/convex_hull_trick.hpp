@@ -3,6 +3,8 @@
 #include <cassert>
 #include <deque>
 
+namespace cp {
+
 template <class T, bool is_max = false> struct convex_hull_trick {
 public:
   convex_hull_trick() {}
@@ -46,3 +48,5 @@ private:
   };
   std::deque<line> ls;
 };
+
+} // namespace cp

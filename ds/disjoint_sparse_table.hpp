@@ -3,7 +3,10 @@
 #include <algorithm>
 #include <cassert>
 #include <vector>
+
 #include "../algebra/monoid.hpp"
+
+namespace cp {
 
 template <monoid M> struct disjoint_sparse_table {
   using S = typename M::S;
@@ -58,3 +61,5 @@ private:
   std::vector<std::vector<S>> table;
   std::vector<int> logs;
 };
+
+} // namespace cp
