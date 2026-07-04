@@ -18,7 +18,6 @@ struct polynomial<mint> {
 
   polynomial() {}
   polynomial(int n) : f(n) {}
-  polynomial(int n, const mint& val) : f(n, val) {}
   polynomial(const std::vector<mint>& v) : f(v) {}
 
   mint& operator[](int i) {
@@ -67,7 +66,6 @@ struct polynomial<mint> {
 
   int size() const { return int(f.size()); }
   void resize(int n) { f.resize(n); }
-  void resize(int n, const mint& val) { f.resize(n, val); }
   void swap(polynomial& other) { f.swap(other.f); }
 
 private: 
@@ -77,11 +75,11 @@ private:
 template <> struct polynomial<long long> {
   polynomial() {}
   polynomial(int n) : f(n) {}
-  polynomial(int n, long long val) : f(n, val) {}
   polynomial(const std::vector<long long>& v) : f(v) {}
 
   long long& operator[](int i) {
-    assert(0 <= i && i < size());
+    assert(0 <= i);
+    if (i >= size()) resize(i + 1);
     return f[i];
   }
   const long long& operator[](int i) const {
@@ -125,7 +123,6 @@ template <> struct polynomial<long long> {
 
   int size() const { return int(f.size()); }
   void resize(int n) { f.resize(n); }
-  void resize(int n, long long val) { f.resize(n, val); }
   void swap(polynomial& other) { f.swap(other.f); }
 
 private: 
