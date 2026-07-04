@@ -24,12 +24,12 @@ def main():
         print('FAIL too few arguments')
         sys.exit(2)
 
-    cmd_gen = sys.argv[1]
-    cmd_sol = sys.argv[2]
-    testnum = sys.argv[3]
+    cmd_sol = sys.argv[1]
+    cmd_gen = sys.argv[2]
+    test = sys.argv[3]
 
-    p_gen = subprocess.Popen(cmd_gen, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
     p_sol = subprocess.Popen(cmd_sol, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+    p_gen = subprocess.Popen(cmd_gen, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
 
     t_in = threading.Thread(target=pipe_stream, args=(p_gen.stdout, p_sol.stdin, 'in.txt'))
     t_out = threading.Thread(target=pipe_stream, args=(p_sol.stdout, p_gen.stdin, 'out.txt'))
@@ -44,7 +44,7 @@ def main():
         subprocess.run(['taskkill', '/F', '/T', '/PID', str(p_gen.pid)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         t_out.join()
         t_in.join()
-        print('Test', testnum, 'TLE')
+        print('Test', test, 'TLE')
         sys.exit(1)
 
     t_out.join()
@@ -59,20 +59,20 @@ def main():
     except subprocess.TimeoutExpired:
         subprocess.run(['taskkill', '/F', '/T', '/PID', str(p_gen.pid)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         t_in.join()
-        print('Test', testnum, 'FAIL the judge program timed out')
+        print('Test', test, 'FAIL the judge program timed out')
         sys.exit(2)
 
     t_in.join()
 
     if p_sol.returncode != 0:
-        print('Test', testnum, 'RE')
+        print('Test', test, 'RE')
         sys.exit(1)
 
     if p_gen.returncode != 0:
-        print('Test', testnum, 'WA')
+        print('Test', test, 'WA')
         sys.exit(1)
 
-    print('Test', testnum, 'AC')
+    print('Test', test, 'AC')
     sys.exit(0)
 
 if __name__ == '__main__':

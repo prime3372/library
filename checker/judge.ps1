@@ -3,6 +3,7 @@ $sol = $Args[0]
 $gen = $Args[1]
 $ans = $Args[2]
 $che = $Args[3]
+$inc = $Args[4]
 
 # constants
 $timelimit = 5000
@@ -11,10 +12,10 @@ $casesnum = 20
 
 do {
 
-  g++ $sol -O2 -o sol.exe -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
-  g++ $gen -O2 -o gen.exe -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
-  g++ $ans -O2 -o ans.exe -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
-  g++ $che -O2 -o che.exe -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
+  g++ $sol -I $inc -O2 -o sol.exe -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
+  g++ $gen -I $inc -O2 -o gen.exe -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
+  g++ $ans -I $inc -O2 -o ans.exe -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
+  g++ $che -I $inc -O2 -o che.exe -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
 
   Start-Sleep -Milliseconds 100 # Start-Sleep is necessary when compilation completes very quickly.
 
