@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 
-#include "../../algebra/Min.hpp"
+#include "../../algebra/min.hpp"
 #include "../../ds/disjoint_sparse_table.hpp"
 
 #include <bits/stdc++.h>
@@ -15,7 +15,7 @@ int main() {
   cin >> n >> q;
   vector<int> a(n);
   rep(i, 0, n) cin >> a[i];
-  disjoint_sparse_table<Min<int, int(1e9)>> dst(a);
+  disjoint_sparse_table<cp::min<int, int(1e9)>> dst(a);
   while (q--) {
     int l, r;
     cin >> l >> r;

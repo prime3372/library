@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_set_range_composite"
 
-#include "../../algebra/Affine.hpp"
-#include "../../algebra/Range_Assign.hpp"
+#include "../../algebra/affine.hpp"
+#include "../../algebra/assign.hpp"
 #include "../../ds/lazy_segtree.hpp"
 #include "../../util/static_modint.hpp"
 
@@ -10,8 +10,8 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using M = Range_Assign<Affine<mint>>;
-using Aff = Affine<mint>::S;
+using M = assign<affine<mint>>;
+using Aff = affine<mint>::S;
 using S = M::S;
 using F = M::F;
 

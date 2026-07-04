@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/deque_operate_all_composite"
 
-#include "../../algebra/Affine.hpp"
+#include "../../algebra/affine.hpp"
 #include "../../ds/slide_window_aggregation_deque.hpp"
 #include "../../util/static_modint.hpp"
 
@@ -8,7 +8,7 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using M = Affine<mint>;
+using M = affine<mint>;
 using S = typename M::S;
 
 int main() {

@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 
-#include "../../algebra/Sum_Affine.hpp"
+#include "../../algebra/sum_affine.hpp"
 #include "../../ds/lazy_segtree.hpp"
 #include "../../util/static_modint.hpp"
 
@@ -9,7 +9,7 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using M = Sum_Affine<mint>;
+using M = sum_affine<mint>;
 using S = M::S;
 
 int main() {

@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
 
-#include "../../algebra/Max.hpp"
+#include "../../algebra/max.hpp"
 #include "../../ds/segtree.hpp"
 
 #include <bits/stdc++.h>
@@ -13,7 +13,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  segtree<Max<bool, false>> seg(n);
+  segtree<cp::max<bool, false>> seg(n);
   rep(i, 0, n) {
     char ti;
     cin >> ti;

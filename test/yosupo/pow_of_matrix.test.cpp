@@ -16,7 +16,7 @@ int main() {
   int n;
   ll k;
   cin >> n >> k;
-  matrix<Add_Mul<mint>> a(n, n);
+  matrix<mint> a(n, n);
   rep(i, 0, n) rep(j, 0, n) cin >> a[i][j];
   auto b = a.pow(k);
   rep(i, 0, n) {

@@ -16,7 +16,7 @@ template <monoid M, typename M::S identity> struct assign {
   static constexpr S op(S x, S y) { return S{M::op(x.val, y.val), x.len + y.len}; }
   static constexpr S e() { return S(); }
 
-  using F = typename Assign<T>::F;
+  using F = typename assign<T>::F;
   static constexpr S mapping(F f, S x) { return f == identity ? x : S{pow(f.val, x.len), x.len}; }
   static constexpr F composition(F g, F f) { return g == identity ? f : g; }
   static constexpr F id() { return identity; }

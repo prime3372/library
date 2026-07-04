@@ -11,7 +11,7 @@ struct min_assign {
   static constexpr S op(S x, S y) { return std::min(x, y); }
   static constexpr S e() { return upper; }
 
-  using F = typename Assign<T>::F;
+  using F = typename assign<T>::F;
   static constexpr S mapping(F f, S x) { return f == identity ? x : f.val; }
   static constexpr F composition(F g, F f) { return g == identity ? f : g; }
   static constexpr F id() { return identity; }

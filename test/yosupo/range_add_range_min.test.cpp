@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_add_range_min"
 
-#include "../../algebra/Min_Add.hpp"
+#include "../../algebra/min_add.hpp"
 #include "../../ds/lazy_segtree.hpp"
 
 #include <bits/stdc++.h>
@@ -16,7 +16,7 @@ int main() {
   cin >> n >> q;
   vector<ll> a(n);
   rep(i, 0, n) cin >> a[i];
-  lazy_segtree<Min_Add<ll, ll(1e18)>> seg(a);
+  lazy_segtree<min_add<ll, ll(1e18)>> seg(a);
   while (q--) {
     bool t;
     cin >> t;

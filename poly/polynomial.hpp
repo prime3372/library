@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class> struct polynomial;
+template <class> struct polynomial {};
 
 template <class mint> requires is_static_modint_v<mint> && (is_prime(mint::mod()))
 struct polynomial<mint> {

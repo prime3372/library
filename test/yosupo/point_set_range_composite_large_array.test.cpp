@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite_large_array"
 
-#include "../../algebra/Affine.hpp"
+#include "../../algebra/affine.hpp"
 #include "../../ds/dynamic_segtree.hpp"
 #include "../../util/static_modint.hpp"
 
@@ -8,7 +8,7 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using M = Affine<mint>;
+using M = affine<mint>;
 using S = M::S;
 
 int main() {
