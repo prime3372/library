@@ -22,7 +22,8 @@ struct polynomial<mint> {
   polynomial(const std::vector<mint>& v) : f(v) {}
 
   mint& operator[](int i) {
-    assert(0 <= i && i < size());
+    assert(0 <= i);
+    if (i >= size()) resize(i + 1);
     return f[i];
   }
   const mint& operator[](int i) const {

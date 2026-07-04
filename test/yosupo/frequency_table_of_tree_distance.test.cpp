@@ -27,9 +27,6 @@ int main() {
     int k = int(cd.tree[p].size());
     vector<polynomial<ll>> f(k);
     rep(i, 0, k) {
-      f[i].resize(cd.size[cd.tree[p][i]] + 1);
-    }
-    rep(i, 0, k) {
       auto dfs = [&](auto self, int v, int d) -> void {
         f[i][d]++;
         for (int nv : cd.subtrees[dep][v]) {
