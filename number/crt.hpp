@@ -20,29 +20,30 @@ std::pair<long long, long long> crt(const std::vector<long long>& r, const std::
       std::swap(r0, r1);
       std::swap(m0, m1);
     }
-    // we want to find (m, r) s.t. z % m0 = r0 and z % m1 = r1 <=> z % m = r (0 <= r < m)
-    // let (x, y) satisfies z = m0*x + r0 = m1*y + r1 ...[1]
+    // we want to find (m, r) s.t. (z % m0 = r0 and z % m1 = r1) <=> z % m = r (0 <= r < m)
+    // let (x, y) satisfies z = m0*x + r0 = m1*y + r1
 
     if (m0 % m1 == 0) {
-      if (r0 % m1 != r1) return {0, 0}; // by[1]: m0 = 0 (mod m1) -> r0 = r1 (mod m1)
+      if (r0 % m1 != r1) return {0, 0}; // m0 = 0 (mod m1) -> r0 = r1 (mod m1)
       continue; // m = m0, r = r0
     }
 
     auto [g, im] = ext_gcd(m0, m1);
     if ((r1 - r0) % g) return {0, 0};
-    // by[1]: m0*x + r0 = m1*y + r1
-    //        -> m0*x - m1*y = r1 - r0
-    //        -> (r1 - r0) % g = 0
+    // m0*x + r0 = m1*y + r1
+    // m0*x - m1*y = r1 - r0
+    // (r1 - r0) % g = 0
 
     long long u1 = m1 / g;
     long long x0 = (r1 - r0) / g % u1 * im % u1;
     if (x0 < 0) x0 += u1;
     // m0*x + r0 = r1 (mod m1)
+    // -> m0*x = r1 - r0 (mod m1)
     // -> (m0/g)*x = (r1 - r0)/g (mod u1)
-    // -> x = (r1 - r0)/g*im (mod u1)
-    // so let x0 = (r1 - r0)/g*im % u1
+    // -> x = (r1 - r0)*im/g (mod u1)
+    // so let x0 = (r1 - r0)*im/g % u1
 
-    // z = m0*(x0 + u1*k) + r0 = m0*x0 + r0 + m0*u1*k
+    // z = m0*x + r0 = m0*(x0 + u1*k) + r0 = m0*x0 + r0 + m0*u1*k
     // -> z % (m0*u1) = m0*x0 + r0
     // note that:
     // 0 <= x0 < u1, 0 <= r0 < m0
