@@ -51,7 +51,7 @@ public:
   void set_default(const Val& v) { default_value = v; }
 
 private:
-  static Hash hash_func;
+  static Hash hasher;
   unsigned int cap, sz;
   std::vector<Key> keys;
   std::vector<Val> vals;
@@ -60,7 +60,7 @@ private:
   unsigned int shift;
   Val default_value;
 
-  unsigned int get_hash(Key k) const { return (hash_func(k) * r) >> shift; }
+  unsigned int get_hash(Key k) const { return (hasher(k) * r) >> shift; }
 
   unsigned int index(Key k) const {
     unsigned int hs = get_hash(k);
