@@ -17,6 +17,8 @@ using ll = long long;
                         } \
                       } while (false)
 
+#define cin
+
 ifstream f_in, f_out, f_ans;
 
 void check() {
