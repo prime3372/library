@@ -10,6 +10,7 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "debug.onTaskErrors": "showErrors",
   "editor.inlineSuggest.enabled": false,
+  "editor.insertSpaces": true,
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
     "textMateRules": [
@@ -22,6 +23,8 @@
     ],
   },
   "explorer.confirmDelete": false,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
   "git.confirmSync": false,
   "git.suggestSmartCommit": false,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
