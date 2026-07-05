@@ -37,14 +37,13 @@ inline std::string ordinal_suffix(int x) {
 }
 
 bool read_as_double(const std::string& t, double& n) {
+  size_t pos;
   try {
-    size_t pos;
     n = std::stod(t, &pos);
-    if (pos != t.size()) throw std::runtime_error("");
   } catch (...) {
     return false;
   }
-  return true;
+  return pos == t.size();
 }
 
 inline double double_delta(double expected, double result) {
