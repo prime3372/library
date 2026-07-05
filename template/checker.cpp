@@ -3,21 +3,33 @@
 using namespace std;
 using ll = long long;
 
-#define check(expr) do { \
-                      if (!(expr)) { \
-                        cout << "wrong answer " << #expr << " is not satisfied" << endl; \
-                        exit(1); \
-                      } \
-                    } while (false)
+#define must(expr)    do { \
+                        if (!(expr)) { \
+                          cout << "wrong answer " << #expr << " is not satisfied, line " << __LINE__ << endl; \
+                          exit(1); \
+                        } \
+                      } while (false)
+
+#define mustnt(expr)  do { \
+                        if (expr) { \
+                          cout << "wrong answer " << #expr << " is satisfied, line " << __LINE__ << endl; \
+                          exit(1); \
+                        } \
+                      } while (false)
+
+ifstream f_in, f_out, f_ans;
+
+void check() {
+
+}
 
 int main(int argc, char* argv[]) {
   assert(argc >= 4);
-  ifstream f_in(argv[1]);
-  ifstream f_out(argv[2]);
-  ifstream f_ans(argv[3]);
-
-  {
-    string dummy;
-    check(!(f_out >> dummy));
-  }
+  f_in.open(argv[1]);
+  f_out.open(argv[2]);
+  f_ans.open(argv[3]);
+  check();
+  string dummy;
+  mustnt(f_out >> dummy);
+  return 0;
 }

@@ -6,7 +6,7 @@
 
 namespace cp {
 
-template <bool upper> std::string random_str(int n) {
+template <bool upper = false> std::string random_str(int n) {
   std::string res(n, 0);
   for (int i = 0; i < n; i++) {
     res[i] = char((upper ? 'A' : 'a') + mt32() % 26);

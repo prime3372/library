@@ -5,7 +5,6 @@
 #include <utility>
 #include <vector>
 
-#include "random_tree.hpp"
 #include "rng.hpp"
 
 namespace cp {
@@ -14,7 +13,7 @@ template <bool directed = false, bool has_self_loops = false>
 std::vector<std::pair<int, int>> random_graph(int n, int m) {
   assert(0 <= n && 0 <= m);
 
-  if (n == 0 || !has_self_loops && n == 1) {
+  if (n == 0 || (!has_self_loops && n == 1)) {
     assert(m == 0);
     return {};
   }
