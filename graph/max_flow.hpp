@@ -67,21 +67,21 @@ public:
     assert(s != t);
 
     std::vector<int> level(n), iter(n);
-    std::queue<int> q;
+    std::queue<int> que;
 
     auto bfs = [&]() {
       std::fill(level.begin(), level.end(), -1);
       level[s] = 0;
-      while (!q.empty()) q.pop();
-      q.push(s);
-      while (!q.empty()) {
-        int v = q.front();
-        q.pop();
+      while (!que.empty()) que.pop();
+      que.push(s);
+      while (!que.empty()) {
+        int v = que.front();
+        que.pop();
         for (auto e : g[v]) {
           if (e.cap == 0 || level[e.to] != -1) continue;
           level[e.to] = level[v] + 1;
           if (e.to == t) return;
-          q.push(e.to);
+          que.push(e.to);
         }
       }
     };
@@ -114,15 +114,15 @@ public:
 
   std::vector<bool> min_cut(int s) {
     std::vector<bool> visited(n);
-    std::queue<int> q;
-    q.push(s);
+    std::queue<int> que;
+    que.push(s);
     visited[s] = true;
-    while (!q.empty()) {
-      int v = q.front();
-      q.pop();
+    while (!que.empty()) {
+      int v = que.front();
+      que.pop();
       for (auto e : g[v]) {
         if (e.cap && !visited[e.to]) {
-          q.push(e.to);
+          que.push(e.to);
           visited[e.to] = true;
         }
       }

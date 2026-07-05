@@ -15,18 +15,18 @@ std::vector<int> topological_sort(const std::vector<std::vector<int>>& g) {
       in_deg[v]++;
     }
   }
-  std::queue<int> q;
+  std::queue<int> que;
   std::vector<int> res;
   for (int i = 0; i < n; ++i) {
-    if (in_deg[i] == 0) q.push(i);
+    if (in_deg[i] == 0) que.push(i);
   }
-  while (!q.empty()) {
-    int u = q.front();
-    q.pop();
+  while (!que.empty()) {
+    int u = que.front();
+    que.pop();
     res.push_back(u);
     for (int v : g[u]) {
       in_deg[v]--;
-      if (in_deg[v] == 0) q.push(v);
+      if (in_deg[v] == 0) que.push(v);
     }
   }
   if (int(res.size()) != n) return {};
