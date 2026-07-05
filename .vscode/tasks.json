@@ -43,7 +43,7 @@
     {
       "label": "bundle current file",
       "type": "shell",
-      "command": "oj-bundle ${file} -I ${workspaceFolder} > submit.cpp; (Get-Content submit.cpp) -replace '^#line.+?$', '' -replace '(cerr|std::cerr).+?;', ';' | Set-Content submit.cpp; code submit.cpp",
+      "command": "(Get-Content ${file}) -replace '(cerr|std::cerr).+?;', ';' | Set-Content tmp.cpp; cmd /c 'oj-bundle tmp.cpp -I ${workspaceFolder} > submit.cpp'; code submit.cpp; Remove-Item tmp.cpp",
       "group": {
         "kind": "build",
         "isDefault": true

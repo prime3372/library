@@ -3,18 +3,27 @@
     {
       "name": "MinGW",
       "includePath": [
-        "${workspaceFolder}",
-        "C:/msys64/ucrt64/include"
+        "${workspaceFolder}/**"
       ],
       "defines": [
         "_DEBUG",
         "UNICODE",
-        "_UNICODE"
+        "_UNICODE",
+        "_GLIBCXX_DEBUG"
+      ],
+      "compilerArgs": [
+        "-D_GLIBCXX_DEBUG",
+        "-I",
+        "${workspaceFolder}",
+        "-O2",
+        "-std=c++23",
+        "-Wall",
+        "-Wextra"
       ],
       "windowsSdkVersion": "10.0.19041.0",
       "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
       "cppStandard": "c++23",
-      "intelliSenseMode": "gcc-x64"
+      "intelliSenseMode": "windows-gcc-x64"
     }
   ],
   "version": 4
