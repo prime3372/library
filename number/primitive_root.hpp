@@ -2,8 +2,8 @@
 
 #include <cassert>
 
-#include "factorize.hpp"
-#include "pow_mod.hpp"
+#include "number/factorize.hpp"
+#include "number/pow_mod.hpp"
 
 namespace cp {
 

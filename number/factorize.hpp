@@ -7,8 +7,8 @@
 #include <utility>
 #include <vector>
 
-#include "is_prime.hpp"
-#include "isqrt.hpp"
+#include "number/is_prime.hpp"
+#include "number/isqrt.hpp"
 #include "random/rng.hpp"
 
 namespace cp {

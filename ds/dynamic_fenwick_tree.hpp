@@ -3,7 +3,7 @@
 #include <cassert>
 #include <cstddef>
 
-#include "hash_map.hpp"
+#include "ds/hash_map.hpp"
 
 namespace cp {
 

@@ -2,7 +2,7 @@
   
 #include <string>
 
-#include "rng.hpp"
+#include "random/rng.hpp"
 
 namespace cp {
 

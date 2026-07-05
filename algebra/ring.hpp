@@ -2,7 +2,7 @@
 
 #include <concepts>
 
-#include "semiring.hpp"
+#include "algebra/semiring.hpp"
 
 namespace cp {
 

@@ -6,7 +6,7 @@
 #include <numeric>
 #include <vector>
 
-#include "rng.hpp"
+#include "random/rng.hpp"
 
 namespace cp {
 

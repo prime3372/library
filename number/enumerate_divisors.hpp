@@ -5,7 +5,7 @@
 #include <utility>
 #include <vector>
 
-#include "factorize.hpp"
+#include "number/factorize.hpp"
 
 namespace cp {
 

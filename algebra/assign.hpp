@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstddef>
-#include "monoid.hpp"
+#include "algebra/monoid.hpp"
 
 namespace cp {
 

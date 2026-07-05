@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "subset_zeta_mobius.hpp"
+#include "setfunc/subset_zeta_mobius.hpp"
 
 namespace cp {
 

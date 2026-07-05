@@ -2,8 +2,8 @@
 
 #include <concepts>
 
-#include "barrett.hpp"
-#include "pow_mod.hpp"
+#include "number/barrett.hpp"
+#include "number/pow_mod.hpp"
 
 namespace cp {
 

@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <type_traits>
 
-#include "affine.hpp"
+#include "algebra/affine.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {

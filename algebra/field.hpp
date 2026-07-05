@@ -2,7 +2,7 @@
 
 #include <concepts>
 
-#include "ring.hpp"
+#include "algebra/ring.hpp"
 
 namespace cp {
 

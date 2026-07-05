@@ -3,7 +3,7 @@
 #include <cassert>
 #include <vector>
 
-#include "scc_graph.hpp"
+#include "graph/scc_graph.hpp"
 
 namespace cp {
 

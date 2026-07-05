@@ -2,7 +2,7 @@
 
 #include <concepts>
 
-#include "monoid.hpp"
+#include "algebra/monoid.hpp"
 
 namespace cp {
 

@@ -4,7 +4,7 @@
 #include <utility>
 #include <vector>
 
-#include "max_flow.hpp"
+#include "graph/max_flow.hpp"
 
 namespace cp {
 

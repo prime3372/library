@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "suffix_array.hpp"
+#include "string/suffix_array.hpp"
 
 namespace cp {
 

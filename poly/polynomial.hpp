@@ -4,7 +4,7 @@
 #include <concepts>
 #include <vector>
 
-#include "convolution.hpp"
+#include "poly/convolution.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {

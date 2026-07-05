@@ -4,7 +4,7 @@
 #include <cstddef>
 #include <vector>
 
-#include "dynamic_fenwick_tree.hpp"
+#include "ds/dynamic_fenwick_tree.hpp"
 
 namespace cp {
 

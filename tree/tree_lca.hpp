@@ -6,7 +6,7 @@
 #include <utility>
 #include <vector>
 
-#include "hl_decomposition.hpp"
+#include "tree/hl_decomposition.hpp"
 
 namespace cp {
 

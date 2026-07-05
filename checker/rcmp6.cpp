@@ -1,4 +1,4 @@
-#include "checker.hpp"
+#include "checker/checker.hpp"
 #include <cmath>
 #include <iomanip>
 

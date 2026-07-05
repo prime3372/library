@@ -5,8 +5,8 @@
 #include <utility>
 #include <vector>
 
-#include "rng.hpp"
-#include "random_seq.hpp"
+#include "random/rng.hpp"
+#include "random/random_seq.hpp"
 
 namespace cp {
 

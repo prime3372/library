@@ -3,7 +3,7 @@
 #include <cassert>
 #include <vector>
 
-#include "fenwick_tree.hpp"
+#include "ds/fenwick_tree.hpp"
 
 namespace cp {
 

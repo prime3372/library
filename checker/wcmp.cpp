@@ -1,4 +1,4 @@
-#include "checker.hpp"
+#include "checker/checker.hpp"
 
 int main(int argc, char* argv[]) {
   open_files(argc, argv);

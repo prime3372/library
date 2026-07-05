@@ -5,7 +5,7 @@
 #include <utility>
 #include <type_traits>
 
-#include "barrett.hpp"
+#include "number/barrett.hpp"
 
 namespace cp {
 

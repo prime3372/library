@@ -5,7 +5,7 @@
 
 #include "ds/hash_map.hpp"
 #include "util/hash_combine.hpp"
-#include "rng.hpp"
+#include "random/rng.hpp"
 
 namespace cp {
 

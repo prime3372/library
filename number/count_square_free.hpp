@@ -3,8 +3,8 @@
 #include <cassert>
 #include <vector>
 
-#include "isqrt.hpp"
-#include "mobius.hpp"
+#include "number/isqrt.hpp"
+#include "number/mobius.hpp"
 
 namespace cp {
 
