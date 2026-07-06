@@ -13,14 +13,11 @@
         "${workspaceFolder}",
         "-O2",
         "-o",
-        "${workspaceFolder}\\debug.exe",
+        "debug.exe",
         "-std=c++23",
         "-Wall",
         "-Wextra"
       ],
-      "options": {
-        "cwd": "${fileDirname}"
-      },
       "problemMatcher": [
         "$gcc"
       ],
@@ -36,7 +33,7 @@
     {
       "label": "g++ cleanup",
       "type": "shell",
-      "command": "if (Test-Path \"${workspaceFolder}\\debug.exe\") { Remove-Item \"${workspaceFolder}\\debug.exe\" }",
+      "command": "if (Test-Path \"debug.exe\") { Remove-Item \"debug.exe\" }",
       "problemMatcher": [],
       "presentation": {
         "panel": "shared",
@@ -46,9 +43,9 @@
       }
     },
     {
-      "label": "bundle current file",
+      "label": "copy bundled current file",
       "type": "shell",
-      "command": "(Get-Content ${file}) -replace \"(cerr|std::cerr).+?;\", \";\" | Set-Content tmp.cpp; cmd /c \"oj-bundle tmp.cpp -I ${workspaceFolder} > submit.cpp \"; code submit.cpp; Remove-Item tmp.cpp",
+      "command": "(Get-Content ${file}) -replace '(cerr|std::cerr).+?;', ';' | Set-Content tmp.cpp; cmd /c \"oj-bundle tmp.cpp -I ${workspaceFolder} > submit.cpp \"; Get-Content \"submit.cpp\" | Set-Clipboard; Remove-Item tmp.cpp -ErrorAction SilentlyContinue; Remove-Item submit.cpp -ErrorAction SilentlyContinue",
       "group": {
         "kind": "build",
         "isDefault": true
