@@ -28,10 +28,12 @@ public:
     return vals[i] = default_value;
   }
 
-  Val operator[](Key k) const {
+  Val get(Key k) const {
     unsigned int i = index(k);
     return used[i] ? vals[i] : default_value;
   }
+
+  Val operator[](Key k) const { return get(k); }
 
   bool count(Key k) const {
     unsigned int i = index(k);
