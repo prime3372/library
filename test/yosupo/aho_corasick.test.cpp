@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  aho_corasick<false> aho;
+  aho_corasick aho;
   std::vector<int> v(n);
   rep(i, 0, n) {
     string s;

@@ -4,15 +4,15 @@
 #include <cassert>
 #include <cctype>
 #include <string>
+#include <utility>
 #include <vector>
+
+#include "ds/hash_map.hpp"
 
 namespace cp {
 
-template <bool is_upper> struct trie_tree {
+struct trie_tree {
 public:
-  static constexpr int sigma = 26;
-  static constexpr char base = is_upper ? 'A' : 'a';
-
   trie_tree() : trie_tree(std::vector<std::string>()) {}
   explicit trie_tree(std::vector<std::string> v) {
     extend();
@@ -21,16 +21,14 @@ public:
 
   int insert(const std::string& s) {
     int v = 0;
-    for (int i = 0; i < int(s.size()); i++) {
-      assert(is_upper ? std::isupper(s[i]) : std::islower(s[i]));
+    for (char c : s) {
       mid[v]++;
-      int k = s[i] - base;
-      if (ch[v][k] == -1) {
-        ch[v][k] = n;
+      if (!to[v].count(c)) {
+        to[v][c] = n;
         extend();
         par.back() = v;
       }
-      v = ch[v][k];
+      v = to[v][c];
     }
     end[v]++;
     return v;
@@ -38,19 +36,20 @@ public:
 
   std::vector<int> search(const std::string& s, int from = 0) const {
     assert(0 <= from && from < n);
-    std::vector<int> res(s.size() + 1);
-    res[0] = from;
-    for (int i = 0; i < int(s.size()); i++) {
-      int k = s[i] - base;
-      res[i + 1] = ch[res[i]][s[i]];
-      if (res[i + 1] == -1) break;
+    std::vector<int> res(1, from);
+    for (char c : s) {
+      if (!to[res.back()].count(c)) {
+        res.push_back(-1);
+        break;
+      }
+      res.push_back(to[res.back()][c]);
     }
     return res;
   }
 
-  const std::array<int, sigma>& operator[](int v) const {
+  const hash_map<char, int>& operator[](int v) const {
     assert(0 <= v && v < n);
-    return ch[v];
+    return to[v];
   }
   int parent(int v) const {
     assert(0 <= v && v < n);
@@ -74,13 +73,13 @@ public:
 
 private:
   int n = 0;
-  std::vector<std::array<int, sigma>> ch;
+  std::vector<hash_map<char, int>> to;
   std::vector<int> par, mid, end;
 
   void extend() {
     n++;
-    ch.emplace_back();
-    ch.back().fill(-1);
+    to.emplace_back();
+    to.back().set_default(-1);
     par.push_back(-1);
     mid.push_back(0);
     end.push_back(0);
