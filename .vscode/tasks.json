@@ -45,7 +45,7 @@
     {
       "label": "copy bundled current file",
       "type": "shell",
-      "command": "(Get-Content ${file}) -replace '(cerr|std::cerr).+?;', ';' | Set-Content tmp.cpp; cmd /c \"oj-bundle tmp.cpp -I ${workspaceFolder} > submit.cpp \"; Get-Content \"submit.cpp\" | Set-Clipboard; Remove-Item tmp.cpp -ErrorAction SilentlyContinue; Remove-Item submit.cpp -ErrorAction SilentlyContinue",
+      "command": "cmd /c \"oj-bundle ${file} -I ${workspaceFolder} > submit.cpp \"; (Get-Content submit.cpp) -replace '(cerr|std::cerr).+?;', ';' | Set-Content submit.cpp; Get-Content submit.cpp | Set-Clipboard; Remove-Item submit.cpp -ErrorAction SilentlyContinue",
       "group": {
         "kind": "build",
         "isDefault": true
