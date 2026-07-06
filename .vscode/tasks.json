@@ -30,15 +30,8 @@
       "presentation": {
         "panel": "shared",
         "clear": true,
-      }
-    },
-    {
-      "label": "g++ delete .exe file",
-      "type": "shell",
-      "command": "Remove-Item ${fileDirname}/${fileBasenameNoExtension}.exe",
-      "presentation": {
         "close": true
-      },
+      }
     },
     {
       "label": "bundle current file",

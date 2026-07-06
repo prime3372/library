@@ -25,7 +25,6 @@
         }
       ],
       "preLaunchTask": "g++ build",
-      "postDebugTask": "g++ delete .exe file"
     }
   ]
 }
