@@ -18,12 +18,11 @@ public:
     g[from].push_back(to);
   }
 
-  int group_num = 0;
   std::vector<int> id;
   std::vector<std::vector<int>> scc;
 
   strongly_connected_components& build() {
-    int now_ord = 0;
+    int now_ord = 0, group_num = 0;
     std::vector<int> visited, low(n), ord(n, -1);
     visited.reserve(n);
     id.assign(n, -1);
