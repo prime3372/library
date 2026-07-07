@@ -58,7 +58,7 @@ public:
 
     std::vector<int> counts(group_num);
     for (int x : id) counts[x]++;
-    scc.assign(n, std::vector<int>());
+    scc.assign(group_num, std::vector<int>());
     for (int i = 0; i < group_num; i++) {
       scc[i].reserve(counts[i]);
     }
