@@ -8,6 +8,7 @@
 namespace cp {
 
 template <monoid_with_mapping M> struct rerooting_dp {
+private:
   using S = typename M::S;
   using F = typename M::F;
 
