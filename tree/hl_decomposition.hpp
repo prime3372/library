@@ -53,9 +53,12 @@ public:
     return *this;
   }
 
-private:
-  int n, k = 0;
+protected:
+  int n;
   std::vector<std::vector<int>> g;
+
+private:
+  int k = 0;
   std::vector<int> size;
 };
 
