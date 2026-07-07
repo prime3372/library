@@ -12,7 +12,7 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
   int n = int(s.size()) + 1;
 
   std::vector<int> rank(n);
-  int num_of_ranks;
+  int rank_num;
   {
     Str t = s;
     std::sort(t.begin(), t.end());
@@ -21,7 +21,7 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
       rank[i] = int(std::lower_bound(t.begin(), last, s[i]) - t.begin()) + 1;
     }
     rank[n - 1] = 0;
-    num_of_ranks = int(t.size());
+    rank_num = int(t.size());
   }
 
   std::vector<int> index(n), cnt(n, 0);
@@ -33,9 +33,9 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
   for (int step = 0; (1 << step) < n; step++) {
     int w = 1 << step;
 
-    std::fill(cnt.begin(), cnt.begin() + num_of_ranks, 0);
+    std::fill(cnt.begin(), cnt.begin() + rank_num, 0);
     for (int i = 0; i < n; i++) cnt[rank[i]]++;
-    for (int i = 1; i < num_of_ranks; i++) cnt[i] += cnt[i - 1];
+    for (int i = 1; i < rank_num; i++) cnt[i] += cnt[i - 1];
 
     for (int i = n - 1; i >= 0; i--) {
       int j = index[i] - w;
@@ -43,13 +43,13 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
       nindex[--cnt[rank[j]]] = j; // order[index[i] - w] = --cnt[rank[index[i] - w]]
     }
 
-    num_of_ranks = 1;
+    rank_num = 1;
     nrank[nindex[0]] = 0;
     for (int i = 1; i < n; i++) {
       std::pair<int, int> cur =  {rank[nindex[i]],     rank[(nindex[i] + w) % n]    };
       std::pair<int, int> prev = {rank[nindex[i - 1]], rank[(nindex[i - 1] + w) % n]};
-      if (cur != prev) num_of_ranks++;
-      nrank[nindex[i]] = num_of_ranks - 1;
+      if (cur != prev) rank_num++;
+      nrank[nindex[i]] = rank_num - 1;
     }
 
     index.swap(nindex);
