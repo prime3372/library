@@ -6,10 +6,11 @@
 
 namespace cp {
 
-struct scc_graph {
+// Tarjan's strongly connected components algorithm
+struct strongly_connected_components {
 public:
-  scc_graph() : scc_graph(0) {}
-  explicit scc_graph(int _n) : n(_n), g(_n) {}
+  strongly_connected_components() : strongly_connected_components(0) {}
+  explicit strongly_connected_components(int _n) : n(_n), g(_n) {}
 
   void add_edge(int from, int to) {
     assert(0 <= from && from < n);
@@ -17,10 +18,15 @@ public:
     g[from].push_back(to);
   }
 
-  std::pair<int, std::vector<int>> scc_ids() {
-    int now_ord = 0, group_num = 0;
-    std::vector<int> visited, low(n), ord(n, -1), id(n);
+  int group_num = 0;
+  std::vector<int> id;
+  std::vector<std::vector<int>> scc;
+
+  strongly_connected_components& build() {
+    int now_ord = 0;
+    std::vector<int> visited, low(n), ord(n, -1);
     visited.reserve(n);
+    id.resize(n);
     auto dfs = [&](auto self, int v) -> void {
       low[v] = ord[v] = now_ord++;
       visited.push_back(v);
@@ -49,21 +55,18 @@ public:
     for (int& x : id) {
       x = group_num - 1 - x;
     }
-    return {group_num, id};
-  }
 
-  std::vector<std::vector<int>> scc() {
-    auto [group_num, id] = scc_ids();
     std::vector<int> counts(group_num);
     for (int x : id) counts[x]++;
-    std::vector<std::vector<int>> groups(group_num);
+    scc.resize(group_num);
     for (int i = 0; i < group_num; i++) {
-      groups[i].reserve(counts[i]);
+      scc[i].reserve(counts[i]);
     }
     for (int i = 0; i < n; i++) {
-      groups[id[i]].push_back(i);
+      scc[id[i]].push_back(i);
     }
-    return groups;
+
+    return *this;
   }
 
 private:

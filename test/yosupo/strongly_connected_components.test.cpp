@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
 
-#include "graph/scc_graph.hpp"
+#include "graph/strongly_connected_components.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
@@ -12,13 +12,13 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  scc_graph g(n);
+  strongly_connected_components g(n);
   rep(i, 0, m) {
     int a, b;
     cin >> a >> b;
     g.add_edge(a, b);
   }
-  auto scc = g.scc();
+  auto scc = g.build().scc;
   cout << scc.size() << "\n";
   for (auto vs : scc) {
     cout << vs.size() << " ";

@@ -3,7 +3,7 @@
 #include <cassert>
 #include <vector>
 
-#include "graph/scc_graph.hpp"
+#include "graph/strongly_connected_components.hpp"
 
 namespace cp {
 
@@ -21,7 +21,7 @@ public:
 
   std::vector<bool> solve() {
     std::vector<bool> ans(n);
-    auto id = scc.scc_ids().second;
+    auto id = scc.build().id;
     for (int i = 0; i < n; i++) {
       if (id[2 * i] == id[2 * i + 1]) return {};
       ans[i] = id[2 * i] < id[2 * i + 1];
@@ -31,7 +31,7 @@ public:
 
 private:
   int n;
-  scc_graph scc;
+  strongly_connected_components scc;
 };
 
 } // namespace cp
