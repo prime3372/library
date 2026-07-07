@@ -13,28 +13,28 @@ $casesnum = 20
 do {
   Write-Host "compiling..."
 
-  g++ $sol -flto -I $inc -O2 -march=native -o sol.exe -std=c++23 -Wall -Wextra
+  g++ $sol -I $inc -O2 -o sol.exe -std=c++23 -Wall -Wextra
   if ($LASTEXITCODE -ne 0) {
     Write-Host "CE" -ForegroundColor Cyan
     code $sol
     break
   }
 
-  g++ $gen -flto -I $inc -O2 -march=native -o gen.exe -std=c++23 -Wall -Wextra
+  g++ $gen -I $inc -O2 -o gen.exe -std=c++23 -Wall -Wextra
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $gen -ForegroundColor Blue
     code $gen
     break
   }
   
-  g++ $ans -flto -I $inc -O2 -march=native -o ans.exe -std=c++23 -Wall -Wextra
+  g++ $ans -I $inc -O2 -o ans.exe -std=c++23 -Wall -Wextra
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $ans -ForegroundColor Blue
     code $ans
     break
   }
   
-  g++ $che -flto -I $inc -O2 -march=native -o che.exe -std=c++23 -Wall -Wextra
+  g++ $che -I $inc -O2 -o che.exe -std=c++23 -Wall -Wextra
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $che -ForegroundColor Blue
     code $che
