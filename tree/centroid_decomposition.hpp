@@ -9,8 +9,7 @@ struct centroid_decomposition {
 public:
   centroid_decomposition() : centroid_decomposition(0) {}
   explicit centroid_decomposition(int _n)
-  : parent(_n, -1), size(_n, -1), depth(_n, -1), tree(_n),
-    n(_n), g(_n), removed(_n) {}
+  : parent(_n, -1), size(_n, -1), depth(_n, -1), tree(_n), n(_n), g(_n), removed(_n) {}
 
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
