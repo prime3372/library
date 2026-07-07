@@ -54,5 +54,5 @@
 "test/yosupo/vertex_add_range_contour_sum_on_tree.test.cpp": "2026-07-05 18:46:49 +0900",
 "test/yosupo/vertex_add_subtree_sum.test.cpp": "2026-07-04 23:49:03 +0900",
 "test/yosupo/vertex_set_path_composite.test.cpp": "2026-07-05 18:46:49 +0900",
-"test/yosupo/z_algorithm.test.cpp": "2026-07-04 23:49:03 +0900"
+"test/yosupo/z_algorithm.test.cpp": "2026-07-07 18:00:48 +0900"
 }
