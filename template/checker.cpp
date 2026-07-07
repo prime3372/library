@@ -3,19 +3,19 @@
 using namespace std;
 using ll = long long;
 
-#define must(expr)    do { \
-                        if (!(expr)) { \
-                          cout << "wrong answer " << #expr << " is not satisfied, line " << __LINE__ << endl; \
-                          exit(1); \
-                        } \
-                      } while (false)
+#define must(expr) do { \
+                     if (!(expr)) { \
+                       cout << "wrong answer " << #expr << " is not satisfied, line " << __LINE__ << endl; \
+                       exit(1); \
+                     } \
+                   } while (false)
 
-#define mustnt(expr)  do { \
-                        if (expr) { \
-                          cout << "wrong answer " << #expr << " is satisfied, line " << __LINE__ << endl; \
-                          exit(1); \
-                        } \
-                      } while (false)
+#define mustnt(expr) do { \
+                      if (expr) { \
+                         cout << "wrong answer " << #expr << " is satisfied, line " << __LINE__ << endl; \
+                         exit(1); \
+                       } \
+                     } while (false)
 
 #define cin
 
