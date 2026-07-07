@@ -9,6 +9,7 @@
 namespace cp {
 
 template <monoid M> struct disjoint_sparse_table {
+private:
   using S = typename M::S;
 
 public:

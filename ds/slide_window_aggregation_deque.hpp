@@ -10,6 +10,7 @@
 namespace cp {
 
 template <monoid M> struct slide_window_aggregation_deque {
+private:
   using S = typename M::S;
 
 public:

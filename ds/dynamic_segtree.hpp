@@ -12,6 +12,7 @@
 namespace cp {
 
 template <monoid M> struct dynamic_segtree {
+private:
   using S = typename M::S;
 
 public:

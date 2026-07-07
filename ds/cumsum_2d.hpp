@@ -8,8 +8,11 @@ namespace cp {
 template <class T> struct cumsum_2d {
 public:
   struct row {
-    friend struct cumsum_2d;
   public:
+    row() : row(0) {}
+    explicit row(int _w) : w(_w), d(_w) {}
+    explicit row(int _w, T x) : w(_w), d(_w, x) {}
+
     T& operator[](int j) {
       assert(0 <= j && j < w);
       return d[j];
@@ -18,11 +21,10 @@ public:
       assert(0 <= j && j < w);
       return d[j];
     }
+
   private:
     int w;
     std::vector<T> d;
-    row(int _w) : w(_w), d(_w) {}
-    row(int _w, T x) : w(_w), d(_w, x) {}
   };
 
   cumsum_2d() : h(0), w(0) {}

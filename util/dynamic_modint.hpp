@@ -12,6 +12,7 @@
 namespace cp {
 
 template <int id> struct dynamic_modint {
+private:
   using mint = dynamic_modint;
 
 public:

@@ -9,6 +9,7 @@
 namespace cp {
 
 template <class T> struct kruscal {
+private:
   using edge = std::tuple<T, int, int, int>;
 
 public:

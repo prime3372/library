@@ -11,9 +11,8 @@
 namespace cp {
 
 struct dynamic_bitset {
-public:
+private:
   struct ref {
-    friend struct dynamic_bitset;
   public:
     operator bool() const { return (*d & mask(pos)) != 0; }
     ref& flip() {
@@ -26,15 +25,16 @@ public:
       return *this;
     }
     ref& operator=(const ref& other) { return *this = (bool)other; }
-  private:
-    unsigned long long* d;
-    int pos;
     ref(dynamic_bitset& b, int i) {
       d = b.a.data() + i / 64;
       pos = i % 64;
     }
+  private:
+    unsigned long long* d;
+    int pos;
   };
 
+public:
   dynamic_bitset() : dynamic_bitset(0) {}
   explicit dynamic_bitset(int _n) : n(_n), a((_n + 63) / 64, 0) {}
   explicit dynamic_bitset(int _n, bool b) : n(_n), a((_n + 63) / 64, b ? (unsigned long long)(-1) : 0) {

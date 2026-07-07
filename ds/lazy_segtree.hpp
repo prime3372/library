@@ -10,6 +10,7 @@
 namespace cp {
 
 template <acted_monoid M> struct lazy_segtree {
+private:
   using S = typename M::S;
   using F = typename M::F;
 

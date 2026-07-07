@@ -11,6 +11,7 @@
 namespace cp {
 
 template <monoid M> struct segtree {
+private:
   using S = typename M::S;
 
 public:

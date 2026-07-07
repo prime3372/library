@@ -13,14 +13,17 @@ namespace cp {
 template <class T>
    requires semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>
 struct matrix {
+private:
   using R = std::conditional_t<semiring<T>, T, add_mul<T>>;
   using S = typename R::S;
 
 public:
   struct row {
-    friend struct matrix;
-
   public:
+    row() : row(0) {}    
+    explicit row(int _w) : w(_w), d(_w, R::zero()) {}
+    explicit row(int _w, S x) : w(_w), d(_w, x) {}
+
     S& operator[](int j) {
       assert(0 <= j && j < w);
       return d[j];
@@ -41,7 +44,6 @@ public:
   private:
     int w;
     std::vector<S> d;
-    row(int _w) : w(_w), d(_w, R::zero()) {}
   };
 
   matrix() : h(0), w(0) {}

@@ -13,9 +13,11 @@ namespace cp {
 template <class T, int h, int w>
   requires (semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>)
 struct matrix_array {
+private:
   using R = std::conditional_t<semiring<T>, T, add_mul<T>>;
   using S = typename R::S;
 
+public:
   matrix_array() : d{} {
     d.fill(std::array<S, w>{});
   }
