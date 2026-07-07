@@ -38,8 +38,7 @@
       "presentation": {
         "panel": "shared",
         "clear": true,
-        "close": true,
-        "reveal": "never"
+        "close": true
       }
     },
     {
@@ -78,7 +77,8 @@
       },
       "presentation": {
         "panel": "shared",
-        "clear": true
+        "clear": true,
+        "close": true
       },
       "problemMatcher": []
     },

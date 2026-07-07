@@ -13,6 +13,7 @@
       ],
       "compilerArgs": [
         "-D_GLIBCXX_DEBUG",
+        "-g",
         "-I",
         "${workspaceFolder}",
         "-O2",
