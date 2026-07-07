@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
 
-#include "poly/polynomial.hpp"
+#include "poly/formal_power_series.hpp"
 #include "tree/centroid_decomposition.hpp"
 
 #include <bits/stdc++.h>
@@ -21,11 +21,11 @@ int main() {
     cd.add_edge(a, b);
   }
   cd.build();
-  polynomial<ll> freq(n);
+  formal_power_series<ll> freq(n);
   rep(p, 0, n) {
     int dep = cd.depth[p];
     int k = int(cd.tree[p].size());
-    vector<polynomial<ll>> f(k);
+    vector<formal_power_series<ll>> f(k);
     rep(i, 0, k) {
       auto dfs = [&](auto self, int v, int d) -> void {
         f[i][d]++;
@@ -35,7 +35,7 @@ int main() {
       };
       dfs(dfs, cd.subtrees[dep][p][i], 1);
     }
-    polynomial<ll> fsum, f2sum;
+    formal_power_series<ll> fsum, f2sum;
     rep(i, 0, k) fsum += f[i];
     rep(i, 0, k) f2sum += f[i] * f[i];
     freq += (fsum * fsum - f2sum) / 2 + fsum;
