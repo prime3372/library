@@ -106,9 +106,9 @@ template <int char_size, auto is_upper = false>
 struct trie_tree : public internal::trie_tree_base<char_size,
                                                    trie_tree<char_size, is_upper>> {
   static_assert(std::is_convertible_v<decltype(is_upper), bool>);
+public:
   using internal::trie_tree_base<char_size,
                                  trie_tree<char_size, is_upper>>::trie_tree_base;
-public:
   static constexpr int index(char c) {
     return is_upper ? internal::upper_offset(c) : internal::lower_offset(c);
   }
@@ -118,9 +118,9 @@ template <int char_size, auto offset>
   requires std::is_convertible_v<decltype(offset), std::function<int(char)>>
 struct trie_tree<char_size, offset> : internal::trie_tree_base<char_size,
                                                                trie_tree<char_size, offset>> {
+public:
   using internal::trie_tree_base<char_size,
                                  trie_tree<char_size, offset>>::trie_tree_base;
-public:
   static constexpr int index(char c) {
     return offset(c);
   }
