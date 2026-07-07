@@ -27,7 +27,7 @@ public:
         int l = lnk[v];
         while (l != -1) {
           if ((*this)[l].count(c)) {
-            lnk[u] = (*this)[l].get(c);
+            lnk[u] = (*this)[l][c];
             break;
           }
           l = lnk[l];
@@ -42,7 +42,7 @@ public:
     std::vector<int> res(1, from);
     for (char c : s) {
       if (!(*this)[res.back()].count(c)) {
-        res.push_back((*this)[res.back()].get(c));
+        res.push_back((*this)[res.back()][c]);
       } else {
         res.push_back(lnk[res.back()]);
       }

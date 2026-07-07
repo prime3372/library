@@ -13,7 +13,7 @@ namespace cp {
 
 template <class Key, class Val, class Hash = std::hash<Key>> struct hash_map {
 public:
-  hash_map() : cap(8), sz(0), keys(cap), vals(cap), used(cap), r(mt64()), shift(61), default_value() {}
+  hash_map() : cap(8), sz(0), shift(61), r(mt64()), keys(cap), vals(cap), used(cap), default_value() {}
 
   Val& operator[](Key k) {
     unsigned int i = index(k);
@@ -28,12 +28,22 @@ public:
     return vals[i] = default_value;
   }
 
-  Val get(Key k) const {
+  const Val& operator[](Key k) const {
     unsigned int i = index(k);
     return used[i] ? vals[i] : default_value;
   }
 
-  Val operator[](Key k) const { return get(k); }
+  Val& at(Key k) {
+    unsigned int i = index(k);
+    assert(used[i]);
+    return vals[i];
+  }
+
+  const Val& at(Key k) const {
+    unsigned int i = index(k);
+    assert(used[i]);
+    return vals[i];
+  }
 
   bool count(Key k) const {
     unsigned int i = index(k);
@@ -54,12 +64,11 @@ public:
 
 private:
   static Hash hasher;
-  unsigned int cap, sz;
+  unsigned int cap, sz, shift;
+  unsigned long long r;
   std::vector<Key> keys;
   std::vector<Val> vals;
   std::vector<bool> used;
-  unsigned long long r;
-  unsigned int shift;
   Val default_value;
 
   unsigned int get_hash(Key k) const { return (hasher(k) * r) >> shift; }
