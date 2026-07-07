@@ -12,14 +12,14 @@ do {
   g++ $sol -I $inc -O2 -o sol.exe -std=c++23 -Wall -Wextra
   if ($LASTEXITCODE -ne 0) {
     Write-Host "Compile Error" -ForegroundColor Cyan
-    code $sol
+    if (Test-Path $sol) { code $sol }
     break
   }
 
   g++ $gen -I $inc -O2 -o gen.exe -std=c++23 -Wall -Wextra
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $gen -ForegroundColor Blue
-    code $gen
+    if (Test-Path $gen) { code $gen }
     break
   }
   
