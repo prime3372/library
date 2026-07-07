@@ -11,7 +11,7 @@
 namespace cp {
 
 template <class T>
-   requires (semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>)
+   requires semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>
 struct matrix {
   using R = std::conditional_t<semiring<T>, T, add_mul<T>>;
   using S = typename R::S;
