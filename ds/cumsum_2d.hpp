@@ -21,7 +21,7 @@ public:
   private:
     int w;
     std::vector<T> d;
-    row(int _w) : w(_w) {}
+    row(int _w) : w(_w), d(_w) {}
     row(int _w, T x) : w(_w), d(_w, x) {}
   };
 
@@ -36,8 +36,8 @@ public:
         cum[i + 1][j + 1] = cum[i + 1][j] + d[i][j];
       }
     }
-    for (int j = 0; j < w; i++) {
-      for (int i = 0; i < h; j++) {
+    for (int j = 0; j < w; j++) {
+      for (int i = 0; i < h; i++) {
         cum[i + 1][j + 1] += cum[i][j + 1];
       }
     }
@@ -45,10 +45,10 @@ public:
   }
 
   row& operator[](int i) {
-    asssert(0 <= i && i < h);
+    assert(0 <= i && i < h);
     return d[i];
   }
-  const row& operator[](int i) {
+  const row& operator[](int i) const {
     assert(0 <= i && i < h);
     return d[i];
   }
