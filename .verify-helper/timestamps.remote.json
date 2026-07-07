@@ -1,6 +1,6 @@
 {
 "test/aoj/DSL_2_B_range_sum_query.test.cpp": "2026-07-04 23:49:03 +0900",
-"test/yosupo/2sat.test.cpp": "2026-07-08 02:31:57 +0900",
+"test/yosupo/2sat.test.cpp": "2026-07-08 02:54:18 +0900",
 "test/yosupo/aho_corasick.test.cpp": "2026-07-07 18:07:00 +0900",
 "test/yosupo/associative_array.test.cpp": "2026-07-07 12:32:32 +0900",
 "test/yosupo/binomial_coefficient_prime_mod.test.cpp": "2026-07-05 18:46:49 +0900",
@@ -43,6 +43,7 @@
 "test/yosupo/sort_points_by_argument.test.cpp": "2026-07-04 23:49:03 +0900",
 "test/yosupo/sqrt_mod.test.cpp": "2026-07-05 18:46:49 +0900",
 "test/yosupo/static_rmq.test.cpp": "2026-07-08 02:31:37 +0900",
+"test/yosupo/strongly_connected_components.test.cpp": "2026-07-08 02:54:18 +0900",
 "test/yosupo/suffix_array.test.cpp": "2026-07-08 01:34:34 +0900",
 "test/yosupo/sum_of_floor_of_linear.test.cpp": "2026-07-04 23:49:03 +0900",
 "test/yosupo/tree_diameter.test.cpp": "2026-07-04 23:49:03 +0900",
