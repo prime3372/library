@@ -26,7 +26,7 @@ public:
     int now_ord = 0;
     std::vector<int> visited, low(n), ord(n, -1);
     visited.reserve(n);
-    id.resize(n);
+    id.assign(n, -1);
     auto dfs = [&](auto self, int v) -> void {
       low[v] = ord[v] = now_ord++;
       visited.push_back(v);
@@ -58,7 +58,7 @@ public:
 
     std::vector<int> counts(group_num);
     for (int x : id) counts[x]++;
-    scc.resize(group_num);
+    scc.assign(n, std::vector<int>());
     for (int i = 0; i < group_num; i++) {
       scc[i].reserve(counts[i]);
     }

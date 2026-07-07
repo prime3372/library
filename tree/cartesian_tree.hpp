@@ -15,7 +15,8 @@ template <bool root_is_min> struct cartesian_tree {
   template <class T> void build(const std::vector<T>& a) {
     assert(!a.empty());
     int n = int(a.size());
-    left = right = std::vector<int>(n, -1);
+    left.assign(n, -1);
+    right.assign(n, -1);
     std::vector<int> st;
     for (int i = 0; i < n; i++) {
       int k = -1;
