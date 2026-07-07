@@ -8,8 +8,19 @@ $casesnum = 20
 
 do {
 
-  g++ $sol -I $inc -O2 -o sol.exe -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
-  g++ $gen -I $inc -O2 -o gen.exe -std=c++23 -Wall -Wextra; if ($LASTEXITCODE -ne 0) { break }
+  g++ $sol -flto -I $inc -march=native -O2 -o sol.exe -std=c++23 -Wall -Wextra
+  if ($LASTEXITCODE -ne 0) {
+    Write-Host "CE" -ForegroundColor Cyan
+    code $sol
+    break
+  }
+
+  g++ $gen -flto -I $inc -march=native -O2 -o gen.exe -std=c++23 -Wall -Wextra
+  if ($LASTEXITCODE -ne 0) {
+    Write-Host "FAIL" "Compile Error" $gen -ForegroundColor Blue
+    code $gen
+    break
+  }
 
   for ($i = 1; $i -le $casesnum; $i++) {
     py checker/interactor.py "sol.exe" "gen.exe" $i

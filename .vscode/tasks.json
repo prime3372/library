@@ -58,6 +58,31 @@
       "problemMatcher": []
     },
     {
+      "label": "setup custom test",
+      "type": "shell",
+      "command": "Get-Content \"template\\template.cpp\" | Set-Content \"gen.cpp\"; code gen.cpp",
+      "presentation": {
+        "panel": "shared",
+        "clear": true,
+        "close": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "run custom test",
+      "type": "shell",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\custom_test.ps1 ${file} gen.cpp ${workspaceFolder}",
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      },
+      "presentation": {
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "setup random test",
       "type": "shell",
       "command": "Get-Content \"template\\template.cpp\" | Set-Content \"gen.cpp\"; Get-Content \"template\\template.cpp\" | Set-Content \"ans.cpp\"; Get-Content \"template\\checker.cpp\" | Set-Content \"che.cpp\"; code gen.cpp ans.cpp che.cpp",
