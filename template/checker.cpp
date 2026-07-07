@@ -1,4 +1,3 @@
-#pragma GCC optimize("O3")
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
