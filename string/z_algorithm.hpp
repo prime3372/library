@@ -8,7 +8,6 @@ template <class Str> std::vector<int> z_algorithm(const Str& s) {
   int n = int(s.size());
   if (n == 0) return {};
   std::vector<int> z(n);
-  z[0] = n;
   for (int i = 1, j = 0; i < n; i++) {
     // let s[l, r) denotes s[l,l+1,...,r-1], then
     // s[j, j+z[j]) = s[0, z[j])
@@ -17,6 +16,7 @@ template <class Str> std::vector<int> z_algorithm(const Str& s) {
     while (i + z[i] < n && s[z[i]] == s[i + z[i]]) z[i]++;
     if (j + z[j] < i + z[i]) j = i;
   }
+  z[0] = n;
   return z;
 }
 
