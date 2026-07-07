@@ -16,28 +16,28 @@ do {
   g++ $sol -I $inc -O2 -o sol.exe -std=c++23 -Wall -Wextra
   if ($LASTEXITCODE -ne 0) {
     Write-Host "CE" -ForegroundColor Cyan
-    code $sol
+    if (Test-Path $sol) { code $sol }
     break
   }
 
   g++ $gen -I $inc -O2 -o gen.exe -std=c++23 -Wall -Wextra
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $gen -ForegroundColor Blue
-    code $gen
+    if (Test-Path $gen) { code $gen }
     break
   }
   
   g++ $ans -I $inc -O2 -o ans.exe -std=c++23 -Wall -Wextra
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $ans -ForegroundColor Blue
-    code $ans
+    if (Test-Path $ans) { code $ans }
     break
   }
   
   g++ $che -I $inc -O2 -o che.exe -std=c++23 -Wall -Wextra
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $che -ForegroundColor Blue
-    code $che
+    if (Test-Path $ans) { code $che }
     break
   }
 
