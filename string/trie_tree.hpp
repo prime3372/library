@@ -105,7 +105,7 @@ constexpr int upper_offset(char c) {
 template <int char_size, auto is_upper = false>
 struct trie_tree : public internal::trie_tree_base<char_size,
                                                    trie_tree<char_size, is_upper>> {
-  static_assert(std::is_same_v<decltype(is_upper), bool>);
+  static_assert(std::is_convertible_v<decltype(is_upper), bool>);
   using internal::trie_tree_base<char_size,
                                  trie_tree<char_size, is_upper>>::trie_tree_base;
 public:

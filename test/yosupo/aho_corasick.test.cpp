@@ -13,7 +13,7 @@ int main() {
   int n;
   cin >> n;
   aho_corasick<26> aho;
-  std::vector<int> v(n);
+  vector<int> v(n);
   rep(i, 0, n) {
     string s;
     cin >> s;
