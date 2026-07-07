@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cassert>
-#include <cctype>
 #include <queue>
 #include <string>
 #include <vector>
@@ -10,10 +9,12 @@
 
 namespace cp {
 
-struct aho_corasick : public trie_tree {
+template <int char_size, auto arg = false>
+struct aho_corasick : public trie_tree<char_size, arg> {
 public:
-  using trie_tree::trie_tree;
-  using trie_tree::size;
+  using trie_tree<char_size, arg>::trie_tree;
+  using trie_tree<char_size, arg>::index;
+  using trie_tree<char_size, arg>::size;
 
   void build() {
     lnk.resize(size());
@@ -23,11 +24,12 @@ public:
     while (!que.empty()) {
       int v = que.front();
       que.pop();
-      for (auto [c, u] : (*this)[v].enumerate()) {
-        int l = lnk[v];
+      for (int i = 0; i < char_size; i++) {
+        int u = (*this)[v][i], l = lnk[v];
+        if (u == -1) continue;
         while (l != -1) {
-          if ((*this)[l].count(c)) {
-            lnk[u] = (*this)[l][c];
+          if ((*this)[l][i] != -1) {
+            lnk[u] = (*this)[l][i];
             break;
           }
           l = lnk[l];
@@ -41,10 +43,11 @@ public:
     assert(0 <= from && from < size());
     std::vector<int> res(1, from);
     for (char c : s) {
-      if (!(*this)[res.back()].count(c)) {
-        res.push_back((*this)[res.back()][c]);
+      int v = res.back(), k = index(c);
+      if ((*this)[v][k] != -1) {
+        res.push_back((*this)[v][k]);
       } else {
-        res.push_back(lnk[res.back()]);
+        res.push_back(lnk[v]);
       }
     }
     return res;
