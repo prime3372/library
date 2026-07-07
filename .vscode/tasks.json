@@ -8,7 +8,7 @@
       "args": [
         "${file}",
         "-D_GLIBCXX_DEBUG",
-        "-g", 
+        "-g",
         "-I",
         "${workspaceFolder}",
         "-O2",
@@ -22,7 +22,7 @@
         "$gcc"
       ],
       "group": {
-        "kind": "build",
+        "kind": "build"
       },
       "presentation": {
         "panel": "shared",
