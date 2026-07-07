@@ -87,15 +87,15 @@ public:
     }
 
     {
-      int _l = l, _r = r;
+      int l2 = l, r2 = r;
       while (l < r) {
         if (l & 1) all_apply(l++, f);
         if (r & 1) all_apply(--r, f);
         l >>= 1;
         r >>= 1;
       }
-      l = _l;
-      r = _r;
+      l = l2;
+      r = r2;
     }
 
     for (int i = 1; i <= log; i++) {

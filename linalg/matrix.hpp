@@ -29,12 +29,10 @@ public:
       assert(0 <= j && j < w);
       return d[j];
     }
-
     void swap(row& r) {
       assert(w == r.w);
       d.swap(r.d);
     }
-
     row& operator=(const row& r) {
       assert(w == r.w);
       d = r.d;
