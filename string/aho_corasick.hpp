@@ -13,11 +13,9 @@ template <int char_size, auto arg = false>
 struct aho_corasick : public trie_tree<char_size, arg> {
 public:
   using trie_tree<char_size, arg>::trie_tree;
-  using trie_tree<char_size, arg>::index;
-  using trie_tree<char_size, arg>::size;
 
   void build() {
-    lnk.resize(size());
+    lnk.resize(this->size());
     lnk[0] = -1;
     std::queue<int> que;
     que.push(0);
@@ -40,10 +38,10 @@ public:
   }
 
   std::vector<int> move(const std::string& s, int from = 0) const {
-    assert(0 <= from && from < size());
+    assert(0 <= from && from < this->size());
     std::vector<int> res(1, from);
     for (char c : s) {
-      int v = res.back(), k = index(c);
+      int v = res.back(), k = this->index(c);
       if ((*this)[v][k] != -1) {
         res.push_back((*this)[v][k]);
       } else {
@@ -54,7 +52,7 @@ public:
   }
 
   int link(int v) const {
-    assert(0 <= v && v < size());
+    assert(0 <= v && v < this->size());
     return lnk[v];
   }
 
