@@ -31,6 +31,7 @@ template <std::floating_point T> std::vector<T> random_seq(int n, T l, T r, bool
 }
 
 std::vector<int> random_perm(int n) {
+  assert(0 <= n);
   std::vector<int> p(n);
   std::iota(p.begin(), p.end(), 0);
   std::shuffle(p.begin(), p.end(), mt32);

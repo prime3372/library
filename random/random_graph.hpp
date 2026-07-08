@@ -45,7 +45,7 @@ std::vector<std::pair<int, int>> random_graph(int n, int m) {
   return edges;
 }
 
-int erase_multiple_edges(std::vector<std::pair<int, int>>& edges) {
+int remove_multiple_edges(std::vector<std::pair<int, int>>& edges) {
   std::sort(edges.begin(), edges.end());
   edges.erase(std::unique(edges.begin(), edges.end()), edges.end());
   std::shuffle(edges.begin(), edges.end(), mt32);
