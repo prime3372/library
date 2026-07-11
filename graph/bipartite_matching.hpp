@@ -11,9 +11,10 @@ namespace cp {
 struct bipartite_matching {
 public: 
   bipartite_matching() : bipartite_matching(0, 0) {}
-  explicit bipartite_matching(int _l, int _r) : l(_l), r(_r), initialized(false), mf(_l + _r + 2), colored(_l + _r) {
-    for (int i = 0; i < l; i++) mf.add_edge(l + r, i);
-    for (int i = 0; i < r; i++) mf.add_edge(l + i, l + r + 1);
+  explicit bipartite_matching(int _l, int _r) : l(_l), r(_r), s(l + r), t(l + r + 1),
+                                                initialized(false), mf(l + r + 2), colored(l + r) {
+    for (int i = 0; i < l; i++) mf.add_edge(s, i);
+    for (int i = 0; i < r; i++) mf.add_edge(l + i, t);
   }
 
   void add_edge(int a, int b) {
@@ -23,7 +24,7 @@ public:
   }
 
   int init() {
-    int f = mf.flow(l + r, l + r + 1);
+    int f = mf.flow(s, t);
     paint();
     initialized = true;
     return f;
@@ -37,7 +38,7 @@ public:
     if (!initialized) init();
     std::vector<edge> res;
     for (auto e : mf.edges()) {
-      if (e.from == l + r || e.to == l + r + 1) continue;
+      if (e.from == s || e.to == t) continue;
       if (e.flow) res.push_back(edge{e.from, e.to - l});
     }
     return res;
@@ -69,12 +70,12 @@ public:
 
   std::vector<edge> min_edge_cover() {
     auto es = max_matching();
-    std::vector<bool> used(l + r);
+    std::vector<bool> used(s);
     for (auto e : es) {
       used[e.from] = used[l + e.to] = true;
     }
     for (auto e : mf.edges()) {
-      if (e.flow || e.from == l + r || e.to == l + r + 1) continue;
+      if (e.flow || e.from == s || e.to == t) continue;
       if (used[e.from] == false || used[e.to] == false) {
         es.push_back(edge{e.from, e.to - l});
         used[e.from] = used[e.to] = true;
@@ -84,17 +85,17 @@ public:
   }
 
 private:
-  int l, r;
+  int l, r, s, t;
   bool initialized;
   max_flow<int> mf;
   std::vector<bool> colored;
 
   void paint() {
-    std::vector<std::vector<int>> g(l + r);
+    std::vector<std::vector<int>> g(s);
     std::vector<bool> start(l, true);
 
     for (auto e : mf.edges()) {
-      if (e.from == l + r || e.to == l + r + 1) continue;
+      if (e.from == s || e.to == t) continue;
       if (e.flow) {
         g[e.to].push_back(e.from);
         start[e.from] = false;
