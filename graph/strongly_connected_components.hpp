@@ -25,7 +25,7 @@ public:
     int now_ord = 0, group_num = 0;
     std::vector<int> visited, low(n), ord(n, -1);
     visited.reserve(n);
-    std::fill(id.begin(), id.end(), -1);
+    id.assign(n, -1);
     auto dfs = [&](auto self, int v) -> void {
       low[v] = ord[v] = now_ord++;
       visited.push_back(v);
