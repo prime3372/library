@@ -30,7 +30,6 @@ public:
     v = id[v];
     while (k > v - head[v]) {
       k -= v - head[v] + 1;
-      if (v == next[v]) return vertex[v];
       v = next[v];
     }
     return vertex[v - k];
