@@ -9,14 +9,14 @@ $timeout = 30000
 do {
   Write-Host "compiling..."
 
-  g++ $sol -fconstexpr-depth=1024 -fconstexpr-loop-limit=524288 -fconstexpr-ops-limit=2097152 -fdiagnostics-color=always -I $inc -O2 -o sol.exe -std=c++23 -Wall -Wextra
+  g++ $sol -o sol.exe -I $inc -O2 -Wall -Wextra -fconstexpr-depth=1024 -fconstexpr-loop-limit=524288 -fconstexpr-ops-limit=2097152 -fdiagnostics-color=always -std=c++23
   if ($LASTEXITCODE -ne 0) {
     Write-Host "Compile Error" -ForegroundColor Cyan
     if (Test-Path $sol) { code $sol }
     break
   }
 
-  g++ $gen -fconstexpr-depth=1024 -fconstexpr-loop-limit=524288 -fconstexpr-ops-limit=2097152 -fdiagnostics-color=always -I $inc -O2 -o gen.exe -std=c++23 -Wall -Wextra
+  g++ $gen -o gen.exe -I $inc -O2 -Wall -Wextra -fconstexpr-depth=1024 -fconstexpr-loop-limit=524288 -fconstexpr-ops-limit=2097152 -fdiagnostics-color=always -std=c++23
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $gen -ForegroundColor Blue
     if (Test-Path $gen) { code $gen }
