@@ -24,7 +24,7 @@ public:
   centroid_decomposition& build() {
     centroid.reserve(n);
     parent.resize(n, -1);
-    size.resize(n, -1);
+    size.resize(n);
     tree.resize(n);
     root = build(0);
     return *this;
