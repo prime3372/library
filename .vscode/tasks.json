@@ -8,7 +8,7 @@
       "args": [
         "${file}",
         "-o",
-        "${workspaceFolder}\\debug.exe",
+        "debug.exe",
         "-D_GLIBCXX_DEBUG",
         "-I",
         "${workspaceFolder}",
@@ -22,9 +22,6 @@
         "-g",
         "-std=c++23"
       ],
-      "options": {
-        "cwd": "${fileDirname}"
-      },
       "problemMatcher": [
         "$gcc"
       ],
@@ -41,7 +38,7 @@
     {
       "type": "shell",
       "label": "remove output file",
-      "command": "if (Test-Path \"${workspaceFolder}\\debug.exe\") { Remove-Item \"${workspaceFolder}\\debug.exe\" }",
+      "command": "if (Test-Path \"debug.exe\") { Remove-Item \"debug.exe\" }",
       "problemMatcher": [],
       "presentation": {
         "panel": "shared",
