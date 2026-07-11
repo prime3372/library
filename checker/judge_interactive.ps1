@@ -8,14 +8,14 @@ $casesnum = 20
 
 do {
 
-  g++ $sol -fdiagnostics-color=always -I $inc -O2 -o sol.exe -std=c++23 -Wall -Wextra
+  g++ $sol -fconstexpr-depth=1024 -fconstexpr-loop-limit=524288 -fconstexpr-ops-limit=2097152 -fdiagnostics-color=always -I $inc -O2 -o sol.exe -std=c++23 -Wall -Wextra
   if ($LASTEXITCODE -ne 0) {
     Write-Host "CE" -ForegroundColor Cyan
     if (Test-Path $sol) { code $sol }
     break
   }
 
-  g++ $gen -fdiagnostics-color=always -I $inc -O2 -o gen.exe -std=c++23 -Wall -Wextra
+  g++ $gen -fconstexpr-depth=1024 -fconstexpr-loop-limit=524288 -fconstexpr-ops-limit=2097152 -fdiagnostics-color=always -I $inc -O2 -o gen.exe -std=c++23 -Wall -Wextra
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $gen -ForegroundColor Blue
     if (Test-Path $gen) { code $gen }
