@@ -2,7 +2,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "(gdb) launch",
+      "name": "launch (lldb)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}\\debug.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "g++.exe build active file",
+      "postDebugTask": "remove output file",
+      "terminal": "integrated"
+    },
+    {
+      "name": "launch (gdb)",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}\\debug.exe",
@@ -19,8 +30,7 @@
           "text": "-enable-pretty-printing",
           "ignoreFailures": true
         }
-      ],
-      "stopAtEntry": true
-    }
+      ]
+    },
   ]
 }
