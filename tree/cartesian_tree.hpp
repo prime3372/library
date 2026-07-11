@@ -21,11 +21,8 @@ template <bool root_is_min> struct cartesian_tree {
     for (int i = 0; i < n; i++) {
       int k = -1;
       while (!st.empty()) {
-        if constexpr (root_is_min) {
-          if (a[st.back()] <= a[i]) break;
-        } else {
-          if (a[st.back()] >= a[i]) break;
-        }
+        if (root_is_min && a[st.back()] <= a[i]) break;
+        if (!root_is_min && a[st.back()] >= a[i]) break;
         int j = st.back();
         st.pop_back();
         right[j] = k;
