@@ -67,12 +67,12 @@ public:
   }
 
 private:
-  using hl_decomposition::n;
-  using hl_decomposition::g;
   using hl_decomposition::id;
   using hl_decomposition::vertex;
   using hl_decomposition::head;
   using hl_decomposition::next;
+  using hl_decomposition::n;
+  using hl_decomposition::g;
   bool initialized = false;
   std::vector<int> dep;
 
