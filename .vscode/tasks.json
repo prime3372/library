@@ -44,7 +44,7 @@
       }
     },
     {
-      "label": "copy bundled current file",
+      "label": "bundle and copy current file",
       "type": "shell",
       "command": "cmd /c \"oj-bundle ${file} -I ${workspaceFolder} > submit.cpp \"; (Get-Content submit.cpp) -replace '(cerr|std::cerr).+?;', ';' | Set-Content submit.cpp; Get-Content submit.cpp | Set-Clipboard; Remove-Item submit.cpp -ErrorAction SilentlyContinue",
       "group": {
