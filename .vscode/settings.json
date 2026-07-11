@@ -5,7 +5,7 @@
   "C_Cpp.intelliSenseEngine": "default",
   "chat.disableAIFeatures": true,
   "cph.general.defaultLanguage": "cpp",
-  "cph.general.defaultLanguageTemplateFileLocation": "${workspaceFolder}\\template\\template.cpp",
+  "cph.general.defaultLanguageTemplateFileLocation": "C:\\cp\\library\\template\\template.cpp",
   "cph.general.firstTime": false,
   "cph.general.hideStderrorWhenCompiledOK": false,
   "cph.general.ignoreSTDERROR": true,
