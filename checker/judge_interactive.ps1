@@ -8,6 +8,8 @@ $casesnum = 20
 
 do {
 
+  Write-Host "compiling..."
+
   g++ $sol -o sol.exe -I $inc -O2 -Wall -Wextra -fconstexpr-depth=1024 -fconstexpr-loop-limit=524288 -fconstexpr-ops-limit=2097152 -fdiagnostics-color=always -std=c++23
   if ($LASTEXITCODE -ne 0) {
     Write-Host "CE" -ForegroundColor Cyan
@@ -21,6 +23,8 @@ do {
     if (Test-Path $gen) { code $gen }
     break
   }
+
+  Write-Host "compilation finished"
 
   for ($i = 1; $i -le $casesnum; $i++) {
     py checker/interactor.py "sol.exe" "gen.exe" $i

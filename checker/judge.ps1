@@ -41,7 +41,7 @@ do {
     break
   }
 
-  Write-Host "compilation is finished"
+  Write-Host "compilation finished"
 
   Start-Sleep -Milliseconds 100 # Start-Sleep is necessary when compilation completes very quickly.
 
