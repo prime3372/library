@@ -73,6 +73,7 @@ private:
   using hl_decomposition::next;
   using hl_decomposition::n;
   using hl_decomposition::g;
+  
   bool initialized = false;
   std::vector<int> dep;
 
