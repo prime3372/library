@@ -18,7 +18,7 @@ void check() {
 
 }
 
-int main(int argc, char* argv[]) {
+int main(int, char* argv[]) {
   f_in.open(argv[1]);
   f_out.open(argv[2]);
   f_ans.open(argv[3]);
