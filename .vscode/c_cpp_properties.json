@@ -2,28 +2,19 @@
   "configurations": [
     {
       "name": "MinGW",
-      "includePath": [
-        "${workspaceFolder}\\**"
-      ],
-      "defines": [
-        "_DEBUG",
-        "UNICODE",
-        "_UNICODE",
-        "_GLIBCXX_DEBUG"
-      ],
       "compilerArgs": [
         "-D_GLIBCXX_DEBUG",
+        "-I",
+        "${workspaceFolder}",
+        "-O2",
+        "-Wall",
+        "-Wextra",
         "-fconstexpr-depth=1024",
         "-fconstexpr-loop-limit=524288",
         "-fconstexpr-ops-limit=2097152",
         "-fdiagnostics-color=always",
         "-g",
-        "-I",
-        "${workspaceFolder}",
-        "-O2",
-        "-std=c++23",
-        "-Wall",
-        "-Wextra"
+        "-std=c++23"
       ],
       "windowsSdkVersion": "10.0.19041.0",
       "compilerPath": "C:\\msys64\\ucrt64\\bin\\g++.exe",

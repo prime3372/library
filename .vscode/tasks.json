@@ -2,46 +2,50 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "g++ build",
       "type": "cppbuild",
-      "command": "g++",
+      "label": "g++.exe build active file",
+      "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
       "args": [
         "${file}",
+        "-o",
+        "${workspaceFolder}\\debug.exe",
         "-D_GLIBCXX_DEBUG",
+        "-I",
+        "${workspaceFolder}",
+        "-O2",
+        "-Wall",
+        "-Wextra",
         "-fconstexpr-depth=1024",
         "-fconstexpr-loop-limit=524288",
         "-fconstexpr-ops-limit=2097152",
         "-fdiagnostics-color=always",
         "-g",
-        "-I",
-        "${workspaceFolder}",
-        "-O2",
-        "-o",
-        "debug.exe",
-        "-std=c++23",
-        "-Wall",
-        "-Wextra"
+        "-std=c++23"
       ],
+      "options": {
+        "cwd": "${fileDirname}"
+      },
       "problemMatcher": [
         "$gcc"
       ],
       "group": {
-        "kind": "build"
+        "kind": "build",
+        "isDefault": false
       },
       "presentation": {
         "panel": "shared",
         "clear": true,
-        "close": true
+        "close": true,
       }
     },
     {
-      "label": "g++ cleanup",
       "type": "shell",
-      "command": "if (Test-Path \"debug.exe\") { Remove-Item \"debug.exe\" }",
+      "label": "remove output file",
+      "command": "if (Test-Path \"${workspaceFolder}\\debug.exe\") { Remove-Item \"${workspaceFolder}\\debug.exe\" }",
       "problemMatcher": [],
       "presentation": {
         "panel": "shared",
-        "clear": true,
+        "reveal": "never",
         "close": true
       }
     },
@@ -61,8 +65,8 @@
       "problemMatcher": []
     },
     {
-      "label": "setup custom test",
       "type": "shell",
+      "label": "setup custom test",
       "command": "Get-Content \"template\\template.cpp\" | Set-Content \"gen.cpp\"; code gen.cpp",
       "presentation": {
         "panel": "shared",
@@ -72,8 +76,8 @@
       "problemMatcher": []
     },
     {
-      "label": "run custom test",
       "type": "shell",
+      "label": "run custom test",
       "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\custom_test.ps1 ${file} gen.cpp ${workspaceFolder}",
       "group": {
         "kind": "test",
@@ -81,13 +85,13 @@
       },
       "presentation": {
         "panel": "shared",
-        "clear": true,
+        "clear": true
       },
       "problemMatcher": []
     },
     {
-      "label": "setup random test",
       "type": "shell",
+      "label": "setup random test",
       "command": "Get-Content \"template\\template.cpp\" | Set-Content \"gen.cpp\"; Get-Content \"template\\template.cpp\" | Set-Content \"ans.cpp\"; Get-Content \"template\\checker.cpp\" | Set-Content \"che.cpp\"; code gen.cpp ans.cpp che.cpp",
       "presentation": {
         "panel": "shared",
@@ -97,8 +101,8 @@
       "problemMatcher": []
     },
     {
-      "label": "run random test (wcmp)",
       "type": "shell",
+      "label": "run random test (wcmp)",
       "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp checker\\wcmp.cpp ${workspaceFolder}",
       "group": {
         "kind": "test",
@@ -111,8 +115,8 @@
       "problemMatcher": []
     },
     {
-      "label": "run random test (rcmp6)",
       "type": "shell",
+      "label": "run random test (rcmp6)",
       "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp checker\\rcmp6.cpp ${workspaceFolder}",
       "group": {
         "kind": "test",
@@ -125,8 +129,8 @@
       "problemMatcher": []
     },
     {
-      "label": "run random test (rcmp9)",
       "type": "shell",
+      "label": "run random test (rcmp9)",
       "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp checker\\rcmp9.cpp ${workspaceFolder}",
       "group": {
         "kind": "test",
@@ -139,8 +143,8 @@
       "problemMatcher": []
     },
     {
-      "label": "run random test (custom judge)",
       "type": "shell",
+      "label": "run random test (custom judge)",
       "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp che.cpp ${workspaceFolder}",
       "group": {
         "kind": "test",
@@ -153,8 +157,8 @@
       "problemMatcher": []
     },
     {
-      "label": "run random test (interactive)",
       "type": "shell",
+      "label": "run random test (interactive)",
       "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\judge_interactive.ps1 ${file} gen.cpp ${workspaceFolder}",
       "group": {
         "kind": "test",
