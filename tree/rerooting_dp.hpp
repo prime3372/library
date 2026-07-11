@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <cassert>
 #include <vector>
 
@@ -35,21 +36,19 @@ public:
     assert(1 <= n);
 
     std::vector<int> par(n, -1), ord(n);
-    {
-      int now_ord = 0;
-      auto dfs = [&](auto self, int v, int pv) -> void {
-        par[v] = pv;
-        ord[now_ord++] = v;
-        for (edge e : g[v]) {
-          if (e.to != pv) self(self, e.to, v);
-        }
-      };
-      for (int i = 0; i < n; i++) {
-        if (par[i] == -1) dfs(dfs, i, i);
+    int now_ord = 0;
+    auto dfs = [&](auto self, int v, int pv) -> void {
+      par[v] = pv;
+      ord[now_ord++] = v;
+      for (edge e : g[v]) {
+        if (e.to != pv) self(self, e.to, v);
       }
+    };
+    for (int i = 0; i < n; i++) {
+      if (par[i] == -1) dfs(dfs, i, i);
     }
 
-    dp.assign(n, std::vector<S>());
+    dp.resize(n);
     for (int v = 0; v < n; v++) {
       dp[v].resize(g[v].size());
     }
@@ -69,7 +68,7 @@ public:
       dp[par[v]][rev] = M::mapping(g[par[v]][rev].f, M::op(cum, vals[v]));
     }
 
-    ans.assign(n, S());
+    ans.resize(n);
     for (int i = 0; i < n; i++) {
       int v = ord[i];
       std::vector<S> rcum(g[v].size() + 1);
