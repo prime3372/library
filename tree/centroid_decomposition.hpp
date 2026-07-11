@@ -8,8 +8,7 @@ namespace cp {
 struct centroid_decomposition {
 public:
   centroid_decomposition() : centroid_decomposition(0) {}
-  explicit centroid_decomposition(int _n)
-  : parent(_n, -1), size(_n, -1), depth(_n, -1), tree(_n), n(_n), g(_n), removed(_n) {}
+  explicit centroid_decomposition(int _n) : n(_n), g(_n), removed(_n) {}
 
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
@@ -19,14 +18,15 @@ public:
   }
 
   int root = -1;
-  std::vector<int> parent, size, depth;
-  std::vector<std::vector<int>> tree;
-  std::vector<std::vector<std::vector<int>>> subtrees;
+  std::vector<int> centroid, parent, size;
+  std::vector<std::vector<int>> tree; // directed
 
-  centroid_decomposition& build(int s = 0) {
-    assert(0 <= s && s < n);
-    root = build(s, 0);
-    parent[root] = -1;
+  centroid_decomposition& build() {
+    centroid.reserve(n);
+    parent.resize(n, -1);
+    size.resize(n, -1);
+    tree.resize(n);
+    root = build(0);
     return *this;
   }
 
@@ -54,31 +54,18 @@ private:
     return v;
   }
 
-  void construct(int v, int pv, int dep, int c) {
-    for (int nv : g[v]) {
-      if (nv == pv || removed[nv]) continue;
-      subtrees[dep][v].push_back(nv);
-      construct(nv, v, dep, c);
-    }
-  }
-
-  int build(int v, int dep) {
+  int build(int v) {
     calc_size(v, -1);
     int c = find_centroid(v, -1, size[v] / 2);
+    centroid.push_back(c);
     size[c] = size[v];
-    depth[c] = dep;
-    if (int(subtrees.size()) == dep) {
-      subtrees.emplace_back(n);
-    }
-    construct(c, -1, dep, c);
     removed[c] = true;
     for (int to : g[c]) {
       if (removed[to]) continue;
-      int nc = build(to, dep + 1);
+      int nc = build(to);
       parent[nc] = c;
       tree[c].push_back(nc);
     }
-    removed[c] = false;
     return c;
   }
 };
