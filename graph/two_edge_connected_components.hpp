@@ -47,10 +47,10 @@ public:
   }
 
 private:
-  using low_link::n;
-  using low_link::g;
   using low_link::ord;
   using low_link::low;
+  using low_link::n;
+  using low_link::g;
 };
 
 } // namespace cp
