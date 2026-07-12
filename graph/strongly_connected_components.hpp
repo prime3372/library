@@ -10,7 +10,7 @@ namespace cp {
 struct strongly_connected_components {
 public:
   strongly_connected_components() : strongly_connected_components(0) {}
-  explicit strongly_connected_components(int _n) : n(_n), g(_n) {}
+  explicit strongly_connected_components(int _n) : id(_n, -1), n(_n), g(_n) {}
 
   void add_edge(int from, int to) {
     assert(0 <= from && from < n);
@@ -25,7 +25,7 @@ public:
     int now_ord = 0, group_num = 0;
     std::vector<int> visited, low(n), ord(n, -1);
     visited.reserve(n);
-    id.assign(n, -1);
+
     auto dfs = [&](auto self, int v) -> void {
       low[v] = ord[v] = now_ord++;
       visited.push_back(v);
@@ -51,6 +51,7 @@ public:
     for (int i = 0; i < n; i++) {
       if (ord[i] == -1) dfs(dfs, i);
     }
+
     for (int& x : id) {
       x = group_num - 1 - x;
     }
