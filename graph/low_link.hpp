@@ -49,4 +49,4 @@ protected:
   std::vector<std::vector<int>> g;
 };
 
-}
+} // namespace cp
