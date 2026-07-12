@@ -29,11 +29,8 @@ public:
     T cur = ls[0](x);
     while (int(ls.size()) >= 2) {
       T nxt = ls[1](x);
-      if constexpr (is_max) {
-        if (nxt < cur) break;
-      } else {
-        if (nxt > cur) break; 
-      }
+      if (is_max && nxt < cur) break;
+      if (!is_max && nxt > cur) break; 
       cur = nxt;
       ls.pop_front();
     }
