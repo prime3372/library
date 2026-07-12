@@ -102,7 +102,7 @@ do {
     }
 
     # run che.exe
-    $p_che = Start-Process -FilePath .\che.exe -ArgumentList "in.txt","out.txt","ans.txt" -NoNewWindow -PassThru
+    $p_che = Start-Process -FilePath .\che.exe -ArgumentList "in.txt", "out.txt", "ans.txt" -NoNewWindow -PassThru
     $dummy = $p_che.Handle
     if (-not $p_che.WaitForExit($timeout)) {
       $p_che.Kill()
