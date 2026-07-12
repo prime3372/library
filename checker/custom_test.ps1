@@ -25,7 +25,7 @@ do {
   
   Write-Host "compilation finished"
 
-  Start-Sleep -Milliseconds 100 # Start-Sleep is necessary when compilation completes very quickly.
+  Start-Sleep -Milliseconds 100
 
   # run gen.exe
   $p_gen = Start-Process -FilePath .\gen.exe -NoNewWindow -RedirectStandardOutput in.txt -PassThru

@@ -43,7 +43,7 @@ do {
 
   Write-Host "compilation finished"
 
-  Start-Sleep -Milliseconds 100 # Start-Sleep is necessary when compilation completes very quickly.
+  Start-Sleep -Milliseconds 100
 
   for ($i = 1; $i -le $casesnum; $i++) {
     # run gen.exe
