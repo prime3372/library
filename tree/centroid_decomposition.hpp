@@ -8,7 +8,8 @@ namespace cp {
 struct centroid_decomposition {
 public:
   centroid_decomposition() : centroid_decomposition(0) {}
-  explicit centroid_decomposition(int _n) : n(_n), g(_n), removed(_n) {}
+  explicit centroid_decomposition(int _n)
+  : parent(_n, -1), size(_n), tree(_n), n(_n), g(_n), removed(_n) {}
 
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
@@ -23,9 +24,6 @@ public:
 
   centroid_decomposition& build() {
     centroid.reserve(n);
-    parent.resize(n, -1);
-    size.resize(n);
-    tree.resize(n);
     root = build(0);
     return *this;
   }
