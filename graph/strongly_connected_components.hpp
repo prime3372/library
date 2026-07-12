@@ -59,7 +59,6 @@ public:
     for (int x : id) counts[x]++;
     scc.resize(group_num);
     for (int i = 0; i < group_num; i++) {
-      scc[i].clear();
       scc[i].reserve(counts[i]);
     }
     for (int i = 0; i < n; i++) {
