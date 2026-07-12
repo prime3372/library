@@ -11,16 +11,15 @@ public:
   union_find() : n(0) {}
   explicit union_find(int _n) : n(_n), parent_or_size(_n, -1) {}
 
-  int unite(int a, int b) {
+  bool unite(int a, int b) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
-    a = find(a);
-    b = find(b);
-    if (a == b) return a;
+    a = find(a); b = find(b);
+    if (a == b) return false;
     if (-parent_or_size[a] < -parent_or_size[b]) std::swap(a, b);
     parent_or_size[a] += parent_or_size[b];
     parent_or_size[b] = a;
-    return a;
+    return true;
   }
 
   int find(int a) {

@@ -12,18 +12,17 @@ public:
   rollback_union_find() : rollback_union_find(0) {}
   explicit rollback_union_find(int _n) : n(_n), inner_snap(0), parent_or_size(_n, -1) {}
 
-  int unite(int a, int b) {
+  bool unite(int a, int b) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
-    a = find(a);
-    b = find(b);
+    a = find(a); b = find(b);
     history.emplace_back(a, parent_or_size[a]);
     history.emplace_back(b, parent_or_size[b]);
-    if (a == b) return a;
+    if (a == b) return false;
     if (-parent_or_size[a] < -parent_or_size[b]) std::swap(a, b);
     parent_or_size[a] += parent_or_size[b];
     parent_or_size[b] = a;
-    return a;
+    return true;
   }
 
   int find(int a) {
