@@ -149,7 +149,7 @@ std::vector<long long> convolution(std::vector<long long> a, std::vector<long lo
     long long x = (c2[i] - c1[i]) % MOD2 * im % MOD2;
     if (x < 0) x += MOD2;
     c1[i] += x * MOD1;
-    if (c1[i] >= MOD12 / 2) c1[i] -= MOD12;
+    if (c1[i] > MOD12 / 2) c1[i] -= MOD12;
   }
   return c1;
 }
