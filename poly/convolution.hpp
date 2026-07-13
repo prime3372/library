@@ -17,9 +17,6 @@ namespace internal {
 
 constexpr int primitive_root_ntt(int p) {
   if (p == 2) return 1;
-  if (p == 167772161) return 3;
-  if (p == 469762049) return 3;
-  if (p == 754974721) return 11;
   if (p == 998244353) return 3;
   std::vector<int> fs = {2};
   int x = p - 1;
@@ -132,34 +129,27 @@ std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
   return c;
 }
 
+// the values after convolution must be between -2*10^18 and 2*10^18
 std::vector<long long> convolution(std::vector<long long> a, std::vector<long long> b) {
   int n = int(a.size()), m = int(b.size());
   if (n == 0 || m == 0) return {};
 
-  static constexpr long long MOD1 = 754974721;  // 45 * 2^24 + 1
-  static constexpr long long MOD2 = 167772161;  //  5 * 2^25 + 1
-  static constexpr long long MOD3 = 469762049;  //  7 * 2^26 + 1
-  static constexpr __int128 MOD123 = __int128(MOD1) * MOD2 * MOD3;
+  static constexpr int MOD1 = 2130706433; // 127 * 2^24 + 1
+  static constexpr int MOD2 = 2113929217; //  63 * 2^25 + 1
+  static constexpr long long MOD12 = 1LL * MOD1 * MOD2;
   assert(n + m - 1 <= (1 << 24));
 
-  static constexpr long long i1 = inv_mod(MOD1, MOD2);
-  static constexpr long long i2 = inv_mod(MOD1 * MOD2, MOD3);
+  static constexpr long long im = inv_mod(MOD1, MOD2);
 
   auto c1 = convolution<MOD1>(a, b);
   auto c2 = convolution<MOD2>(a, b);
-  auto c3 = convolution<MOD3>(a, b);
 
   // restore the true value using CRT
   for (int i = 0; i < n + m - 1; i++) {
-    long long x = (c2[i] - c1[i]) % MOD2 * i1 % MOD2;
+    long long x = (c2[i] - c1[i]) % MOD2 * im % MOD2;
     if (x < 0) x += MOD2;
     c1[i] += x * MOD1;
-
-    x = (c3[i] - c1[i]) % MOD3 * i2 % MOD3;
-    if (x < 0) x += MOD3;
-    __int128 r = c1[i] + __int128(x) * MOD1 * MOD2;
-    if (r > MOD123 / 2) r -= MOD123;
-    c1[i] = (long long)(r);
+    if (c1[i] >= MOD12 / 2) c1[i] -= MOD12;
   }
   return c1;
 }
