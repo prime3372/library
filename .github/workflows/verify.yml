@@ -34,15 +34,17 @@ jobs:
           exit 0
         fi
 
-        TOTAL_FILES=$(echo "$FILES" | wc -l)
+        mapfile -t FILE_ARRAY <<< "$FILES"
+        TOTAL_FILES=${#FILE_ARRAY[@]}
 
-        TARGETS=$(echo "$FILES" | awk -v shard=${{ matrix.shard }} -v total=${{ matrix.total }} -v n=$TOTAL_FILES '
-          BEGIN {
-            start = int(shard * n / total) + 1
-            end = int((shard + 1) * n / total)
-          }
-          start <= NR && NR <= end
-        ')
+        SHARD=${{ matrix.shard }}
+        TOTAL=${{ matrix.total }}
+
+        START=$(( SHARD * TOTAL_FILES / TOTAL ))
+        END=$(( (SHARD + 1) * TOTAL_FILES / TOTAL ))
+        LEN=$(( END - START ))
+
+        TARGETS="${FILE_ARRAY[@]:START:LEN}"
 
         if [ -n "$TARGETS" ]; then
           oj-verify run $TARGETS
