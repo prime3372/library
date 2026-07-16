@@ -1,4 +1,6 @@
 {
+"test/aoj/DSL_2_B_range_sum_query.test.cpp": "2026-07-04 23:49:03 +0900",
+"test/yosupo/2sat.test.cpp": "2026-07-12 20:20:44 +0900",
 "test/yosupo/counting_square_free_integers.test.cpp": "2026-07-05 18:46:49 +0900",
 "test/yosupo/cycle_detection_directed.test.cpp": "2026-07-04 23:49:03 +0900",
 "test/yosupo/cycle_detection_undirected.test.cpp": "2026-07-04 23:49:03 +0900",
