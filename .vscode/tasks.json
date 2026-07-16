@@ -72,7 +72,7 @@
     {
       "type": "shell",
       "label": "run custom test",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\custom_test.ps1 ${file} gen.cpp ${workspaceFolder}",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; checker\\custom_test.ps1 ${file} gen.cpp ${workspaceFolder}",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -97,7 +97,7 @@
     {
       "type": "shell",
       "label": "run random test (wcmp)",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp checker\\wcmp.cpp ${workspaceFolder}",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp checker\\wcmp.cpp ${workspaceFolder}",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -111,7 +111,7 @@
     {
       "type": "shell",
       "label": "run random test (rcmp6)",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp checker\\rcmp6.cpp ${workspaceFolder}",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp checker\\rcmp6.cpp ${workspaceFolder}",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -125,7 +125,7 @@
     {
       "type": "shell",
       "label": "run random test (rcmp9)",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp checker\\rcmp9.cpp ${workspaceFolder}",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp checker\\rcmp9.cpp ${workspaceFolder}",
       "group": {
         "kind": "test",
         "isDefault": false
@@ -139,7 +139,7 @@
     {
       "type": "shell",
       "label": "run random test (custom judge)",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp che.cpp ${workspaceFolder}",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp che.cpp ${workspaceFolder}",
       "group": {
         "kind": "test",
         "isDefault": true
@@ -153,7 +153,7 @@
     {
       "type": "shell",
       "label": "run random test (interactive)",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process; checker\\judge_interactive.ps1 ${file} gen.cpp ${workspaceFolder}",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; checker\\judge_interactive.ps1 ${file} gen.cpp ${workspaceFolder}",
       "group": {
         "kind": "test",
         "isDefault": true
