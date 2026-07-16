@@ -3,7 +3,6 @@
   "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
   "C_Cpp.errorSquiggles": "enabled",
   "C_Cpp.intelliSenseEngine": "default",
-  "chat.disableAIFeatures": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "debug.onTaskErrors": "showErrors",
   "editor.inlineSuggest.enabled": false,
