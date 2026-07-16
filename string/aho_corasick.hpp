@@ -9,13 +9,14 @@
 
 namespace cp {
 
-template <int char_size, auto arg = false>
-struct aho_corasick : public trie_tree<char_size, arg> {
+template <int char_size, auto offset = 'a'>
+struct aho_corasick : public trie_tree<char_size, offset> {
 public:
-  using trie_tree<char_size, arg>::trie_tree;
-
+  using trie_tree<char_size, offset>::trie_tree;
+  using trie_tree<char_size, offset>::size;
+  
   void build() {
-    lnk.resize(this->size());
+    lnk.resize(size());
     lnk[0] = -1;
     std::queue<int> que;
     que.push(0);
@@ -38,7 +39,7 @@ public:
   }
 
   std::vector<int> move(const std::string& s, int from = 0) const {
-    assert(0 <= from && from < this->size());
+    assert(0 <= from && from < size());
     std::vector<int> res(1, from);
     for (char c : s) {
       int v = res.back(), k = this->index(c);
@@ -52,7 +53,7 @@ public:
   }
 
   int link(int v) const {
-    assert(0 <= v && v < this->size());
+    assert(0 <= v && v < size());
     return lnk[v];
   }
 

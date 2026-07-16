@@ -23,7 +23,7 @@ public:
   int insert(const std::string& s) {
     int v = 0;
     for (char c : s) {
-      mid[v]++;
+      pre[v]++;
       int k = index(c);
       if (to[v][k] == -1) {
         to[v][k] = n;
@@ -32,19 +32,9 @@ public:
       }
       v = to[v][k];
     }
-    end[v]++;
+    pre[v]++;
+    cnt[v]++;
     return v;
-  }
-
-  std::vector<int> search(const std::string& s, int from = 0) const {
-    assert(0 <= from && from < n);
-    std::vector<int> res(1, from);
-    for (char c : s) {
-      int v = res.back(), k = index(c);
-      if (to[v][k] == -1) break;
-      res.push_back(to[v][k]);
-    }
-    return res;
   }
 
   const std::array<int, char_size>& operator[](int v) const {
@@ -58,15 +48,11 @@ public:
 
   int count(int v) const {
     assert(0 <= v && v < n);
-    return end[v];
+    return cnt[v];
   }
   int prefix(int v) const {
     assert(0 <= v && v < n);
-    return mid[v] + end[v];
-  }
-  int proper_prefix(int v) const {
-    assert(0 <= v && v < n);
-    return mid[v];
+    return pre[v];
   }
 
   int size() const { return n; }
@@ -74,7 +60,7 @@ public:
 private:
   int n = 0;
   std::vector<std::array<int, char_size>> to;
-  std::vector<int> par, mid, end;
+  std::vector<int> par, pre, cnt;
 
   static constexpr int index(char c) {
     return derived::index(c); // CRTP
@@ -85,42 +71,34 @@ private:
     to.emplace_back();
     to.back().fill(-1);
     par.push_back(-1);
-    mid.push_back(0);
-    end.push_back(0);
+    pre.push_back(0);
+    cnt.push_back(0);
   }
 };
 
-constexpr int lower_offset(char c) {
-  assert('a' <= c && c <= 'z');
-  return c - 'a';
-}
-
-constexpr int upper_offset(char c) {
-  assert('A' <= c && c <= 'Z');
-  return c - 'A';
-}
-
 } // namespace internal
 
-template <int char_size, auto is_upper = false>
-struct trie_tree : public internal::trie_tree_base<char_size,
-                                                   trie_tree<char_size, is_upper>> {
-  static_assert(std::is_convertible_v<decltype(is_upper), bool>);
+template <int char_size, auto offset = 'a'>
+struct trie_tree {};
+
+template <int char_size, char offset>
+struct trie_tree<char_size, offset>
+: public internal::trie_tree_base<char_size, trie_tree<char_size, offset>> {
 public:
-  using internal::trie_tree_base<char_size,
-                                 trie_tree<char_size, is_upper>>::trie_tree_base;
+  using internal::trie_tree_base<char_size, trie_tree<char_size, offset>>
+        ::trie_tree_base;
   static constexpr int index(char c) {
-    return is_upper ? internal::upper_offset(c) : internal::lower_offset(c);
+    return c - offset;
   }
 };
 
 template <int char_size, auto offset>
   requires std::is_convertible_v<decltype(offset), std::function<int(char)>>
-struct trie_tree<char_size, offset> : internal::trie_tree_base<char_size,
-                                                               trie_tree<char_size, offset>> {
+struct trie_tree<char_size, offset>
+: public internal::trie_tree_base<char_size, trie_tree<char_size, offset>> {
 public:
-  using internal::trie_tree_base<char_size,
-                                 trie_tree<char_size, offset>>::trie_tree_base;
+  using internal::trie_tree_base<char_size, trie_tree<char_size, offset>>
+        ::trie_tree_base;
   static constexpr int index(char c) {
     return offset(c);
   }
