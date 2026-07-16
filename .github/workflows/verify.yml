@@ -9,6 +9,11 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+        total: [4]
 
     steps:
     - uses: actions/checkout@v3
@@ -27,4 +32,18 @@ jobs:
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: oj-verify all
+      run: |
+        FILES=$(find . -type f -name "*.test.cpp" | sort)
+        
+        if [ -z "$FILES" ]; then
+          exit 0
+        fi
+
+        TARGETS=$(echo "$FILES" | awk -v shard=${{ matrix.shard }} -v total=${{ matrix.total }} '(NR - 1) % total == shard')
+
+        if [ -z "$TARGETS" ]; then
+          exit 0
+        else
+          echo "$TARGETS"
+          oj-verify run $TARGETS
+        fi
