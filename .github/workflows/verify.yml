@@ -81,7 +81,7 @@ jobs:
         xargs -t -I {} -d ' ' bash -c 'run {}'
 
     - name: Save timestamps
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: timestamps
