@@ -30,8 +30,8 @@ jobs:
       run: git fetch origin main
 
     - name: Run tests
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # env:
+      #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         FILES=$(find . -type f -name "*.test.cpp" | sort)
         
@@ -52,21 +52,3 @@ jobs:
         if [ -n "$TARGETS" ]; then
           oj-verify run $TARGETS
         fi
-    
-    - name: Push with retry
-      run: |
-        for attempt in {1..5}; do
-          git fetch origin main
-          git rebase origin/main || {
-            git rebase --abort
-            git fetch origin main
-            git reset --hard origin/main
-          }
-          if git push origin HEAD:main; then
-            exit 0
-          fi
-          if [ $attempt -lt 5 ]; then
-            sleep 2
-          fi
-        done
-        exit 1
