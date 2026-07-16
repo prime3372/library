@@ -52,16 +52,6 @@ jobs:
         if [ -n "$TARGETS" ]; then
           oj-verify run $TARGETS
         fi
-
-    - name: Fetch and rebase before push
-      run: |
-        git fetch origin main
-        git rebase origin/main || {
-          git rebase --abort
-          git fetch origin main
-          git reset --hard origin/main
-          git rebase origin/main
-        }
     
     - name: Push with retry
       run: |
