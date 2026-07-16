@@ -12,8 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [0, 1, 2, 3, 4, 5, 6, 7]
-        total: [8]
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+        total: [20]
 
     steps:
     - uses: actions/checkout@v3
@@ -28,9 +28,6 @@ jobs:
 
     - name: Fetch latest changes before verification
       run: git fetch origin main
-
-    - name: Fast-forward to latest main
-      run: git rebase origin/main
 
     - name: Run tests
       env:
@@ -55,3 +52,15 @@ jobs:
         if [ -n "$TARGETS" ]; then
           oj-verify run $TARGETS
         fi
+
+    - name: Fetch and rebase before push
+      run: |
+        git fetch origin main
+        git rebase origin/main
+
+    - name: Resolve push conflicts
+      if: failure()
+      run: |
+        git fetch origin main
+        git rebase origin/main
+        git push origin HEAD:main
