@@ -10,20 +10,15 @@ using ll = long long;
                          exit(1); \
                        } \
                      } while (false)
+
 #define cin
 
 ifstream f_in, f_out, f_ans;
-
-void check() {
-
-}
 
 int main(int, char* argv[]) {
   f_in.open(argv[1]);
   f_out.open(argv[2]);
   f_ans.open(argv[3]);
-  check();
-  string dummy;
-  assert(f_out >> dummy);
+
   return 0;
 }
