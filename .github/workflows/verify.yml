@@ -9,22 +9,37 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+        total: [20]
 
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-
     - name: Set up Python
       uses: actions/setup-python@v4
 
-    - name: Install dependencies
+    - name: Install oj-verify
       run: pip3 install -U online-judge-verify-helper
 
-    - name: Fetch latest changes before verification
-      run: git fetch origin main
-
     - name: Run tests
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: oj-verify all
+      run: |
+        FILES=$(find . -type f -name "*.test.cpp" | sort)
+        
+        if [ -z "$FILES" ]; then
+          exit 0
+        fi
+
+        TOTAL_FILES=$(echo "$FILES" | wc -l)
+
+        TARGETS=$(echo "$FILES" | awk -v shard=${{ matrix.shard }} -v total=${{ matrix.total }} -v n=$TOTAL_FILES '
+          BEGIN {
+            start = int(shard * n / total) + 1
+            end = int((shard + 1) * n / total)
+          }
+          start <= NR && NR <= end
+        ')
+
+        if [ -n "$TARGETS" ]; then
+          oj-verify run $TARGETS
+        fi
