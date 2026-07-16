@@ -56,11 +56,23 @@ jobs:
     - name: Fetch and rebase before push
       run: |
         git fetch origin main
-        git rebase origin/main
-
-    - name: Resolve push conflicts
-      if: failure()
+        git rebase origin/main || {
+          git rebase --abort
+          git fetch origin main
+          git reset --hard origin/main
+          git rebase origin/main
+        }
+    
+    - name: Push with retry
       run: |
-        git fetch origin main
-        git rebase origin/main
-        git push origin HEAD:main
+        for attempt in {1..5}; do
+          git fetch origin main
+          if git push origin HEAD:main; then
+            exit 0
+          fi
+          if [ $attempt -lt 5 ]; then
+            git rebase origin/main
+            sleep 1
+          fi
+        done
+        exit 1
