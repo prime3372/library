@@ -7,6 +7,11 @@
 namespace cp {
 
 struct low_link {
+private:
+  struct edge {
+    int to, id;
+  };
+
 public:
   low_link() : low_link(0) {}
   explicit low_link(int _n) : low(_n, _n), ord(_n, -1), n(_n), g(_n) {}
@@ -14,8 +19,9 @@ public:
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
     assert(0 <= v && v < n);
-    g[u].push_back(v);
-    g[v].push_back(u);
+    g[u].push_back(edge{v, m});
+    g[v].push_back(edge{u, m});
+    m++;
   }
 
   std::vector<int> low, ord;
@@ -25,16 +31,16 @@ public:
     auto dfs = [&](auto self, int v, int pv) -> void {
       low[v] = ord[v] = now_ord++;
       bool multiple = false;
-      for (int nv : g[v]) {
-        if (nv == pv && !multiple) {
+      for (auto& e : g[v]) {
+        if (e.to == pv && !multiple) {
           multiple = true;
           continue;
         }
-        if (ord[nv] == -1) {
-          self(self, nv, v);
-          low[v] = std::min(low[v], low[nv]);
+        if (ord[e.to] == -1) {
+          self(self, e.to, v);
+          low[v] = std::min(low[v], low[e.to]);
         } else {
-          low[v] = std::min(low[v], ord[nv]);
+          low[v] = std::min(low[v], ord[e.to]);
         }
       }
     };
@@ -45,8 +51,8 @@ public:
   }
 
 protected:
-  int n;
-  std::vector<std::vector<int>> g;
+  int n, m;
+  std::vector<std::vector<edge>> g;
 };
 
 } // namespace cp

@@ -25,8 +25,8 @@ public:
       } else {
         id[v] = k++;
       }
-      for (int to : g[v]) {
-        if (id[to] == -1) self(self, to, v, k);        
+      for (auto& e : g[v]) {
+        if (id[e.to] == -1) self(self, e.to, v, k);        
       }
     };
     for (int i = 0; i < n; i++) {
