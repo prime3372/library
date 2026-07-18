@@ -23,10 +23,7 @@ jobs:
     - name: Install dependencies
       run: pip3 install -U online-judge-verify-helper
 
-    - name: Fetch latest changes before verification
-      run: git fetch origin main
-
-    - name: Run tests (Parallel Bash Range)
+    - name: Run tests
       run: |
         FILES=$(find . -type f -name "*.test.cpp" | sort)
         
