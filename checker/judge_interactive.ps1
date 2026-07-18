@@ -4,7 +4,7 @@ $gen = $Args[1]
 $inc = $Args[2]
 
 # constants
-$casesnum = 20
+$casesnum = 50
 
 do {
 

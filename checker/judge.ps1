@@ -8,7 +8,7 @@ $inc = $Args[4]
 # constants
 $timelimit = 5000
 $timeout = 10000
-$casesnum = 20
+$casesnum = 50
 
 do {
   Write-Host "compiling..."
