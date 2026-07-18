@@ -6,7 +6,7 @@ using ll = long long;
 #undef assert
 #define assert(expr) do { \
                        if (!(expr)) { \
-                         cout << "wrong answer " << #expr << " is not satisfied, line " << __LINE__ << endl; \
+                         cout << "wrong answer '" << #expr << "' is not satisfied, line " << __LINE__ << endl; \
                          exit(1); \
                        } \
                      } while (false)
