@@ -17,7 +17,7 @@ private:
 public:
   lazy_segtree() : lazy_segtree(0) {}
   explicit lazy_segtree(int n) : lazy_segtree(std::vector<S>(n, M::e())) {}
-  explicit lazy_segtree(int n, S v) : lazy_segtree(std::vector<S>(n, v)) {}
+  explicit lazy_segtree(int n, S val) : lazy_segtree(std::vector<S>(n, val)) {}
   explicit lazy_segtree(const std::vector<S>& v) : n(int(v.size())) {
     sz = (int)std::bit_ceil((unsigned int)(n));
     log = std::countr_zero((unsigned int)(sz));

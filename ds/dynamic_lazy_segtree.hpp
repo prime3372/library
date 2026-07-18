@@ -19,13 +19,13 @@ private:
 public:
   dynamic_lazy_segtree() : dynamic_lazy_segtree(0) {}
   explicit dynamic_lazy_segtree(size_t _n) : dynamic_lazy_segtree(_n, M::e()) {}
-  explicit dynamic_lazy_segtree(size_t _n, S v) : n(_n) {
+  explicit dynamic_lazy_segtree(size_t _n, S val) : n(_n) {
     sz = std::bit_ceil(n);
     log = std::countr_zero(sz);
     initial_vals.resize(log + 1);
     for (int i = log; i >= 0; i--) {
-      initial_vals[i] = v;
-      v = M::op(v, v);
+      initial_vals[i] = val;
+      val = M::op(val, val);
     }
   }
 

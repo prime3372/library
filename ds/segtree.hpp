@@ -17,7 +17,7 @@ private:
 public:
   segtree() : segtree(0) {}
   explicit segtree(int n) : segtree(std::vector<S>(n, M::e())) {}
-  explicit segtree(int n, S v) : segtree(std::vector<S>(n, v)) {}
+  explicit segtree(int n, S val) : segtree(std::vector<S>(n, val)) {}
   explicit segtree(const std::vector<S>& v) : n(int(v.size())) {
     sz = (int)std::bit_ceil((unsigned int)(n));
     log = std::countr_zero((unsigned int)(sz));
