@@ -6,11 +6,9 @@
 
 namespace cp {
 
-template <class> struct add {};
-
 template <class T>
   requires (std::is_arithmetic_v<T> || is_modint_v<T>)
-struct add<T> {
+struct add {
   using S = T;
   static constexpr S op(S x, S y) { return x + y; }
   static constexpr S e() { return 0; }
