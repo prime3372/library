@@ -1,10 +1,7 @@
-name: verify
+name: verify_all
 
 on:
-  push:
-    branches:
-    - main
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   verify:
@@ -12,8 +9,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [0, 1, 2, 3]
-        total: [4]
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+        total: [20]
 
     steps:
     - uses: actions/checkout@v3
@@ -26,26 +23,17 @@ jobs:
     - name: Install dependencies
       run: pip3 install -U online-judge-verify-helper
 
-    - name: Fetch latest changes before verification
-      run: git fetch origin main
-
-    - name: Run tests (Parallel Bash Range)
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Run tests
       run: |
-        # 1. テストファイルを列挙して辞書順にソート
         FILES=$(find . -type f -name "*.test.cpp" | sort)
         
         if [ -z "$FILES" ]; then
-          echo "テストファイルが見つかりません。"
           exit 0
         fi
 
-        # 2. ファイル一覧を Bash の配列に格納
         mapfile -t FILE_ARRAY <<< "$FILES"
         TOTAL_FILES=${#FILE_ARRAY[@]}
 
-        # 3. 純粋な整数演算でインデックス（0-based, 半開区間 [START, END)）を計算
         SHARD=${{ matrix.shard }}
         TOTAL=${{ matrix.total }}
 
@@ -53,13 +41,8 @@ jobs:
         END=$(( (SHARD + 1) * TOTAL_FILES / TOTAL ))
         LEN=$(( END - START ))
 
-        # 4. 配列スライス機能で担当分を切り出す
         TARGETS="${FILE_ARRAY[@]:START:LEN}"
 
-        if [ -z "$TARGETS" ]; then
-          echo "このシャードに割り当てられたテストファイルはありません。"
-        else
-          echo "以下のファイルをテストします (インデックス $START から $((END-1)) まで):"
-          echo "$TARGETS" | tr ' ' '\n'
+        if [ -n "$TARGETS" ]; then
           oj-verify run $TARGETS
         fi
