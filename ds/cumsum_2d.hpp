@@ -7,26 +7,6 @@ namespace cp {
 
 template <class T> struct cumsum_2d {
 public:
-  struct row {
-  public:
-    row() : w(0) {}
-    explicit row(int _w) : w(_w), d(_w) {}
-    explicit row(int _w, T x) : w(_w), d(_w, x) {}
-
-    T& operator[](int j) {
-      assert(0 <= j && j < w);
-      return d[j];
-    }
-    T operator[](int j) const {
-      assert(0 <= j && j < w);
-      return d[j];
-    }
-
-  private:
-    int w;
-    std::vector<T> d;
-  };
-
   cumsum_2d() : h(0), w(0) {}
   cumsum_2d(int _h, int _w) : h(_h), w(_w), d(_h, row(_w)) {}
   cumsum_2d(int _h, int _w, T x) : h(_h), w(_w), d(_h, row(_w, x)) {}
@@ -46,11 +26,11 @@ public:
     accumulated = true;
   }
 
-  row& operator[](int i) {
+  std::vector<T>& operator[](int i) {
     assert(0 <= i && i < h);
     return d[i];
   }
-  const row& operator[](int i) const {
+  const std::vector<T>& operator[](int i) const {
     assert(0 <= i && i < h);
     return d[i];
   }
@@ -84,7 +64,7 @@ public:
 private:
   int h, w;
   bool accumulated = false;
-  std::vector<row> d;
+  std::vector<std::vector<T>> d;
   std::vector<std::vector<T>> cum;
 };
 

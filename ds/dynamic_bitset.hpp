@@ -24,7 +24,7 @@ private:
       else *d &= ~mask(pos);
       return *this;
     }
-    ref& operator=(const ref& other) { return *this = (bool)other; }
+    ref& operator=(const ref& other) { return *this = bool(other); }
     ref(dynamic_bitset& b, int i) {
       d = b.a.data() + i / 64;
       pos = i % 64;

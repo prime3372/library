@@ -19,46 +19,17 @@ private:
   using S = typename R::S;
 
 public:
-  struct row {
-  public:
-    row() : row(0) {}    
-    explicit row(int _w) : w(_w), d(_w, R::zero()) {}
-    explicit row(int _w, S x) : w(_w), d(_w, x) {}
-
-    S& operator[](int j) {
-      assert(0 <= j && j < w);
-      return d[j];
-    }
-    const S& operator[](int j) const {
-      assert(0 <= j && j < w);
-      return d[j];
-    }
-    void swap(row& r) {
-      assert(w == r.w);
-      d.swap(r.d);
-    }
-    row& operator=(const row& r) {
-      assert(w == r.w);
-      d = r.d;
-      return *this;
-    }
-
-  private:
-    int w;
-    std::vector<S> d;
-  };
-
   matrix() : h(0), w(0) {}
-  explicit matrix(int _h, int _w) : h(_h), w(_w), d(_h, row(_w)) {}
+  explicit matrix(int _h, int _w) : h(_h), w(_w), d(_h, std::vector<S>(_w)) {}
 
   int height() const { return h; }
   int width() const { return w; }
 
-  row& operator[](int i) {
+  std::vector<S>& operator[](int i) {
     assert(0 <= i && i < h);
     return d[i];
   }
-  const row& operator[](int i) const {
+  const std::vector<S>& operator[](int i) const {
     assert(0 <= i && i < h);
     return d[i];
   }
@@ -138,7 +109,7 @@ public:
 
 private:
   int h, w;
-  std::vector<row> d;
+  std::vector<std::vector<S>> d;
 };
 
 } // namespace cp
