@@ -120,9 +120,11 @@ template <int mod = 998244353, std::integral T>
 std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
   using mint = static_modint<mod>;
   int n = int(a.size()), m = int(b.size());
+
   std::vector<mint> a2(n), b2(m);
   for (int i = 0; i < n; i++) a2[i] = mint(a[i]);
   for (int i = 0; i < m; i++) b2[i] = mint(b[i]);
+  
   auto c2 = convolution(std::move(a2), std::move(b2));
   std::vector<T> c(n + m - 1);
   for (int i = 0; i < n + m - 1; i++) c[i] = c2[i].val();
