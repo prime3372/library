@@ -5,7 +5,7 @@
 
 namespace cp {
 
-template <class T, T upper> requires std::is_arithmetic_v<T>
+template <class T, T upper> requires (std::is_arithmetic_v<T>)
 struct min_assign {
   using S = T;
   static constexpr S op(S x, S y) { return std::min(x, y); }

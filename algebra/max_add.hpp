@@ -5,7 +5,7 @@
 
 namespace cp {
 
-template <class T, T lower> requires std::is_arithmetic_v<T>
+template <class T, T lower> requires (std::is_arithmetic_v<T>)
 struct max_add {
   using S = T;
   static constexpr S op(S x, S y) { return std::max(x, y); }

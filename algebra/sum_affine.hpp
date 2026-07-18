@@ -9,7 +9,7 @@
 namespace cp {
 
 template <class T>
-  requires std::is_arithmetic_v<T> || is_modint_v<T>
+  requires (std::is_arithmetic_v<T> || is_modint_v<T>)
 struct sum_affine {
   struct S {
     T val;

@@ -26,7 +26,10 @@ struct add_mul<T> {
   static constexpr S zero() { return 0; }
   static constexpr S one() { return 1; }
   static constexpr S minus(S x) { return -x; }
-  static constexpr S recip(S x) requires std::is_floating_point_v<T> || is_modint_v<T> { return 1 / x; }
+  static constexpr S recip(S x)
+  requires (std::is_floating_point_v<T> || is_modint_v<T>) {
+    return 1 / x;
+  }
 };
 
 } // namespace cp

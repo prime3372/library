@@ -7,7 +7,7 @@
 
 namespace cp {
 
-template <class mint> requires is_modint_v<mint>
+template <class mint> requires (is_modint_v<mint>)
 struct binom_mod {
 public:
   binom_mod() : binom_mod(1) {}

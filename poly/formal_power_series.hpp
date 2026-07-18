@@ -11,7 +11,7 @@ namespace cp {
 
 template <class> struct formal_power_series {};
 
-template <class mint> requires is_static_modint_v<mint> && (is_prime(mint::mod()))
+template <class mint> requires (is_static_modint_v<mint> && is_prime(mint::mod()))
 struct formal_power_series<mint> {
 private:
   using fps = formal_power_series;
@@ -54,6 +54,13 @@ public:
   fps& operator/=(const mint& rhs) {
     for (int i = 0; i < size(); i++) f[i] /= rhs;
     return *this;
+  }
+
+  fps& operator+() { return *this; }
+  fps& operator-() { return }
+
+  fps& pow(long long n) {
+
   }
 
   friend fps operator+(const fps& lhs, const fps& rhs) { return fps(lhs) += rhs; }

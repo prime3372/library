@@ -90,7 +90,7 @@ template <class mint, int g> void ntt(std::vector<mint>& a) {
 } // namespace internal
 
 template <class mint>
-  requires is_static_modint_v<mint> && (is_prime(mint::mod()))
+  requires (is_static_modint_v<mint> && is_prime(mint::mod()))
 std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
   static constexpr int g = internal::primitive_root_ntt(mint::mod());
   static constexpr int ig = pow_mod(g, mint::mod() - 2, mint::mod());
