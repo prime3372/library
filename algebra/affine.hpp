@@ -16,7 +16,9 @@ struct affine {
   };
   static constexpr S op(S f, S g) { return {g.a * f.a, g.a * f.b + g.b}; }
   static constexpr S e() { return S(); }
-  static constexpr S inv(S f) requires std::is_floating_point_v<T> || is_modint_v<T> { return {1 / f.a, -f.b / f.a}; }
+  static constexpr S inv(S f) requires (std::is_floating_point_v<T> || is_modint_v<T>) {
+    return {1 / f.a, -f.b / f.a};
+  }
 };
 
 } // namespace cp

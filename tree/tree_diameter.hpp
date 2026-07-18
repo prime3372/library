@@ -8,6 +8,7 @@ namespace cp {
 
 template <class T> struct tree_diameter {
 public:
+  tree_diameter() : n(0) {}
   explicit tree_diameter(int n) : n(n), g(n) {}
   
   int add_edge(int u, int v, T c = 1) {

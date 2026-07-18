@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <iostream>
 #include <type_traits>
 #include <vector>
 
@@ -39,6 +40,7 @@ public:
     row& operator=(const row& r) {
       assert(w == r.w);
       d = r.d;
+      return *this;
     }
 
   private:
@@ -61,31 +63,42 @@ public:
     return d[i];
   }
 
-  friend matrix operator+(const matrix& lhs, const matrix& rhs) {
-    assert(lhs.h == rhs.h && lhs.w == rhs.w);
-    matrix res(lhs.h, lhs.w);
-    for (int i = 0; i < lhs.h; i++) {
-      for (int j = 0; j < lhs.w; j++) {
-        res[i][j] = R::add(lhs[i][j], rhs[i][j]);
+  matrix& operator+=(const matrix& rhs) {
+    assert(h == rhs.h && w == rhs.w);
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        (*this)[i][j] = R::add((*this)[i][j], rhs[i][j]);
       }
     }
-    return res;
+    return *this;
   }
-  friend matrix operator*(const matrix& lhs, const matrix& rhs) {
-    assert(lhs.w == rhs.h);
-    matrix res(lhs.h, rhs.w);
-    for (int i = 0; i < lhs.h; i++) {
-      for (int k = 0; k < lhs.w; k++) {
+
+  matrix& operator*=(const S& rhs) {
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        (*this)[i][j] = R::mul((*this)[i][j], rhs);
+      }
+    }
+    return *this;
+  }
+  
+  matrix operator*=(const matrix& rhs) {
+    assert(w == rhs.h);
+    matrix res(h, rhs.w);
+    for (int i = 0; i < h; i++) {
+      for (int k = 0; k < w; k++) {
         for (int j = 0; j < rhs.w; j++) {
-          res[i][j] = R::add(res[i][j], R::mul(lhs[i][k], rhs[k][j]));
+          res[i][j] = R::add(res[i][j], R::mul((*this)[i][k], rhs[k][j]));
         }
       }
     }
-    return res;
+    return *this = res;
   }
 
-  matrix operator+=(const matrix& rhs) { return *this = *this + rhs; }  
-  matrix operator*=(const matrix& rhs) { return *this = *this * rhs; }
+  friend matrix operator+(const matrix& lhs, const matrix& rhs) { return matrix(lhs) += rhs; }  
+  friend matrix operator*(const matrix& lhs, const S& rhs) { return matrix(lhs) *= rhs; }
+  friend matrix operator*(const S& lhs, const matrix& rhs) { return matrix(rhs) *= lhs; }
+  friend matrix operator*(const matrix& lhs, const matrix& rhs) { return matrix(lhs) *= rhs; }
 
   static matrix unit(int n) {
     matrix res(n, n);
@@ -105,12 +118,27 @@ public:
     return r;
   }
 
+  friend std::istream& operator>>(std::istream& is, matrix& mat) {
+    for (int i = 0; i < mat.h; i++) {
+      for (int j = 0; j < mat.w; j++) {
+        is >> mat[i][j];
+      }
+    }
+    return is;
+  }
+  friend std::ostream& operator<<(std::ostream& os, matrix& mat) {
+    for (int i = 0; i < mat.h; i++) {
+      for (int j = 0; j < mat.w; j++) {
+        os << mat[i][j] << " ";
+      }
+      if (i != mat.h - 1) os << "\n";
+    }
+    return os;
+  }
+
 private:
   int h, w;
   std::vector<row> d;
 };
-
-template <class T>
-struct is_matrix<matrix<T>> : std::true_type {};
 
 } // namespace cp

@@ -21,7 +21,7 @@ private:
   };
 
 public:
-  fenwick_tree_2d() : fenwick_tree_2d(0, 0) {}
+  fenwick_tree_2d() : h(0), w(0) {}
   fenwick_tree_2d(int _h, int _w) : h(_h), w(_w), fw(_h) {
     for (int i = 0; i < h; i++) {
       fw[i] = fenwick_tree<T>(w);

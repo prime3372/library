@@ -14,7 +14,7 @@ private:
   using F = typename M::F;
 
 public:
-  rerooting_dp() : rerooting_dp(0) {}
+  rerooting_dp() : n(0) {}
   explicit rerooting_dp(int _n) : rerooting_dp(std::vector<S>(_n, M::e())) {}
   explicit rerooting_dp(int _n, S val) : rerooting_dp(std::vector<S>(_n, val)) {}
   explicit rerooting_dp(const std::vector<S>& v) : n(int(v.size())), g(int(v.size())), vals(v) {}

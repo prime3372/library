@@ -35,7 +35,7 @@ private:
   };
 
 public:
-  dynamic_bitset() : dynamic_bitset(0) {}
+  dynamic_bitset() : n(0) {}
   explicit dynamic_bitset(int _n) : n(_n), a((_n + 63) / 64, 0) {}
   explicit dynamic_bitset(int _n, bool b) : n(_n), a((_n + 63) / 64, b ? (unsigned long long)(-1) : 0) {
     if (b && n % 64) a.back() &= mask(n % 64) - 1;

@@ -17,7 +17,7 @@ namespace internal {
 
 constexpr int primitive_root_ntt(int p) {
   if (p == 2) return 1;
-  if (p == 998244353) return 3;
+
   std::vector<int> fs = {2};
   int x = p - 1;
   while (x % 2 == 0) x /= 2;

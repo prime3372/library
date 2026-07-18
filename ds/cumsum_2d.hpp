@@ -9,7 +9,7 @@ template <class T> struct cumsum_2d {
 public:
   struct row {
   public:
-    row() : row(0) {}
+    row() : w(0) {}
     explicit row(int _w) : w(_w), d(_w) {}
     explicit row(int _w, T x) : w(_w), d(_w, x) {}
 

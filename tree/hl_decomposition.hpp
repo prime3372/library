@@ -7,9 +7,9 @@ namespace cp {
 
 struct hl_decomposition {
 public:
-  hl_decomposition() : hl_decomposition(0) {}
-  explicit hl_decomposition(int _n)
-  : id(_n, -1), vertex(_n, -1), head(_n, -1), next(_n, -1), n(_n), g(_n), size(_n) {}
+  hl_decomposition() : n(0) {}
+  explicit hl_decomposition(int _n) : id(_n, -1), vertex(_n, -1), head(_n, -1), next(_n, -1),
+                                      n(_n), g(_n), size(_n) {}
 
   void add_edge(int a, int b) {
     assert(0 <= a && a < n);

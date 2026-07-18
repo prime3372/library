@@ -13,11 +13,10 @@ namespace cp {
 template <class T, int h, int w>
   requires (semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>)
 struct matrix_array {
-private:
+public:
   using R = std::conditional_t<semiring<T>, T, add_mul<T>>;
   using S = typename R::S;
 
-public:
   matrix_array() : d{} {
     d.fill(std::array<S, w>{});
   }
@@ -34,27 +33,46 @@ public:
     return d[i];
   }
 
-  friend matrix_array operator+(const matrix_array& lhs, const matrix_array& rhs) {
-    matrix_array res;
+  matrix_array& operator+=(const matrix_array& rhs) {
     for (int i = 0; i < h; i++) {
       for (int j = 0; j < w; j++) {
-        res[i][j] = R::add(lhs[i][j], rhs[i][j]);
+        (*this)[i][j] = R::add((*this)[i][j], rhs[i][j]);
       }
     }
-    return res;
+    return *this;
   }
 
-  matrix_array& operator+=(const matrix_array& rhs) { return *this = *this + rhs; }
+  matrix_array& operator*=(const S& rhs) {
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        (*this)[i][j] = R::mul((*this)[i][j], rhs);
+      }
+    }
+    return *this;
+  }
+
+  friend matrix_array operator+(const matrix_array& lhs,
+                                const matrix_array& rhs) {
+    return matrix_array(lhs) += rhs;
+  }
+  friend matrix_array operator*(const matrix_array& lhs,
+                                const S& rhs) {
+    return matrix_array(lhs) *= rhs;
+  }
+  friend matrix_array operator*(const S& lhs,
+                                const matrix_array& rhs) {
+    return matrix_array(rhs) *= lhs;
+  }
+
   matrix_array& operator*=(const matrix_array<R, w, w>& rhs) { return *this = *this * rhs; }
 
-  static matrix_array unit() requires (h == w) {
-    matrix_array res;
-    for (int i = 0; i < h; i++) res[i][i] = R::one();
+  template <int n> static matrix_array<T, n, n> unit() {
+    matrix_array<T, n, n> res;
+    for (int i = 0; i < n; i++) res[i][i] = R::one();
     return res;
   }
 
-  matrix_array pow(long long n) const {
-    static_assert(h == w);
+  matrix_array pow(long long n) requires (h == w) const {
     assert(0 <= n);
     matrix_array r = unit<h>(), mat = *this;
     while (n) {
@@ -63,6 +81,24 @@ public:
       n >>= 1;
     }
     return r;
+  }
+
+  friend std::istream& operator>>(std::istream& is, matrix_array& mat) {
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        is >> mat[i][j];
+      }
+    }
+    return is;
+  }
+  friend std::ostream& operator<<(std::ostream& os, matrix_array& mat) {
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
+        os << mat[i][j] << " ";
+      }
+      if (i != mat.height) os << "\n";
+    }
+    return os;
   }
 
 private:
@@ -83,8 +119,5 @@ matrix_array<T, l, n> operator*(const matrix_array<T, l, m>& lhs,
   }
   return res;
 }
-
-template <class T, int h, int w>
-struct is_matrix<matrix_array<T, h, w>> : std::true_type {};
 
 } // namespace cp
