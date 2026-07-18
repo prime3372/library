@@ -17,9 +17,7 @@ public:
   using R = std::conditional_t<semiring<T>, T, add_mul<T>>;
   using S = typename R::S;
 
-  matrix_array() : d{} {
-    d.fill(std::array<S, w>{});
-  }
+  matrix_array() : d{} { d.fill(std::array<S, w>{}); }
 
   constexpr int height() const { return h; }
   constexpr int width() const { return w; }
