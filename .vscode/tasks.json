@@ -48,7 +48,7 @@
     {
       "type": "shell",
       "label": "bundle and copy",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; ${workspaceFolder}\\script\\bundle_and_copy.ps1 ${file} ${workspaceFolder}",
+      "command": "cmd /c oj-bundle ${file} -I ${workspaceFolder} > submit.cpp (Get-Content submit.cpp) -replace '(cerr|std::cerr).+?;', ';' | Set-Content submit.cpp; Get-Content submit.cpp | Set-Clipboard; if (Test-Path submit.cpp) { Remove-Item submit.cpp }",
       "group": {
         "kind": "test",
         "isDefault": true
