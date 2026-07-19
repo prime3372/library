@@ -36,10 +36,20 @@ inline std::string ordinal_suffix(int x) {
   return "th";
 }
 
-bool read_as_double(const std::string& t, double& n) {
+bool read_as_ll(const std::string& t, long long& n) {
   size_t pos;
   try {
-    n = std::stod(t, &pos);
+    n = std::stoll(t, &pos);
+  } catch (...) {
+    return false;
+  }
+  return pos == t.size();
+}
+
+bool read_as_double(const std::string& t, double& d) {
+  size_t pos;
+  try {
+    d = std::stod(t, &pos);
   } catch (...) {
     return false;
   }

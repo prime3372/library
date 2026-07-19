@@ -1,15 +1,17 @@
 #include "checker/checker.hpp"
-#include <cmath>
 #include <iomanip>
 
-constexpr double max_error = 1e-6;
-constexpr int display_precision = 6;
+constexpr double max_error = 1E-6;
+constexpr int display_precision = 7;
 
 int main(int argc, char** argv) {
   open_files(argc, argv);
 
+  std::cout << std::fixed << std::setprecision(display_precision);
+
   std::string t_out, t_ans;
   int t_cnt = 0;
+  double n_out, n_ans;
 
   while (f_ans >> t_ans) {
     if (!(f_out >> t_out)) {
@@ -18,7 +20,6 @@ int main(int argc, char** argv) {
     }
     t_cnt++;
 
-    double n_out, n_ans;
     if (!read_as_double(t_ans, n_ans)) {
       std::cout << "FAIL Expected double, but '" << t_ans << "' found" << std::endl;
       return 2;
@@ -29,11 +30,10 @@ int main(int argc, char** argv) {
     }
 
     if (double_delta(n_ans, n_out) > max_error) {
-      std::cout << std::fixed << std::setprecision(display_precision);
       std::cout << "wrong answer " << t_cnt << ordinal_suffix(t_cnt) << " numbers differ - ";
       std::cout << "expected: '" << n_ans << "', ";
       std::cout << "found: '" << n_out << "', "; 
-      std::cout << "error: '" << double_delta(n_ans, n_out) << "'" << std::endl; 
+      std::cout << "error = '" << double_delta(n_ans, n_out) << "'" << std::endl; 
       return 1;
     }
   }
@@ -44,9 +44,9 @@ int main(int argc, char** argv) {
   }
 
   if (t_cnt == 1) {
-    std::cout << "ok '" << t_out << "'" << std::endl;
-  } else {
-    std::cout << "ok " << t_cnt << " numbers" << std::endl;
+    std::cout << "ok found '" << n_out << "', expected '" << n_ans << "', error '" << double_delta(n_ans, n_out) << "'" << std::endl;
+    return 0;
   }
-  return 0;
+
+  std::cout << "ok " << t_cnt << " numbers" << std::endl;
 }

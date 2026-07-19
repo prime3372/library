@@ -1,8 +1,8 @@
 #include "checker/checker.hpp"
 #include <iomanip>
 
-constexpr double max_error = 1E-9;
-constexpr int display_precision = 10;
+constexpr double max_error = 1E-4;
+constexpr int display_precision = 5;
 
 int main(int argc, char** argv) {
   open_files(argc, argv);
