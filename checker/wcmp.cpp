@@ -12,7 +12,9 @@ int main(int argc, char* argv[]) {
       std::cout << "wrong answer Unexpected EOF in the participants output" << std::endl;
       std::exit(1);
     }
+
     t_cnt++;
+    
     if (t_out != t_ans) {
       std::cout << "wrong answer " << t_cnt << ordinal_suffix(t_cnt) << " words differ - ";
       std::cout << "expected: '" << t_ans << "', ";

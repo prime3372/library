@@ -19,6 +19,7 @@ int main(int argc, char** argv) {
       std::cout << "wrong answer Unexpected EOF in the participants output" << std::endl;
       std::exit(1);
     }
+    
     t_cnt++;
 
     if (!read_as_double(t_ans, n_ans)) {
