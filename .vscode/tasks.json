@@ -24,7 +24,7 @@
       "args": [
         "${file}",
         "-o",
-        "debug.exe",
+        "${workspaceFolder}\\$debug.exe",
         "-D_GLIBCXX_DEBUG",
         "-I",
         "${workspaceFolder}",
@@ -51,7 +51,7 @@
     {
       "type": "shell",
       "label": "remove output file",
-      "command": "if (Test-Path debug.exe) { Remove-Item debug.exe }",
+      "command": "if (Test-Path ${workspaceFolder}\\debug.exe) { Remove-Item ${workspaceFolder}\\debug.exe }",
       "presentation": {
         "panel": "shared",
         "reveal": "never",
