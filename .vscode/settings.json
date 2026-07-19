@@ -11,7 +11,7 @@
       {
         "scope": "entity.name.function.preprocessor.cpp",
         "settings": {
-          "foreground": "#e7b2b5",
+          "foreground": "#e7b5b5",
         }
       }
     ],
