@@ -9,9 +9,6 @@ template <int char_size, auto offset = 'a'>
 class trie_tree {
 public:
   trie_tree() { nodes.push_back(node(-1)); }
-  trie_tree(const std::vector<std::string>& vec) : trie_tree() {
-    for (const auto& s : vec) insert(s);
-  }
 
   int insert(const std::string& s) {
     int v = 0;
