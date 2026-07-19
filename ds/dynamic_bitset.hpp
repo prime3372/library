@@ -59,8 +59,8 @@ public:
   dynamic_bitset& flip() { return flip(n); }
   dynamic_bitset& flip(int l, int r) {
     assert(0 <= l && l <= r && r <= n);
-    flip(r);
     flip(l);
+    flip(r);
     return *this;
   }
   dynamic_bitset& flip(int r) {
@@ -163,7 +163,7 @@ public:
       a[block_shift] <<= bit_shift;
     }
 
-    if (n % 64) a.back() &= mask(n % 64) - 1;
+    if (n % 64) a.back() &= mask(n % 64) - 1; // clean the bits that stick out on the left
     return *this;
   }
   dynamic_bitset& operator>>=(int shift) {
