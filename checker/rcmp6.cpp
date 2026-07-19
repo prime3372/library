@@ -1,5 +1,4 @@
 #include "checker/checker.hpp"
-#include <cstdlib>
 #include <iomanip>
 
 constexpr double max_error = 1E-6;
@@ -17,18 +16,18 @@ int main(int argc, char** argv) {
   while (f_ans >> t_ans) {
     if (!(f_out >> t_out)) {
       std::cout << "wrong answer Unexpected EOF in the participants output" << std::endl;
-      std::exit(1);
+      return 1;
     }
 
     t_cnt++;
 
     if (!read_as_double(t_ans, n_ans)) {
       std::cout << "FAIL Expected double, but '" << t_ans << "' found" << std::endl;
-      std::exit(2);
+      return 2;
     }
     if (!read_as_double(t_out, n_out)) {
       std::cout << "wrong output format Expected double, but '" << t_out << "' found" << std::endl;
-      std::exit(1);
+      return 1;
     }
 
     if (double_delta(n_ans, n_out) > max_error) {
@@ -36,18 +35,18 @@ int main(int argc, char** argv) {
       std::cout << "expected: '" << n_ans << "', ";
       std::cout << "found: '" << n_out << "', "; 
       std::cout << "error = '" << double_delta(n_ans, n_out) << "'" << std::endl; 
-      std::exit(1);
+      return 1;
     }
   }
 
   if (f_out >> t_out) {
     std::cout << "wrong answer Participant output contains extra tokens" << std::endl;
-    std::exit(1);
+    return 1;
   }
 
   if (t_cnt == 1) {
     std::cout << "ok found '" << n_out << "', expected '" << n_ans << "', error '" << double_delta(n_ans, n_out) << "'" << std::endl;
-    std::exit(0);
+    return 0;
   }
   std::cout << "ok " << t_cnt << " numbers" << std::endl;
 }
