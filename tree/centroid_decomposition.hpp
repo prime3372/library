@@ -8,8 +8,8 @@ namespace cp {
 struct centroid_decomposition {
 public:
   centroid_decomposition() : n(0) {}
-  explicit centroid_decomposition(int _n)
-  : parent(_n, -1), size(_n), tree(_n), n(_n), g(_n), removed(_n) {}
+  explicit centroid_decomposition(int _n) : parent(_n, -1), size(_n), tree(_n),
+                                            n(_n), g(_n), removed(_n) {}
 
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
