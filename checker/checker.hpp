@@ -21,7 +21,7 @@ void open_files(int argc, char** argv) {
   f_out.open(argv[2]);
   f_ans.open(argv[3]);
 
-  if (!f_in.is_open() || !f_out.is_open() || !f_ans.is_open()) {
+  if (!(f_in.is_open() && f_out.is_open() && f_ans.is_open())) {
     std::cout << "error opening files" << std::endl;
     std::exit(2);
   }
