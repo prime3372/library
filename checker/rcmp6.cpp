@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
       std::cout << "wrong answer Unexpected EOF in the participants output" << std::endl;
       std::exit(1);
     }
-    
+
     t_cnt++;
 
     if (!read_as_double(t_ans, n_ans)) {
@@ -49,6 +49,5 @@ int main(int argc, char** argv) {
     std::cout << "ok found '" << n_out << "', expected '" << n_ans << "', error '" << double_delta(n_ans, n_out) << "'" << std::endl;
     std::exit(0);
   }
-
   std::cout << "ok " << t_cnt << " numbers" << std::endl;
 }

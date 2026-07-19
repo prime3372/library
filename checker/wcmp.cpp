@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
     }
 
     t_cnt++;
-    
+
     if (t_out != t_ans) {
       std::cout << "wrong answer " << t_cnt << ordinal_suffix(t_cnt) << " words differ - ";
       std::cout << "expected: '" << t_ans << "', ";
@@ -32,6 +32,5 @@ int main(int argc, char* argv[]) {
     std::cout << "ok '" << t_out << "'" << std::endl;
     std::exit(0);
   }
-  
   std::cout << "ok " << t_cnt << " tokens" << std::endl;
 }

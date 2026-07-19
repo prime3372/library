@@ -49,11 +49,9 @@ int main(int argc, char** argv) {
   }
 
   int extra_out_cnt = 0;
-
   while (f_out >> t_out) {
     extra_out_cnt++;
   }
-
   if (extra_out_cnt > 0) {
     std::cout << "wrong answer Output contains longer sequence [length = " << t_cnt + extra_out_cnt << "], ";
     std::cout << "but answer contains " << t_cnt << "elements" << std::endl;
@@ -64,6 +62,5 @@ int main(int argc, char** argv) {
     std::cout << "ok "<< t_cnt << " number(s): \"" << t_first << "\"" << std::endl;
     std::exit(0);
   }
-
   std::cout << "ok " << t_cnt << " numbers" << std::endl;
 }
