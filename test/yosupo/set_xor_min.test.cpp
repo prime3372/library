@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
+#define PROBLEM "https://judge.yosupo.jp/problem/set_xor_min"
 
 #include "ds/binary_trie.hpp"
 
