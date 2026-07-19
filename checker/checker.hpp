@@ -13,7 +13,7 @@ std::ifstream f_in, f_out, f_ans;
 
 void open_files(int argc, char** argv) {
   if (argc < 4) {
-    std::cout << "usage: " << argv[0] << " <input-file> <output-file> <answer-file>" << std::endl;
+    std::cout << "FAIL too few arguments" << std::endl;
     std::exit(2);
   }
 
@@ -22,7 +22,7 @@ void open_files(int argc, char** argv) {
   f_ans.open(argv[3]);
 
   if (!(f_in.is_open() && f_out.is_open() && f_ans.is_open())) {
-    std::cout << "error opening files" << std::endl;
+    std::cout << "FAIL cannot open files" << std::endl;
     std::exit(2);
   }
 }
