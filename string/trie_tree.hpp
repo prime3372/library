@@ -1,9 +1,9 @@
 #pragma once
 
-#include <vector>
-#include <string>
 #include <array>
+#include <string>
 #include <type_traits>
+#include <vector>
 
 template <int char_size, auto offset = 'a'>
 class trie_tree {
