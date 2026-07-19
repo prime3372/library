@@ -1,21 +1,6 @@
 {
   "version": "2.0.0",
   "tasks": [
-    // tasks for oj-bundle
-    {
-      "type": "shell",
-      "label": "bundle and copy",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; ${workspaceFolder}\\script\\bundle_and_copy.ps1 ${file} ${workspaceFolder}",
-      "group": {
-        "kind": "test",
-        "isDefault": true
-      },
-      "presentation": {
-        "panel": "shared",
-        "clear": true,
-        "close": true
-      }
-    },
     // tasks for debug
     {
       "type": "cppbuild",
@@ -58,6 +43,21 @@
         "close": true
       },
       "problemMatcher": []
+    },
+    // tasks for oj-bundle
+    {
+      "type": "shell",
+      "label": "bundle and copy",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; ${workspaceFolder}\\script\\bundle_and_copy.ps1 ${file} ${workspaceFolder}",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "panel": "shared",
+        "clear": true,
+        "close": true
+      }
     }
   ]
 }
