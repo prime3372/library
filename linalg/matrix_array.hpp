@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cassert>
+#include <iostream>
 #include <type_traits>
 
 #include "algebra/add_mul.hpp"
@@ -70,7 +71,7 @@ public:
     return res;
   }
 
-  matrix_array pow(long long n) requires (h == w) const {
+  matrix_array pow(long long n) const requires (h == w) {
     assert(0 <= n);
     matrix_array r = unit<h>(), mat = *this;
     while (n) {
