@@ -1,6 +1,22 @@
 {
   "version": "2.0.0",
   "tasks": [
+    // tasks for oj-bundle
+    {
+      "type": "shell",
+      "label": "bundle and copy",
+      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; ${workspaceFolder}\\script\\bundle_and_copy.ps1 ${file} ${workspaceFolder}",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "panel": "shared",
+        "clear": true,
+        "close": true
+      }
+    },
+    // tasks for debug
     {
       "type": "cppbuild",
       "label": "g++.exe build active file",
@@ -35,132 +51,11 @@
     {
       "type": "shell",
       "label": "remove output file",
-      "command": "if (Test-Path \"debug.exe\") { Remove-Item \"debug.exe\" }",
-      "problemMatcher": [],
+      "command": "if (Test-Path debug.exe) { Remove-Item debug.exe }",
       "presentation": {
         "panel": "shared",
         "reveal": "never",
         "close": true
-      }
-    },
-    {
-      "label": "bundle and copy current file",
-      "type": "shell",
-      "command": "cmd /c \"oj-bundle ${file} -I ${workspaceFolder} > submit.cpp \"; (Get-Content submit.cpp) -replace '(cerr|std::cerr).+?;', ';' | Set-Content submit.cpp; Get-Content submit.cpp | Set-Clipboard; Remove-Item submit.cpp -ErrorAction SilentlyContinue",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "panel": "shared",
-        "clear": true,
-        "close": true
-      },
-      "problemMatcher": []
-    },
-    {
-      "type": "shell",
-      "label": "setup custom test",
-      "command": "Get-Content \"template\\template.cpp\" | Set-Content \"gen.cpp\"; code gen.cpp",
-      "presentation": {
-        "panel": "shared",
-        "clear": true,
-        "close": true
-      },
-      "problemMatcher": []
-    },
-    {
-      "type": "shell",
-      "label": "run custom test",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; checker\\custom_test.ps1 ${file} gen.cpp ${workspaceFolder}",
-      "group": {
-        "kind": "test",
-        "isDefault": false
-      },
-      "presentation": {
-        "panel": "shared",
-        "clear": true
-      },
-      "problemMatcher": []
-    },
-    {
-      "type": "shell",
-      "label": "setup random test",
-      "command": "Get-Content \"template\\template.cpp\" | Set-Content \"gen.cpp\"; Get-Content \"template\\template.cpp\" | Set-Content \"ans.cpp\"; Get-Content \"template\\checker.cpp\" | Set-Content \"che.cpp\"; code gen.cpp ans.cpp che.cpp",
-      "presentation": {
-        "panel": "shared",
-        "clear": true,
-        "close": true
-      },
-      "problemMatcher": []
-    },
-    {
-      "type": "shell",
-      "label": "run random test (wcmp)",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp checker\\wcmp.cpp ${workspaceFolder}",
-      "group": {
-        "kind": "test",
-        "isDefault": false
-      },
-      "presentation": {
-        "panel": "shared",
-        "clear": true
-      },
-      "problemMatcher": []
-    },
-    {
-      "type": "shell",
-      "label": "run random test (rcmp6)",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp checker\\rcmp6.cpp ${workspaceFolder}",
-      "group": {
-        "kind": "test",
-        "isDefault": false
-      },
-      "presentation": {
-        "panel": "shared",
-        "clear": true
-      },
-      "problemMatcher": []
-    },
-    {
-      "type": "shell",
-      "label": "run random test (rcmp9)",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp checker\\rcmp9.cpp ${workspaceFolder}",
-      "group": {
-        "kind": "test",
-        "isDefault": false
-      },
-      "presentation": {
-        "panel": "shared",
-        "clear": true
-      },
-      "problemMatcher": []
-    },
-    {
-      "type": "shell",
-      "label": "run random test (custom judge)",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; checker\\judge.ps1 ${file} gen.cpp ans.cpp che.cpp ${workspaceFolder}",
-      "group": {
-        "kind": "test",
-        "isDefault": true
-      },
-      "presentation": {
-        "panel": "shared",
-        "clear": true
-      },
-      "problemMatcher": []
-    },
-    {
-      "type": "shell",
-      "label": "run random test (interactive)",
-      "command": "Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; checker\\judge_interactive.ps1 ${file} gen.cpp ${workspaceFolder}",
-      "group": {
-        "kind": "test",
-        "isDefault": true
-      },
-      "presentation": {
-        "panel": "shared",
-        "clear": true
       },
       "problemMatcher": []
     }
