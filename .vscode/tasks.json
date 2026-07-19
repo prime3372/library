@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
   "tasks": [
-    // tasks for debug
+    // debug
     {
       "type": "cppbuild",
       "label": "g++.exe build active file",
@@ -9,7 +9,7 @@
       "args": [
         "${file}",
         "-o",
-        "${workspaceFolder}\\$debug.exe",
+        "${workspaceFolder}\\debug.exe",
         "-D_GLIBCXX_DEBUG",
         "-I",
         "${workspaceFolder}",
@@ -30,13 +30,17 @@
       "presentation": {
         "panel": "shared",
         "clear": true,
-        "close": true,
+        "close": true
       }
     },
     {
       "type": "shell",
       "label": "remove output file",
       "command": "if (Test-Path ${workspaceFolder}\\debug.exe) { Remove-Item ${workspaceFolder}\\debug.exe }",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
       "presentation": {
         "panel": "shared",
         "reveal": "never",
@@ -44,13 +48,13 @@
       },
       "problemMatcher": []
     },
-    // tasks for oj-bundle
+    // oj-bundle
     {
       "type": "shell",
       "label": "bundle and copy",
-      "command": "cmd /c oj-bundle ${file} -I ${workspaceFolder} > submit.cpp (Get-Content submit.cpp) -replace '(cerr|std::cerr).+?;', ';' | Set-Content submit.cpp; Get-Content submit.cpp | Set-Clipboard; if (Test-Path submit.cpp) { Remove-Item submit.cpp }",
+      "command": "cmd /c oj-bundle ${file} -I ${workspaceFolder} > submit.cpp; (Get-Content submit.cpp) -replace '(cerr|std::cerr).+?;', ';' | Set-Content submit.cpp; Get-Content submit.cpp | Set-Clipboard; Remove-Item submit.cpp",
       "group": {
-        "kind": "test",
+        "kind": "build",
         "isDefault": true
       },
       "presentation": {
@@ -58,6 +62,6 @@
         "clear": true,
         "close": true
       }
-    }
+    },
   ]
 }
