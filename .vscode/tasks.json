@@ -17,6 +17,7 @@
         "-Wall",
         "-Wconversion",
         "-Wextra",
+        "-Wfloat-equal",
         "-Wshadow",
         "-fdiagnostics-color=always",
         "-g",
