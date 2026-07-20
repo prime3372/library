@@ -37,12 +37,12 @@ constexpr long long floor_sum(int n, int m, long long a, long long b) {
   assert(0 <= n && 1 <= m);
   unsigned long long ans = 0;
   if (a < 0) {
-    unsigned long long r_a = a < 0 ? a % m + m : a % m;
+    unsigned long long r_a = a % m + m;
     ans -= 1ULL * n * (n - 1) / 2 * ((r_a - a) / m);
     a = r_a;
   }
   if (b < 0) {
-    unsigned long long r_b = b < 0 ? b % m + m : b % m;
+    unsigned long long r_b = b % m + m;
     ans -= 1ULL * n * ((r_b - b) / m);
     b = r_b;
   }
