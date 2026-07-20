@@ -27,7 +27,7 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
   std::vector<int> index(n), cnt(n, 0);
   for (int i = 0; i < n; i++) cnt[rank[i]]++;
   for (int i = 1; i < n; i++) cnt[i] += cnt[i - 1];
-  for (int i = 0; i < n; i++) index[--cnt[rank[i]]] = i; // order[i] = --cnt[rank[i]]
+  for (int i = 0; i < n; i++) index[--cnt[rank[i]]] = i;
 
   std::vector<int> nindex(n), nrank(n);
   for (int step = 0; (1 << step) < n; step++) {
@@ -40,13 +40,13 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
     for (int i = n - 1; i >= 0; i--) {
       int j = index[i] - w;
       if (j < 0) j += n;
-      nindex[--cnt[rank[j]]] = j; // order[index[i] - w] = --cnt[rank[index[i] - w]]
+      nindex[--cnt[rank[j]]] = j;
     }
 
     rank_num = 1;
     nrank[nindex[0]] = 0;
     for (int i = 1; i < n; i++) {
-      std::pair<int, int> cur =  {rank[nindex[i]],     rank[(nindex[i] + w) % n]    };
+      std::pair<int, int> cur = {rank[nindex[i]], rank[(nindex[i] + w) % n]};
       std::pair<int, int> prev = {rank[nindex[i - 1]], rank[(nindex[i - 1] + w) % n]};
       if (cur != prev) rank_num++;
       nrank[nindex[i]] = rank_num - 1;
