@@ -13,7 +13,5 @@ int main() {
   string s;
   cin >> s;
   auto sa = suffix_array(s);
-  rep(i, 1, sa.size()) {
-    cout << sa[i] << " ";
-  }
+  rep(i, 1, sa.size()) cout << sa[i] << " ";  
 }

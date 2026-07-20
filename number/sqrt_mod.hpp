@@ -35,7 +35,7 @@ constexpr long long sqrt_mod(long long n, long long p) {
   };
 
   Fp2 z = {1, 0}, t = {a, 1};
-  for (int e = (p + 1) / 2; e; e >>= 1) {
+  for (long long e = (p + 1) / 2; e; e >>= 1) {
     if (e & 1) z = mul(z, t);
     t = mul(t, t);
   }

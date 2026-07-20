@@ -95,7 +95,7 @@ private:
     r *= b;
     r = (r >> 61) + (r & m);
     if (r >= m) r -= m;
-    return r;
+    return (long long)(r);
   }
 };
 

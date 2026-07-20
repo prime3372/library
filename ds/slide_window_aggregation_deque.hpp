@@ -56,7 +56,7 @@ private:
   }
 
   void rebalance() {
-    int n = a0.size() + a1.size();
+    int n = int(a0.size() + a1.size());
     int s0 = n / 2 + (a0.empty() ? n % 2 : 0);
     std::vector<S> a = a0;
     std::reverse(a.begin(), a.end());

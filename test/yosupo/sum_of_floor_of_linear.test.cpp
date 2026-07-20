@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int t;
   cin >> t;
-  while (t--) {
+  while (t--) {    
     ll n, m, a, b;
     cin >> n >> m >> a >> b;
     cout << floor_sum(n, m, a, b) << "\n";

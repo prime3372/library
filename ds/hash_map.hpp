@@ -71,7 +71,7 @@ private:
   std::vector<bool> used;
   Val default_value;
 
-  unsigned int get_hash(Key k) const { return (hasher(k) * r) >> shift; }
+  unsigned int get_hash(Key k) const { return (unsigned int)((hasher(k) * r) >> shift); }
 
   unsigned int index(Key k) const {
     unsigned int hs = get_hash(k);

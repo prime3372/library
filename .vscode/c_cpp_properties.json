@@ -3,12 +3,13 @@
     {
       "name": "MinGW",
       "compilerArgs": [
-        "-D_GLIBCXX_DEBUG",
         "-I",
         "${workspaceFolder}",
         "-O2",
         "-Wall",
+        "-Wconversion",
         "-Wextra",
+        "-Wshadow",
         "-fdiagnostics-color=always",
         "-g",
         "-std=c++23"

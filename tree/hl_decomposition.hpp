@@ -37,18 +37,18 @@ public:
     };
     first_dfs(first_dfs, r, -1);
 
+    head[now_id] = now_id;
+    next[now_id] = -1;
     auto second_dfs = [&](auto self, int v, int pv) -> void {
-      id[v] = k;
-      vertex[k++] = v;
+      id[v] = now_id;
+      vertex[now_id++] = v;
       for (int nv : g[v]) {
         if (nv == pv) continue;
-        head[k] = g[v][0] == nv ? head[id[v]] : k;
-        next[k] = g[v][0] == nv ? next[id[v]] : id[v];
+        head[now_id] = g[v][0] == nv ? head[id[v]] : now_id;
+        next[now_id] = g[v][0] == nv ? next[id[v]] : id[v];
         self(self, nv, v);
       }
     };
-    head[k] = k;
-    next[k] = -1;
     second_dfs(second_dfs, r, -1);
     return *this;
   }
@@ -58,7 +58,7 @@ protected:
   std::vector<std::vector<int>> g;
 
 private:
-  int k = 0;
+  int now_id = 0;
   std::vector<int> size;
 };
 

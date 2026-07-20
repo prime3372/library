@@ -33,21 +33,21 @@ int main() {
     int k = int(g[c].size());
 
     vector<formal_power_series<ll>> f(k);
-    rep(i, 0, k) {
+    rep(j, 0, k) {
       auto dfs = [&](auto self, int v, int pv, int d) -> void {
-        f[i][d]++;
+        f[j][d]++;
         for (int nv : g[v]) {
           if (!removed[nv] && nv != pv) {
             self(self, nv, v, d + 1);
           }
         }
       };
-      if (!removed[g[c][i]]) dfs(dfs, g[c][i], c, 1);
+      if (!removed[g[c][j]]) dfs(dfs, g[c][j], c, 1);
     }
 
     formal_power_series<ll> fsum, f2sum;
-    rep(i, 0, k) fsum += f[i];
-    rep(i, 0, k) f2sum += f[i] * f[i];
+    rep(j, 0, k) fsum += f[j];
+    rep(j, 0, k) f2sum += f[j] * f[j];
     freq += (fsum * fsum - f2sum) / 2 + fsum;
 
     removed[c] = true;
