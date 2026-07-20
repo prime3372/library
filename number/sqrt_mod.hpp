@@ -10,11 +10,12 @@ namespace cp {
 // https://en.wikipedia.org/wiki/Cipolla%27s_algorithm
 constexpr long long sqrt_mod(long long n, long long p) {
   assert(2 <= p);
-
-  n = n < 0 ? n % p + p : n % p;
+  n %= p;
+  if (n < 0) n += p;
   if (n <= 1) return n;
-  if (pow_mod(n, (p - 1) / 2, p) != 1) return -1;
+
   // if n is not a square in F_p, return -1
+  if (pow_mod(n, (p - 1) / 2, p) != 1) return -1;
 
   // take an a s.t. a*a - n is not a square in F_p,
   // and let w = sqrt(a*a - n)

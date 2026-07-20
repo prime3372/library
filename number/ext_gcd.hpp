@@ -8,7 +8,8 @@ namespace cp {
 // @return pair(g, x) s.t. g = gcd(a, b), xa = g (mod b), 0 <= x < b/g
 constexpr std::pair<long long, long long> ext_gcd(long long a, long long b) {
   assert(1 <= b);
-  a = a < 0 ? a % b + b : a % b;
+  a %= b;
+  if (a < 0) a += b;
   long long g0 = b, g1 = a;
   long long x0 = 0, x1 = 1;
   while (g1) {
