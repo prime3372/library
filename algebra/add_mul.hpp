@@ -9,7 +9,7 @@ namespace cp {
 template <class> struct add_mul {};
 
 template <class T>
-  requires std::is_arithmetic_v<T> || is_modint_v<T>
+  requires (std::is_arithmetic_v<T> || is_modint_v<T>)
 struct add_mul<T> {
   using S = T;
   static constexpr S op(S x, S y) { return x + y; }
