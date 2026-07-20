@@ -24,7 +24,7 @@ int main() {
       unsigned int m = 0;
       int v = 0;
       for (int i = 31; i >= 0; i--) {
-        bool b = x >> i & 1;
+        bool b = (x >> i) & 1;
         m <<= 1;
         if (trie[v][b] != -1) {
           v = trie[v][b];
