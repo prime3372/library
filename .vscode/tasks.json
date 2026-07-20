@@ -8,8 +8,6 @@
       "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
       "args": [
         "${file}",
-        "-o",
-        "${workspaceFolder}\\debug.exe",
         "-D_GLIBCXX_DEBUG",
         "-I",
         "${workspaceFolder}",
@@ -21,6 +19,8 @@
         "-Wshadow",
         "-fdiagnostics-color=always",
         "-g",
+        "-o",
+        "${workspaceFolder}\\debug.exe",
         "-std=c++23"
       ],
       "problemMatcher": [
