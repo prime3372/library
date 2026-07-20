@@ -25,7 +25,7 @@ public:
       } else {
         id[v] = k++;
       }
-      for (auto& e : g[v]) {
+      for (const auto& e : g[v]) {
         if (id[e.to] == -1) self(self, e.to, v, k);        
       }
     };
@@ -33,12 +33,7 @@ public:
       if (id[i] == -1) dfs(dfs, i, -1, group_num);      
     }
 
-    std::vector<int> counts(group_num);
-    for (int x : id) counts[x]++;
     groups.resize(group_num);
-    for (int i = 0; i < group_num; i++) {
-      groups[i].reserve(counts[i]);
-    }
     for (int i = 0; i < n; i++) {
       groups[id[i]].push_back(i);
     }

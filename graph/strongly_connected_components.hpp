@@ -56,12 +56,7 @@ public:
       x = group_num - 1 - x;
     }
 
-    std::vector<int> counts(group_num);
-    for (int x : id) counts[x]++;
     scc.resize(group_num);
-    for (int i = 0; i < group_num; i++) {
-      scc[i].reserve(counts[i]);
-    }
     for (int i = 0; i < n; i++) {
       scc[id[i]].push_back(i);
     }
