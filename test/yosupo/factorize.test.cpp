@@ -14,11 +14,11 @@ int main() {
   while (t--) {
     ll n;
     cin >> n;
-    auto fs = factorize(n);
+    auto fac = factorize(n);
     int k = 0;
-    for (auto f : fs) k += f.second;
+    for (auto f : fac) k += f.second;
     cout << k << " ";
-    for (auto f : fs) {
+    for (auto f : fac) {
       rep(i, 0, f.second) cout << f.first << " ";
     }
     cout << "\n";

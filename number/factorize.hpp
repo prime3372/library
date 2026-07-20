@@ -58,24 +58,27 @@ std::vector<std::pair<long long, int>> factorize(long long n) {
   assert(1 <= n);
   if (n == 1) return {};
 
-  std::vector<long long> fac;
-  auto _factorize = [&](auto self, long long x) -> void {
+  std::vector<long long> factors;
+  auto f = [&](auto self, long long x) -> void {
     long long d = internal::pollard_rho(x);
     if (d == x) {
-      fac.push_back(d);
+      factors.push_back(d);
       return;
     }
     self(self, d);
     self(self, x / d);
   };
-  _factorize(_factorize, n);
-  std::sort(fac.begin(), fac.end());
+  f(f, n);
+  std::sort(factors.begin(), factors.end());
 
   std::vector<std::pair<long long, int>> ans;
-  ans.emplace_back(fac[0], 1);
-  for (int i = 1; i < int(fac.size()); i++) {
-    if (fac[i] == fac[i - 1]) ans.back().second++;
-    else ans.emplace_back(fac[i], 1);
+  ans.emplace_back(factors[0], 1);
+  for (int i = 1; i < int(factors.size()); i++) {
+    if (factors[i] == factors[i - 1]) {
+      ans.back().second++;
+    } else {
+      ans.emplace_back(factors[i], 1);
+    }
   }
   return ans;
 }

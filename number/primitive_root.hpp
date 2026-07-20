@@ -10,10 +10,10 @@ namespace cp {
 long long primitive_root(long long p) {
   assert(2 <= p);
   if (p == 2) return 1;
-  auto fs = factorize(p - 1);
+  auto fac = factorize(p - 1);
   for (int g = 2; g < p; g++) {
     bool ok = true;
-    for (auto f : fs) {
+    for (auto f : fac) {
       if (pow_mod(g, (p - 1) / f.first, p) == 1) {
         ok = false;
         break;

@@ -18,20 +18,20 @@ namespace internal {
 constexpr int primitive_root_ntt(int p) {
   if (p == 2) return 1;
 
-  std::vector<int> fs = {2};
+  std::vector<int> fac = {2};
   int x = p - 1;
   while (x % 2 == 0) x /= 2;
   for (int i = 3; 1LL * i * i <= x; i += 2) {
     if (x % i == 0) {
-      fs.push_back(i);
+      fac.push_back(i);
       while (x % i == 0) x /= i;
     }
   }
-  if (x > 1) fs.push_back(x);
+  if (x > 1) fac.push_back(x);
 
   for (int g = 2;; g++) {
     bool ok = true;
-    for (int f : fs) {
+    for (int f : fac) {
       if (pow_mod(g, (p - 1) / f, p) == 1) {
         ok = false;
         break;
