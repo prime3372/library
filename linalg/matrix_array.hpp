@@ -90,12 +90,13 @@ public:
     }
     return is;
   }
-  friend std::ostream& operator<<(std::ostream& os, matrix_array& mat) {
+  friend std::ostream& operator<<(std::ostream& os, const matrix_array& mat) {
     for (int i = 0; i < h; i++) {
       for (int j = 0; j < w; j++) {
-        os << mat[i][j] << " ";
+        os << mat[i][j];
+        if (j != w - 1) os << " ";
       }
-      if (i != mat.height) os << "\n";
+      if (i != h - 1) os << "\n";
     }
     return os;
   }
