@@ -36,7 +36,7 @@ public:
 
     logs.resize(1 << log);
     for (int k = 0; k < log; k++) {
-      for (int i = 1 << k; i < 1 << (k + 1); i++) {
+      for (int i = 1 << k; i < (1 << (k + 1)); i++) {
         logs[i] = k;
       }
     }
