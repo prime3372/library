@@ -4,7 +4,6 @@
 #include "util/static_modint.hpp"
 
 #include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
