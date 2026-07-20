@@ -50,20 +50,17 @@ public:
     return *this;
   }
 
-  friend matrix_array operator+(const matrix_array& lhs,
-                                const matrix_array& rhs) {
+  matrix_array& operator*=(const matrix_array<R, w, w>& rhs) { return *this = *this * rhs; }
+
+  friend matrix_array operator+(const matrix_array& lhs, const matrix_array& rhs) {
     return matrix_array(lhs) += rhs;
   }
-  friend matrix_array operator*(const matrix_array& lhs,
-                                const S& rhs) {
+  friend matrix_array operator*(const matrix_array& lhs, const S& rhs) {
     return matrix_array(lhs) *= rhs;
   }
-  friend matrix_array operator*(const S& lhs,
-                                const matrix_array& rhs) {
+  friend matrix_array operator*(const S& lhs, const matrix_array& rhs) {
     return matrix_array(rhs) *= lhs;
   }
-
-  matrix_array& operator*=(const matrix_array<R, w, w>& rhs) { return *this = *this * rhs; }
 
   template <int n> static matrix_array<T, n, n> unit() {
     matrix_array<T, n, n> res;
