@@ -17,6 +17,7 @@ template <class T> struct double_ended_priority_queue {
     assert(!empty());
     return d[2];
   }
+  
   T max() const {
     assert(!empty());
     return int(d.size()) == 3 ? d[2] : d[3];
@@ -37,6 +38,7 @@ template <class T> struct double_ended_priority_queue {
     d.pop_back();
     up(down(2));
   }
+
   void pop_max() {
     assert(!empty());
     if (int(d.size()) <= 4) {
