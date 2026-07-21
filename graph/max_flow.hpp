@@ -113,6 +113,7 @@ public:
   }
 
   std::vector<bool> min_cut(int s) {
+    assert(0 <= s && s < n);
     std::vector<bool> visited(n);
     std::queue<int> que;
     que.push(s);
