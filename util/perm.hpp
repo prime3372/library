@@ -29,18 +29,22 @@ public:
     for (int i = 0; i < p.n; i++) r[i] = q[p[i]];
     return r;
   }
+
   perm operator-() const {
     perm q(n);
     for (int i = 0; i < n; ++i) q[p[i]] = i;
     return q;
   }
+  
   friend perm operator-(const perm& q, const perm& p) {
     assert(p.n == q.n);
     return q + -p;
   }
+
   bool operator++() {
     return std::next_permutation(p.begin(), p.end());
   }
+
 private:
   int n;
   std::vector<int> p;
