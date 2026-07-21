@@ -7,9 +7,8 @@
 namespace cp {
 
 // Kasai's algorithm
-template <class Str> std::vector<int> lcp_array(const Str& s, std::vector<int> sa = {}) {
+template <class Str> std::vector<int> lcp_array(const Str& s, const std::vector<int>& sa) {
   int n = int(s.size());
-  if (sa.empty()) sa = suffix_array(s);
   std::vector<int> rank(n + 1);
   for (int i = 0; i <= n; i++) {
     rank[sa[i]] = i;
@@ -24,6 +23,9 @@ template <class Str> std::vector<int> lcp_array(const Str& s, std::vector<int> s
     lcp[rank[i] - 1] = h;
   }
   return lcp;
+}
+template <class Str> std::vector<int> lcp_array(const Str& s) {
+  return lcp_array(s, suffix_array(s));
 }
 
 } // namespace cp
