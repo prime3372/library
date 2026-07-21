@@ -35,7 +35,7 @@ public:
     assert(r <= n);
     T s = 0;
     while (r) {
-      s += d[r - 1];
+      s += d.get(r - 1);
       r -= r & (~r + 1);
     }
     return s;
@@ -57,8 +57,8 @@ public:
     size_t lb = 0, k = 1;
     while ((k << 1) <= n) k <<= 1;
     while (k) {
-      if (lb + k <= n && d[lb + k - 1] < w) {
-        w -= d[lb + k - 1];
+      if (lb + k <= n && d.get(lb + k - 1) < w) {
+        w -= d.get(lb + k - 1);
         lb += k;
       }
       k >>= 1;
@@ -71,8 +71,8 @@ public:
     size_t ub = 0, k = 1;
     while ((k << 1) <= n) k <<= 1;
     while (k) {
-      if (ub + k <= n && d[ub + k - 1] <= w) {
-        w -= d[ub + k - 1];
+      if (ub + k <= n && d.get(ub + k - 1) <= w) {
+        w -= d.get(ub + k - 1);
         ub += k;
       }
       k >>= 1;

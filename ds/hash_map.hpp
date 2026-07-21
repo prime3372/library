@@ -28,21 +28,9 @@ public:
     return vals[i] = default_value;
   }
 
-  const Val& operator[](Key k) const {
+  const Val& get(Key k) const {
     unsigned int i = index(k);
     return used[i] ? vals[i] : default_value;
-  }
-
-  Val& at(Key k) {
-    unsigned int i = index(k);
-    assert(used[i]);
-    return vals[i];
-  }
-
-  const Val& at(Key k) const {
-    unsigned int i = index(k);
-    assert(used[i]);
-    return vals[i];
   }
 
   bool count(Key k) const {
