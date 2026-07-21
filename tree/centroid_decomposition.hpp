@@ -8,8 +8,7 @@ namespace cp {
 struct centroid_decomposition {
 public:
   centroid_decomposition() : n(0) {}
-  explicit centroid_decomposition(int _n) : parent(_n, -1), size(_n), tree(_n),
-                                            n(_n), g(_n), removed(_n) {}
+  explicit centroid_decomposition(int _n) : parent(_n, -1), size(_n), n(_n), g(_n), removed(_n) {}
 
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
@@ -20,7 +19,6 @@ public:
 
   int root = -1;
   std::vector<int> centroid, parent, size;
-  std::vector<std::vector<int>> tree; // directed
 
   centroid_decomposition& build() {
     centroid.reserve(n);
@@ -60,9 +58,7 @@ private:
     removed[c] = true;
     for (int to : g[c]) {
       if (removed[to]) continue;
-      int nc = build(to);
-      parent[nc] = c;
-      tree[c].push_back(nc);
+      parent[build(to)] = c;
     }
     return c;
   }
