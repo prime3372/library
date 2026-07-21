@@ -163,7 +163,7 @@ public:
       a[block_shift] <<= bit_shift;
     }
 
-    if (n % 64) a.back() &= mask(n % 64) - 1; // clean the bits that stick out on the left
+    if (n % 64) a.back() &= mask(n % 64) - 1; // clean the bits sticking out on the left
     return *this;
   }
   dynamic_bitset& operator>>=(int shift) {
