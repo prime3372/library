@@ -11,52 +11,64 @@ template <class mint> requires (is_modint_v<mint>)
 struct binom_mod {
 public:
   binom_mod() : binom_mod(1) {}
-  explicit binom_mod(int _N) : N(_N) {
-    if (_N < 1) _N = 1;
-    f.resize(_N + 1);
-    finv.resize(_N + 1);
-    std::vector<mint> inv(_N + 1);
+  explicit binom_mod(int n) : N(n) {
+    assert(0 <= N);
+    if (N == 0) N = 1;
+    fct.resize(N + 1);
+    ifct.resize(N + 1);
+    std::vector<mint> inv(N + 1);
     inv[1] = 1;
-    f[0] = f[1] = 1;
-    finv[0] = finv[1] = 1;
+    fct[0] = fct[1] = 1;
+    ifct[0] = ifct[1] = 1;
     for (int i = 2; i <= N; i++) {
       int m = mint::mod();
       inv[i] = -inv[m % i] * (m / i);
-      f[i] = f[i - 1] * i;
-      finv[i] = finv[i - 1] * inv[i];
+      fct[i] = fct[i - 1] * i;
+      ifct[i] = ifct[i - 1] * inv[i];
     }
   }
 
   mint operator()(int n, int r) const {
+    if (r < 0) return 0;
+    if (n < 0) {
+      mint res = (*this)(-n + r - 1, r);
+      if (r % 2) res = -res;
+      return res;
+    }
+    if (r > n) return 0;
     assert(n <= N);
-    if (n < 0 || r < 0 || n < r) return 0;
-    assert(finv[n - r] != 0 && finv[r] != 0);
-    return f[n] * finv[n - r] * finv[r];
+    assert(ifct[n - r] != 0 && ifct[r] != 0);
+    return fct[n] * ifct[n - r] * ifct[r];
   }
 
   mint perm(int n, int r) const {
+    if (r < 0) return 0;
+    if (n < 0) {
+      mint res = perm(-n + r - 1, r);
+      if (r % 2) res = -res;
+      return res;
+    }
+    if (r > n) return 0;
     assert(n <= N);
-    if (n < 0 || r < 0 || n < r) return 0;
-    assert(finv[n - r] != 0);
-    return f[n] * finv[n - r];
+    assert(ifct[n - r] != 0);
+    return fct[n] * ifct[n - r];
   }
 
   mint fact(int n) const {
-    assert(n <= N);
-    if (n < 0) return 0;
-    return f[n];
+    assert(0 <= n && n <= N);
+    return fct[n];
   }
 
-  mint fact_inv(int n) const {
+  mint ifact(int n) const {
     assert(n <= N);
     if (n < 0) return 0;
-    assert(finv[n] != 0);
-    return finv[n];
+    assert(ifct[n] != 0);
+    return ifct[n];
   }
 
 private:
   int N;
-  std::vector<mint> f, finv;
+  std::vector<mint> fct, ifct;
 };
 
 } // namespace cp
