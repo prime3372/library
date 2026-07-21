@@ -42,7 +42,7 @@ template <bool root_is_min> struct cartesian_tree {
       if (left[i] != -1) parent[left[i]] = i;
       if (right[i] != -1) parent[right[i]] = i;
     }
-    parent[root] = root;
+    parent[root] = -1;
   }
 };
 
