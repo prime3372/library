@@ -14,7 +14,7 @@
           "foreground": "#e7b5b5",
         }
       }
-    ],
+    ]
   },
   "explorer.confirmDelete": false,
   "files.autoSave": "afterDelay",
