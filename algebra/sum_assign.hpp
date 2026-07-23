@@ -25,7 +25,7 @@ struct sum_assign {
     F() : val(), id(true) {}
     F(T v) : val(v), id(false) {}
   };
-  static constexpr S mapping(F f, S x) { return f.id ? x : f.val; }
+  static constexpr S mapping(F f, S x) { return f.id ? x.val : f.val; }
   static constexpr F composition(F g, F f) { return g.id ? f : g; }
   static constexpr F id() { return F(); }
 };
