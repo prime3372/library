@@ -77,13 +77,21 @@ public:
     return v;
   }
 
-  const std::array<int, char_size>& operator[](int v) const { return nodes[v].to; }
+  const std::array<int, char_size>& operator[](int v) const {
+    return nodes[v].to;
+  }
 
-  int next(int v, char c) const { return nodes[v].to[index(c)]; }
+  int next(int v, char c) const {
+    return nodes[v].to[index(c)];
+  }
   
-  int parent(int v) const { return nodes[v].par; }
+  int parent(int v) const {
+    return nodes[v].par;
+  }
 
-  int size() const { return int(nodes.size()); }
+  int size() const {
+    return int(nodes.size());
+  }
 
 protected:
   constexpr int index(char c) const {

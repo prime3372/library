@@ -39,7 +39,7 @@ public:
   S prod() { return M::op(prod0, prod1); }
 
   int size() { return int(a0.size() + a1.size()); }
-  int empty() { return size() == 0; }
+  bool empty() { return size() == 0; }
 
 private:
   std::vector<S> a0, a1, cum0, cum1;

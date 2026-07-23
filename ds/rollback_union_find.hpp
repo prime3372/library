@@ -51,8 +51,12 @@ public:
     history.pop_back();
   }
 
-  void snapshot() { inner_snap = int(history.size()); }
-  void rollback() { while (inner_snap < int(history.size())) undo(); }
+  void snapshot() {
+    inner_snap = int(history.size());
+  }
+  void rollback() {
+    while (inner_snap < int(history.size())) undo();
+  }
 
   std::vector<std::vector<int>> groups() {
     std::vector<int> root(n), group_size(n);

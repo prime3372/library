@@ -46,7 +46,7 @@ public:
     return res;
   }
 
-  int size() const { return int(sz); }
+  int size() const { return sz; }
 
   void set_default(const Val& v) { default_value = v; }
 
