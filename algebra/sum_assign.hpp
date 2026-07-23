@@ -20,12 +20,12 @@ struct sum_assign {
   static constexpr S e() { return S(); }
 
   struct F {
-    T val;
+    S val;
     bool id;
     F() : val(), id(true) {}
-    F(T v) : val(v), id(false) {}
+    F(S v) : val(v), id(false) {}
   };
-  static constexpr S mapping(F f, S x) { return f.id ? x.val : f.val; }
+  static constexpr S mapping(F f, S x) { return f.id ? x : f.val; }
   static constexpr F composition(F g, F f) { return g.id ? f : g; }
   static constexpr F id() { return F(); }
 };
