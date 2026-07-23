@@ -4,7 +4,6 @@
 #include "util/static_modint.hpp"
 
 #include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
@@ -13,8 +12,9 @@ int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n;
-  cin >> n;
+  long long m;
+  cin >> n >> m;
   formal_power_series<mint> f(n);
   cin >> f;
-  cout << f.inv() << "\n";
+  cout << f.pow(m) << "\n";
 }
