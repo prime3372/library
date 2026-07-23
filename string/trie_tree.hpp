@@ -84,7 +84,7 @@ public:
   int next(int v, char c) const {
     return nodes[v].to[index(c)];
   }
-  
+
   int parent(int v) const {
     return nodes[v].par;
   }
