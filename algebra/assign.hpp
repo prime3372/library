@@ -12,6 +12,7 @@ template <monoid M> struct assign {
     T val;
     size_t len;
     S() : val(M::e()), len(0) {}
+    S(T v) : val(v), len(1) {}
     S(T v, size_t l) : val(v), len(l) {}
   };
   static constexpr S op(S x, S y) { return S{M::op(x.val, y.val), x.len + y.len}; }
