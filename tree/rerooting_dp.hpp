@@ -4,11 +4,11 @@
 #include <cassert>
 #include <vector>
 
-#include "algebra/monoid_with_mapping.hpp"
+#include "algebra/monoid.hpp"
 
 namespace cp {
 
-template <monoid_with_mapping M> struct rerooting_dp {
+template <monoid M, auto mapping = M::mapping> struct rerooting_dp {
 private:
   using S = typename M::S;
   using F = typename M::F;
