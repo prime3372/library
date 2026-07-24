@@ -15,6 +15,7 @@ struct sum_affine {
     T val;
     size_t len;
     S() : val(0), len(0) {}
+    S(T v) : val(v), len(1) {}
     S(T v, size_t l) : val(v), len(l) {}
   };
   static S op(S x, S y) { return S{x.val + y.val, x.len + y.len}; }
