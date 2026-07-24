@@ -82,16 +82,16 @@ private:
   struct node;
   using node_ptr = std::unique_ptr<node>;
   struct node {
-    S val;
-    F lz;
     node_ptr left, right;
-    bool lzflag;
-    node(S v) : val(v), lz(M::id()), lzflag(false) {}
+    S val;
+    F lz = M::id();
+    bool lzflag = false;
+    node(S v) : val(v)  {}
   };
   size_t n, sz;
   int log;
-  node_ptr root;
   std::vector<S> initial_vals;
+  node_ptr root;
 
   void update(node_ptr& p, int dep) {
     p->val = M::op(p->left ? p->left->val : initial_vals[dep + 1],
