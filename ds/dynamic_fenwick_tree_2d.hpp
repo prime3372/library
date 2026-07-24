@@ -11,7 +11,7 @@ namespace cp {
 template <class T> struct dynamic_fenwick_tree_2d {
 public: 
   struct ref {
-    friend struct dynamic_fenwick_tree_2d;
+    friend dynamic_fenwick_tree_2d;
   public:
     T operator[](size_t j) const {
       assert(j < ptr->w);
