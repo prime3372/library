@@ -11,8 +11,14 @@ namespace cp {
 struct bipartite_matching {
 public: 
   bipartite_matching() : bipartite_matching(0, 0) {}
-  explicit bipartite_matching(int _l, int _r) : l(_l), r(_r), s(l + r), t(l + r + 1),
-                                                initialized(false), mf(l + r + 2), colored(l + r) {
+  explicit bipartite_matching(int _l, int _r)
+  : l(_l),
+    r(_r),
+    s(l + r),
+    t(l + r + 1),
+    initialized(false),
+    mf(l + r + 2),
+    colored(l + r) {
     for (int i = 0; i < l; i++) mf.add_edge(s, i);
     for (int i = 0; i < r; i++) mf.add_edge(l + i, t);
   }
