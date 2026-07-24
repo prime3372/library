@@ -46,7 +46,7 @@ public:
   }
 
   int size() const { return n; }
-  
+
   T weight(int a) {
     assert(0 <= a && a < n);
     find(a);
