@@ -82,10 +82,10 @@ private:
   struct node;
   using node_ptr = std::unique_ptr<node>;
   struct node {
-    node_ptr left, right;
     S val;
     F lz = M::id();
     bool lzflag = false;
+    node_ptr left, right;
     node(S v) : val(v)  {}
   };
   size_t n, sz;
