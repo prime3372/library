@@ -73,7 +73,7 @@ private:
   struct node {
     S val;
     node_ptr left, right;
-    node(S v) : val(v), left(nullptr), right(nullptr) {}
+    node(S v) : val(v) {}
   };
   size_t n, sz;
   int log;

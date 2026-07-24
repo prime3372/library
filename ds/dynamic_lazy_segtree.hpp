@@ -86,7 +86,7 @@ private:
     F lz;
     node_ptr left, right;
     bool lzflag;
-    node(S v) : val(v), lz(M::id()), left(nullptr), right(nullptr), lzflag(false) {}
+    node(S v) : val(v), lz(M::id()), lzflag(false) {}
   };
   size_t n, sz;
   int log;
