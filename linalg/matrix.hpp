@@ -15,7 +15,9 @@ template <class T>
    requires (semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>)
 struct matrix {
 private:
-  using R = std::conditional_t<semiring<T>, T, add_mul<T>>;
+  using R = std::conditional_t<semiring<T>,
+                               std::type_identity<T>,
+                               std::type_identity<add_mul<T>>>::type;
   using S = typename R::S;
 
 public:
