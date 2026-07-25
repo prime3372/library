@@ -24,6 +24,7 @@ template <class Str> std::vector<int> lcp_array(const Str& s, const std::vector<
   }
   return lcp;
 }
+
 template <class Str> std::vector<int> lcp_array(const Str& s) {
   return lcp_array(s, suffix_array(s));
 }
