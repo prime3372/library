@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
+#define REP(i, a, b) for (int i = int(a); i <= int(b); i++)
 #define all(a) a.begin(), a.end()
 using namespace std;
 using ll = long long;
