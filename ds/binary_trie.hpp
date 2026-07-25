@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T> requires (std::is_unsigned_v<T>)
+template <class T> requires std::is_unsigned_v<T>
 class binary_trie : public trie_tree<2, '0'> {
 public:
   using trie_tree<2, '0'>::trie_tree;

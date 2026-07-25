@@ -12,7 +12,7 @@
 namespace cp {
 
 template <class T, int h, int w>
-  requires (semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>)
+  requires semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>
 struct matrix_array {
 public:
   using R = std::conditional_t<semiring<T>,

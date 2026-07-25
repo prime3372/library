@@ -7,7 +7,7 @@
 namespace cp {
 
 template <class T>
-  requires (std::is_arithmetic_v<T> || is_modint_v<T>)
+  requires std::is_arithmetic_v<T> || is_modint_v<T>
 struct add_mul {
   using S = T;
   static S op(S x, S y) { return x + y; }
@@ -25,7 +25,7 @@ struct add_mul {
   static S one() { return 1; }
   static S minus(S x) { return -x; }
   static S recip(S x)
-  requires (std::is_floating_point_v<T> || is_modint_v<T>) {
+  requires std::is_floating_point_v<T> || is_modint_v<T> {
     return 1 / x;
   }
 };

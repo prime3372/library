@@ -7,7 +7,7 @@
 namespace cp {
 
 template <class T>
-  requires (std::is_arithmetic_v<T> || is_modint_v<T>)
+  requires std::is_arithmetic_v<T> || is_modint_v<T>
 struct affine {
   struct S {
     T a, b;
@@ -16,7 +16,7 @@ struct affine {
   };
   static S op(S f, S g) { return {g.a * f.a, g.a * f.b + g.b}; }
   static S e() { return S(); }
-  static S inv(S f) requires (std::is_floating_point_v<T> || is_modint_v<T>) {
+  static S inv(S f) requires std::is_floating_point_v<T> || is_modint_v<T> {
     return S{1 / f.a, -f.b / f.a};
   }
 };
