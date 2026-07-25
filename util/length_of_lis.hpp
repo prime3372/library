@@ -7,7 +7,7 @@
 namespace cp {
 
 template <bool strong = true, class T>
-int longest_increasing_sequence(const std::vector<T>& a) {
+int length_of_lis(const std::vector<T>& a) {
   int n = int(a.size());
   std::vector<T> dp(n, std::numeric_limits<T>::max());
   int ans = 0;
