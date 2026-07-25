@@ -20,8 +20,7 @@ template <class T> struct treap_node {
   explicit treap_node(const T& x) : val(x), priority(mt64()) {}    
 };
 
-template <class T> struct treap
-: public treap_base<treap_node<T>, treap<T>> {
+template <class T> struct treap : public treap_base<treap_node<T>, treap<T>> {
 private:
   using node = treap_node<T>;
   using node_ptr = std::shared_ptr<node>;
