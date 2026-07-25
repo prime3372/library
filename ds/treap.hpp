@@ -4,31 +4,31 @@
 #include <functional>
 #include <memory>
 
-#include "ds/implicit_treap_base.hpp"
+#include "ds/treap_base.hpp"
 #include "random/rng.hpp"
 
 namespace cp {
 
-template <class T> struct implicit_treap_node {
+template <class T> struct treap_node {
   T val;
   int sub = 1;
   bool rev = false;
-  std::shared_ptr<implicit_treap_node> left, right;
+  std::shared_ptr<treap_node> left, right;
   unsigned long long priority;
 
-  implicit_treap_node() = default;
-  explicit implicit_treap_node(const T& x) : val(x), priority(mt64()) {}    
+  treap_node() = default;
+  explicit treap_node(const T& x) : val(x), priority(mt64()) {}    
 };
 
-template <class T> struct implicit_treap
-: public implicit_treap_base<implicit_treap_node<T>, implicit_treap<T>> {
+template <class T> struct treap
+: public treap_base<treap_node<T>, treap<T>> {
 private:
-  using node = implicit_treap_node<T>;
+  using node = treap_node<T>;
   using node_ptr = std::shared_ptr<node>;
-  using base = implicit_treap_base<node, implicit_treap>;
+  using base = treap_base<node, treap>;
 
 public:
-  using base::implicit_treap_base;
+  using base::treap_base;
 
 private:
   friend base;

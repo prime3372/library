@@ -11,14 +11,14 @@
 
 namespace cp {
 
-template <class node, class derived> struct implicit_treap_base {
+template <class node, class derived> struct treap_base {
 private:
   using T = decltype(node::val);
   using node_ptr = std::shared_ptr<node>;
 
 public:
-  implicit_treap_base() : root(nullptr) {}
-  implicit_treap_base(const std::vector<T>& v) : root(nullptr) {
+  treap_base() : root(nullptr) {}
+  treap_base(const std::vector<T>& v) : root(nullptr) {
     if (v.empty()) return;
     int n = int(v.size());
     std::vector<node_ptr> ps(n);

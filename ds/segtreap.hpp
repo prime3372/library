@@ -5,7 +5,7 @@
 #include <memory>
 
 #include "algebra/monoid.hpp"
-#include "ds/implicit_treap_base.hpp"
+#include "ds/treap_base.hpp"
 #include "random/rng.hpp"
 
 namespace cp {
@@ -24,19 +24,19 @@ template <monoid M> struct segtreap_node {
 
 template <monoid M, auto flip = std::identity()>
 struct segtreap
-: public implicit_treap_base<segtreap_node<M>, segtreap<M, flip>> {
+: public treap_base<segtreap_node<M>, segtreap<M, flip>> {
 private:
   using S = typename M::S;
   using node = segtreap_node<M>;
   using node_ptr = std::shared_ptr<node>;
-  using base = implicit_treap_base<node, segtreap<M, flip>>;
+  using base = treap_base<node, segtreap<M, flip>>;
   using base::merge;
   using base::split;
   using base::size;
   using base::root;
 
 public:
-  using base::implicit_treap_base;
+  using base::treap_base;
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());

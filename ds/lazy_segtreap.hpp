@@ -5,7 +5,7 @@
 #include <memory>
 
 #include "algebra/acted_monoid.hpp"
-#include "ds/implicit_treap_base.hpp"
+#include "ds/treap_base.hpp"
 #include "random/rng.hpp"
 
 namespace cp {
@@ -27,20 +27,20 @@ public:
 
 template <acted_monoid M, auto flip = std::identity()>
 struct lazy_segtreap
-: public implicit_treap_base<lazy_segtreap_node<M>, lazy_segtreap<M, flip>> {
+: public treap_base<lazy_segtreap_node<M>, lazy_segtreap<M, flip>> {
 private:
   using S = typename M::S;
   using F = typename M::F;
   using node = lazy_segtreap_node<M>;
   using node_ptr = std::shared_ptr<node>;
-  using base = implicit_treap_base<node, lazy_segtreap<M, flip>>;
+  using base = treap_base<node, lazy_segtreap<M, flip>>;
   using base::merge;
   using base::split;
   using base::size;
   using base::root;
 
 public:
-  using base::implicit_treap_base;
+  using base::treap_base;
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
