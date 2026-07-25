@@ -32,8 +32,7 @@
       },
       "presentation": {
         "panel": "shared",
-        "clear": true,
-        "close": true
+        "clear": true
       }
     },
     {
