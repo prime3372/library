@@ -9,10 +9,11 @@ namespace cp {
 
 struct perm {
 public:
-  perm(int _n) : n(_n), p(_n) {
+  perm() : n(0) {}
+  explicit perm(int _n) : n(_n), p(_n) {
     std::iota(p.begin(), p.end(), 0);
   }
-  perm(std::vector<int> _p) : n(int(_p.size())), p(_p) {}
+  explicit perm(std::vector<int> _p) : n(int(_p.size())), p(_p) {}
 
   int& operator[](int i) {
     assert(0 <= i && i < n);
