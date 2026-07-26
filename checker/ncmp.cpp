@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
   while (f_ans >> t_ans) {
     if (!(f_out >> t_out)) {
       int extra_ans_cnt = 1;
-      while ((f_ans >> t_ans)) {
+      while (f_ans >> t_ans) {
         extra_ans_cnt++;
       }
       std::cout << "Answer contains longer sequence [length = " << t_cnt + extra_ans_cnt << "], ";
