@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cassert>
+#include <string>
 #include <type_traits>
 #include <vector>
 
@@ -10,8 +11,7 @@ class trie_tree {
 public:
   trie_tree() { nodes.push_back(node(-1)); }
 
-  template <class Str>
-  int insert(const Str& s) {
+  int insert(const std::string& s) {
     int v = 0;
     nodes[v].mid++;
     for (char c : s) {
@@ -27,8 +27,7 @@ public:
     return v;
   }
 
-  template <class Str>
-  bool erase(const Str& s) {
+  bool erase(const std::string& s) {
     if (count(s) == 0) return false;
     int v = 0;
     nodes[v].mid--;
@@ -46,8 +45,7 @@ public:
     return true;
   }
 
-  template <class Str>
-  int count(const Str& s) const {
+  int count(const std::string& s) const {
     int v = search(s);
     return v == -1 ? 0 : count(v);
   }
@@ -55,8 +53,7 @@ public:
     return nodes[v].end;
   }
 
-  template <class Str>
-  int prefix(const Str& s) const {
+  int prefix(const std::string& s) const {
     int v = search(s);
     return v == -1 ? 0 : prefix(v);
   }
@@ -64,12 +61,10 @@ public:
     return nodes[v].mid;
   }
 
-  template <class Str>
-  int search(const Str& s) const {
+  int search(const std::string& s) const {
     return search(0, s);
   }
-  template <class Str>
-  int search(int v, const Str& s) const {
+  int search(int v, const std::string& s) const {
     for (char c : s) {
       v = next(v, c);
       if (v == -1) return -1;
