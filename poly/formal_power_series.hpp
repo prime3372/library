@@ -311,15 +311,6 @@ public:
   void swap(fps& other) { f.swap(other.f); }
   void clear() { f.clear(); }
 
-  long long eval(long long x) const {
-    long long r = 0, w = 1;
-    for (long long v : f) {
-      r += w * v;
-      w *= x;
-    }
-    return r;
-  }
-
   friend std::istream& operator>>(std::istream& is, fps& r) {
     for (long long& x : r.f) is >> x;
     return is;
