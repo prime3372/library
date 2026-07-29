@@ -205,15 +205,15 @@ public:
     return r;
   }
 
-  friend std::istream& operator>>(std::istream& is, fps& r) {
-    for (mint& x : r.f) is >> x;
+  friend std::istream& operator>>(std::istream& is, fps& rhs) {
+    for (mint& x : rhs.f) is >> x;
     return is;
   }
 
-  friend std::ostream& operator<<(std::ostream& os, const fps& r) {
-    for (int i = 0; i < r.size(); i++) {
-      os << r.f[i];
-      if (i != r.size() - 1) os << " ";
+  friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
+    for (int i = 0; i < rhs.size(); i++) {
+      os << rhs.f[i];
+      if (i != rhs.size() - 1) os << " ";
     }
     return os;
   }
@@ -311,15 +311,15 @@ public:
   void swap(fps& other) { f.swap(other.f); }
   void clear() { f.clear(); }
 
-  friend std::istream& operator>>(std::istream& is, fps& r) {
-    for (long long& x : r.f) is >> x;
+  friend std::istream& operator>>(std::istream& is, fps& rhs) {
+    for (long long& x : rhs.f) is >> x;
     return is;
   }
 
-  friend std::ostream& operator<<(std::ostream& os, const fps& r) {
-    for (int i = 0; i < r.size(); i++) {
-      os << r.f[i];
-      if (i != r.size() - 1) os << " ";
+  friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
+    for (int i = 0; i < rhs.size(); i++) {
+      os << rhs.f[i];
+      if (i != rhs.size() - 1) os << " ";
     }
     return os;
   }
