@@ -56,9 +56,7 @@ public:
     return (a[i / 64] & mask(i % 64)) != 0;
   }
 
-  dynamic_bitset& flip() {
-    return flip(n);
-  }
+  dynamic_bitset& flip() { return flip(n); }
   dynamic_bitset& flip(int l, int r) {
     assert(0 <= l && l <= r && r <= n);
     flip(l);
@@ -78,9 +76,7 @@ public:
     return dynamic_bitset(*this).flip();
   }
 
-  int count() const {
-    return count(n);
-  }
+  int count() const { return count(n); }
   int count(int l, int r) const {
     assert(0 <= l && l <= r && r <= n);
     return count(r) - count(l);
