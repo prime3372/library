@@ -12,15 +12,14 @@
 namespace cp {
 
 template <class T>
-   requires semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>
+  requires semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>
 struct matrix {
-private:
+public:
   using R = std::conditional_t<semiring<T>,
                                std::type_identity<T>,
                                std::type_identity<add_mul<T>>>::type;
   using S = typename R::S;
 
-public:
   matrix() : h(0), w(0) {}
   explicit matrix(int _h, int _w) : h(_h), w(_w), d(_h, std::vector<S>(_w)) {}
 
