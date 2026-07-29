@@ -8,7 +8,8 @@
 
 namespace cp {
 
-// even index -> min heap, odd index -> max heap
+// even index -> min heap
+// odd index -> max heap
 template <class T> struct double_ended_priority_queue {
 
   double_ended_priority_queue() : d(2) {}
