@@ -7,48 +7,37 @@
 
 namespace cp {
 
-struct perm {
-public:
-  perm() : n(0) {}
-  explicit perm(int _n) : n(_n), p(_n) {
-    std::iota(p.begin(), p.end(), 0);
-  }
-  explicit perm(std::vector<int> _p) : n(int(_p.size())), p(_p) {}
-
-  int& operator[](int i) {
-    assert(0 <= i && i < n);
-    return p[i];
-  }
-  int operator[](int i) const {
-    assert(0 <= i && i < n);
-    return p[i];
+struct perm : public std::vector<int> {
+  perm() = default;
+  explicit perm(int _n) {
+    std::iota(begin(), end(), 0);
   }
 
   friend perm operator+(const perm& q, const perm& p) {
-    assert(p.n == q.n);
-    perm r(p.n);
-    for (int i = 0; i < p.n; i++) r[i] = q[p[i]];
+    assert(p.size() == q.size());
+    perm r(p.size());
+    for (int i = 0; i < int(p.size()); i++) r[i] = q[p[i]];
     return r;
   }
 
   perm operator-() const {
-    perm q(n);
-    for (int i = 0; i < n; ++i) q[p[i]] = i;
+    perm q(size());
+    for (int i = 0; i < int(size()); i++) q[(*this)[i]] = i;
     return q;
   }
   
   friend perm operator-(const perm& q, const perm& p) {
-    assert(p.n == q.n);
+    assert(p.size() == q.size());
     return q + -p;
   }
 
   bool operator++() {
-    return std::next_permutation(p.begin(), p.end());
+    return std::next_permutation(begin(), end());
   }
 
-private:
-  int n;
-  std::vector<int> p;
+  bool operator--() {
+    return std::prev_permutation(begin(), end());
+  }
 };
 
 } // namespace cp
