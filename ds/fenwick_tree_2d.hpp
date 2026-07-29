@@ -10,6 +10,7 @@ namespace cp {
 template <class T> struct fenwick_tree_2d {
 private:
   struct ref {
+  public:
     T operator[](int j) const {
       assert(0 <= j && j < ptr->w);
       return ptr->sum(i, j, i + 1, j + 1);
