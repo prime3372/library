@@ -7,7 +7,8 @@ using namespace cp;
 #define REP(i, a, b) for (int i = int(a); i <= int(b); i++)
 #define all(a) a.begin(), a.end()
 using ll = long long;
-template <class T> using vec = std::vector<T>;
+using mint = modint998244353;
+template <class T> using vec = vector<T>;
 template <class T> bool chmin(T& a, T b) { if (b < a) { a = b; return 1; } else return 0; }
 template <class T> bool chmax(T& a, T b) { if (b > a) { a = b; return 1; } else return 0; }
 
