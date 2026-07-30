@@ -3,20 +3,21 @@
 #include <algorithm>
 #include <array>
 #include <cctype>
+#include <cstddef>
 #include <iostream>
 #include <string>
 #include <vector>
 
 #include "util/type_traits.hpp"
 
-namespace cp {
+namespace std {
 
-std::istream& operator>>(std::istream& is, __int128& val) {
-  std::string s;
+istream& operator>>(istream& is, __int128& val) {
+  string s;
   if (is >> s) {
     val = 0;
     for (int i = s[0] == '+' || s[0] == '-'; i < int(s.size()); i++) {
-      if (!std::isdigit(s[i])) break;
+      if (!isdigit(s[i])) break;
       val = val * 10 + (s[i] - '0');
     }
     if (s[0] == '-') val = -val;
@@ -24,12 +25,12 @@ std::istream& operator>>(std::istream& is, __int128& val) {
   return is;
 }
 
-std::istream& operator>>(std::istream& is, unsigned __int128& val) {
-  std::string s;
+istream& operator>>(istream& is, unsigned __int128& val) {
+  string s;
   if (is >> s) {
     val = 0;
     for (int i = s[0] == '+' || s[0] == '-'; i < int(s.size()); i++) {
-      if (!std::isdigit(s[i])) break;
+      if (!isdigit(s[i])) break;
       val = val * 10 + (s[i] - '0');
     }
     if (s[0] == '-') val = ~val + 1;
@@ -37,51 +38,57 @@ std::istream& operator>>(std::istream& is, unsigned __int128& val) {
   return is;
 }
 
-std::ostream& operator<<(std::ostream& os, __int128 val) {
+ostream& operator<<(ostream& os, __int128 val) {
   if (val == 0) return os << '0';
   unsigned __int128 uval = val;
   if (val < 0) {
     os << '-';
     uval = -val;
   }
-  std::string s;
+  string s;
   while (uval) {
     s.push_back((char)('0' + (uval % 10)));
     uval /= 10;
   }
-  std::reverse(s.begin(), s.end());
+  reverse(s.begin(), s.end());
   return os << s;
 }
 
-std::ostream& operator<<(std::ostream& os, unsigned __int128 val) {
+ostream& operator<<(ostream& os, unsigned __int128 val) {
   if (val == 0) return os << '0';
-  std::string s;
+  string s;
   while (val) {
     s.push_back((char)('0' + (val % 10)));
     val /= 10;
   }
-  std::reverse(s.begin(), s.end());
+  reverse(s.begin(), s.end());
   return os << s;
 }
 
-template <class T, class U>
-std::istream& operator>>(std::istream& is, std::pair<T, U>& p);
+template <class Tuple> requires cp::is_tuple_like_v<Tuple>
+istream& operator>>(istream& is, Tuple& t);
 
-template <class T, class U>
-std::ostream& operator<<(std::ostream& os, const std::pair<T, U>& p);
+template <class Tuple> requires cp::is_tuple_like_v<Tuple>
+ostream& operator<<(ostream& os, const Tuple& t);
 
 template <class T>
-std::istream& operator>>(std::istream& is, std::vector<T>& v) {
+istream& operator>>(istream& is, vector<T>& v);
+
+template <class T>
+ostream& operator<<(ostream& os, const vector<T>& v);
+
+template <class T>
+istream& operator>>(istream& is, vector<T>& v) {
   for (auto& x : v) is >> x;  
   return is;
 }
 
 template <class T>
-std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
+ostream& operator<<(ostream& os, const vector<T>& v) {
   for (int i = 0; i < int(v.size()); i++) {
     os << v[i];
     if (i != int(v.size()) - 1) {
-      if constexpr (is_pair_v<T> || is_vector_v<T>) {
+      if constexpr (cp::is_tuple_like_v<T> || cp::is_vector_v<T>) {
         os << "\n";
       } else {
         os << " ";
@@ -91,22 +98,4 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) {
   return os;
 }
 
-template <class T, class U>
-std::istream& operator>>(std::istream& is, std::pair<T, U>& p) {
-  is >> p.first >> p.second;
-  return is;
-}
-
-template <class T, class U>
-std::ostream& operator<<(std::ostream& os, const std::pair<T, U>& p) {
-  os << p.first;
-  if constexpr (is_pair_v<T> || is_vector_v<T>) {
-    os << "\n";
-  } else {
-    os << " ";
-  }
-  os << p.second;
-  return os;
-}
-
-} // namespace cp
+} // namespace std
