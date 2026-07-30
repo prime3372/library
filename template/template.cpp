@@ -3,6 +3,8 @@
 #include "util/static_modint.hpp"
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 #define REP(i, a, b) for (int i = int(a); i <= int(b); i++)
+#define rrep(i, a, b) for (int i = int(b)-1; i >= int(a); i--)
+#define RREP(i, a, b) for (int i = int(b); i >= int(a); i--)
 #define all(a) a.begin(), a.end()
 using namespace std;
 using namespace cp;
