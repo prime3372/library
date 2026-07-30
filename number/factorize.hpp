@@ -10,6 +10,7 @@
 #include "number/is_prime.hpp"
 #include "number/isqrt.hpp"
 #include "random/rng.hpp"
+#include "util/run_length_encoding.hpp"
 
 namespace cp {
 
@@ -57,7 +58,6 @@ long long pollard_rho(long long n) {
 std::vector<std::pair<long long, int>> factorize(long long n) {
   assert(1 <= n);
   if (n == 1) return {};
-
   std::vector<long long> factors;
   auto f = [&](auto self, long long x) -> void {
     long long d = internal::pollard_rho(x);
@@ -70,17 +70,7 @@ std::vector<std::pair<long long, int>> factorize(long long n) {
   };
   f(f, n);
   std::sort(factors.begin(), factors.end());
-
-  std::vector<std::pair<long long, int>> ans;
-  ans.emplace_back(factors[0], 1);
-  for (int i = 1; i < int(factors.size()); i++) {
-    if (factors[i] == factors[i - 1]) {
-      ans.back().second++;
-    } else {
-      ans.emplace_back(factors[i], 1);
-    }
-  }
-  return ans;
+  return run_length_encoding(factors);
 }
 
 } // namespace cp

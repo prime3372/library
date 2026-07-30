@@ -1,7 +1,8 @@
-#include <bits/stdc++.h>
-#include "util/ios_overload.hpp"
+#include "util/io_utility.hpp"
+#include "util/math_utility.hpp"
 #include "util/static_modint.hpp"
 
+#include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
 #define REP(i, a, b) for (int i = int(a); i <= int(b); i++)
 #define rrep(i, a, b) for (int i = int(b) - 1; i >= int(a); i--)
@@ -16,9 +17,6 @@ using i128 = __int128;
 using u128 = unsigned __int128;
 using mint = modint998244353;
 template <class T> using vec = vector<T>;
-template <class T> inline bool chmin(T& a, T b) { if (b < a) { a = b; return 1; } else return 0; }
-template <class T> inline bool chmax(T& a, T b) { if (b > a) { a = b; return 1; } else return 0; }
-inline i128 ipow(i128 x, i128 n) { i128 r = 1; while (n) { if (n & 1) r *= x; x *= x; n >>= 1; } return r; }
 
 int main() {
   ios_base::sync_with_stdio(false);
