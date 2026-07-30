@@ -3,6 +3,8 @@
 #include <utility>
 #include <vector>
 
+namespace cp {
+
 template <class T>
 std::vector<std::pair<T, int>> run_length_encoding(const std::vector<T>& v) {
   if (v.empty()) return {};
@@ -17,3 +19,5 @@ std::vector<std::pair<T, int>> run_length_encoding(const std::vector<T>& v) {
   }
   return res;
 }
+
+} // namespace cp
