@@ -1,7 +1,11 @@
 {
   "version": "2.0.0",
+  "options": {
+    "shell": {
+      "executable": "powershell.exe"
+    }
+  },
   "tasks": [
-    // debug
     {
       "type": "cppbuild",
       "label": "g++.exe build active file",
@@ -50,11 +54,10 @@
       },
       "problemMatcher": []
     },
-    // oj-bundle
     {
       "type": "shell",
       "label": "bundle and copy",
-      "command": "cmd /c oj-bundle ${file} -I ${workspaceFolder} > submit.cpp; (Get-Content submit.cpp) -replace '(cerr|std::cerr).+?;', ';' | Set-Clipboard; Remove-Item submit.cpp",
+      "command": "cmd /c oj-bundle ${file} -I ${workspaceFolder} > submit.cpp; (Get-Content submit.cpp -Raw) -replace '(?s)(cerr|std::cerr).*?;', ';' | Set-Clipboard; Remove-Item submit.cpp",
       "group": {
         "kind": "build",
         "isDefault": true
