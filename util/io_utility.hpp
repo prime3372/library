@@ -77,6 +77,32 @@ istream& operator>>(istream& is, vector<T>& v);
 template <class T>
 ostream& operator<<(ostream& os, const vector<T>& v);
 
+template <class Tuple> requires cp::is_tuple_like_v<Tuple>
+istream& operator>>(istream& is, Tuple& t) {
+  apply([&](auto&... args) {
+    (is >> ... >> args);
+  }, t);
+  return is;
+}
+
+template <class Tuple> requires cp::is_tuple_like_v<Tuple>
+ostream& operator<<(ostream& os, const Tuple& t) {
+  static constexpr size_t n = tuple_size_v<Tuple>; 
+  if constexpr (n == 0) return os;
+  [&]<size_t... I>(index_sequence<I...>) {
+    ([&]<class T>(const T& x) {
+      os << x;
+      if constexpr (cp::is_tuple_like_v<T> || cp::is_vector_v<T>) {
+        os << "\n";
+      } else {
+        os << " ";
+      }
+    }(get<I>(t)), ...);
+  }(make_index_sequence<n - 1>());
+  os << get<n - 1>(t);
+  return os;
+}
+
 template <class T>
 istream& operator>>(istream& is, vector<T>& v) {
   for (auto& x : v) is >> x;  
