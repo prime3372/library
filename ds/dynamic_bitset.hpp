@@ -216,7 +216,7 @@ private:
   int n;
   std::vector<unsigned long long> a;
 
-  static constexpr unsigned long long mask(int pos) { return 1ULL << pos; }
+  static unsigned long long mask(int pos) { return 1ULL << pos; }
 };
 
 } // namespace cp

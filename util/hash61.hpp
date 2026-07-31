@@ -90,7 +90,7 @@ private:
     return true;
   }
 
-  static constexpr long long mul(long long a, long long b) {
+  static long long mul(long long a, long long b) {
     __int128 r = a;
     r *= b;
     r = (r >> 61) + (r & m);
