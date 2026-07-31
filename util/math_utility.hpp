@@ -5,7 +5,7 @@
 namespace cp {
 
 template <class T>
-inline __int128 ipow(__int128 x, T n) {
+constexpr __int128 ipow(__int128 x, T n) {
   assert(0 <= n);
   __int128 r = 1;
   while (n) {
@@ -17,7 +17,7 @@ inline __int128 ipow(__int128 x, T n) {
 }
 
 template <class T>
-inline bool chmin(T& a, T b) {
+constexpr bool chmin(T& a, T b) {
   if (b < a) {
     a = b;
     return true;
@@ -26,7 +26,7 @@ inline bool chmin(T& a, T b) {
 }
 
 template <class T>
-inline bool chmax(T& a, T b) {
+constexpr bool chmax(T& a, T b) {
   if (b > a) {
     a = b;
     return true;
