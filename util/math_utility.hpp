@@ -5,7 +5,19 @@
 namespace cp {
 
 template <class T>
-constexpr __int128 ipow(__int128 x, T n) {
+constexpr long long ipow(long long x, T n) {
+  assert(0 <= n);
+  long long r = 1;
+  while (n) {
+    if (n & 1) r *= x;
+    x *= x;
+    n >>= 1;
+  }
+  return r;
+}
+
+template <class T>
+constexpr __int128 ipow128(__int128 x, T n) {
   assert(0 <= n);
   __int128 r = 1;
   while (n) {
