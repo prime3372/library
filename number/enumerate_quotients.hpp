@@ -4,7 +4,7 @@
 #include <numeric>
 #include <vector>
 
-#include "isqrt.hpp"
+#include "util/math_utility.hpp"
 
 namespace cp {
 

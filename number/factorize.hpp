@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "number/is_prime.hpp"
-#include "number/isqrt.hpp"
+#include "number/kth_root.hpp"
 #include "random/rng.hpp"
 #include "util/run_length_encoding.hpp"
 

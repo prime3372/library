@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <cmath>
 
 namespace cp {
 
@@ -26,6 +27,22 @@ constexpr __int128 ipow128(__int128 x, T n) {
     n >>= 1;
   }
   return r;
+}
+
+template <class T>
+constexpr T isqrt(T x) {
+  T y = T(std::sqrt(x));
+  while (y && y > x / y) y--;
+  while ((y + 1) <= x / (y + 1)) y++;
+  return y;
+}
+
+template <class T>
+constexpr T icbrt(T x) {
+  T y = T(std::cbrt(x));
+  while (y && y * y > x / y) y--;
+  while ((y + 1) * (y + 1) <= x / (y + 1)) y++;
+  return y;
 }
 
 template <class T>

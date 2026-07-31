@@ -3,8 +3,9 @@
 #include <cassert>
 #include <vector>
 
-#include "number/isqrt.hpp"
+#include "number/kth_root.hpp"
 #include "number/mobius.hpp"
+#include "util/math_utility.hpp"
 
 namespace cp {
 
