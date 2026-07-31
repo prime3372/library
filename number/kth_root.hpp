@@ -6,7 +6,7 @@
 
 namespace cp {
 
-template <std::integral T, std::integral U>
+template <std::integral T, std::integral U> requires (sizeof(T) <= 8)
 constexpr T kth_root(T x, U k) {
   assert(0 <= x && 1 <= k);
   if (x <= 1 || k == 1) return x;

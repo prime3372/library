@@ -1,13 +1,17 @@
 #pragma once
 
 #include <cassert>
+#include <concepts>
 #include <cmath>
+#include <type_traits>
 
 namespace cp {
 
-template <class T>
-constexpr long long ipow(long long x, T n) {
+constexpr long long ipow(long long x, long long n) {
   assert(0 <= n);
+  if (x == 0) return n == 0;
+  if (x == 1) return 1;
+  if (x == -1) return n % 2 ? -1 : 1;
   long long r = 1;
   while (n) {
     if (n & 1) r *= x;
@@ -17,28 +21,18 @@ constexpr long long ipow(long long x, T n) {
   return r;
 }
 
-template <class T>
-constexpr __int128 ipow128(__int128 x, T n) {
-  assert(0 <= n);
-  __int128 r = 1;
-  while (n) {
-    if (n & 1) r *= x;
-    x *= x;
-    n >>= 1;
-  }
-  return r;
-}
-
-template <class T>
+template <std::integral T>
 constexpr T isqrt(T x) {
-  T y = T(std::sqrt(x));
+  assert(0 <= x);
+  T y = sizeof(T) <= 8 ? T(std::sqrt(x)) : T(std::sqrtl(x));
   while (y && y > x / y) y--;
   while ((y + 1) <= x / (y + 1)) y++;
   return y;
 }
 
-template <class T>
+template <std::integral T>
 constexpr T icbrt(T x) {
+  assert(0 <= x);
   T y = T(std::cbrt(x));
   while (y && y * y > x / y) y--;
   while ((y + 1) * (y + 1) <= x / (y + 1)) y++;
