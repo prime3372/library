@@ -10,7 +10,7 @@ struct bracket {
     S() : prefix_min(0), sum(0) {}
     S(int x) : prefix_min(std::min(x, 0)), sum(x) {}
     S(int m, int s) : prefix_min(m), sum(s) {}
-    bool is_good() {
+    bool is_correct() {
       return prefix_min >= 0 && sum == 0;
     }
   };
