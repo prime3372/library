@@ -20,6 +20,6 @@ int main() {
     diam.add_edge(a, b, c);
   }
   diam.build();
-  cout << diam.dist << " " << diam.vertices.size() << "\n";
+  cout << diam.len << " " << diam.vertices.size() << "\n";
   for (int v : diam.vertices) cout << v << " ";
 }

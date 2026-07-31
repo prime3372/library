@@ -8,6 +8,7 @@
 #define rrep(i, a, b) for (int i = int(b) - 1; i >= int(a); i--)
 #define RREP(i, a, b) for (int i = int(b); i >= int(a); i--)
 #define all(a) a.begin(), a.end()
+#define rall(a) a.rbegin(), a.rend()
 using namespace std;
 using namespace cp;
 using uint = unsigned int;

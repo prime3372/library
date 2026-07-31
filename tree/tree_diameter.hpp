@@ -14,8 +14,8 @@ public:
   int add_edge(int u, int v, T c = 1) {
     assert(0 <= u && u < n);
     assert(0 <= v && v < n);
-    int m = int(pos.size());
-    pos.push_back(c);
+    int m = int(co.size());
+    co.push_back(c);
     g[u].push_back(edge{v, m, c});
     g[v].push_back(edge{u, m, c});
     return m;
@@ -25,7 +25,7 @@ public:
     return farthest(s, -1).second;
   }
   
-  T dist = 0;
+  T len = 0;
   std::vector<int> vertices, edges;
   
   tree_diameter& build(int s = 0) {
@@ -47,8 +47,8 @@ public:
     };
     construct(construct, t, -1);
 
-    dist = 0;
-    for (int i : edges) dist += pos[i];
+    len = 0;
+    for (int i : edges) len += co[i];
     return *this;
   }
   
@@ -58,7 +58,7 @@ private:
     int to, id;
     T cost;
   };
-  std::vector<T> pos;
+  std::vector<T> co;
   std::vector<std::vector<edge>> g;
 
   std::pair<T, int> farthest(int v, int pv) {
