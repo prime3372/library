@@ -13,7 +13,7 @@ constexpr long long pow_mod(long long x, long long n, long long m) {
   assert(0 <= n && 1 <= m);
   if (m == 1) return 0;
 
-  if (m >> 32) {
+  if (m >= (1LL << 32)) {
     __int128 r = 1, y = x % m;
     if (y < 0) y += m;
     while (n) {
