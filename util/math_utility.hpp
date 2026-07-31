@@ -1,8 +1,12 @@
 #pragma once
 
+#include <cassert>
+
 namespace cp {
 
-inline __int128 ipow(__int128 x, __int128 n) {
+template <class T>
+inline __int128 ipow(__int128 x, T n) {
+  assert(0 <= n);
   __int128 r = 1;
   while (n) {
     if (n & 1) r *= x;
@@ -12,7 +16,8 @@ inline __int128 ipow(__int128 x, __int128 n) {
   return r;
 }
 
-template <class T> inline bool chmin(T& a, T b) {
+template <class T>
+inline bool chmin(T& a, T b) {
   if (b < a) {
     a = b;
     return true;
@@ -20,7 +25,8 @@ template <class T> inline bool chmin(T& a, T b) {
   return false;
 }
 
-template <class T> inline bool chmax(T& a, T b) {
+template <class T>
+inline bool chmax(T& a, T b) {
   if (b > a) {
     a = b;
     return true;
