@@ -10,7 +10,7 @@ template <class T> struct tree_diameter {
 public:
   tree_diameter() : n(0) {}
   explicit tree_diameter(int _n) : n(_n), g(_n) {}
-  
+
   int add_edge(int u, int v, T c = 1) {
     assert(0 <= u && u < n);
     assert(0 <= v && v < n);
@@ -20,14 +20,14 @@ public:
     g[v].push_back(edge{u, m, c});
     return m;
   }
-  
+
   int farthest(int s) {
     return farthest(s, -1).second;
   }
-  
+
   T len = 0;
   std::vector<int> vertices, edges;
-  
+
   tree_diameter& build(int s = 0) {
     vertices.clear();
     edges.clear();
@@ -51,7 +51,7 @@ public:
     for (int i : edges) len += co[i];
     return *this;
   }
-  
+
 private:
   int n;
   struct edge {
