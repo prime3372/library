@@ -9,6 +9,8 @@
 
 namespace cp {
 
+// is_modint
+
 template <class> struct is_modint : std::false_type {};
 
 template <class T>
@@ -24,6 +26,8 @@ template <class> struct is_dynamic_modint : std::false_type {};
 template <class T>
 inline constexpr bool is_dynamic_modint_v = is_dynamic_modint<T>::value;
 
+// is_tuple_like
+
 template <class T>
 struct is_tuple_like : std::false_type {};
 
@@ -38,6 +42,8 @@ struct is_tuple_like<std::pair<T, U>> : std::true_type {};
 
 template <class T>
 constexpr bool is_tuple_like_v = is_tuple_like<T>::value;
+
+// is_vector
 
 template <class T>
 struct is_vector : std::false_type {};
