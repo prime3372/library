@@ -29,7 +29,7 @@ do {
 
   # run gen.exe
   $p_gen = Start-Process -FilePath .\gen.exe -NoNewWindow -RedirectStandardOutput in.txt -PassThru
-  $dummy = $p_gen.Handle
+  $p_gen.Handle
   if (-not $p_gen.WaitForExit($timeout)) {
     $p_gen.Kill()
     Write-Host "FAIL" "Timed Out" $gen -ForegroundColor Blue
@@ -44,7 +44,7 @@ do {
 
   # run sol.exe
   $p_sol = Start-Process -FilePath .\sol.exe -NoNewWindow -RedirectStandardInput in.txt -RedirectStandardOutput out.txt -PassThru
-  $dummy = $p_sol.Handle
+  $p_sol.Handle
   $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
   if (-not $p_sol.WaitForExit($timeout)) {
     $p_sol.Kill()
