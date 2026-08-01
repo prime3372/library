@@ -80,9 +80,9 @@ using copy_cv_t = typename copy_cv<T, U>::type;
 template <class T>
 using make_unsigned =
   std::conditional<
-  is_signed_int128_v<T> || is_unsigned_int128_v<T>,
-  copy_cv_t<T, unsigned __int128>,
-  std::make_unsigned_t<T>>;
+    is_signed_int128_v<T> || is_unsigned_int128_v<T>,
+    copy_cv_t<T, unsigned __int128>,
+    std::make_unsigned_t<T>>;
 
 template <class T>
 using make_unsigned_t = typename make_unsigned<T>::type;
