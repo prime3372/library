@@ -2,20 +2,19 @@
 
 #include <cassert>
 #include <iostream>
-#include <type_traits>
 #include <vector>
 
 #include "algebra/add_mul.hpp"
-#include "algebra/semiring.hpp"
+#include "algebra/concepts.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
 
 template <class T>
-  requires semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>
+  requires internal::semiring<T> || internal::is_arithmetic_v<T> || internal::is_modint_v<T>
 struct matrix {
 public:
-  using R = std::conditional_t<semiring<T>,
+  using R = std::conditional_t<internal::semiring<T>,
                                T,
                                add_mul<T>>;
   using S = typename R::S;

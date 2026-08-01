@@ -65,10 +65,10 @@ ostream& operator<<(ostream& os, unsigned __int128 val) {
   return os << s;
 }
 
-template <class Tuple> requires cp::is_tuple_like_v<Tuple>
+template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 istream& operator>>(istream& is, Tuple& t);
 
-template <class Tuple> requires cp::is_tuple_like_v<Tuple>
+template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 ostream& operator<<(ostream& os, const Tuple& t);
 
 template <class T>
@@ -77,7 +77,7 @@ istream& operator>>(istream& is, vector<T>& v);
 template <class T>
 ostream& operator<<(ostream& os, const vector<T>& v);
 
-template <class Tuple> requires cp::is_tuple_like_v<Tuple>
+template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 istream& operator>>(istream& is, Tuple& t) {
   apply([&](auto&... args) {
     (is >> ... >> args);
@@ -85,14 +85,14 @@ istream& operator>>(istream& is, Tuple& t) {
   return is;
 }
 
-template <class Tuple> requires cp::is_tuple_like_v<Tuple>
+template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 ostream& operator<<(ostream& os, const Tuple& t) {
   static constexpr size_t n = tuple_size_v<Tuple>; 
   if constexpr (n == 0) return os;
   [&]<size_t... I>(index_sequence<I...>) {
     ([&]<class T>(const T& x) {
       os << x;
-      if constexpr (cp::is_tuple_like_v<T> || cp::is_vector_v<T>) {
+      if constexpr (cp::internal::is_tuple_like_v<T> || cp::internal::is_vector_v<T>) {
         os << "\n";
       } else {
         os << " ";
@@ -114,7 +114,7 @@ ostream& operator<<(ostream& os, const vector<T>& v) {
   for (int i = 0; i < int(v.size()); i++) {
     os << v[i];
     if (i != int(v.size()) - 1) {
-      if constexpr (cp::is_tuple_like_v<T> || cp::is_vector_v<T>) {
+      if constexpr (cp::internal::is_tuple_like_v<T> || cp::internal::is_vector_v<T>) {
         os << "\n";
       } else {
         os << " ";

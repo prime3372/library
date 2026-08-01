@@ -2,14 +2,15 @@
 
 #include <algorithm>
 #include <cassert>
-#include <concepts>
 #include <limits>
 #include <queue>
 #include <vector>
 
+#include "util/type_traits.hpp"
+
 namespace cp {
 
-template <std::integral Cap> struct max_flow {
+template <internal::integral Cap> struct max_flow {
 public:
   max_flow() : max_flow(0) {}
   explicit max_flow(int _n) : n(_n), g(_n) {}

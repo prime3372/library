@@ -1,12 +1,13 @@
 #pragma once
 
 #include <cassert>
-#include <concepts>
 #include <cmath>
+
+#include "util/type_traits.hpp"
 
 namespace cp {
 
-template <std::integral T, std::integral U> requires (sizeof(T) <= 8)
+template <class T, class U>
 constexpr T kth_root(T x, U k) {
   assert(0 <= x && 1 <= k);
   if (x <= 1 || k == 1) return x;
@@ -17,9 +18,9 @@ constexpr T kth_root(T x, U k) {
       if (e & 1) z *= y;
       y *= y;
     }
-    return z <= x;
+    return z <= (unsigned __int128)(x);
   };
-  T y = T(std::pow(x, 1.0 / k));
+  T y = T(std::pow(double(x), 1.0 / k));
   while (!check(y)) y--;
   while (check(y + 1)) y++;
   return y;

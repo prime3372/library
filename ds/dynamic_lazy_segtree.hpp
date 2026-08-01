@@ -7,11 +7,11 @@
 #include <memory>
 #include <vector>
 
-#include "algebra/acted_monoid.hpp"
+#include "algebra/concepts.hpp"
 
 namespace cp {
 
-template <acted_monoid M> struct dynamic_lazy_segtree {
+template <internal::acted_monoid M> struct dynamic_lazy_segtree {
 private:
   using S = typename M::S;
   using F = typename M::F;

@@ -3,14 +3,13 @@
 #include <algorithm>
 #include <bit>
 #include <cassert>
-#include <type_traits>
 #include <vector>
 
-#include "algebra/monoid.hpp"
+#include "algebra/concepts.hpp"
 
 namespace cp {
 
-template <monoid M> struct segtree {
+template <internal::monoid M> struct segtree {
 private:
   using S = typename M::S;
 

@@ -6,16 +6,16 @@
 #include <type_traits>
 
 #include "algebra/add_mul.hpp"
-#include "algebra/semiring.hpp"
+#include "algebra/concepts.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
 
 template <class T, int h, int w>
-  requires semiring<T> || std::is_arithmetic_v<T> || is_modint_v<T>
+  requires internal::semiring<T> || internal::is_arithmetic_v<T> || internal::is_modint_v<T>
 struct matrix_array {
 public:
-  using R = std::conditional_t<semiring<T>,
+  using R = std::conditional_t<internal::semiring<T>,
                                T,
                                add_mul<T>>;
   using S = typename R::S;

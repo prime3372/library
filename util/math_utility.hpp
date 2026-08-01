@@ -1,9 +1,9 @@
 #pragma once
 
 #include <cassert>
-#include <concepts>
 #include <cmath>
-#include <type_traits>
+
+#include "util/type_traits.hpp"
 
 namespace cp {
 
@@ -18,16 +18,16 @@ constexpr __int128 ipow(__int128 x, __int128 n) {
   return r;
 }
 
-template <std::integral T>
+template <internal::integral T>
 constexpr T isqrt(T x) {
   assert(0 <= x);
-  T y = sizeof(T) <= 8 ? T(std::sqrt(x)) : T(std::sqrtl(x));
+  T y = sizeof(T) <= 8 ? T(std::sqrt(double(x))) : T(std::sqrtl((long double)(x)));
   while (y && y > x / y) y--;
   while ((y + 1) <= x / (y + 1)) y++;
   return y;
 }
 
-template <std::integral T>
+template <internal::integral T>
 constexpr T icbrt(T x) {
   assert(0 <= x);
   T y = T(std::cbrt(x));

@@ -2,7 +2,6 @@
 
 #include <cassert>
 #include <iostream>
-#include <type_traits>
 
 #include "number/ext_gcd.hpp"
 #include "number/is_prime.hpp"
@@ -18,13 +17,13 @@ public:
   static constexpr int mod() { return m; }
 
   static_modint() : v(0) {}
-  template <class T> requires std::is_signed_v<T>
+  template <internal::signed_int T>
   static_modint(T _v) {
     long long x = (long long)(_v % (long long)(umod()));
     if (x < 0) x += umod();
     v = (unsigned int)(x);
   }
-  template <class T> requires std::is_unsigned_v<T>
+  template <internal::unsigned_int T>
   static_modint(T _v) {
     v = (unsigned int)(_v % umod());
   }
@@ -125,9 +124,13 @@ private:
 using modint998244353 = static_modint<998244353>;
 using modint1000000007 = static_modint<1000000007>;
 
+namespace internal {
+
 template <int m>
 struct is_modint<static_modint<m>> : public std::true_type {};
 template <int m>
 struct is_static_modint<static_modint<m>> : public std::true_type {};
+
+} // namespace internal
 
 } // namespace cp

@@ -1,9 +1,6 @@
 #pragma once
 
 #include <cassert>
-#include <concepts>
-#include <utility>
-#include <type_traits>
 
 #include "number/barrett.hpp"
 

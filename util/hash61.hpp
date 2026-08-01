@@ -3,9 +3,9 @@
 #include <algorithm>
 #include <array>
 #include <random>
-#include <type_traits>
 
 #include "random/rng.hpp"
+#include "util/type_traits.hpp"
 
 namespace cp {
 
@@ -22,13 +22,13 @@ public:
   }
 
   hash61() {}
-  template <class T> requires std::is_signed_v<T>
+  template <internal::signed_int T>
   hash61(T _v) {
     long long x = (long long)(_v % m);
     if (x < 0) x += m;
     std::fill(v.begin(), v.end(), x);
   }
-  template <class T> requires std::is_unsigned_v<T>
+  template <internal::unsigned_int T>
   hash61(T _v) {
     std::fill(v.begin(), v.end(), (long long)(_v % m));
   }

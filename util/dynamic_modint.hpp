@@ -3,7 +3,6 @@
 #include <cassert>
 #include <iostream>
 #include <utility>
-#include <type_traits>
 
 #include "number/barrett.hpp"
 #include "number/ext_gcd.hpp"
@@ -23,13 +22,13 @@ public:
   static int mod() { return bt.umod(); }
 
   dynamic_modint() : v(0) {}
-  template <class T> requires std::is_signed_v<T>
+  template <internal::signed_int T>
   dynamic_modint(T _v) {
     long long x = (long long)(_v % (long long)(mod()));
     if (x < 0) x += mod();
     v = (unsigned int)(x);
   }
-  template <class T> requires std::is_unsigned_v<T>
+  template <internal::unsigned_int T>
   dynamic_modint(T _v) {
     v = (unsigned int)(_v % mod());
   }
@@ -122,9 +121,13 @@ private:
 
 using modint = dynamic_modint<-1>;
 
+namespace internal {
+
 template <int id>
 struct is_modint<dynamic_modint<id>> : std::true_type {};
 template <int id>
 struct is_dynamic_modint<dynamic_modint<id>> : std::true_type {};
+
+} // namespace internal
 
 } // namespace cp

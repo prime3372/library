@@ -29,7 +29,7 @@ template <> struct hash<string> {
   }
 };
 
-template <class Tuple> requires cp::is_tuple_like_v<Tuple>
+template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 struct hash<Tuple> {
 public:
   hash() {}
@@ -47,9 +47,9 @@ private:
   static size_t combine(size_t hs) { return hs; }
 };
 
-template <class T> struct hash<vector<T>> {
+template <class T, class Alloc> struct hash<vector<T, Alloc>> {
   hash() {}
-  size_t operator()(const vector<T>& v) const {
+  size_t operator()(const vector<T, Alloc>& v) const {
     size_t hs = 0;
     for (auto& elem : v) hs = cp::hash_combine(hs, elem);
     return hs;

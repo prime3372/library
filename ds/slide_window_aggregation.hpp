@@ -3,11 +3,11 @@
 #include <cassert>
 #include <vector>
 
-#include "algebra/monoid.hpp"
+#include "algebra/concepts.hpp"
 
 namespace cp {
 
-template <monoid M> struct slide_window_aggregation {
+template <internal::monoid M> struct slide_window_aggregation {
 private:
   using S = typename M::S;
 

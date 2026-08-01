@@ -6,7 +6,6 @@
 #include <utility>
 #include <vector>
 
-#include "algebra/acted_monoid.hpp"
 #include "ds/cartesian_tree.hpp"
 
 namespace cp {

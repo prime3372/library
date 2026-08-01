@@ -2,7 +2,6 @@
 
 #include <algorithm>
 #include <bit>
-#include <concepts>
 #include <vector>
 
 #include "number/is_prime.hpp"
@@ -89,7 +88,7 @@ template <class mint, int g> void ntt(std::vector<mint>& a) {
 } // namespace internal
 
 template <class mint>
-  requires is_static_modint_v<mint> && (is_prime(mint::mod()))
+  requires internal::is_static_modint_v<mint> && (is_prime(mint::mod()))
 std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
   static constexpr int g = internal::primitive_root_ntt(mint::mod());
   static constexpr int ig = pow_mod(g, mint::mod() - 2, mint::mod());
@@ -115,7 +114,7 @@ std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
   return a;
 }
 
-template <int mod = 998244353, std::integral T>
+template <int mod = 998244353, internal::integral T>
 std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
   using mint = static_modint<mod>;
   int n = int(a.size()), m = int(b.size());

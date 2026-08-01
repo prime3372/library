@@ -1,11 +1,12 @@
 #pragma once
 
 #include <cstddef>
-#include "algebra/monoid.hpp"
+
+#include "algebra/concepts.hpp"
 
 namespace cp {
 
-template <monoid M> struct assign {
+template <internal::monoid M> struct assign {
   using T = typename M::S;
 
   struct S {

@@ -4,11 +4,11 @@
 #include <cassert>
 #include <vector>
 
-#include "algebra/monoid.hpp"
+#include "algebra/concepts.hpp"
 
 namespace cp {
 
-template <monoid M> struct disjoint_sparse_table {
+template <internal::monoid M> struct disjoint_sparse_table {
 private:
   using S = typename M::S;
 

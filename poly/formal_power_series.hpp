@@ -2,7 +2,6 @@
 
 #include <algorithm>
 #include <cassert>
-#include <concepts>
 #include <iostream>
 #include <vector>
 
@@ -15,7 +14,7 @@ template <class>
 struct formal_power_series {};
 
 template <class mint>
-  requires is_static_modint_v<mint> && (is_prime(mint::mod()))
+  requires internal::is_static_modint_v<mint> && (is_prime(mint::mod()))
 struct formal_power_series<mint> {
 private:
   using fps = formal_power_series;

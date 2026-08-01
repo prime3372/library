@@ -2,14 +2,13 @@
 
 #include <algorithm>
 #include <cassert>
-#include <type_traits>
 #include <vector>
 
-#include "algebra/acted_monoid.hpp"
+#include "algebra/concepts.hpp"
 
 namespace cp {
 
-template <acted_monoid M> struct lazy_segtree {
+template <internal::acted_monoid M> struct lazy_segtree {
 private:
   using S = typename M::S;
   using F = typename M::F;

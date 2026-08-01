@@ -7,10 +7,11 @@
 #include <vector>
 
 #include "random/rng.hpp"
+#include "util/type_traits.hpp"
 
 namespace cp {
 
-template <std::integral T> std::vector<T> random_seq(int n, T l, T r, bool sorted = false) {
+template <internal::integral T> std::vector<T> random_seq(int n, T l, T r, bool sorted = false) {
   assert(0 <= n && (n == 0 || l < r));
   std::vector<T> seq(n);
   for (int i = 0; i < n; i++) {

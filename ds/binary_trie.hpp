@@ -2,14 +2,14 @@
 
 #include <bitset>
 #include <limits>
-#include <type_traits>
 #include <string>
 
 #include "string/trie_tree.hpp"
+#include "util/type_traits.hpp"
 
 namespace cp {
 
-template <class T> requires std::is_unsigned_v<T>
+template <internal::unsigned_int T>
 class binary_trie : public trie_tree<2, '0'> {
 public:
   using trie_tree<2, '0'>::trie_tree;
