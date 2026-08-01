@@ -37,16 +37,16 @@ jobs:
         rm -f .verify-helper/timestamps.remote.json .verify-helper/timestamps.local.json
 
         mapfile -t FILE_ARRAY <<< "$FILES"
-        TOTAL_FILES = ${#FILE_ARRAY[@]}
+        TOTAL_FILES=${#FILE_ARRAY[@]}
 
-        SHARD = ${{ matrix.shard }}
-        TOTAL = ${{ matrix.total }}
+        SHARD=${{ matrix.shard }}
+        TOTAL=${{ matrix.total }}
 
-        START = $(( SHARD * TOTAL_FILES / TOTAL ))
-        END = $(( (SHARD + 1) * TOTAL_FILES / TOTAL ))
-        LEN = $(( END - START ))
+        START=$(( SHARD * TOTAL_FILES / TOTAL ))
+        END=$(( (SHARD + 1) * TOTAL_FILES / TOTAL ))
+        LEN=$(( END - START ))
 
-        TARGETS = "${FILE_ARRAY[@]:START:LEN}"
+        TARGETS="${FILE_ARRAY[@]:START:LEN}"
 
         if [ -n "$TARGETS" ]; then
           oj-verify run $TARGETS
