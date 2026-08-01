@@ -7,12 +7,9 @@
 
 namespace cp {
 
-constexpr long long ipow(long long x, long long n) {
+constexpr __int128 ipow(__int128 x, __int128 n) {
   assert(0 <= n);
-  if (x == 0) return n == 0;
-  if (x == 1) return 1;
-  if (x == -1) return n % 2 ? -1 : 1;
-  long long r = 1;
+  __int128 r = 1;
   while (n) {
     if (n & 1) r *= x;
     x *= x;
