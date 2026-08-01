@@ -22,13 +22,13 @@ public:
   }
 
   hash61() {}
-  template <internal::signed_int T>
+  template <class T> requires internal::is_signed_int_v<T>
   hash61(T _v) {
     long long x = (long long)(_v % m);
     if (x < 0) x += m;
     std::fill(v.begin(), v.end(), x);
   }
-  template <internal::unsigned_int T>
+  template <class T> requires internal::is_unsigned_int_v<T>
   hash61(T _v) {
     std::fill(v.begin(), v.end(), (long long)(_v % m));
   }
