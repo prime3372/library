@@ -62,7 +62,7 @@ inline constexpr bool is_unsigned_int_v = is_unsigned_int<T>::value;
 template <class T>
 using is_arithmetic =
   std::conditional_t<
-    is_signed_int128_v<T> || is_unsigned_int128_v<T> || std::is_arithmetic_v<T>,
+    std::is_arithmetic_v<T> || is_signed_int128_v<T> || is_unsigned_int128_v<T>,
     std::true_type,
     std::false_type>;
 
