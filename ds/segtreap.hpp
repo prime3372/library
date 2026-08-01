@@ -22,14 +22,14 @@ template <monoid M> struct segtreap_node {
   explicit segtreap_node(const S& x) : val(x), prod(x), priority(mt64()) {}    
 };
 
-template <monoid M, auto flip = std::identity()>
+template <monoid M, auto rev = std::identity()>
 struct segtreap
-: public treap_base<segtreap_node<M>, segtreap<M, flip>> {
+: public treap_base<segtreap_node<M>, segtreap<M, rev>> {
 private:
   using S = typename M::S;
   using node = segtreap_node<M>;
   using node_ptr = std::shared_ptr<node>;
-  using base = treap_base<node, segtreap<M, flip>>;
+  using base = treap_base<node, segtreap<M, rev>>;
   using base::merge;
   using base::split;
   using base::size;
@@ -53,7 +53,7 @@ private:
 
   static void toggle(node_ptr p) {
     swap(p->left, p->right);
-    p->prod = flip(p->prod);
+    p->prod = rev(p->prod);
     p->rev = !p->rev;
   }
 

@@ -25,15 +25,15 @@ public:
   explicit lazy_segtreap_node(const S& x) : val(x), prod(x), priority(mt64()) {}  
 };
 
-template <acted_monoid M, auto flip = std::identity()>
+template <acted_monoid M, auto rev = std::identity()>
 struct lazy_segtreap
-: public treap_base<lazy_segtreap_node<M>, lazy_segtreap<M, flip>> {
+: public treap_base<lazy_segtreap_node<M>, lazy_segtreap<M, rev>> {
 private:
   using S = typename M::S;
   using F = typename M::F;
   using node = lazy_segtreap_node<M>;
   using node_ptr = std::shared_ptr<node>;
-  using base = treap_base<node, lazy_segtreap<M, flip>>;
+  using base = treap_base<node, lazy_segtreap<M, rev>>;
   using base::merge;
   using base::split;
   using base::size;
@@ -66,7 +66,7 @@ private:
 
   static void toggle(node_ptr p) {
     swap(p->left, p->right);
-    p->prod = flip(p->prod);
+    p->prod = rev(p->prod);
     p->rev = !p->rev;
   }
 

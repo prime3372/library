@@ -9,9 +9,9 @@ namespace cp {
 
 template <class M>
 concept acted_monoid = monoid<M> && requires { typename M::F; }
-&& std::is_default_constructible_v<typename M::S>
-&& std::is_copy_constructible_v<typename M::S>
-&& std::is_copy_assignable_v<typename M::S>
+&& std::is_default_constructible_v<typename M::F>
+&& std::is_copy_constructible_v<typename M::F>
+&& std::is_copy_assignable_v<typename M::F>
 && requires (typename M::S x, typename M::F f, typename M::F g) {
   {M::mapping(f, x)} -> std::same_as<typename M::S>;
   {M::composition(g, f)} -> std::same_as<typename M::F>;
