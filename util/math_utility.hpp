@@ -21,7 +21,11 @@ constexpr __int128 ipow(__int128 x, __int128 n) {
 template <internal::integral T>
 constexpr T isqrt(T x) {
   assert(0 <= x);
-  T y = sizeof(T) <= 8 ? T(std::sqrt(double(x))) : T(std::sqrtl((long double)(x)));
+  T y = T(std::sqrt(double(x)));
+  if constexpr (sizeof(T) > 8) {
+    y = (y + x / y) / 2;
+    y = (y + x / y) / 2;
+  }
   while (y && y > x / y) y--;
   while ((y + 1) <= x / (y + 1)) y++;
   return y;
