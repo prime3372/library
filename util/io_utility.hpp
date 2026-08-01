@@ -81,7 +81,7 @@ istream& operator>>(istream& is, vector<T>& v);
 template <class T>
 ostream& operator<<(ostream& os, const vector<T>& v);
 
-// tuple_like
+// tuple_like (array, tuple, pair)
 
 template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 istream& operator>>(istream& is, Tuple& t) {
