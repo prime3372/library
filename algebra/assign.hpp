@@ -14,6 +14,7 @@ template <monoid M> struct assign {
     S() : val(M::e()), len(0) {}
     S(T v) : val(v), len(1) {}
     S(T v, size_t l) : val(v), len(l) {}
+    explicit operator T() const { return val; }
   };
   static S op(S x, S y) { return S{M::op(x.val, y.val), x.len + y.len}; }
   static S e() { return S(); }

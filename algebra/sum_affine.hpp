@@ -13,6 +13,7 @@ template <class T> struct sum_affine {
     S() : val(0), len(0) {}
     S(T v) : val(v), len(1) {}
     S(T v, size_t l) : val(v), len(l) {}
+    explicit operator T() const { return val; }
   };
   static S op(S x, S y) { return S{x.val + y.val, x.len + y.len}; }
   static S e() { return S(); }
