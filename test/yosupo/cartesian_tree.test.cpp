@@ -9,10 +9,10 @@ using namespace cp;
 
 int main() {
   ios::sync_with_stdio(false);
-  std::cin.tie(nullptr);
+  cin.tie(nullptr);
   int n;
   cin >> n;
-  std::vector<int> a(n);
+  vector<int> a(n);
   rep(i, 0, n) cin >> a[i];
   cartesian_tree<true> cart(a);
   for (int p : cart.parent) cout << (p == -1 ? cart.root : p) << " ";
