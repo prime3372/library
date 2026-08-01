@@ -15,7 +15,7 @@ public:
     hash61 hs;
     for (int i = 0; i < num_of_base; i++) {
       do {
-        hs.v[i] = mt64() % m;
+        hs.v[i] = get_rand(m);
       } while (!is_primitive(hs.v[i]));
     }
     return hs;

@@ -11,7 +11,7 @@ template <bool upper = false> std::string random_str(int n) {
   assert(0 <= n);
   std::string res(n, 0);
   for (int i = 0; i < n; i++) {
-    res[i] = char((upper ? 'A' : 'a') + mt32() % 26);
+    res[i] = char((upper ? 'A' : 'a') + get_rand(26));
   }
   return res;
 }
@@ -20,7 +20,7 @@ std::string random_str(int n, std::string s) {
   assert(0 <= n);
   std::string res(n, 0);
   for (int i = 0; i < n; i++) {
-    res[i] = s[mt32() % s.size()];
+    res[i] = s[get_rand(0, int(s.size()))];
   }
   return res;
 }

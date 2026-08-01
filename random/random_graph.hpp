@@ -23,20 +23,20 @@ std::vector<std::pair<int, int>> random_graph(int n, int m) {
     int u, v;
     if constexpr (directed) {
       if constexpr (has_self_loops) {
-        u = mt32() % n;
-        v = mt32() % n;
+        u = get_rand(0, n);
+        v = get_rand(0, n);
       } else {
-        u = mt32() % (n - 1);
-        v = mt32() % (n - u - 1) + u + 1;
-        if (mt32() % 2) std::swap(u, v);
+        u = get_rand(0, n - 1);
+        v = get_rand(u + 1, n);
+        if (get_rand(2)) std::swap(u, v);
       }
     } else {
       if constexpr (has_self_loops) {
-        u = mt32() % n;
-        v = mt32() % (n - u) + u;
+        u = get_rand(0, n);
+        v = get_rand(u, n);
       } else {
-        u = mt32() % (n - 1);
-        v = mt32() % (n - u - 1) + u + 1;
+        u = get_rand(0, n - 1);
+        v = get_rand(u, n);
       }
     }
     edges[i] = {u, v};
