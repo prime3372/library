@@ -1,12 +1,10 @@
 #pragma once
 
 #include <algorithm>
-#include <type_traits>
 
 namespace cp {
 
-template <class T, T upper> requires std::is_arithmetic_v<T>
-struct min_assign {
+template <class T, T upper> struct min_assign {
   using S = T;
   static S op(S x, S y) { return std::min(x, y); }
   static S e() { return upper; }

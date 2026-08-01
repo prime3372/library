@@ -1,16 +1,12 @@
 #pragma once
 
 #include <cstddef>
-#include <type_traits>
 
 #include "algebra/affine.hpp"
-#include "util/type_traits.hpp"
 
 namespace cp {
 
-template <class T>
-  requires std::is_arithmetic_v<T> || is_modint_v<T>
-struct sum_affine {
+template <class T> struct sum_affine {
   struct S {
     T val;
     size_t len;

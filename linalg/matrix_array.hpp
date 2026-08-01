@@ -16,8 +16,8 @@ template <class T, int h, int w>
 struct matrix_array {
 public:
   using R = std::conditional_t<semiring<T>,
-                               std::type_identity<T>,
-                               std::type_identity<add_mul<T>>>::type;
+                               T,
+                               add_mul<T>>;
   using S = typename R::S;
 
   matrix_array() : d{} { d.fill(std::array<S, w>{}); }

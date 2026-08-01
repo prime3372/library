@@ -1,10 +1,8 @@
 #pragma once
 
-#include <concepts>
-
 namespace cp {
 
-template <std::integral T> struct bitwise_xor {
+template <class T> struct bitwise_xor {
   using S = T;
   static S op(S x, S y) { return x ^ y; }
   static S e() { return 0; }

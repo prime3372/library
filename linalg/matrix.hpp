@@ -16,8 +16,8 @@ template <class T>
 struct matrix {
 public:
   using R = std::conditional_t<semiring<T>,
-                               std::type_identity<T>,
-                               std::type_identity<add_mul<T>>>::type;
+                               T,
+                               add_mul<T>>;
   using S = typename R::S;
 
   matrix() : h(0), w(0) {}

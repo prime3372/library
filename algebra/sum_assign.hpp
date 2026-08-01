@@ -1,15 +1,10 @@
 #pragma once
 
 #include <cstddef>
-#include <type_traits>
-
-#include "util/type_traits.hpp"
 
 namespace cp {
 
-template <class T>
-  requires std::is_arithmetic_v<T> || is_modint_v<T>
-struct sum_assign {
+template <class T> struct sum_assign {
   struct S {
     T val;
     size_t len;
