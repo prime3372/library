@@ -23,8 +23,7 @@ constexpr T isqrt(T x) {
   assert(0 <= x);
   T y = T(std::sqrt(double(x)));
   if constexpr (sizeof(T) > 8) {
-    y = (y + x / y) / 2;
-    y = (y + x / y) / 2;
+    y = (y + x / y) / 2; // Newton's method
   }
   while (y && y > x / y) y--;
   while ((y + 1) <= x / (y + 1)) y++;
