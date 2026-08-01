@@ -12,6 +12,8 @@
 
 namespace std {
 
+// __int128
+
 istream& operator>>(istream& is, __int128& val) {
   string s;
   if (is >> s) {
@@ -65,6 +67,8 @@ ostream& operator<<(ostream& os, unsigned __int128 val) {
   return os << s;
 }
 
+// forward declarations
+
 template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 istream& operator>>(istream& is, Tuple& t);
 
@@ -76,6 +80,8 @@ istream& operator>>(istream& is, vector<T>& v);
 
 template <class T>
 ostream& operator<<(ostream& os, const vector<T>& v);
+
+// tuple_like
 
 template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 istream& operator>>(istream& is, Tuple& t) {
@@ -102,6 +108,8 @@ ostream& operator<<(ostream& os, const Tuple& t) {
   os << get<n - 1>(t);
   return os;
 }
+
+// vector
 
 template <class T>
 istream& operator>>(istream& is, vector<T>& v) {
