@@ -8,8 +8,7 @@
 
 namespace cp {
 
-template <class T>
-  requires internal::is_integral_v<T>
+template <class T> requires internal::is_integral_v<T>
 constexpr T kth_root(T x, long long k) {
   assert(0 <= x && 1 <= k);
   if (x <= 1 || k == 1) return x;
