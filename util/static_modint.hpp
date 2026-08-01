@@ -17,13 +17,13 @@ public:
   static constexpr int mod() { return m; }
 
   static_modint() : v(0) {}
-  template <internal::signed_int T>
+  template <class T> requires internal::is_signed_int_v<T>
   static_modint(T _v) {
     long long x = (long long)(_v % (long long)(umod()));
     if (x < 0) x += umod();
     v = (unsigned int)(x);
   }
-  template <internal::unsigned_int T>
+  template <class T> requires internal::is_unsigned_int_v<T>
   static_modint(T _v) {
     v = (unsigned int)(_v % umod());
   }

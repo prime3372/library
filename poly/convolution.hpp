@@ -114,7 +114,7 @@ std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
   return a;
 }
 
-template <int mod = 998244353, internal::integral T>
+template <int mod = 998244353, class T> requires internal::is_integral_v<T>
 std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
   using mint = static_modint<mod>;
   int n = int(a.size()), m = int(b.size());

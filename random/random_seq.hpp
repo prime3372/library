@@ -2,8 +2,8 @@
 
 #include <algorithm>
 #include <cassert>
-#include <concepts>
 #include <numeric>
+#include <type_traits>
 #include <vector>
 
 #include "random/rng.hpp"
@@ -11,7 +11,8 @@
 
 namespace cp {
 
-template <internal::integral T> std::vector<T> random_seq(int n, T l, T r, bool sorted = false) {
+template <class T> requires internal::is_integral_v<T>
+std::vector<T> random_seq(int n, T l, T r, bool sorted = false) {
   assert(0 <= n && (n == 0 || l < r));
   std::vector<T> seq(n);
   for (int i = 0; i < n; i++) {
@@ -21,7 +22,8 @@ template <internal::integral T> std::vector<T> random_seq(int n, T l, T r, bool 
   return seq;
 }
 
-template <std::floating_point T> std::vector<T> random_seq(int n, T l, T r, bool sorted = false) {
+template <class T> requires std::is_floating_point_v<T>
+std::vector<T> random_seq(int n, T l, T r, bool sorted = false) {
   assert(0 <= n && (n == 0 || l < r));
   std::vector<T> seq(n);
   for (int i = 0; i < n; i++) {

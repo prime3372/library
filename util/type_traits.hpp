@@ -38,9 +38,6 @@ template <class T>
 inline constexpr bool is_integral_v = is_integral<T>::value;
 
 template <class T>
-concept integral = is_integral_v<T>;
-
-template <class T>
 using is_signed_int =
   std::conditional_t<
     (std::is_integral_v<T> && std::is_signed_v<T>) || is_signed_int128_v<T>,
@@ -51,9 +48,6 @@ template <class T>
 inline constexpr bool is_signed_int_v = is_signed_int<T>::value;
 
 template <class T>
-concept signed_int = is_signed_int_v<T>;
-
-template <class T>
 using is_unsigned_int =
   std::conditional_t<
     (std::is_integral_v<T> && std::is_unsigned_v<T>) || is_unsigned_int128_v<T>,
@@ -62,9 +56,6 @@ using is_unsigned_int =
 
 template <class T>
 inline constexpr bool is_unsigned_int_v = is_unsigned_int<T>::value;
-
-template <class T>
-concept unsigned_int = is_unsigned_int_v<T>;
 
 // is_arithmetic
 
@@ -77,9 +68,6 @@ using is_arithmetic =
 
 template <class T>
 inline constexpr bool is_arithmetic_v = is_arithmetic<T>::value;
-
-template <class T>
-concept arithmetic = is_arithmetic_v<T>;
 
 // copy_cv
 
@@ -119,7 +107,7 @@ using make_unsigned =
   std::make_unsigned_t<T>>;
 
 template <class T>
-using make_signed_t = typename make_signed<T>::type;
+using make_unsigned_t = typename make_unsigned<T>::type;
 
 // is_modint
 
