@@ -9,6 +9,7 @@
 #define RREP(i, a, b) for (int i = (b); i >= (a); i--)
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
+#define isize(a) int((a).size())
 using namespace std;
 using namespace cp;
 using uint = unsigned int;
