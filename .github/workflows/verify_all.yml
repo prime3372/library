@@ -1,4 +1,4 @@
-name: verify
+name: verify_all
 
 on:
   workflow_dispatch:
