@@ -11,9 +11,7 @@
 
 namespace cp {
 
-template <class T, int h, int w>
-  requires internal::semiring<T> || internal::is_arithmetic_v<T> || internal::is_modint_v<T>
-struct matrix_array {
+template <class T, int h, int w> struct matrix_array {
 public:
   using R = std::conditional_t<internal::semiring<T>,
                                T,

@@ -10,9 +10,7 @@
 
 namespace cp {
 
-template <class T>
-  requires internal::semiring<T> || internal::is_arithmetic_v<T> || internal::is_modint_v<T>
-struct matrix {
+template <class T> struct matrix {
 public:
   using R = std::conditional_t<internal::semiring<T>,
                                T,
