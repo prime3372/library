@@ -23,6 +23,8 @@ constexpr std::pair<long long, long long> ext_gcd(long long a, long long b) {
   return {g0, x0};
 }
 
+// @param gcd(x, m) = 1
+// @return a s.t. xa = 1 (mod m)
 constexpr long long inv_mod(long long x, long long m) {
   assert(1 <= m);
   auto z = ext_gcd(x, m);
