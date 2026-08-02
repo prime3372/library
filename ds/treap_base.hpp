@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <functional>
+#include <iostream>
 #include <memory>
 #include <utility>
 #include <vector>
@@ -76,6 +77,15 @@ public:
   }
 
   int size() const { return size(root); }
+
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os, const treap_base& tp) {
+    for (size_t i = 0; i < tp.size(); i++) {
+      os << tp[i];
+      if (i != tp.size() - 1) os << " ";
+    }
+    return os;
+  }
 
 protected:
   node_ptr root;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <iostream>
 #include <vector>
 
 #include "ds/fenwick_tree.hpp"
@@ -23,9 +24,9 @@ private:
 
 public:
   fenwick_tree_2d() : h(0), w(0) {}
-  fenwick_tree_2d(int _h, int _w) : h(_h), w(_w), fw(_h) {
+  fenwick_tree_2d(int _h, int _w) : h(_h), w(_w), d(_h) {
     for (int i = 0; i < h; i++) {
-      fw[i] = fenwick_tree<T>(w);
+      d[i] = fenwick_tree<T>(w);
     }
   }
 
@@ -34,7 +35,7 @@ public:
     assert(0 <= j && j < w);
     i++;
     while (i <= h) {
-      fw[i - 1].add(j, x);
+      d[i - 1].add(j, x);
       i += i & -i;
     }
   }
@@ -49,7 +50,7 @@ public:
     assert(0 <= j && j <= w);
     T res = 0;
     while (i) {
-      res += fw[i - 1].sum(j);
+      res += d[i - 1].sum(j);
       i -= i & -i;
     }
     return res;
@@ -79,9 +80,21 @@ public:
   int height() const { return h; }
   int width() const { return w; }
 
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os, const fenwick_tree_2d& fw) {
+    for (int i = 0; i < fw.h; i++) {
+      for (int j = 0; j < fw.w; j++) {
+        os << fw[i][j];
+        if (j != fw.w - 1) os << " ";
+      }
+      if (i != fw.h - 1) os << "\n";
+    }
+    return os;
+  }
+
 private:
   int h, w;
-  std::vector<fenwick_tree<T>> fw;
+  std::vector<fenwick_tree<T>> d;
 };
 
 } // namespace cp

@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <bit>
 #include <cassert>
+#include <iostream>
 #include <vector>
 
 #include "algebra/concepts.hpp"
@@ -111,6 +112,15 @@ public:
   }
 
   int size() const { return n; }
+
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os, const segtree& seg) {
+    for (int i = 0; i < seg.n; i++) {
+      os << seg[i];
+      if (i != seg.n - 1) os << " ";
+    }
+    return os;
+  }
 
 private:
   int n, sz, log;

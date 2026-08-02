@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <iostream>
 #include <vector>
 
 #include "algebra/concepts.hpp"
@@ -55,6 +56,15 @@ public:
   }
 
   int size() const { return n; }
+
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os, const disjoint_sparse_table& dst) {
+    for (int i = 0; i < dst.n; i++) {
+      os << dst[i];
+      if (i != dst.n - 1) os << " ";
+    }
+    return os;
+  }
 
 private:
   int n, log;

@@ -79,14 +79,7 @@ public:
     return r;
   }
 
-  friend std::istream& operator>>(std::istream& is, matrix_array& mat) {
-    for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) {
-        is >> mat[i][j];
-      }
-    }
-    return is;
-  }
+  // for debugging
   friend std::ostream& operator<<(std::ostream& os, const matrix_array& mat) {
     for (int i = 0; i < h; i++) {
       for (int j = 0; j < w; j++) {

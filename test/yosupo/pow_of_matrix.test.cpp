@@ -17,7 +17,6 @@ int main() {
   ll k;
   cin >> n >> k;
   matrix<mint> a(n, n);
-  cin >> a;
-  auto b = a.pow(k);
-  cout << b << "\n";
+  rep(i, 0, n) rep(j, 0, n) cin >> a[i][j];
+  cout << a.pow(k) << "\n";
 }

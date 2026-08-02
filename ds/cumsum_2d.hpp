@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <iostream>
 #include <vector>
 
 namespace cp {
@@ -8,8 +9,8 @@ namespace cp {
 template <class T> struct cumsum_2d {
 public:
   cumsum_2d() : h(0), w(0) {}
-  cumsum_2d(int _h, int _w) : h(_h), w(_w), d(_h, row(_w)) {}
-  cumsum_2d(int _h, int _w, T x) : h(_h), w(_w), d(_h, row(_w, x)) {}
+  cumsum_2d(int _h, int _w) : h(_h), w(_w), d(_h, std::vector<T>(_w)) {}
+  cumsum_2d(int _h, int _w, T x) : h(_h), w(_w), d(_h, std::vector<T>(_w, x)) {}
 
   void accumulate() {
     cum.resize(h + 1, std::vector<T>(w + 1));
@@ -60,6 +61,18 @@ public:
 
   int height() const { return h; }
   int width() const { return w; }
+
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os, const cumsum_2d& sum) {
+    for (int i = 0; i < sum.h; i++) {
+      for (int j = 0; j < sum.w; j++) {
+        os << sum[i][j];
+        if (j != sum.w - 1) os << " ";
+      }
+      if (i != sum.h - 1) os << "\n";
+    }
+    return os;
+  }
 
 private:
   int h, w;

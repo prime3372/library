@@ -4,6 +4,7 @@
 #include <bit>
 #include <cassert>
 #include <cstddef>
+#include <iostream>
 #include <memory>
 #include <vector>
 
@@ -77,6 +78,15 @@ public:
   }
 
   size_t size() const { return n; }
+
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os, const dynamic_lazy_segtree& seg) {
+    for (size_t i = 0; i < seg.n; i++) {
+      os << seg[i];
+      if (i != seg.n - 1) os << " ";
+    }
+    return os;
+  }
 
 private:
   struct node;

@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <cstddef>
+#include <iostream>
 #include <vector>
 
 #include "ds/dynamic_fenwick_tree.hpp"
@@ -23,9 +24,9 @@ public:
   };
 
   dynamic_fenwick_tree_2d() : h(0), w(0) {}
-  dynamic_fenwick_tree_2d(int _h, size_t _w) : h(_h), w(_w), fw(_h) {
+  dynamic_fenwick_tree_2d(int _h, size_t _w) : h(_h), w(_w), d(_h) {
     for (int i = 0; i < h; i++) {
-      fw[i] = dynamic_fenwick_tree<T>(w);
+      d[i] = dynamic_fenwick_tree<T>(w);
     }
   }
 
@@ -34,7 +35,7 @@ public:
     assert(j < w);
     i++;
     while (i <= h) {
-      fw[i - 1].add(j, x);
+      d[i - 1].add(j, x);
       i += i & -i;
     }
   }
@@ -49,7 +50,7 @@ public:
     assert(j <= w);
     T s = 0;
     while (i) {
-      s += fw[i - 1].sum(j);
+      s += d[i - 1].sum(j);
       i -= i & -i;
     }
     return s;
@@ -79,10 +80,22 @@ public:
   int height() const { return h; }
   size_t width() const { return w; }
 
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os, const dynamic_fenwick_tree_2d& fw) {
+    for (int i = 0; i < fw.h; i++) {
+      for (size_t j = 0; j < fw.w; j++) {
+        os << fw[i][j];
+        if (j != fw.w - 1) os << " ";
+      }
+      if (i != fw.h - 1) os << "\n";
+    }
+    return os;
+  }
+
 private:
   int h;
   size_t w;
-  std::vector<dynamic_fenwick_tree<T>> fw;
+  std::vector<dynamic_fenwick_tree<T>> d;
 };
 
 } // namespace cp

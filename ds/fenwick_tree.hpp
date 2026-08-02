@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <iostream>
 #include <vector>
 
 namespace cp {
@@ -79,6 +80,15 @@ public:
   }
 
   int size() const { return n; }
+
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os, const fenwick_tree& fw) {
+    for (int i = 0; i < fw.n; i++) {
+      os << fw[i];
+      if (i != fw.n - 1) os << " ";
+    }
+    return os;
+  }
 
 private:
   int n;
