@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 namespace cp {
 
 template <class T> struct affine {
@@ -7,6 +9,11 @@ template <class T> struct affine {
     T a, b;
     S() : a(1), b(0) {}
     S(T _a, T _b) : a(_a), b(_b) {}
+
+    friend std::ostream& operator<<(std::ostream& os, const S& x) {
+      os << x.a << " " << x.b;
+      return os;
+    }
   };
   static S op(S f, S g) { return {g.a * f.a, g.a * f.b + g.b}; }
   static S e() { return S(); }

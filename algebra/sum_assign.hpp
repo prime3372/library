@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <iostream>
 
 namespace cp {
 
@@ -11,7 +12,11 @@ template <class T> struct sum_assign {
     S() : val(0), len(0) {}
     S(T v) : val(v), len(1) {}
     S(T v, size_t l) : val(v), len(l) {}
-    explicit operator T() const { return val; }
+
+    friend std::ostream& operator<<(std::ostream& os, const S& x) {
+      os << x.val;
+      return os;
+    }
   };
   static S op(S x, S y) { return S{x.val + y.val, x.len + y.len}; }
   static S e() { return S(); }
