@@ -18,9 +18,9 @@ constexpr T kth_root(T x, long long k) {
   auto is_small_enough = [&](T y) {
     if (y == 0) return true;
     T z = 1;
-    for (int e = k; e; e >>= 1) {
-      if (e & 1) z *= y;      
-      if (e > 1) {
+    for (int i = k; i; i >>= 1) {
+      if (i & 1) z *= y;      
+      if (i > 1) {
         if (z > x / y / y) return false;
         y *= y;
       }
