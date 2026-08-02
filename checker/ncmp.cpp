@@ -24,11 +24,11 @@ int main(int argc, char** argv) {
 
     if (!read_as_ll(t_ans, n_ans)) {
       std::cout << "FAIL Expected integer, but '" << t_ans << "' found" << std::endl;
-      return 2;
+      return 3;
     }
     if (!read_as_ll(t_out, n_out)) {
       std::cout << "wrong output format Expected integer, but '" << t_out << "' found" << std::endl;
-      return 1;
+      return 2;
     }
 
     if (n_ans != n_out) {

@@ -9,6 +9,11 @@ $inc = $Args[4]
 $timelimit = 5000
 $timeout = 10000
 $casesnum = 50
+enum Result {
+  ok = 0
+  wa = 1
+  pe = 2
+}
 
 do {
   Write-Host "compiling..."
@@ -110,12 +115,17 @@ do {
       code in.txt out.txt ans.txt
       break
     }
-    if ($p_che.ExitCode -eq 1) {
+    if ($p_che.ExistCode -eq [Result]::wa) {
       Write-Host "Test" $i "WA" $time "ms" -ForegroundColor Red
       code in.txt out.txt ans.txt
       break
     }
-    if ($p_che.ExitCode -ne 0) {
+    if ($p_che.ExitCode -eq [Result]::pe) {
+      Write-Host "Test" $i "PE" $time "ms" -ForegroundColor Red
+      code in.txt out.txt ans.txt
+      break
+    }
+    if ($p_che.ExitCode -ne [Result]::ok) {
       Write-Host "Test" $i "FAIL" "Runtime Error" $che -ForegroundColor Blue
       code in.txt out.txt ans.txt
       break
