@@ -17,6 +17,7 @@ namespace cp {
 namespace internal {
 
 // Pollard's rho algorithm
+// @param 2 <= n
 long long pollard_rho(long long n) {
   assert(2 <= n);
   if (n % 2 == 0) return 2;
@@ -55,6 +56,7 @@ long long pollard_rho(long long n) {
 
 } // namespace internal
 
+// @param 1 <= n
 std::vector<std::pair<long long, int>> factorize(long long n) {
   assert(1 <= n);
   if (n == 1) return {};

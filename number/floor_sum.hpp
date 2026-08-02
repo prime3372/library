@@ -33,6 +33,7 @@ constexpr unsigned long long floor_sum_unsigned(unsigned long long n,
 
 } // namespace internal
 
+// @param 0 <= n,m < 2^32
 constexpr long long floor_sum(long long n, long long m, long long a, long long b) {
   assert(0 <= n && n < (1LL << 32));
   assert(1 <= m && m < (1LL << 32)); 

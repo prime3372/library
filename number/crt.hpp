@@ -8,6 +8,7 @@
 
 namespace cp {
 
+// @return (rem, mod)
 std::pair<long long, long long> crt(const std::vector<long long>& r,
                                     const std::vector<long long>& m) {
   assert(r.size() == m.size());
@@ -47,12 +48,12 @@ std::pair<long long, long long> crt(const std::vector<long long>& r,
     // z = m0*x + r0 = m0*(x0 + u1*k) + r0 = m0*x0 + r0 + m0*u1*k
     // -> z % (m0*u1) = m0*x0 + r0
     // note that:
-    // 0 <= x0 < u1, 0 <= r0 < m0
-    // -> 0 <= m0*x0 + r0 < m0*(u1 - 1) + m0 = m0*u1
+    //   0 <= x0 < u1, 0 <= r0 < m0
+    //   -> 0 <= m0*x0 + r0 < m0*(u1 - 1) + m0 = m0*u1
 
-    // now suppose z % (m0*u1) = m0*x0 + r0, then
-    // z % m0 = r0
-    // z % m1 = (m0*x + r0) % m1 = (m1*y + r1) % m1 = r1
+    // conversely, if z % (m0*u1) = m0*x0 + r0, then
+    //   z % m0 = r0
+    //   z % m1 = (m0*x + r0) % m1 = (m1*y + r1) % m1 = r1
     // therefore m = m0*u1, r = m0*x0 + r0
 
     r0 += x0 * m0;

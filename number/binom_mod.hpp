@@ -14,17 +14,17 @@ public:
   explicit binom_mod(int n) : N(n) {
     assert(0 <= N);
     if (N == 0) N = 1;
-    fct.resize(N + 1);
-    ifct.resize(N + 1);
+    f.resize(N + 1);
+    fi.resize(N + 1);
     std::vector<mint> inv(N + 1);
     inv[1] = 1;
-    fct[0] = fct[1] = 1;
-    ifct[0] = ifct[1] = 1;
+    f[0] = f[1] = 1;
+    fi[0] = fi[1] = 1;
     for (int i = 2; i <= N; i++) {
       int m = mint::mod();
       inv[i] = -inv[m % i] * (m / i);
-      fct[i] = fct[i - 1] * i;
-      ifct[i] = ifct[i - 1] * inv[i];
+      f[i] = f[i - 1] * i;
+      fi[i] = fi[i - 1] * inv[i];
     }
   }
 
@@ -37,8 +37,8 @@ public:
     }
     if (r > n) return 0;
     assert(n <= N);
-    assert(ifct[n - r] != 0 && ifct[r] != 0);
-    return fct[n] * ifct[n - r] * ifct[r];
+    assert(fi[n - r] != 0 && fi[r] != 0);
+    return f[n] * fi[n - r] * fi[r];
   }
 
   mint perm(int n, int r) const {
@@ -50,25 +50,25 @@ public:
     }
     if (r > n) return 0;
     assert(n <= N);
-    assert(ifct[n - r] != 0);
-    return fct[n] * ifct[n - r];
+    assert(fi[n - r] != 0);
+    return f[n] * fi[n - r];
   }
 
   mint fact(int n) const {
     assert(0 <= n && n <= N);
-    return fct[n];
+    return f[n];
   }
 
   mint ifact(int n) const {
     assert(n <= N);
     if (n < 0) return 0;
-    assert(ifct[n] != 0);
-    return ifct[n];
+    assert(fi[n] != 0);
+    return fi[n];
   }
 
 private:
   int N;
-  std::vector<mint> fct, ifct;
+  std::vector<mint> f, fi;
 };
 
 } // namespace cp
