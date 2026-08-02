@@ -35,7 +35,7 @@ int main() {
     vector<formal_power_series<ll>> f(k);
     rep(j, 0, k) {
       auto dfs = [&](auto self, int v, int pv, int d) -> void {
-        f[j].resize(d + 1);
+        if (f[j].size() <= d) f[j].resize(d + 1);
         f[j][d]++;
         for (int nv : g[v]) {
           if (!removed[nv] && nv != pv) {
