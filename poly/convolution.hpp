@@ -13,7 +13,7 @@ namespace cp {
 
 namespace internal {
 
-constexpr int primitive_root_ntt(int p) {
+constexpr int primitive_root_constexpr(int p) {
   if (p == 2) return 1;
 
   std::vector<int> fac = {2};
@@ -85,12 +85,25 @@ template <class mint, int g> void ntt(std::vector<mint>& a) {
   }
 }
 
+template <class mint>
+std::vector<mint> convolution_naive(const std::vector<mint>& a,
+                                    const std::vector<mint>& b) {
+  int n = int(a.size()), m = int(b.size());
+  std::vector<mint> ans(n + m - 1);
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < m; j++) {
+      ans[i + j] += a[i] * b[j];
+    }
+  }
+  return ans;
+}
+
 } // namespace internal
 
 template <class mint>
   requires internal::is_static_modint_v<mint> && (is_prime(mint::mod()))
 std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
-  static constexpr int g = internal::primitive_root_ntt(mint::mod());
+  static constexpr int g = internal::primitive_root_constexpr(mint::mod());
   static constexpr int ig = pow_mod(g, mint::mod() - 2, mint::mod());
 
   int n = int(a.size()), m = int(b.size());
@@ -98,6 +111,10 @@ std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
 
   int z = int(std::bit_ceil((unsigned int)(n + m - 1)));
   assert((mint::mod() - 1) % z == 0);
+
+  if (std::min(n, m) <= 60) {
+    return internal::convolution_naive(std::move(a), std::move(b));
+  }
 
   a.resize(z);
   internal::ntt<mint, g>(a);
@@ -114,7 +131,8 @@ std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
   return a;
 }
 
-template <int mod = 998244353, class T> requires internal::is_integral_v<T>
+template <int mod = 998244353, class T>
+  requires (is_prime(mod)) && internal::is_integral_v<T>
 std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
   using mint = static_modint<mod>;
   int n = int(a.size()), m = int(b.size());
@@ -129,8 +147,9 @@ std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
   return c;
 }
 
-// the values after convolution must be between -2*10^18 and 2*10^18
-std::vector<long long> convolution(std::vector<long long> a, std::vector<long long> b) {
+// @note the values after convolution must be between -2*10^18 and 2*10^18
+std::vector<long long> convolution(std::vector<long long> a,
+                                   std::vector<long long> b) {
   int n = int(a.size()), m = int(b.size());
   if (n == 0 || m == 0) return {};
 
