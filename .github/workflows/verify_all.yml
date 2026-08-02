@@ -28,6 +28,8 @@ jobs:
 
     - name: Run tests
       run: |
+        cd library
+
         FILES=$(find . -type f -name "*.test.cpp" | sort)
         
         if [ -z "$FILES" ]; then
@@ -49,5 +51,5 @@ jobs:
         TARGETS="${FILE_ARRAY[@]:START:LEN}"
 
         if [ -n "$TARGETS" ]; then
-          oj-verify run $TARGETS -I .\\library
+          oj-verify run $TARGETS
         fi
