@@ -67,28 +67,6 @@
         "clear": true,
         "close": true
       }
-    },
-    // template
-    {
-      "type": "shell",
-      "label": "create file using template",
-      "command": "Get-Content ${workspaceFolder}\\template\\template.cpp | Set-Content ${input:filename}",
-      "group": {
-        "kind": "test",
-        "isDefault": false
-      },
-      "presentation": {
-        "panel": "shared",
-        "reveal": "never",
-        "close": true
-      }
-    }
-  ],
-  "inputs": [
-    {
-      "id": "filename",
-      "type": "promptString",
-      "description": "enter file name"
     }
   ]
 }
