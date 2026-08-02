@@ -22,7 +22,7 @@ public:
   unsigned long long priority;
 
   lazy_segtreap_node() = default;
-  explicit lazy_segtreap_node(const S& x) : val(x), prod(x), priority(mt64()) {}  
+  explicit lazy_segtreap_node(S x) : val(x), prod(x), priority(mt64()) {}  
 };
 
 template <internal::acted_monoid M, auto rev = std::identity()>
@@ -52,7 +52,7 @@ public:
     return res;
   }
 
-  void apply(int l, int r, const F& f) {
+  void apply(int l, int r, F f) {
     assert(0 <= l && l <= r && r <= size());
     if (l == r) return;
     auto s = split(root, l);
@@ -95,7 +95,7 @@ private:
     p->lz = M::id();
   }
 
-  static void all_apply(node_ptr p, const F& f) {
+  static void all_apply(node_ptr p, F f) {
     p->lz = M::composition(f, p->lz);
     p->val = M::composition(f, p->val);
     p->prod = M::mapping(f, p->prod);

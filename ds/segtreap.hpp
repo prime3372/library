@@ -19,7 +19,7 @@ template <internal::monoid M> struct segtreap_node {
   unsigned long long priority;
 
   segtreap_node() = default;
-  explicit segtreap_node(const S& x) : val(x), prod(x), priority(mt64()) {}    
+  explicit segtreap_node(S x) : val(x), prod(x), priority(mt64()) {}    
 };
 
 template <internal::monoid M, auto rev = std::identity()>
