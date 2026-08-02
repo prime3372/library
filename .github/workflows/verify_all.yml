@@ -28,8 +28,6 @@ jobs:
 
     - name: Run tests
       run: |
-        cd library
-
         FILES=$(find . -type f -name "*.test.cpp" | sort)
         
         if [ -z "$FILES" ]; then
