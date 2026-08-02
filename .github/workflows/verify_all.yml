@@ -49,5 +49,5 @@ jobs:
         TARGETS="${FILE_ARRAY[@]:START:LEN}"
 
         if [ -n "$TARGETS" ]; then
-          oj-verify run $TARGETS
+          oj-verify run $TARGETS -I .\\library
         fi
