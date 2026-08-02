@@ -27,7 +27,7 @@ void open_files(int argc, char** argv) {
   }
 }
 
-inline std::string ordinal_suffix(int x) {
+std::string ordinal_suffix(int x) {
   x %= 100;
   if (x / 10 == 1) return "th";
   if (x % 10 == 1) return "st";
