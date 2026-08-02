@@ -26,14 +26,13 @@ public:
   explicit formal_power_series(const std::vector<mint>& v) : f(v) {}
 
   mint& operator[](int i) {
-    assert(0 <= i);
-    if (size() <= i) resize(i + 1);
+    assert(0 <= i && i < size());
     return f[i];
   }
 
-  mint get(int i) const {
-    assert(0 <= i);
-    return i < size() ? f[i] : 0;
+  const mint& operator[](int i) const {
+    assert(0 <= i && i < size());
+    return f[i];
   }
 
   fps& operator+=(const mint& rhs) {
@@ -41,7 +40,7 @@ public:
   }
   fps& operator+=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
-    for (int i = 0; i < rhs.size(); i++) f[i] += rhs.get(i);
+    for (int i = 0; i < rhs.size(); i++) f[i] += rhs[i];
     return *this;
   }
 
@@ -50,7 +49,7 @@ public:
   }
   fps& operator-=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
-    for (int i = 0; i < rhs.size(); i++) f[i] -= rhs.get(i);
+    for (int i = 0; i < rhs.size(); i++) f[i] -= rhs[i];
     return *this;
   }
 
@@ -233,14 +232,13 @@ public:
   explicit formal_power_series(const std::vector<long long>& v) : f(v) {}
 
   long long& operator[](int i) {
-    assert(0 <= i);
-    if (size() <= i) resize(i + 1);
+    assert(0 <= i && i < size());
     return f[i];
   }
 
-  long long get(int i) const {
-    assert(0 <= i);
-    return i < size() ? f[i] : 0;
+  const long long& operator[](int i) const {
+    assert(0 <= i && i < size());
+    return f[i];
   }
 
   fps& operator+=(long long rhs) {
@@ -248,7 +246,7 @@ public:
   }
   fps& operator+=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
-    for (int i = 0; i < rhs.size(); i++) f[i] += rhs.get(i);
+    for (int i = 0; i < rhs.size(); i++) f[i] += rhs[i];
     return *this;
   }
 
@@ -257,7 +255,7 @@ public:
   }
   fps& operator-=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
-    for (int i = 0; i < rhs.size(); i++) f[i] -= rhs.get(i);
+    for (int i = 0; i < rhs.size(); i++) f[i] -= rhs[i];
     return *this;
   }
 
