@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <iostream>
 #include <vector>
 
 namespace cp {
@@ -44,6 +45,16 @@ public:
   int size() {
     if (!initialized) init();
     return int(d.size());
+  }
+
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os,
+                                  coordinate_compression& cc) {
+    for (int i = 0; i < cc.size(); i++) {
+      os << cc[i];
+      if (i != cc.size() - 1) os << " ";
+    }
+    return os;
   }
 
 private:
