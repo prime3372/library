@@ -84,7 +84,8 @@ public:
   size_t size() const { return n; }
 
   // for debugging
-  friend std::ostream& operator<<(std::ostream& os, const dynamic_fenwick_tree& fw) {
+  friend std::ostream& operator<<(std::ostream& os,
+                                  const dynamic_fenwick_tree& fw) {
     for (size_t i = 0; i < fw.n; i++) {
       os << fw[i];
       if (i != fw.n - 1) os << " ";

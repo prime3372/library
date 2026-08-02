@@ -22,7 +22,7 @@ public:
     sz = (int)std::bit_ceil((unsigned int)(n));
     log = std::countr_zero((unsigned int)(sz));
     d = std::vector<S>(2 * sz);
-    lz = std::vector<F>(sz);
+    lz = std::vector<F>(sz, M::id());
     for (int i = 0; i < n; i++) d[sz + i] = v[i];
     for (int i = sz - 1; i >= 1; i--) update(i);
   }
@@ -168,7 +168,7 @@ public:
   int size() const { return n; }
 
   // for debugging
-  friend std::ostream& operator<<(std::ostream& os, const lazy_segtree& seg) {
+  friend std::ostream& operator<<(std::ostream& os, lazy_segtree& seg) {
     for (int i = 0; i < seg.n; i++) {
       os << seg[i];
       if (i != seg.n - 1) os << " ";

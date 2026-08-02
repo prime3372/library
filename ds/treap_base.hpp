@@ -50,7 +50,7 @@ public:
     insert(k, x);
   }
 
-  const T& operator[](int k) {
+  const T& operator[](int k) const {
     assert(0 <= k && k < size());
     return get(root, k)->val;
   }
@@ -80,7 +80,7 @@ public:
 
   // for debugging
   friend std::ostream& operator<<(std::ostream& os, const treap_base& tp) {
-    for (size_t i = 0; i < tp.size(); i++) {
+    for (int i = 0; i < tp.size(); i++) {
       os << tp[i];
       if (i != tp.size() - 1) os << " ";
     }

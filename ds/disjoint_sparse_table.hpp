@@ -43,12 +43,12 @@ public:
     }
   }
 
-  S operator[](int i) {
+  S operator[](int i) const {
     assert(0 <= i && i < n);
     return a[i];
   }
 
-  S prod(int l, int r) {
+  S prod(int l, int r) const {
     assert(0 <= l && l <= r && r <= n);
     if (r - l == 1) return a[l];
     int k = logs[l ^ (r - 1)];
@@ -58,7 +58,8 @@ public:
   int size() const { return n; }
 
   // for debugging
-  friend std::ostream& operator<<(std::ostream& os, const disjoint_sparse_table& dst) {
+  friend std::ostream& operator<<(std::ostream& os,
+                                  const disjoint_sparse_table& dst) {
     for (int i = 0; i < dst.n; i++) {
       os << dst[i];
       if (i != dst.n - 1) os << " ";

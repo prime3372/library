@@ -80,7 +80,8 @@ public:
   size_t size() const { return n; }
 
   // for debugging
-  friend std::ostream& operator<<(std::ostream& os, const dynamic_lazy_segtree& seg) {
+  friend std::ostream& operator<<(std::ostream& os,
+                                  const dynamic_lazy_segtree& seg) {
     for (size_t i = 0; i < seg.n; i++) {
       os << seg[i];
       if (i != seg.n - 1) os << " ";
@@ -96,7 +97,7 @@ private:
     F lz = M::id();
     bool lzflag = false;
     node_ptr left, right;
-    node(S v) : val(v)  {}
+    node(const S& v) : val(v)  {}
   };
   size_t n, sz;
   int log;
