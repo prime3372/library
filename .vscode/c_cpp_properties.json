@@ -4,7 +4,7 @@
       "name": "MinGW",
       "compilerArgs": [
         "-I",
-        "${workspaceFolder}\\library",
+        "${workspaceFolder}",
         "-O2",
         "-Wall",
         "-Wconversion",

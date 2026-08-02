@@ -14,7 +14,7 @@
         "${file}",
         "-D_GLIBCXX_DEBUG",
         "-I",
-        "${workspaceFolder}\\library",
+        "${workspaceFolder}",
         "-O2",
         "-Wall",
         "-Wconversion",
