@@ -53,7 +53,7 @@ do {
   for ($i = 1; $i -le $casesnum; $i++) {
     # run gen.exe
     $p_gen = Start-Process -FilePath .\gen.exe -NoNewWindow -RedirectStandardOutput in.txt -PassThru
-    $p_gen.Handle
+    $p_gen.Handle | Out-Null
     if (-not $p_gen.WaitForExit($timeout)) {
       $p_gen.Kill()
       Write-Host "Test" $i "FAIL" "Timed Out" $gen -ForegroundColor Blue
@@ -68,7 +68,7 @@ do {
 
     # run ans.exe
     $p_ans = Start-Process -FilePath .\ans.exe -NoNewWindow -RedirectStandardInput in.txt -RedirectStandardOutput ans.txt -PassThru
-    $p_ans.Handle
+    $p_ans.Handle | Out-Null
     if (-not $p_ans.WaitForExit($timeout)) {
       $p_ans.Kill()
       Write-Host "Test" $i "FAIL" "Timed Out" $ans -ForegroundColor Blue
@@ -83,7 +83,7 @@ do {
 
     # run sol.exe
     $p_sol = Start-Process -FilePath .\sol.exe -NoNewWindow -RedirectStandardInput in.txt -RedirectStandardOutput out.txt -PassThru
-    $p_sol.Handle
+    $p_sol.Handle | Out-Null
     $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
     if (-not $p_sol.WaitForExit($timeout)) {
       $p_sol.Kill()
@@ -108,7 +108,7 @@ do {
 
     # run che.exe
     $p_che = Start-Process -FilePath .\che.exe -ArgumentList "in.txt", "out.txt", "ans.txt" -NoNewWindow -PassThru
-    $p_che.Handle
+    $p_che.Handle | Out-Null
     if (-not $p_che.WaitForExit($timeout)) {
       $p_che.Kill()
       Write-Host "Test" $i "FAIL" "Timed Out" $che -ForegroundColor Blue
