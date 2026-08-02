@@ -14,7 +14,7 @@
         "${file}",
         "-D_GLIBCXX_DEBUG",
         "-I",
-        "${workspaceFolder}",
+        "${workspaceFolder}\\library",
         "-O2",
         "-Wall",
         "-Wconversion",
@@ -57,7 +57,7 @@
     {
       "type": "shell",
       "label": "bundle and copy",
-      "command": "cmd /c oj-bundle ${file} -I ${workspaceFolder} > submit.cpp; (Get-Content submit.cpp -Raw) -replace '(?s)(cerr|std::cerr).*?;', ';' | Set-Clipboard; Remove-Item submit.cpp",
+      "command": "cmd /c oj-bundle ${file} -I ${workspaceFolder}\\library > submit.cpp; (Get-Content submit.cpp -Raw) -replace '(?s)(cerr|std::cerr).*?;', ';' | Set-Clipboard; Remove-Item submit.cpp",
       "group": {
         "kind": "build",
         "isDefault": true
