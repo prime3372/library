@@ -131,9 +131,9 @@ protected:
   static int size(node_ptr p) { return p ? p->sub : 0; }
 
 private:
-  static inline void toggle(node_ptr p) { derived::toggle(p); }
-  static inline void update(node_ptr p) { derived::update(p); }
-  static inline void push(node_ptr p) { derived::push(p); }
+  static void toggle(node_ptr p) { derived::toggle(p); }
+  static void update(node_ptr p) { derived::update(p); }
+  static void push(node_ptr p) { derived::push(p); }
 };
 
 } // namespace cp
