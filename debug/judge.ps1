@@ -31,14 +31,14 @@ do {
     if (Test-Path $gen) { code $gen }
     break
   }
-  
+
   g++ $ans -I $inc -O2 -Wall -Wextra -fdiagnostics-color=always -o ans.exe -std=c++23
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $ans -ForegroundColor Blue
     if (Test-Path $ans) { code $ans }
     break
   }
-  
+
   g++ $che -I $inc -O2 -Wall -Wextra -fdiagnostics-color=always -o che.exe -std=c++23
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $che -ForegroundColor Blue
