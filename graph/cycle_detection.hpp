@@ -15,7 +15,9 @@ public:
     assert(0 <= from && from < n);
     assert(0 <= to && to < n);
     g[from].push_back(edge{to, m});
-    if constexpr (!is_directed) g[to].push_back(edge{from, m});
+    if constexpr (!is_directed) {
+      g[to].push_back(edge{from, m});
+    }
     return m++;
   }
 
