@@ -18,7 +18,7 @@ private:
   using node_ptr = std::shared_ptr<node>;
 
 public:
-  treap_base() {};
+  treap_base() {}
 
   void build(const std::vector<T>& v) {
     if (v.empty()) return;
