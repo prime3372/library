@@ -14,7 +14,7 @@ namespace cp {
 
 namespace internal {
 
-template <class T> void output_delimiteriter(std::ostream& os) {
+template <class T> void output_delimiter(std::ostream& os) {
   if constexpr (is_tuple_like_v<T> || is_vector_v<T>) {
     os << "\n";
   } else {
