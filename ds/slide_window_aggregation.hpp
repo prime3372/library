@@ -41,7 +41,7 @@ public:
     for (int i = 0; i < int(swag.a1.size()); i++) {
       os << swag.a1[i];
       if (i != int(swag.a1.size()) - 1) {
-        ointernal::delim<S>(os);
+        internal::delim<S>(os);
       }
     }
     return os;
