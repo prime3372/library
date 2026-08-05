@@ -66,13 +66,13 @@ public:
 private:
   friend base;
 
-  void toggle(node_ptr p) override {
+  void toggle(node_ptr p) const override {
     swap(p->left, p->right);
     p->prod = rev(p->prod);
     p->rev = !p->rev;
   }
 
-  void update(node_ptr p) override {
+  void update(node_ptr p) const override {
     push(p);
     p->sub = 1;
     p->prod = p->val;
@@ -86,7 +86,7 @@ private:
     }
   }
 
-  void push(node_ptr p) override {
+  void push(node_ptr p) const override {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);
@@ -97,7 +97,7 @@ private:
     p->lz = M::id();
   }
 
-  void all_apply(node_ptr p, F f) {
+  void all_apply(node_ptr p, F f) const {
     p->lz = M::composition(f, p->lz);
     p->val = M::composition(f, p->val);
     p->prod = M::mapping(f, p->prod);

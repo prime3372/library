@@ -34,19 +34,19 @@ public:
   explicit treap(const std::vector<T>& v) { build(v); }
 
 protected:
-  void toggle(node_ptr p) override {
+  void toggle(node_ptr p) const override {
     swap(p->left, p->right);
     p->rev = !p->rev;
   }
 
-  void update(node_ptr p) override {
+  void update(node_ptr p) const override {
     push(p);
     p->sub = 1;
     if (p->left) p->sub += p->left->sub;
     if (p->right) p->sub += p->right->sub;
   }
 
-  void push(node_ptr p) override {
+  void push(node_ptr p) const override {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);

@@ -94,13 +94,7 @@ public:
 protected:
   node_ptr root;
 
-  void dfs(node_ptr p) {
-    if (p->left) dfs(p->left);
-    if (p->right) dfs(p->right);
-    update(p);
-  }
-
-  node_ptr merge(node_ptr left, node_ptr right) {
+  node_ptr merge(node_ptr left, node_ptr right) const {
     if (!left || !right) return left ? left : right;
     if (left->priority > right->priority) {
       push(left);
@@ -115,7 +109,7 @@ protected:
     }
   }
 
-  std::pair<node_ptr, node_ptr> split(node_ptr p, int k) {
+  std::pair<node_ptr, node_ptr> split(node_ptr p, int k) const {
     if (!p) return {nullptr, nullptr};
     push(p);
     if (k <= size(p->left)) {
@@ -131,20 +125,20 @@ protected:
     }
   }
 
-  node_ptr get(node_ptr p, int k) {
+  node_ptr get(node_ptr p, int k) const {
     push(p);
     if (size(p->left) == k) return p;
     if (k < size(p->left)) return get(p->left, k);
     else return get(p->right, k - size(p->left) - 1);
   }
 
-  int size(node_ptr p) { return p ? p->sub : 0; }
+  int size(node_ptr p) const { return p ? p->sub : 0; }
 
-  virtual void toggle(node_ptr p) = 0;
+  virtual void toggle(node_ptr p) const = 0;
 
-  virtual void update(node_ptr p) = 0;
+  virtual void update(node_ptr p) const = 0;
 
-  virtual void push(node_ptr p) = 0;
+  virtual void push(node_ptr p) const = 0;
 };
 
 } // namespace cp

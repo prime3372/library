@@ -51,13 +51,13 @@ public:
   }
 
 protected:
-  void toggle(node_ptr p) override {
+  void toggle(node_ptr p) const override {
     swap(p->left, p->right);
     p->prod = rev(p->prod);
     p->rev = !p->rev;
   }
 
-  void update(node_ptr p) override {
+  void update(node_ptr p) const override {
     push(p);
     p->sub = 1;
     p->prod = p->val;
@@ -71,7 +71,7 @@ protected:
     }
   }
 
-  void push(node_ptr p) override {
+  void push(node_ptr p) const override {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);
