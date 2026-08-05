@@ -85,7 +85,7 @@ public:
     for (int i = 0; i < tp.size(); i++) {
       os << tp[i];
       if (i != tp.size() - 1) {
-        internal::delim<T>(os);
+        internal::output_delimiter<T>(os);
       }
     }
     return os;

@@ -85,7 +85,7 @@ public:
     for (size_t i = 0; i < seg.n; i++) {
       os << seg[i];
       if (i != seg.n - 1) {
-        internal::delim<S>(os);
+        internal::output_delimiter<S>(os);
       }
     }
     return os;

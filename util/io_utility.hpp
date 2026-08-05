@@ -14,7 +14,7 @@ namespace cp {
 
 namespace internal {
 
-template <class T> void delim(std::ostream& os) {
+template <class T> void output_output_delimiteriter(std::ostream& os) {
   if constexpr (is_tuple_like_v<T> || is_vector_v<T>) {
     os << "\n";
   } else {
@@ -114,7 +114,7 @@ ostream& operator<<(ostream& os, const Tuple& t) {
   [&]<size_t... I>(index_sequence<I...>) {
     ([&]<class T>(const T& x) {
       os << x;
-      cp::internal::delim<T>(os);
+      cp::internal::output_delimiter<T>(os);
     }(get<I>(t)), ...);
   }(make_index_sequence<n - 1>());
   os << get<n - 1>(t);
@@ -134,7 +134,7 @@ ostream& operator<<(ostream& os, const vector<T>& v) {
   for (int i = 0; i < int(v.size()); i++) {
     os << v[i];
     if (i != int(v.size()) - 1) {
-      cp::internal::delim<T>(os);
+      cp::internal::output_delimiter<T>(os);
     }
   }
   return os;

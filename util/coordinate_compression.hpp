@@ -55,7 +55,7 @@ public:
     for (int i = 0; i < cc.size(); i++) {
       os << cc[i];
       if (i != cc.size() - 1) {
-        internal::delim<T>(os);
+        internal::output_delimiter<T>(os);
       }
     }
     return os;
