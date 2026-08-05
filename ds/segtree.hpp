@@ -118,7 +118,7 @@ public:
     for (int i = 0; i < seg.n; i++) {
       os << seg[i];
       if (i != seg.n - 1) {
-        internal::delim<T>(os);
+        internal::delim<S>(os);
       }
     }
     return os;

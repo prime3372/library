@@ -63,7 +63,7 @@ public:
     for (int i = 0; i < dst.n; i++) {
       os << dst[i];
       if (i != dst.n - 1) {
-        internal::delim<T>(os);
+        internal::delim<S>(os);
       }
     }
     return os;

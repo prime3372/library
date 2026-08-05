@@ -48,13 +48,13 @@ public:
     for (int i = int(swag.a0.size()) - 1; i >= 0; i--) {
       os << swag.a0[i];
       if (!swag.a1.empty() || i != int(swag.a0.size()) - 1) {
-        internal::delim<T>(os);
+        internal::delim<S>(os);
       }
     }
     for (int i = 0; i < int(swag.a1.size()); i++) {
       os << swag.a1[i];
       if (i != int(swag.a1.size()) - 1) {
-        internal::delim<T>(os);
+        internal::delim<S>(os);
       }
     }
     return os;
