@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 
+#include "util/io_utility.hpp"
+
 namespace cp {
 
 template <class T> struct coordinate_compression {
@@ -52,7 +54,9 @@ public:
                                   coordinate_compression& cc) {
     for (int i = 0; i < cc.size(); i++) {
       os << cc[i];
-      if (i != cc.size() - 1) os << " ";
+      if (i != cc.size() - 1) {
+        internal::delim<T>(os);
+      }
     }
     return os;
   }

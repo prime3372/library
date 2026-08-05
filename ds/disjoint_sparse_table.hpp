@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 
+#include "util/io_utility.hpp"
+
 namespace cp {
 
 template <class M> struct disjoint_sparse_table {
@@ -60,7 +62,9 @@ public:
                                   const disjoint_sparse_table& dst) {
     for (int i = 0; i < dst.n; i++) {
       os << dst[i];
-      if (i != dst.n - 1) os << " ";
+      if (i != dst.n - 1) {
+        internal::delim<T>(os);
+      }
     }
     return os;
   }

@@ -8,6 +8,8 @@
 #include <memory>
 #include <vector>
 
+#include "util/io_utility.hpp"
+
 namespace cp {
 
 template <class M> struct dynamic_lazy_segtree {
@@ -82,7 +84,9 @@ public:
                                   const dynamic_lazy_segtree& seg) {
     for (size_t i = 0; i < seg.n; i++) {
       os << seg[i];
-      if (i != seg.n - 1) os << " ";
+      if (i != seg.n - 1) {
+        internal::delim<T>(os);
+      }
     }
     return os;
   }

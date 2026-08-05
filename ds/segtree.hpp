@@ -6,6 +6,8 @@
 #include <iostream>
 #include <vector>
 
+#include "util/io_utility.hpp"
+
 namespace cp {
 
 template <class M> struct segtree {
@@ -115,7 +117,9 @@ public:
   friend std::ostream& operator<<(std::ostream& os, const segtree& seg) {
     for (int i = 0; i < seg.n; i++) {
       os << seg[i];
-      if (i != seg.n - 1) os << " ";
+      if (i != seg.n - 1) {
+        internal::delim<T>(os);
+      }
     }
     return os;
   }

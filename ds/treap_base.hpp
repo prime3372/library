@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "ds/cartesian_tree.hpp"
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -83,7 +84,9 @@ public:
   friend std::ostream& operator<<(std::ostream& os, const treap_base& tp) {
     for (int i = 0; i < tp.size(); i++) {
       os << tp[i];
-      if (i != tp.size() - 1) os << " ";
+      if (i != tp.size() - 1) {
+        internal::delim<T>(os);
+      }
     }
     return os;
   }

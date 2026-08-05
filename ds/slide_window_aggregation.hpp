@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 
+#include "util/io_utility.hpp"
+
 namespace cp {
 
 template <class M> struct slide_window_aggregation {
@@ -33,13 +35,13 @@ public:
     for (int i = int(swag.a0.size()) - 1; i >= 0; i--) {
       os << swag.a0[i];
       if (!swag.a1.empty() || i != int(swag.a0.size()) - 1) {
-        os << " ";
+        internal::delim<T>(os);
       }
     }
     for (int i = 0; i < int(swag.a1.size()); i++) {
       os << swag.a1[i];
       if (i != int(swag.a1.size()) - 1) {
-        os << " ";
+        ointernal::delim<T>(os);
       }
     }
     return os;
