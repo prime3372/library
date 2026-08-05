@@ -36,24 +36,14 @@ std::string ordinal_suffix(int x) {
   return "th";
 }
 
-bool read_as_ll(const std::string& t, long long& n) {
-  size_t pos;
-  try {
-    n = std::stoll(t, &pos);
-  } catch (...) {
-    return false;
-  }
-  return pos == t.size();
+bool read_as_ll(const std::string& s, long long& n) {
+  auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), n);
+  return ec == std::errc{} && ptr == s.data() + s.size();
 }
 
-bool read_as_double(const std::string& t, double& d) {
-  size_t pos;
-  try {
-    d = std::stod(t, &pos);
-  } catch (...) {
-    return false;
-  }
-  return pos == t.size();
+bool read_as_double(const std::string& s, double& d) {
+  auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), d);
+  return ec == std::errc{} && ptr == s.data() + s.size();
 }
 
 double double_delta(double expected, double result) {
