@@ -12,15 +12,15 @@
 
 namespace cp {
 
-template <class node, class derived> struct treap_base {
+template <class node> struct treap_base {
 private:
   using T = decltype(node::val);
   using node_ptr = std::shared_ptr<node>;
 
 public:
-  treap_base() : root(nullptr) {}
-  explicit treap_base(int n) : treap_base(std::vector<T>(n)) {}
-  explicit treap_base(const std::vector<T>& v) {
+  treap_base() {};
+
+  void build(const std::vector<T>& v) {
     if (v.empty()) return;
     int n = int(v.size());
     std::vector<node_ptr> ps(n);
@@ -38,12 +38,12 @@ public:
         ps[i]->right = ps[cart.right[i]];
       }
     }
-    auto dfs = [](auto self, node_ptr p) -> void {
+    auto dfs = [&](auto self, node_ptr p) -> void {
       if (p->left) self(self, p->left);
       if (p->right) self(self, p->right);
       update(p);
     };
-    dfs(dfs, root = ps[cart.root]);  
+    dfs(dfs, root = ps[cart.root]);
   }
 
   void set(int k, const T& x) {
@@ -94,7 +94,13 @@ public:
 protected:
   node_ptr root;
 
-  static node_ptr merge(node_ptr left, node_ptr right) {
+  void dfs(node_ptr p) {
+    if (p->left) dfs(p->left);
+    if (p->right) dfs(p->right);
+    update(p);
+  }
+
+  node_ptr merge(node_ptr left, node_ptr right) {
     if (!left || !right) return left ? left : right;
     if (left->priority > right->priority) {
       push(left);
@@ -109,7 +115,7 @@ protected:
     }
   }
 
-  static std::pair<node_ptr, node_ptr> split(node_ptr p, int k) {
+  std::pair<node_ptr, node_ptr> split(node_ptr p, int k) {
     if (!p) return {nullptr, nullptr};
     push(p);
     if (k <= size(p->left)) {
@@ -125,19 +131,20 @@ protected:
     }
   }
 
-  static node_ptr get(node_ptr p, int k) {
+  node_ptr get(node_ptr p, int k) {
     push(p);
     if (size(p->left) == k) return p;
     if (k < size(p->left)) return get(p->left, k);
     else return get(p->right, k - size(p->left) - 1);
   }
 
-  static int size(node_ptr p) { return p ? p->sub : 0; }
+  int size(node_ptr p) { return p ? p->sub : 0; }
 
-private:
-  static void toggle(node_ptr p) { derived::toggle(p); }
-  static void update(node_ptr p) { derived::update(p); }
-  static void push(node_ptr p) { derived::push(p); }
+  virtual void toggle(node_ptr p) = 0;
+
+  virtual void update(node_ptr p) = 0;
+
+  virtual void push(node_ptr p) = 0;
 };
 
 } // namespace cp

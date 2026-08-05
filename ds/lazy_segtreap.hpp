@@ -20,26 +20,29 @@ public:
   std::shared_ptr<lazy_segtreap_node> left, right;
   unsigned long long priority;
 
-  lazy_segtreap_node() = default;
+  lazy_segtreap_node() {}
   explicit lazy_segtreap_node(S x) : val(x), prod(x), priority(mt64()) {}  
 };
 
 template <class M, auto rev = std::identity()>
-struct lazy_segtreap
-: public treap_base<lazy_segtreap_node<M>, lazy_segtreap<M, rev>> {
+struct lazy_segtreap : public treap_base<lazy_segtreap_node<M>> {
 private:
   using S = typename M::S;
   using F = typename M::F;
   using node = lazy_segtreap_node<M>;
   using node_ptr = std::shared_ptr<node>;
-  using base = treap_base<node, lazy_segtreap<M, rev>>;
+  using base = treap_base<node>;
+  using base::build;
   using base::merge;
   using base::split;
   using base::size;
   using base::root;
 
 public:
-  using base::treap_base;
+  lazy_segtreap() {}
+  explicit lazy_segtreap(int n) { build(std::vector<S>(n)); }
+  explicit lazy_segtreap(int n, S val) { build(std::vector<S>(n, val)); }
+  explicit lazy_segtreap(const std::vector<S>& v) { build(v); }
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
@@ -63,13 +66,13 @@ public:
 private:
   friend base;
 
-  static void toggle(node_ptr p) {
+  void toggle(node_ptr p) override {
     swap(p->left, p->right);
     p->prod = rev(p->prod);
     p->rev = !p->rev;
   }
 
-  static void update(node_ptr p) {
+  void update(node_ptr p) override {
     push(p);
     p->sub = 1;
     p->prod = p->val;
@@ -83,7 +86,7 @@ private:
     }
   }
 
-  static void push(node_ptr p) {
+  void push(node_ptr p) override {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);
@@ -94,7 +97,7 @@ private:
     p->lz = M::id();
   }
 
-  static void all_apply(node_ptr p, F f) {
+  void all_apply(node_ptr p, F f) {
     p->lz = M::composition(f, p->lz);
     p->val = M::composition(f, p->val);
     p->prod = M::mapping(f, p->prod);

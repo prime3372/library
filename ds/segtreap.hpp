@@ -17,25 +17,28 @@ template <class M> struct segtreap_node {
   std::shared_ptr<segtreap_node> left, right;
   unsigned long long priority;
 
-  segtreap_node() = default;
+  segtreap_node() {}
   explicit segtreap_node(S x) : val(x), prod(x), priority(mt64()) {}    
 };
 
 template <class M, auto rev = std::identity()>
-struct segtreap
-: public treap_base<segtreap_node<M>, segtreap<M, rev>> {
+struct segtreap : public treap_base<segtreap_node<M>> {
 private:
   using S = typename M::S;
   using node = segtreap_node<M>;
   using node_ptr = std::shared_ptr<node>;
-  using base = treap_base<node, segtreap<M, rev>>;
+  using base = treap_base<node>;
+  using base::build;
   using base::merge;
   using base::split;
   using base::size;
   using base::root;
 
 public:
-  using base::treap_base;
+  segtreap() {}
+  explicit segtreap(int n) { build(std::vector<S>(n)); }
+  explicit segtreap(int n, S val) { build(std::vector<S>(n, val)); }
+  explicit segtreap(const std::vector<S>& v) { build(v); }
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
@@ -47,16 +50,14 @@ public:
     return res;
   }
 
-private:
-  friend base;
-
-  static void toggle(node_ptr p) {
+protected:
+  void toggle(node_ptr p) override {
     swap(p->left, p->right);
     p->prod = rev(p->prod);
     p->rev = !p->rev;
   }
 
-  static void update(node_ptr p) {
+  void update(node_ptr p) override {
     push(p);
     p->sub = 1;
     p->prod = p->val;
@@ -70,7 +71,7 @@ private:
     }
   }
 
-  static void push(node_ptr p) {
+  void push(node_ptr p) override {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);
