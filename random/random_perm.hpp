@@ -6,7 +6,7 @@
 #include <type_traits>
 #include <vector>
 
-#include "random/rng.hpp"
+#include "random/get_rand.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
