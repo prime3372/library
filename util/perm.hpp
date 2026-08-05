@@ -8,7 +8,7 @@
 namespace cp {
 
 struct perm : public std::vector<int> {
-  perm() = default;
+  perm() {}
   explicit perm(int _n) {
     std::iota(begin(), end(), 0);
   }
