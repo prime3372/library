@@ -5,11 +5,9 @@
 #include <iostream>
 #include <vector>
 
-#include "algebra/concepts.hpp"
-
 namespace cp {
 
-template <internal::monoid M> struct disjoint_sparse_table {
+template <class M> struct disjoint_sparse_table {
 private:
   using S = typename M::S;
 

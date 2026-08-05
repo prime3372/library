@@ -8,11 +8,9 @@
 #include <memory>
 #include <vector>
 
-#include "algebra/concepts.hpp"
-
 namespace cp {
 
-template <internal::monoid M> struct dynamic_segtree {
+template <class M> struct dynamic_segtree {
 private:
   using S = typename M::S;
 

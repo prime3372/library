@@ -6,11 +6,9 @@
 #include <iostream>
 #include <vector>
 
-#include "algebra/concepts.hpp"
-
 namespace cp {
 
-template <internal::monoid M> struct segtree {
+template <class M> struct segtree {
 private:
   using S = typename M::S;
 

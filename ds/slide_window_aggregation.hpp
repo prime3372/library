@@ -4,11 +4,9 @@
 #include <iostream>
 #include <vector>
 
-#include "algebra/concepts.hpp"
-
 namespace cp {
 
-template <internal::monoid M> struct slide_window_aggregation {
+template <class M> struct slide_window_aggregation {
 private:
   using S = typename M::S;
 

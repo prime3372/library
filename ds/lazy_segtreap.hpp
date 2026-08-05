@@ -4,13 +4,12 @@
 #include <functional>
 #include <memory>
 
-#include "algebra/concepts.hpp"
 #include "ds/treap_base.hpp"
 #include "random/get_rand.hpp"
 
 namespace cp {
 
-template <internal::acted_monoid M> struct lazy_segtreap_node {
+template <class M> struct lazy_segtreap_node {
 public:
   using S = typename M::S;
   using F = typename M::F;
@@ -25,7 +24,7 @@ public:
   explicit lazy_segtreap_node(S x) : val(x), prod(x), priority(mt64()) {}  
 };
 
-template <internal::acted_monoid M, auto rev = std::identity()>
+template <class M, auto rev = std::identity()>
 struct lazy_segtreap
 : public treap_base<lazy_segtreap_node<M>, lazy_segtreap<M, rev>> {
 private:

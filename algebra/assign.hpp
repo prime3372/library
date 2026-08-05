@@ -3,8 +3,6 @@
 #include <cstddef>
 #include <iostream>
 
-#include "algebra/concepts.hpp"
-
 namespace cp {
 
 template <internal::monoid M> struct assign {

@@ -4,30 +4,23 @@
 #include <iostream>
 #include <vector>
 
-#include "algebra/add_mul.hpp"
-#include "algebra/concepts.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
 
 template <class T> struct matrix {
 public:
-  using R = std::conditional_t<internal::semiring<T>,
-                               T,
-                               add_mul<T>>;
-  using S = typename R::S;
-
   matrix() : h(0), w(0) {}
-  explicit matrix(int _h, int _w) : h(_h), w(_w), d(_h, std::vector<S>(_w)) {}
+  explicit matrix(int _h, int _w) : h(_h), w(_w), d(_h, std::vector<T>(_w)) {}
 
   int height() const { return h; }
   int width() const { return w; }
 
-  std::vector<S>& operator[](int i) {
+  std::vector<T>& operator[](int i) {
     assert(0 <= i && i < h);
     return d[i];
   }
-  const std::vector<S>& operator[](int i) const {
+  const std::vector<T>& operator[](int i) const {
     assert(0 <= i && i < h);
     return d[i];
   }
@@ -36,16 +29,16 @@ public:
     assert(h == rhs.h && w == rhs.w);
     for (int i = 0; i < h; i++) {
       for (int j = 0; j < w; j++) {
-        (*this)[i][j] = R::add((*this)[i][j], rhs[i][j]);
+        (*this)[i][j] += rhs[i][j];
       }
     }
     return *this;
   }
 
-  matrix& operator*=(const S& rhs) {
+  matrix& operator*=(const T& rhs) {
     for (int i = 0; i < h; i++) {
       for (int j = 0; j < w; j++) {
-        (*this)[i][j] = R::mul((*this)[i][j], rhs);
+        (*this)[i][j] *= rhs;
       }
     }
     return *this;
@@ -57,7 +50,7 @@ public:
     for (int i = 0; i < h; i++) {
       for (int k = 0; k < w; k++) {
         for (int j = 0; j < rhs.w; j++) {
-          res[i][j] = R::add(res[i][j], R::mul((*this)[i][k], rhs[k][j]));
+          res[i][j] += (*this)[i][k] * rhs[k][j];
         }
       }
     }
@@ -65,13 +58,13 @@ public:
   }
 
   friend matrix operator+(const matrix& lhs, const matrix& rhs) { return matrix(lhs) += rhs; }  
-  friend matrix operator*(const matrix& lhs, const S& rhs) { return matrix(lhs) *= rhs; }
-  friend matrix operator*(const S& lhs, const matrix& rhs) { return matrix(rhs) *= lhs; }
+  friend matrix operator*(const matrix& lhs, const T& rhs) { return matrix(lhs) *= rhs; }
+  friend matrix operator*(const T& lhs, const matrix& rhs) { return matrix(rhs) *= lhs; }
   friend matrix operator*(const matrix& lhs, const matrix& rhs) { return matrix(lhs) *= rhs; }
 
   static matrix unit(int n) {
     matrix res(n, n);
-    for (int i = 0; i < n; i++) res[i][i] = R::one();    
+    for (int i = 0; i < n; i++) res[i][i] = 1;    
     return res;
   }
 
@@ -101,7 +94,7 @@ public:
 
 private:
   int h, w;
-  std::vector<std::vector<S>> d;
+  std::vector<std::vector<T>> d;
 };
 
 } // namespace cp
