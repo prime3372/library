@@ -1,4 +1,4 @@
-#include "checker/checker.hpp"
+#include "checker/common.hpp"
 #include <iomanip>
 
 constexpr double max_error = 1E-6;

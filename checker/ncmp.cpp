@@ -1,4 +1,4 @@
-#include "checker/checker.hpp"
+#include "checker/common.hpp"
 #include <iomanip>
 
 int main(int argc, char** argv) {

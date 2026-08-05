@@ -56,7 +56,7 @@ bool read_as_double(const std::string& t, double& d) {
   return pos == t.size();
 }
 
-inline double double_delta(double expected, double result) {
+double double_delta(double expected, double result) {
   double absolute = std::abs(result - expected);
   double relative = std::abs(absolute / expected);
   return std::min(absolute, relative);
