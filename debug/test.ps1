@@ -9,14 +9,14 @@ $timeout = 30000
 do {
   Write-Host "compiling..."
 
-  g++ $sol -o sol.exe -I $inc -O2 -Wall -Wextra -fdiagnostics-color=always -std=c++23
+  g++ $sol -I $inc -O2 -Wall -Wextra -fdiagnostics-color=always -o sol.exe -std=c++23
   if ($LASTEXITCODE -ne 0) {
     Write-Host "Compile Error" -ForegroundColor Cyan
     if (Test-Path $sol) { code $sol }
     break
   }
 
-  g++ $gen -o gen.exe -I $inc -O2 -Wall -Wextra -fdiagnostics-color=always -std=c++23
+  g++ $gen -I $inc -O2 -Wall -Wextra -fdiagnostics-color=always -o gen.exe -std=c++23
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $gen -ForegroundColor Blue
     if (Test-Path $gen) { code $gen }
