@@ -5,7 +5,7 @@
 
 namespace cp {
 
-template <internal::monoid M> struct assign {
+template <class M> struct assign {
   using T = typename M::S;
 
   struct S {
