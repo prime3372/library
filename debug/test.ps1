@@ -4,7 +4,7 @@ $gen = $Args[1]
 $include = $Args[2]
 
 # constants
-$timeout = 30000
+$timeout = 15000
 
 do {
   Write-Host "compiling..."
