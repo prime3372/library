@@ -13,7 +13,7 @@
 namespace cp {
 
 template <class T> size_t hash_combine(size_t seed, const T& val) {
-  return seed ^ (hash<T>()(val) + 0x9e3779b97f4a7c15 + (seed << 12) + (seed >> 4));
+  return seed ^ (std::hash<T>()(val) + 0x9e3779b97f4a7c15 + (seed << 12) + (seed >> 4));
 }
 
 } // namespace cp
