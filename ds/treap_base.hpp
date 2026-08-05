@@ -18,7 +18,8 @@ private:
 
 public:
   treap_base() : root(nullptr) {}
-  treap_base(const std::vector<T>& v) : root(nullptr) {
+  explicit treap_base(int n) : treap_base(std::vector<T>(n)) {}
+  explicit treap_base(const std::vector<T>& v) {
     if (v.empty()) return;
     int n = int(v.size());
     std::vector<node_ptr> ps(n);
