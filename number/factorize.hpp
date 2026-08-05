@@ -14,8 +14,6 @@
 
 namespace cp {
 
-namespace internal {
-
 // Pollard's rho algorithm
 // @param 2 <= n
 long long pollard_rho(long long n) {
@@ -54,15 +52,13 @@ long long pollard_rho(long long n) {
   }
 }
 
-} // namespace internal
-
 // @param 1 <= n
 std::vector<std::pair<long long, int>> factorize(long long n) {
   assert(1 <= n);
   if (n == 1) return {};
   std::vector<long long> factors;
   auto f = [&](auto self, long long x) -> void {
-    long long d = internal::pollard_rho(x);
+    long long d = pollard_rho(x);
     if (d == x) {
       factors.push_back(d);
       return;
