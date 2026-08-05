@@ -98,8 +98,7 @@ ostream& operator<<(ostream& os, const Tuple& t) {
   [&]<size_t... I>(index_sequence<I...>) {
     ([&]<class T>(const T& x) {
       os << x;
-      if constexpr (cp::internal::is_tuple_like_v<T> ||
-                    cp::internal::is_vector_v<T>) {
+      if constexpr (cp::internal::is_tuple_like_v<T> || cp::internal::is_vector_v<T>) {
         os << "\n";
       } else {
         os << " ";
@@ -123,8 +122,7 @@ ostream& operator<<(ostream& os, const vector<T>& v) {
   for (int i = 0; i < int(v.size()); i++) {
     os << v[i];
     if (i != int(v.size()) - 1) {
-      if constexpr (cp::internal::is_tuple_like_v<T> ||
-                    cp::internal::is_vector_v<T>) {
+      if constexpr (cp::internal::is_tuple_like_v<T> || cp::internal::is_vector_v<T>) {
         os << "\n";
       } else {
         os << " ";
