@@ -1,7 +1,7 @@
 # arguments
 $sol = $Args[0]
 $gen = $Args[1]
-$inc = $Args[2]
+$include = $Args[2]
 
 # constants
 $timeout = 30000
@@ -9,14 +9,14 @@ $timeout = 30000
 do {
   Write-Host "compiling..."
 
-  g++ $sol -I $inc -O2 -Wall -Wextra -fdiagnostics-color=always -o sol.exe -std=c++23
+  g++ $sol -I $include -O2 -Wall -Wextra -fdiagnostics-color=always -o sol.exe -std=c++23
   if ($LASTEXITCODE -ne 0) {
     Write-Host "Compile Error" -ForegroundColor Cyan
     if (Test-Path $sol) { code $sol }
     break
   }
 
-  g++ $gen -I $inc -O2 -Wall -Wextra -fdiagnostics-color=always -o gen.exe -std=c++23
+  g++ $gen -I $include -O2 -Wall -Wextra -fdiagnostics-color=always -o gen.exe -std=c++23
   if ($LASTEXITCODE -ne 0) {
     Write-Host "FAIL" "Compile Error" $gen -ForegroundColor Blue
     if (Test-Path $gen) { code $gen }
