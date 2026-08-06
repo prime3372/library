@@ -16,18 +16,18 @@ int main(int argc, char** argv) {
   while (f_ans >> t_ans) {
     if (!(f_out >> t_out)) {
       std::cout << "wrong answer Unexpected EOF in the participants output" << std::endl;
-      return 1;
+      return _wa;
     }
 
     t_cnt++;
 
     if (!read_as_double(t_ans, n_ans)) {
       std::cout << "FAIL Expected double, but '" << t_ans << "' found" << std::endl;
-      return 3;
+      return _fail;
     }
     if (!read_as_double(t_out, n_out)) {
       std::cout << "wrong output format Expected double, but '" << t_out << "' found" << std::endl;
-      return 2;
+      return _pe;
     }
 
     if (double_delta(n_ans, n_out) > max_error) {
@@ -35,18 +35,19 @@ int main(int argc, char** argv) {
       std::cout << "expected: '" << n_ans << "', ";
       std::cout << "found: '" << n_out << "', "; 
       std::cout << "error = '" << double_delta(n_ans, n_out) << "'" << std::endl; 
-      return 1;
+      return _wa;
     }
   }
 
   if (f_out >> t_out) {
     std::cout << "wrong answer Participant output contains extra tokens" << std::endl;
-    return 1;
+    return _wa;
   }
 
   if (t_cnt == 1) {
     std::cout << "ok found '" << n_out << "', expected '" << n_ans << "', error '" << double_delta(n_ans, n_out) << "'" << std::endl;
-    return 0;
+  } else {
+    std::cout << "ok " << t_cnt << " numbers" << std::endl;
   }
-  std::cout << "ok " << t_cnt << " numbers" << std::endl;
+  return _ok;
 }

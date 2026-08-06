@@ -18,25 +18,25 @@ int main(int argc, char** argv) {
       std::cout << "Answer contains longer sequence ";
       std::cout << "[length = " << t_cnt + extra_ans_cnt << "], ";
       std::cout << "but output contains " << t_cnt << " elements" << std::endl;
-      return 1;
+      return _wa;
     }
 
     t_cnt++;
 
     if (!read_as_ll(t_ans, n_ans)) {
       std::cout << "FAIL Expected integer, but '" << t_ans << "' found" << std::endl;
-      return 3;
+      return _fail;
     }
     if (!read_as_ll(t_out, n_out)) {
       std::cout << "wrong output format Expected integer, but '" << t_out << "' found" << std::endl;
-      return 2;
+      return _pe;
     }
 
     if (n_ans != n_out) {
       std::cout << "wrong answer " << t_cnt << ordinal_suffix(t_cnt) << " numbers differ - ";
       std::cout << "expected: '" << n_ans << "', ";
       std::cout << "found: '" << n_out << "'" << std::endl;
-      return 1;
+      return _wa;
     } else if (t_cnt <= 5) {
       if (!t_first.empty()) {
         t_first.push_back(' ');
@@ -53,12 +53,13 @@ int main(int argc, char** argv) {
     std::cout << "wrong answer Output contains longer sequence ";
     std::cout << "[length = " << t_cnt + extra_out_cnt << "], ";
     std::cout << "but answer contains " << t_cnt << "elements" << std::endl;
-    return 1;
+    return _wa;
   }
 
   if (t_cnt <= 5) {
     std::cout << "ok "<< t_cnt << " number(s): \"" << t_first << "\"" << std::endl;
-    return 0;
+  } else {
+    std::cout << "ok " << t_cnt << " numbers" << std::endl;
   }
-  std::cout << "ok " << t_cnt << " numbers" << std::endl;
+  return _ok;
 }

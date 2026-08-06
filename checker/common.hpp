@@ -9,12 +9,19 @@
 #include <stdexcept>
 #include <string>
 
+enum result {
+  _ok = 0,
+  _wa = 1,
+  _pe = 2,
+  _fail = 3
+};
+
 std::ifstream f_in, f_out, f_ans;
 
 void open_files(int argc, char** argv) {
   if (argc < 4) {
     std::cout << "FAIL too few arguments" << std::endl;
-    std::exit(3);
+    std::exit(_fail);
   }
 
   f_in.open(argv[1]);
@@ -23,7 +30,7 @@ void open_files(int argc, char** argv) {
 
   if (!(f_in.is_open() && f_out.is_open() && f_ans.is_open())) {
     std::cout << "FAIL cannot open files" << std::endl;
-    std::exit(3);
+    std::exit(_fail);
   }
 }
 
