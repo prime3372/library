@@ -15,7 +15,8 @@ int main(int argc, char** argv) {
       while (f_ans >> t_ans) {
         extra_ans_cnt++;
       }
-      std::cout << "Answer contains longer sequence [length = " << t_cnt + extra_ans_cnt << "], ";
+      std::cout << "Answer contains longer sequence ";
+      std::cout << "[length = " << t_cnt + extra_ans_cnt << "], ";
       std::cout << "but output contains " << t_cnt << " elements" << std::endl;
       return 1;
     }
@@ -49,7 +50,8 @@ int main(int argc, char** argv) {
     extra_out_cnt++;
   }
   if (extra_out_cnt > 0) {
-    std::cout << "wrong answer Output contains longer sequence [length = " << t_cnt + extra_out_cnt << "], ";
+    std::cout << "wrong answer Output contains longer sequence ";
+    std::cout << "[length = " << t_cnt + extra_out_cnt << "], ";
     std::cout << "but answer contains " << t_cnt << "elements" << std::endl;
     return 1;
   }
