@@ -9,7 +9,7 @@
 
 #include "number/is_prime.hpp"
 #include "number/kth_root.hpp"
-#include "random/get_rand.hpp"
+#include "random/common.hpp"
 #include "util/run_length_encoding.hpp"
 
 namespace cp {
@@ -27,7 +27,7 @@ long long pollard_rho(long long n) {
   int m = int(kth_root(n, 8));
   while (true) {
     long long x = 0, y = 0, x_tmp, y_tmp, q = 1, d = 1;
-    r = get_rand(2LL, n);
+    r = uniform(2LL, n - 1);
     while (d == 1) {
       x_tmp = x;
       y_tmp = y;

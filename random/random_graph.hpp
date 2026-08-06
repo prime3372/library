@@ -5,7 +5,7 @@
 #include <utility>
 #include <vector>
 
-#include "random/get_rand.hpp"
+#include "random/common.hpp"
 
 namespace cp {
 
@@ -23,20 +23,20 @@ std::vector<std::pair<int, int>> random_graph(int n, int m) {
     int u, v;
     if constexpr (directed) {
       if constexpr (has_self_loops) {
-        u = get_rand(0, n);
-        v = get_rand(0, n);
+        u = uniform(0, n - 1);
+        v = uniform(0, n - 1);
       } else {
-        u = get_rand(0, n - 1);
-        v = get_rand(u + 1, n);
-        if (get_rand(2)) std::swap(u, v);
+        u = uniform(0, n - 2);
+        v = uniform(u + 1, n - 1);
+        if (uniform_bool()) std::swap(u, v);
       }
     } else {
       if constexpr (has_self_loops) {
-        u = get_rand(0, n);
-        v = get_rand(u, n);
+        u = uniform(0, n - 1);
+        v = uniform(u, n - 1);
       } else {
-        u = get_rand(0, n - 1);
-        v = get_rand(u, n);
+        u = uniform(0, n - 2);
+        v = uniform(u + 1, n - 1);
       }
     }
     edges[i] = {u, v};

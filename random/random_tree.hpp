@@ -5,7 +5,7 @@
 #include <utility>
 #include <vector>
 
-#include "random/get_rand.hpp"
+#include "random/common.hpp"
 
 namespace cp {
 
@@ -16,10 +16,10 @@ std::vector<std::pair<int, int>> random_tree(int n, int root = 0) {
 
   std::vector<int> par(n, -1);
   for (int i = root + 1; i < n; i++) {
-    par[i] = get_rand(root, i);;
+    par[i] = uniform(root, i - 1);;
   }
   for (int i = 0; i < root; i++) {
-    par[i] = get_rand(root, n + i) % n;
+    par[i] = uniform(root, n + i - 1) % n;
   }
 
   std::vector<std::pair<int, int>> edges;
@@ -38,7 +38,7 @@ std::vector<std::pair<int, int>> random_forest(int n) {
   if (n == 1) return {};
 
   std::vector<int> par(n);
-  for (int i = 0; i < n; i++) par[i] = get_rand(i + 1);
+  for (int i = 0; i < n; i++) par[i] = uniform(0, i);
 
   std::vector<std::pair<int, int>> edges;
   for (int i = 0; i < n; i++) {

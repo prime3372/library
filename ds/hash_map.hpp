@@ -7,7 +7,7 @@
 #include <utility>
 #include <vector>
 
-#include "random/get_rand.hpp"
+#include "random/common.hpp"
 #include "util/hash_combine.hpp"
 
 namespace cp {

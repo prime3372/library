@@ -13,7 +13,7 @@ std::vector<size_t> random_choice(size_t n, int r) {
   std::vector<size_t> res(r);
   hash_map<size_t, size_t> table;
   for (int i = 0; i < r; i++) {
-    size_t j = get_rand(n);
+    size_t j = uniform(0, n - 1);
     res[i] = table.count(j) ? j : table[j];
     table[j] = table.count(i) ? i : table[i];
   }

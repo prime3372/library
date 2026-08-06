@@ -4,7 +4,7 @@
 #include <array>
 #include <random>
 
-#include "random/get_rand.hpp"
+#include "random/common.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
@@ -15,7 +15,7 @@ public:
     hash61 hs;
     for (int i = 0; i < num_of_base; i++) {
       do {
-        hs.v[i] = get_rand(m);
+        hs.v[i] = uniform(0LL, m - 1);
       } while (!is_primitive(hs.v[i]));
     }
     return hs;
