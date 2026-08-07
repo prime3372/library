@@ -59,10 +59,10 @@ public:
 
   bs& flip() {
     if (n == 0) return *this;
-    for (int i = 0; i < n / 64; i++) {
+    for (int i = 0; i < int(a.size()); i++) {
       a[i] = ~a[i];
     }
-    a[(n - 1) / 64] ^= mask(n % 64) - 1;
+    if (n % 64) a.back() &= mask(n % 64) - 1;
     return *this;
   }
   bs operator~() const {
@@ -125,7 +125,6 @@ public:
 
   bs& operator<<=(int shift) {
     assert(0 <= shift);
-
     if (n == 0) return *this;
     if (shift >= n) {
       std::fill(a.begin(), a.end(), 0);
@@ -155,7 +154,6 @@ public:
 
   bs& operator>>=(int shift) {
     assert(0 <= shift);
-
     if (n == 0) return *this;
     if (shift >= n) {
       std::fill(a.begin(), a.end(), 0);
