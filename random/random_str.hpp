@@ -11,7 +11,7 @@ template <bool upper = false> std::string random_str(int n) {
   assert(0 <= n);
   std::string res(n, 0);
   for (int i = 0; i < n; i++) {
-    res[i] = char((upper ? 'A' : 'a') + uniform(0, 25));
+    res[i] = upper ? uniform('A', 'Z') : uniform('a', 'z');
   }
   return res;
 }
