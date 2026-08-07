@@ -16,7 +16,7 @@ public:
 
   dynamic_bitset() : n(0) {}
   explicit dynamic_bitset(int _n) : n(_n), a((_n + 63) / 64, 0) {}
-  explicit dynamic_bitset(int _n, bool b) : n(_n), a((_n + 63) / 64, b ? (unsigned long long)(-1) : 0) {
+  explicit dynamic_bitset(int _n, bool b) : n(_n), a((_n + 63) / 64, b ? -1 : 0) {
     if (b && n % 64) a.back() &= mask(n % 64) - 1;
   }
   explicit dynamic_bitset(const std::string& s) : n(int(s.size())), a((int(s.size()) + 63) / 64) {
