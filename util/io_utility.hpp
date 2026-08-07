@@ -18,18 +18,18 @@ template <class T> struct delimiter {
   static constexpr char value = ' ';
 };
 
+template <class T>
+inline constexpr auto delimiter_v = delimiter<T>::value;
+
+template <class T, class Alloc>
+struct delimiter<std::vector<T, Alloc>> {
+  static constexpr char value = '\n';
+};
+
 template <class T> requires is_tuple_like_v<T>
 struct delimiter<T> {
   static constexpr char value = '\n';
 };
-
-template <class T> requires is_vector_v<T>
-struct delimiter<T> {
-  static constexpr char value = '\n';
-};
-
-template <class T>
-inline constexpr char delimiter_v = delimiter<T>::value;
 
 } // namespace internal
 
@@ -94,17 +94,36 @@ ostream& operator<<(ostream& os, unsigned __int128 val) {
 
 // forward declarations
 
+template <class T>
+istream& operator>>(istream& is, vector<T>& v);
+
+template <class T>
+ostream& operator<<(ostream& os, const vector<T>& v);
+
 template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 istream& operator>>(istream& is, Tuple& t);
 
 template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 ostream& operator<<(ostream& os, const Tuple& t);
 
-template <class T>
-istream& operator>>(istream& is, vector<T>& v);
+// vector
 
 template <class T>
-ostream& operator<<(ostream& os, const vector<T>& v);
+istream& operator>>(istream& is, vector<T>& v) {
+  for (T& x : v) is >> x;  
+  return is;
+}
+
+template <class T>
+ostream& operator<<(ostream& os, const vector<T>& v) {
+  for (int i = 0; i < int(v.size()); i++) {
+    os << v[i];
+    if (i != int(v.size()) - 1) {
+      os << cp::internal::delimiter_v<T>;
+    }
+  }
+  return os;
+}
 
 // tuple_like (array, tuple, pair)
 
@@ -126,25 +145,6 @@ ostream& operator<<(ostream& os, const Tuple& t) {
     }(get<I>(t)), ...);
   }(make_index_sequence<n - 1>());
   os << get<n - 1>(t);
-  return os;
-}
-
-// vector
-
-template <class T>
-istream& operator>>(istream& is, vector<T>& v) {
-  for (T& x : v) is >> x;  
-  return is;
-}
-
-template <class T>
-ostream& operator<<(ostream& os, const vector<T>& v) {
-  for (int i = 0; i < int(v.size()); i++) {
-    os << v[i];
-    if (i != int(v.size()) - 1) {
-      os << cp::internal::delimiter_v<T>;
-    }
-  }
   return os;
 }
 

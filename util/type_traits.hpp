@@ -92,6 +92,9 @@ using make_unsigned_t = typename make_unsigned<T>::type;
 template <class T>
 struct is_tuple_like : public std::false_type {};
 
+template <class T>
+constexpr bool is_tuple_like_v = is_tuple_like<T>::value;
+
 template <class T, size_t Size>
 struct is_tuple_like<std::array<T, Size>> : public std::true_type {};
 
@@ -100,20 +103,6 @@ struct is_tuple_like<std::tuple<Args...>> : public std::true_type {};
 
 template <class T, class U>
 struct is_tuple_like<std::pair<T, U>> : public std::true_type {};
-
-template <class T>
-constexpr bool is_tuple_like_v = is_tuple_like<T>::value;
-
-// is_vector
-
-template <class T>
-struct is_vector : public std::false_type {};
-
-template <class T, class Alloc>
-struct is_vector<std::vector<T, Alloc>> : public std::true_type {};
-
-template <class T>
-constexpr bool is_vector_v = is_vector<T>::value;
 
 // is_modint
 
