@@ -117,7 +117,7 @@ public:
     for (int i = 0; i < seg.n; i++) {
       os << seg[i];
       if (i != seg.n - 1) {
-        internal::output_delimiter<S>(os);
+        os << delimiter_v<S>;
       }
     }
     return os;
@@ -131,5 +131,13 @@ private:
     d[k] = M::op(d[2 * k], d[2 * k + 1]);
   }
 };
+
+namespace internal {
+
+template <class M> struct delimiter<segtree<M>> {
+  static constexpr char value = "\n";
+};
+
+} // namespace internal
 
 } // namespace cp

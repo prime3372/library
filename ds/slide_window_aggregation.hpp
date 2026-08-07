@@ -28,24 +28,6 @@ public:
   int size() const { return int(a0.size() + a1.size()); }
   bool empty() const { return size() == 0; }
 
-  // for debugging
-  friend std::ostream& operator<<(std::ostream& os,
-                                  const slide_window_aggregation& swag) {
-    for (int i = int(swag.a0.size()) - 1; i >= 0; i--) {
-      os << swag.a0[i];
-      if (!swag.a1.empty() || i != int(swag.a0.size()) - 1) {
-        internal::output_delimiter<S>(os);
-      }
-    }
-    for (int i = 0; i < int(swag.a1.size()); i++) {
-      os << swag.a1[i];
-      if (i != int(swag.a1.size()) - 1) {
-        internal::output_delimiter<S>(os);
-      }
-    }
-    return os;
-  }
-
 private:
   std::vector<S> a0, a1, cum0, cum1;
   S prod0, prod1;

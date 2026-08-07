@@ -4,6 +4,7 @@
 #include <functional>
 #include <iostream>
 #include <memory>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -86,7 +87,7 @@ public:
     for (int i = 0; i < tp.size(); i++) {
       os << tp[i];
       if (i != tp.size() - 1) {
-        internal::output_delimiter<T>(os);
+        os << delimiter_v<T>;
       }
     }
     return os;
@@ -140,6 +141,11 @@ protected:
   virtual void update(node_ptr p) const = 0;
 
   virtual void push(node_ptr p) const = 0;
+};
+
+template <class T, class node> requires std::is_base_of_v<treap_base<node>, T>
+struct delimiter<T> {
+  static constexpr char value = "\n";
 };
 
 } // namespace internal

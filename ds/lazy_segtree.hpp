@@ -171,7 +171,7 @@ public:
     for (int i = 0; i < seg.n; i++) {
       os << seg[i];
       if (i != seg.n - 1) {
-        internal::output_delimiter<S>(os);
+        os << internal::delimiter_v<S>;
       }
     }
     return os;
@@ -195,5 +195,13 @@ private:
     lz[k] = M::id();
   }
 };
+
+namespace internal {
+
+template <class M> struct delimiter<lazy_segtree<M>> {
+  static constexpr char value = "\n";
+};
+
+} // namespace internal
 
 } // namespace cp

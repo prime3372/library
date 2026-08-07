@@ -55,7 +55,7 @@ public:
     for (int i = 0; i < cc.size(); i++) {
       os << cc[i];
       if (i != cc.size() - 1) {
-        internal::output_delimiter<T>(os);
+        os << delimiter_v<T>;
       }
     }
     return os;
@@ -65,5 +65,14 @@ private:
   bool initialized = false;
   std::vector<T> d;
 };
+
+namespace internal {
+
+template <class T> struct delimiter<coordinate_compression<T>> {
+  static constexpr char value = "\n";
+};
+
+} // namespace internal
+
 
 } // namespace cp

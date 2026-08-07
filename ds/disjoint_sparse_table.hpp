@@ -62,7 +62,7 @@ public:
     for (int i = 0; i < dst.n; i++) {
       os << dst[i];
       if (i != dst.n - 1) {
-        internal::output_delimiter<S>(os);
+        os << internal::delimiter_v<S>;
       }
     }
     return os;
@@ -74,5 +74,13 @@ private:
   std::vector<std::vector<S>> table;
   std::vector<int> logs;
 };
+
+namespace internal {
+
+template <class M> struct delimiter<disjoint_sparse_table<M>> {
+  static constexpr char value = "\n";
+};
+
+} // namespace internal
 
 } // namespace cp

@@ -98,4 +98,12 @@ private:
   hash_map<size_t, T> d;
 };
 
+namespace internal {
+
+template <class T> struct delimiter<dynamic_fenwick_tree<T>> {
+  static constexpr char value = "\n";
+};
+
+} // namespace internal
+
 } // namespace cp

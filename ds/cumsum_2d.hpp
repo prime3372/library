@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 
+#include "util/io_utility.hpp"
+
 namespace cp {
 
 template <class T> struct cumsum_2d {
@@ -80,5 +82,14 @@ private:
   std::vector<std::vector<T>> d;
   std::vector<std::vector<T>> cum;
 };
+
+namespace internal {
+
+template <class T> struct delimiter<cumsum_2d<T>> {
+  static constexpr char value = "\n";
+};
+
+} // namespace internal
+
 
 } // namespace cp

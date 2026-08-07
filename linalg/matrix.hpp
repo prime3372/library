@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "util/type_traits.hpp"
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -96,5 +97,13 @@ private:
   int h, w;
   std::vector<std::vector<T>> d;
 };
+
+namespace internal {
+
+template <class T> struct delimiter<matrix<T>> {
+  static constexpr char value = "\n";
+};
+
+} // namespace internal
 
 } // namespace cp

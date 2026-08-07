@@ -84,7 +84,7 @@ public:
     for (size_t i = 0; i < seg.n; i++) {
       os << seg[i];
       if (i != seg.n - 1) {
-        internal::output_delimiter<S>(os);
+        os << internal::delimiter_v<S>;
       }
     }
     return os;
@@ -251,5 +251,13 @@ private:
     return test > c ? test : min_left(p->left, a, c, dep + 1, product, r, f);
   }
 };
+
+namespace internal {
+
+template <class M> struct delimiter<dynamic_lazy_segtree<M>> {
+  static constexpr char value = "\n";
+};
+
+} // namespace internal
 
 } // namespace cp

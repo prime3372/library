@@ -14,13 +14,22 @@ namespace cp {
 
 namespace internal {
 
-template <class T> void output_delimiter(std::ostream& os) {
-  if constexpr (is_tuple_like_v<T> || is_vector_v<T>) {
-    os << "\n";
-  } else {
-    os << " ";
-  }
-}
+template <class T> struct delimiter {
+  static constexpr char value = " ";
+};
+
+template <class T> requires is_tuple_like_v<T>
+struct delimiter<T> {
+  static constexpr char value = "\n";
+};
+
+template <class T> requires is_vector_v<T>
+struct delimiter<T> {
+  static constexpr char value = "\n";
+};
+
+template <class T>
+inline constexpr char delimiter_v = delimiter<T>::value;
 
 } // namespace internal
 
@@ -113,8 +122,7 @@ ostream& operator<<(ostream& os, const Tuple& t) {
   if constexpr (n == 0) return os;
   [&]<size_t... I>(index_sequence<I...>) {
     ([&]<class T>(const T& x) {
-      os << x;
-      cp::internal::output_delimiter<T>(os);
+      os << x << delimiter_v<T>;
     }(get<I>(t)), ...);
   }(make_index_sequence<n - 1>());
   os << get<n - 1>(t);
@@ -134,7 +142,7 @@ ostream& operator<<(ostream& os, const vector<T>& v) {
   for (int i = 0; i < int(v.size()); i++) {
     os << v[i];
     if (i != int(v.size()) - 1) {
-      cp::internal::output_delimiter<T>(os);
+      os << delimiter_v<T>;
     }
   }
   return os;

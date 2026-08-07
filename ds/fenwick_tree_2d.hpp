@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "ds/fenwick_tree.hpp"
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -95,5 +96,14 @@ private:
   int h, w;
   std::vector<fenwick_tree<T>> d;
 };
+
+namespace internal {
+
+template <class T> struct delimiter<fenwick_tree_2d<T>> {
+  static constexpr char value = "\n";
+};
+
+} // namespace internal
+
 
 } // namespace cp
