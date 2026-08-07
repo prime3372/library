@@ -117,7 +117,7 @@ public:
     for (int i = 0; i < seg.n; i++) {
       os << seg[i];
       if (i != seg.n - 1) {
-        os << delimiter_v<S>;
+        os << internal::delimiter_v<S>;
       }
     }
     return os;

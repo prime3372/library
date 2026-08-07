@@ -87,7 +87,7 @@ public:
     for (int i = 0; i < tp.size(); i++) {
       os << tp[i];
       if (i != tp.size() - 1) {
-        os << delimiter_v<T>;
+        os << internal::delimiter_v<T>;
       }
     }
     return os;
