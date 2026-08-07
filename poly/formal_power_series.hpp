@@ -133,9 +133,7 @@ public:
     return res;
   }
 
-  fps inv() const {
-    return inv(size());
-  }
+  fps inv() const { return inv(size()); }
   fps inv(int n) const {
     assert(0 <= n);
     assert(!f.empty() && f[0] != 0);
@@ -147,9 +145,7 @@ public:
     return g.prefix(n);
   }
 
-  fps log() const {
-    return log(size());
-  }
+  fps log() const { return log(size()); }
   fps log(int n) const {
     assert(0 <= n);
     assert(!f.empty() && f[0] == 1);
@@ -157,9 +153,7 @@ public:
     return (g.diff() * g.inv()).integral().prefix(n);
   }
 
-  fps exp() const {
-    return exp(size());
-  }
+  fps exp() const { return exp(size()); }
   fps exp(int n) const {
     assert(0 <= n);
     assert(f.empty() || f[0] == 0);
@@ -171,9 +165,7 @@ public:
     return g.prefix(n);
   }
 
-  fps pow(long long k) {
-    return pow(k, size());
-  }
+  fps pow(long long k) { return pow(k, size()); }
   fps pow(long long k, int n) const {
     assert(0 <= k && 0 <= n);
     if (k == 0) {
