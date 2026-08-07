@@ -11,10 +11,8 @@ namespace cp {
 
 template <class T> requires internal::is_unsigned_int_v<T>
 class binary_trie : public trie_tree<2, '0'> {
-private:
-  using base = trie_tree<2, '0'>;
-
 public:
+  using base = trie_tree<2, '0'>;
   using base::trie_tree;
 
   int insert(T x) {
