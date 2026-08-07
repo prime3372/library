@@ -15,17 +15,17 @@ namespace cp {
 namespace internal {
 
 template <class T> struct delimiter {
-  static constexpr char value = " ";
+  static constexpr char value = ' ';
 };
 
 template <class T> requires is_tuple_like_v<T>
 struct delimiter<T> {
-  static constexpr char value = "\n";
+  static constexpr char value = '\n';
 };
 
 template <class T> requires is_vector_v<T>
 struct delimiter<T> {
-  static constexpr char value = "\n";
+  static constexpr char value = '\n';
 };
 
 template <class T>

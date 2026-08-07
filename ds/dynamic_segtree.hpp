@@ -195,7 +195,7 @@ private:
 namespace internal {
 
 template <class M> struct delimiter<dynamic_segtree<M>> {
-  static constexpr char value = "\n";
+  static constexpr char value = '\n';
 };
 
 } // namespace internal
