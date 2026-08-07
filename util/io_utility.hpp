@@ -122,7 +122,7 @@ ostream& operator<<(ostream& os, const Tuple& t) {
   if constexpr (n == 0) return os;
   [&]<size_t... I>(index_sequence<I...>) {
     ([&]<class T>(const T& x) {
-      os << x << delimiter_v<T>;
+      os << x << cp::internal::delimiter_v<T>;
     }(get<I>(t)), ...);
   }(make_index_sequence<n - 1>());
   os << get<n - 1>(t);
@@ -142,7 +142,7 @@ ostream& operator<<(ostream& os, const vector<T>& v) {
   for (int i = 0; i < int(v.size()); i++) {
     os << v[i];
     if (i != int(v.size()) - 1) {
-      os << delimiter_v<T>;
+      os << cp::internal::delimiter_v<T>;
     }
   }
   return os;
