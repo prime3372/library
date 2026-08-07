@@ -5,6 +5,7 @@
 #include <random>
 
 #include "random/common.hpp"
+#include "util/io_utility.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
@@ -13,44 +14,36 @@ struct hash61 {
 public:
   static hash61 get_base() {
     hash61 hs;
-    for (int i = 0; i < num_of_base; i++) {
-      do {
-        hs.v[i] = uniform(0LL, m - 1);
-      } while (!is_primitive(hs.v[i]));
-    }
+    do {
+      hs.v = uniform(0ULL, m - 1);
+    } while (!is_primitive(hs.v));
     return hs;
   }
 
-  hash61() {}
+  hash61() : v(0) {}
   template <class T> requires internal::is_signed_int_v<T>
   hash61(T _v) {
     long long x = (long long)(_v % m);
     if (x < 0) x += m;
-    std::fill(v.begin(), v.end(), x);
+    v = x;
   }
   template <class T> requires internal::is_unsigned_int_v<T>
   hash61(T _v) {
-    std::fill(v.begin(), v.end(), (long long)(_v % m));
+    v = (unsigned long long)(_v % m);
   }
 
   hash61& operator+=(const hash61& rhs) {
-    for (int i = 0; i < num_of_base; i++) {
-      v[i] += rhs.v[i];
-      if (v[i] >= m) v[i] -= m;
-    }
+    v += rhs.v;
+    if (v >= m) v -= m;
     return *this;
   }
   hash61& operator-=(const hash61& rhs) {
-    for (int i = 0; i < num_of_base; i++) {
-      v[i] += m - rhs.v[i];
-      if (v[i] >= m) v[i] -= m;
-    }
+    v += m - rhs.v;
+    if (v >= m) v -= m;
     return *this;
   }
   hash61& operator*=(const hash61& rhs) {
-    for (int i = 0; i < num_of_base; i++) {
-      v[i] = mul(v[i], rhs.v[i]);
-    }
+    v = mul(v, rhs.v);
     return *this;
   }
 
@@ -67,14 +60,23 @@ public:
   friend bool operator>(const hash61& lhs, const hash61& rhs) { return lhs.v > rhs.v; }
   friend bool operator<=(const hash61& lhs, const hash61& rhs) { return lhs.v <= rhs.v; }
   friend bool operator>=(const hash61& lhs, const hash61& rhs) { return lhs.v >= rhs.v; }
+  
+  friend std::istream& operator>>(std::istream& is, hash61& hs) {
+    unsigned long long t;
+    is >> t;
+    hs = t;
+    return is;
+  }
+  friend std::ostream& operator<<(std::ostream& os, const hash61& hs) {
+    return os << hs.v;
+  }
 
 private:
-  static constexpr long long m = (1LL << 61) - 1;
-  static constexpr int num_of_base = 2;
-  std::array<long long, num_of_base> v;
+  static constexpr unsigned long long m = (1LL << 61) - 1;
+  unsigned long long v;
 
-  static long long pow(long long x, long long n) {
-    long long r = 1;
+  static unsigned long long pow(unsigned long long x, unsigned long long n) {
+    unsigned long long r = 1;
     while (n) {
       if (n & 1) r = mul(r, x);
       x = mul(x, x);
@@ -83,19 +85,19 @@ private:
     return r;
   }
 
-  static bool is_primitive(long long x) {
-    for (long long d : {2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321}) {
+  static bool is_primitive(unsigned long long x) {
+    for (unsigned long long d : {2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321}) {
       if (pow(x, (m - 1) / d) <= 1) return false;
     }
     return true;
   }
 
-  static long long mul(long long a, long long b) {
+  static unsigned long long mul(unsigned long long a, unsigned long long b) {
     __int128 r = a;
     r *= b;
     r = (r >> 61) + (r & m);
     if (r >= m) r -= m;
-    return (long long)(r);
+    return (unsigned long long)(r);
   }
 };
 
