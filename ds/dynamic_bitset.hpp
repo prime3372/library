@@ -186,6 +186,9 @@ public:
   friend bs operator<<(const bs& lhs, int shift) { return bs(lhs) <<= shift; }
   friend bs operator>>(const bs& lhs, int shift) { return bs(lhs) >>= shift; }
 
+  friend bool operator==(const bs& lhs, const bs& rhs) { return lhs.a == rhs.a; }
+  friend bool operator!=(const bs& lhs, const bs& rhs) { return !(lhs == rhs); }
+
   friend std::istream& operator>>(std::istream& is, bs& x) {
     std::string t;
     is >> t;
