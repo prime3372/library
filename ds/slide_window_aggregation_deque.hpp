@@ -11,10 +11,9 @@
 namespace cp {
 
 template <class M> struct slide_window_aggregation_deque {
-private:
+public:
   using S = typename M::S;
 
-public:
   slide_window_aggregation_deque() : prod0(M::e()), prod1(M::e()) {}
 
   void push_front(S x) { push0(x); }

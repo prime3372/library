@@ -147,7 +147,7 @@ std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
   return c;
 }
 
-// @note the values after convolution must be between -2*10^18 and 2*10^18
+// @note the values after convolution must be in [-2*10^18, 2*10^18]
 std::vector<long long> convolution(std::vector<long long> a,
                                    std::vector<long long> b) {
   int n = int(a.size()), m = int(b.size());

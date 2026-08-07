@@ -8,11 +8,10 @@ namespace cp {
 
 template <class M, auto mapping = M::mapping>
 struct rerooting_dp {
-private:
+public:
   using S = typename M::S;
   using F = typename M::F;
 
-public:
   rerooting_dp() : n(0) {}
   explicit rerooting_dp(int _n) : rerooting_dp(std::vector<S>(_n, M::e())) {}
   explicit rerooting_dp(int _n, S val) : rerooting_dp(std::vector<S>(_n, val)) {}

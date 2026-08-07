@@ -10,10 +10,9 @@
 namespace cp {
 
 template <int m> requires (1 <= m) struct static_modint {
-private:
+public:
   using mint = static_modint;
 
-public:
   static constexpr int mod() { return m; }
 
   static_modint() : v(0) {}

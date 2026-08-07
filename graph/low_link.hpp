@@ -7,11 +7,6 @@
 namespace cp {
 
 struct low_link {
-private:
-  struct edge {
-    int to, id;
-  };
-
 public:
   low_link() : low_link(0) {}
   explicit low_link(int _n) : low(_n, _n), ord(_n, -1), n(_n), g(_n) {}
@@ -52,6 +47,9 @@ public:
 
 protected:
   int n, m;
+  struct edge {
+    int to, id;
+  };
   std::vector<std::vector<edge>> g;
 };
 

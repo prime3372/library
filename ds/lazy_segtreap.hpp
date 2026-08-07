@@ -26,19 +26,13 @@ public:
 
 template <class M, auto rev = std::identity()>
 struct lazy_segtreap : public treap_base<lazy_segtreap_node<M>> {
-private:
+public:
   using S = typename M::S;
   using F = typename M::F;
   using node = lazy_segtreap_node<M>;
-  using node_ptr = std::shared_ptr<node>;
   using base = treap_base<node>;
-  using base::build;
-  using base::merge;
-  using base::split;
-  using base::size;
-  using base::root;
+  using node_ptr = typename base::node_ptr;
 
-public:
   lazy_segtreap() {}
   explicit lazy_segtreap(int n) { build(std::vector<S>(n)); }
   explicit lazy_segtreap(int n, S val) { build(std::vector<S>(n, val)); }
@@ -63,8 +57,12 @@ public:
     root = merge(s.first, merge(t.first, t.second));
   }
 
-private:
-  friend base;
+protected:
+  using base::build;
+  using base::merge;
+  using base::split;
+  using base::size;
+  using base::root;
 
   void toggle(node_ptr p) const override {
     swap(p->left, p->right);

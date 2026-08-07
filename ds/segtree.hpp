@@ -11,10 +11,9 @@
 namespace cp {
 
 template <class M> struct segtree {
-private:
+public:
   using S = typename M::S;
 
-public:
   segtree() : segtree(0) {}
   explicit segtree(int _n) : segtree(std::vector<S>(_n, M::e())) {}
   explicit segtree(int _n, S val) : segtree(std::vector<S>(_n, val)) {}

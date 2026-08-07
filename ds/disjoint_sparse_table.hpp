@@ -10,10 +10,9 @@
 namespace cp {
 
 template <class M> struct disjoint_sparse_table {
-private:
+public:
   using S = typename M::S;
 
-public:
   disjoint_sparse_table() : n(0), log(0) {}
   explicit disjoint_sparse_table(const std::vector<S>& _a) : a(_a) {
     n = int(a.size());

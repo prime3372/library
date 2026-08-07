@@ -9,19 +9,6 @@
 namespace cp {
 
 template <class T> struct fenwick_tree_2d {
-private:
-  struct ref {
-  public:
-    T operator[](int j) const {
-      assert(0 <= j && j < ptr->w);
-      return ptr->sum(i, j, i + 1, j + 1);
-    }
-    ref(const fenwick_tree_2d<T>* _ptr, int _i) : ptr(_ptr), i(_i) {}
-  private:
-    const fenwick_tree_2d<T>* ptr;
-    int i;
-  };
-
 public:
   fenwick_tree_2d() : h(0), w(0) {}
   fenwick_tree_2d(int _h, int _w) : h(_h), w(_w), d(_h) {
@@ -39,6 +26,18 @@ public:
       i += i & -i;
     }
   }
+
+  struct ref {
+  public:
+    T operator[](int j) const {
+      assert(0 <= j && j < ptr->w);
+      return ptr->sum(i, j, i + 1, j + 1);
+    }
+    ref(const fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), i(_i) {}
+  private:
+    const fenwick_tree_2d* ptr;
+    int i;
+  };
 
   ref operator[](int i) const {
     assert(0 <= i && i < h);

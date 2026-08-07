@@ -11,7 +11,19 @@
 namespace cp {
 
 struct dynamic_bitset {
-private:
+public:
+  dynamic_bitset() : n(0) {}
+  explicit dynamic_bitset(int _n) : n(_n), a((_n + 63) / 64, 0) {}
+  explicit dynamic_bitset(int _n, bool b) : n(_n), a((_n + 63) / 64, b ? (unsigned long long)(-1) : 0) {
+    if (b && n % 64) a.back() &= mask(n % 64) - 1;
+  }
+  explicit dynamic_bitset(const std::string& s) : n(int(s.size())), a((int(s.size()) + 63) / 64) {
+    for (int i = 0; i < n; i++) {
+      assert(s[n - 1 - i] == '0' || s[n - 1 - i] == '1');
+      a[i / 64] |= (unsigned long long)(s[n - 1 - i] - '0') << (i % 64);
+    }
+  }
+
   struct ref {
   public:
     operator bool() const { return (*d & mask(pos)) != 0; }
@@ -33,19 +45,6 @@ private:
     unsigned long long* d;
     int pos;
   };
-
-public:
-  dynamic_bitset() : n(0) {}
-  explicit dynamic_bitset(int _n) : n(_n), a((_n + 63) / 64, 0) {}
-  explicit dynamic_bitset(int _n, bool b) : n(_n), a((_n + 63) / 64, b ? (unsigned long long)(-1) : 0) {
-    if (b && n % 64) a.back() &= mask(n % 64) - 1;
-  }
-  explicit dynamic_bitset(const std::string& s) : n(int(s.size())), a((int(s.size()) + 63) / 64) {
-    for (int i = 0; i < n; i++) {
-      assert(s[n - 1 - i] == '0' || s[n - 1 - i] == '1');
-      a[i / 64] |= (unsigned long long)(s[n - 1 - i] - '0') << (i % 64);
-    }
-  }
 
   ref operator[](int i) {
     assert(0 <= i && i < n);

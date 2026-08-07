@@ -10,11 +10,10 @@
 namespace cp {
 
 template <class M> struct lazy_segtree {
-private:
+public:
   using S = typename M::S;
   using F = typename M::F;
 
-public:
   lazy_segtree() : lazy_segtree(0) {}
   explicit lazy_segtree(int _n) : lazy_segtree(std::vector<S>(_n, M::e())) {}
   explicit lazy_segtree(int _n, S val) : lazy_segtree(std::vector<S>(_n, val)) {}

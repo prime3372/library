@@ -23,18 +23,12 @@ template <class M> struct segtreap_node {
 
 template <class M, auto rev = std::identity()>
 struct segtreap : public treap_base<segtreap_node<M>> {
-private:
+public:
   using S = typename M::S;
   using node = segtreap_node<M>;
-  using node_ptr = std::shared_ptr<node>;
   using base = treap_base<node>;
-  using base::build;
-  using base::merge;
-  using base::split;
-  using base::size;
-  using base::root;
+  using node_ptr = typename base::node_ptr;
 
-public:
   segtreap() {}
   explicit segtreap(int n) { build(std::vector<S>(n)); }
   explicit segtreap(int n, S val) { build(std::vector<S>(n, val)); }
@@ -51,6 +45,12 @@ public:
   }
 
 protected:
+  using base::build;
+  using base::merge;
+  using base::split;
+  using base::size;
+  using base::root;
+
   void toggle(node_ptr p) const override {
     swap(p->left, p->right);
     p->prod = rev(p->prod);

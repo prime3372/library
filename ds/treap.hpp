@@ -21,19 +21,19 @@ template <class T> struct treap_node {
 };
 
 template <class T> struct treap : public treap_base<treap_node<T>> {
-private:
-  using node = treap_node<T>;
-  using node_ptr = std::shared_ptr<node>;
-  using base = treap_base<node>;
-  using base::build;
-
 public:
+  using node = treap_node<T>;
+  using base = treap_base<node>;
+  using node_ptr = typename base::node_ptr;
+
   treap() {}
   explicit treap(int n) { build(std::vector<T>(n)); }
   explicit treap(int n, const T& val) { build(std::vector<T>(n, val)); }
   explicit treap(const std::vector<T>& v) { build(v); }
 
 protected:
+  using base::build;
+
   void toggle(node_ptr p) const override {
     swap(p->left, p->right);
     p->rev = !p->rev;

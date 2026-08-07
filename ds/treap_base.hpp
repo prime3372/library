@@ -13,11 +13,10 @@
 namespace cp {
 
 template <class node> struct treap_base {
-private:
+public:
   using T = decltype(node::val);
   using node_ptr = std::shared_ptr<node>;
 
-public:
   treap_base() {}
 
   void build(const std::vector<T>& v) {

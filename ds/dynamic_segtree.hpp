@@ -13,10 +13,9 @@
 namespace cp {
 
 template <class M> struct dynamic_segtree {
-private:
+public:
   using S = typename M::S;
 
-public:
   dynamic_segtree() : dynamic_segtree(0) {}
   explicit dynamic_segtree(size_t _n) : dynamic_segtree(_n, M::e()) {}
   explicit dynamic_segtree(size_t _n, S val) : n(_n), root(nullptr) {

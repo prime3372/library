@@ -11,10 +11,9 @@
 namespace cp {
 
 template <int id> struct dynamic_modint {
-private:
+public:
   using mint = dynamic_modint;
 
-public:
   static void set_mod(int m) {
     assert(1 <= m);
     bt = barrett(m);

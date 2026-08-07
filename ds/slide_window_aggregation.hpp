@@ -9,10 +9,9 @@
 namespace cp {
 
 template <class M> struct slide_window_aggregation {
-private:
+public:
   using S = typename M::S;
 
-public:
   slide_window_aggregation() : prod0(M::e()), prod1(M::e()) {}
 
   void push(S x) { push1(x); }
