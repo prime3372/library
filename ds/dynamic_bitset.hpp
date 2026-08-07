@@ -15,14 +15,14 @@ public:
   using bs = dynamic_bitset;
 
   dynamic_bitset() : n(0) {}
-  explicit dynamic_bitset(int _n) : n(_n), a((_n + 63) / 64, 0) {}
-  explicit dynamic_bitset(int _n, bool b) : n(_n), a((_n + 63) / 64, b ? -1 : 0) {
-    if (b && n % 64) a.back() &= mask(n % 64) - 1;
+  explicit dynamic_bitset(int _n) : n(_n), a((_n + w - 1) / w, 0) {}
+  explicit dynamic_bitset(int _n, bool b) : n(_n), a((_n + w - 1) / w, b ? -1 : 0) {
+    if (b && n % w) a.back() &= mask(n % w) - 1;
   }
-  explicit dynamic_bitset(const std::string& s) : n(int(s.size())), a((int(s.size()) + 63) / 64) {
+  explicit dynamic_bitset(const std::string& s) : n(int(s.size())), a((int(s.size()) + w - 1) / w) {
     for (int i = 0; i < n; i++) {
       assert(s[n - 1 - i] == '0' || s[n - 1 - i] == '1');
-      a[i / 64] |= (unsigned long long)(s[n - 1 - i] - '0') << (i % 64);
+      a[i / w] |= (unsigned long long)(s[n - 1 - i] - '0') << (i % w);
     }
   }
 
@@ -40,8 +40,8 @@ public:
     }
     ref& operator=(const ref& other) { return *this = bool(other); }
     ref(bs& b, int i) {
-      d = b.a.data() + i / 64;
-      pos = i % 64;
+      d = b.a.data() + i / w;
+      pos = i % w;
     }
   private:
     unsigned long long* d;
@@ -54,7 +54,7 @@ public:
   }
   bool operator[](int i) const {
     assert(0 <= i && i < n);
-    return (a[i / 64] & mask(i % 64)) != 0;
+    return (a[i / w] & mask(i % w)) != 0;
   }
 
   bs& flip() {
@@ -62,7 +62,7 @@ public:
     for (int i = 0; i < int(a.size()); i++) {
       a[i] = ~a[i];
     }
-    if (n % 64) a.back() &= mask(n % 64) - 1;
+    if (n % w) a.back() &= mask(n % w) - 1;
     return *this;
   }
   bs operator~() const {
@@ -79,28 +79,28 @@ public:
 
   int next(int i) const {
     assert(0 <= i && i < n);
-    int j = i / 64;
-    if (i % 64 != 63) {
+    int j = i / w;
+    if (i % w != w - 1) {
       unsigned long long start = a[j];
-      start &= (unsigned long long)(-1) << (i % 64 + 1);
-      if (start) return 64 * j + std::countr_zero(start);
+      start &= (unsigned long long)(-1) << (i % w + 1);
+      if (start) return j * w + std::countr_zero(start);
     }
     while (++j < int(a.size())) {
-      if (a[j]) return 64 * j + std::countr_zero(a[j]);
+      if (a[j]) return j * w + std::countr_zero(a[j]);
     }
     return n;
   }
 
   int prev(int i) const {
     assert(0 <= i && i < n);
-    int j = i / 64;
-    if (i % 64 != 0) {
+    int j = i / w;
+    if (i % w != 0) {
       unsigned long long start = a[j];
-      start &= (unsigned long long)(-1) >> (64 - i % 64);
-      if (start) return 64 * j + 63 - std::countl_zero(start);
+      start &= (unsigned long long)(-1) >> (w - i % w);
+      if (start) return j * w + (w - 1 - std::countl_zero(start));
     }
     while (--j >= 0) {
-      if (a[j]) return 64 * j + 63 - std::countl_zero(a[j]);
+      if (a[j]) return j * w + (w - 1 - std::countl_zero(a[j]));
     }
     return -1;
   }
@@ -131,7 +131,7 @@ public:
       return *this;
     }
 
-    int block_shift = shift / 64;    
+    int block_shift = shift / w;
     if (block_shift > 0) {
       for (int i = int(a.size()) - 1; i >= block_shift; i--) {
         a[i] = a[i - block_shift]; 
@@ -139,16 +139,16 @@ public:
       std::fill(a.begin(), a.begin() + block_shift, 0);
     }
 
-    int bit_shift = shift % 64;
+    int bit_shift = shift % w;
     if (bit_shift > 0) {
       for (int i = int(a.size()) - 1; i > block_shift; i--) {
         a[i] <<= bit_shift;
-        if (i) a[i] |= a[i - 1] >> (64 - bit_shift);
+        if (i) a[i] |= a[i - 1] >> (w - bit_shift);
       }
       a[block_shift] <<= bit_shift;
     }
 
-    if (n % 64) a.back() &= mask(n % 64) - 1;
+    if (n % w) a.back() &= mask(n % w) - 1;
     return *this;
   }
 
@@ -160,7 +160,7 @@ public:
       return *this;
     }
 
-    int block_shift = shift / 64;
+    int block_shift = shift / w;
     if (block_shift > 0) {
       for (int i = 0; i < int(a.size()) - block_shift; i++) {
         a[i] = a[i + block_shift];
@@ -168,11 +168,11 @@ public:
       std::fill(a.end() - block_shift, a.end(), 0);
     }
 
-    int bit_shift = shift % 64;
+    int bit_shift = shift % w;
     if (bit_shift > 0) {
       for (int i = 0; i < int(a.size()) - block_shift - 1; i++) {
         a[i] >>= bit_shift;
-        a[i] |= a[i + 1] << (64 - bit_shift);
+        a[i] |= a[i + 1] << (w - bit_shift);
       }
       a[a.size() - block_shift - 1] >>= bit_shift;
     }
@@ -201,6 +201,7 @@ public:
   }
 
 private:
+  static constexpr int w = 64;
   int n;
   std::vector<unsigned long long> a;
 
