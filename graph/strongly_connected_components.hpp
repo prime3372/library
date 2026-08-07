@@ -18,11 +18,12 @@ public:
     g[from].push_back(to);
   }
 
+  int num = 0;
   std::vector<int> id;
-  std::vector<std::vector<int>> scc;
+  std::vector<std::vector<int>> groups;
 
   strongly_connected_components& build() {
-    int now_ord = 0, group_num = 0;
+    int now_ord = 0;
     std::vector<int> visited, low(n), ord(n, -1);
     visited.reserve(n);
 
@@ -42,10 +43,10 @@ public:
           int u = visited.back();
           visited.pop_back();
           ord[u] = n;
-          id[u] = group_num;
+          id[u] = num;
           if (u == v) break;
         }
-        group_num++;
+        num++;
       }
     };
     for (int i = 0; i < n; i++) {
@@ -53,12 +54,12 @@ public:
     }
 
     for (int& x : id) {
-      x = group_num - 1 - x;
+      x = num - 1 - x;
     }
 
-    scc.resize(group_num);
+    groups.resize(num);
     for (int i = 0; i < n; i++) {
-      scc[id[i]].push_back(i);
+      groups[id[i]].push_back(i);
     }
 
     return *this;

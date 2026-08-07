@@ -12,15 +12,14 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  strongly_connected_components g(n);
+  strongly_connected_components scc(n);
   rep(i, 0, m) {
     int a, b;
     cin >> a >> b;
-    g.add_edge(a, b);
+    scc.add_edge(a, b);
   }
-  auto scc = g.build().scc;
-  cout << scc.size() << "\n";
-  for (auto vs : scc) {
+  cout << scc.num << "\n";
+  for (auto vs : scc.groups) {
     cout << vs.size() << " ";
     for (int v : vs) cout << v << " ";
     cout << "\n";
