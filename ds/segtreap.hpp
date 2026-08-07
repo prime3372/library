@@ -26,8 +26,8 @@ struct segtreap : public treap_base<segtreap_node<M>> {
 public:
   using S = typename M::S;
   using node = segtreap_node<M>;
+  using node_ptr = std::shared_ptr<node>;
   using base = treap_base<node>;
-  using node_ptr = typename base::node_ptr;
 
   segtreap() {}
   explicit segtreap(int n) { build(std::vector<S>(n)); }

@@ -30,8 +30,8 @@ public:
   using S = typename M::S;
   using F = typename M::F;
   using node = lazy_segtreap_node<M>;
+  using node_ptr = std::shared_ptr<node>;
   using base = treap_base<node>;
-  using node_ptr = typename base::node_ptr;
 
   lazy_segtreap() {}
   explicit lazy_segtreap(int n) { build(std::vector<S>(n)); }

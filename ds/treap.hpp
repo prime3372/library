@@ -23,8 +23,8 @@ template <class T> struct treap_node {
 template <class T> struct treap : public treap_base<treap_node<T>> {
 public:
   using node = treap_node<T>;
+  using node_ptr = std::shared_ptr<node>;
   using base = treap_base<node>;
-  using node_ptr = typename base::node_ptr;
 
   treap() {}
   explicit treap(int n) { build(std::vector<T>(n)); }
