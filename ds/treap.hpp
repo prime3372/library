@@ -9,6 +9,8 @@
 
 namespace cp {
 
+namespace internal {
+
 template <class T> struct treap_node {
   T val;
   int sub = 1;
@@ -20,11 +22,14 @@ template <class T> struct treap_node {
   explicit treap_node(const T& x) : val(x), priority(mt64()) {}    
 };
 
-template <class T> struct treap : public treap_base<treap_node<T>> {
+} // namespace internal
+
+template <class T>
+struct treap : public internal::treap_base<internal::treap_node<T>> {
 public:
-  using node = treap_node<T>;
+  using node = internal::treap_node<T>;
   using node_ptr = std::shared_ptr<node>;
-  using base = treap_base<node>;
+  using base = internal::treap_base<node>;
 
   treap() {}
   explicit treap(int n) { build(std::vector<T>(n)); }

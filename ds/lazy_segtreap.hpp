@@ -9,6 +9,8 @@
 
 namespace cp {
 
+namespace internal {
+
 template <class M> struct lazy_segtreap_node {
 public:
   using S = typename M::S;
@@ -24,14 +26,16 @@ public:
   explicit lazy_segtreap_node(S x) : val(x), prod(x), priority(mt64()) {}  
 };
 
+} // namespace internal
+
 template <class M, auto rev = std::identity()>
-struct lazy_segtreap : public treap_base<lazy_segtreap_node<M>> {
+struct lazy_segtreap : public internal::treap_base<internal::lazy_segtreap_node<M>> {
 public:
   using S = typename M::S;
   using F = typename M::F;
-  using node = lazy_segtreap_node<M>;
+  using node = internal::lazy_segtreap_node<M>;
   using node_ptr = std::shared_ptr<node>;
-  using base = treap_base<node>;
+  using base = internal::treap_base<node>;
 
   lazy_segtreap() {}
   explicit lazy_segtreap(int n) { build(std::vector<S>(n)); }

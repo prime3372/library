@@ -9,6 +9,8 @@
 
 namespace cp {
 
+namespace internal {
+
 template <class M> struct segtreap_node {
   using S = typename M::S;
   S val, prod;
@@ -21,13 +23,15 @@ template <class M> struct segtreap_node {
   explicit segtreap_node(S x) : val(x), prod(x), priority(mt64()) {}    
 };
 
+} // namespace internal
+
 template <class M, auto rev = std::identity()>
-struct segtreap : public treap_base<segtreap_node<M>> {
+struct segtreap : public internal::treap_base<internal::segtreap_node<M>> {
 public:
   using S = typename M::S;
-  using node = segtreap_node<M>;
+  using node = internal::segtreap_node<M>;
   using node_ptr = std::shared_ptr<node>;
-  using base = treap_base<node>;
+  using base = internal::treap_base<node>;
 
   segtreap() {}
   explicit segtreap(int n) { build(std::vector<S>(n)); }
