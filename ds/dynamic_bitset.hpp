@@ -55,39 +55,23 @@ public:
     return (a[i / 64] & mask(i % 64)) != 0;
   }
 
-  dynamic_bitset& flip() { return flip(n); }
-  dynamic_bitset& flip(int l, int r) {
-    assert(0 <= l && l <= r && r <= n);
-    flip(l);
-    flip(r);
-    return *this;
-  }
-  dynamic_bitset& flip(int r) {
-    assert(0 <= r && r <= n);
-    if (r == 0) return *this;
-    for (int i = 0; i < r / 64; i++) {
+  dynamic_bitset& flip() {
+    if (n == 0) return *this;
+    for (int i = 0; i < n / 64; i++) {
       a[i] = ~a[i];
     }
-    a[(r - 1) / 64] ^= mask(r % 64) - 1;
+    a[(n - 1) / 64] ^= mask(n % 64) - 1;
     return *this;
   }
   dynamic_bitset operator~() const {
     return dynamic_bitset(*this).flip();
   }
 
-  int count() const { return count(n); }
-  int count(int l, int r) const {
-    assert(0 <= l && l <= r && r <= n);
-    return count(r) - count(l);
-  }
-  int count(int r) const {
-    assert(0 <= r && r <= n);
-    if (r == 0) return 0;
+  int count() const {
     int res = 0;
-    for (int i = 0; i < r / 64; i++) {
+    for (int i = 0; i < int(a.size()); i++) {
       res += std::popcount(a[i]);
     }
-    res += std::popcount(a[(r - 1) / 64] & (mask(r % 64) - 1));
     return res;
   }
 
@@ -97,23 +81,24 @@ public:
     if (i % 64 != 63) {
       unsigned long long start = a[j];
       start &= (unsigned long long)(-1) << (i % 64 + 1);
-      if (start) return j * 64 + std::countr_zero(start);
+      if (start) return 64 * j + std::countr_zero(start);
     }
     while (++j < int(a.size())) {
-      if (a[j]) return j * 64 + std::countr_zero(a[j]);
+      if (a[j]) return 64 * j + std::countr_zero(a[j]);
     }
     return n;
   }
+
   int prev(int i) const {
     assert(0 <= i && i < n);
     int j = i / 64;
     if (i % 64 != 0) {
       unsigned long long start = a[j];
       start &= (unsigned long long)(-1) >> (64 - i % 64);
-      if (start) return j * 64 + 63 - std::countl_zero(start);
+      if (start) return 64 * j + 63 - std::countl_zero(start);
     }
     while (--j >= 0) {
-      if (a[j]) return j * 64 + 63 - std::countl_zero(a[j]);
+      if (a[j]) return 64 * j + 63 - std::countl_zero(a[j]);
     }
     return -1;
   }
@@ -162,9 +147,10 @@ public:
       a[block_shift] <<= bit_shift;
     }
 
-    if (n % 64) a.back() &= mask(n % 64) - 1; // clean the bits sticking out on the left
+    if (n % 64) a.back() &= mask(n % 64) - 1;
     return *this;
   }
+
   dynamic_bitset& operator>>=(int shift) {
     assert(0 <= shift);
 
