@@ -21,18 +21,17 @@ private:
 
 public:
   formal_power_series() {}
-  explicit formal_power_series(int n) : f(n) {}
-  explicit formal_power_series(int n, const mint& val) : f(n, val) {}
-  explicit formal_power_series(const std::vector<mint>& v) : f(v) {}
+  explicit formal_power_series(int n) : a(n) {}
+  explicit formal_power_series(int n, const mint& val) : a(n, val) {}
+  explicit formal_power_series(const std::vector<mint>& _a) : a(_a) {}
 
   mint& operator[](int i) {
     assert(0 <= i && i < size());
-    return f[i];
+    return a[i];
   }
-
   const mint& operator[](int i) const {
     assert(0 <= i && i < size());
-    return f[i];
+    return a[i];
   }
 
   fps& operator+=(const mint& rhs) {
@@ -40,7 +39,7 @@ public:
   }
   fps& operator+=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
-    for (int i = 0; i < rhs.size(); i++) f[i] += rhs[i];
+    for (int i = 0; i < rhs.size(); i++) a[i] += rhs[i];
     return *this;
   }
 
@@ -49,21 +48,21 @@ public:
   }
   fps& operator-=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
-    for (int i = 0; i < rhs.size(); i++) f[i] -= rhs[i];
+    for (int i = 0; i < rhs.size(); i++) a[i] -= rhs[i];
     return *this;
   }
 
   fps& operator*=(const mint& rhs) {
-    for (int i = 0; i < size(); i++) f[i] *= rhs;
+    for (int i = 0; i < size(); i++) a[i] *= rhs;
     return *this;
   }
   fps& operator*=(const fps& rhs) {
-    f = convolution(f, rhs.f);
+    a = convolution(a, rhs.a);
     return *this;
   }
 
   fps& operator/=(const mint& rhs) {
-    for (int i = 0; i < size(); i++) f[i] /= rhs;
+    for (int i = 0; i < size(); i++) a[i] /= rhs;
     return *this;
   }
 
@@ -84,43 +83,43 @@ public:
 
   fps operator>>(int w) const {
     if (size() <= w) return fps();
-    auto g = f;
-    g.erase(g.begin(), g.begin() + w);
-    return fps(g);
+    auto b = a;
+    b.erase(b.begin(), b.begin() + w);
+    return fps(b);
   }
 
   fps operator<<(int w) const {
-    auto g = f;
-    g.insert(g.begin(), w, 0);
-    return fps(g);
+    auto b = a;
+    b.insert(b.begin(), w, 0);
+    return fps(b);
   }
 
-  int size() const { return int(f.size()); }
-  bool empty() const { return f.empty(); }
-  void resize(int n) { f.resize(n); }
+  int size() const { return int(a.size()); }
+  bool empty() const { return a.empty(); }
+  void resize(int n) { a.resize(n); }
 
-  void swap(fps& other) { f.swap(other.f); }
-  void clear() { f.clear(); }
+  void swap(fps& other) { a.swap(other.a); }
+  void clear() { a.clear(); }
 
   fps prefix(int n) const {
-    fps g(n);
-    for (int i = 0; i < std::min(n, size()); i++) g[i] = f[i];
-    return g;
+    fps f(n);
+    for (int i = 0; i < std::min(n, size()); i++) f[i] = a[i];
+    return f;
   }
 
   fps diff() const {
-    if (f.empty()) return fps();
-    fps res(size() - 1);
+    if (a.empty()) return fps();
+    fps ans(size() - 1);
     mint coeff = 1;
     for (int i = 1; i < size(); i++) {
-      res[i - 1] = f[i] * coeff;
+      ans[i - 1] = a[i] * coeff;
       coeff++;
     }
-    return res;
+    return ans;
   }
 
   fps integral() const {
-    if (f.empty()) return fps(1);
+    if (a.empty()) return fps(1);
     fps res(size() + 1);
     res[1] = 1;
     int mod = mint::mod();
@@ -128,7 +127,7 @@ public:
       res[i] = -res[mod % i] * (mod / i);
     }
     for (int i = 0; i < size(); i++) {
-      res[i + 1] *= f[i];
+      res[i + 1] *= a[i];
     }
     return res;
   }
@@ -136,8 +135,8 @@ public:
   fps inv() const { return inv(size()); }
   fps inv(int n) const {
     assert(0 <= n);
-    assert(!f.empty() && f[0] != 0);
-    fps g(1, f[0].inv());
+    assert(!a.empty() && a[0] != 0);
+    fps g(1, a[0].inv());
     for (int i = 0; (1 << i) < n; i++) {
       g = 2 * g - g * g * prefix(1 << (i + 1));
       g.resize(1 << (i + 1));
@@ -148,7 +147,7 @@ public:
   fps log() const { return log(size()); }
   fps log(int n) const {
     assert(0 <= n);
-    assert(!f.empty() && f[0] == 1);
+    assert(!a.empty() && a[0] == 1);
     fps g = prefix(n);
     return (g.diff() * g.inv()).integral().prefix(n);
   }
@@ -156,11 +155,11 @@ public:
   fps exp() const { return exp(size()); }
   fps exp(int n) const {
     assert(0 <= n);
-    assert(f.empty() || f[0] == 0);
+    assert(a.empty() || a[0] == 0);
     fps g(1, 1);
     for (int i = 0; (1 << i) < n; i++) {
       g = g - g * g.log(1 << (i + 1)) + g * prefix(1 << (i + 1));
-      g.f.resize(1 << (i + 1));
+      g.resize(1 << (i + 1));
     }
     return g.prefix(n);
   }
@@ -169,18 +168,18 @@ public:
   fps pow(long long k, int n) const {
     assert(0 <= k && 0 <= n);
     if (k == 0) {
-      fps res(n);
-      if (n) res[0] = 1;
-      return res;
+      fps ans(n);
+      if (n) ans[0] = 1;
+      return ans;
     }
     int up = int((n - 1) / k + 1);
     for (int i = 0; i < up; i++) {
-      if (f[i] != 0) {
-        mint minv = f[i].inv();
-        fps res = (((*this * minv) >> i).log(n) * k).exp(n);
-        res *= f[i].pow(k);
-        res = (res << int(i * k)).prefix(n);
-        return res.prefix(n);
+      if (a[i] != 0) {
+        mint minv = a[i].inv();
+        fps ans = (((*this * minv) >> i).log(n) * k).exp(n);
+        ans *= a[i].pow(k);
+        ans = (ans << int(i * k)).prefix(n);
+        return ans.prefix(n);
       }
     }
     return fps(n);
@@ -188,7 +187,7 @@ public:
 
   mint eval(const mint& x) const {
     mint r = 0, w = 1;
-    for (const mint& v : f) {
+    for (const mint& v : a) {
       r += w * v;
       w *= x;
     }
@@ -196,20 +195,20 @@ public:
   }
 
   friend std::istream& operator>>(std::istream& is, fps& rhs) {
-    for (mint& x : rhs.f) is >> x;
+    for (mint& x : rhs.a) is >> x;
     return is;
   }
 
   friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
     for (int i = 0; i < rhs.size(); i++) {
-      os << rhs.f[i];
+      os << rhs.a[i];
       if (i != rhs.size() - 1) os << " ";
     }
     return os;
   }
 
 private:
-  std::vector<mint> f;
+  std::vector<mint> a;
 };
 
 template <>
@@ -219,18 +218,17 @@ private:
 
 public:
   formal_power_series() {}
-  explicit formal_power_series(int n) : f(n) {}
-  explicit formal_power_series(int n, long long val) : f(n, val) {}
-  explicit formal_power_series(const std::vector<long long>& v) : f(v) {}
+  explicit formal_power_series(int n) : a(n) {}
+  explicit formal_power_series(int n, long long val) : a(n, val) {}
+  explicit formal_power_series(const std::vector<long long>& _a) : a(_a) {}
 
   long long& operator[](int i) {
     assert(0 <= i && i < size());
-    return f[i];
+    return a[i];
   }
-
   const long long& operator[](int i) const {
     assert(0 <= i && i < size());
-    return f[i];
+    return a[i];
   }
 
   fps& operator+=(long long rhs) {
@@ -238,7 +236,7 @@ public:
   }
   fps& operator+=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
-    for (int i = 0; i < rhs.size(); i++) f[i] += rhs[i];
+    for (int i = 0; i < rhs.size(); i++) a[i] += rhs[i];
     return *this;
   }
 
@@ -247,21 +245,21 @@ public:
   }
   fps& operator-=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
-    for (int i = 0; i < rhs.size(); i++) f[i] -= rhs[i];
+    for (int i = 0; i < rhs.size(); i++) a[i] -= rhs[i];
     return *this;
   }
 
   fps& operator*=(long long rhs) {
-    for (int i = 0; i < size(); i++) f[i] *= rhs;
+    for (int i = 0; i < size(); i++) a[i] *= rhs;
     return *this;
   }
   fps& operator*=(const fps& rhs) {
-    f = convolution(f, rhs.f);
+    a = convolution(a, rhs.a);
     return *this;
   }
 
   fps& operator/=(long long rhs) {
-    for (int i = 0; i < size(); i++) f[i] /= rhs;
+    for (int i = 0; i < size(); i++) a[i] /= rhs;
     return *this;
   }
 
@@ -282,39 +280,39 @@ public:
 
   fps operator>>(int w) const {
     if (size() <= w) return fps();
-    auto g = f;
-    g.erase(g.begin(), g.begin() + w);
-    return fps(g);
+    auto b = a;
+    b.erase(b.begin(), b.begin() + w);
+    return fps(b);
   }
 
   fps operator<<(int w) const {
-    auto g = f;
-    g.insert(g.begin(), w, 0);
-    return fps(g);
+    auto b = a;
+    b.insert(b.begin(), w, 0);
+    return fps(b);
   }
 
-  int size() const { return int(f.size()); }
-  bool empty() const { return f.empty(); }
-  void resize(int n) { f.resize(n); }
+  int size() const { return int(a.size()); }
+  bool empty() const { return a.empty(); }
+  void resize(int n) { a.resize(n); }
 
-  void swap(fps& other) { f.swap(other.f); }
-  void clear() { f.clear(); }
+  void swap(fps& other) { a.swap(other.a); }
+  void clear() { a.clear(); }
 
   friend std::istream& operator>>(std::istream& is, fps& rhs) {
-    for (long long& x : rhs.f) is >> x;
+    for (long long& x : rhs.a) is >> x;
     return is;
   }
 
   friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
     for (int i = 0; i < rhs.size(); i++) {
-      os << rhs.f[i];
+      os << rhs.a[i];
       if (i != rhs.size() - 1) os << " ";
     }
     return os;
   }
 
 private:
-  std::vector<long long> f;
+  std::vector<long long> a;
 };
 
 } // namespace cp
