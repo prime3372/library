@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "random/base.hpp"
+#include "util/hash_utility.hpp"
 #include "util/hash61.hpp"
 
 namespace cp {
@@ -16,7 +17,7 @@ public:
     pw.resize(n + 1);
     pw[0] = 1;
     for (int i = 0; i < n; i++) {
-      hs[i + 1] = hs[i] * basis + hash61((unsigned long long)(s[i]) ^ rnd);
+      hs[i + 1] = hs[i] * basis + hash<decltype(s[i])>()(s[i]);
       pw[i + 1] = pw[i] * basis;
     }
   }
@@ -29,19 +30,17 @@ public:
   template <class Str> static hash61 to_hash(const Str& s) {
     hash61 h = 0;
     for (int i = 0; i < int(s.size()); i++) {
-      h = h * basis + (hash61)((unsigned long long)(s[i]) ^ rnd);
+      h = h * basis + hash<decltype(s[i])>()(s[i]);
     }
     return h;
   }
 
 private:
   static hash61 basis;
-  static unsigned long long rnd;
   int n;
   std::vector<hash61> hs, pw;
 };
 
 hash61 rolling_hash::basis = hash61::get_basis();
-unsigned long long rolling_hash::rnd = mt64();
 
 } // namespace cp
