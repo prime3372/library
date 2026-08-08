@@ -4,7 +4,8 @@ $gen = $Args[1]
 $include = $Args[2]
 
 # constants
-$timeout = 15000
+$timeout = 10000
+$casesnum = 50
 
 do {
   Write-Host "compiling..."
@@ -27,41 +28,44 @@ do {
 
   Start-Sleep -Milliseconds 100
 
-  # run gen.exe
-  $p_gen = Start-Process -FilePath .\gen.exe -NoNewWindow -RedirectStandardOutput in.txt -PassThru
-  $p_gen.Handle | Out-Null
-  if (-not $p_gen.WaitForExit($timeout)) {
-    $p_gen.Kill()
-    Write-Host "FAIL" "Timed Out" $gen -ForegroundColor Blue
-    code in.txt
-    break
-  }
-  if ($p_gen.ExitCode -ne 0) {
-    Write-Host "FAIL" "Runtime Error" $gen -ForegroundColor Blue
-    code in.txt
-    break
+  for ($i = 1; $i -le $casesnum; $i++) {
+    # run gen.exe
+    $p_gen = Start-Process -FilePath .\gen.exe -NoNewWindow -RedirectStandardOutput in.txt -PassThru
+    $p_gen.Handle | Out-Null
+    if (-not $p_gen.WaitForExit($timeout)) {
+      $p_gen.Kill()
+      Write-Host "Test" $i "FAIL" "Timed Out" $gen -ForegroundColor Blue
+      code in.txt
+      break
+    }
+    if ($p_gen.ExitCode -ne 0) {
+      Write-Host "Test" $i "FAIL" "Runtime Error" $gen -ForegroundColor Blue
+      code in.txt
+      break
+    }
+
+    # run sol.exe
+    $p_sol = Start-Process -FilePath .\sol.exe -NoNewWindow -RedirectStandardInput in.txt -RedirectStandardOutput out.txt -PassThru
+    $p_sol.Handle | Out-Null
+    $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+    if (-not $p_sol.WaitForExit($timeout)) {
+      $p_sol.Kill()
+      Write-Host "Test" $i "Timed Out" ">" $timeout "ms" -ForegroundColor Yellow
+      code in.txt out.txt
+      break
+    }
+    $stopwatch.Stop()
+    $time = $stopwatch.ElapsedMilliseconds
+
+    if ($p_sol.ExitCode -ne 0) {
+      Write-Host "Test" $i "Runtime Error" $time "ms" -ForegroundColor Magenta
+      code in.txt out.txt
+      break
+    }
+
+    Write-Host "Test" $i "Success" $time "ms" -ForegroundColor Green
   }
 
-  # run sol.exe
-  $p_sol = Start-Process -FilePath .\sol.exe -NoNewWindow -RedirectStandardInput in.txt -RedirectStandardOutput out.txt -PassThru
-  $p_sol.Handle | Out-Null
-  $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
-  if (-not $p_sol.WaitForExit($timeout)) {
-    $p_sol.Kill()
-    Write-Host "Timed Out" ">" $timeout "ms" -ForegroundColor Yellow
-    code in.txt out.txt
-    break
-  }
-  $stopwatch.Stop()
-  $time = $stopwatch.ElapsedMilliseconds
-
-  if ($p_sol.ExitCode -ne 0) {
-    Write-Host "Runtime Error" $time "ms" -ForegroundColor Magenta
-    code in.txt out.txt
-    break
-  }
-
-  Write-Host "Success" $time "ms" -ForegroundColor Green
 } while ($false)
 
 Remove-Item sol.exe -ErrorAction SilentlyContinue
