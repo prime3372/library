@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <cassert>
 #include <cstddef>
 #include <iostream>
@@ -85,7 +86,7 @@ public:
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_fenwick_tree_2d& fw) {
     for (int i = 0; i < fw.h; i++) {
-      for (size_t j = 0; j < fw.w; j++) {
+      for (size_t j = 0; j < std::min(fw.w, 20ULL); j++) {
         os << fw[i][j];
         if (j != fw.w - 1) os << " ";
       }
@@ -103,7 +104,7 @@ private:
 namespace internal {
 
 template <class T> struct delimiter<dynamic_fenwick_tree_2d<T>> {
-  static constexpr char value = '\n';
+  static constexpr char value[] = "\n";
 };
 
 } // namespace internal

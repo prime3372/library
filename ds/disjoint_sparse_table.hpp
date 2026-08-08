@@ -78,7 +78,7 @@ private:
 namespace internal {
 
 template <class M> struct delimiter<disjoint_sparse_table<M>> {
-  static constexpr char value = '\n';
+  static constexpr char value[] = "\n";
 };
 
 } // namespace internal

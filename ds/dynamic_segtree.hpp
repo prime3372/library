@@ -70,7 +70,7 @@ public:
   // for debugging
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_segtree& seg) {
-    for (size_t i = 0; i < seg.n; i++) {
+    for (size_t i = 0; i < std::min(seg.n, 20ULL); i++) {
       os << seg[i];
       if (i != seg.n - 1) {
         os << internal::delimiter_v<S>;
@@ -195,7 +195,7 @@ private:
 namespace internal {
 
 template <class M> struct delimiter<dynamic_segtree<M>> {
-  static constexpr char value = '\n';
+  static constexpr char value[] = "\n";
 };
 
 } // namespace internal

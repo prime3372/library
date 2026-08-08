@@ -86,7 +86,7 @@ private:
 namespace internal {
 
 template <class T> struct delimiter<cumsum_2d<T>> {
-  static constexpr char value = '\n';
+  static constexpr char value[] = "\n";
 };
 
 } // namespace internal

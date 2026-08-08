@@ -69,7 +69,7 @@ private:
 namespace internal {
 
 template <class T> struct delimiter<coordinate_compression<T>> {
-  static constexpr char value = '\n';
+  static constexpr char value[] = "\n";
 };
 
 } // namespace internal

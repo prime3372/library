@@ -145,7 +145,7 @@ protected:
 
 template <class T, class node> requires std::is_base_of_v<treap_base<node>, T>
 struct delimiter<T> {
-  static constexpr char value = '\n';
+  static constexpr char value[] = "\n";
 };
 
 } // namespace internal

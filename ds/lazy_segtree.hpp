@@ -199,7 +199,7 @@ private:
 namespace internal {
 
 template <class M> struct delimiter<lazy_segtree<M>> {
-  static constexpr char value = '\n';
+  static constexpr char value[] = "\n";
 };
 
 } // namespace internal

@@ -87,7 +87,7 @@ public:
   // for debugging
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_fenwick_tree& fw) {
-    for (size_t i = 0; i < fw.n; i++) {
+    for (size_t i = 0; i < std::min(fw.n, 20ULL); i++) {
       os << fw[i];
       if (i != fw.n - 1) os << " ";
     }
@@ -102,7 +102,7 @@ private:
 namespace internal {
 
 template <class T> struct delimiter<dynamic_fenwick_tree<T>> {
-  static constexpr char value = '\n';
+  static constexpr char value[] = "\n";
 };
 
 } // namespace internal
