@@ -6,6 +6,7 @@
 #include <random>
 
 #include "random/base.hpp"
+#include "util/hash_utility.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
@@ -34,6 +35,8 @@ public:
   hash61(T _v) {
     v = (unsigned long long)(_v % m);
   }
+
+  unsigned long long val() const { return v; }
 
   hash61& operator+=(const hash61& rhs) {
     v += rhs.v;
@@ -103,5 +106,15 @@ private:
     return (unsigned long long)(r);
   }
 };
+
+namespace internal {
+
+template <> struct hash<hash61> {
+  unsigned long long operator()(const hash61& hs) const {
+    return hash<unsigned long long>()(hs.val());
+  }
+};
+
+}
 
 } // namespace cp

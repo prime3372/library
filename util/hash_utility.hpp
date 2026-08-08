@@ -13,11 +13,13 @@
 
 namespace cp {
 
+namespace internal {
+
 template <class T> struct hash {};
 
 template <class T> requires internal::is_integral_v<T>
 struct hash<T> {
-  unsigned long long operator()(const T& x) {
+  unsigned long long operator()(const T& x) const {
     static const unsigned long long fixed_random = seed_gen();
     unsigned long long h = (unsigned long long)(x);
     h += fixed_random;
@@ -27,8 +29,6 @@ struct hash<T> {
   }
 };
 
-namespace internal {
-
 template <class T> void hash_combine(unsigned long long& seed, const T& val) {
   static const unsigned long long fixed_random = seed_gen();
   seed += fixed_random;
@@ -37,7 +37,7 @@ template <class T> void hash_combine(unsigned long long& seed, const T& val) {
   seed = (seed ^ (seed >> 27)) * 0x94d049bb133111eb;;
 }
 
-} // namespace internal
+// string
 
 template <> struct hash<std::string> {
   unsigned long long operator()(const std::string& s) const {
@@ -46,6 +46,8 @@ template <> struct hash<std::string> {
     return hs;
   }
 };
+
+// tuple_like (array, pair, tuple)
 
 template <class Tuple> requires internal::is_tuple_like_v<Tuple>
 struct hash<Tuple> {
@@ -58,6 +60,8 @@ struct hash<Tuple> {
   }
 };
 
+// vector
+
 template <class T, class Alloc> struct hash<std::vector<T, Alloc>> {
   unsigned long long operator()(const std::vector<T, Alloc>& v) const {
     unsigned long long hs = 0;
@@ -65,5 +69,7 @@ template <class T, class Alloc> struct hash<std::vector<T, Alloc>> {
     return hs;
   }
 };
+
+} // namespace internal
 
 } // namespace cp

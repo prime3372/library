@@ -127,6 +127,12 @@ struct is_modint<dynamic_modint<id>> : std::true_type {};
 template <int id>
 struct is_dynamic_modint<dynamic_modint<id>> : std::true_type {};
 
+template <int id> struct hash<dynamic_modint<id>> {
+  unsigned long long operator()(const dynamic_modint<id>& x) const {
+    return hash<int>()(x.val());
+  }
+};
+
 } // namespace internal
 
 } // namespace cp
