@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "poly/convolution.hpp"
+#include "util/io_utility.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
@@ -194,11 +195,7 @@ public:
     return r;
   }
 
-  friend std::istream& operator>>(std::istream& is, fps& rhs) {
-    for (mint& x : rhs.a) is >> x;
-    return is;
-  }
-
+  // for debugging
   friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
     for (int i = 0; i < rhs.size(); i++) {
       os << rhs.a[i];
@@ -298,11 +295,7 @@ public:
   void swap(fps& other) { a.swap(other.a); }
   void clear() { a.clear(); }
 
-  friend std::istream& operator>>(std::istream& is, fps& rhs) {
-    for (long long& x : rhs.a) is >> x;
-    return is;
-  }
-
+  // for debugging
   friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
     for (int i = 0; i < rhs.size(); i++) {
       os << rhs.a[i];
@@ -314,5 +307,14 @@ public:
 private:
   std::vector<long long> a;
 };
+
+namespace internal {
+
+template <class T>
+struct delimiter<formal_power_series<T>> {
+  static constexpr char value[] = "\n";
+};
+
+} // namespace internal
 
 } // namespace cp
