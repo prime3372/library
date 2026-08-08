@@ -126,16 +126,16 @@ using modint1000000007 = static_modint<1000000007>;
 
 namespace internal {
 
-template <int m>
-struct is_modint<static_modint<m>> : public std::true_type {};
-template <int m>
-struct is_static_modint<static_modint<m>> : public std::true_type {};
-
 template <int m> struct hash<static_modint<m>> {
   unsigned long long operator()(const static_modint<m>& x) const {
     return hash<int>()(x.val());
   }
 };
+
+template <int m>
+struct is_modint<static_modint<m>> : public std::true_type {};
+template <int m>
+struct is_static_modint<static_modint<m>> : public std::true_type {};
 
 } // namespace internal
 

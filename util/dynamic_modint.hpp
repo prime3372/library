@@ -6,6 +6,7 @@
 
 #include "number/barrett.hpp"
 #include "number/ext_gcd.hpp"
+#include "util/hash_utility.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
@@ -122,16 +123,16 @@ using modint = dynamic_modint<-1>;
 
 namespace internal {
 
-template <int id>
-struct is_modint<dynamic_modint<id>> : std::true_type {};
-template <int id>
-struct is_dynamic_modint<dynamic_modint<id>> : std::true_type {};
-
 template <int id> struct hash<dynamic_modint<id>> {
   unsigned long long operator()(const dynamic_modint<id>& x) const {
     return hash<int>()(x.val());
   }
 };
+
+template <int id>
+struct is_modint<dynamic_modint<id>> : std::true_type {};
+template <int id>
+struct is_dynamic_modint<dynamic_modint<id>> : std::true_type {};
 
 } // namespace internal
 
