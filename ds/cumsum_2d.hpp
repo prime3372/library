@@ -52,13 +52,19 @@ public:
     return cum[hr][wr] - cum[hr][wl] - cum[hl][wr] + cum[hl][wl];
   }
 
-  void imos(int hl, int wl, int hr, int wr, T x) {
+  void imos_add(int hl, int wl, int hr, int wr, T x) {
     assert(0 <= hl && hl <= hr && hr <= h);
     assert(0 <= wl && wl <= wr && wr <= w);
     if (hl < h && wl < w) d[hl][wl] += x;
     if (hl < h && wr < w) d[hl][wr] -= x;
     if (hr < h && wl < w) d[hr][wl] -= x;
     if (hr < h && wr < w) d[hr][wr] += x;
+  }
+
+  T imos_get(int i, int j) {
+    assert(0 <= i && i < h);
+    assert(0 <= j && j < w);
+    return sum(i + 1, j + 1);
   }
 
   int height() const { return h; }
