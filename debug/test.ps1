@@ -23,7 +23,7 @@ do {
     if (Test-Path $gen) { code $gen }
     break
   }
-  
+
   Write-Host "compilation finished"
 
   Start-Sleep -Milliseconds 100
