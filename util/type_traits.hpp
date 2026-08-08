@@ -57,18 +57,6 @@ using is_unsigned_int =
 template <class T>
 inline constexpr bool is_unsigned_int_v = is_unsigned_int<T>::value;
 
-// to_unsigned
-
-template <class T>
-using to_unsigned =
-  std::conditional<
-    is_signed_int128_v<T> || is_unsigned_int128_v<T>,
-    unsigned __int128,
-    std::remove_cv_t<std::make_unsigned_t<T>>>;
-
-template <class T>
-using to_unsigned_t = typename to_unsigned<T>::type;
-
 // is_tuple_like
 
 template <class T>
