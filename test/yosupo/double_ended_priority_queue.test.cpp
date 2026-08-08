@@ -1,6 +1,6 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/double_ended_priority_queue"
+#define PROBLEM "https://judge.yosupo.jp/problem/priority_deque"
 
-#include "ds/double_ended_priority_queue.hpp"
+#include "ds/priority_deque.hpp"
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = int(a); i < int(b); i++)
@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  double_ended_priority_queue<int> pq;
+  priority_deque<int> pq;
   rep(i, 0, n) {
     int si;
     cin >> si;

@@ -10,9 +10,9 @@ namespace cp {
 
 // even index -> min heap
 // odd index -> max heap
-template <class T> struct double_ended_priority_queue {
+template <class T> struct priority_deque {
 public:
-  double_ended_priority_queue() : d(2) {}
+  priority_deque() : d(2) {}
 
   T min() const {
     assert(!empty());
