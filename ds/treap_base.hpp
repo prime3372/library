@@ -143,11 +143,6 @@ protected:
   virtual void push(node_ptr p) const = 0;
 };
 
-template <class T, class node> requires std::is_base_of_v<treap_base<node>, T>
-struct delimiter<T> {
-  static constexpr char value[] = "\n";
-};
-
 } // namespace internal
 
 } // namespace cp

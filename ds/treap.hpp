@@ -60,4 +60,13 @@ protected:
   }
 };
 
+namespace internal {
+
+template <class T>
+struct delimiter<treap<T>> {
+  static constexpr char value[] = "\n";
+};
+
+} // namespace internal
+
 } // namespace cp
