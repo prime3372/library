@@ -99,7 +99,7 @@ private:
   }
 
   static unsigned long long mul(unsigned long long a, unsigned long long b) {
-    __int128 r = a;
+    unsigned __int128 r = a;
     r *= b;
     r = (r >> 61) + (r & m);
     if (r >= m) r -= m;
