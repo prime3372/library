@@ -32,7 +32,7 @@ public:
     int v = 0;
     nodes[v].mid--;
     for (char c : s) {
-      size_t i = index(c);
+      int i = index(c);
       int nv = nodes[v].to[i];
       nodes[nv].mid--;
       if (nodes[nv].mid == 0) {
@@ -96,7 +96,6 @@ protected:
       assert(0 <= idx && idx < char_size);
       return idx;
     }
-
     assert(0 <= c - offset && c - offset < char_size);
     return c - offset;
   }
