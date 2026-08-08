@@ -86,7 +86,7 @@ public:
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_fenwick_tree_2d& fw) {
     for (int i = 0; i < fw.h; i++) {
-      for (size_t j = 0; j < std::min(fw.w, 20ULL); j++) {
+      for (size_t j = 0; j < std::min<size_t>(fw.w, 20); j++) {
         os << fw[i][j];
         if (j != fw.w - 1) os << " ";
       }

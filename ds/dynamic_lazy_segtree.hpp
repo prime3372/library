@@ -81,7 +81,7 @@ public:
   // for debugging
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_lazy_segtree& seg) {
-    for (size_t i = 0; i < std::min(seg.n, 20ULL); i++) {
+    for (size_t i = 0; i < std::min<size_t>(seg.n, 20); i++) {
       os << seg[i];
       if (i != seg.n - 1) {
         os << internal::delimiter_v<S>;
