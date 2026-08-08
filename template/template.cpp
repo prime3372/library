@@ -3,6 +3,7 @@
 #include "util/static_modint.hpp"
 
 #pragma region
+
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = (a); i < int(b); i++)
 #define REP(i, a, b) for (int i = (a); i <= int(b); i++)
@@ -20,6 +21,7 @@ using u128 = unsigned __int128;
 using mint = modint998244353;
 template <class T> using vec = vector<T>;
 template <class T> using min_queue = priority_queue<T, vector<T>, greater<T>>;
+
 #pragma endregion
 
 int main() {
