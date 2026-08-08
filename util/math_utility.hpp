@@ -22,7 +22,7 @@ template <class T> requires internal::is_integral_v<T>
 constexpr T isqrt(T x) {
   assert(0 <= x);
   T y = T(std::sqrt(double(x)));
-  if constexpr (sizeof(T) > 8U) {
+  if constexpr (sizeof(T) > 8ULL) {
     if (y) y = (y + x / y) / 2; // Newton's method
   }
   while (y && y > x / y) y--;
