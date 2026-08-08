@@ -5,7 +5,7 @@
 #include <utility>
 #include <vector>
 
-#include "random/common.hpp"
+#include "random/base.hpp"
 
 namespace cp {
 

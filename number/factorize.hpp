@@ -9,7 +9,7 @@
 
 #include "number/is_prime.hpp"
 #include "number/kth_root.hpp"
-#include "random/common.hpp"
+#include "random/base.hpp"
 #include "util/run_length_encoding.hpp"
 
 namespace cp {

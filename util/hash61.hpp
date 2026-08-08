@@ -5,7 +5,7 @@
 #include <iostream>
 #include <random>
 
-#include "random/common.hpp"
+#include "random/base.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {

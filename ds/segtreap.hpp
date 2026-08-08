@@ -5,7 +5,7 @@
 #include <memory>
 
 #include "ds/treap_base.hpp"
-#include "random/common.hpp"
+#include "random/base.hpp"
 
 namespace cp {
 

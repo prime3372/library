@@ -2,12 +2,13 @@
 
 #include <cassert>
 #include <cstddef>
-#include <functional>
+#include <iostream>
 #include <random>
 #include <utility>
 #include <vector>
 
-#include "random/common.hpp"
+#include "random/base.hpp"
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -50,6 +51,12 @@ public:
 
   void set_default(const Val& v) { default_value = v; }
 
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os, const hash_map& mp) {
+    os << mp.enumerate();
+    return os;
+  }
+
 private:
   unsigned int cap, sz, shift;
   unsigned long long r;
@@ -85,5 +92,14 @@ private:
     used.swap(u);
   }
 };
+
+namespace internal {
+
+template <class Key, class Val>
+struct delimiter<hash_map<Key, Val>> {
+  static constexpr char value[] = "\n";
+};
+
+} // namespace internal
 
 } // namespace cp

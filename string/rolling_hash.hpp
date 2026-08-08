@@ -3,20 +3,20 @@
 #include <cassert>
 #include <vector>
 
-#include "random/common.hpp"
+#include "random/base.hpp"
 #include "util/hash61.hpp"
 
 namespace cp {
 
-template <class Str> struct rolling_hash {
+struct rolling_hash {
 public:
-  rolling_hash() : rolling_hash(Str()) {}
-  explicit rolling_hash(const Str& s) : n(int(s.size())) {
+  rolling_hash() : n(-1) {}
+  template <class Str> explicit rolling_hash(const Str& s) : n(int(s.size())) {
     hs.resize(n + 1);
     pw.resize(n + 1);
     pw[0] = 1;
     for (int i = 0; i < n; i++) {
-      hs[i + 1] = hs[i] * basis + (hash61)((unsigned long long)(s[i]) ^ rnd);
+      hs[i + 1] = hs[i] * basis + hash61((unsigned long long)(s[i]) ^ rnd);
       pw[i + 1] = pw[i] * basis;
     }
   }
@@ -26,7 +26,7 @@ public:
     return hs[r] - hs[l] * pw[r - l];
   }
 
-  static hash61 to_hash(const Str& s) {
+  template <class Str> static hash61 to_hash(const Str& s) {
     hash61 h = 0;
     for (int i = 0; i < int(s.size()); i++) {
       h = h * basis + (hash61)((unsigned long long)(s[i]) ^ rnd);
@@ -41,7 +41,7 @@ private:
   std::vector<hash61> hs, pw;
 };
 
-template <class Str> hash61 rolling_hash<Str>::basis = hash61::get_basis();
-template <class Str> unsigned long long rolling_hash<Str>::rnd = mt64();
+hash61 rolling_hash::basis = hash61::get_basis();
+unsigned long long rolling_hash::rnd = mt64();
 
 } // namespace cp
