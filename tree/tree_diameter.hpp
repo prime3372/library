@@ -25,7 +25,7 @@ public:
     return farthest(s, -1).second;
   }
 
-  T len = 0;
+  T len = -1;
   std::vector<int> vertices, edges;
 
   tree_diameter& build(int s = 0) {

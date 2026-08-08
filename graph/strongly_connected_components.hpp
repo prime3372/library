@@ -18,7 +18,7 @@ public:
     g[from].push_back(to);
   }
 
-  int num = 0;
+  int num = -1;
   std::vector<int> id;
   std::vector<std::vector<int>> groups;
 
@@ -26,6 +26,7 @@ public:
     int now_ord = 0;
     std::vector<int> visited, low(n), ord(n, -1);
     visited.reserve(n);
+    num = 0;
 
     auto dfs = [&](auto self, int v) -> void {
       low[v] = ord[v] = now_ord++;

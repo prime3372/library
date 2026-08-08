@@ -18,6 +18,7 @@ int main() {
     cin >> a >> b;
     scc.add_edge(a, b);
   }
+  scc.build();
   cout << scc.num << "\n";
   for (auto vs : scc.groups) {
     cout << vs.size() << " ";
