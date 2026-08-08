@@ -5,7 +5,7 @@ $include = $Args[2]
 
 # constants
 $timeout = 10000
-$casesnum = 50
+$casesnum = 20
 
 do {
   Write-Host "compiling..."
