@@ -8,11 +8,10 @@
 #include <vector>
 
 #include "random/common.hpp"
-#include "util/hash_combine.hpp"
 
 namespace cp {
 
-template <class Key, class Val, class Hash = std::hash<Key>> struct hash_map {
+template <class Key, class Val> struct hash_map {
 public:
   hash_map() : cap(8), sz(0), shift(61), r(mt64()), keys(cap), vals(cap), used(cap), default_value() {}
 
@@ -52,7 +51,6 @@ public:
   void set_default(const Val& v) { default_value = v; }
 
 private:
-  static Hash hasher;
   unsigned int cap, sz, shift;
   unsigned long long r;
   std::vector<Key> keys;
@@ -60,7 +58,7 @@ private:
   std::vector<bool> used;
   Val default_value;
 
-  unsigned int get_hash(Key k) const { return (unsigned int)((hasher(k) * r) >> shift); }
+  unsigned int get_hash(Key k) const { return (unsigned int)(((unsigned long long)(k) * r) >> shift); }
 
   unsigned int index(Key k) const {
     unsigned int hs = get_hash(k);

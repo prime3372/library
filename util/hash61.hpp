@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <array>
+#include <iostream>
 #include <random>
 
 #include "random/common.hpp"
@@ -11,12 +12,15 @@ namespace cp {
 
 struct hash61 {
 public:
-  static hash61 get_base() {
+  static hash61 get_basis() {
     hash61 hs;
     do {
-      hs.v = uniform(0ULL, m - 1);
+      hs.v = uniform(1ULL, m - 1);
     } while (!is_primitive(hs.v));
     return hs;
+  }
+  static hash61 get_rand() {
+    return hash61(uniform(1ULL, m - 1));
   }
 
   hash61() : v(0) {}
@@ -59,7 +63,7 @@ public:
   friend bool operator>(const hash61& lhs, const hash61& rhs) { return lhs.v > rhs.v; }
   friend bool operator<=(const hash61& lhs, const hash61& rhs) { return lhs.v <= rhs.v; }
   friend bool operator>=(const hash61& lhs, const hash61& rhs) { return lhs.v >= rhs.v; }
-  
+
   friend std::istream& operator>>(std::istream& is, hash61& hs) {
     unsigned long long t;
     is >> t;

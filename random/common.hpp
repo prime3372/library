@@ -17,4 +17,9 @@ template <class T> T uniform(T l, T r) {
 
 bool unifom_bool() { return uniform(0, 1) == 1; }
 
+template <class T> T uniform_real(T l, T r) {
+  assert(l <= r);
+  return std::uniform_real_distribution<T>(l, r)(mt32);
+}
+
 } // namespace cp
