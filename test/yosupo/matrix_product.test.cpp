@@ -18,5 +18,8 @@ int main() {
   rep(i, 0, n) rep(j, 0, m) cin >> a[i][j];
   rep(i, 0, m) rep(j, 0, k) cin >> b[i][j];
   a *= b;
-  rep(i, 0, n) rep(j, 0, k) cout << a[i][j];
+  rep(i, 0, n) {
+    rep(j, 0, k) cout << a[i][j] << " ";
+    cout << "\n";
+  }
 }

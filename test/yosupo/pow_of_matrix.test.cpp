@@ -19,5 +19,8 @@ int main() {
   matrix<mint> a(n, n);
   rep(i, 0, n) rep(j, 0, n) cin >> a[i][j];
   a = a.pow(k);
-  rep(i, 0, n) rep(j, 0, n) cout << a[i][j];
+  rep(i, 0, n) {
+    rep(j, 0, n) cout << a[i][j] << " ";
+    cout << "\n";
+  }
 }
