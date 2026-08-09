@@ -3,9 +3,9 @@
 #include <algorithm>
 #include <cassert>
 #include <limits>
-#include <queue>
 #include <vector>
 
+#include "ds/simple_queue.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
@@ -69,7 +69,7 @@ public:
     assert(s != t);
 
     std::vector<int> level(n), iter(n);
-    std::queue<int> que;
+    simple_queue<int> que;
 
     auto bfs = [&]() {
       std::fill(level.begin(), level.end(), -1);
@@ -117,7 +117,7 @@ public:
   std::vector<bool> min_cut(int s) {
     assert(0 <= s && s < n);
     std::vector<bool> visited(n);
-    std::queue<int> que;
+    simple_queue<int> que;
     que.push(s);
     visited[s] = true;
     while (!que.empty()) {

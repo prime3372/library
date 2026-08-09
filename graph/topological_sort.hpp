@@ -1,8 +1,9 @@
 #pragma once
 
 #include <cassert>
-#include <queue>
 #include <vector>
+
+#include "ds/simple_queue.hpp"
 
 namespace cp {
 
@@ -15,7 +16,7 @@ std::vector<int> topological_sort(const std::vector<std::vector<int>>& g) {
       in_deg[v]++;
     }
   }
-  std::queue<int> que;
+  simple_queue<int> que;
   std::vector<int> res;
   for (int i = 0; i < n; ++i) {
     if (in_deg[i] == 0) que.push(i);

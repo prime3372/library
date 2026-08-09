@@ -1,11 +1,11 @@
 #pragma once
 
 #include <cassert>
-#include <queue>
 #include <string>
 #include <vector>
 
-#include "trie_tree.hpp"
+#include "ds/simple_queue.hpp"
+#include "string/trie_tree.hpp"
 
 namespace cp {
 
@@ -19,7 +19,7 @@ public:
   void build() {
     lnk.resize(size());
     lnk[0] = -1;
-    std::queue<int> que;
+    simple_queue<int> que;
     que.push(0);
     while (!que.empty()) {
       int v = que.front();
