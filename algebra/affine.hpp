@@ -10,8 +10,9 @@ template <class T> struct affine {
     S() : a(1), b(0) {}
     S(T _a, T _b) : a(_a), b(_b) {}
 
+    // for debugging
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
-      os << "(a: " << x.a << ", b: " << x.b << ")";
+      os << "(a: " << x.a << " b: " << x.b << ")";
       return os;
     }
   };

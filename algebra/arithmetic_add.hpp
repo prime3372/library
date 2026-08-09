@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <iostream>
 
 namespace cp {
 
@@ -8,6 +9,12 @@ template <class T> struct arithmetic_add {
   struct S {
     T val_sum;
     size_t index_sum, len;
+
+    // for debugging
+    friend std::ostream& operator<<(std::ostream& os, const S& x) {
+      os << x.val_sum;
+      return os;
+    }
   };
   static S op(S x, S y) {
     return S{x.val_sum + y.val_sum, x.index_sum + y.index_sum, x.len + y.len};

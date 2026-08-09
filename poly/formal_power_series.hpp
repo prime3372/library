@@ -199,7 +199,7 @@ public:
   friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
     for (int i = 0; i < rhs.size(); i++) {
       os << rhs.a[i];
-      if (i != rhs.size() - 1) os << " ";
+      if (i != rhs.size() - 1) os << ", ";
     }
     return os;
   }
@@ -299,7 +299,7 @@ public:
   friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
     for (int i = 0; i < rhs.size(); i++) {
       os << rhs.a[i];
-      if (i != rhs.size() - 1) os << " ";
+      if (i != rhs.size() - 1) os << ", ";
     }
     return os;
   }

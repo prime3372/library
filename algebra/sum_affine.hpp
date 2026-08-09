@@ -14,7 +14,8 @@ template <class T> struct sum_affine {
     S() : val(0), len(0) {}
     S(T v) : val(v), len(1) {}
     S(T v, size_t l) : val(v), len(l) {}
-    
+
+    // for debugging
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
       os << x.val;
       return os;

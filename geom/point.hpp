@@ -80,7 +80,7 @@ public:
   
   // for debugging
   friend std::ostream& operator<<(std::ostream& os, const point& v) {
-    return os << "(" << v.x << ", " << v.y << ")";
+    return os << "(" << v.x << " " << v.y << ")";
   }
 
   bool is_parallel(const point& rhs) const { return std::abs(dot(rhs)) < eps; }

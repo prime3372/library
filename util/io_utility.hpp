@@ -81,7 +81,7 @@ namespace cp {
 namespace internal {
 
 template <class T> struct delimiter {
-  static constexpr char value[] = ", ";
+  static constexpr char value[] = " ";
 };
 
 template <class T>
