@@ -17,5 +17,6 @@ int main() {
   cin >> n >> m;
   formal_power_series<mint> f(n);
   rep(i, 0, n) cin >> f[i];
-  cout << f.pow(m) << "\n";
+  f = f.pow(m);
+  rep(i, 0, n) cout << f << " ";
 }

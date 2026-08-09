@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iostream>
 
-#include "util/io_utility.hpp
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -79,10 +79,12 @@ public:
   }
   friend bool operator<(const point& lhs, const point& rhs) { return argcmp(lhs, rhs) < 0; }
   friend bool operator>(const point& lhs, const point& rhs) { return argcmp(lhs, rhs) > 0; }
-  
-  // for debugging
+
+  friend std::istream& operator<<(std::istream& is, const point& v) {
+    return is >> v.x >> v.y;
+  }  
   friend std::ostream& operator<<(std::ostream& os, const point& v) {
-    return os << "(" << v.x << " " << v.y << ")";
+    return os << v.x << " " << v.y;
   }
 
   bool is_parallel(const point& rhs) const { return std::abs(dot(rhs)) < eps; }
