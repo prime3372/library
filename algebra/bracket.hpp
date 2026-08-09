@@ -17,7 +17,7 @@ struct bracket {
 
     // for debugging
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
-      os << "(prefix_min: " << x.prefix_min << " sum: " << x.sum << ")";
+      os << "{prefix_min:" << x.prefix_min << " sum:" << x.sum << "}";
       return os;
     }
   };

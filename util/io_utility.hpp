@@ -116,6 +116,11 @@ template <> struct delimiter<std::string> {
   static constexpr char value[] = "\n";
 };
 
+template <class Tuple> requires internal::is_tuple_like_v<Tuple>
+struct delimiter<Tuple> {
+  static constexpr char value[] = "\n";
+};
+
 template <class Key, class Val, class Hash, class Equal, class Alloc>
 struct delimiter<std::unordered_map<Key, Val, Hash, Equal, Alloc>> {
   static constexpr char value[] = "\n";
@@ -242,7 +247,7 @@ ostream& operator<<(ostream& os, const Tuple& t) {
   os << "(";
   [&]<size_t... I>(index_sequence<I...>) {
     ([&]<class T>(const T& x) {
-      os << x << cp::internal::delimiter_v<T>;
+      os << x << "," << cp::internal::delimiter_v<T>;
     }(get<I>(t)), ...);
   }(make_index_sequence<n - 1>());
   os << get<n - 1>(t) << ")";
