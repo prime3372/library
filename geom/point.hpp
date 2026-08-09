@@ -80,7 +80,7 @@ public:
   friend bool operator<(const point& lhs, const point& rhs) { return argcmp(lhs, rhs) < 0; }
   friend bool operator>(const point& lhs, const point& rhs) { return argcmp(lhs, rhs) > 0; }
 
-  friend std::istream& operator<<(std::istream& is, point& v) {
+  friend std::istream& operator>>(std::istream& is, point& v) {
     return is >> v.x >> v.y;
   }
   friend std::ostream& operator<<(std::ostream& os, const point& v) {
