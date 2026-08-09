@@ -17,5 +17,6 @@ int main() {
   matrix<mint> a(n, m), b(m, k);
   rep(i, 0, n) rep(j, 0, m) cin >> a[i][j];
   rep(i, 0, m) rep(j, 0, k) cin >> b[i][j];
-  cout << a * b << "\n";
+  a *= b;
+  rep(i, 0, n) rep(j, 0, k) cout << a[i][j];
 }

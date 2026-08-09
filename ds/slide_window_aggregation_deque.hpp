@@ -21,30 +21,48 @@ public:
   void push_back(S x) { push1(x); }
 
   void pop_front() {
+    assert(!empty());
     if (a0.empty()) rebalance();
-    assert(!a0.empty());
-    a0.pop_back(), cum0.pop_back();
+    a0.pop_back(); cum0.pop_back();
     prod0 = cum0.empty() ? M::e() : cum0.back();
   }
 
   void pop_back() {
+    assert(!empty());
     if (a1.empty()) rebalance();
-    assert(!a1.empty());
-    a1.pop_back(), cum1.pop_back();
+    a1.pop_back(); cum1.pop_back();
     prod1 = cum1.empty() ? M::e() : cum1.back();
   }
 
-  S front() const { return a0.empty() ? a1.front() : a0.back(); }
-  S back() const { return a1.empty() ? a0.front() : a1.back(); }
-  S prod() { return M::op(prod0, prod1); }
+  S front() const {
+    assert(!empty());
+    return a0.empty() ? a1.front() : a0.back();
+  }
+  S back() const {
+    assert(!empty());
+    return a1.empty() ? a0.front() : a1.back();
+  }
+  S prod() const { return M::op(prod0, prod1); }
 
   int size() { return int(a0.size() + a1.size()); }
   bool empty() { return size() == 0; }
 
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os, slide_window_aggregation_deque swag) {
+    while (!swag.empty()) {
+      os << swag.front();
+      swag.pop_front();
+      if (!swag.empty()) {
+        os << internal::delimiter_v<S>;
+      }
+    }
+    return os;
+  }
+
 private:
   std::vector<S> a0, a1, cum0, cum1;
   S prod0, prod1;
-  
+
   void push0(S x) {
     a0.push_back(x);
     cum0.push_back(prod0 = M::op(x, prod0));
@@ -66,6 +84,14 @@ private:
     for (int i = s0 - 1; i >= 0; i--) push0(a[i]);
     for (int i = s0; i < n; i++) push1(a[i]);
   }
+};
+
+namespace internal {
+
+template <class M> struct delimiter<slide_window_aggregation_deque<M>> {
+  static constexpr char value[] = "\n";
+};
+
 };
 
 } // namespace cp

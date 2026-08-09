@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <iostream>
 
 namespace cp {
 
@@ -12,6 +13,11 @@ struct bracket {
     S(int m, int s) : prefix_min(m), sum(s) {}
     bool is_correct() const {
       return prefix_min >= 0 && sum == 0;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const S& x) {
+      os << "(prefix_min: " << x.prefix_min << ", sum: " << x.sum << ")";
+      return os;
     }
   };
 

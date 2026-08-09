@@ -16,17 +16,33 @@ public:
 
   void push(S x) { push1(x); }
   void pop() {
+    assert(!empty());
     if (a0.empty()) transfer();
-    assert(!a0.empty());
     a0.pop_back();
     cum0.pop_back();
     prod0 = cum0.empty() ? M::e() : cum0.back();
   }
 
+  S front() const {
+    assert(!empty());
+    return a0.empty() ? a1.front() : a0.back();
+  }
   S prod() const { return M::op(prod0, prod1); }
 
   int size() const { return int(a0.size() + a1.size()); }
   bool empty() const { return size() == 0; }
+
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os, slide_window_aggregation swag) {
+    while (!swag.empty()) {
+      os << swag.front();
+      swag.pop();
+      if (!swag.empty()) {
+        os << internal::delimiter_v<S>;
+      }
+    }
+    return os;
+  }
 
 private:
   std::vector<S> a0, a1, cum0, cum1;
@@ -50,6 +66,14 @@ private:
     }
     prod1 = M::e();
   }
+};
+
+namespace internal {
+
+template <class M> struct delimiter<slide_window_aggregation<M>> {
+  static constexpr char value[] = "\n";
+};
+
 };
 
 } // namespace cp

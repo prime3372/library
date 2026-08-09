@@ -2,9 +2,12 @@
 
 #include <algorithm>
 #include <cassert>
+#include <iostream>
 #include <iterator>
 #include <utility>
 #include <vector>
+
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -14,12 +17,12 @@ template <class T> struct priority_deque {
 public:
   priority_deque() : d(2) {}
 
-  T min() const {
+  const T& min() const {
     assert(!empty());
     return d[2];
   }
   
-  T max() const {
+  const T& max() const {
     assert(!empty());
     return int(d.size()) == 3 ? d[2] : d[3];
   }
@@ -53,6 +56,20 @@ public:
 
   int size() const { return int(d.size()) - 2; }
   bool empty() const { return size() == 0; }
+
+  void clear() { d.resize(2); }
+
+  // for debugging
+  friend std::ostream& operator<<(std::ostream& os, priority_deque pq) {
+    while (!pq.empty()) {
+      os << pq.min();
+      pq.pop_min();
+      if (!pq.empty()) {
+        os << internal::delimiter_v<T>;
+      }
+    }
+    return os;
+  }
 
 private:
   std::vector<T> d;
@@ -108,5 +125,13 @@ private:
     return cur;
   }
 };
+
+namespace internal {
+
+template <class T> struct delimiter<priority_deque<T>> {
+  static constexpr char value[] = "\n";
+};
+
+} // namespace internal
 
 } // namespace cp

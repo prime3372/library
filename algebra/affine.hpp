@@ -11,7 +11,7 @@ template <class T> struct affine {
     S(T _a, T _b) : a(_a), b(_b) {}
 
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
-      os << x.a << " " << x.b;
+      os << "(a: " << x.a << ", b: " << x.b << ")";
       return os;
     }
   };

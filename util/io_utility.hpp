@@ -81,7 +81,7 @@ namespace cp {
 namespace internal {
 
 template <class T> struct delimiter {
-  static constexpr char value[] = " ";
+  static constexpr char value[] = ", ";
 };
 
 template <class T>
@@ -112,8 +112,7 @@ struct delimiter<std::set<T, Comp, Alloc>> {
   static constexpr char value[] = "\n";
 };
 
-template <class Tuple> requires is_tuple_like_v<Tuple>
-struct delimiter<Tuple> {
+template <> struct delimiter<std::string> {
   static constexpr char value[] = "\n";
 };
 
@@ -234,18 +233,19 @@ ostream& operator<<(ostream& os, const set<T, Comp, Alloc>& s) {
   return os;
 }
 
-// tuple_like (array, tuple, pair)
+// tuple_like (array, pair, tuple)
 
 template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 ostream& operator<<(ostream& os, const Tuple& t) {
   static constexpr size_t n = tuple_size_v<Tuple>; 
   if constexpr (n == 0) return os;
+  os << "(";
   [&]<size_t... I>(index_sequence<I...>) {
     ([&]<class T>(const T& x) {
       os << x << cp::internal::delimiter_v<T>;
     }(get<I>(t)), ...);
   }(make_index_sequence<n - 1>());
-  os << get<n - 1>(t);
+  os << get<n - 1>(t) << ")";
   return os;
 }
 
