@@ -275,19 +275,6 @@ public:
   friend fps operator/(const fps& lhs, long long rhs) { return fps(lhs) /= rhs; }
   friend fps operator/(long long lhs, const fps& rhs) { return fps(rhs) /= lhs; }
 
-  fps operator>>(int w) const {
-    if (size() <= w) return fps();
-    auto b = a;
-    b.erase(b.begin(), b.begin() + w);
-    return fps(b);
-  }
-
-  fps operator<<(int w) const {
-    auto b = a;
-    b.insert(b.begin(), w, 0);
-    return fps(b);
-  }
-
   int size() const { return int(a.size()); }
   bool empty() const { return a.empty(); }
   void resize(int n) { a.resize(n); }
