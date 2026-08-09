@@ -165,7 +165,7 @@ public:
     return g.prefix(n);
   }
 
-  fps pow(long long k) { return pow(k, size()); }
+  fps pow(long long k) const { return pow(k, size()); }
   fps pow(long long k, int n) const {
     assert(0 <= k && 0 <= n);
     if (k == 0) {
