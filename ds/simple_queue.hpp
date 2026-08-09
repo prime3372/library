@@ -38,7 +38,7 @@ public:
 
   // for debugging
   friend std::ostream& operator<<(std::ostream& os, const simple_queue& que) {
-    for (int i = pos; i < int(que.payload.size()); i++) {
+    for (int i = que.pos; i < int(que.payload.size()); i++) {
       os << que.payload[i];
       if (i != int(que.payload.size()) - 1) {
         os << internal::delimiter_v<T>;
