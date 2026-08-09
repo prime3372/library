@@ -5,7 +5,7 @@ $include = $Args[2]
 
 # constants
 $timeout = 10000
-$casesnum = 20
+$case_num = 20
 
 do {
   Write-Host "compiling..."
@@ -28,7 +28,7 @@ do {
 
   Start-Sleep -Milliseconds 100
 
-  for ($i = 1; $i -le $casesnum; $i++) {
+  for ($i = 1; $i -le $case_num; $i++) {
     # run gen.exe
     $p_gen = Start-Process -FilePath .\gen.exe -NoNewWindow -RedirectStandardOutput in.txt -PassThru
     $p_gen.Handle | Out-Null

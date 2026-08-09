@@ -8,7 +8,7 @@ $include = $Args[4]
 # constants
 $timelimit = 5000
 $timeout = 10000
-$casesnum = 50
+$case_num = 50
 enum Result {
   ok = 0
   wa = 1
@@ -50,7 +50,7 @@ do {
 
   Start-Sleep -Milliseconds 100
 
-  for ($i = 1; $i -le $casesnum; $i++) {
+  for ($i = 1; $i -le $case_num; $i++) {
     # run gen.exe
     $p_gen = Start-Process -FilePath .\gen.exe -NoNewWindow -RedirectStandardOutput in.txt -PassThru
     $p_gen.Handle | Out-Null
