@@ -87,10 +87,6 @@ template <class T> struct delimiter {
 template <class T>
 inline constexpr auto delimiter_v = delimiter<T>::value;
 
-template <> struct delimiter<char> {
-  static constexpr char value[] = "";
-};
-
 template <class T, class Alloc>
 struct delimiter<std::deque<T, Alloc>> {
   static constexpr char value[] = "\n";
