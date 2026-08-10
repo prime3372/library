@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
   }
 
   if (cnt == 1) {
-    std::cout << "ok '" << t_p << "'" << std::endl;
+    std::cout << "ok \"" << t_p << "\"" << std::endl;
   } else {
     std::cout << "ok " << cnt << " tokens" << std::endl;
   }
