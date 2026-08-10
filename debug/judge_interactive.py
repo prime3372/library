@@ -26,6 +26,11 @@ RED = "\033[31m"
 GREEN = "\033[32m"
 RESET = "\033[0m"
 
+# results
+OK = 0
+WA = 1
+PE = 2
+
 def pump(src, dst, prefix, f_log):
     try:
         for line in src:
@@ -43,15 +48,11 @@ def main():
 
     for src, exe in [(sol, "sol.exe"), (gen, "gen.exe"), (ans, "ans.exe"), (act, "act.exe"), (che, "che.exe")]:
         if subprocess.run(["g++", src] + opts + ["-o", exe]).returncode != 0:
-            if src == sol:
-                print(f"{CYAN}CE{RESET}")
-            else:
-                print(f"{BLUE}FAIL Compile Error {src}{RESET}")
-            if os.path.exists(src):
+            if os.path.exists(src):                
                 subprocess.run(["code", src], shell=True)
             return
 
-    print("compilation finished")
+    print("compilation finished.")
     time.sleep(0.1)
 
     for i in range(1, case_num + 1):
@@ -111,11 +112,6 @@ def main():
             subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
             break
 
-        if p_act.returncode != 0:
-            print(f"{MAGENTA}Test {i} Interactor's RE {t} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
-            break
-
         if p_sol.returncode != 0:
             print(f"{MAGENTA}Test {i} RE {t} ms{RESET}")
             subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
@@ -126,17 +122,30 @@ def main():
             subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
             break
 
-        # run che.exe
-        try:
-            res = subprocess.run(["./che.exe", "in.txt", "out.txt", "ans.txt"], timeout=timeout / 1000.0)
-            code_ret = res.returncode
-            if code_ret == 0:
-                print(f"{GREEN}Test {i} AC {t} ms{RESET}")
-            elif code_ret == 1:
+        if p_act.returncode != OK:
+            if p_act.returncode == WA:
                 print(f"{RED}Test {i} WA {t} ms{RESET}")
                 subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
                 break
-            elif code_ret == 2:
+            elif p_act.returncode == PE:
+                print(f"{RED}Test {i} PE {t} ms{RESET}")
+                subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
+                break
+            else:
+                print(f"{BLUE}Test {i} FAIL Runtime Error {act}{RESET}")
+                subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
+                break
+
+        # run che.exe
+        try:
+            res = subprocess.run(["./che.exe", "in.txt", "out.txt", "ans.txt"], timeout=timeout / 1000.0)
+            if res.returncode == OK:
+                print(f"{GREEN}Test {i} AC {t} ms{RESET}")
+            elif res.returncode == WA:
+                print(f"{RED}Test {i} WA {t} ms{RESET}")
+                subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
+                break
+            elif res.returncode == PE:
                 print(f"{RED}Test {i} PE {t} ms{RESET}")
                 subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
                 break

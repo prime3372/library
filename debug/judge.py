@@ -36,15 +36,11 @@ def main():
 
     for src, exe in [(sol, "sol.exe"), (gen, "gen.exe"), (ans, "ans.exe"), (che, "che.exe")]:
         if subprocess.run(["g++", src] + opts + ["-o", exe]).returncode != 0:
-            if src == sol:
-                print(f"{CYAN}CE{RESET}")
-            else:
-                print(f"{BLUE}FAIL Compile Error {src}{RESET}")
             if os.path.exists(src):
                 subprocess.run(["code", src], shell=True)
             return
 
-    print("compilation finished")
+    print("compilation finished.")
     time.sleep(0.1)
 
     for i in range(1, case_num + 1):

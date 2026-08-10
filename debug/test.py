@@ -26,18 +26,16 @@ def main():
     opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
     if subprocess.run(["g++", sol] + opts + ["-o", "sol.exe"]).returncode != 0:
-        print(f"{CYAN}Compile Error{RESET}")
         if os.path.exists(sol):
             subprocess.run(["code", sol], shell=True)
         return
 
     if subprocess.run(["g++", gen] + opts + ["-o", "gen.exe"]).returncode != 0:
-        print(f"{BLUE}FAIL Compile Error {gen}{RESET}")
         if os.path.exists(gen):
             subprocess.run(["code", gen], shell=True)
         return
 
-    print("compilation finished")
+    print("compilation finished.")
     time.sleep(0.1)
 
     for i in range(1, case_num + 1):
