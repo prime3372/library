@@ -22,7 +22,7 @@ template <class T> T uniform(T l, T r) {
   return T(mt64() % (unsigned long long)(r - l + 1) + l);
 }
 
-bool unifom_bool() { return uniform(0, 1) == 1; }
+bool uniform_bool() { return uniform(0, 1) == 1; }
 
 template <class T> T uniform_real(T l, T r) {
   assert(l <= r);
