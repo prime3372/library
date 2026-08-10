@@ -1,14 +1,21 @@
 #pragma once
 
 #include <cassert>
+#include <chrono>
 #include <random>
 
 namespace cp {
 
-std::random_device seed_gen;
+namespace internal {
 
-std::mt19937 mt32(seed_gen());
-std::mt19937_64 mt64(seed_gen());
+unsigned int rand_time = (unsigned int)(std::chrono::duration_cast<std::chrono::nanoseconds>(
+                                        std::chrono::high_resolution_clock::now().time_since_epoch())
+                                        .count());
+
+} // namespace internal
+
+std::mt19937 mt32(internal::rand_time);
+std::mt19937_64 mt64(internal::rand_time);
 
 template <class T> T uniform(T l, T r) {
   assert(l <= r);

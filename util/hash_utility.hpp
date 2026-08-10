@@ -20,7 +20,7 @@ template <class T> struct hash {};
 template <class T> requires internal::is_integral_v<T>
 struct hash<T> {
   unsigned long long operator()(const T& x) const {
-    static const unsigned long long fixed_random = seed_gen();
+    static const unsigned long long fixed_random = mt64();
     unsigned long long h = (unsigned long long)(x);
     h += fixed_random;
     h = (h ^ (h >> 30)) * 0xbf58476d1ce4e5b9;
@@ -30,7 +30,7 @@ struct hash<T> {
 };
 
 template <class T> void hash_combine(unsigned long long& seed, const T& val) {
-  static const unsigned long long fixed_random = seed_gen();
+  static const unsigned long long fixed_random = mt64();
   seed += fixed_random;
   seed ^= hash<T>()(val);
   seed = (seed ^ (seed >> 30)) * 0xbf58476d1ce4e5b9;
