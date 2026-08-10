@@ -14,7 +14,7 @@ int main() {
   int n;
   cin >> n;
   vector<point> pts(n);
-  rep(i, 0, n) cin >> pts[i].x >> pts[i].y;
+  rep(i, 0, n) cin >> pts[i];
   sort(pts.begin(), pts.end());
-  rep(i, 0, n) cout << pts[i].x << " " << pts[i].y << "\n";
+  rep(i, 0, n) cout << pts[i] << "\n";
 }
