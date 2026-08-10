@@ -98,14 +98,13 @@ def main():
         # run che.exe
         try:
             res = subprocess.run(["./che.exe", "in.txt", "out.txt", "ans.txt"], timeout=timeout / 1000.0)
-            code_ret = res.returncode
-            if code_ret == OK:
+            if res.returncode == OK:
                 print(f"{GREEN}Test {i} AC {t} ms{RESET}")
-            elif code_ret == WA:
+            elif res.returncode == WA:
                 print(f"{RED}Test {i} WA {t} ms{RESET}")
                 subprocess.run(["code", "in.txt", "out.txt", "ans.txt"], shell=True)
                 break
-            elif code_ret == PE:
+            elif res.returncode == PE:
                 print(f"{RED}Test {i} PE {t} ms{RESET}")
                 subprocess.run(["code", "in.txt", "out.txt", "ans.txt"], shell=True)
                 break
