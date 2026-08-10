@@ -33,12 +33,19 @@ def main():
     print("compiling...")
 
     opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
+    targets = [(sol, "sol.exe"), (gen, "gen.exe"), (ans, "ans.exe"), (che, "che.exe")]
 
-    for src, exe in [(sol, "sol.exe"), (gen, "gen.exe"), (ans, "ans.exe"), (che, "che.exe")]:
-        if subprocess.run(["g++", src] + opts + ["-o", exe]).returncode != 0:
+    procs = [(src, subprocess.Popen(["g++", src] + opts + ["-o", exe])) for src, exe in targets]
+
+    failed = False
+    for src, p in procs:
+        if p.wait() != 0 and not failed:
             if os.path.exists(src):
                 subprocess.run(["code", src], shell=True)
-            return
+            failed = True
+
+    if failed:
+        return
 
     print("compilation finished.")
     time.sleep(0.1)
