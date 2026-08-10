@@ -86,7 +86,7 @@ public:
     for (int i = 0; i < mat.h; i++) {
       for (int j = 0; j < mat.w; j++) {
         os << mat[i][j];
-        if (j != mat.w - 1) os << ", ";
+        if (j != mat.w - 1) os << " ";
       }
       if (i != mat.h - 1) os << "\n";
     }
