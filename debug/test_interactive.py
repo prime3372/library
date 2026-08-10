@@ -40,7 +40,7 @@ def main():
     for src, exe in [(sol, "sol.exe"), (gen, "gen.exe"), (act, "act.exe")]:
         if subprocess.run(["g++", src] + opts + ["-o", exe]).returncode != 0:
             if src == sol:
-                print(f"{CYAN}CE{RESET}")
+                print(f"{CYAN}Compile Error{RESET}")
             else:
                 print(f"{BLUE}FAIL Compile Error {src}{RESET}")
             if os.path.exists(src):
