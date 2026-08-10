@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
 
-#include "poly/formal_power_series.hpp"
+#include "poly/formal_power_series_ll.hpp"
 #include "tree/centroid_decomposition.hpp"
 
 #include <bits/stdc++.h>
