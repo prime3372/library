@@ -73,7 +73,7 @@ def main():
         p_act = subprocess.Popen(["./act.exe", "in.txt", "out.txt"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
 
         with open("log.txt", "w") as f_log:
-            t1 = threading.Thread(target=pump, args=(p_sol.stdout, p_act.stdin, "[SEND]    ", f_log))
+            t1 = threading.Thread(target=pump, args=(p_sol.stdout, p_act.stdin, "   [SEND] ", f_log))
             t2 = threading.Thread(target=pump, args=(p_act.stdout, p_sol.stdin, "[RECEIVE] ", f_log))
             t1.start()
             t2.start()
