@@ -10,6 +10,13 @@ template <class T> struct simple_queue {
 public:
   simple_queue() {}
   
+  void reserve(int n) { payload.reserve(n); }
+  
+  int size() const { return int(payload.size()) - pos; }
+  bool empty() const { return pos == int(payload.size()); }
+  
+  void push(const T& t) { payload.push_back(t); }
+  
   T& front() {
     assert(!empty());
     return payload[pos];
@@ -18,24 +25,17 @@ public:
     assert(!empty());
     return payload[pos];
   }
-
-  void push(const T& t) { payload.push_back(t); }
-
-  void pop() {
-    assert(!empty());
-    pos++;
-  }
-
+  
   void clear() {
     payload.clear();
     pos = 0;
   }
-
-  int size() const { return int(payload.size()) - pos; }
-  bool empty() const { return pos == int(payload.size()); }
-
-  void reserve(int n) { payload.reserve(n); }
-
+  
+  void pop() {
+    assert(!empty());
+    pos++;
+  }
+  
   // for debugging
   friend std::ostream& operator<<(std::ostream& os, const simple_queue& que) {
     for (int i = que.pos; i < int(que.payload.size()); i++) {
