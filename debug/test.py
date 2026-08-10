@@ -46,11 +46,11 @@ def main():
             with open("in.txt", "w") as f_in:
                 subprocess.run(["./gen.exe"], stdout=f_in, timeout=timeout / 1000.0, check=True)
         except subprocess.TimeoutExpired:
-            print(f"{BLUE}Test {i} FAIL Timed Out {gen}{RESET}")
+            print(f"{BLUE}Test {i} Fail Timed Out {gen}{RESET}")
             subprocess.run(["code", "in.txt"], shell=True)
             break
         except subprocess.CalledProcessError:
-            print(f"{BLUE}Test {i} FAIL Runtime Error {gen}{RESET}")
+            print(f"{BLUE}Test {i} Fail Runtime Error {gen}{RESET}")
             subprocess.run(["code", "in.txt"], shell=True)
             break
 

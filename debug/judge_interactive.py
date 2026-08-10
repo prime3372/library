@@ -67,11 +67,11 @@ def main():
             with open("in.txt", "w") as f_in:
                 subprocess.run(["./gen.exe"], stdout=f_in, timeout=timeout / 1000.0, check=True)
         except subprocess.TimeoutExpired:
-            print(f"{BLUE}Test {i} FAIL Timed Out {gen}{RESET}")
+            print(f"{BLUE}Test {i} Fail Timed Out {gen}{RESET}")
             subprocess.run(["code", "in.txt"], shell=True)
             break
         except subprocess.CalledProcessError:
-            print(f"{BLUE}Test {i} FAIL Runtime Error {gen}{RESET}")
+            print(f"{BLUE}Test {i} Fail Runtime Error {gen}{RESET}")
             subprocess.run(["code", "in.txt"], shell=True)
             break
 
@@ -80,11 +80,11 @@ def main():
             with open("in.txt", "r") as f_in, open("ans.txt", "w") as f_ans:
                 subprocess.run(["./ans.exe"], stdin=f_in, stdout=f_ans, timeout=timeout / 1000.0, check=True)
         except subprocess.TimeoutExpired:
-            print(f"{BLUE}Test {i} FAIL Timed Out {ans}{RESET}")
+            print(f"{BLUE}Test {i} Fail Timed Out {ans}{RESET}")
             subprocess.run(["code", "in.txt", "ans.txt"], shell=True)
             break
         except subprocess.CalledProcessError:
-            print(f"{BLUE}Test {i} FAIL Runtime Error {ans}{RESET}")
+            print(f"{BLUE}Test {i} Fail Runtime Error {ans}{RESET}")
             subprocess.run(["code", "in.txt", "ans.txt"], shell=True)
             break
 
@@ -138,7 +138,7 @@ def main():
                 subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
                 break
             else:
-                print(f"{BLUE}Test {i} FAIL Runtime Error {act}{RESET}")
+                print(f"{BLUE}Test {i} Fail Runtime Error {act}{RESET}")
                 subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
                 break
 
@@ -156,11 +156,11 @@ def main():
                 subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
                 break
             else:
-                print(f"{BLUE}Test {i} FAIL Runtime Error {che}{RESET}")
+                print(f"{BLUE}Test {i} Fail Runtime Error {che}{RESET}")
                 subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
                 break
         except subprocess.TimeoutExpired:
-            print(f"{BLUE}Test {i} FAIL Timed Out {che}{RESET}")
+            print(f"{BLUE}Test {i} Fail Timed Out {che}{RESET}")
             subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
             break
 
