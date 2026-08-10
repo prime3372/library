@@ -94,13 +94,13 @@ def main():
             subprocess.run(["code", "in.txt", "log.txt", "out.txt"], shell=True)
             break
 
-        if p_act.returncode != 0:
-            print(f"{MANGENTA}Test {i} Interactor's Runtime Rrror {t} ms{RESET}")
+        if p_sol.returncode != 0:
+            print(f"{MAGENTA}Test {i} Runtime Error {t} ms{RESET}")
             subprocess.run(["code", "in.txt", "log.txt", "out.txt"], shell=True)
             break
 
-        if p_sol.returncode != 0:
-            print(f"{MAGENTA}Test {i} Runtime Error {t} ms{RESET}")
+        if p_act.returncode != 0:
+            print(f"{MANGENTA}Test {i} Interactor's Runtime Rrror {t} ms{RESET}")
             subprocess.run(["code", "in.txt", "log.txt", "out.txt"], shell=True)
             break
 
