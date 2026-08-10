@@ -100,7 +100,7 @@ def main():
             break
 
         if p_act.returncode != 0:
-            print(f"{MANGENTA}Test {i} Interactor's Runtime Rrror {t} ms{RESET}")
+            print(f"{MAGENTA}Test {i} Interactor's Runtime Rrror {t} ms{RESET}")
             subprocess.run(["code", "in.txt", "log.txt", "out.txt"], shell=True)
             break
 
