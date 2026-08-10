@@ -3,8 +3,6 @@
 #include <cstddef>
 #include <iostream>
 
-#include "util/io_utility.hpp"
-
 namespace cp {
 
 template <class T> struct arithmetic_add {
@@ -32,13 +30,5 @@ template <class T> struct arithmetic_add {
   static F composition(F g, F f) { return F{f.a + g.a, f.b + g.b}; }
   static F id() { return F{0, 0}; }
 };
-
-namespace internal {
-
-template <class T> struct delimiter<typename arithmetic_add<T>::S> {
-  static constexpr char value[] = " ";
-};
-
-} // namespace internal
 
 } // namespace cp
