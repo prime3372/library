@@ -19,7 +19,6 @@ case_num = 50
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # colors
-CYAN = "\033[36m"
 BLUE = "\033[34m"
 YELLOW = "\033[33m"
 MAGENTA = "\033[35m"
