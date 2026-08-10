@@ -4,62 +4,62 @@
 int main(int argc, char** argv) {
   open_files(argc, argv);
 
-  std::string t_out, t_ans;
-  int t_cnt = 0;
-  long long n_out, n_ans;
+  std::string t_j, t_p;
+  int cnt = 0;
+  long long n_j, n_p;
   std::string t_first;
 
-  while (f_ans >> t_ans) {
-    if (!(f_out >> t_out)) {
+  while (fans >> t_j) {
+    if (!(fout >> t_p)) {
       int extra_ans_cnt = 1;
-      while (f_ans >> t_ans) {
+      while (fans >> t_p) {
         extra_ans_cnt++;
       }
-      std::cout << "Answer contains longer sequence ";
-      std::cout << "[length = " << t_cnt + extra_ans_cnt << "], ";
-      std::cout << "but output contains " << t_cnt << " elements" << std::endl;
+      std::cout << "wrong answer Answer contains longer sequence ";
+      std::cout << "[length = " << cnt + extra_ans_cnt << "], ";
+      std::cout << "but output contains " << cnt << " elements" << std::endl;
       return _wa;
     }
 
-    t_cnt++;
+    cnt++;
 
-    if (!read_as_ll(t_ans, n_ans)) {
-      std::cout << "FAIL Expected integer, but '" << t_ans << "' found" << std::endl;
+    if (!read_as_ll(t_j, n_j)) {
+      std::cout << "FAIL Expected integer, but '" << t_j << "' found" << std::endl;
       return _fail;
     }
-    if (!read_as_ll(t_out, n_out)) {
-      std::cout << "wrong output format Expected integer, but '" << t_out << "' found" << std::endl;
+    if (!read_as_ll(t_p, n_p)) {
+      std::cout << "wrong output format Expected integer, but '" << t_p << "' found" << std::endl;
       return _pe;
     }
 
-    if (n_ans != n_out) {
-      std::cout << "wrong answer " << t_cnt << ordinal_suffix(t_cnt) << " numbers differ - ";
-      std::cout << "expected: '" << n_ans << "', ";
-      std::cout << "found: '" << n_out << "'" << std::endl;
+    if (n_j != n_p) {
+      std::cout << "wrong answer " << cnt << ordinal_suffix(cnt) << " numbers differ - ";
+      std::cout << "expected: '" << n_j << "', ";
+      std::cout << "found: '" << n_p << "'" << std::endl;
       return _wa;
-    } else if (t_cnt <= 5) {
+    } else if (cnt <= 5) {
       if (!t_first.empty()) {
         t_first.push_back(' ');
       }
-      t_first.append(std::to_string(n_out));
+      t_first.append(std::to_string(n_p));
     }
   }
 
   int extra_out_cnt = 0;
-  while (f_out >> t_out) {
+  while (fout >> t_p) {
     extra_out_cnt++;
   }
   if (extra_out_cnt > 0) {
     std::cout << "wrong answer Output contains longer sequence ";
-    std::cout << "[length = " << t_cnt + extra_out_cnt << "], ";
-    std::cout << "but answer contains " << t_cnt << "elements" << std::endl;
+    std::cout << "[length = " << cnt + extra_out_cnt << "], ";
+    std::cout << "but answer contains " << cnt << "elements" << std::endl;
     return _wa;
   }
 
-  if (t_cnt <= 5) {
-    std::cout << "ok "<< t_cnt << " number(s): \"" << t_first << "\"" << std::endl;
+  if (cnt <= 5) {
+    std::cout << "ok "<< cnt << " number(s): \"" << t_first << "\"" << std::endl;
   } else {
-    std::cout << "ok " << t_cnt << " numbers" << std::endl;
+    std::cout << "ok " << cnt << " numbers" << std::endl;
   }
   return _ok;
 }

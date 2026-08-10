@@ -16,7 +16,7 @@ enum result {
   _fail = 3
 };
 
-std::ifstream f_in, f_out, f_ans;
+std::ifstream fin, fout, fans;
 
 void open_files(int argc, char** argv) {
   if (argc < 4) {
@@ -24,11 +24,11 @@ void open_files(int argc, char** argv) {
     std::exit(_fail);
   }
 
-  f_in.open(argv[1]);
-  f_out.open(argv[2]);
-  f_ans.open(argv[3]);
+  fin.open(argv[1]);
+  fout.open(argv[2]);
+  fans.open(argv[3]);
 
-  if (!(f_in.is_open() && f_out.is_open() && f_ans.is_open())) {
+  if (!(fin.is_open() && fout.is_open() && fans.is_open())) {
     std::cout << "FAIL cannot open files" << std::endl;
     std::exit(_fail);
   }
@@ -48,8 +48,8 @@ bool read_as_ll(const std::string& s, long long& n) {
   return ec == std::errc{} && ptr == s.data() + s.size();
 }
 
-bool read_as_double(const std::string& s, double& d) {
-  auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), d);
+bool read_as_double(const std::string& s, double& n) {
+  auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), n);
   return ec == std::errc{} && ptr == s.data() + s.size();
 }
 

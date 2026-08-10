@@ -9,45 +9,45 @@ int main(int argc, char** argv) {
 
   std::cout << std::fixed << std::setprecision(display_precision);
 
-  std::string t_out, t_ans;
-  int t_cnt = 0;
-  double n_out, n_ans;
+  std::string t_j, t_p;
+  int cnt = 0;
+  double n_j, n_p;
 
-  while (f_ans >> t_ans) {
-    if (!(f_out >> t_out)) {
+  while (fans >> t_j) {
+    if (!(fout >> t_p)) {
       std::cout << "wrong answer Unexpected EOF in the participants output" << std::endl;
       return _wa;
     }
 
-    t_cnt++;
+    cnt++;
 
-    if (!read_as_double(t_ans, n_ans)) {
-      std::cout << "FAIL Expected double, but '" << t_ans << "' found" << std::endl;
+    if (!read_as_double(t_j, n_j)) {
+      std::cout << "FAIL Expected double, but '" << t_j << "' found" << std::endl;
       return _fail;
     }
-    if (!read_as_double(t_out, n_out)) {
-      std::cout << "wrong output format Expected double, but '" << t_out << "' found" << std::endl;
+    if (!read_as_double(t_p, n_p)) {
+      std::cout << "wrong output format Expected double, but '" << t_p << "' found" << std::endl;
       return _pe;
     }
 
-    if (double_delta(n_ans, n_out) > max_error) {
-      std::cout << "wrong answer " << t_cnt << ordinal_suffix(t_cnt) << " numbers differ - ";
-      std::cout << "expected: '" << n_ans << "', ";
-      std::cout << "found: '" << n_out << "', "; 
-      std::cout << "error = '" << double_delta(n_ans, n_out) << "'" << std::endl; 
+    if (double_delta(n_j, n_p) > max_error) {
+      std::cout << "wrong answer " << cnt << ordinal_suffix(cnt) << " numbers differ - ";
+      std::cout << "expected: '" << n_j << "', ";
+      std::cout << "found: '" << n_p << "', "; 
+      std::cout << "error = '" << double_delta(n_j, n_p) << "'" << std::endl; 
       return _wa;
     }
   }
 
-  if (f_out >> t_out) {
+  if (fout >> t_p) {
     std::cout << "wrong answer Participant output contains extra tokens" << std::endl;
     return _wa;
   }
 
-  if (t_cnt == 1) {
-    std::cout << "ok found '" << n_out << "', expected '" << n_ans << "', error '" << double_delta(n_ans, n_out) << "'" << std::endl;
+  if (cnt == 1) {
+    std::cout << "ok found '" << n_p << "', expected '" << n_j << "', error '" << double_delta(n_j, n_p) << "'" << std::endl;
   } else {
-    std::cout << "ok " << t_cnt << " numbers" << std::endl;
+    std::cout << "ok " << cnt << " numbers" << std::endl;
   }
   return _ok;
 }

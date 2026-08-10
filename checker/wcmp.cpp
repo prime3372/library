@@ -3,34 +3,34 @@
 int main(int argc, char* argv[]) {
   open_files(argc, argv);
 
-  std::string t_out, t_ans;
-  int t_cnt = 0;
+  std::string t_j, t_p;
+  int cnt = 0;
 
-  while (f_ans >> t_ans) {
-    if (!(f_out >> t_out)) {
+  while (fans >> t_j) {
+    if (!(fout >> t_p)) {
       std::cout << "wrong answer Unexpected EOF in the participants output" << std::endl;
       return _wa;
     }
 
-    t_cnt++;
+    cnt++;
 
-    if (t_out != t_ans) {
-      std::cout << "wrong answer " << t_cnt << ordinal_suffix(t_cnt) << " words differ - ";
-      std::cout << "expected: '" << t_ans << "', ";
-      std::cout << "found: '" << t_out << "'" << std::endl; 
+    if (t_j != t_p) {
+      std::cout << "wrong answer " << cnt << ordinal_suffix(cnt) << " words differ - ";
+      std::cout << "expected: '" << t_j << "', ";
+      std::cout << "found: '" << t_p << "'" << std::endl; 
       return _wa;
     }
   }
 
-  if (f_out >> t_out) {
+  if (fout >> t_p) {
     std::cout << "wrong answer Participant output contains extra tokens" << std::endl;
     return _wa;
   }
 
-  if (t_cnt == 1) {
-    std::cout << "ok '" << t_out << "'" << std::endl;
+  if (cnt == 1) {
+    std::cout << "ok '" << t_p << "'" << std::endl;
   } else {
-    std::cout << "ok " << t_cnt << " tokens" << std::endl;
+    std::cout << "ok " << cnt << " tokens" << std::endl;
   }
   return _ok;
 }
