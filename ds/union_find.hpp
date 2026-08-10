@@ -46,6 +46,7 @@ public:
       root[i] = find(i);
       group_size[root[i]]++;
     }
+
     std::vector<std::vector<int>> res(n);
     for (int i = 0; i < n; i++) {
       res[i].reserve(group_size[i]);
