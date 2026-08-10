@@ -16,6 +16,7 @@ include = sys.argv[6]
 timelimit = 5000
 timeout = 10000
 case_num = 50
+opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # colors
 CYAN = "\033[36m"
@@ -44,7 +45,6 @@ def pump(src, dst, prefix, f_log):
 def main():
     print("compiling...")
 
-    opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
     targets = [(sol, "sol.exe"), (gen, "gen.exe"), (ans, "ans.exe"), (act, "act.exe"), (che, "che.exe")]
 
     procs = [(src, subprocess.Popen(["g++", src] + opts + ["-o", exe])) for src, exe in targets]

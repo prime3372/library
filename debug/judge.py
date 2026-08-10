@@ -14,6 +14,7 @@ include = sys.argv[5]
 timelimit = 5000
 timeout = 10000
 case_num = 50
+opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # colors
 CYAN = "\033[36m"
@@ -32,7 +33,6 @@ PE = 2
 def main():
     print("compiling...")
 
-    opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
     targets = [(sol, "sol.exe"), (gen, "gen.exe"), (ans, "ans.exe"), (che, "che.exe")]
 
     procs = [(src, subprocess.Popen(["g++", src] + opts + ["-o", exe])) for src, exe in targets]
