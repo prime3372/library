@@ -10,7 +10,7 @@ include = sys.argv[3]
 
 # variables
 timeout = 10000
-case_num = 20
+case_num = 50
 
 # colors
 CYAN = "\033[36m"
