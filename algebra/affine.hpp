@@ -13,8 +13,8 @@ template <class T> struct affine {
     // for debugging
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
       if (x.a == 0) os << x.b;
-      else if (x.a == 1) os << "x+" << x.b;
-      else os << x.a << "x+" << x.b;
+      else if (x.a == 1) os << "x + " << x.b;
+      else os << x.a << "x + " << x.b;
       return os;
     }
   };

@@ -29,7 +29,7 @@ template <class T> struct delimiter {
 template <class T>
 inline constexpr auto delimiter_v = delimiter<T>::value;
 
-template <class T> requires internal::is_integral_v<T>
+template <class T> requires is_integral_v<T>
 struct delimiter<T> {
   static constexpr char value[] = " ";
 };
@@ -202,13 +202,12 @@ template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 ostream& operator<<(ostream& os, const Tuple& t) {
   static constexpr size_t n = tuple_size_v<Tuple>; 
   if constexpr (n == 0) return os;
-  os << "(";
   [&]<size_t... I>(index_sequence<I...>) {
     ([&]<class T>(const T& x) {
-      os << x << "," << cp::internal::delimiter_v<T>;
+      os << x << cp::internal::delimiter_v<T>;
     }(get<I>(t)), ...);
   }(make_index_sequence<n - 1>());
-  os << get<n - 1>(t) << ")";
+  os << get<n - 1>(t);
   return os;
 }
 

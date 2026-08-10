@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "algebra/affine.hpp"
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -29,5 +30,13 @@ template <class T> struct sum_affine {
   static F composition(F g, F f) { return affine<T>::op(f, g); }
   static F id() { return affine<T>::e(); }
 };
+
+namespace internal {
+
+template <class T> struct delimiter<typename sum_affine<T>::S> {
+  static constexpr char value[] = " ";
+};
+
+} // namespace internal
 
 } // namespace cp

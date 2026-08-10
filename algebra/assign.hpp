@@ -3,6 +3,8 @@
 #include <cstddef>
 #include <iostream>
 
+#include "util/io_utility.hpp"
+
 namespace cp {
 
 template <class M> struct assign {
@@ -43,5 +45,13 @@ template <class M> struct assign {
     return r;
   }
 };
+
+namespace internal {
+
+template <class M> struct delimiter<typename assign<M>::S> {
+  static constexpr char value[] = " ";
+};
+
+} // namespace internal
 
 } // namespace cp
