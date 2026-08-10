@@ -89,13 +89,4 @@ private:
   std::vector<std::vector<T>> cum;
 };
 
-namespace internal {
-
-template <class T> struct delimiter<cumsum_2d<T>> {
-  static constexpr char value[] = "\n";
-};
-
-} // namespace internal
-
-
 } // namespace cp
