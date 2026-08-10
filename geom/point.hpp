@@ -94,12 +94,4 @@ private:
   static constexpr long double eps = 1e-9;
 };
 
-namespace internal {
-
-template <> struct delimiter<point> {
-  static constexpr char value[] = "\n";
-};
-
-} // namespace internal
-
 } // namespace cp

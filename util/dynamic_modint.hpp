@@ -7,6 +7,7 @@
 #include "number/barrett.hpp"
 #include "number/ext_gcd.hpp"
 #include "util/hash_utility.hpp"
+#include "util/io_utility.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
@@ -127,6 +128,10 @@ template <int id> struct hash<dynamic_modint<id>> {
   unsigned long long operator()(const dynamic_modint<id>& x) const {
     return hash<int>()(x.val());
   }
+};
+
+template <int id> struct delimiter<dynamic_modint<id>> {
+  static constexpr char value[] = " ";
 };
 
 template <int id>

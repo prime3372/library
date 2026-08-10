@@ -7,6 +7,7 @@
 
 #include "random/base.hpp"
 #include "util/hash_utility.hpp"
+#include "util/io_utility.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
@@ -115,6 +116,10 @@ template <> struct hash<hash61> {
   }
 };
 
-}
+template <> struct delimiter<hash61> {
+  static constexpr char value[] = " ";
+};
+
+} // namespace internal
 
 } // namespace cp

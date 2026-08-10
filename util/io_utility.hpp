@@ -13,9 +13,35 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <utility>
+#include <type_traits>
 #include <vector>
 
 #include "util/type_traits.hpp"
+
+namespace cp {
+
+namespace internal {
+
+template <class T> struct delimiter {
+  static constexpr char value[] = "\n";
+};
+
+template <class T>
+inline constexpr auto delimiter_v = delimiter<T>::value;
+
+template <class T> requires internal::is_integral_v<T>
+struct delimiter<T> {
+  static constexpr char value[] = " ";
+};
+
+template <class T> requires std::is_floating_point_v<T>
+struct delimiter<T> {
+  static constexpr char value[] = " ";
+};
+
+} // namespace internal
+
+} // namespace cp
 
 namespace std {
 
@@ -73,74 +99,6 @@ ostream& operator<<(ostream& os, unsigned __int128 val) {
   reverse(s.begin(), s.end());
   return os << s;
 }
-
-} // namespace std
-
-namespace cp {
-
-namespace internal {
-
-template <class T> struct delimiter {
-  static constexpr char value[] = " ";
-};
-
-template <class T>
-inline constexpr auto delimiter_v = delimiter<T>::value;
-
-template <class T, class Alloc>
-struct delimiter<std::deque<T, Alloc>> {
-  static constexpr char value[] = "\n";
-};
-
-template <class Key, class Val, class Comp, class Alloc>
-struct delimiter<std::map<Key, Val, Comp, Alloc>> {
-  static constexpr char value[] = "\n";
-};
-
-template <class T, class Container, class Comp>
-struct delimiter<std::priority_queue<T, Container, Comp>> {
-  static constexpr char value[] = "\n";
-};
-
-template <class T, class Container>
-struct delimiter<std::queue<T, Container>> {
-  static constexpr char value[] = "\n";
-};
-
-template <class T, class Comp, class Alloc>
-struct delimiter<std::set<T, Comp, Alloc>> {
-  static constexpr char value[] = "\n";
-};
-
-template <> struct delimiter<std::string> {
-  static constexpr char value[] = "\n";
-};
-
-template <class Tuple> requires internal::is_tuple_like_v<Tuple>
-struct delimiter<Tuple> {
-  static constexpr char value[] = "\n";
-};
-
-template <class Key, class Val, class Hash, class Equal, class Alloc>
-struct delimiter<std::unordered_map<Key, Val, Hash, Equal, Alloc>> {
-  static constexpr char value[] = "\n";
-};
-
-template <class T, class Hash, class Equal, class Alloc>
-struct delimiter<std::unordered_set<T, Hash, Equal, Alloc>> {
-  static constexpr char value[] = "\n";
-};
-
-template <class T, class Alloc>
-struct delimiter<std::vector<T, Alloc>> {
-  static constexpr char value[] = "\n";
-};
-
-} // namespace internal
-
-} // namespace cp
-
-namespace std {
 
 // forward declarations
 

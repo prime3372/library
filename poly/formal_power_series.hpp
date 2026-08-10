@@ -295,13 +295,4 @@ private:
   std::vector<long long> a;
 };
 
-namespace internal {
-
-template <class T>
-struct delimiter<formal_power_series<T>> {
-  static constexpr char value[] = "\n";
-};
-
-} // namespace internal
-
 } // namespace cp

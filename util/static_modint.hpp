@@ -6,6 +6,7 @@
 #include "number/ext_gcd.hpp"
 #include "number/is_prime.hpp"
 #include "util/hash_utility.hpp"
+#include "util/io_utility.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
@@ -130,6 +131,10 @@ template <int m> struct hash<static_modint<m>> {
   unsigned long long operator()(const static_modint<m>& x) const {
     return hash<int>()(x.val());
   }
+};
+
+template <int m> struct delimiter<static_modint<m>> {
+  static constexpr char value[] = " ";
 };
 
 template <int m>

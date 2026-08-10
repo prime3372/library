@@ -68,12 +68,4 @@ private:
   }
 };
 
-namespace internal {
-
-template <class M> struct delimiter<slide_window_aggregation<M>> {
-  static constexpr char value[] = "\n";
-};
-
-};
-
 } // namespace cp

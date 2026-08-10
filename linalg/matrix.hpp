@@ -98,12 +98,4 @@ private:
   std::vector<std::vector<T>> d;
 };
 
-namespace internal {
-
-template <class T> struct delimiter<matrix<T>> {
-  static constexpr char value[] = "\n";
-};
-
-} // namespace internal
-
 } // namespace cp
