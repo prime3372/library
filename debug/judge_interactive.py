@@ -7,10 +7,8 @@ import threading
 # arguments
 sol = sys.argv[1]
 gen = sys.argv[2]
-ans = sys.argv[3]
-act = sys.argv[4]
-che = sys.argv[5]
-include = sys.argv[6]
+act = sys.argv[3]
+include = sys.argv[4]
 
 # variables
 timelimit = 5000
@@ -19,11 +17,11 @@ case_num = 50
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # colors
-BLUE = "\033[34m"
-YELLOW = "\033[33m"
-MAGENTA = "\033[35m"
 RED = "\033[31m"
 GREEN = "\033[32m"
+YELLOW = "\033[33m"
+BLUE = "\033[34m"
+MAGENTA = "\033[35m"
 RESET = "\033[0m"
 
 # results
@@ -44,7 +42,7 @@ def pump(src, dst, prefix, f_log):
 def main():
     print("compiling...")
 
-    targets = [(sol, "sol.exe"), (gen, "gen.exe"), (ans, "ans.exe"), (act, "act.exe"), (che, "che.exe")]
+    targets = [(sol, "sol.exe"), (gen, "gen.exe"), (act, "act.exe")]
 
     procs = [(src, subprocess.Popen(["g++", src] + opts + ["-o", exe])) for src, exe in targets]
 
@@ -75,22 +73,9 @@ def main():
             subprocess.run(["code", "in.txt"], shell=True)
             break
 
-        # run ans.exe
-        try:
-            with open("in.txt", "r") as f_in, open("ans.txt", "w") as f_ans:
-                subprocess.run(["./ans.exe"], stdin=f_in, stdout=f_ans, timeout=timeout / 1000.0, check=True)
-        except subprocess.TimeoutExpired:
-            print(f"{BLUE}Test {i} Fail Timed Out {ans}{RESET}")
-            subprocess.run(["code", "in.txt", "ans.txt"], shell=True)
-            break
-        except subprocess.CalledProcessError:
-            print(f"{BLUE}Test {i} Fail Runtime Error {ans}{RESET}")
-            subprocess.run(["code", "in.txt", "ans.txt"], shell=True)
-            break
-
         # run sol.exe
         p_sol = subprocess.Popen(["./sol.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
-        p_act = subprocess.Popen(["./act.exe", "in.txt", "out.txt"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+        p_act = subprocess.Popen(["./act.exe", "in.txt"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
 
         with open("log.txt", "w") as f_log:
             t1 = threading.Thread(target=pump, args=(p_sol.stdout, p_act.stdin, "   [send] ", f_log))
@@ -115,57 +100,36 @@ def main():
 
         if tle:
             print(f"{YELLOW}Test {i} TLE > {timeout} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
+            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
         if p_sol.returncode != 0:
             print(f"{MAGENTA}Test {i} RE {t} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
+            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
         if t > timelimit:
             print(f"{YELLOW}Test {i} TLE {t} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
+            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
-        if p_act.returncode != OK:
-            if p_act.returncode == WA:
-                print(f"{RED}Test {i} WA {t} ms{RESET}")
-                subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
-                break
-            elif p_act.returncode == PE:
-                print(f"{RED}Test {i} PE {t} ms{RESET}")
-                subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
-                break
-            else:
-                print(f"{BLUE}Test {i} Fail Runtime Error {act}{RESET}")
-                subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
-                break
-
-        # run che.exe
-        try:
-            res = subprocess.run(["./che.exe", "in.txt", "out.txt", "ans.txt"], timeout=timeout / 1000.0)
-            if res.returncode == OK:
-                print(f"{GREEN}Test {i} AC {t} ms{RESET}")
-            elif res.returncode == WA:
-                print(f"{RED}Test {i} WA {t} ms{RESET}")
-                subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
-                break
-            elif res.returncode == PE:
-                print(f"{RED}Test {i} PE {t} ms{RESET}")
-                subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
-                break
-            else:
-                print(f"{BLUE}Test {i} Fail Runtime Error {che}{RESET}")
-                subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
-                break
-        except subprocess.TimeoutExpired:
-            print(f"{BLUE}Test {i} Fail Timed Out {che}{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt", "out.txt", "ans.txt"], shell=True)
+        if p_act.returncode == OK:
+            print(f"{GREEN}Test {i} AC {t} ms{RESET}")
+        elif p_act.returncode == WA:
+            print(f"{RED}Test {i} WA {t} ms{RESET}")
+            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
+            break
+        elif p_act.returncode == PE:
+            print(f"{RED}Test {i} PE {t} ms{RESET}")
+            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
+            break
+        else:
+            print(f"{BLUE}Test {i} Fail Runtime Error {act}{RESET}")
+            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
 if __name__ == "__main__":
     main()
-    for f in ["sol.exe", "gen.exe", "ans.exe", "act.exe", "che.exe"]:
+    for f in ["sol.exe", "gen.exe", "act.exe"]:
         if os.path.exists(f):
             os.remove(f)

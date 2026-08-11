@@ -69,7 +69,7 @@ def main():
 
         # run sol.exe
         p_sol = subprocess.Popen(["./sol.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
-        p_act = subprocess.Popen(["./act.exe", "in.txt", "out.txt"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+        p_act = subprocess.Popen(["./act.exe", "in.txt"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
 
         with open("log.txt", "w") as f_log:
             t1 = threading.Thread(target=pump, args=(p_sol.stdout, p_act.stdin, "   [send] ", f_log))
@@ -94,17 +94,17 @@ def main():
 
         if tle:
             print(f"{YELLOW}Test {i} Timed Out > {timeout} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt", "out.txt"], shell=True)
+            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
         if p_sol.returncode != 0:
             print(f"{MAGENTA}Test {i} Runtime Error {t} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt", "out.txt"], shell=True)
+            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
         if p_act.returncode != 0:
             print(f"{MAGENTA}Test {i} Interactor's Runtime Rrror {t} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt", "out.txt"], shell=True)
+            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
         print(f"{GREEN}Test {i} Success {t} ms{RESET}")
