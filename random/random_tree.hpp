@@ -41,6 +41,7 @@ std::vector<std::pair<int, int>> random_tree(int n) {
   for (auto& e : edges) {
     if (uniform_bool()) std::swap(e.first, e.second);
   }
+
   return edges;
 }
 
@@ -60,6 +61,7 @@ std::vector<std::pair<int, int>> random_forest(int n) {
   for (auto& e : edges) {
     if (uniform_bool()) std::swap(e.first, e.second);
   }
+
   return edges;
 }
 
