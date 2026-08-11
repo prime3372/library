@@ -97,12 +97,4 @@ private:
   std::vector<T> d;
 };
 
-namespace internal {
-
-template <class T> struct delimiter<fenwick_tree<T>> {
-  static constexpr char value[] = "\n";
-};
-
-} // namespace internal
-
 } // namespace cp

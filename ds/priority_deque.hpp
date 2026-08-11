@@ -126,12 +126,4 @@ private:
   }
 };
 
-namespace internal {
-
-template <class T> struct delimiter<priority_deque<T>> {
-  static constexpr char value[] = "\n";
-};
-
-} // namespace internal
-
 } // namespace cp

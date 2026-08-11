@@ -252,12 +252,4 @@ private:
   }
 };
 
-namespace internal {
-
-template <class M> struct delimiter<dynamic_lazy_segtree<M>> {
-  static constexpr char value[] = "\n";
-};
-
-} // namespace internal
-
 } // namespace cp

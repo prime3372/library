@@ -130,12 +130,4 @@ private:
   }
 };
 
-namespace internal {
-
-template <class M> struct delimiter<segtree<M>> {
-  static constexpr char value[] = "\n";
-};
-
-} // namespace internal
-
 } // namespace cp

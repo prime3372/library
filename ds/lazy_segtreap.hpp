@@ -106,13 +106,4 @@ protected:
   }
 };
 
-namespace internal {
-
-template <class M, auto rev>
-struct delimiter<lazy_segtreap<M, rev>> {
-  static constexpr char value[] = "\n";
-};
-
-} // namespace internal
-
 } // namespace cp

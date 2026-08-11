@@ -92,13 +92,4 @@ private:
   }
 };
 
-namespace internal {
-
-template <class Key, class Val>
-struct delimiter<hash_map<Key, Val>> {
-  static constexpr char value[] = "\n";
-};
-
-} // namespace internal
-
 } // namespace cp
