@@ -14,7 +14,10 @@ public:
   using S = typename M::S;
 
   disjoint_sparse_table() : n(0), log(0) {}
-  explicit disjoint_sparse_table(const std::vector<S>& _a) : a(_a) {
+  explicit disjoint_sparse_table(const std::vector<S>& _a) { build(_a); }
+
+  disjoint_sparse_table& build(const std::vector<S>& _a) {
+    a = _a;
     n = int(a.size());
     log = 0;
     while ((1 << log) < n) log++;
@@ -40,6 +43,8 @@ public:
         logs[i] = k;
       }
     }
+
+    return *this;
   }
 
   S operator[](int i) const {
