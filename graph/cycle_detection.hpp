@@ -21,18 +21,18 @@ public:
     return m++;
   }
 
-  int len = -1;
+  int len = 0;
   std::vector<int> vertices, edges;
 
   cycle_detection& detect() {
     vertices.clear();
     edges.clear();
-    std::vector<int> visited(n);
+    std::vector<bool> processing(n), processed(n);
     auto dfs = [&](auto self, int v, int id) -> int {
-      if (visited[v] == 1) return v;
-      visited[v] = 1;
+      if (procesing[v]) return v;
+      processing[v] = true;
       for (auto e : g[v]) {
-        if (visited[e.to] == -1 || e.id == id) continue;
+        if (processed[e.to] == true || e.id == id) continue;
         int ret = self(self, e.to, e.id);
         if (ret == -1) continue;
         if (ret == n) return n;
@@ -40,11 +40,12 @@ public:
         edges.push_back(e.id);
         return ret == v ? n : ret;
       }
-      visited[v] = -1;
+      processing[v] = false;
+      processed[v] = true;
       return -1;
     };
     for (int v = 0; v < n; v++) {
-      if (!visited[v] && dfs(dfs, v, -1) == n) break;
+      if (!processed[v] && dfs(dfs, v, -1) == n) break;
     }
     std::reverse(vertices.begin(), vertices.end());
     std::reverse(edges.begin(), edges.end());
