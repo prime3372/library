@@ -8,7 +8,7 @@ namespace cp {
 
 template <bool is_directed> struct cycle_detection {
 public:  
-  cycle_detection() : cycle_detection(0) {}
+  cycle_detection() : n(0) {}
   explicit cycle_detection(int _n) : n(_n), g(_n) {}
 
   int add_edge(int from, int to) {
