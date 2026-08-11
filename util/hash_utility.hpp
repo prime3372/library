@@ -21,11 +21,11 @@ template <class T> requires is_integral_v<T>
 struct hash<T> {
   unsigned long long operator()(const T& x) const {
     static const unsigned long long fixed_random = mt64();
-    unsigned long long h = (unsigned long long)(x);
-    h += fixed_random;
-    h = (h ^ (h >> 30)) * 0xbf58476d1ce4e5b9;
-    h = (h ^ (h >> 27)) * 0x94d049bb133111eb;;
-    return h ^ (h >> 31);
+    unsigned long long hs = (unsigned long long)(x);
+    hs += fixed_random;
+    hs = (hs ^ (hs >> 30)) * 0xbf58476d1ce4e5b9;
+    hs = (hs ^ (hs >> 27)) * 0x94d049bb133111eb;;
+    return hs ^ (hs >> 31);
   }
 };
 
