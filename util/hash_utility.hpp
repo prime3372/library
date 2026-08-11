@@ -34,7 +34,6 @@ template <class T> void hash_combine(unsigned long long& seed, const T& val) {
   seed += fixed_random;
   seed ^= hash<T>()(val);
   seed = (seed ^ (seed >> 30)) * 0xbf58476d1ce4e5b9;
-  seed = (seed ^ (seed >> 27)) * 0x94d049bb133111eb;;
 }
 
 // string
