@@ -29,7 +29,7 @@ public:
     edges.clear();
     std::vector<bool> processing(n), processed(n);
     auto dfs = [&](auto self, int v, int id) -> int {
-      if (procesing[v]) return v;
+      if (processing[v]) return v;
       processing[v] = true;
       int ret = -1;
       for (auto e : g[v]) {
