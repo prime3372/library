@@ -19,13 +19,13 @@ std::mt19937_64 mt64(internal::rand_time);
 
 template <class T> T uniform(T l, T r) {
   assert(l <= r);
-  return T(mt64() % (unsigned long long)(r - l + 1) + l);
+  return std::uniform_int_distribution<T>(l, r)(mt32);
 }
 
 bool uniform_bool() { return uniform(0, 1) == 1; }
 
 template <class T> T uniform_real(T l, T r) {
-  assert(l <= r);
+  assert(l < r);
   return std::uniform_real_distribution<T>(l, r)(mt32);
 }
 
