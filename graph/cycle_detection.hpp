@@ -31,18 +31,18 @@ public:
     auto dfs = [&](auto self, int v, int id) -> int {
       if (procesing[v]) return v;
       processing[v] = true;
+      int ret = -1;
       for (auto e : g[v]) {
         if (processed[e.to] == true || e.id == id) continue;
-        int ret = self(self, e.to, e.id);
-        if (ret == -1) continue;
-        if (ret == n) return n;
-        vertices.push_back(v);
-        edges.push_back(e.id);
-        return ret == v ? n : ret;
+        ret = self(self, e.to, e.id);
+        if (ret != -1) break;
       }
       processing[v] = false;
       processed[v] = true;
-      return -1;
+      if (ret == -1 || ret == n) return ret;
+      vertices.push_back(v);
+      edges.push_back(e.id);
+      return ret == v ? n : ret;
     };
     for (int v = 0; v < n; v++) {
       if (!processed[v] && dfs(dfs, v, -1) == n) break;
