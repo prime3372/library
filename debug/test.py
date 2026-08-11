@@ -14,10 +14,10 @@ case_num = 50
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # colors
-BLUE = "\033[34m"
-YELLOW = "\033[33m"
-MAGENTA = "\033[35m"
 GREEN = "\033[32m"
+YELLOW = "\033[33m"
+BLUE = "\033[34m"
+MAGENTA = "\033[35m"
 RESET = "\033[0m"
 
 def main():
