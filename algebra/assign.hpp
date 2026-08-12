@@ -29,7 +29,7 @@ template <class M> struct assign {
   };
   static S mapping(F f, S x) { return f.id ? x : S{pow(f.val, x.len), x.len}; }
   static F composition(F g, F f) { return g.id ? f : g; }
-  static F id() { return F(); }
+  static F id() { return F{T(), true}; }
 
   static T pow(T x, size_t n) {
     T r = M::e();
