@@ -68,6 +68,22 @@ public:
   friend bool operator<=(const hash61& lhs, const hash61& rhs) { return lhs.v <= rhs.v; }
   friend bool operator>=(const hash61& lhs, const hash61& rhs) { return lhs.v >= rhs.v; }
 
+  hash61 pow(long long k) const {
+    assert(0 <= k);
+    hash61 x = *this, r = 1;
+    while (k) {
+      if (k & 1) r *= x;
+      x *= x;
+      k >>= 1;
+    }
+    return r;
+  }
+
+  hash61 inv() const {
+    assert(v);
+    return pow(m - 2);
+  }
+
   friend std::istream& operator>>(std::istream& is, hash61& hs) {
     long long t;
     is >> t;
