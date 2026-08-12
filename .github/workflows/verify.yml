@@ -73,7 +73,7 @@ jobs:
       if: ${{ !cancelled() }}
       with:
         name: timestamps
-        path: main/.verify-helper/timestamps-${{ matrix.id }}.json
+        path: .verify-helper/timestamps-${{ matrix.id }}.json
 
   post-verify:
     runs-on: ubuntu-latest
