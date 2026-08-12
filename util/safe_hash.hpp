@@ -20,13 +20,13 @@ namespace internal {
 static unsigned long long splitmix64(unsigned long long x) {
   static const unsigned long long fixed_rand = mt64();
   x += fixed_rand;
-  x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-  x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+  x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;
+  x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;
   return x ^ (x >> 31);
 }
 
 template <class T> void hash_combine(unsigned long long& seed, const T& val) {
-  seed = internal::splitmix64(seed) ^ (safe_hash<T>()(val) + (seed << 6) + (seed >> 2) + 0x9e3779b9);
+  seed ^= safe_hash<T>()(val) + (seed << 6) + (seed >> 2) + 0x9e3779b9ULL;
 }
 
 } // namespace internal
@@ -41,11 +41,12 @@ struct safe_hash<T> {
 template <class T> requires internal::is_signed_int128_v<T> || internal::is_unsigned_int128_v<T>
 struct safe_hash<T> {
   unsigned long long operator()(const T& x) const {
-    if ((x >> 64) == 0) {
-      return safe_hash<unsigned long long>()((unsigned long long)(x));
+    unsigned __int128 ux = x;
+    if ((ux >> 64) == 0) {
+      return safe_hash<unsigned long long>()((unsigned long long)(ux));
     }
     unsigned long long hs = 0;
-    internal::hash_combine(hs, (unsigned long long)((unsigned __int128)(x) >> 64));
+    internal::hash_combine(hs, (unsigned long long)(ux >> 64));
     internal::hash_combine(hs, (unsigned long long)(x));
     return hs;
   }
