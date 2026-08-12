@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "random/base.hpp"
-#include "util/hash_utility.hpp"
+#include "util/safe_hash.hpp"
 #include "util/io_utility.hpp"
 
 namespace cp {
@@ -66,7 +66,7 @@ private:
   Val default_value;
 
   unsigned int index(Key k) const {
-    unsigned int hs = (unsigned int)(internal::hash<Key>()(k) >> shift);
+    unsigned int hs = (unsigned int)(safe_hash<Key>()(k) >> shift);
     while (used[hs] && keys[hs] != k) hs = (hs + 1) & (cap - 1);
     return hs;
   }
@@ -79,7 +79,7 @@ private:
     std::vector<bool> u(cap);
     for (int i = 0; i < int(keys.size()); i++) {
       if (!used[i]) continue;
-      unsigned int hs = (unsigned int)(internal::hash<Key>()(keys[i]) >> shift);
+      unsigned int hs = (unsigned int)(safe_hash<Key>()(keys[i]) >> shift);
       while (u[hs]) hs = (hs + 1) & (cap - 1);
       k[hs] = keys[i];
       v[hs] = vals[i];

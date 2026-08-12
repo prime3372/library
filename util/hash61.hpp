@@ -6,7 +6,7 @@
 #include <random>
 
 #include "random/base.hpp"
-#include "util/hash_utility.hpp"
+#include "util/safe_hash.hpp"
 #include "util/io_utility.hpp"
 #include "util/type_traits.hpp"
 
@@ -108,13 +108,13 @@ private:
   }
 };
 
-namespace internal {
-
-template <> struct hash<hash61> {
+template <> struct safe_hash<hash61> {
   unsigned long long operator()(const hash61& hs) const {
-    return hash<unsigned long long>()(hs.val());
+    return safe_hash<unsigned long long>()(hs.val());
   }
 };
+
+namespace internal {
 
 template <> struct delimiter<hash61> {
   static constexpr char value[] = " ";

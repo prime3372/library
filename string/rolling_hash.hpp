@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "random/base.hpp"
-#include "util/hash_utility.hpp"
+#include "util/safe_hash.hpp"
 #include "util/hash61.hpp"
 
 namespace cp {
@@ -18,7 +18,7 @@ public:
     pw.resize(n + 1);
     pw[0] = 1;
     for (int i = 0; i < n; i++) {
-      hs[i + 1] = hs[i] * basis + internal::hash<std::decay_t<decltype(s[i])>>()(s[i]);
+      hs[i + 1] = hs[i] * basis + safe_hash<std::decay_t<decltype(s[i])>>()(s[i]);
       pw[i + 1] = pw[i] * basis;
     }
   }
@@ -31,7 +31,7 @@ public:
   template <class Str> static hash61 to_hash(const Str& s) {
     hash61 h = 0;
     for (int i = 0; i < int(s.size()); i++) {
-      h = h * basis + internal::hash<std::decay_t<decltype(s[i])>>()(s[i]);
+      h = h * basis + safe_hash<std::decay_t<decltype(s[i])>>()(s[i]);
     }
     return h;
   }

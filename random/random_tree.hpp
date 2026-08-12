@@ -27,7 +27,6 @@ std::vector<int> random_rooted_tree(int n, int root = 0) {
 
 std::vector<std::pair<int, int>> random_tree(int n) {
   assert(1 <= n);
-
   auto par = random_rooted_tree(n, uniform(0, n - 1));
 
   std::vector<std::pair<int, int>> edges;
