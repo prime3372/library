@@ -30,6 +30,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        pip3 install --upgrade pip
         pip3 install -U setuptools
         pip3 install -U online-judge-verify-helper
 
