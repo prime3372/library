@@ -33,7 +33,6 @@ jobs:
       run: pip3 install -U online-judge-verify-helper
 
     - name: Assign test files
-      working-directory: main
       run: |
         TEST_FILES=$(
           find verify -type f -name '*.test.cpp' | \
@@ -51,7 +50,6 @@ jobs:
         cat .verify-helper/targets.txt
 
     - name: Run tests
-      working-directory: main
       run: |
         set -eu
         if [ ! -f ./.verify-helper/timestamps.remote.json ]; then
