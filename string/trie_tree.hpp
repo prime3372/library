@@ -49,21 +49,21 @@ public:
     int v = search(s);
     return v == -1 ? 0 : count(v);
   }
-  int count(int v) const {
-    return nodes[v].end;
-  }
+  int count(int v) const { return nodes[v].end; }
 
   int prefix(const std::string& s) const {
     int v = search(s);
     return v == -1 ? 0 : prefix(v);
   }
-  int prefix(int v) const {
-    return nodes[v].mid;
-  }
+  int prefix(int v) const { return nodes[v].mid; }
 
-  int search(const std::string& s) const {
-    return search(0, s);
-  }
+  const std::array<int, char_size>& operator[](int v) const { return nodes[v].to; }
+
+  int next(int v, char c) const { return nodes[v].to[index(c)]; }
+
+  int parent(int v) const { return nodes[v].par; }
+
+  int search(const std::string& s) const { return search(0, s); }
   int search(int v, const std::string& s) const {
     for (char c : s) {
       v = next(v, c);
@@ -72,21 +72,7 @@ public:
     return v;
   }
 
-  const std::array<int, char_size>& operator[](int v) const {
-    return nodes[v].to;
-  }
-
-  int next(int v, char c) const {
-    return nodes[v].to[index(c)];
-  }
-
-  int parent(int v) const {
-    return nodes[v].par;
-  }
-
-  int size() const {
-    return int(nodes.size());
-  }
+  int size() const { return int(nodes.size()); }
 
 protected:
   constexpr int index(char c) const {
