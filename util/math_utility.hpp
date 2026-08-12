@@ -9,10 +9,21 @@ namespace cp {
 
 constexpr long long ipow(long long x, long long n) {
   assert(0 <= n);
-  unsigned long long r = 1;
+  long long r = 1;
   while (n) {
     if (n & 1) r *= x;
-    x *= (unsigned long long)(x);
+    x *= x;
+    n >>= 1;
+  }
+  return r;
+}
+
+constexpr __int128 ipow128(__int128 x, long long n) {
+  assert(0 <= n);
+  __int128 r = 1;
+  while (n) {
+    if (n & 1) r *= x;
+    x *= x;
     n >>= 1;
   }
   return r;
@@ -55,6 +66,17 @@ constexpr bool chmax(T& a, T b) {
     return true;
   }
   return false;
+}
+
+template <class Container>
+long long sum(const Container& a) {
+  return std::accumulate(a.begin(), a.end(), 0LL);
+}
+
+template <class Container>
+void sort_unique(const Container& a) {
+  std::sort(a.begin(), a.end());
+  a.erase(std::unique(a.begin(), a.end()), a.end());
 }
 
 } // namespace cp
