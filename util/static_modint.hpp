@@ -125,13 +125,13 @@ private:
 using modint998244353 = static_modint<998244353>;
 using modint1000000007 = static_modint<1000000007>;
 
-namespace internal {
-
 template <int m> struct safe_hash<static_modint<m>> {
   unsigned long long operator()(const static_modint<m>& x) const {
     return safe_hash<int>()(x.val());
   }
 };
+
+namespace internal {
 
 template <int m> struct delimiter<static_modint<m>> {
   static constexpr char value[] = " ";
