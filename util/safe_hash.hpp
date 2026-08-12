@@ -47,7 +47,7 @@ struct safe_hash<T> {
     }
     unsigned long long hs = 0;
     internal::hash_combine(hs, (unsigned long long)(ux >> 64));
-    internal::hash_combine(hs, (unsigned long long)(x));
+    internal::hash_combine(hs, (unsigned long long)(ux));
     return hs;
   }
 };
