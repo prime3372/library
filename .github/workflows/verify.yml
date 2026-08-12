@@ -26,13 +26,11 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.12.0
+        python-version: 3.11.9
 
     - name: Install dependencies
       run: |
-        pip3 install --upgrade pip
-        pip3 install -U setuptools wheel
-        pip3 install --force-reinstall -U online-judge-verify-helper[setuptools]
+        pip3 install -U online-judge-verify-helper
 
     - name: Assign test files
       run: |
