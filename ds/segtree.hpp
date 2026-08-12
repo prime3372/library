@@ -54,9 +54,6 @@ public:
 
   S all_prod() const { return d[1]; }
 
-  template <bool (*f)(S)> int max_right(int l) const {
-    return max_right(l, [](S x) { return f(x); });
-  }
   template <class F> int max_right(int l, F f) const {
     assert(0 <= l && l <= n);
     assert(f(M::e()));
@@ -81,9 +78,6 @@ public:
     return n;
   }
 
-  template <bool (*f)(S)> int min_left(int r) const {
-    return min_left(r, [](S x) { return f(x); });
-  }
   template <class F> int min_left(int r, F f) const {
     assert(0 <= r && r <= n);
     assert(f(M::e()));

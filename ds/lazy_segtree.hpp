@@ -104,9 +104,6 @@ public:
     }
   }
 
-  template <bool (*g)(S)> int max_right(int l) {
-    return max_right(l, [](S x) { return g(x); });
-  }
   template <class G> int max_right(int l, G g) {
     assert(0 <= l && l <= n);
     assert(g(M::e()));
@@ -133,9 +130,6 @@ public:
     return n;
   }
 
-  template <bool (*g)(S)> int min_left(int r) {
-    return min_left(r, [](S x) { return g(x); });
-  }
   template <class G> int min_left(int r, G g) {
     assert(0 <= r && r <= n);
     assert(g(M::e()));

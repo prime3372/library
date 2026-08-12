@@ -45,9 +45,6 @@ public:
 
   S all_prod() const { return root ? root->val : initial_vals[0]; }
 
-  template <bool (*f)(S)> size_t max_right(size_t l) {
-    return max_right(l, [](S x) { return f(x); });
-  }
   template <class F> size_t max_right(size_t l, F f) {
     assert(l <= n);
     assert(f(M::e()));
@@ -55,9 +52,6 @@ public:
     return max_right(root, 0, sz, 0, product, l, f);
   }
 
-  template <bool (*f)(S)> size_t min_left(size_t r) {
-    return min_left(r, [](S x) { return f(x); });
-  }
   template <class F> size_t min_left(size_t r, F f) {
     assert(r <= n);
     assert(f(M::e()));
