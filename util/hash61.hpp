@@ -78,7 +78,6 @@ public:
     }
     return r;
   }
-
   hash61 inv() const {
     assert(v);
     return pow(m - 2);
