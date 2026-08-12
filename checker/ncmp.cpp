@@ -1,6 +1,8 @@
 #include "checker/common.hpp"
 #include <iomanip>
 
+constexpr int display_max = 30;
+
 int main(int argc, char** argv) {
   open_files(argc, argv);
 
@@ -37,7 +39,7 @@ int main(int argc, char** argv) {
       std::cout << "expected: '" << n_j << "', ";
       std::cout << "found: '" << n_p << "'" << std::endl;
       return _wa;
-    } else if (cnt <= 5) {
+    } else if (cnt <= display_max) {
       if (!t_first.empty()) {
         t_first.push_back(' ');
       }
@@ -56,7 +58,7 @@ int main(int argc, char** argv) {
     return _wa;
   }
 
-  if (cnt <= 5) {
+  if (cnt <= display_max) {
     std::cout << "ok "<< cnt << " number(s): \"" << t_first << "\"" << std::endl;
   } else {
     std::cout << "ok " << cnt << " numbers" << std::endl;
