@@ -9,8 +9,6 @@
 #include "util/io_utility.hpp"
 #include "util/type_traits.hpp"
 
-#error
-
 namespace cp {
 
 template <int m> requires (1 <= m) struct static_modint {
