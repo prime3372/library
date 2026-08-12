@@ -26,37 +26,26 @@ static unsigned long long splitmix64(unsigned long long x) {
 }
 
 template <class T> void hash_combine(unsigned long long& seed, const T& val) {
-  seed = internal::splitmix64(seed) ^ (safe_hash<T>()(val) + 0x9e3779b9 + (seed << 6) + (seed >> 2));
+  seed = internal::splitmix64(seed) ^ (safe_hash<T>()(val) + (seed << 6) + (seed >> 2) + 0x9e3779b9);
 }
 
 } // namespace internal
 
 template <class T> requires internal::is_integral_v<T> && (sizeof(T) <= 8)
 struct safe_hash<T> {
-  unsigned long long operator()(T x) const {
+  unsigned long long operator()(const T& x) const {
     return internal::splitmix64((unsigned long long)(x));
   }
 };
 
-template <> struct safe_hash<__int128> {
-  unsigned long long operator()(__int128 x) const {
+template <class T> requires internal::is_signed_int128_v<T> || internal::is_unsigned_int128_v<T>
+struct safe_hash<T> {
+  unsigned long long operator()(const T& x) const {
     if ((x >> 64) == 0) {
       return safe_hash<unsigned long long>()((unsigned long long)(x));
     }
     unsigned long long hs = 0;
     internal::hash_combine(hs, (unsigned long long)((unsigned __int128)(x) >> 64));
-    internal::hash_combine(hs, (unsigned long long)(x));
-    return hs;
-  }
-};
-
-template <> struct safe_hash<unsigned __int128> {
-  unsigned long long operator()(unsigned __int128 x) const {
-    if ((x >> 64) == 0) {
-      return safe_hash<unsigned long long>()((unsigned long long)(x));
-    }
-    unsigned long long hs = 0;
-    internal::hash_combine(hs, (unsigned long long)(x >> 64));
     internal::hash_combine(hs, (unsigned long long)(x));
     return hs;
   }
