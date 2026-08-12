@@ -8,9 +8,9 @@ namespace cp {
 
 namespace internal {
 
-unsigned int rand_time = (unsigned int)(std::chrono::duration_cast<std::chrono::nanoseconds>(
-                                        std::chrono::high_resolution_clock::now().time_since_epoch())
-                                        .count());
+const unsigned int rand_time = (unsigned int)(std::chrono::duration_cast<std::chrono::nanoseconds>(
+                                              std::chrono::high_resolution_clock::now().time_since_epoch())
+                                              .count());
 
 } // namespace internal
 
