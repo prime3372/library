@@ -29,7 +29,9 @@ jobs:
         python-version: 3.12.0
 
     - name: Install dependencies
-      run: pip3 install -U online-judge-verify-helper
+      run: |
+        pip3 install -U setuptools
+        pip3 install -U online-judge-verify-helper
 
     - name: Assign test files
       run: |
