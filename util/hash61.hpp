@@ -69,7 +69,7 @@ public:
   friend bool operator>=(const hash61& lhs, const hash61& rhs) { return lhs.v >= rhs.v; }
 
   friend std::istream& operator>>(std::istream& is, hash61& hs) {
-    unsigned long long t;
+    long long t;
     is >> t;
     hs = t;
     return is;
