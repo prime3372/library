@@ -37,18 +37,21 @@ jobs:
 
     - name: Assign test files
       run: |
-        TEST_FILES=$(
-          find . -type f -name '*.test.cpp' | \
-          sort | \
-          awk -v n=${{ strategy.job-total }} \
-              -v i=${{ strategy.job-index }} \
-              '{
-                if((NR - 1) % n == i) {
-                  print $0
-                }
-              }' \
-          )
-        echo ${TEST_FILES} > .verify-helper/targets.txt
+        FILES=$(find . -type f -name '*.test.cpp' | sort)
+
+        mapfile -t FILE_ARRAY <<< "$FILES"
+        TOTAL_FILES=${#FILE_ARRAY[@]}
+
+        INDEX=${{ strategy.job-index }}
+        TOTAL=${{ strategy.job-total }}
+
+        START=$(( INDEX * TOTAL_FILES / TOTAL ))
+        END=$(( (INDEX + 1) * TOTAL_FILES / TOTAL ))
+        LEN=$(( END - START ))
+
+        TARGETS="${FILE_ARRAY[@]:START:LEN}"
+
+        echo ${TARGETS} > .verify-helper/targets.txt
         cat .verify-helper/targets.txt
 
     - name: Run tests
