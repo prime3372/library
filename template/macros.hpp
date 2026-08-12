@@ -5,7 +5,6 @@
 #define rrep(i, a, b)  for (int i = int(b) - 1; i >= (a); i--)
 #define RREP(i, a, b)  for (int i = int(b); i >= (a); i--)
 #define fore(x, a)     for (auto& x : (a))
-#define elif           else if
 #define all(a)         (a).begin(), (a).end()
 
 #ifdef LOCAL
