@@ -6,6 +6,8 @@
 using namespace std;
 using namespace cp;
 
+#error
+
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
