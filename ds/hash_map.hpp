@@ -15,7 +15,7 @@ namespace cp {
 
 template <class Key, class Val> struct hash_map {
 public:
-  hash_map() : cap(8), sz(0), shift(61), r(mt64()), keys(cap), vals(cap), used(cap), default_value() {}
+  hash_map() : cap(8), sz(0), shift(61), keys(cap), vals(cap), used(cap), default_value() {}
 
   Val& operator[](Key k) {
     unsigned int i = index(k);
@@ -60,7 +60,6 @@ public:
 
 private:
   unsigned int cap, sz, shift;
-  unsigned long long r;
   std::vector<Key> keys;
   std::vector<Val> vals;
   std::vector<bool> used;

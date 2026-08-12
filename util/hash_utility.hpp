@@ -17,7 +17,7 @@ namespace internal {
 
 template <class T> struct hash {};
 
-template <class T> requires is_integral_v<T>
+template <class T> requires (is_integral_v<T> && !(is_signed_int128_v<T> || is_unsigned_int128_v<T>))
 struct hash<T> {
   unsigned long long operator()(const T& x) const {
     static const unsigned long long fixed_random = mt64();
@@ -35,6 +35,24 @@ template <class T> void hash_combine(unsigned long long& seed, const T& val) {
   seed ^= hash<T>()(val);
   seed = (seed ^ (seed >> 30)) * 0xbf58476d1ce4e5b9;
 }
+
+template <> struct hash<__int128> {
+  unsigned long long operator()(const __int128& x) const {
+    unsigned long long hs = 0;
+    hash_combine(hs, (unsigned long long)((unsigned __int128)(x) >> 64));
+    hash_combine(hs, (unsigned long long)(x));
+    return hs;
+  }
+};
+
+template <> struct hash<unsigned __int128> {
+  unsigned long long operator()(const unsigned __int128& x) const {
+    unsigned long long hs = 0;
+    hash_combine(hs, (unsigned long long)(x >> 64));
+    hash_combine(hs, (unsigned long long)(x));
+    return hs;
+  }
+};
 
 // string
 
