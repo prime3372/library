@@ -8,8 +8,7 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using M = affine<mint>;
-using S = M::S;
+using M = alg::affine<mint>;
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -30,8 +29,7 @@ int main() {
       int l, r;
       mint x;
       cin >> l >> r >> x;
-      S f = seg.prod(l, r);
-      cout << f.a * x + f.b << "\n";
+      cout << seg.prod(l, r)(x) << "\n";
     }
   }
 }

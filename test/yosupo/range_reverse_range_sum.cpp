@@ -16,7 +16,7 @@ int main() {
   cin >> n >> q;
   vector<ll> a(n);
   rep(i, 0, n) cin >> a[i];
-  segtreap<add<ll>> seg(a);
+  segtreap<alg::add<ll>> seg(a);
   while (q--) {
     bool t;
     cin >> t;

@@ -7,13 +7,12 @@
 
 namespace cp {
 
+namespace alg {
+
 template <class T> struct sum_affine {
   struct S {
     T val;
     size_t len;
-    S() : val(0), len(0) {}
-    S(T v) : val(v), len(1) {}
-    S(T v, size_t l) : val(v), len(l) {}
 
     // for debugging
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
@@ -29,5 +28,7 @@ template <class T> struct sum_affine {
   static F composition(F g, F f) { return affine<T>::op(f, g); }
   static F id() { return affine<T>::e(); }
 };
+
+} // namespace alg
 
 } // namespace cp

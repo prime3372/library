@@ -2,6 +2,8 @@
 
 namespace cp {
 
+namespace alg {
+
 template <class T> struct bitwise_xor_and {
   using S = T;
   static S op(S x, S y) { return x ^ y; }
@@ -12,5 +14,7 @@ template <class T> struct bitwise_xor_and {
   static F composition(F g, F f) { return g & f; }
   static F id() { return -1; }
 };
+
+} // namespace alg
 
 } // namespace cp

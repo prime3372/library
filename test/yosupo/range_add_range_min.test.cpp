@@ -16,7 +16,7 @@ int main() {
   cin >> n >> q;
   vector<ll> a(n);
   rep(i, 0, n) cin >> a[i];
-  lazy_segtree<min_add<ll, ll(1e18)>> seg(a);
+  lazy_segtree<alg::min_add<ll, ll(1e18)>> seg(a);
   while (q--) {
     bool t;
     cin >> t;

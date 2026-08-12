@@ -4,6 +4,8 @@
 
 namespace cp {
 
+namespace alg {
+
 template <class T, T lower> struct max_max {
   using S = T;
   static S op(S x, S y) { return std::max(x, y); }
@@ -14,5 +16,7 @@ template <class T, T lower> struct max_max {
   static F composition(F g, F f) { return std::max(g, f); }
   static F id() { return lower; }
 };
+
+} // namespace alg
 
 } // namespace cp

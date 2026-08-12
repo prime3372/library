@@ -9,24 +9,22 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using S = typename sum_affine<mint>::S;
-using F = typename sum_affine<mint>::F;
+using M = alg::sum_affine<mint>;
 
 int main() {
   int n;
   cin >> n;
-  std::vector<S> a(n);
+  std::vector<M::S> a(n);
   rep(i, 0, n) {
-    mint ai;
-    cin >> ai;
-    a[i] = S{ai, 1};
+    cin >> a[i].val;
+    a[i].len = 1;
   }
-  rerooting_dp<sum_affine<mint>> rerooting(a);
+  rerooting_dp<M> rerooting(a);
   rep(i, 0, n - 1) {
     int u, v;
     mint b, c;
     cin >> u >> v >> b >> c;
-    rerooting.add_edge(u, v, F{b, c});
+    rerooting.add_edge(u, v, {b, c});
   }
-  for (S p : rerooting.build().ans) cout << p.val << " ";
+  for (auto p : rerooting.build().ans) cout << p.val << " ";
 }

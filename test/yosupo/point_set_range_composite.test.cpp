@@ -9,15 +9,14 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using M = affine<mint>;
-using S = affine<mint>::S;
+using M = alg::affine<mint>;
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  vector<S> a(n);
+  vector<M::S> a(n);
   rep(i, 0, n) cin >> a[i].a >> a[i].b;
   segtree<M> seg(a);
   while (q--) {
@@ -32,8 +31,7 @@ int main() {
       int l, r;
       mint x;
       cin >> l >> r >> x;
-      S f = seg.prod(l, r);
-      cout << f.a * x + f.b << "\n";
+      cout << seg.prod(l, r)(x) << "\n";
     }
   }
 }

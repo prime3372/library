@@ -11,7 +11,7 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 using mint = modint998244353;
-using M = affine<mint>;
+using M = alg::affine<mint>;
 
 struct Rev_M {
   using S = M::S;

@@ -13,7 +13,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  segtree<cp::max<bool, false>> seg(n);
+  segtree<alg::max<bool, false>> seg(n);
   rep(i, 0, n) {
     char ti;
     cin >> ti;

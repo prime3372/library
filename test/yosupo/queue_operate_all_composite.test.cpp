@@ -8,8 +8,7 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using M = affine<mint>;
-using S = affine<mint>::S;
+using M = alg::affine<mint>;
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -29,8 +28,7 @@ int main() {
     } else {
       mint x;
       cin >> x;
-      S f = swag.prod();
-      cout << f.a * x + f.b << "\n";
+      cout << swag.prod()(x) << "\n";
     }
   }
 }

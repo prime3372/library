@@ -10,21 +10,17 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using A = affine<mint>::S;
-using M = assign<affine<mint>>;
-using S = M::S;
-using F = M::F;
+using M = alg::assign<alg::affine<mint>>;
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  vector<S> f(n);
+  vector<M::S> f(n);
   rep(i, 0, n) {
-    mint a, b;
-    cin >> a >> b;
-    f[i] = {{a, b}, 1};
+    cin >> f[i].val.a >> f[i].val.b;
+    f[i].len = 1;
   }
   lazy_segtree<M> seg(f);
   while (q--) {
@@ -34,13 +30,12 @@ int main() {
       int l, r;
       mint c, d;
       cin >> l >> r >> c >> d;
-      seg.apply(l, r, F{A{c, d}});
+      seg.apply(l, r, {{c, d}, false});
     } else {
       int l, r;
       mint x;
       cin >> l >> r >> x;
-      S prod = seg.prod(l, r);
-      cout << prod.val.a * x + prod.val.b << "\n";
+      cout << seg.prod(l, r).val(x) << "\n";
     }
   }
 }

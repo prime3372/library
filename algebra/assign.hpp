@@ -5,16 +5,16 @@
 
 namespace cp {
 
+namespace alg {
+
 template <class M> struct assign {
   using T = typename M::S;
 
   struct S {
     T val;
     size_t len;
-    S() : val(M::e()), len(0) {}
-    S(T v) : val(v), len(1) {}
-    S(T v, size_t l) : val(v), len(l) {}
 
+    // for debugging
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
       os << x.val;
       return os;
@@ -26,8 +26,6 @@ template <class M> struct assign {
   struct F {
     T val;
     bool id;
-    F() : val(), id(true) {}
-    F(T v) : val(v), id(false) {}
   };
   static S mapping(F f, S x) { return f.id ? x : S{pow(f.val, x.len), x.len}; }
   static F composition(F g, F f) { return g.id ? f : g; }
@@ -43,5 +41,7 @@ template <class M> struct assign {
     return r;
   }
 };
+
+} // namespace alg
 
 } // namespace cp

@@ -5,13 +5,12 @@
 
 namespace cp {
 
+namespace alg {
+
 template <class T> struct sum_assign {
   struct S {
     T val;
     size_t len;
-    S() : val(0), len(0) {}
-    S(T v) : val(v), len(1) {}
-    S(T v, size_t l) : val(v), len(l) {}
 
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
       os << x.val;
@@ -24,12 +23,12 @@ template <class T> struct sum_assign {
   struct F {
     T val;
     bool id;
-    F() : val(), id(true) {}
-    F(T v) : val(v), id(false) {}
   };
   static S mapping(F f, S x) { return f.id ? x : S{f.val * x.len, x.len}; }
   static F composition(F g, F f) { return g.id ? f : g; }
   static F id() { return F(); }
 };
+
+} // namespace alg
 
 } // namespace cp

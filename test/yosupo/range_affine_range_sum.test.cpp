@@ -9,15 +9,14 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using M = sum_affine<mint>;
-using S = M::S;
+using M = alg::sum_affine<mint>;
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  vector<S> a(n);
+  vector<M::S> a(n);
   rep(i, 0, n) {
     cin >> a[i].val;
     a[i].len = 1;
