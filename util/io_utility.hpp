@@ -103,6 +103,43 @@ ostream& operator<<(ostream& os, unsigned __int128 val) {
 // forward declarations
 
 template <class T, class Alloc>
+istream& operator>>(istream& is, deque<T, Alloc>& dq);
+
+template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
+istream& operator>>(istream& is, Tuple& t);
+
+template <class T, class Alloc>
+istream& operator>>(istream& os, vector<T, Alloc>& v);
+
+// deque
+
+template <class T, class Alloc>
+istream& operator>>(istream& is, deque<T, Alloc>& dq) {
+  for (auto& x : dq) is >> x;
+  return is;
+}
+
+// tuple_like (array, pair, tuple)
+
+template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
+istream& operator>>(istream& is, Tuple& t) {
+  [&]<size_t... I>(index_sequence<I...>) {
+    (is >> ... >> get<I>(t));
+  }(make_index_sequence<tuple_size_v<Tuple>>());
+  return is;
+}
+
+// vector
+
+template <class T, class Alloc>
+istream& operator>>(istream& is, vector<T, Alloc>& v) {
+  for (auto& x : v) is >> x;
+  return is;
+}
+
+// forward declarations
+
+template <class T, class Alloc>
 ostream& operator<<(ostream& os, const deque<T, Alloc>& dq);
 
 template <class Key, class Val, class Comp, class Alloc>
