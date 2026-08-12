@@ -32,7 +32,7 @@ jobs:
       run: |
         pip3 install --upgrade pip
         pip3 install -U setuptools wheel
-        pip3 install --force-reinstall -U online-judge-verify-helper
+        pip3 install --force-reinstall -U online-judge-verify-helper[setuptools]
 
     - name: Assign test files
       run: |
