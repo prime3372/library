@@ -17,7 +17,7 @@ template <class Key, class Val> struct hash_map {
 public:
   hash_map() : cap(8), sz(0), shift(61), keys(cap), vals(cap), used(cap), default_value() {}
 
-  Val& operator[](Key k) {
+  Val& operator[](const Key& k) {
     unsigned int i = index(k);
     if (used[i]) return vals[i];
     if (sz + sz / 4 >= cap) {
@@ -30,12 +30,12 @@ public:
     return vals[i] = default_value;
   }
 
-  const Val& get(Key k) const {
+  const Val& get(const Key& k) const {
     unsigned int i = index(k);
     return used[i] ? vals[i] : default_value;
   }
 
-  bool count(Key k) const {
+  bool count(const Key& k) const {
     unsigned int i = index(k);
     return used[i];
   }
@@ -65,7 +65,7 @@ private:
   std::vector<bool> used;
   Val default_value;
 
-  unsigned int index(Key k) const {
+  unsigned int index(const Key& k) const {
     unsigned int hs = (unsigned int)(safe_hash<Key>()(k) >> shift);
     while (used[hs] && keys[hs] != k) hs = (hs + 1) & (cap - 1);
     return hs;
