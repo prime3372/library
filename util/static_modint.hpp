@@ -84,7 +84,7 @@ public:
     return r;
   }
   mint inv() const {
-    if constexpr (prime) {
+    if (prime) {
       assert(v);
       return pow(umod() - 2);
     } else {

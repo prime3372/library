@@ -13,7 +13,7 @@ int length_of_lis(const std::vector<T>& a) {
   int ans = 0;
   for (int i = 0; i < n; i++) {
     int j;
-    if constexpr (strong) {
+    if (strong) {
       j = int(std::lower_bound(dp.begin(), dp.end(), a[i]) - dp.begin());
     } else {
       j = int(std::upper_bound(dp.begin(), dp.end(), a[i]) - dp.begin());

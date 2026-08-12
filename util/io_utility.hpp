@@ -238,7 +238,7 @@ ostream& operator<<(ostream& os, const set<T, Comp, Alloc>& s) {
 template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
 ostream& operator<<(ostream& os, const Tuple& t) {
   static constexpr size_t n = tuple_size_v<Tuple>; 
-  if constexpr (n == 0) return os;
+  if (n == 0) return os;
   [&]<size_t... I>(index_sequence<I...>) {
     ([&]<class T>(const T& x) {
       os << x << cp::internal::delimiter_v<T>;

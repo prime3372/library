@@ -11,7 +11,7 @@ public:
 
   void add(T a, T b) {
     if (!ls.emtpy()) {
-      if constexpr (is_max) assert(ls.back().a <= a);
+      if (is_max) assert(ls.back().a <= a);
       else assert(a <= ls.back().a);
     }
     line l(a, b);
