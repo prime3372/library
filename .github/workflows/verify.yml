@@ -40,13 +40,13 @@ jobs:
         FILES=$(find . -type f -name '*.test.cpp' | sort)
 
         mapfile -t FILE_ARRAY <<< "$FILES"
-        TOTAL_FILES=${#FILE_ARRAY[@]}
+        FILE_NUM=${#FILE_ARRAY[@]}
 
         INDEX=${{ strategy.job-index }}
         TOTAL=${{ strategy.job-total }}
 
-        START=$(( INDEX * TOTAL_FILES / TOTAL ))
-        END=$(( (INDEX + 1) * TOTAL_FILES / TOTAL ))
+        START=$(( INDEX * FILE_NUM / TOTAL ))
+        END=$(( (INDEX + 1) * FILE_NUM / TOTAL ))
         LEN=$(( END - START ))
 
         TARGETS="${FILE_ARRAY[@]:START:LEN}"
