@@ -31,8 +31,8 @@ jobs:
     - name: Install dependencies
       run: |
         pip3 install --upgrade pip
-        pip3 install -U setuptools
-        pip3 install -U online-judge-verify-helper
+        pip3 install -U setuptools wheel
+        pip3 install --force-reinstall -U online-judge-verify-helper
 
     - name: Assign test files
       run: |
