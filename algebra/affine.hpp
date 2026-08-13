@@ -12,7 +12,6 @@ template <class T> struct affine {
 
     T operator()(T x) const { return a * x + b; }
 
-    // for debugging
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
       os << x.a << "x + " << x.b;
       return os;

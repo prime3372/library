@@ -49,7 +49,6 @@ public:
     return int(d.size());
   }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os,
                                   coordinate_compression& cc) {
     for (int i = 0; i < cc.size(); i++) {

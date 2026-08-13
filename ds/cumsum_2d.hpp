@@ -70,7 +70,6 @@ public:
   int height() const { return h; }
   int width() const { return w; }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os, const cumsum_2d& sum) {
     for (int i = 0; i < sum.h; i++) {
       for (int j = 0; j < sum.w; j++) {

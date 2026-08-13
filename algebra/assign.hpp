@@ -14,7 +14,6 @@ template <class M> struct assign {
     T val;
     size_t len;
 
-    // for debugging
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
       os << x.val;
       return os;

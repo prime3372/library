@@ -41,7 +41,6 @@ public:
 
   int size() const { return sz; }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os, const hash_set& s) {
     os << s.enumerate();
     return os;

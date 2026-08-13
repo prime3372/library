@@ -82,7 +82,6 @@ public:
 
   int size() const { return size(root); }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os, const treap_base& tp) {
     for (int i = 0; i < tp.size(); i++) {
       os << tp[i];

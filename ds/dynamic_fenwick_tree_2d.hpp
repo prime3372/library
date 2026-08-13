@@ -82,7 +82,6 @@ public:
   int height() const { return h; }
   size_t width() const { return w; }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_fenwick_tree_2d& fw) {
     for (int i = 0; i < fw.h; i++) {

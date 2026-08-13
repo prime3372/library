@@ -36,7 +36,6 @@ public:
     pos++;
   }
   
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os, const simple_queue& que) {
     for (int i = que.pos; i < int(que.payload.size()); i++) {
       os << que.payload[i];

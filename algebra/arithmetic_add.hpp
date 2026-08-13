@@ -12,7 +12,6 @@ template <class T> struct arithmetic_add {
     T val_sum;
     size_t index_sum, len;
 
-    // for debugging
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
       os << x.val_sum;
       return os;

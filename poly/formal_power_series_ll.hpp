@@ -85,7 +85,6 @@ public:
   void swap(fps& other) { a.swap(other.a); }
   void clear() { a.clear(); }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
     for (int i = 0; i < rhs.size(); i++) {
       os << rhs.a[i];

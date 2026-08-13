@@ -12,7 +12,6 @@ template <class T> struct sum_assign {
     T val;
     size_t len;
 
-    // for debugging
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
       os << x.val;
       return os;

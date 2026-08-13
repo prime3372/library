@@ -61,7 +61,6 @@ public:
 
   int size() const { return n; }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os,
                                   const disjoint_sparse_table& dst) {
     for (int i = 0; i < dst.n; i++) {

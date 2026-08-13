@@ -158,7 +158,6 @@ public:
 
   int size() const { return n; }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os, lazy_segtree& seg) {
     for (int i = 0; i < seg.n; i++) {
       os << seg[i];

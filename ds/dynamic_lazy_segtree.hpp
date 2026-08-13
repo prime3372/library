@@ -72,7 +72,6 @@ public:
 
   size_t size() const { return n; }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_lazy_segtree& seg) {
     for (size_t i = 0; i < std::min<size_t>(seg.n, 20); i++) {

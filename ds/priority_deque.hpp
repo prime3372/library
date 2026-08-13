@@ -59,7 +59,6 @@ public:
 
   void clear() { d.resize(2); }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os, priority_deque pq) {
     while (!pq.empty()) {
       os << pq.min();

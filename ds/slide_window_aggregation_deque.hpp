@@ -47,7 +47,6 @@ public:
   int size() { return int(a0.size() + a1.size()); }
   bool empty() { return size() == 0; }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os, slide_window_aggregation_deque swag) {
     while (!swag.empty()) {
       os << swag.front();

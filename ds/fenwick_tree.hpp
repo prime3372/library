@@ -83,7 +83,6 @@ public:
 
   int size() const { return n; }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os, const fenwick_tree& fw) {
     for (int i = 0; i < fw.n; i++) {
       os << fw[i];

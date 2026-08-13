@@ -81,7 +81,6 @@ public:
     return r;
   }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os, const matrix& mat) {
     for (int i = 0; i < mat.h; i++) {
       for (int j = 0; j < mat.w; j++) {

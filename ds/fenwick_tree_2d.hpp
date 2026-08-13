@@ -80,7 +80,6 @@ public:
   int height() const { return h; }
   int width() const { return w; }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os, const fenwick_tree_2d& fw) {
     for (int i = 0; i < fw.h; i++) {
       for (int j = 0; j < fw.w; j++) {

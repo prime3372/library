@@ -50,7 +50,6 @@ public:
 
   void set_default(const Val& v) { default_value = v; }
 
-  // for debugging
   friend std::ostream& operator<<(std::ostream& os, const hash_map& mp) {
     os << mp.enumerate();
     return os;
