@@ -15,24 +15,21 @@ constexpr bool is_prime(long long n) {
   long long d = n - 1;
   while (d % 2 == 0) d /= 2;
 
-  std::vector<long long> bases = n < 4759123141 ?
-                                 std::vector<long long>{2, 7, 61} :
-                                 std::vector<long long>{2, 325, 9375, 28178, 450775, 9780504, 1795265022};
+  auto bases = n < 4759123141 ?
+               std::vector<long long>{2, 7, 61} :
+               std::vector<long long>{2, 325, 9375, 28178, 450775, 9780504, 1795265022};
 
   for (long long a : bases) {
     if (a % n == 0) continue;
+    long long t = d;
     __int128 y = pow_mod(a, d, n);
-    if (y == 1) continue;
-
-    bool ok = false;
-    for (long long t = d; t != n - 1; t *= 2) {
-      if (y == n - 1) {
-        ok = true;
-        break;
-      }
+    while (t != n - 1 && y != 1 && y != n - 1) {
       y = y * y % n;
+      t <<= 1;
     }
-    if (!ok) return false;
+    if (y != n - 1 && t % 2 == 0) {
+      return false;
+    }
   }
   return true;
 }

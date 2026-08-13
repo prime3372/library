@@ -6,13 +6,46 @@
 
 #include "number/is_prime.hpp"
 #include "number/pow_mod.hpp"
-#include "number/primitive_root_constexpr.hpp"
 #include "util/type_traits.hpp"
 #include "util/static_modint.hpp"
 
 namespace cp {
 
 namespace internal {
+
+// @param m must be prime
+// @return primitive root (and minimum in now)
+constexpr int primitive_root_ntt(int m) {
+  if (m == 2) return 1;
+  if (m == 167772161) return 3;
+  if (m == 469762049) return 3;
+  if (m == 754974721) return 11;
+  if (m == 998244353) return 3;
+  int divs[20] = {};
+  divs[0] = 2;
+  int cnt = 1;
+  int x = (m - 1) / 2;
+  while (x % 2 == 0) x /= 2;
+  for (int i = 3; 1LL * i * i <= x; i += 2) {
+    if (x % i == 0) {
+      divs[cnt++] = i;
+      while (x % i == 0) x /= i;      
+    }
+  }
+  if (x > 1) {
+    divs[cnt++] = x;  
+  }
+  for (int g = 2;; g++) {
+    bool ok = true;
+    for (int i = 0; i < cnt; i++) {
+      if (pow_mod(g, (m - 1) / divs[i], m) == 1) {
+        ok = false;
+        break;
+      }
+    }
+    if (ok) return g;
+  }
+}
 
 template <class mint, int g> std::vector<mint> ntt_root() {
   constexpr int rank2 = std::countr_zero((unsigned int)(mint::mod() - 1));
@@ -78,7 +111,7 @@ std::vector<mint> convolution_naive(const std::vector<mint>& a,
 template <class mint>
   requires internal::is_static_modint_v<mint> && (is_prime(mint::mod()))
 std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
-  static constexpr int g = internal::primitive_root_constexpr(mint::mod());
+  static constexpr int g = internal::primitive_root_ntt(mint::mod());
   static constexpr int ig = pow_mod(g, mint::mod() - 2, mint::mod());
 
   int n = int(a.size()), m = int(b.size());

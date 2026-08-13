@@ -7,10 +7,10 @@ namespace cp {
 
 namespace internal {
 
-constexpr unsigned long long floor_sum_unsigned(unsigned long long n,
-                                                unsigned long long m,
-                                                unsigned long long a,
-                                                unsigned long long b) {
+unsigned long long floor_sum_unsigned(unsigned long long n,
+                                      unsigned long long m,
+                                      unsigned long long a,
+                                      unsigned long long b) {
   unsigned long long ans = 0;
   while (true) {
     if (a >= m) {
@@ -34,7 +34,7 @@ constexpr unsigned long long floor_sum_unsigned(unsigned long long n,
 } // namespace internal
 
 // @param 0 <= n,m < 2^32
-constexpr long long floor_sum(long long n, long long m, long long a, long long b) {
+long long floor_sum(long long n, long long m, long long a, long long b) {
   assert(0 <= n && n < (1LL << 32));
   assert(1 <= m && m < (1LL << 32)); 
   unsigned long long ans = 0;

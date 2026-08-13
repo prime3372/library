@@ -9,7 +9,7 @@
 
 namespace cp {
 
-constexpr long long ipow(long long x, long long n) {
+long long ipow(long long x, long long n) {
   assert(0 <= n);
   long long r = 1;
   while (n) {
@@ -20,7 +20,7 @@ constexpr long long ipow(long long x, long long n) {
   return r;
 }
 
-constexpr __int128 ipow128(__int128 x, long long n) {
+__int128 ipow128(__int128 x, long long n) {
   assert(0 <= n);
   __int128 r = 1;
   while (n) {
@@ -32,7 +32,7 @@ constexpr __int128 ipow128(__int128 x, long long n) {
 }
 
 template <class T> requires internal::is_integral_v<T>
-constexpr T isqrt(T x) {
+T isqrt(T x) {
   assert(0 <= x);
   T y = T(std::sqrt(double(x)));
   if (sizeof(T) > 8ULL) {
@@ -44,7 +44,7 @@ constexpr T isqrt(T x) {
 }
 
 template <class T> requires internal::is_integral_v<T>
-constexpr T icbrt(T x) {
+T icbrt(T x) {
   assert(0 <= x);
   T y = T(std::cbrt(double(x)));
   while (y && y * y > x / y) y--;
@@ -52,8 +52,7 @@ constexpr T icbrt(T x) {
   return y;
 }
 
-template <class T>
-constexpr bool chmin(T& a, T b) {
+template <class T> bool chmin(T& a, T b) {
   if (b < a) {
     a = b;
     return true;
@@ -61,8 +60,7 @@ constexpr bool chmin(T& a, T b) {
   return false;
 }
 
-template <class T>
-constexpr bool chmax(T& a, T b) {
+template <class T> bool chmax(T& a, T b) {
   if (b > a) {
     a = b;
     return true;
