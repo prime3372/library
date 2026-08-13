@@ -3,32 +3,23 @@
 #include <cassert>
 #include <cmath>
 
-#include "util/math_utility.hpp"
-#include "util/type_traits.hpp"
-
 namespace cp {
 
-template <class T> requires internal::is_integral_v<T>
-T kth_root(T x, int k) {
-  assert(0 <= x && 1 <= k);
+// @return floor(a^(1/k))
+unsigned long long kth_root(unsigned long long x, unsigned long long k) {
   if (x <= 1 || k == 1) return x;
-  if (k == 2) return isqrt(x);
-  if (k == 3) return icbrt(x);
-
-  auto is_small_enough = [&](T y) {
-    if (y == 0) return true;
-    T z = 1;
-    for (int i = k; i; i >>= 1) {
-      if (i & 1) z *= y;      
-      if (i > 1) {
-        if (z > x / y / y) return false;
-        y *= y;
-      }
+  if (64 <= k) return 1;
+  auto is_small_enough = [&](unsigned __int128 y) {
+    unsigned __int128 z = 1;
+    unsigned long long p = k;
+    while (p) {
+      if (p & 1) z *= y;
+      y *= y;
+      p >>= 1;
     }
     return z <= x;
   };
-
-  T y = T(std::pow(double(x), 1.0 / k));
+  unsigned long long y = (unsigned long long)(std::pow(x, 1.0 / double(k)));
   while (!is_small_enough(y)) y--;
   while (is_small_enough(y + 1)) y++;
   return y;
