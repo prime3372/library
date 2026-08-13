@@ -233,6 +233,20 @@ ostream& operator<<(ostream& os, const set<T, Comp, Alloc>& s) {
   return os;
 }
 
+// stack
+
+template <class T, class Container>
+ostream& operator<<(ostream& os, const stack<T, Container> stk) {
+  while (!stk.empty()) {
+    os << stk.top();
+    stk.pop();
+    if (!stk.empty()) {
+      os << cp::internal::delimiter_v<T>;
+    }
+  }
+  return os;
+}
+
 // tuple_like (array, pair, tuple)
 
 template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
