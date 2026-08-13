@@ -16,7 +16,7 @@ public:
 
   std::vector<T> enumerate() const {
     auto pairs = mp.enumerate();
-    std::vector<T> res(e.size());
+    std::vector<T> res(pairs.size());
     for (int i = 0; i < int(pairs.size()); i++) {
       res[i] = pairs[i].first;
     }
