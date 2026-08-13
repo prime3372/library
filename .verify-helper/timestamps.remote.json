@@ -36,7 +36,7 @@
   "test/yosupo/pow_of_matrix.test.cpp": "2026-08-13 08:39:55 +0900",
   "test/yosupo/predecessor_problem.test.cpp": "2026-08-13 07:38:31 +0900",
   "test/yosupo/primality_test.test.cpp": "2026-08-11 21:23:12 +0900",
-  "test/yosupo/primitive_root.test.cpp": "2026-08-13 07:38:31 +0900",
+  "test/yosupo/primitive_root.test.cpp": "2026-08-13 10:04:11 +0900",
   "test/yosupo/queue_operate_all_composite.test.cpp": "2026-08-13 08:39:55 +0900",
   "test/yosupo/range_add_range_min.test.cpp": "2026-08-13 07:38:31 +0900",
   "test/yosupo/range_affine_point_get.test.cpp": "2026-08-13 08:39:55 +0900",
