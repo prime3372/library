@@ -9,6 +9,7 @@
 
 namespace cp {
 
+// @return the number of square-free integers not greater than n
 // https://smsxgz.github.io/post/pe/counting_square_free_numbers/
 long long count_square_free(long long n) {
   assert(0 <= n);
