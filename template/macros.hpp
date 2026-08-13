@@ -30,7 +30,7 @@
 
 #define INVOKE(macro, ...) EVAL(INVOKE_RECURSIVE(macro, __VA_ARGS__))
 
-#define DEBUG(a) do { std::cerr << (a) << " "; } while (false)
+#define DEBUG(a) do { std::cerr << (a); } while (false)
 
 #define debug(...) do { INVOKE(DEBUG, __VA_ARGS__); std::cerr << "\n"; } while (false)
 
