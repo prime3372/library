@@ -60,7 +60,7 @@ struct safe_hash<Range> {
   }
 };
 
-template <class Tuple> requires internal::is_tuple_v<Tuple>
+template <class Tuple> requires internal::is_tuple_like_v<Tuple>
 struct safe_hash<Tuple> {
   unsigned long long operator()(const Tuple& t) const {
     unsigned long long hs = 0;
