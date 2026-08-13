@@ -12,7 +12,7 @@
   "test/yosupo/cycle_detection_undirected.test.cpp": "2026-08-13 07:38:31 +0900",
   "test/yosupo/deque_operate_all_composite.test.cpp": "2026-08-13 08:39:55 +0900",
   "test/yosupo/double_ended_priority_queue.test.cpp": "2026-08-13 07:38:31 +0900",
-  "test/yosupo/enumerate_palindromes.test.cpp": "2026-08-13 08:39:55 +0900",
+  "test/yosupo/enumerate_palindromes.test.cpp": "2026-08-13 08:45:06 +0900",
   "test/yosupo/enumerate_primes.test.cpp": "2026-08-02 16:02:47 +0900",
   "test/yosupo/enumerate_quotients.test.cpp": "2026-08-09 07:24:16 +0900",
   "test/yosupo/exp_of_formal_power_series.test.cpp": "2026-08-13 03:20:37 +0900",
