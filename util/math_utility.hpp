@@ -70,6 +70,18 @@ constexpr bool chmax(T& a, T b) {
 }
 
 template <class Container>
+auto min(const Container& a) {
+  assert(!a.empty());
+  return *std::min_element(a.begin(), a.end());
+}
+
+template <class Container>
+auto max(const Container& a) {
+  assert(!a.empty());
+  return *std::max_element(a.begin(), a.end());
+}
+
+template <class Container>
 long long sum(const Container& a) {
   return std::accumulate(a.begin(), a.end(), 0LL);
 }
