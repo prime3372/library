@@ -5,8 +5,6 @@
 #include <cmath>
 #include <numeric>
 
-#include "util/type_traits.hpp"
-
 namespace cp {
 
 long long ipow(long long x, long long n) {
