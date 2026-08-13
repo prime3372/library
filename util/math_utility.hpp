@@ -70,25 +70,21 @@ constexpr bool chmax(T& a, T b) {
   return false;
 }
 
-template <class Container>
-auto min(const Container& a) {
+template <class T> auto min(const T& a) {
   assert(!a.empty());
   return *std::min_element(a.begin(), a.end());
 }
 
-template <class Container>
-auto max(const Container& a) {
+template <class T> auto max(const T& a) {
   assert(!a.empty());
   return *std::max_element(a.begin(), a.end());
 }
 
-template <class Container>
-long long sum(const Container& a) {
+template <class T> long long sum(const T& a) {
   return std::accumulate(a.begin(), a.end(), 0LL);
 }
 
-template <class Container>
-void sort_unique(const Container& a) {
+template <class T> void sort_unique(T& a) {
   std::sort(a.begin(), a.end());
   a.erase(std::unique(a.begin(), a.end()), a.end());
 }
