@@ -5,6 +5,7 @@
 
 namespace cp {
 
+// @param 1 <= b
 // @return pair(g, x) s.t. g = gcd(a, b), xa = g (mod b), 0 <= x < b/g
 constexpr std::pair<long long, long long> ext_gcd(long long a, long long b) {
   assert(1 <= b);
