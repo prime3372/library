@@ -9,7 +9,7 @@ namespace cp {
 // Cipolla's Algorithm
 // https://en.wikipedia.org/wiki/Cipolla%27s_algorithm
 // @param p must be prime
-constexpr long long sqrt_mod(long long n, long long p) {
+long long sqrt_mod(long long n, long long p) {
   assert(2 <= p);
   n %= p;
   if (n < 0) n += p;
