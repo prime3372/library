@@ -10,7 +10,11 @@
 #ifdef LOCAL
 
 #define debug(...) \
-  []<class... Args>(Args... args) -> void { \
+  []<class... Args>(Args... args) { \
+    (std::cerr << ... << args); \
+  }(__VA_ARGS__)
+#define debugl(...) \
+  []<class... Args>(Args... args) { \
     (std::cerr << ... << args); \
     std::cerr << "\n"; \
   }(__VA_ARGS__)
@@ -18,5 +22,6 @@
 #else
 
 #define debug(...)
+#define debugl(...)
 
 #endif
