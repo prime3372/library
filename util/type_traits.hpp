@@ -63,7 +63,7 @@ template <class T>
 struct is_tuple_like : public std::false_type {};
 
 template <class T>
-constexpr bool is_tuple_like_v = is_tuple_like<T>::value;
+inline constexpr bool is_tuple_like_v = is_tuple_like<T>::value;
 
 template <class T, size_t Size>
 struct is_tuple_like<std::array<T, Size>> : public std::true_type {};
