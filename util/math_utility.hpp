@@ -31,23 +31,16 @@ __int128 ipow128(__int128 x, long long n) {
   return r;
 }
 
-template <class T> requires internal::is_integral_v<T>
-T isqrt(T x) {
-  assert(0 <= x);
-  T y = T(std::sqrt(double(x)));
-  if (sizeof(T) > 8ULL) {
-    if (y) y = (y + x / y) / 2; // Newton's method
-  }
-  while (y && y > x / y) y--;
+unsigned long long isqrt(unsigned long long x) {
+  unsigned long long y = (unsigned long long)(std::sqrt(double(x)));
+  while (y != 0 && y > x / y) y--;
   while ((y + 1) <= x / (y + 1)) y++;
   return y;
 }
 
-template <class T> requires internal::is_integral_v<T>
-T icbrt(T x) {
-  assert(0 <= x);
-  T y = T(std::cbrt(double(x)));
-  while (y && y * y > x / y) y--;
+unsigned long long icbrt(unsigned long long x) {
+  unsigned long long y = (unsigned long long)(std::cbrt(double(x)));
+  while (y != 0 && y * y > x / y) y--;
   while ((y + 1) * (y + 1) <= x / (y + 1)) y++;
   return y;
 }
