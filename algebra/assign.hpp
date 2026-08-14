@@ -23,12 +23,12 @@ template <class M> struct assign {
   static S e() { return S(); }
 
   struct F {
-    T val;
-    bool id;
+    T val{};
+    bool id = true;
   };
   static S mapping(F f, S x) { return f.id ? x : S{pow(f.val, x.len), x.len}; }
   static F composition(F g, F f) { return g.id ? f : g; }
-  static F id() { return F{T(), true}; }
+  static F id() { return F{}; }
 
   static T pow(T x, size_t n) {
     T r = M::e();
