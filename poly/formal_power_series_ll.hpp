@@ -11,8 +11,7 @@
 
 namespace cp {
 
-template <>
-struct formal_power_series<long long> {
+template <> struct formal_power_series<long long> {
 private:
   using fps = formal_power_series;
 
