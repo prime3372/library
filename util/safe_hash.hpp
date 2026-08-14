@@ -1,7 +1,6 @@
 #pragma once
 
 #include <array>
-#include <deque>
 #include <cstddef>
 #include <functional>
 #include <string>
@@ -73,15 +72,6 @@ struct safe_hash<std::array<T, Size>> {
   unsigned long long operator()(const std::array<T, Size>& a) const {
     unsigned long long hs = 0;
     for (const auto& x : a) internal::hash_combine(hs, x);
-    return hs;
-  }
-};
-
-template <class T, class Alloc>
-struct safe_hash<std::deque<T, Alloc>> {
-  unsigned long long operator()(const std::deque<T, Alloc>& dq) const {
-    unsigned long long hs = 0;
-    for (const auto& x : dq) internal::hash_combine(hs, x);
     return hs;
   }
 };

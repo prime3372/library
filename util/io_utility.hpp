@@ -4,7 +4,6 @@
 #include <array>
 #include <cctype>
 #include <cstddef>
-#include <deque>
 #include <iostream>
 #include <type_traits>
 #include <utility>
@@ -104,9 +103,6 @@ ostream& operator<<(ostream& os, unsigned __int128 val) {
 template <class T, size_t Size>
 istream& operator>>(istream& is, array<T, Size>& a);
 
-template <class T, class Alloc>
-istream& operator>>(istream& is, deque<T, Alloc>& dq);
-
 template <class T, class U>
 istream& operator>>(istream& is, pair<T, U>& p);
 
@@ -119,12 +115,6 @@ istream& operator>>(istream& is, vector<T, Alloc>& v);
 template <class T, size_t Size>
 istream& operator>>(istream& is, array<T, Size>& a) {
   for (auto& x : a) is >> x;
-  return is;
-}
-
-template <class T, class Alloc>
-istream& operator>>(istream& is, deque<T, Alloc>& dq) {
-  for (auto& x : dq) is >> x;
   return is;
 }
 
@@ -152,9 +142,6 @@ istream& operator>>(istream& is, vector<T, Alloc>& v) {
 template <class T, size_t Size>
 ostream& operator<<(ostream& os, const array<T, Size>& a);
 
-template <class T, class Alloc>
-ostream& operator<<(ostream& os, const deque<T, Alloc>& dq);
-
 template <class T, class U>
 ostream& operator<<(ostream& os, const pair<T, U>& p);
 
@@ -169,17 +156,6 @@ ostream& operator<<(ostream& os, const array<T, Size>& a) {
   for (int i = 0; i < int(a.size()); i++) {
     os << a[i];
     if (i != int(a.size()) - 1) {
-      os << cp::internal::delimiter_of_v<T>;
-    }
-  }
-  return os;
-}
-
-template <class T, class Alloc>
-ostream& operator<<(ostream& os, const deque<T, Alloc>& dq) {
-  for (int i = 0; i < int(dq.size()); i++) {
-    os << dq[i];
-    if (i != int(dq.size()) - 1) {
       os << cp::internal::delimiter_of_v<T>;
     }
   }
