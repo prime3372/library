@@ -20,15 +20,15 @@ template <class M> struct assign {
     }
   };
   static S op(S x, S y) { return S{M::op(x.val, y.val), x.len + y.len}; }
-  static S e() { return S(); }
+  static S e() { return S{M::e(), 0}; }
 
   struct F {
-    T val{};
-    bool id = true;
+    T val;
+    bool id;
   };
   static S mapping(F f, S x) { return f.id ? x : S{pow(f.val, x.len), x.len}; }
   static F composition(F g, F f) { return g.id ? f : g; }
-  static F id() { return F{}; }
+  static F id() { return F{T{}, true}; }
 
   static T pow(T x, size_t n) {
     T r = M::e();

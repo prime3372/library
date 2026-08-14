@@ -20,7 +20,7 @@ template <class T> struct sum_affine {
     }
   };
   static S op(S x, S y) { return S{x.val + y.val, x.len + y.len}; }
-  static S e() { return S(); }
+  static S e() { return S{0, 0}; }
 
   using F = typename affine<T>::S;
   static S mapping(F f, S x) { return S{f.a * x.val + f.b * x.len, x.len}; }

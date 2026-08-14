@@ -18,7 +18,7 @@ struct bracket {
   static S op(S x, S y) {
     return S{std::min(x.prefix_min, x.sum + y.prefix_min), x.sum + y.sum};
   }
-  static S e() { return S(); }
+  static S e() { return S{0, 0}; }
 };
 
 } // namespace alg

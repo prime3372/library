@@ -12,12 +12,12 @@ template <class T, T upper> struct min_assign {
   static S e() { return upper; }
 
   struct F {
-    T val{};
-    bool id = true;
+    T val;
+    bool id;
   };
   static S mapping(F f, S x) { return f.id ? x : f.val; }
   static F composition(F g, F f) { return g.id ? f : g; }
-  static F id() { return F{}; }
+  static F id() { return F{T{}, true}; }
 };
 
 } // namespace alg

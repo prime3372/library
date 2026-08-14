@@ -11,8 +11,7 @@ namespace alg {
 
 struct rolling_hash {
   struct S {
-    hash61 val;
-    hash61 b;
+    hash61 val, b;
     bool is_same(S other) const {
       return val == other.val;
     }
