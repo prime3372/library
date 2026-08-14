@@ -56,6 +56,7 @@ public:
   T diff(int a, int b) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
+    assert(same(a, b));
     return weight(a) - weight(b);
   }
 
