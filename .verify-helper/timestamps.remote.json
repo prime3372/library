@@ -102,6 +102,7 @@
   "test/yosupo/string/longest_common_substring.test.cpp": "2026-08-14 23:50:22 +0900",
   "test/yosupo/string/number_of_substrings.test.cpp": "2026-08-14 18:29:26 +0900",
   "test/yosupo/string/suffix_array.test.cpp": "2026-08-14 18:29:26 +0900",
+  "test/yosupo/string/wildcard_pattern_matching.test.cpp": "2026-08-15 00:52:22 +0900",
   "test/yosupo/string/z_algorithm.test.cpp": "2026-08-14 18:29:26 +0900",
   "test/yosupo/strongly_connected_components.test.cpp": "2026-08-14 10:38:51 +0900",
   "test/yosupo/suffix_array.test.cpp": "2026-08-13 02:57:43 +0900",
