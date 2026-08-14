@@ -54,7 +54,7 @@ public:
     for (int i = 0; i < cc.size(); i++) {
       os << cc[i];
       if (i != cc.size() - 1) {
-        os << internal::delimiter_of_v<std::decay_t<T>>;
+        os << internal::delimiter_of_v<T>;
       }
     }
     return os;
