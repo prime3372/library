@@ -2,8 +2,6 @@
 
 #include <vector>
 
-#include "util/io_utility.hpp"
-
 namespace cp {
 
 template <class T> struct simple_queue {
@@ -34,16 +32,6 @@ public:
   void pop() {
     assert(!empty());
     pos++;
-  }
-  
-  friend std::ostream& operator<<(std::ostream& os, const simple_queue& que) {
-    for (int i = que.pos; i < int(que.payload.size()); i++) {
-      os << que.payload[i];
-      if (i != int(que.payload.size()) - 1) {
-        os << internal::delimiter_v<T>;
-      }
-    }
-    return os;
   }
 
 private:

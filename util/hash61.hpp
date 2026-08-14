@@ -131,8 +131,8 @@ template <> struct safe_hash<hash61> {
 
 namespace internal {
 
-template <> struct delimiter<hash61> {
-  static constexpr char value[] = " ";
+template <> struct delimiter_of<hash61> {
+  static constexpr char value = ' ';
 };
 
 } // namespace internal

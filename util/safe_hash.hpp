@@ -2,8 +2,7 @@
 
 #include <array>
 #include <cstddef>
-#include <ranges>
-#include <tuple>
+#include <functional>
 #include <utility>
 #include <vector>
 
@@ -37,7 +36,8 @@ struct safe_hash<T> {
   }
 };
 
-template <class T> requires internal::is_signed_int128_v<T> || internal::is_unsigned_int128_v<T>
+template <class T>
+  requires internal::is_signed_int128_v<T> || internal::is_unsigned_int128_v<T>
 struct safe_hash<T> {
   unsigned long long operator()(const T& x) const {
     unsigned __int128 ux = x;
@@ -51,22 +51,37 @@ struct safe_hash<T> {
   }
 };
 
-template <class Range> requires std::ranges::range<Range>
-struct safe_hash<Range> {
-  unsigned long long operator()(const Range& a) const {
+template <class T> requires std::is_floating_point_v<T>
+struct safe_hash<T> {
+  unsigned long long operator()(const T& x) const {
+    return internal::splitmix64(std::hash<T>()(x));
+  }
+};
+
+template <class T, size_t Size>
+struct safe_hash<std::array<T, Size>> {
+  unsigned long long operator()(const std::array<T, Size>& a) const {
     unsigned long long hs = 0;
     for (const auto& x : a) internal::hash_combine(hs, x);
     return hs;
   }
 };
 
-template <class Tuple> requires internal::is_tuple_like_v<Tuple>
-struct safe_hash<Tuple> {
-  unsigned long long operator()(const Tuple& t) const {
+template <class T, class U>
+struct safe_hash<std::pair<T, U>> {
+  unsigned long long operator()(const std::pair<T, U>& p) const {
     unsigned long long hs = 0;
-    [&]<size_t... I>(std::index_sequence<I...>) {
-      (internal::hash_combine(hs, std::get<I>(t)), ...);
-    }(std::make_index_sequence<std::tuple_size_v<Tuple>>());
+    internal::hash_combine(hs, p.first);
+    internal::hash_combine(hs, p.second);
+    return hs;
+  }
+};
+
+template <class T, class Alloc>
+struct safe_hash<std::vector<T, Alloc>> {
+  unsigned long long operator()(const std::vector<T, Alloc>& v) const {
+    unsigned long long hs = 0;
+    for (const auto& x : v) internal::hash_combine(hs, x);
     return hs;
   }
 };

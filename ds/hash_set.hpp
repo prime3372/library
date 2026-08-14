@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "util/safe_hash.hpp"
-#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -40,11 +39,6 @@ public:
   }
 
   int size() const { return sz; }
-
-  friend std::ostream& operator<<(std::ostream& os, const hash_set& s) {
-    os << s.enumerate();
-    return os;
-  }
 
 private:
   unsigned int cap, sz, shift;

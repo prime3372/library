@@ -4,8 +4,6 @@
 #include <iostream>
 #include <vector>
 
-#include "util/io_utility.hpp"
-
 namespace cp {
 
 template <class M> struct slide_window_aggregation {
@@ -31,17 +29,6 @@ public:
 
   int size() const { return int(a0.size() + a1.size()); }
   bool empty() const { return size() == 0; }
-
-  friend std::ostream& operator<<(std::ostream& os, slide_window_aggregation swag) {
-    while (!swag.empty()) {
-      os << swag.front();
-      swag.pop();
-      if (!swag.empty()) {
-        os << internal::delimiter_v<S>;
-      }
-    }
-    return os;
-  }
 
 private:
   std::vector<S> a0, a1, cum0, cum1;

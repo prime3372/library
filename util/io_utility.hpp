@@ -4,17 +4,9 @@
 #include <array>
 #include <cctype>
 #include <cstddef>
-#include <deque>
 #include <iostream>
-#include <map>
-#include <queue>
-#include <set>
-#include <stack>
-#include <string>
-#include <unordered_map>
-#include <unordered_set>
-#include <utility>
 #include <type_traits>
+#include <utility>
 #include <vector>
 
 #include "util/type_traits.hpp"
@@ -23,21 +15,26 @@ namespace cp {
 
 namespace internal {
 
-template <class T> struct delimiter {
-  static constexpr char value[] = "\n";
+template <class T> struct delimiter_of {
+  static constexpr char value = '\n';
 };
 
 template <class T>
-inline constexpr auto delimiter_v = delimiter<T>::value;
+inline constexpr char delimiter_of_v = delimiter_of<T>::value;
 
 template <class T> requires is_integral_v<T>
-struct delimiter<T> {
-  static constexpr char value[] = " ";
+struct delimiter_of<T> {
+  static constexpr char value = ' ';
 };
 
 template <class T> requires std::is_floating_point_v<T>
-struct delimiter<T> {
-  static constexpr char value[] = " ";
+struct delimiter_of<T> {
+  static constexpr char value = ' ';
+};
+
+template <class T> requires std::is_pointer_v<T>
+struct delimiter_of<T> {
+  static constexpr char value = ' ';
 };
 
 } // namespace internal
@@ -101,36 +98,27 @@ ostream& operator<<(ostream& os, unsigned __int128 val) {
   return os << s;
 }
 
-// forward declarations
+// utilities for input
+
+template <class T, size_t Size>
+istream& operator>>(istream& is, array<T, Size>& a);
+
+template <class T, class U>
+istream& operator>>(istream& is, pair<T, U>& p);
 
 template <class T, class Alloc>
-istream& operator>>(istream& is, deque<T, Alloc>& dq);
+istream& operator>>(istream& is, vector<T, Alloc>& v);
 
-template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
-istream& operator>>(istream& is, Tuple& t);
-
-template <class T, class Alloc>
-istream& operator>>(istream& os, vector<T, Alloc>& v);
-
-// deque
-
-template <class T, class Alloc>
-istream& operator>>(istream& is, deque<T, Alloc>& dq) {
-  for (auto& x : dq) is >> x;
+template <class T, size_t Size>
+istream& operator>>(istream& is, array<T, Size>& a) {
+  for (auto& x : a) is >> a;
   return is;
 }
 
-// tuple_like (array, pair, tuple)
-
-template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
-istream& operator>>(istream& is, Tuple& t) {
-  [&]<size_t... I>(index_sequence<I...>) {
-    (is >> ... >> get<I>(t));
-  }(make_index_sequence<tuple_size_v<Tuple>>());
-  return is;
+template <class T, class U>
+istream& operator>>(istream& is, pair<T, U>& p) {
+  return is >> p.first >> p.second;
 }
-
-// vector
 
 template <class T, class Alloc>
 istream& operator>>(istream& is, vector<T, Alloc>& v) {
@@ -138,165 +126,42 @@ istream& operator>>(istream& is, vector<T, Alloc>& v) {
   return is;
 }
 
-// forward declarations
+// utilities for output
 
-template <class T, class Alloc>
-ostream& operator<<(ostream& os, const deque<T, Alloc>& dq);
+template <class T, size_t Size>
+ostream& operator<<(ostream& os, const array<T, Size>& a);
 
-template <class Key, class Val, class Comp, class Alloc>
-ostream& operator<<(ostream& os, const map<Key, Val, Comp, Alloc>& mp);
-
-template <class T, class Container, class Comp>
-ostream& operator<<(ostream& os, priority_queue<T, Container, Comp> pq);
-
-template <class T, class Container>
-ostream& operator<<(ostream& os, queue<T, Container> que);
-
-template <class T, class Comp, class Alloc>
-ostream& operator<<(ostream& os, const set<T, Comp, Alloc>& s);
-
-template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
-ostream& operator<<(ostream& os, const Tuple& t);
-
-template <class Key, class Val, class Hash, class Equal, class Alloc>
-ostream& operator<<(ostream& os, const unordered_map<Key, Val, Hash, Equal, Alloc>& mp);
-
-template <class T, class Hash, class Equal, class Alloc>
-ostream& operator<<(ostream& os, const unordered_set<T, Hash, Equal, Alloc>& s);
+template <class T, class U>
+ostream& operator<<(ostream& os, const pair<T, U>& p);
 
 template <class T, class Alloc>
 ostream& operator<<(ostream& os, const vector<T, Alloc>& v);
 
-// deque
-
-template <class T, class Alloc>
-ostream& operator<<(ostream& os, const deque<T, Alloc>& dq) {
-  for (int i = 0; i < int(dq.size()); i++) {
-    os << dq[i];
-    if (i != int(dq.size()) - 1) {
-      os << cp::internal::delimiter_v<T>;
+template <class T, size_t Size>
+ostream& operator<<(ostream& os, const array<T, Size>& a) {
+  for (int i = 0; i < int(a.size()); i++) {
+    os << a[i];
+    if (i != int(a.size()) - 1) {
+      os << cp::internal::delimiter_of_v<T>;
     }
   }
   return os;
 }
 
-// map
-
-template <class Key, class Val, class Comp, class Alloc>
-ostream& operator<<(ostream& os, const map<Key, Val, Comp, Alloc>& mp) {
-  for (auto itr = mp.begin(); itr != mp.end(); itr++) {
-    os << *itr;
-    if (next(itr) != mp.end()) {
-      os << cp::internal::delimiter_v<pair<Key, Val>>;
-    }
-  }
-  return os;
+template <class T, class U>
+ostream& operator<<(ostream& os, const pair<T, U>& p) {
+  constexpr char delimiter =
+    cp::internal::delimiter_of_v<T> == '\n' ? '\n' :
+    cp::internal::delimiter_of_v<U> == '\n' ? '\n' : ' ';
+  return os << p.first << delimiter << p.second;
 }
-
-// priority_queue
-
-template <class T, class Container, class Comp>
-ostream& operator<<(ostream& os, priority_queue<T, Container, Comp> pq) {
-  while (!pq.empty()) {
-    os << pq.top();
-    pq.pop();
-    if (!pq.empty()) {
-      os << cp::internal::delimiter_v<T>;
-    }
-  }
-  return os;
-}
-
-// queue
-
-template <class T, class Container>
-ostream& operator<<(ostream& os, queue<T, Container> que) {
-  while (!que.empty()) {
-    os << que.front();
-    que.pop();
-    if (!que.empty()) {
-      os << cp::internal::delimiter_v<T>;
-    }
-  }
-  return os;
-}
-
-// set
-
-template <class T, class Comp, class Alloc>
-ostream& operator<<(ostream& os, const set<T, Comp, Alloc>& s) {
-  for (auto itr = s.begin(); itr != s.end(); itr++) {
-    os << *itr;
-    if (next(itr) != s.end()) {
-      os << cp::internal::delimiter_v<T>;
-    }
-  }
-  return os;
-}
-
-// stack
-
-template <class T, class Container>
-ostream& operator<<(ostream& os, const stack<T, Container> stk) {
-  while (!stk.empty()) {
-    os << stk.top();
-    stk.pop();
-    if (!stk.empty()) {
-      os << cp::internal::delimiter_v<T>;
-    }
-  }
-  return os;
-}
-
-// tuple_like (array, pair, tuple)
-
-template <class Tuple> requires cp::internal::is_tuple_like_v<Tuple>
-ostream& operator<<(ostream& os, const Tuple& t) {
-  static constexpr size_t n = tuple_size_v<Tuple>; 
-  if (n == 0) return os;
-  [&]<size_t... I>(index_sequence<I...>) {
-    ([&]<class T>(const T& x) {
-      os << x << cp::internal::delimiter_v<T>;
-    }(get<I>(t)), ...);
-  }(make_index_sequence<n - 1>());
-  os << get<n - 1>(t);
-  return os;
-}
-
-// unordered_map
-
-template <class Key, class Val, class Hash, class Equal, class Alloc>
-ostream& operator<<(ostream& os, const unordered_map<Key, Val, Hash, Equal, Alloc>& mp) {
-  for (auto itr = mp.begin(); itr != mp.end(); itr++) {
-    os << *itr;
-    if (next(itr) != mp.end()) {
-      os << cp::internal::delimiter_v<pair<Key, Val>>;
-    }
-  }
-  return os;
-}
-
-// unordered_set
-
-template <class T, class Hash, class Equal, class Alloc>
-ostream& operator<<(ostream& os, const unordered_set<T, Hash, Equal, Alloc>& s) {
-  for (auto itr = s.begin(); itr != s.end(); itr++) {
-    os << *itr;
-    if (next(itr) != s.end()) {
-      os << cp::internal::delimiter_v<T>;
-    }
-  }
-  return os;
-}
-
-// vector
 
 template <class T, class Alloc>
 ostream& operator<<(ostream& os, const vector<T, Alloc>& v) {
   for (int i = 0; i < int(v.size()); i++) {
     os << v[i];
     if (i != int(v.size()) - 1) {
-      os << cp::internal::delimiter_v<T>;
+      os << cp::internal::delimiter_of_v<T>;
     }
   }
   return os;

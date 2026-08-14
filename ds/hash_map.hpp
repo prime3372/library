@@ -7,7 +7,6 @@
 #include <vector>
 
 #include "util/safe_hash.hpp"
-#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -49,11 +48,6 @@ public:
   int size() const { return sz; }
 
   void set_default(const Val& v) { default_value = v; }
-
-  friend std::ostream& operator<<(std::ostream& os, const hash_map& mp) {
-    os << mp.enumerate();
-    return os;
-  }
 
 private:
   unsigned int cap, sz, shift;

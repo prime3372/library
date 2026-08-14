@@ -6,8 +6,6 @@
 #include <iterator>
 #include <vector>
 
-#include "util/io_utility.hpp"
-
 namespace cp {
 
 template <class M> struct slide_window_aggregation_deque {
@@ -46,17 +44,6 @@ public:
 
   int size() { return int(a0.size() + a1.size()); }
   bool empty() { return size() == 0; }
-
-  friend std::ostream& operator<<(std::ostream& os, slide_window_aggregation_deque swag) {
-    while (!swag.empty()) {
-      os << swag.front();
-      swag.pop_front();
-      if (!swag.empty()) {
-        os << internal::delimiter_v<S>;
-      }
-    }
-    return os;
-  }
 
 private:
   std::vector<S> a0, a1, cum0, cum1;
