@@ -15,7 +15,8 @@ template <class T> struct treap_node {
   T val;
   int sub = 1;
   bool rev = false;
-  std::shared_ptr<treap_node> left, right;
+  treap_node* left = nullptr;
+  treap_node* right = nullptr;
   unsigned long long priority;
 
   treap_node() {};
@@ -39,18 +40,18 @@ public:
 protected:
   using base::build;
 
-  void toggle(node_ptr p) override {
-    swap(p->left, p->right);
+  void toggle(node* p) override {
+    std::swap(p->left, p->right);
     p->rev = !p->rev;
   }
 
-  void update(node_ptr p) override {
+  void update(node* p) override {
     p->sub = 1;
     if (p->left) p->sub += p->left->sub;
     if (p->right) p->sub += p->right->sub;
   }
 
-  void push(node_ptr p) override {
+  void push(node* p) override {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);

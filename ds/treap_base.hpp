@@ -18,17 +18,17 @@ namespace internal {
 template <class node> struct treap_base {
 public:
   using T = decltype(node::val);
-  using node_ptr = std::shared_ptr<node>;
 
-  treap_base() {}
+  treap_base() : root(nullptr) {}
+  virtual ~treap_base() { delete root; }
 
   void build(const std::vector<T>& v) {
     if (v.empty()) return;
     int n = int(v.size());
-    std::vector<node_ptr> ps(n);
+    std::vector<node*> ps(n);
     std::vector<unsigned long long> pr(n);
     for (int i = 0; i < n; i++) {
-      ps[i] = std::make_shared<node>(v[i]);
+      ps[i] = new node(v[i]);
       pr[i] = ps[i]->priority;
     }
     cartesian_tree<true> cart(pr);
@@ -40,7 +40,7 @@ public:
         ps[i]->right = ps[cart.right[i]];
       }
     }
-    auto dfs = [&](auto self, node_ptr p) -> void {
+    auto dfs = [&](auto self, node* p) -> void {
       if (p->left) self(self, p->left);
       if (p->right) self(self, p->right);
       update(p);
@@ -68,13 +68,15 @@ public:
   void insert(int k, const T& x) {
     assert(0 <= k && k <= size());
     auto s = split(root, k);
-    root = merge(merge(s.first, std::make_shared<node>(x)), s.second);
+    root = merge(merge(s.first, std::make_unique<node>(x)), s.second);
   }
 
   void erase(int k) {
     assert(0 <= k && k < size());
     auto s = split(root, k);
-    root = merge(s.first, split(s.second, 1).second);
+    auto t = split(s.second, 1);
+    delete t.first;
+    root = merge(s.first, t.second);
   }
 
   void reverse(int l, int r) {
@@ -99,9 +101,9 @@ public:
   }
 
 protected:
-  node_ptr root;
+  node* root;
 
-  node_ptr& merge(node_ptr& left, node_ptr& right) {
+  node* merge(node* left, node* right) {
     if (!left || !right) return left ? left : right;
     if (left->priority > right->priority) {
       push(left);
@@ -116,7 +118,7 @@ protected:
     }
   }
 
-  std::pair<node_ptr, node_ptr> split(node_ptr p, int k) {
+  std::pair<node*, node*> split(node* p, int k) {
     if (!p) return {nullptr, nullptr};
     push(p);
     if (k <= size(p->left)) {
@@ -132,13 +134,13 @@ protected:
     }
   }
 
-  int size(node_ptr p) const { return p ? p->sub : 0; }
+  int size(const node* p) const { return p ? p->sub : 0; }
 
-  virtual void toggle(node_ptr p) = 0;
+  virtual void toggle(node* p) = 0;
 
-  virtual void update(node_ptr p) = 0;
+  virtual void update(node* p) = 0;
 
-  virtual void push(node_ptr p) = 0;
+  virtual void push(node* p) = 0;
 };
 
 } // namespace internal

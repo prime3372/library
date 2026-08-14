@@ -19,11 +19,16 @@ public:
   F lz = M::id();
   int sub = 1;
   bool rev = false;
-  std::shared_ptr<lazy_segtreap_node> left, right;
+  lazy_segtreap_node* left = nullptr;
+  lazy_segtreap_node* right = nullptr;
   unsigned long long priority;
 
   lazy_segtreap_node() {}
   explicit lazy_segtreap_node(S x) : val(x), prod(x), priority(mt64()) {}  
+  ~lazy_segtreap_node() {
+    delete left;
+    delete right;
+  }
 };
 
 } // namespace internal
@@ -34,7 +39,6 @@ public:
   using S = typename M::S;
   using F = typename M::F;
   using node = internal::lazy_segtreap_node<M>;
-  using node_ptr = std::shared_ptr<node>;
   using base = internal::treap_base<node>;
 
   lazy_segtreap() {}
@@ -68,13 +72,13 @@ protected:
   using base::size;
   using base::root;
 
-  void toggle(node_ptr p) override {
-    swap(p->left, p->right);
+  void toggle(node* p) override {
+    std::swap(p->left, p->right);
     p->prod = rev(p->prod);
     p->rev = !p->rev;
   }
 
-  void update(node_ptr p) override {
+  void update(node* p) override {
     p->sub = 1;
     p->prod = p->val;
     if (p->left) {
@@ -87,7 +91,7 @@ protected:
     }
   }
 
-  void push(node_ptr p) override {
+  void push(node* p) override {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);
@@ -98,7 +102,7 @@ protected:
     p->lz = M::id();
   }
 
-  void all_apply(node_ptr p, F f) {
+  void all_apply(node* p, F f) {
     p->lz = M::composition(f, p->lz);
     p->val = M::composition(f, p->val);
     p->prod = M::mapping(f, p->prod);

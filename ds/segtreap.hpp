@@ -3,6 +3,7 @@
 #include <cassert>
 #include <functional>
 #include <memory>
+#include <utility>
 
 #include "ds/treap_base.hpp"
 #include "random/base.hpp"
@@ -16,11 +17,16 @@ template <class M> struct segtreap_node {
   S val, prod;
   int sub = 1;
   bool rev = false;
-  std::shared_ptr<segtreap_node> left, right;
+  segtreap_node* left = nullptr;
+  segtreap_node* right = nullptr;
   unsigned long long priority;
 
   segtreap_node() {}
   explicit segtreap_node(S x) : val(x), prod(x), priority(mt64()) {}    
+  ~segtreap_node() {
+    delete left;
+    delete right;
+  }
 };
 
 } // namespace internal
@@ -30,7 +36,6 @@ struct segtreap : public internal::treap_base<internal::segtreap_node<M>> {
 public:
   using S = typename M::S;
   using node = internal::segtreap_node<M>;
-  using node_ptr = std::shared_ptr<node>;
   using base = internal::treap_base<node>;
 
   segtreap() {}
@@ -55,13 +60,13 @@ protected:
   using base::size;
   using base::root;
 
-  void toggle(node_ptr p) override {
-    swap(p->left, p->right);
+  void toggle(node* p) override {
+    std::swap(p->left, p->right);
     p->prod = rev(p->prod);
     p->rev = !p->rev;
   }
 
-  void update(node_ptr p) override {
+  void update(node* p) override {
     p->sub = 1;
     p->prod = p->val;
     if (p->left) {
@@ -74,7 +79,7 @@ protected:
     }
   }
 
-  void push(node_ptr p) override {
+  void push(node* p) override {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);
