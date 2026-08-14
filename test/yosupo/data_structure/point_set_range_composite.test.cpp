@@ -20,9 +20,9 @@ int main() {
   rep(i, 0, n) cin >> a[i].a >> a[i].b;
   segtree<M> seg(a);
   while (q--) {
-    bool t;
+    int t;
     cin >> t;
-    if (!t) {
+    if (t == 0) {
       int p;
       mint c, d;
       cin >> p >> c >> d;

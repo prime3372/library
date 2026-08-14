@@ -27,9 +27,9 @@ int main() {
   fenwick_tree<ll> fw(n);
   rep(i, 0, n) fw.add(id[i], a[i]);
   while (q--) {
-    bool t;
+    int t;
     cin >> t;
-    if (!t) {
+    if (t == 0) {
       int p;
       ll x;
       cin >> p >> x;

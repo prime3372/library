@@ -41,9 +41,9 @@ int main() {
     rseg.set(id[i], f[i]);
   }
   while (q--) {
-    bool t;
+    int t;
     cin >> t;
-    if (!t) {
+    if (t == 0) {
       int p;
       mint c, d;
       cin >> p >> c >> d;

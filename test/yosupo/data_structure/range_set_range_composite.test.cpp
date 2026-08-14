@@ -24,9 +24,9 @@ int main() {
   }
   lazy_segtree<M> seg(f);
   while (q--) {
-    bool t;
+    int t;
     cin >> t;
-    if (!t) {
+    if (t == 0) {
       int l, r;
       mint c, d;
       cin >> l >> r >> c >> d;

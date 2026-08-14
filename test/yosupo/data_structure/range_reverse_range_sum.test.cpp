@@ -18,11 +18,9 @@ int main() {
   rep(i, 0, n) cin >> a[i];
   segtreap<alg::add<ll>> seg(a);
   while (q--) {
-    bool t;
-    cin >> t;
-    int l, r;
-    cin >> l >> r;
-    if (!t) seg.reverse(l, r);
+    int t, l, r;
+    cin >> t >> l >> r;
+    if (t == 0) seg.reverse(l, r);
     else cout << seg.prod(l, r) << "\n";
   }
 }

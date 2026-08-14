@@ -18,9 +18,9 @@ int main() {
   rep(i, 0, n) cin >> a[i];
   lazy_segtree<alg::min_add<ll, ll(1e18)>> seg(a);
   while (q--) {
-    bool t;
+    int t;
     cin >> t;
-    if (!t) {
+    if (t == 0) {
       int l, r;
       ll x;
       cin >> l >> r >> x;

@@ -20,9 +20,9 @@ int main() {
     fw.add(i, a);
   }
   while (q--) {
-    bool t;
+    int t;
     cin >> t;
-    if (!t) {
+    if (t == 0) {
       int p;
       ll x;
       cin >> p >> x;

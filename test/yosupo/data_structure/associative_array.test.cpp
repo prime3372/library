@@ -14,9 +14,9 @@ int main() {
   cin >> q;
   hash_map<ll, ll> mp;
   while (q--) {
-    bool t;
+    int t;
     cin >> t;
-    if (!t) {
+    if (t == 0) {
       ll k, v;
       cin >> k >> v;
       mp[k] = v;

@@ -71,9 +71,9 @@ int main() {
   rep(i, 0, n) query0(i, a[i]);  
 
   while (q--) {
-    bool t;
+    int t;
     cin >> t;
-    if (!t) {
+    if (t == 0) {
       int p;
       ll x;
       cin >> p >> x;

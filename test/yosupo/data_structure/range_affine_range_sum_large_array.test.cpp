@@ -18,9 +18,9 @@ int main() {
   cin >> n >> q;
   dynamic_lazy_segtree<M> seg(n, {0, 1});
   while (q--) {
-    bool t;
+    int t;
     cin >> t;
-    if (!t) {
+    if (t == 0) {
       int l, r;
       mint b, c;
       cin >> l >> r >> b >> c;
