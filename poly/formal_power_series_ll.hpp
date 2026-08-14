@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 
-#include "poly/convolution.hpp"
+#include "poly/convolution_ll.hpp"
 #include "poly/formal_power_series.hpp"
 #include "util/io_utility.hpp"
 
@@ -53,7 +53,7 @@ public:
     return *this;
   }
   fps& operator*=(const fps& rhs) {
-    a = convolution(a, rhs.a);
+    a = convolution_ll(a, rhs.a);
     return *this;
   }
 
