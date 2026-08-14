@@ -19,6 +19,7 @@ public:
   dynamic_segtree() : dynamic_segtree(0) {}
   explicit dynamic_segtree(size_t _n) : dynamic_segtree(_n, M::e()) {}
   explicit dynamic_segtree(size_t _n, S val) : n(_n), root(nullptr) {
+    assert(n <= (1ULL << 63));
     sz = std::bit_ceil(n);
     log = std::countr_zero(sz);
     initial_vals.resize(log + 1);
