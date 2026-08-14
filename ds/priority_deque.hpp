@@ -7,12 +7,10 @@
 #include <utility>
 #include <vector>
 
-#include "util/io_utility.hpp"
-
 namespace cp {
 
 // even index -> min heap
-// odd index -> max heap
+// odd index  -> max heap
 template <class T> struct priority_deque {
 public:
   priority_deque() : d(2) {}
@@ -58,17 +56,6 @@ public:
   bool empty() const { return size() == 0; }
 
   void clear() { d.resize(2); }
-
-  friend std::ostream& operator<<(std::ostream& os, priority_deque pq) {
-    while (!pq.empty()) {
-      os << pq.min();
-      pq.pop_min();
-      if (!pq.empty()) {
-        os << internal::delimiter_v<T>;
-      }
-    }
-    return os;
-  }
 
 private:
   std::vector<T> d;
