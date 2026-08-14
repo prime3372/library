@@ -4,6 +4,7 @@
 #include <deque>
 #include <cstddef>
 #include <functional>
+#include <string>
 #include <tuple>
 #include <utility>
 #include <vector>
@@ -91,6 +92,14 @@ struct safe_hash<std::pair<T, U>> {
     unsigned long long hs = 0;
     internal::hash_combine(hs, p.first);
     internal::hash_combine(hs, p.second);
+    return hs;
+  }
+};
+
+template <> struct safe_hash<std::string> {
+  unsigned long long operator()(const std::string& s) const {
+    unsigned long long hs = 0;
+    for (char c : s) internal::hash_combine(hs, c);
     return hs;
   }
 };
