@@ -98,6 +98,7 @@
   "test/yosupo/sqrt_mod.test.cpp": "2026-08-14 00:05:25 +0900",
   "test/yosupo/static_rmq.test.cpp": "2026-08-14 09:59:29 +0900",
   "test/yosupo/string/enumerate_palindromes.test.cpp": "2026-08-14 18:29:26 +0900",
+  "test/yosupo/string/longest_common_substring.test.cpp": "2026-08-14 23:50:22 +0900",
   "test/yosupo/string/number_of_substrings.test.cpp": "2026-08-14 18:29:26 +0900",
   "test/yosupo/string/suffix_array.test.cpp": "2026-08-14 18:29:26 +0900",
   "test/yosupo/string/z_algorithm.test.cpp": "2026-08-14 18:29:26 +0900",
