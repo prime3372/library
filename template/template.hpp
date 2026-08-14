@@ -25,13 +25,16 @@ using mint = modint998244353;
 
 #ifdef LOCAL
 
+#define local(...) []{ __VA__ARGS__ }()
 #define debug(...) \
   []<class... Args>(Args... args) { \
     (std::cerr << ... << args); \
+    std::cerr << "\n"; \
   }(__VA_ARGS__)
 
 #else
 
+#define local(...)
 #define debug(...)
 
 #endif
