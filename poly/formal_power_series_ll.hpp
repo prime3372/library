@@ -6,20 +6,19 @@
 #include <vector>
 
 #include "poly/convolution_ll.hpp"
-#include "poly/formal_power_series.hpp"
 #include "util/io_utility.hpp"
 
 namespace cp {
 
-template <> struct formal_power_series<long long> {
+struct formal_power_series_ll {
 private:
-  using fps = formal_power_series;
+  using fps = formal_power_series_ll;
 
 public:
-  formal_power_series() {}
-  explicit formal_power_series(int n) : a(n) {}
-  explicit formal_power_series(int n, long long val) : a(n, val) {}
-  explicit formal_power_series(const std::vector<long long>& _a) : a(_a) {}
+  formal_power_series_ll() {}
+  explicit formal_power_series_ll(int n) : a(n) {}
+  explicit formal_power_series_ll(int n, long long val) : a(n, val) {}
+  explicit formal_power_series_ll(const std::vector<long long>& _a) : a(_a) {}
 
   long long& operator[](int i) {
     assert(0 <= i && i < size());

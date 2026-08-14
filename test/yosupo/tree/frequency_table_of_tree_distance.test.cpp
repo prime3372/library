@@ -26,13 +26,13 @@ int main() {
   }
   cd.build();
 
-  formal_power_series<ll> freq(n);
+  formal_power_series_ll freq(n);
   vector<bool> removed(n);
   rep(i, 0, n) {
     int c = cd.centroid[i];
     int k = int(g[c].size());
 
-    vector<formal_power_series<ll>> f(k);
+    vector<formal_power_series_ll> f(k);
     rep(j, 0, k) {
       auto dfs = [&](auto self, int v, int pv, int d) -> void {
         if (f[j].size() <= d) f[j].resize(d + 1);
@@ -46,7 +46,7 @@ int main() {
       if (!removed[g[c][j]]) dfs(dfs, g[c][j], c, 1);
     }
 
-    formal_power_series<ll> fsum, f2sum;
+    formal_power_series_ll fsum, f2sum;
     rep(j, 0, k) fsum += f[j];
     rep(j, 0, k) f2sum += f[j] * f[j];
     freq += (fsum * fsum - f2sum) / 2 + fsum;
