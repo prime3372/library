@@ -44,7 +44,7 @@ public:
     while (head[a] != head[b]) {
       if (a > b) std::swap(a, b);
       b = next[b];
-    }    
+    }
     return vertex[std::min(a, b)];
   }
 
