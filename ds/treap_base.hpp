@@ -68,7 +68,7 @@ public:
   void insert(int k, const T& x) {
     assert(0 <= k && k <= size());
     auto s = split(root, k);
-    root = merge(merge(s.first, std::make_unique<node>(x)), s.second);
+    root = merge(merge(s.first, new node(x)), s.second);
   }
 
   void erase(int k) {
@@ -90,7 +90,7 @@ public:
 
   int size() const { return size(root); }
 
-  friend std::ostream& operator<<(std::ostream& os, const treap_base& tp) {
+  friend std::ostream& operator<<(std::ostream& os, treap_base& tp) {
     for (int i = 0; i < tp.size(); i++) {
       os << tp[i];
       if (i != tp.size() - 1) {
