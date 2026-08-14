@@ -18,7 +18,7 @@ public:
 
   dynamic_segtree() : dynamic_segtree(0) {}
   explicit dynamic_segtree(size_t _n) : dynamic_segtree(_n, M::e()) {}
-  explicit dynamic_segtree(size_t _n, S val) : n(_n), root(nullptr) {
+  explicit dynamic_segtree(size_t _n, S val) : n(_n) {
     assert(n <= (1ULL << 63));
     sz = std::bit_ceil(n);
     log = std::countr_zero(sz);
@@ -84,7 +84,7 @@ private:
   size_t n, sz;
   int log;
   std::vector<S> initial_vals;
-  node_ptr root;
+  node_ptr root = nullptr;
 
   void update(node_ptr& p, int dep) {
     p->val = M::op(p->left ? p->left->val : initial_vals[dep + 1],

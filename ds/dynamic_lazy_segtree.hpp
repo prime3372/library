@@ -97,7 +97,7 @@ private:
   size_t n, sz;
   int log;
   std::vector<S> initial_vals;
-  node_ptr root;
+  node_ptr root = nullptr;
 
   void update(node_ptr& p, int dep) {
     p->val = M::op(p->left ? p->left->val : initial_vals[dep + 1],
