@@ -9,7 +9,7 @@ namespace cp {
 
 // @note the values after convolution must be in [-2*10^18, 2*10^18]
 std::vector<long long> convolution_ll(std::vector<long long> a,
-                                   std::vector<long long> b) {
+                                      std::vector<long long> b) {
   int n = int(a.size()), m = int(b.size());
   if (n == 0 || m == 0) return {};
 
