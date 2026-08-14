@@ -45,7 +45,6 @@ protected:
   }
 
   void update(node_ptr p) const override {
-    push(p);
     p->sub = 1;
     if (p->left) p->sub += p->left->sub;
     if (p->right) p->sub += p->right->sub;

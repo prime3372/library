@@ -68,14 +68,13 @@ protected:
   using base::size;
   using base::root;
 
-  void toggle(node_ptr p) const override {
+  void toggle(node_ptr p) override {
     swap(p->left, p->right);
     p->prod = rev(p->prod);
     p->rev = !p->rev;
   }
 
-  void update(node_ptr p) const override {
-    push(p);
+  void update(node_ptr p) override {
     p->sub = 1;
     p->prod = p->val;
     if (p->left) {
@@ -88,7 +87,7 @@ protected:
     }
   }
 
-  void push(node_ptr p) const override {
+  void push(node_ptr p) override {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);
@@ -99,7 +98,7 @@ protected:
     p->lz = M::id();
   }
 
-  void all_apply(node_ptr p, F f) const {
+  void all_apply(node_ptr p, F f) {
     p->lz = M::composition(f, p->lz);
     p->val = M::composition(f, p->val);
     p->prod = M::mapping(f, p->prod);

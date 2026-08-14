@@ -50,13 +50,19 @@ public:
 
   void set(int k, const T& x) {
     assert(0 <= k && k < size());
-    erase(k);
-    insert(k, x);
+    auto s1 = split(root, k);
+    auto s2 = split(s1.second, 1);
+    s2.first->val = x;
+    root = merge(s1.first, merge(s2.first, s2.second));
   }
 
-  const T& operator[](int k) const {
+  const T& operator[](int k) {
     assert(0 <= k && k < size());
-    return get(root, k)->val;
+    auto s1 = split(root, k);
+    auto s2 = split(s1.second, 1);
+    const T& res = s2.first->val;
+    root = merge(s1.first, merge(s2.first, s2.second));
+    return res;
   }
 
   void insert(int k, const T& x) {
@@ -95,7 +101,7 @@ public:
 protected:
   node_ptr root;
 
-  node_ptr merge(node_ptr left, node_ptr right) const {
+  node_ptr& merge(node_ptr& left, node_ptr& right) {
     if (!left || !right) return left ? left : right;
     if (left->priority > right->priority) {
       push(left);
@@ -110,7 +116,7 @@ protected:
     }
   }
 
-  std::pair<node_ptr, node_ptr> split(node_ptr p, int k) const {
+  std::pair<node_ptr, node_ptr> split(node_ptr p, int k) {
     if (!p) return {nullptr, nullptr};
     push(p);
     if (k <= size(p->left)) {
@@ -126,20 +132,13 @@ protected:
     }
   }
 
-  node_ptr get(node_ptr p, int k) const {
-    push(p);
-    if (size(p->left) == k) return p;
-    if (k < size(p->left)) return get(p->left, k);
-    else return get(p->right, k - size(p->left) - 1);
-  }
-
   int size(node_ptr p) const { return p ? p->sub : 0; }
 
-  virtual void toggle(node_ptr p) const = 0;
+  virtual void toggle(node_ptr p) = 0;
 
-  virtual void update(node_ptr p) const = 0;
+  virtual void update(node_ptr p) = 0;
 
-  virtual void push(node_ptr p) const = 0;
+  virtual void push(node_ptr p) = 0;
 };
 
 } // namespace internal
