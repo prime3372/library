@@ -18,7 +18,7 @@ public:
     g[from].push_back(to);
   }
 
-  int num = -1;
+  int group_num = -1;
   std::vector<int> id;
   std::vector<std::vector<int>> groups;
 
@@ -26,7 +26,7 @@ public:
     int now_ord = 0;
     std::vector<int> visited, low(n), ord(n, -1);
     visited.reserve(n);
-    num = 0;
+    group_num = 0;
 
     auto dfs = [&](auto self, int v) -> void {
       low[v] = ord[v] = now_ord++;
@@ -44,10 +44,10 @@ public:
           int u = visited.back();
           visited.pop_back();
           ord[u] = n;
-          id[u] = num;
+          id[u] = group_num;
           if (u == v) break;
         }
-        num++;
+        group_num++;
       }
     };
     for (int i = 0; i < n; i++) {
@@ -55,10 +55,10 @@ public:
     }
 
     for (int& x : id) {
-      x = num - 1 - x;
+      x = group_num - 1 - x;
     }
 
-    groups.resize(num);
+    groups.resize(group_num);
     for (int i = 0; i < n; i++) {
       groups[id[i]].push_back(i);
     }

@@ -19,7 +19,7 @@ int main() {
     scc.add_edge(a, b);
   }
   scc.build();
-  cout << scc.num << "\n";
+  cout << scc.group_num << "\n";
   for (auto vs : scc.groups) {
     cout << vs.size() << " ";
     for (int v : vs) cout << v << " ";
