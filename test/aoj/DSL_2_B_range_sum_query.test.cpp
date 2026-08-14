@@ -15,10 +15,11 @@ int main() {
   while (q--) {
     int com, x, y;
     cin >> com >> x >> y;
+    x--;
     if (com == 0) {
-      fw.add(x - 1, y);
+      fw.add(x, y);
     } else {
-      cout << fw.sum(x - 1, y) << "\n";
+      cout << fw.sum(x, y) << "\n";
     }
   }
 }

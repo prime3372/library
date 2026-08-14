@@ -15,14 +15,14 @@ int main() {
   cin >> n;
   vector<mint> a(1 << n), b(1 << n);
   for (int i = 0; i < (1 << n); i++) {
-    int a_i;
-    cin >> a_i;
-    a[i] = a_i;
+    int ai;
+    cin >> ai;
+    a[i] = ai;
   }
   for (int i = 0; i < (1 << n); i++) {
-    int b_i;
-    cin >> b_i;
-    b[i] = b_i;
+    int bi;
+    cin >> bi;
+    b[i] = bi;
   }
   for (mint x : and_convolution(n, a, b)) cout << x.val() << " ";
 }
