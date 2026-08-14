@@ -5,8 +5,6 @@
 #include <iostream>
 #include <vector>
 
-#include "util/io_utility.hpp"
-
 namespace cp {
 
 template <class M> struct disjoint_sparse_table {
