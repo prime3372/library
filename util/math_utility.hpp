@@ -73,7 +73,7 @@ template <class T> long long sum(const T& a) {
   return std::accumulate(a.begin(), a.end(), 0LL);
 }
 
-template <class T> void sort_unique(T& a) {
+template <class T> void uniq(T& a) {
   std::sort(a.begin(), a.end());
   a.erase(std::unique(a.begin(), a.end()), a.end());
 }
