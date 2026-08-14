@@ -22,7 +22,7 @@ template <class M> struct segtreap_node {
   unsigned long long priority;
 
   segtreap_node() {}
-  explicit segtreap_node(S x) : val(x), prod(x), priority(mt64()) {}    
+  explicit segtreap_node(const S& x) : val(x), prod(x), priority(mt64()) {}    
   ~segtreap_node() {
     delete left;
     delete right;

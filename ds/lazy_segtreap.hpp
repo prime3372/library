@@ -24,7 +24,7 @@ public:
   unsigned long long priority;
 
   lazy_segtreap_node() {}
-  explicit lazy_segtreap_node(S x) : val(x), prod(x), priority(mt64()) {}  
+  explicit lazy_segtreap_node(const S& x) : val(x), prod(x), priority(mt64()) {}  
   ~lazy_segtreap_node() {
     delete left;
     delete right;
