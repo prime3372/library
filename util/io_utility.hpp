@@ -4,6 +4,7 @@
 #include <array>
 #include <cctype>
 #include <cstddef>
+#include <deque>
 #include <iostream>
 #include <type_traits>
 #include <utility>
@@ -22,17 +23,17 @@ template <class T> struct delimiter_of {
 template <class T>
 inline constexpr char delimiter_of_v = delimiter_of<T>::value;
 
-template <class T> requires is_integral_v<T>
+template <class T> requires is_integral_v<std::decay_t<T>>
 struct delimiter_of<T> {
   static constexpr char value = ' ';
 };
 
-template <class T> requires std::is_floating_point_v<T>
+template <class T> requires std::is_floating_point_v<std::decay_t<T>>
 struct delimiter_of<T> {
   static constexpr char value = ' ';
 };
 
-template <class T> requires std::is_pointer_v<T>
+template <class T> requires is_modint_v<std::decay_t<T>>
 struct delimiter_of<T> {
   static constexpr char value = ' ';
 };
@@ -103,21 +104,41 @@ ostream& operator<<(ostream& os, unsigned __int128 val) {
 template <class T, size_t Size>
 istream& operator>>(istream& is, array<T, Size>& a);
 
+template <class T, class Alloc>
+istream& operator>>(istream& is, deque<T, Alloc>& dq);
+
 template <class T, class U>
 istream& operator>>(istream& is, pair<T, U>& p);
+
+template <class... Args>
+istream& operator>>(istream& is, tuple<Args...>& t);
 
 template <class T, class Alloc>
 istream& operator>>(istream& is, vector<T, Alloc>& v);
 
 template <class T, size_t Size>
 istream& operator>>(istream& is, array<T, Size>& a) {
-  for (auto& x : a) is >> a;
+  for (auto& x : a) is >> x;
+  return is;
+}
+
+template <class T, class Alloc>
+istream& operator>>(istream& is, deque<T, Alloc>& dq) {
+  for (auto& x : dq) is >> x;
   return is;
 }
 
 template <class T, class U>
 istream& operator>>(istream& is, pair<T, U>& p) {
   return is >> p.first >> p.second;
+}
+
+template <class... Args>
+istream& operator>>(istream& is, tuple<Args...>& t) {
+  [&]<size_t... I>(index_sequence<I...>) {
+    (is >> ... >> get<I>(t));
+  }(make_index_sequence<sizeof...(Args)>());
+  return is;
 }
 
 template <class T, class Alloc>
@@ -131,8 +152,14 @@ istream& operator>>(istream& is, vector<T, Alloc>& v) {
 template <class T, size_t Size>
 ostream& operator<<(ostream& os, const array<T, Size>& a);
 
+template <class T, class Alloc>
+ostream& operator<<(ostream& os, const deque<T, Alloc>& dq);
+
 template <class T, class U>
 ostream& operator<<(ostream& os, const pair<T, U>& p);
+
+template <class... Args>
+ostream& operator<<(ostream& os, const tuple<Args...>& t);
 
 template <class T, class Alloc>
 ostream& operator<<(ostream& os, const vector<T, Alloc>& v);
@@ -148,12 +175,43 @@ ostream& operator<<(ostream& os, const array<T, Size>& a) {
   return os;
 }
 
+template <class T, class Alloc>
+ostream& operator<<(ostream& os, const deque<T, Alloc>& dq) {
+  for (int i = 0; i < int(dq.size()); i++) {
+    os << dq[i];
+    if (i != int(dq.size()) - 1) {
+      os << cp::internal::delimiter_of_v<T>;
+    }
+  }
+  return os;
+}
+
 template <class T, class U>
 ostream& operator<<(ostream& os, const pair<T, U>& p) {
   constexpr char delimiter =
     cp::internal::delimiter_of_v<T> == '\n' ? '\n' :
     cp::internal::delimiter_of_v<U> == '\n' ? '\n' : ' ';
   return os << p.first << delimiter << p.second;
+}
+
+template <class... Args>
+ostream& operator<<(ostream& os, const tuple<Args...>& t) {
+  constexpr size_t n = sizeof...(Args);
+  if (n == 0) return os;
+
+  constexpr char delimiter = []{
+    char res = ' ';
+    ((res = cp::internal::delimiter_of_v<Args> == '\n' ? '\n' : res), ...);
+    return res;
+  }();
+
+  [&]<size_t... I>(index_sequence<I...>) {
+    ([&]<class T>(const T& x) {
+      os << x << delimiter;
+    }(get<I>(t)), ...);
+  }(make_index_sequence<n - 1>());
+
+  return os << get<n - 1>(t);
 }
 
 template <class T, class Alloc>

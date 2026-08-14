@@ -130,10 +130,6 @@ template <int id> struct safe_hash<dynamic_modint<id>> {
 
 namespace internal {
 
-template <int id> struct delimiter_of<dynamic_modint<id>> {
-  static constexpr char value = ' ';
-};
-
 template <int id>
 struct is_modint<dynamic_modint<id>> : std::true_type {};
 template <int id>
