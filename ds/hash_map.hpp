@@ -12,7 +12,7 @@ namespace cp {
 
 template <class Key, class Val> struct hash_map {
 public:
-  hash_map() : cap(8), sz(0), shift(61), keys(cap), vals(cap), used(cap), default_value() {}
+  hash_map() : cap(8), sz(0), keys(cap), vals(cap), used(cap), default_value() {}
 
   Val& operator[](const Key& k) {
     unsigned int i = index(k);
@@ -50,27 +50,26 @@ public:
   void set_default(const Val& v) { default_value = v; }
 
 private:
-  unsigned int cap, sz, shift;
+  unsigned int cap, sz;
   std::vector<Key> keys;
   std::vector<Val> vals;
   std::vector<bool> used;
   Val default_value;
 
   unsigned int index(const Key& k) const {
-    unsigned int hs = (unsigned int)(safe_hash<Key>()(k) >> shift);
+    unsigned int hs = (unsigned int)(safe_hash<Key>()(k) & (cap - 1));
     while (used[hs] && keys[hs] != k) hs = (hs + 1) & (cap - 1);
     return hs;
   }
 
   void extend() {
     cap <<= 1;
-    shift--;
     std::vector<Key> k(cap);
     std::vector<Val> v(cap);
     std::vector<bool> u(cap);
     for (int i = 0; i < int(keys.size()); i++) {
       if (!used[i]) continue;
-      unsigned int hs = (unsigned int)(safe_hash<Key>()(keys[i]) >> shift);
+      unsigned int hs = (unsigned int)(safe_hash<Key>()(keys[i]) & (cap - 1));
       while (u[hs]) hs = (hs + 1) & (cap - 1);
       k[hs] = keys[i];
       v[hs] = vals[i];

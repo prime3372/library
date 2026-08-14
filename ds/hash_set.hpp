@@ -10,7 +10,7 @@ namespace cp {
 
 template <class T> struct hash_set {
 public:
-  hash_set() : cap(8), sz(0), shift(61), keys(cap), used(cap) {}
+  hash_set() : cap(8), sz(0), keys(cap), used(cap) {}
 
   bool insert(const T& k) {
     unsigned int i = index(k);
@@ -41,24 +41,23 @@ public:
   int size() const { return sz; }
 
 private:
-  unsigned int cap, sz, shift;
+  unsigned int cap, sz;
   std::vector<T> keys;
   std::vector<bool> used;
 
   unsigned int index(const T& k) const {
-    unsigned int hs = (unsigned int)(safe_hash<T>()(k) >> shift);
+    unsigned int hs = (unsigned int)(safe_hash<T>()(k) & (cap - 1));
     while (used[hs] && keys[hs] != k) hs = (hs + 1) & (cap - 1);
     return hs;
   }
 
   void extend() {
     cap <<= 1;
-    shift--;
     std::vector<T> k(cap);
     std::vector<bool> u(cap);
     for (int i = 0; i < int(keys.size()); i++) {
       if (!used[i]) continue;
-      unsigned int hs = (unsigned int)(safe_hash<T>()(keys[i]) >> shift);
+      unsigned int hs = (unsigned int)(safe_hash<T>()(keys[i]) & (cap - 1));
       while (u[hs]) hs = (hs + 1) & (cap - 1);
       k[hs] = keys[i];
       u[hs] = true;
