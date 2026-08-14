@@ -39,21 +39,21 @@ public:
     return get(root, 0, sz, 0, i);
   }
 
-  S prod(size_t l, size_t r) {
+  S prod(size_t l, size_t r) const {
     assert(l <= r && r <= n);
     return prod(root, 0, sz, 0, l, r);
   }
 
   S all_prod() const { return root ? root->val : initial_vals[0]; }
 
-  template <class F> size_t max_right(size_t l, F f) {
+  template <class F> size_t max_right(size_t l, F f) const {
     assert(l <= n);
     assert(f(M::e()));
     S product = M::e();
     return max_right(root, 0, sz, 0, product, l, f);
   }
 
-  template <class F> size_t min_left(size_t r, F f) {
+  template <class F> size_t min_left(size_t r, F f) const {
     assert(r <= n);
     assert(f(M::e()));
     S product = M::e();
@@ -91,7 +91,7 @@ private:
                    p->right ? p->right->val : initial_vals[dep + 1]);
   }
 
-  S pow_initial(size_t len, int dep) {
+  S pow_initial(size_t len, int dep) const {
     S res = M::e();
     for (int k = 0; k <= log - dep; k++) {
       if (len & 1) res = M::op(res, initial_vals[log - k]);      
@@ -120,7 +120,7 @@ private:
     else return get(p->right, c, b, dep + 1, i);
   }
 
-  S prod(const node_ptr& p, size_t a, size_t b, int dep, size_t l, size_t r) {
+  S prod(const node_ptr& p, size_t a, size_t b, int dep, size_t l, size_t r) const {
     if (b <= l || r <= a) return M::e();
     if (l <= a && b <= r) return p ? p->val : initial_vals[dep];
     if (!p) return pow_initial(std::min(b, r) - std::max(a, l), dep);
@@ -131,7 +131,7 @@ private:
   }
 
   template <class F>
-  size_t max_right(const node_ptr& p, size_t a, size_t b, int dep, S& product, size_t l, F f) {
+  size_t max_right(const node_ptr& p, size_t a, size_t b, int dep, S& product, size_t l, F f) const {
     if (b <= l) return b;
     if (n <= a) return n;
     if (l <= a && b <= n) {
@@ -159,7 +159,7 @@ private:
   }
 
   template <class F>
-  size_t min_left(const node_ptr& p, size_t a, size_t b, int dep, S& product, size_t r, F f) {
+  size_t min_left(const node_ptr& p, size_t a, size_t b, int dep, S& product, size_t r, F f) const {
     if (r <= a) return a;
     if (b <= r) {
       S val = p ? p->val : initial_vals[dep];
