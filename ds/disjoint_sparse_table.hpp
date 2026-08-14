@@ -61,17 +61,6 @@ public:
 
   int size() const { return n; }
 
-  friend std::ostream& operator<<(std::ostream& os,
-                                  const disjoint_sparse_table& dst) {
-    for (int i = 0; i < dst.n; i++) {
-      os << dst[i];
-      if (i != dst.n - 1) {
-        os << internal::delimiter_v<S>;
-      }
-    }
-    return os;
-  }
-
 private:
   int n, log;
   std::vector<S> a;
