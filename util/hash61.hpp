@@ -130,13 +130,4 @@ template <> struct safe_hash<hash61> {
   }
 };
 
-namespace internal {
-
-template <class T> requires std::is_same_v<std::decay_t<T>, hash61>
-struct delimiter_of<T> {
-  static constexpr char value = ' ';
-};
-
-} // namespace internal
-
 } // namespace cp
