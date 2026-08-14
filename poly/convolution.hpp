@@ -17,9 +17,6 @@ namespace internal {
 // @return primitive root (and minimum in now)
 constexpr int primitive_root_ntt(int m) {
   if (m == 2) return 1;
-  if (m == 167772161) return 3;
-  if (m == 469762049) return 3;
-  if (m == 754974721) return 11;
   if (m == 998244353) return 3;
   if (m == 2113929217) return 5;
   if (m == 2130706433) return 3;
