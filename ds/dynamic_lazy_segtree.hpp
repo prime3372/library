@@ -92,7 +92,7 @@ private:
     F lz = M::id();
     bool lzflag = false;
     node_ptr left, right;
-    node(const S& v) : val(v)  {}
+    node(S v) : val(v)  {}
   };
   size_t n, sz;
   int log;
