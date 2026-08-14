@@ -48,7 +48,7 @@
   "test/yosupo/shortest_path.test.cpp": "2026-08-02 16:02:47 +0900",
   "test/yosupo/sort_points_by_argument.test.cpp": "2026-08-14 00:52:33 +0900",
   "test/yosupo/sqrt_mod.test.cpp": "2026-08-14 00:05:25 +0900",
-  "test/yosupo/static_rmq.test.cpp": "2026-08-14 00:52:33 +0900",
+  "test/yosupo/static_rmq.test.cpp": "2026-08-14 09:38:53 +0900",
   "test/yosupo/strongly_connected_components.test.cpp": "2026-08-08 20:39:08 +0900",
   "test/yosupo/suffix_array.test.cpp": "2026-08-13 02:57:43 +0900",
   "test/yosupo/sum_of_floor_of_linear.test.cpp": "2026-08-14 00:07:33 +0900",
