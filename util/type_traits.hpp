@@ -30,8 +30,8 @@ inline constexpr bool is_unsigned_int128_v = is_unsigned_int128<T>::value;
 template <class T>
 using is_integral =
   std::conditional_t<std::is_integral_v<T> ||
-                       is_signed_int128_v<T> ||
-                       is_unsigned_int128_v<T>,
+                       is_signed_int128_v<std::remove_cv_t<T>> ||
+                       is_unsigned_int128_v<std::remove_cv_t<T>>,
                      std::true_type,
                      std::false_type>;
 
@@ -42,7 +42,7 @@ template <class T>
 using is_signed_int =
   std::conditional_t<(std::is_integral_v<T> &&
                       std::is_signed_v<T>) ||
-                        is_signed_int128_v<T>,
+                        is_signed_int128_v<std::remove_cv_t<T>>,
                       std::true_type,
                       std::false_type>;
 
@@ -53,7 +53,7 @@ template <class T>
 using is_unsigned_int =
   std::conditional_t<(std::is_integral_v<T> &&
                       std::is_unsigned_v<T>) ||
-                        is_unsigned_int128_v<T>,
+                        is_unsigned_int128_v<std::remove_cv_t<T>>,
                       std::true_type,
                       std::false_type>;
 
