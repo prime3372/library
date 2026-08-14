@@ -1,8 +1,10 @@
 #pragma once
 
 #include <array>
+#include <deque>
 #include <cstddef>
 #include <functional>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -67,12 +69,32 @@ struct safe_hash<std::array<T, Size>> {
   }
 };
 
+template <class T, class Alloc>
+struct safe_hash<std::deque<T, Alloc>> {
+  unsigned long long operator()(const std::deque<T, Alloc>& dq) const {
+    unsigned long long hs = 0;
+    for (const auto& x : dq) internal::hash_combine(hs, x);
+    return hs;
+  }
+};
+
 template <class T, class U>
 struct safe_hash<std::pair<T, U>> {
   unsigned long long operator()(const std::pair<T, U>& p) const {
     unsigned long long hs = 0;
     internal::hash_combine(hs, p.first);
     internal::hash_combine(hs, p.second);
+    return hs;
+  }
+};
+
+template <class... Args>
+struct safe_hash<std::tuple<Args...>> {
+  unsigned long long operator()(const std::tuple<Args...>& t) const {
+    unsigned long long hs = 0;
+    [&]<size_t... I>(std::index_sequence<I...>) {
+      (internal::hash_combine(hs, get<I>(t)), ...);
+    }(std::make_index_sequence<sizeof...(Args)>());
     return hs;
   }
 };
