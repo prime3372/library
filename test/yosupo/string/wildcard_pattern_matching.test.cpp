@@ -1,7 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/wildcard_pattern_matching"
 
-#include "template/template.hpp"
-
 #include "poly/convolution_ll.hpp"
 
 #include <bits/stdc++.h>
