@@ -14,7 +14,7 @@ using ull = unsigned long long;
 using i128 = __int128;
 using u128 = unsigned __int128;
 template <class T> using vec = vector<T>;
-template <class T> using min_queue = priority_queue<T, vector<T>, greater<T>>;
+template <class T> using pqueue = priority_queue<T, vector<T>, greater<T>>;
 
 #define rep(i, a, b) for (int i = (a); i < int(b); i++)
 #define REP(i, a, b) for (int i = (a); i <= int(b); i++)
