@@ -6,7 +6,6 @@
 
 #include "number/barrett.hpp"
 #include "number/ext_gcd.hpp"
-#include "util/safe_hash.hpp"
 #include "util/io_utility.hpp"
 #include "util/type_traits.hpp"
 
@@ -121,12 +120,6 @@ private:
 };
 
 using modint = dynamic_modint<-1>;
-
-template <int id> struct safe_hash<dynamic_modint<id>> {
-  unsigned long long operator()(const dynamic_modint<id>& x) const {
-    return safe_hash<int>()(x.val());
-  }
-};
 
 namespace internal {
 

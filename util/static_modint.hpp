@@ -5,7 +5,6 @@
 
 #include "number/ext_gcd.hpp"
 #include "number/is_prime.hpp"
-#include "util/safe_hash.hpp"
 #include "util/io_utility.hpp"
 #include "util/type_traits.hpp"
 
@@ -124,12 +123,6 @@ private:
 
 using modint998244353 = static_modint<998244353>;
 using modint1000000007 = static_modint<1000000007>;
-
-template <int m> struct safe_hash<static_modint<m>> {
-  unsigned long long operator()(const static_modint<m>& x) const {
-    return safe_hash<int>()(x.val());
-  }
-};
 
 namespace internal {
 

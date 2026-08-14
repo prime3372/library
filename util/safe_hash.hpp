@@ -60,6 +60,13 @@ struct safe_hash<T> {
   }
 };
 
+template <class T> requires internal::is_modint_v<T>
+struct safe_hash<T> {
+  unsigned long long operator()(const T& x) const {
+    return safe_hash<int>()(x.val());
+  }
+};
+
 template <class T, size_t Size>
 struct safe_hash<std::array<T, Size>> {
   unsigned long long operator()(const std::array<T, Size>& a) const {
