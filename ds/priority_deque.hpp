@@ -19,7 +19,7 @@ public:
     assert(!empty());
     return d[2];
   }
-  
+
   const T& max() const {
     assert(!empty());
     return int(d.size()) == 3 ? d[2] : d[3];
