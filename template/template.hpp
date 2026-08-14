@@ -29,15 +29,9 @@ template <class T> using pqueue = priority_queue<T, vector<T>, greater<T>>;
   []<class... Args>(Args... args) { \
     (std::cerr << ... << args); \
   }(__VA_ARGS__)
-#define debugl(...) \
-  []<class... Args>(Args... args) { \
-    (std::cerr << ... << args); \
-    std::cerr << "\n"; \
-  }(__VA_ARGS__)
 
 #else
 
 #define debug(...)
-#define debugl(...)
 
 #endif
