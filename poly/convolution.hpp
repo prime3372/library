@@ -107,8 +107,7 @@ std::vector<mint> convolution_naive(const std::vector<mint>& a,
 
 } // namespace internal
 
-template <class mint>
-  requires internal::is_static_modint_v<mint> && (is_prime(mint::mod()))
+template <class mint> requires internal::is_static_modint_v<mint>
 std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
   static constexpr int g = internal::primitive_root_ntt(mint::mod());
   static constexpr int ig = pow_mod(g, mint::mod() - 2, mint::mod());
@@ -138,8 +137,7 @@ std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
   return a;
 }
 
-template <int mod = 998244353, class T>
-  requires (is_prime(mod)) && internal::is_integral_v<T>
+template <int mod = 998244353, class T> requires internal::is_integral_v<T>
 std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
   using mint = static_modint<mod>;
   int n = int(a.size()), m = int(b.size());
