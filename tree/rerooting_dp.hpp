@@ -63,7 +63,7 @@ public:
       }
       if (par_id == -1) continue;
       int rev = g[v][par_id].rev;
-      dp[par[v]][rev] = M::mapping(g[par[v]][rev].f, M::op(cum, vals[v]));
+      dp[par[v]][rev] = mapping(g[par[v]][rev].f, M::op(cum, vals[v]));
     }
 
     ans.resize(n);
@@ -78,7 +78,7 @@ public:
       S cum = M::e();
       for (int j = 0; j < int(g[v].size()); j++) {
         int to = g[v][j].to, rev = g[v][j].rev;
-        dp[to][rev] = M::mapping(g[to][rev].f, M::op(M::op(cum, rcum[j + 1]), vals[v]));
+        dp[to][rev] = mapping(g[to][rev].f, M::op(M::op(cum, rcum[j + 1]), vals[v]));
         cum = M::op(cum, dp[v][j]);
       }
       ans[v] = M::op(cum, vals[v]);
