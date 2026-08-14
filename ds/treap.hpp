@@ -39,18 +39,18 @@ public:
 protected:
   using base::build;
 
-  void toggle(node_ptr p) const override {
+  void toggle(node_ptr p) override {
     swap(p->left, p->right);
     p->rev = !p->rev;
   }
 
-  void update(node_ptr p) const override {
+  void update(node_ptr p) override {
     p->sub = 1;
     if (p->left) p->sub += p->left->sub;
     if (p->right) p->sub += p->right->sub;
   }
 
-  void push(node_ptr p) const override {
+  void push(node_ptr p) override {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);
