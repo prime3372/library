@@ -4,7 +4,6 @@
 #include <bit>
 #include <vector>
 
-#include "number/is_prime.hpp"
 #include "number/pow_mod.hpp"
 #include "util/type_traits.hpp"
 #include "util/static_modint.hpp"
