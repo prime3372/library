@@ -7,23 +7,13 @@
 
 namespace cp {
 
-long long ipow(long long x, long long n) {
+template <class T = long long>
+T ipow(long long x, long long n) {
   assert(0 <= n);
-  long long r = 1;
+  T r = 1, t = x;
   while (n) {
-    if (n & 1) r *= x;
-    x *= x;
-    n >>= 1;
-  }
-  return r;
-}
-
-__int128 ipow128(__int128 x, long long n) {
-  assert(0 <= n);
-  __int128 r = 1;
-  while (n) {
-    if (n & 1) r *= x;
-    x *= x;
+    if (n & 1) r *= t;
+    t *= t;
     n >>= 1;
   }
   return r;
@@ -81,26 +71,27 @@ template <class T> void uniq(T& a) {
   a.erase(std::unique(a.begin(), a.end()), a.end());
 }
 
-template <class... Args, class Comp = std::less<std::tuple<Args...>>>
-void sortzip(Args&... args) {
-  if constexpr (sizeof...(Args)) {
-    int size = int(std::get<0>(std::tie(args...)).size());
-    assert(((int(args.size()) == size) && ...));
+template <bool descending = false, class... Args>
+std::vector<int> zip_sort(Args&... args) {
+  if (sizeof...(Args) == 0) return {};
 
-    std::vector<int> p(size);
-    std::iota(p.begin(), p.end(), 0);
+  int n = int(std::get<0>(std::tie(args...)).size());
+  assert(((int(args.size()) == n) && ...));
 
-    std::sort(p.begin(), p.end(), [&](int i, int j) {
-      return std::tie(args[i]...) < std::tie(args[j]...);
-    });
+  std::vector<int> p(n);
+  std::iota(p.begin(), p.end(), 0);
+  std::sort(p.begin(), p.end(), [&](int i, int j) {
+    if (descending) return std::tie(args[i]...) > std::tie(args[j]...);
+    else return std::tie(args[i]...) < std::tie(args[j]...);
+  });
 
-    ([&](auto& c) {
-      auto tmp = c;
-      for (int i = 0; i < size; i++) {
-        c[i] = std::move(tmp[p[i]]);
-      }
-    }(args), ...);
-  }
+  ([&](auto& arg) {
+    auto tmp = arg;
+    for (int i = 0; i < n; i++) {
+      arg[i] = std::move(tmp[p[i]]);
+    }
+  }(args), ...);
+  return p;
 }
 
 } // namespace cp
