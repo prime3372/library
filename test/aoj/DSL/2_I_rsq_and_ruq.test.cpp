@@ -21,12 +21,11 @@ int main() {
     if (com == 0) {
       int s, t, x;
       cin >> s >> t >> x;
-      seg.apply(s - 1, t, {x});
-      cerr << seg << "\n";
+      seg.apply(s, t + 1, {x});
     } else {
       int s, t;
       cin >> s >> t;
-      cout << seg.prod(s - 1, t) << "\n";
+      cout << seg.prod(s, t + 1) << "\n";
     }
   }
 }
