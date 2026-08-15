@@ -1,5 +1,11 @@
 #pragma once
 
+#include "util/io_utility.hpp"
+#include "util/math_utility.hpp"
+#include "util/static_modint.hpp"
+using namespace cp;
+using mint = modint998244353;
+
 #include <bits/stdc++.h>
 using namespace std;
 using uint = unsigned int;
@@ -10,12 +16,6 @@ using u128 = unsigned __int128;
 template <class T> using vec = vector<T>;
 using str = string;
 template <class T> using pque = priority_queue<T, vector<T>, greater<T>>;
-
-#include "util/io_utility.hpp"
-#include "util/math_utility.hpp"
-#include "util/static_modint.hpp"
-using namespace cp;
-using mint = modint998244353;
 
 #define rep(i, a, b) for (int i = (a); i < int(b); i++)
 #define REP(i, a, b) for (int i = (a); i <= int(b); i++)
