@@ -25,17 +25,17 @@ public:
     assert(0 <= from && from < n);
     std::fill(d.begin(), d.end(), -1);
     using visit = std::tuple<T, int, int, int>;
-    std::priority_queue<visit, std::vector<visit>, std::greater<visit>> que;
-    que.emplace(0, from, from, -1);
-    while (!que.empty()) {
-      auto [c, v, pv, pe] = que.top();
-      que.pop();
+    std::priority_queue<visit, std::vector<visit>, std::greater<visit>> pq;
+    pq.emplace(0, from, from, -1);
+    while (!pq.empty()) {
+      auto [c, v, pv, pe] = pq.top();
+      pq.pop();
       if (d[v] != -1) continue;
       d[v] = c;
       prev_v[v] = pv;
       prev_e[v] = pe;
       for (auto e : g[v]) {
-        que.emplace(c + e.cost, e.to, v, e.id);
+        pq.emplace(c + e.cost, e.to, v, e.id);
       }
     }
   }
