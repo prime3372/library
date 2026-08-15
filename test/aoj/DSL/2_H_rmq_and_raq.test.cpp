@@ -6,7 +6,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
-using ll = long long;
 using M = alg::min_add<int, INT_MAX>;
 
 int main() {

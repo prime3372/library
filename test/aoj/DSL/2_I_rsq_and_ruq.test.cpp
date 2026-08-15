@@ -6,7 +6,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
-using ll = long long;
 using M = alg::sum_assign<int>;
 
 int main() {
