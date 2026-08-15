@@ -11,7 +11,7 @@ using ll = long long;
 int main() {
   int n;
   cin >> n;
-  vector<ll> a(n);
+  vector<int> a(n);
   rep(i, 0, n) cin >> a[i];
   cout << length_of_lis(a) << "\n";
 }
