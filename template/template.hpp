@@ -1,7 +1,5 @@
 #pragma once
 
-// All the remaining parts of this library works without this template.
-
 #include <bits/stdc++.h>
 using namespace std;
 using uint = unsigned int;
