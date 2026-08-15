@@ -1,5 +1,7 @@
 #pragma once
 
+// All the remaining parts of this library works without this template.
+
 #include <bits/stdc++.h>
 using namespace std;
 using uint = unsigned int;
@@ -37,6 +39,7 @@ template <class T> using pque = priority_queue<T, vector<T>, greater<T>>;
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
+#include "util/algo_utility.hpp"
 #include "util/io_utility.hpp"
 #include "util/math_utility.hpp"
 #include "util/static_modint.hpp"
