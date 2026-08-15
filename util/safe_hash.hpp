@@ -68,7 +68,7 @@ struct safe_hash<T> {
   }
 };
 
-template <ranges::range Range>
+template <std::ranges::range Range>
 struct safe_hash<Range> {
   unsigned long long operator()(const Range& r) const {
     unsigned long long hs = 0;
