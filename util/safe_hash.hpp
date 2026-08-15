@@ -3,6 +3,7 @@
 #include <array>
 #include <cstddef>
 #include <functional>
+#include <ranges>
 #include <string>
 #include <tuple>
 #include <utility>
@@ -67,11 +68,11 @@ struct safe_hash<T> {
   }
 };
 
-template <class T, size_t Size>
-struct safe_hash<std::array<T, Size>> {
-  unsigned long long operator()(const std::array<T, Size>& a) const {
+template <ranges::range Range>
+struct safe_hash<Range> {
+  unsigned long long operator()(const Range& r) const {
     unsigned long long hs = 0;
-    for (const auto& x : a) internal::hash_combine(hs, x);
+    for (const auto& x : r) internal::hash_combine(hs, x);
     return hs;
   }
 };
@@ -86,14 +87,6 @@ struct safe_hash<std::pair<T, U>> {
   }
 };
 
-template <> struct safe_hash<std::string> {
-  unsigned long long operator()(const std::string& s) const {
-    unsigned long long hs = 0;
-    for (char c : s) internal::hash_combine(hs, c);
-    return hs;
-  }
-};
-
 template <class... Args>
 struct safe_hash<std::tuple<Args...>> {
   unsigned long long operator()(const std::tuple<Args...>& t) const {
@@ -101,15 +94,6 @@ struct safe_hash<std::tuple<Args...>> {
     [&]<size_t... I>(std::index_sequence<I...>) {
       (internal::hash_combine(hs, get<I>(t)), ...);
     }(std::make_index_sequence<sizeof...(Args)>());
-    return hs;
-  }
-};
-
-template <class T, class Alloc>
-struct safe_hash<std::vector<T, Alloc>> {
-  unsigned long long operator()(const std::vector<T, Alloc>& v) const {
-    unsigned long long hs = 0;
-    for (const auto& x : v) internal::hash_combine(hs, x);
     return hs;
   }
 };
