@@ -22,7 +22,7 @@ template <class T> struct sum_assign {
 
   struct F {
     T val;
-    bool id;
+    bool id = false;
   };
   static S mapping(F f, S x) { return f.id ? x : S{f.val * x.len, x.len}; }
   static F composition(F g, F f) { return g.id ? f : g; }

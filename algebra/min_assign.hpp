@@ -13,7 +13,7 @@ template <class T, T upper> struct min_assign {
 
   struct F {
     T val;
-    bool id;
+    bool id = false;
   };
   static S mapping(F f, S x) { return f.id ? x : f.val; }
   static F composition(F g, F f) { return g.id ? f : g; }
