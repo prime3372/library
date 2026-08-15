@@ -14,9 +14,9 @@ int main() {
   cin >> n >> m >> r;
   dijkstra<int> g(n);
   rep(i, 0, m) {
-    int u, v, d;
-    cin >> u >> v >> d;
-    g.add_edge(u, v, d);
+    int s, t, d;
+    cin >> s >> t >> d;
+    g.add_edge(s, t, d);
   }
   g.search(r);
   rep(i, 0, n) {
