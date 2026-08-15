@@ -23,6 +23,7 @@ template <class T> using pque = priority_queue<T, vector<T>, greater<T>>;
 #define RREP(i, a, b) for (int i = int(b); i >= (a); i--)
 #define fore(x, a) for (auto& x : (a))
 #define all(a) (a).begin(), (a).end()
+#define rall(a) (a).rbegin(), (a).rend()
 
 #ifdef LOCAL
 
