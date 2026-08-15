@@ -14,6 +14,6 @@ int main() {
   cin >> n;
   vector<int> a(n);
   rep(i, 0, n) cin >> a[i];
-  cartesian_tree<true> cart(a);
+  cartesian_tree<false> cart(a);
   for (int p : cart.parent) cout << (p == -1 ? cart.root : p) << " ";
 }
