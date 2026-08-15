@@ -27,7 +27,8 @@ template <class T> using pque = priority_queue<T, vector<T>, greater<T>>;
 
 #ifdef LOCAL
 
-#define local 1
+#define iflocal if (true)
+#define ifnlocal if (false)
 #define debug(...) \
   []<class... Args>(Args... args) { \
     (std::cerr << ... << args); \
@@ -36,7 +37,8 @@ template <class T> using pque = priority_queue<T, vector<T>, greater<T>>;
 
 #else
 
-#define local 0
+#define iflocal if (false)
+#define ifnlocal if (true)
 #define debug(...)
 
 #endif
