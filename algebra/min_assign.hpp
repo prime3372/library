@@ -17,7 +17,7 @@ template <class T, T upper> struct min_assign {
   };
   static S mapping(F f, S x) { return f.id ? x : f.val; }
   static F composition(F g, F f) { return g.id ? f : g; }
-  static F id() { return F{T{}, true}; }
+  static F id() { return F{upper, true}; }
 };
 
 } // namespace alg

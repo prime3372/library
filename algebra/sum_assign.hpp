@@ -26,7 +26,7 @@ template <class T> struct sum_assign {
   };
   static S mapping(F f, S x) { return f.id ? x : S{f.val * x.len, x.len}; }
   static F composition(F g, F f) { return g.id ? f : g; }
-  static F id() { return F{T{}, true}; }
+  static F id() { return F{0, true}; }
 };
 
 } // namespace alg
