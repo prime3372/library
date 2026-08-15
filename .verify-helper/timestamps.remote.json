@@ -8,6 +8,8 @@
   "test/aoj/DSL/2_F_rmq_and_ruq.test.cpp": "2026-08-15 12:40:07 +0900",
   "test/aoj/DSL/2_G_rsq_and_raq.test.cpp": "2026-08-15 12:40:07 +0900",
   "test/aoj/DSL/2_H_rmq_and_raq.test.cpp": "2026-08-15 12:48:22 +0900",
+  "test/aoj/DSL/2_I_rsq_and_ruq.test.cpp": "2026-08-15 12:57:34 +0900",
+  "test/aoj/DSL/3_D_sliding_minimum_elements.test.cpp": "2026-08-15 12:40:07 +0900",
   "test/aoj/DSL_2_B_range_sum_query.test.cpp": "2026-08-14 18:23:36 +0900",
   "test/aoj/DSL_3_D_sliding_minimum_elements.test.cpp": "2026-08-14 18:29:26 +0900",
   "test/yosupo/2sat.test.cpp": "2026-08-14 10:38:51 +0900",
