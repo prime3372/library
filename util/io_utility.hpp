@@ -31,17 +31,9 @@ template <class T> char delimiter_of(const T& x) {
 
   if (s.size() == 1) return ' ';
 
-  {
-    [[maybe_unused]] long long dummy;
-    auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), dummy);
-    if (ec == std::errc{} && ptr == s.data() + s.size()) return ' ';
-  }
-
-  {
-    [[maybe_unused]] long double dummy;
-    auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), dummy);
-    if (ec == std::errc{} && ptr == s.data() + s.size()) return ' ';
-  }
+  long double dummy;
+  auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), dummy);
+  if (ec == std::errc{} && ptr == s.data() + s.size()) return ' ';
 
   return '\n';
 }
@@ -192,7 +184,7 @@ ostream& operator<<(ostream& os, stack<T, Container> st) {
 
 template <class T, class U>
 ostream& operator<<(ostream& os, const pair<T, U>& p) {
-  return os << std::make_tuple(p.first, p.second);
+  return os << std::tie(p.first, p.second);
 }
 
 template <class... Args>
