@@ -14,21 +14,6 @@ template <class T> bool chmax(T& a, const T& b) {
   return b > a ? (a = b, true) : false;
 }
 
-template <class T> auto min_elem(const T& a) {
-  assert(!a.empty());
-  return *std::min_element(a.begin(), a.end());
-}
-
-template <class T> auto max_elem(const T& a) {
-  assert(!a.empty());
-  return *std::max_element(a.begin(), a.end());
-}
-
-template <class T = long long, class U>
-T sum(const U& a) {
-  return std::accumulate(a.begin(), a.end(), T(0));
-}
-
 template <class T> void uniq(T& a) {
   std::sort(a.begin(), a.end());
   a.erase(std::unique(a.begin(), a.end()), a.end());
