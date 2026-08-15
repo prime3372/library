@@ -78,7 +78,7 @@ public:
     for (size_t i = 0; i < std::min<size_t>(seg.n, 20); i++) {
       os << seg[i];
       if (i != seg.n - 1) {
-        os << internal::delimiter_of_v<S>;
+        os << internal::delimiter_after(seg[i]);
       }
     }
     return os;

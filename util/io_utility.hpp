@@ -3,8 +3,10 @@
 #include <algorithm>
 #include <array>
 #include <cctype>
+#include <charconv>
 #include <cstddef>
 #include <iostream>
+#include <sstream>
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -15,27 +17,31 @@ namespace cp {
 
 namespace internal {
 
-template <class T> struct delimiter_of {
-  static constexpr char value = '\n';
-};
+template <class T> char delimiter_after(const T& x) {
+  if (is_integral_v<T>) return ' ';
+  if (std::is_floating_point_v<T>) return ' ';
+  if (std::is_same_v<T, std::string>) return '\n';
 
-template <class T>
-inline constexpr char delimiter_of_v = delimiter_of<T>::value;
+  std::ostringstream oss;
+  oss << x;
+  std::string s = oss.str();
 
-template <class T> requires is_integral_v<std::decay_t<T>>
-struct delimiter_of<T> {
-  static constexpr char value = ' ';
-};
+  if (s.size() == 1) return ' ';
 
-template <class T> requires std::is_floating_point_v<std::decay_t<T>>
-struct delimiter_of<T> {
-  static constexpr char value = ' ';
-};
+  {
+    [[maybe_unused]] long long dummy;
+    auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), dummy);
+    if (ec == std::errc{} && ptr == s.data() + s.size()) return ' ';
+  }
 
-template <class T> requires is_modint_v<std::decay_t<T>>
-struct delimiter_of<T> {
-  static constexpr char value = ' ';
-};
+  {
+    [[maybe_unused]] long double dummy;
+    auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), dummy);
+    if (ec == std::errc{} && ptr == s.data() + s.size()) return ' ';
+  }
+
+  return '\n';
+}
 
 } // namespace internal
 
@@ -49,7 +55,7 @@ istream& operator>>(istream& is, __int128& val) {
   string s;
   if (is >> s) {
     val = 0;
-    for (int i = s[0] == '+' || s[0] == '-'; i < int(s.size()); i++) {
+    for (int i = (s[0] == '+' || s[0] == '-'); i < int(s.size()); i++) {
       if (!isdigit(s[i])) break;
       val = val * 10 + (s[i] - '0');
     }
@@ -62,7 +68,7 @@ istream& operator>>(istream& is, unsigned __int128& val) {
   string s;
   if (is >> s) {
     val = 0;
-    for (int i = s[0] == '+' || s[0] == '-'; i < int(s.size()); i++) {
+    for (int i = (s[0] == '+' || s[0] == '-'); i < int(s.size()); i++) {
       if (!isdigit(s[i])) break;
       val = val * 10 + (s[i] - '0');
     }
@@ -156,7 +162,7 @@ ostream& operator<<(ostream& os, const array<T, Size>& a) {
   for (int i = 0; i < int(a.size()); i++) {
     os << a[i];
     if (i != int(a.size()) - 1) {
-      os << cp::internal::delimiter_of_v<T>;
+      os << cp::internal::delimiter_after(a[i]);
     }
   }
   return os;
@@ -164,9 +170,13 @@ ostream& operator<<(ostream& os, const array<T, Size>& a) {
 
 template <class T, class U>
 ostream& operator<<(ostream& os, const pair<T, U>& p) {
-  constexpr char delimiter =
-    cp::internal::delimiter_of_v<T> == '\n' ? '\n' :
-    cp::internal::delimiter_of_v<U> == '\n' ? '\n' : ' ';
+  char delimiter = ' ';
+  if (cp::internal::delimiter_after(p.first) == '\n') {
+    delimiter = '\n';
+  }
+  if (cp::internal::delimiter_after(p.second) == '\n') {
+    delimiter = '\n';
+  }
   return os << p.first << delimiter << p.second;
 }
 
@@ -175,14 +185,17 @@ ostream& operator<<(ostream& os, const tuple<Args...>& t) {
   constexpr size_t n = sizeof...(Args);
   if (n == 0) return os;
 
-  constexpr char delimiter = []{
-    char res = ' ';
-    ((res = cp::internal::delimiter_of_v<Args> == '\n' ? '\n' : res), ...);
-    return res;
-  }();
+  char delimiter = ' ';
+  [&]<size_t... I>(index_sequence<I...>) {
+    ([&](const auto& x) {
+      if (cp::internal::delimiter_after(x) == '\n') {
+        delimiter = '\n';
+      }
+    }(get<I>(t)), ...);
+  }(make_index_sequence<n>());
 
   [&]<size_t... I>(index_sequence<I...>) {
-    ([&]<class T>(const T& x) {
+    ([&](const auto& x) {
       os << x << delimiter;
     }(get<I>(t)), ...);
   }(make_index_sequence<n - 1>());
@@ -195,7 +208,7 @@ ostream& operator<<(ostream& os, const vector<T, Alloc>& v) {
   for (int i = 0; i < int(v.size()); i++) {
     os << v[i];
     if (i != int(v.size()) - 1) {
-      os << cp::internal::delimiter_of_v<T>;
+      os << cp::internal::delimiter_after(v[i]);
     }
   }
   return os;
