@@ -29,15 +29,18 @@ __int128 ipow128(__int128 x, long long n) {
   return r;
 }
 
-unsigned long long isqrt(unsigned long long x) {
-  unsigned long long y = (unsigned long long)(std::sqrt(double(x)));
+template <class T> T isqrt(T x) {
+  T y = T(std::sqrt(double(x)));
+  if (sizeof(T) > 8) {
+    y = (y + x / y) / 2; // Newton's method
+  }
   while (y != 0 && y > x / y) y--;
   while ((y + 1) <= x / (y + 1)) y++;
   return y;
 }
 
-unsigned long long icbrt(unsigned long long x) {
-  unsigned long long y = (unsigned long long)(std::cbrt(double(x)));
+template <class T> T icbrt(T x) {
+  T y = T(std::cbrt(double(x)));
   while (y != 0 && y * y > x / y) y--;
   while ((y + 1) * (y + 1) <= x / (y + 1)) y++;
   return y;
@@ -76,6 +79,28 @@ template <class T> long long sum(const T& a) {
 template <class T> void uniq(T& a) {
   std::sort(a.begin(), a.end());
   a.erase(std::unique(a.begin(), a.end()), a.end());
+}
+
+template <class... Args, class Comp = std::less<std::tuple<Args...>>>
+void sortzip(Args&... args) {
+  if constexpr (sizeof...(Args) > 0) {
+    int size = int(std::get<0>(std::tie(args...)).size());
+    assert((int(args.size()) == size) && ...);
+
+    std::vector<int> p(size);
+    std::iota(p.begin(), p.end(), 0);
+
+    std::sort(p.begin(), p.end(), [&](int i, int j) {
+      return std::tie(args[i]...) < std::tie(args[j]...);
+    });
+
+    ([&](auto& c) {
+      auto tmp = c;
+      for (int i = 0; i < size; i++) {
+        c[i] = std::move(tmp[p[i]]);
+      }
+    }(args), ...);
+  }
 }
 
 } // namespace cp
