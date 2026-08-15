@@ -160,13 +160,11 @@ public:
   int size() const { return n; }
 
   friend std::ostream& operator<<(std::ostream& os, lazy_segtree& seg) {
+    std::vector<S> v(seg.n);
     for (int i = 0; i < seg.n; i++) {
-      os << seg[i];
-      if (i != seg.n - 1) {
-        os << internal::delimiter_after(seg[i]);
-      }
+      v[i] = seg[i];
     }
-    return os;
+    return os << v;
   }
 
 private:

@@ -51,13 +51,10 @@ public:
 
   friend std::ostream& operator<<(std::ostream& os,
                                   coordinate_compression& cc) {
-    for (int i = 0; i < cc.size(); i++) {
-      os << cc[i];
-      if (i != cc.size() - 1) {
-        os << internal::delimiter_after(cc[i]);
-      }
-    }
-    return os;
+    if (!cc.initialized) cc.init();
+    std::vector<S> v;
+    v.assign(cc.d.begin(), cc.d.end());
+    return os << v;
   }
 
 private:

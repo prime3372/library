@@ -6,6 +6,7 @@
 #include <charconv>
 #include <cstddef>
 #include <iostream>
+#include <ranges>
 #include <sstream>
 #include <type_traits>
 #include <utility>
@@ -20,6 +21,8 @@ namespace internal {
 template <class T> char delimiter_after(const T& x) {
   if (is_integral_v<T>) return ' ';
   if (std::is_floating_point_v<T>) return ' ';
+  if (std::ranges::range<T>) return '\n';
+  if (is_tuple_v<T>) return '\n';
   if (std::is_same_v<T, std::string>) return '\n';
 
   std::ostringstream oss;
@@ -159,25 +162,14 @@ ostream& operator<<(ostream& os, const vector<T, Alloc>& v);
 
 template <class T, size_t Size>
 ostream& operator<<(ostream& os, const array<T, Size>& a) {
-  for (int i = 0; i < int(a.size()); i++) {
-    os << a[i];
-    if (i != int(a.size()) - 1) {
-      os << cp::internal::delimiter_after(a[i]);
-    }
-  }
-  return os;
+  std::vector<T> v;
+  v.assign(a.begin(), a.end());
+  return os << v;
 }
 
 template <class T, class U>
 ostream& operator<<(ostream& os, const pair<T, U>& p) {
-  char delimiter = ' ';
-  if (cp::internal::delimiter_after(p.first) == '\n') {
-    delimiter = '\n';
-  }
-  if (cp::internal::delimiter_after(p.second) == '\n') {
-    delimiter = '\n';
-  }
-  return os << p.first << delimiter << p.second;
+  return os << std::make_tuple(p.first, p.second);
 }
 
 template <class... Args>
@@ -205,13 +197,19 @@ ostream& operator<<(ostream& os, const tuple<Args...>& t) {
 
 template <class T, class Alloc>
 ostream& operator<<(ostream& os, const vector<T, Alloc>& v) {
-  for (int i = 0; i < int(v.size()); i++) {
-    os << v[i];
-    if (i != int(v.size()) - 1) {
-      os << cp::internal::delimiter_after(v[i]);
+  if (v.empty()) return os;
+
+  char delimiter = ' ';
+  for (const auto& x : v) {
+    if (cp::internal::delimiter_after(x) == '\n') {
+      delimiter = '\n';
     }
   }
-  return os;
+
+  for (int i = 0; i < int(v.size()) - 1; i++) {
+    os << v[i] << delimiter;
+  }
+  return os << v.back();
 }
 
 } // namespace std

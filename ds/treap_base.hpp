@@ -91,13 +91,11 @@ public:
   int size() const { return size(root); }
 
   friend std::ostream& operator<<(std::ostream& os, treap_base& tp) {
+    std::vector<S> v(tp.size());
     for (int i = 0; i < tp.size(); i++) {
-      os << tp[i];
-      if (i != tp.size() - 1) {
-        os << internal::delimiter_after(tp[i]);
-      }
+      v[i] = tp[i];
     }
-    return os;
+    return os << v;
   }
 
 protected:

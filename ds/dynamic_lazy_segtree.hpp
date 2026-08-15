@@ -75,13 +75,11 @@ public:
 
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_lazy_segtree& seg) {
-    for (size_t i = 0; i < std::min<size_t>(seg.n, 20); i++) {
-      os << seg[i];
-      if (i != seg.n - 1) {
-        os << internal::delimiter_after(seg[i]);
-      }
+    std::vector<S> v(std::min<size_t>(seg.n, 20));
+    for (size_t i = 0; i < v.size(); i++) {
+      v[i] = seg[i];
     }
-    return os;
+    return os << v;
   }
 
 private:
