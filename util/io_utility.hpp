@@ -20,7 +20,7 @@ namespace cp {
 
 namespace internal {
 
-template <class T> char delimiter_after(const T& x) {
+template <class T> char delimiter_of(const T& x) {
   if (is_integral_v<T>) return ' ';
   if (std::is_floating_point_v<T>) return ' ';
   if (std::is_same_v<T, std::string>) return '\n';
@@ -138,18 +138,18 @@ istream& operator>>(istream& is, vector<T, Alloc>& v) {
 
 template <ranges::range Range>
   requires (!is_convertible_v<Range, string>)
-ostream& operator<<(ostream& os, const Range& v) {
-  if (v.empty()) return os;
+ostream& operator<<(ostream& os, const Range& r) {
+  if (r.empty()) return os;
 
   char delimiter = ' ';
-  for (const auto& x : v) {
-    if (cp::internal::delimiter_after(x) == '\n') {
+  for (const auto& x : r) {
+    if (cp::internal::delimiter_of(x) == '\n') {
       delimiter = '\n';
     }
   }
 
   bool first = true;
-  for (const auto& x : v) {
+  for (const auto& x : r) {
     if (!first) os << delimiter;
     first = false;
     os << x;
@@ -203,7 +203,7 @@ ostream& operator<<(ostream& os, const tuple<Args...>& t) {
   char delimiter = ' ';
   [&]<size_t... I>(index_sequence<I...>) {
     ([&](const auto& x) {
-      if (cp::internal::delimiter_after(x) == '\n') {
+      if (cp::internal::delimiter_of(x) == '\n') {
         delimiter = '\n';
       }
     }(get<I>(t)), ...);
