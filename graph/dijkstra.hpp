@@ -38,14 +38,17 @@ public:
         pq.emplace(c + e.cost, e.to, v, e.id);
       }
     }
+    initialized = true;
   }
 
   T dist(int to) const {
+    assert(initialized);
     assert(0 <= to && to < n);
     return d[to];
   }
 
   std::pair<std::vector<int>, std::vector<int>> route(int to) const {
+    assert(initialized);
     assert(0 <= to && to < n);
     if (d[to] == -1) return {};
     std::vector<int> vs, es;
@@ -62,6 +65,7 @@ public:
 
 private:
   int n, m = 0;
+  bool initialized = false;
   struct edge {
     int to, id;
     T cost;
