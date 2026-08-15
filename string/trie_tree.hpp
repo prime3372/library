@@ -82,7 +82,7 @@ protected:
       assert(0 <= idx && idx < char_size);
       return idx;
     }
-    assert(0 <= c - offset && c - offset < char_size);
+    assert(offset <= c && c < offset + char_size);
     return c - offset;
   }
 
