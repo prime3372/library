@@ -14,8 +14,8 @@ public:
   explicit dijkstra(int _n) : n(_n), g(_n), d(_n), prev_v(_n), prev_e(_n) {}
 
   int add_edge(int from, int to, T cost) {
-    assert(0 <= from && to < n);
-    assert(0 <= from && to < n);
+    assert(0 <= from && from < n);
+    assert(0 <= to && to < n);
     assert(0 <= cost);
     g[from].push_back(edge{to, m, cost});
     return m++;
@@ -24,8 +24,8 @@ public:
   void search(int from) {
     assert(0 <= from && from < n);
     std::fill(d.begin(), d.end(), -1);
-    using visit = std::tuple<T, int, int, int>;
-    std::priority_queue<visit, std::vector<visit>, std::greater<visit>> pq;
+    using tup = std::tuple<T, int, int, int>;
+    std::priority_queue<tup, std::vector<tup>, std::greater<tup>> pq;
     pq.emplace(0, from, from, -1);
     while (!pq.empty()) {
       auto [c, v, pv, pe] = pq.top();
