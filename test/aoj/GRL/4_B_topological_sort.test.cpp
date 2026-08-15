@@ -1,4 +1,5 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_4_B"
+#define CHECKER "4_B_topological_sort.test.checker"
 
 #include "graph/topological_sort.hpp"
 
