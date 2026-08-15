@@ -60,6 +60,19 @@ using is_unsigned_int =
 template <class T>
 inline constexpr bool is_unsigned_int_v = is_unsigned_int<T>::value;
 
+// is_tuple
+
+template <class> struct is_tuple : public std::false_type {};
+
+template <class T>
+inline constexpr bool is_tuple_v = is_tuple<T>::value;
+
+template <class T, class U>
+struct is_tuple<std::pair<T, U>> : public std::true_type {};
+
+template <class... Args>
+struct is_tuple<std::tuple<Args...>> : public std::true_type {};
+
 // is_modint
 
 template <class> struct is_modint : public std::false_type {};
