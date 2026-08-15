@@ -83,9 +83,9 @@ template <class T> void uniq(T& a) {
 
 template <class... Args, class Comp = std::less<std::tuple<Args...>>>
 void sortzip(Args&... args) {
-  if constexpr (sizeof...(Args) > 0) {
+  if constexpr (sizeof...(Args)) {
     int size = int(std::get<0>(std::tie(args...)).size());
-    assert((int(args.size()) == size) && ...);
+    assert(((int(args.size()) == size) && ...));
 
     std::vector<int> p(size);
     std::iota(p.begin(), p.end(), 0);
