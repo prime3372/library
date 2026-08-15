@@ -14,6 +14,7 @@
   "test/aoj/DSL/3_D_sliding_minimum_elements.test.cpp": "2026-08-15 19:58:31 +0900",
   "test/aoj/DSL/5_B_the_maximum_number_of_overlaps.test.cpp": "2026-08-16 03:03:20 +0900",
   "test/aoj/GRL/1_A_single_sourse_shortest_path.test.cpp": "2026-08-16 04:44:04 +0900",
+  "test/aoj/GRL/2_A_minimum_spanning_tree.test.cpp": "2026-08-16 04:46:22 +0900",
   "test/aoj/GRL/6_A_maximum_flow.test.cpp": "2026-08-16 04:30:59 +0900",
   "test/yosupo/convolution/bitwise_and_convolution.test.cpp": "2026-08-16 03:03:20 +0900",
   "test/yosupo/convolution/convolution.test.cpp": "2026-08-16 03:03:20 +0900",
