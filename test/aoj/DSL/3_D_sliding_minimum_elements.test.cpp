@@ -7,13 +7,14 @@
 #define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
+using M = alg::min<int, int(1e9) + 1>;
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, l;
   cin >> n >> l;
-  slide_window_aggregation<alg::min<int, int(1e9) + 1>> swag;
+  slide_window_aggregation<M> swag;
   rep(i, 0, l) {
     int a;
     cin >> a;
