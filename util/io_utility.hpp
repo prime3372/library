@@ -6,8 +6,10 @@
 #include <charconv>
 #include <cstddef>
 #include <iostream>
+#include <queue>
 #include <ranges>
 #include <sstream>
+#include <stack>
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -21,8 +23,6 @@ namespace internal {
 template <class T> char delimiter_after(const T& x) {
   if (is_integral_v<T>) return ' ';
   if (std::is_floating_point_v<T>) return ' ';
-  if (std::ranges::range<T>) return '\n';
-  if (is_tuple_v<T>) return '\n';
   if (std::is_same_v<T, std::string>) return '\n';
 
   std::ostringstream oss;
@@ -110,18 +110,6 @@ ostream& operator<<(ostream& os, unsigned __int128 val) {
 // utilities for input
 
 template <class T, size_t Size>
-istream& operator>>(istream& is, array<T, Size>& a);
-
-template <class T, class U>
-istream& operator>>(istream& is, pair<T, U>& p);
-
-template <class... Args>
-istream& operator>>(istream& is, tuple<Args...>& t);
-
-template <class T, class Alloc>
-istream& operator>>(istream& is, vector<T, Alloc>& v);
-
-template <class T, size_t Size>
 istream& operator>>(istream& is, array<T, Size>& a) {
   for (auto& x : a) is >> x;
   return is;
@@ -148,22 +136,57 @@ istream& operator>>(istream& is, vector<T, Alloc>& v) {
 
 // utilities for output
 
-template <class T, size_t Size>
-ostream& operator<<(ostream& os, const array<T, Size>& a);
+template <ranges::range Range>
+  requires (!is_convertible_v<Range, string>)
+ostream& operator<<(ostream& os, const Range& v) {
+  if (v.empty()) return os;
 
-template <class T, class U>
-ostream& operator<<(ostream& os, const pair<T, U>& p);
+  char delimiter = ' ';
+  for (const auto& x : v) {
+    if (cp::internal::delimiter_after(x) == '\n') {
+      delimiter = '\n';
+    }
+  }
 
-template <class... Args>
-ostream& operator<<(ostream& os, const tuple<Args...>& t);
+  bool first = true;
+  for (const auto& x : v) {
+    if (!first) os << delimiter;
+    first = false;
+    os << x;
+  }
+  return os;
+}
 
-template <class T, class Alloc>
-ostream& operator<<(ostream& os, const vector<T, Alloc>& v);
+template <class T, class Container>
+ostream& operator<<(ostream& os, queue<T, Container> q) {
+  std::vector<T> v(q.size());
+  int i = 0;
+  while (!q.empty()) {
+    v[i++] = q.front();
+    q.pop();
+  }
+  return os << v;
+}
 
-template <class T, size_t Size>
-ostream& operator<<(ostream& os, const array<T, Size>& a) {
-  std::vector<T> v;
-  v.assign(a.begin(), a.end());
+template <class T, class Container, class Compare>
+ostream& operator<<(ostream& os, priority_queue<T, Container, Compare> pq) {
+  std::vector<T> v(pq.size());
+  int i = 0;
+  while (!pq.empty()) {
+    v[i++] = pq.top();
+    pq.pop();
+  }
+  return os << v;
+}
+
+template <class T, class Container>
+ostream& operator<<(ostream& os, stack<T, Container> st) {
+  std::vector<T> v(st.size());
+  int i = 0;
+  while (!st.empty()) {
+    v[i++] = st.top();
+    st.pop();
+  }
   return os << v;
 }
 
@@ -193,23 +216,6 @@ ostream& operator<<(ostream& os, const tuple<Args...>& t) {
   }(make_index_sequence<n - 1>());
 
   return os << get<n - 1>(t);
-}
-
-template <class T, class Alloc>
-ostream& operator<<(ostream& os, const vector<T, Alloc>& v) {
-  if (v.empty()) return os;
-
-  char delimiter = ' ';
-  for (const auto& x : v) {
-    if (cp::internal::delimiter_after(x) == '\n') {
-      delimiter = '\n';
-    }
-  }
-
-  for (int i = 0; i < int(v.size()) - 1; i++) {
-    os << v[i] << delimiter;
-  }
-  return os << v.back();
 }
 
 } // namespace std
