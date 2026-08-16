@@ -22,10 +22,6 @@ std::istream& operator>>(std::istream& is, __int128& val);
 
 std::istream& operator>>(std::istream& is, unsigned __int128& val);
 
-std::istream& operator>>(std::istream& is, unsigned __int128& val);
-
-std::ostream& operator<<(std::ostream& os, unsigned __int128 val);
-
 template <class T, size_t Size>
 std::istream& operator>>(std::istream& is, std::array<T, Size>& a);
 
@@ -37,6 +33,10 @@ std::istream& operator>>(std::istream& is, std::tuple<Args...>& t);
 
 template <class T, class Alloc>
 std::istream& operator>>(std::istream& is, std::vector<T, Alloc>& v);
+
+std::ostream& operator<<(std::ostream& os, __int128 val);
+
+std::ostream& operator<<(std::ostream& os, unsigned __int128 val);
 
 template <std::ranges::range Range>
   requires (!std::is_convertible_v<Range, std::string>)
@@ -88,7 +88,8 @@ template <> struct delimiter_of<std::string> {
 
 } // namespace cp
 
-// __int128
+
+// utilities for input
 
 std::istream& operator>>(std::istream& is, __int128& val) {
   std::string s;
@@ -116,35 +117,6 @@ std::istream& operator>>(std::istream& is, unsigned __int128& val) {
   return is;
 }
 
-std::ostream& operator<<(std::ostream& os, __int128 val) {
-  if (val == 0) return os << '0';
-  unsigned __int128 uval = val;
-  if (val < 0) {
-    os << '-';
-    uval = -val;
-  }
-  std::string s;
-  while (uval) {
-    s.push_back((char)('0' + (uval % 10)));
-    uval /= 10;
-  }
-  std::reverse(s.begin(), s.end());
-  return os << s;
-}
-
-std::ostream& operator<<(std::ostream& os, unsigned __int128 val) {
-  if (val == 0) return os << '0';
-  std::string s;
-  while (val) {
-    s.push_back((char)('0' + (val % 10)));
-    val /= 10;
-  }
-  std::reverse(s.begin(), s.end());
-  return os << s;
-}
-
-// utilities for input
-
 template <class T, size_t Size>
 std::istream& operator>>(std::istream& is, std::array<T, Size>& a) {
   for (auto& x : a) is >> x;
@@ -171,6 +143,33 @@ std::istream& operator>>(std::istream& is, std::vector<T, Alloc>& v) {
 }
 
 // utilities for output
+
+std::ostream& operator<<(std::ostream& os, __int128 val) {
+  if (val == 0) return os << '0';
+  unsigned __int128 uval = val;
+  if (val < 0) {
+    os << '-';
+    uval = -val;
+  }
+  std::string s;
+  while (uval) {
+    s.push_back((char)('0' + (uval % 10)));
+    uval /= 10;
+  }
+  std::reverse(s.begin(), s.end());
+  return os << s;
+}
+
+std::ostream& operator<<(std::ostream& os, unsigned __int128 val) {
+  if (val == 0) return os << '0';
+  std::string s;
+  while (val) {
+    s.push_back((char)('0' + (val % 10)));
+    val /= 10;
+  }
+  std::reverse(s.begin(), s.end());
+  return os << s;
+}
 
 template <std::ranges::range Range>
   requires (!std::is_convertible_v<Range, std::string>)
