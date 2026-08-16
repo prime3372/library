@@ -1,6 +1,12 @@
 #pragma once
 
 #include <bits/stdc++.h>
+
+#include "util/algo_utility.hpp"
+#include "util/io_utility.hpp"
+#include "util/math_utility.hpp"
+#include "util/static_modint.hpp"
+
 using namespace std;
 using uint = unsigned int;
 using ll = long long;
@@ -10,6 +16,9 @@ using u128 = unsigned __int128;
 template <class T> using vec = vector<T>;
 using str = string;
 template <class T> using pque = priority_queue<T, vector<T>, greater<T>>;
+
+using namespace cp;
+using mint = modint998244353;
 
 #ifdef LOCAL
 
@@ -36,10 +45,3 @@ template <class T> using pque = priority_queue<T, vector<T>, greater<T>>;
 #define fore(x, a) for (auto& x : (a))
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
-
-#include "util/algo_utility.hpp"
-#include "util/io_utility.hpp"
-#include "util/math_utility.hpp"
-#include "util/static_modint.hpp"
-using namespace cp;
-using mint = modint998244353;
