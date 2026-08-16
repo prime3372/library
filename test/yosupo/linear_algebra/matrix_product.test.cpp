@@ -24,11 +24,5 @@ int main() {
       cin >> b[i][j];
     }
   }
-  a *= b;
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < k; j++) {
-      cout << a[i][j] << " ";
-    }
-    cout << "\n";
-  }
+  cout << a * b << "\n";
 }

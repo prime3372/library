@@ -21,11 +21,5 @@ int main() {
       cin >> a[i][j];
     }
   }
-  a = a.pow(k);
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-      cout << a[i][j] << " ";    
-    }
-    cout << "\n";
-  }
+  cout << a.pow(k) << "\n";
 }
