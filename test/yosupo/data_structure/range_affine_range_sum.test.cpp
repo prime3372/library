@@ -3,9 +3,8 @@
 #include "algebra/sum_affine.hpp"
 #include "ds/lazy_segtree.hpp"
 #include "util/static_modint.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
@@ -17,9 +16,9 @@ int main() {
   int n, q;
   cin >> n >> q;
   vector<M::S> a(n);
-  rep(i, 0, n) {
-    cin >> a[i].val;
-    a[i].len = 1;
+  for (auto& ai : a) {
+    cin >> ai.val;
+    ai.len = 1;
   }
   lazy_segtree<M> seg(a);
   while (q--) {

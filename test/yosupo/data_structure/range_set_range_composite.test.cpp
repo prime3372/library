@@ -4,9 +4,8 @@
 #include "algebra/assign.hpp"
 #include "ds/lazy_segtree.hpp"
 #include "util/static_modint.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
@@ -18,9 +17,9 @@ int main() {
   int n, q;
   cin >> n >> q;
   vector<M::S> f(n);
-  rep(i, 0, n) {
-    cin >> f[i].val.a >> f[i].val.b;
-    f[i].len = 1;
+  for (auto& fi : f) {
+    cin >> fi.val.a >> fi.val.b;
+    fi.len = 1;
   }
   lazy_segtree<M> seg(f);
   while (q--) {

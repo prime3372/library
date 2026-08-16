@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 
 #include "ds/hash_map.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
 using ll = long long;

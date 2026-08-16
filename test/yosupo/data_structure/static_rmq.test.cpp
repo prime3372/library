@@ -2,9 +2,8 @@
 
 #include "algebra/min.hpp"
 #include "ds/disjoint_sparse_table.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -14,7 +13,7 @@ int main() {
   int n, q;
   cin >> n >> q;
   vector<int> a(n);
-  rep(i, 0, n) cin >> a[i];
+  for (int& ai : a) cin >> ai;
   disjoint_sparse_table<alg::min<int, int(1e9)>> dst(a);
   while (q--) {
     int l, r;

@@ -2,9 +2,8 @@
 
 #include "algebra/max.hpp"
 #include "ds/segtree.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -14,7 +13,7 @@ int main() {
   int n, q;
   cin >> n >> q;
   segtree<alg::max<bool, false>> seg(n);
-  rep(i, 0, n) {
+  for (int i = 0; i < n; i++) {
     char ti;
     cin >> ti;
     seg.set(i, ti == '1');

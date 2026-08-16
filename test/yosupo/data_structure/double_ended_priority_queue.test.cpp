@@ -2,8 +2,6 @@
 
 #include "ds/priority_deque.hpp"
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -13,7 +11,7 @@ int main() {
   int n, q;
   cin >> n >> q;
   priority_deque<int> pq;
-  rep(i, 0, n) {
+  for (int i = 0; i < n; i++) {
     int si;
     cin >> si;
     pq.push(si);

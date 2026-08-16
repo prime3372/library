@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/set_xor_min"
 
 #include "ds/binary_trie.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
 

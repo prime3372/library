@@ -2,9 +2,8 @@
 
 #include "algebra/add.hpp"
 #include "ds/segtreap.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;
@@ -15,7 +14,7 @@ int main() {
   int n, q;
   cin >> n >> q;
   vector<ll> a(n);
-  rep(i, 0, n) cin >> a[i];
+  for (ll& ai : a) cin >> ai;
   segtreap<alg::add<ll>> seg(a);
   while (q--) {
     int t, l, r;

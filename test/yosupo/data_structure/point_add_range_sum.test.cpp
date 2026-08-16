@@ -2,8 +2,6 @@
 
 #include "ds/fenwick_tree.hpp"
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;
@@ -14,7 +12,7 @@ int main() {
   int n, q;
   cin >> n >> q;
   fenwick_tree<ll> fw(n);
-  rep(i, 0, n) {
+  for (int i = 0; i < n; i++) {
     ll a;
     cin >> a;
     fw.add(i, a);

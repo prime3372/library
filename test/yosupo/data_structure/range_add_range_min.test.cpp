@@ -2,9 +2,9 @@
 
 #include "algebra/min_add.hpp"
 #include "ds/lazy_segtree.hpp"
+#include <iostream>
+#include <vector>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;
@@ -15,7 +15,7 @@ int main() {
   int n, q;
   cin >> n >> q;
   vector<ll> a(n);
-  rep(i, 0, n) cin >> a[i];
+  for (ll& ai : a) cin >> ai;
   lazy_segtree<alg::min_add<ll, ll(1e18)>> seg(a);
   while (q--) {
     int t;

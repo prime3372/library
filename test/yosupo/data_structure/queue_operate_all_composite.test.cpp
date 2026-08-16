@@ -3,8 +3,8 @@
 #include "algebra/affine.hpp"
 #include "ds/slide_window_aggregation.hpp"
 #include "util/static_modint.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
