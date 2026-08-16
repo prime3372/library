@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
 
 #include "graph/two_sat.hpp"
+#include <iostream>
+#include <string>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -17,7 +17,7 @@ int main() {
   int n, m;
   cin >> n >> m;
   two_sat sat(n);
-  rep(i, 0, m) {
+  for (int i = 0; i < m; i++) {
     int a, b, dummy;
     cin >> a >> b >> dummy;
     bool f = a > 0, g = b > 0;
@@ -32,7 +32,7 @@ int main() {
   }
   cout << "s SATISFIABLE\n";
   cout << "v ";
-  rep(i, 0, ans.size()) {
+  for (int i = 0; i < int(ans.size()); i++) {
     cout << (ans[i] ? i + 1: -i - 1) << " ";
   }
   cout << "0\n";

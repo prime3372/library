@@ -2,7 +2,6 @@
 
 #include "util/io_utility.hpp"
 
-#include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
 

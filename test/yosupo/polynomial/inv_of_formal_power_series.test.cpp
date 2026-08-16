@@ -2,9 +2,8 @@
 
 #include "poly/formal_power_series.hpp"
 #include "util/static_modint.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
@@ -15,7 +14,6 @@ int main() {
   int n;
   cin >> n;
   formal_power_series<mint> f(n);
-  rep(i, 0, n) cin >> f[i];
-  f = f.inv();
-  rep(i, 0, n) cout << f[i] << " ";
+  for (int i = 0; i < n; i++) cin >> f[i];  
+  cout << f.inv() << " ";  
 }
