@@ -15,9 +15,12 @@ constexpr bool is_prime(long long n) {
   long long d = n - 1;
   while (d % 2 == 0) d /= 2;
 
-  auto bases = n < 4759123141 ?
-               std::vector<long long>{2, 7, 61} :
-               std::vector<long long>{2, 325, 9375, 28178, 450775, 9780504, 1795265022};
+  std::vector<long long> bases;
+  if (n < 4759123141) {
+    bases = {2, 7, 61};
+  } else {
+    bases = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
+  }
 
   for (long long a : bases) {
     if (a % n == 0) continue;
