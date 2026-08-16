@@ -11,10 +11,9 @@
 namespace cp {
 
 struct formal_power_series_ll {
-private:
+public:
   using fps = formal_power_series_ll;
 
-public:
   formal_power_series_ll() {}
   explicit formal_power_series_ll(int n) : a(n) {}
   explicit formal_power_series_ll(int n, long long val) : a(n, val) {}
@@ -64,17 +63,39 @@ public:
   fps operator+() const { return *this; }
   fps operator-() const { return fps() - *this; }
 
-  friend fps operator+(const fps& lhs, long long rhs) { return fps(lhs) += rhs; }
-  friend fps operator+(long long lhs, const fps& rhs) { return fps(rhs) += lhs; }
-  friend fps operator+(const fps& lhs, const fps& rhs) { return fps(lhs) += rhs; }
-  friend fps operator-(const fps& lhs, long long rhs) { return fps(lhs) -= rhs; }
-  friend fps operator-(long long lhs, const fps& rhs) { return fps(1, lhs) -= rhs; }
-  friend fps operator-(const fps& lhs, const fps& rhs) { return fps(lhs) -= rhs; }
-  friend fps operator*(const fps& lhs, long long rhs) { return fps(lhs) *= rhs; }
-  friend fps operator*(long long lhs, const fps& rhs) { return fps(rhs) *= lhs; }
-  friend fps operator*(const fps& lhs, const fps& rhs) { return fps(lhs) *= rhs; }
-  friend fps operator/(const fps& lhs, long long rhs) { return fps(lhs) /= rhs; }
-  friend fps operator/(long long lhs, const fps& rhs) { return fps(rhs) /= lhs; }
+  friend fps operator+(const fps& lhs, long long rhs) {
+    return fps(lhs) += rhs;
+  }
+  friend fps operator+(long long lhs, const fps& rhs) {
+    return fps(rhs) += lhs;
+  }
+  friend fps operator+(const fps& lhs, const fps& rhs) {
+    return fps(lhs) += rhs;
+  }
+  friend fps operator-(const fps& lhs, long long rhs) {
+    return fps(lhs) -= rhs;
+  }
+  friend fps operator-(long long lhs, const fps& rhs) {
+    return fps(1, lhs) -= rhs;
+  }
+  friend fps operator-(const fps& lhs, const fps& rhs) {
+    return fps(lhs) -= rhs;
+  }
+  friend fps operator*(const fps& lhs, long long rhs) {
+    return fps(lhs) *= rhs;
+  }
+  friend fps operator*(long long lhs, const fps& rhs) {
+    return fps(rhs) *= lhs;
+  }
+  friend fps operator*(const fps& lhs, const fps& rhs) {
+    return fps(lhs) *= rhs;
+  }
+  friend fps operator/(const fps& lhs, long long rhs) {
+    return fps(lhs) /= rhs;
+  }
+  friend fps operator/(long long lhs, const fps& rhs) {
+    return fps(rhs) /= lhs;
+  }
 
   int size() const { return int(a.size()); }
   bool empty() const { return a.empty(); }
