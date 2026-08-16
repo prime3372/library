@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/double_ended_priority_queue"
 
 #include "ds/priority_deque.hpp"
+#include <iostream>
 
 using namespace std;
 using namespace cp;
