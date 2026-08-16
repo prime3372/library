@@ -7,9 +7,9 @@
 
 namespace cp {
 
-struct two_edge_connected_components : private low_link {
+struct two_edge_connected_components {
 public:
-  two_edge_connected_components(int _n) : id(_n, -1), link(_n) {}
+  two_edge_connected_components(int _n) : id(_n, -1), n(_n), link(_n) {}
 
   void add_edge(int a, int b) {
     assert(0 <= a && a < n);
@@ -47,6 +47,7 @@ public:
   }
 
 private:
+  int n;
   low_link link;
 };
 
