@@ -15,11 +15,11 @@ template <int id> struct dynamic_modint {
 public:
   using mint = dynamic_modint;
 
+  static int mod() { return bt.umod(); }
   static void set_mod(int m) {
     assert(1 <= m);
     bt = barrett(m);
   }
-  static int mod() { return bt.umod(); }
 
   dynamic_modint() : v(0) {}
   template <class T> requires internal::is_signed_int_v<T>
@@ -70,7 +70,9 @@ public:
     v = bt.mul(v, rhs.v);
     return *this;
   }
-  mint& operator/=(const mint& rhs) { return *this = *this * rhs.inv(); }
+  mint& operator/=(const mint& rhs) {
+    return *this = *this * rhs.inv();
+  }
 
   mint operator+() const { return *this; }
   mint operator-() const { return mint() - *this; }
@@ -91,17 +93,37 @@ public:
     return eg.second;
   }
 
-  friend mint operator+(const mint& lhs, const mint& rhs) { return mint(lhs) += rhs; }
-  friend mint operator-(const mint& lhs, const mint& rhs) { return mint(lhs) -= rhs; }
-  friend mint operator*(const mint& lhs, const mint& rhs) { return mint(lhs) *= rhs; }
-  friend mint operator/(const mint& lhs, const mint& rhs) { return mint(lhs) /= rhs; }
+  friend mint operator+(const mint& lhs, const mint& rhs) {
+    return mint(lhs) += rhs;
+  }
+  friend mint operator-(const mint& lhs, const mint& rhs) {
+    return mint(lhs) -= rhs;
+  }
+  friend mint operator*(const mint& lhs, const mint& rhs) {
+    return mint(lhs) *= rhs;
+  }
+  friend mint operator/(const mint& lhs, const mint& rhs) {
+    return mint(lhs) /= rhs;
+  }
 
-  friend bool operator==(const mint& lhs, const mint& rhs) { return lhs.v == rhs.v; }
-  friend bool operator!=(const mint& lhs, const mint& rhs) { return lhs.v != rhs.v; }
-  friend bool operator<(const mint& lhs, const mint& rhs) { return lhs.v < rhs.v; }
-  friend bool operator>(const mint& lhs, const mint& rhs) { return lhs.v > rhs.v; }
-  friend bool operator<=(const mint& lhs, const mint& rhs) { return lhs.v <= rhs.v; }
-  friend bool operator>=(const mint& lhs, const mint& rhs) { return lhs.v >= rhs.v; }
+  friend bool operator==(const mint& lhs, const mint& rhs) {
+    return lhs.v == rhs.v;
+  }
+  friend bool operator!=(const mint& lhs, const mint& rhs) {
+    return lhs.v != rhs.v;
+  }
+  friend bool operator<(const mint& lhs, const mint& rhs) {
+    return lhs.v < rhs.v;
+  }
+  friend bool operator>(const mint& lhs, const mint& rhs) {
+    return lhs.v > rhs.v;
+  }
+  friend bool operator<=(const mint& lhs, const mint& rhs) {
+    return lhs.v <= rhs.v;
+  }
+  friend bool operator>=(const mint& lhs, const mint& rhs) {
+    return lhs.v >= rhs.v;
+  }
 
   friend std::istream& operator>>(std::istream& is, mint& x) {
     long long t;
