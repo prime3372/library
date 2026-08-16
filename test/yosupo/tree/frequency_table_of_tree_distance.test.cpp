@@ -2,9 +2,9 @@
 
 #include "poly/formal_power_series_ll.hpp"
 #include "tree/centroid_decomposition.hpp"
+#include <iostream>
+#include <vector>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;
@@ -17,7 +17,7 @@ int main() {
   cin >> n;
   std::vector<std::vector<int>> g(n);
   centroid_decomposition cd(n);
-  rep(i, 0, n - 1) {
+  for (int i = 0; i < n - 1; i++) {
     int a, b;
     cin >> a >> b;
     g[a].push_back(b);
@@ -28,12 +28,12 @@ int main() {
 
   formal_power_series_ll freq(n);
   vector<bool> removed(n);
-  rep(i, 0, n) {
+  for (int i = 0; i < n; i++) {
     int c = cd.centroid[i];
     int k = int(g[c].size());
 
     vector<formal_power_series_ll> f(k);
-    rep(j, 0, k) {
+    for (int j = 0; j < k; j++) {
       auto dfs = [&](auto self, int v, int pv, int d) -> void {
         if (f[j].size() <= d) f[j].resize(d + 1);
         f[j][d]++;
@@ -47,12 +47,12 @@ int main() {
     }
 
     formal_power_series_ll fsum, f2sum;
-    rep(j, 0, k) fsum += f[j];
-    rep(j, 0, k) f2sum += f[j] * f[j];
+    for (int j = 0; j < k; j++) fsum += f[j];
+    for (int j = 0; j < k; j++) f2sum += f[j] * f[j];
     freq += (fsum * fsum - f2sum) / 2 + fsum;
 
     removed[c] = true;
-  };
+  }
   
-  rep(i, 1, n) cout << freq[i] << " ";
+  for (int i = 1; i < n; i++) cout << freq[i] << " ";
 }

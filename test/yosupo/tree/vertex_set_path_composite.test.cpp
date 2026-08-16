@@ -4,6 +4,8 @@
 #include "ds/segtree.hpp"
 #include "util/static_modint.hpp"
 #include "tree/hl_decomposition.hpp"
+#include <iostream>
+#include <vector>
 
 #include <bits/stdc++.h>
 #define rep(i, a, b) for (int i = (a); i < int(b); i++)
@@ -24,10 +26,10 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  std::vector<M::S> f(n);
-  rep(i, 0, n) cin >> f[i].a >> f[i].b;
+  vector<M::S> f(n);
+  for (auto& fi : f) cin >> fi.a >> fi.b;
   hl_decomposition hld(n);
-  rep(i, 0, n - 1) {
+  for (int i = 0; i < n - 1; i++) {
     int u, v;
     cin >> u >> v;
     hld.add_edge(u, v);
@@ -36,7 +38,7 @@ int main() {
   auto id = hld.id, head = hld.head, next = hld.next;
   segtree<M> seg(n);
   segtree<Rev_M> rseg(n);
-  rep(i, 0, n) {
+  for (int i = 0; i < n; i++) {
     seg.set(id[i], f[i]);
     rseg.set(id[i], f[i]);
   }

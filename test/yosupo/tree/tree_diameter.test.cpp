@@ -1,9 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
 
 #include "tree/tree_diameter.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;
@@ -14,7 +13,7 @@ int main() {
   int n;
   cin >> n;
   tree_diameter<ll> diam(n);
-  rep(i, 0, n - 1) {
+  for (int i = 0; i < n - 1; i++) {
     int a, b, c;
     cin >> a >> b >> c;
     diam.add_edge(a, b, c);

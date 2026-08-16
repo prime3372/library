@@ -2,9 +2,9 @@
 
 #include "ds/fenwick_tree.hpp"
 #include "tree/hl_decomposition.hpp"
+#include <iostream>
+#include <utility>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;
@@ -14,10 +14,10 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  std::vector<ll> a(n);
+  vector<ll> a(n);
   hl_decomposition hld(n);
-  rep(i, 0, n) cin >> a[i];
-  rep(i, 0, n - 1) {
+  for (ll& ai : a) cin >> ai;
+  for(int i = 0; i < n - 1; i++) {
     int u, v;
     cin >> u >> v;
     hld.add_edge(u, v);
@@ -25,7 +25,7 @@ int main() {
   hld.build();
   auto id = hld.id, head = hld.head, next = hld.next;
   fenwick_tree<ll> fw(n);
-  rep(i, 0, n) fw.add(id[i], a[i]);
+  for (int i = 0; i < n; i++) fw.add(id[i], a[i]);
   while (q--) {
     int t;
     cin >> t;

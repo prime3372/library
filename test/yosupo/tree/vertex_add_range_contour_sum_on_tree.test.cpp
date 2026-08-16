@@ -3,9 +3,8 @@
 #include "ds/fenwick_tree.hpp"
 #include "tree/centroid_decomposition.hpp"
 #include "tree/tree_lca.hpp"
+#include <vector>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;
@@ -17,11 +16,11 @@ int main() {
   int n, q;
   cin >> n >> q;
   vector<ll> a(n);
-  rep(i, 0, n) cin >> a[i];
+  for (ll& ai : a) cin >> ai;
   vector<vector<int>> tree(n);
   centroid_decomposition cd(n);
   tree_lca lca(n);
-  rep(i, 0, n - 1) {
+  for (int i = 0; i < n - 1; i++) {
     int u, v;
     cin >> u >> v;
     tree[u].push_back(v);
@@ -33,7 +32,7 @@ int main() {
   lca.init();
 
   vector<fenwick_tree<ll>> fw_all(n), fw_par(n);
-  rep(i, 0, n) {
+  for (int i = 0; i < n; i++) {
     fw_all[i] = fw_par[i] = fenwick_tree<ll>(cd.size[i] + 1);
   }
 
@@ -68,7 +67,7 @@ int main() {
     return ans;
   };
 
-  rep(i, 0, n) query0(i, a[i]);  
+  for (int i = 0; i < n; i++) query0(i, a[i]);  
 
   while (q--) {
     int t;

@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification"
 
 #include "tree/rooted_tree_hash.hpp"
+#include <iostream>
+#include <vector>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -13,14 +13,14 @@ int main() {
   int n;
   cin >> n;
   rooted_tree_hash t(n);
-  rep(i, 1, n) {
+  for (int i = 1; i < n; i++) {
     int p;
     cin >> p;
     t.add_edge(i, p);
   }
   auto hs = t.build(0).hash;
   vector<pair<hash61, int>> hs_idx(n);
-  rep(i, 0, n) hs_idx[i] = {hs[i], i};
+  for (int i = 0; i < n; i++) hs_idx[i] = {hs[i], i};
   sort(hs_idx.begin(), hs_idx.end());
   int id = 0;
   vector<int> ans(n);
@@ -29,5 +29,5 @@ int main() {
     if (i < n - 1 && hs_idx[i].first != hs_idx[i + 1].first) id++;
   }
   cout << id + 1 << "\n";
-  rep(i, 0, n) cout << ans[i] << " ";
+  for (int x : ans) cout << x << " ";
 }

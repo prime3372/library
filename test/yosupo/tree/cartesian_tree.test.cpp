@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
 
 #include "ds/cartesian_tree.hpp"
+#include <iostream>
+#include <vector>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -13,7 +13,7 @@ int main() {
   int n;
   cin >> n;
   vector<int> a(n);
-  rep(i, 0, n) cin >> a[i];
+  for (int& ai : a) cin >> ai;
   cartesian_tree<false> cart(a);
   for (int p : cart.parent) {
     cout << (p == -1 ? cart.root : p) << " ";

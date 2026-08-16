@@ -3,9 +3,8 @@
 #include "algebra/sum_affine.hpp"
 #include "tree/rerooting_dp.hpp"
 #include "util/static_modint.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
@@ -15,12 +14,12 @@ int main() {
   int n;
   cin >> n;
   std::vector<M::S> a(n);
-  rep(i, 0, n) {
-    cin >> a[i].val;
-    a[i].len = 1;
+  for (auto& ai : a) {
+    cin >> ai.val;
+    ai.len = 1;
   }
   rerooting_dp<M> rerooting(a);
-  rep(i, 0, n - 1) {
+  for (int i = 0; i < n - 1; i++) {
     int u, v;
     mint b, c;
     cin >> u >> v >> b >> c;

@@ -2,9 +2,9 @@
 
 #include "ds/fenwick_tree.hpp"
 #include "tree/euler_tour.hpp"
+#include <iostream>
+#include <vector>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;
@@ -14,10 +14,10 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  std::vector<ll> a(n);
-  rep(i, 0, n) cin >> a[i];
+  vector<ll> a(n);
+  for (ll& ai : a) cin >> ai;
   euler_tour et(n);
-  rep(i, 1, n) {
+  for (int i = 1; i < n; i++) {
     int p;
     cin >> p;
     et.add_edge(i, p);
@@ -25,7 +25,7 @@ int main() {
   et.build();
   auto in = et.in, out = et.out;
   fenwick_tree<ll> fw(n);
-  rep(i, 0, n) fw.add(in[i], a[i]);
+  for (int i = 0; i < n; i++) fw.add(in[i], a[i]);
   while (q--) {
     int t;
     cin >> t;
