@@ -57,7 +57,9 @@ public:
   }
   int prefix(int v) const { return nodes[v].mid; }
 
-  const std::array<int, char_size>& operator[](int v) const { return nodes[v].to; }
+  const std::array<int, char_size>& operator[](int v) const {
+    return nodes[v].to;
+  }
 
   int next(int v, char c) const { return nodes[v].to[index(c)]; }
 
