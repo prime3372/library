@@ -2,6 +2,7 @@
 
 #include <bits/stdc++.h>
 
+#include "random/base.hpp"
 #include "util/algo_utility.hpp"
 #include "util/io_utility.hpp"
 #include "util/math_utility.hpp"
