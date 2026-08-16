@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 
 #include "ds/fenwick_tree.hpp"
+#include <iostream>
 
 using namespace std;
 using namespace cp;

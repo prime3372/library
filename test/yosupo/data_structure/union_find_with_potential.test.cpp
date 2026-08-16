@@ -2,6 +2,7 @@
 
 #include "ds/union_find_with_potential.hpp"
 #include "util/static_modint.hpp"
+#include <iostream>
 
 using namespace std;
 using namespace cp;

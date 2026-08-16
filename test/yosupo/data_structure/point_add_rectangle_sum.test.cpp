@@ -2,6 +2,7 @@
 
 #include "ds/dynamic_fenwick_tree_2d.hpp"
 #include "util/coordinate_compression.hpp"
+#include <iostream>
 #include <vector>
 
 using namespace std;

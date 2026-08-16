@@ -3,6 +3,7 @@
 #include "algebra/affine.hpp"
 #include "ds/segtree.hpp"
 #include "util/static_modint.hpp"
+#include <iostream>
 #include <vector>
 
 using namespace std;
