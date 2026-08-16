@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sort_points_by_argument"
 
 #include "geom/point.hpp"
+#include <iostream>
+#include <iomanip>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -13,8 +13,8 @@ int main() {
   cout << fixed << setprecision(0);
   int n;
   cin >> n;
-  vector<point> pts(n);
-  rep(i, 0, n) cin >> pts[i];
-  sort(pts.begin(), pts.end());
-  rep(i, 0, n) cout << pts[i] << "\n";
+  vector<point> ps(n);
+  for (auto& p : ps) cin >> p;
+  sort(ps.begin(), ps.end());
+  for (auto& p : ps) cout << p << "\n";
 }
