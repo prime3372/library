@@ -42,7 +42,6 @@ public:
     for (int i = 0; i < rhs.size(); i++) a[i] += rhs[i];
     return *this;
   }
-
   fps& operator-=(const mint& rhs) {
     return *this -= fps(1, rhs);
   }
@@ -51,7 +50,6 @@ public:
     for (int i = 0; i < rhs.size(); i++) a[i] -= rhs[i];
     return *this;
   }
-
   fps& operator*=(const mint& rhs) {
     for (int i = 0; i < size(); i++) a[i] *= rhs;
     return *this;
@@ -60,7 +58,6 @@ public:
     a = convolution(a, rhs.a);
     return *this;
   }
-
   fps& operator/=(const mint& rhs) {
     for (int i = 0; i < size(); i++) a[i] /= rhs;
     return *this;
@@ -69,17 +66,39 @@ public:
   fps operator+() const { return *this; }
   fps operator-() const { return fps() - *this; }
 
-  friend fps operator+(const fps& lhs, const mint& rhs) { return fps(lhs) += rhs; }
-  friend fps operator+(const mint& lhs, const fps& rhs) { return fps(rhs) += lhs; }
-  friend fps operator+(const fps& lhs, const fps& rhs) { return fps(lhs) += rhs; }
-  friend fps operator-(const fps& lhs, const mint& rhs) { return fps(lhs) -= rhs; }
-  friend fps operator-(const mint& lhs, const fps& rhs) { return fps(1, lhs) -= rhs; }
-  friend fps operator-(const fps& lhs, const fps& rhs) { return fps(lhs) -= rhs; }
-  friend fps operator*(const fps& lhs, const mint& rhs) { return fps(lhs) *= rhs; }
-  friend fps operator*(const mint& lhs, const fps& rhs) { return fps(rhs) *= lhs; }
-  friend fps operator*(const fps& lhs, const fps& rhs) { return fps(lhs) *= rhs; }
-  friend fps operator/(const fps& lhs, const mint& rhs) { return fps(lhs) /= rhs; }
-  friend fps operator/(const mint& lhs, const fps& rhs) { return fps(rhs) /= lhs; }
+  friend fps operator+(const fps& lhs, const mint& rhs) {
+    return fps(lhs) += rhs;
+  }
+  friend fps operator+(const mint& lhs, const fps& rhs) {
+    return fps(rhs) += lhs;
+  }
+  friend fps operator+(const fps& lhs, const fps& rhs) {
+    return fps(lhs) += rhs;
+  }
+  friend fps operator-(const fps& lhs, const mint& rhs) {
+    return fps(lhs) -= rhs;
+  }
+  friend fps operator-(const mint& lhs, const fps& rhs) {
+    return fps(1, lhs) -= rhs;
+  }
+  friend fps operator-(const fps& lhs, const fps& rhs) {
+    return fps(lhs) -= rhs;
+  }
+  friend fps operator*(const fps& lhs, const mint& rhs) {
+    return fps(lhs) *= rhs;
+  }
+  friend fps operator*(const mint& lhs, const fps& rhs) {
+    return fps(rhs) *= lhs;
+  }
+  friend fps operator*(const fps& lhs, const fps& rhs) {
+    return fps(lhs) *= rhs;
+  }
+  friend fps operator/(const fps& lhs, const mint& rhs) {
+    return fps(lhs) /= rhs;
+  }
+  friend fps operator/(const mint& lhs, const fps& rhs) {
+    return fps(rhs) /= lhs;
+  }
 
   fps operator>>(int w) const {
     if (size() <= w) return fps();
