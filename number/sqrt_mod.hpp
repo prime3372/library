@@ -15,17 +15,17 @@ long long sqrt_mod(long long n, long long p) {
   if (n < 0) n += p;
   if (n <= 1) return n;
 
-  // if n is not a square in F_p, return -1
+  // If n is not a square in F_p, return -1.
   if (pow_mod(n, (p - 1) / 2, p) != 1) return -1;
 
-  // take an a s.t. a*a - n is not a square in F_p,
-  // and let w = sqrt(a*a - n)
+  // Take an a s.t. a*a - n is not a square in F_p,
+  // and let w = sqrt(a*a - n).
   long long a = 0;
   while (pow_mod(a * a - n, (p - 1) / 2, p) == 1) a++;
   long long w2 = (a * a - n) % p; 
   if (w2 < 0) w2 += p;
 
-  // let F_p^2 = F_p(w)
+  // Let F_p^2 = F_p(w).
   struct Fp2 {
     __int128 re, im;
   };
@@ -46,10 +46,14 @@ long long sqrt_mod(long long n, long long p) {
   // -> (a + w)^p = a^p - w^p = a - w (mod p)
 
   // z = (a + w)^{(p+1)/2} (in F_p^2)
-  // z^2 = (a + w)^(p+1) = (a + w)(a + w)^p = (a + w)(a - w) = a^2 - w^2 = n (in F_p^2)
-  // therefore z, -z are sqrt(n) in F_p^2
-  // with Lagrange's theorem, polynomial of degree 2 has at most 2 roots in any field K, so z, -z are also sqrt(n) in F_p
-  // (note that we have already checked that n is a square in F_p)
+  // z^2 = (a + w)^(p+1)
+  //     = (a + w)(a + w)^p
+  //     = (a + w)(a - w)
+  //     = a^2 - w^2 = n (in F_p^2)
+  // Therefore z, -z are sqrt(n) in F_p^2.
+  // Polynomial of degree 2 has at most 2 roots in any field K,
+  // so z, -z are also sqrt(n) in F_p.
+  // Note that we have already checked that n is a square in F_p.
 
   return (long long)(z.re);
 }
