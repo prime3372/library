@@ -2,6 +2,7 @@
 
 #include "algebra/min.hpp"
 #include "ds/segtree.hpp"
+#include <climits>
 #include <iostream>
 
 using namespace std;
