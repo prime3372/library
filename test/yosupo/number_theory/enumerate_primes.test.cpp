@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_primes"
 
 #include "number/enumerate_primes.hpp"
+#include <iostream>
+#include <vector>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -18,7 +18,7 @@ int main() {
     ans.push_back(ps[a * i + b]);
   }
   cout << ps.size() << " " << ans.size() << "\n";
-  rep(i, 0, ans.size()) {
+  for (int i = 0; i < int(ans.size()); i++) {
     cout << ans[i] << " ";
   }
 }

@@ -2,9 +2,8 @@
 
 #include "linalg/matrix.hpp"
 #include "util/static_modint.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;
@@ -17,10 +16,16 @@ int main() {
   ll k;
   cin >> n >> k;
   matrix<mint> a(n, n);
-  rep(i, 0, n) rep(j, 0, n) cin >> a[i][j];
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      cin >> a[i][j];
+    }
+  }
   a = a.pow(k);
-  rep(i, 0, n) {
-    rep(j, 0, n) cout << a[i][j] << " ";
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      cout << a[i][j] << " ";    
+    }
     cout << "\n";
   }
 }

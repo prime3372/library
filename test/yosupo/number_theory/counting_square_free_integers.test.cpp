@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/counting_squarefrees"
 
 #include "number/count_square_free.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
 using ll = long long;

@@ -1,9 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/factorize"
 
 #include "number/factorize.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;
@@ -19,7 +18,9 @@ int main() {
     for (auto f : fac) k += f.second;
     cout << k << " ";
     for (auto f : fac) {
-      rep(i, 0, f.second) cout << f.first << " ";
+      while (f.second--) {
+        cout << f.first << " ";
+      }
     }
     cout << "\n";
   }

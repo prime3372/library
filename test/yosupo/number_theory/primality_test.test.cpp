@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/primality_test"
 
 #include "number/is_prime.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
 using ll = long long;
