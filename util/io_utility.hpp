@@ -20,23 +20,28 @@ namespace cp {
 
 namespace internal {
 
-template <class T> char delimiter_of(const T& x) {
-  if (is_integral_v<T>) return ' ';
-  if (std::is_floating_point_v<T>) return ' ';
-  if (std::is_same_v<T, std::string>) return '\n';
+template <class T> struct delimiter_of {
+  char operator()(const T& x) {
+    if (is_integral_v<T>) return ' ';
+    if (std::is_floating_point_v<T>) return ' ';
 
-  std::ostringstream oss;
-  oss << x;
-  std::string s = oss.str();
+    std::ostringstream oss;
+    oss << x;
+    std::string s = oss.str();
 
-  if (s.size() == 1) return ' ';
+    if (s.size() == 1) return ' ';
 
-  long double dummy;
-  auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), dummy);
-  if (ec == std::errc{} && ptr == s.data() + s.size()) return ' ';
+    long double dummy;
+    auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), dummy);
+    if (ec == std::errc{} && ptr == s.data() + s.size()) return ' ';
 
-  return '\n';
-}
+    return '\n';
+  }
+};
+
+template <> struct delimiter_of<std::string> {
+  char operator()(const std::string&) { return '\n'; }
+};
 
 } // namespace internal
 
@@ -135,7 +140,8 @@ ostream& operator<<(ostream& os, const Range& r) {
 
   char delimiter = ' ';
   for (const auto& x : r) {
-    if (cp::internal::delimiter_of(x) == '\n') {
+    using cp::internal::delimiter_of;
+    if (delimiter_of<std::decay_t<decltype(x)>>()(x) == '\n') {
       delimiter = '\n';
     }
   }
@@ -195,7 +201,8 @@ ostream& operator<<(ostream& os, const tuple<Args...>& t) {
   char delimiter = ' ';
   [&]<size_t... I>(index_sequence<I...>) {
     ([&](const auto& x) {
-      if (cp::internal::delimiter_of(x) == '\n') {
+      using cp::internal::delimiter_of;
+      if (delimiter_of<decay_t<decltype(x)>>()(x) == '\n') {
         delimiter = '\n';
       }
     }(get<I>(t)), ...);
