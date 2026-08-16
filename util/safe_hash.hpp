@@ -26,7 +26,8 @@ static unsigned long long splitmix64(unsigned long long x) {
   return x ^ (x >> 31);
 }
 
-template <class T> void hash_combine(unsigned long long& seed, const T& val) {
+template <class T>
+void hash_combine(unsigned long long& seed, const T& val) {
   seed ^= safe_hash<T>()(val) + (seed << 6) + (seed >> 2) + 0x9e3779b9ULL;
 }
 
