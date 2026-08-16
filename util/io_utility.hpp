@@ -16,6 +16,47 @@
 
 #include "util/type_traits.hpp"
 
+// forward declarations
+
+std::istream& operator>>(std::istream& is, __int128& val);
+
+std::istream& operator>>(std::istream& is, unsigned __int128& val);
+
+std::istream& operator>>(std::istream& is, unsigned __int128& val);
+
+std::ostream& operator<<(std::ostream& os, unsigned __int128 val);
+
+template <class T, size_t Size>
+std::istream& operator>>(std::istream& is, std::array<T, Size>& a);
+
+template <class T, class U>
+std::istream& operator>>(std::istream& is, std::pair<T, U>& p);
+
+template <class... Args>
+std::istream& operator>>(std::istream& is, std::tuple<Args...>& t);
+
+template <class T, class Alloc>
+std::istream& operator>>(std::istream& is, std::vector<T, Alloc>& v);
+
+template <std::ranges::range Range>
+  requires (!std::is_convertible_v<Range, std::string>)
+std::ostream& operator<<(std::ostream& os, const Range& r);
+
+template <class T, class Container>
+std::ostream& operator<<(std::ostream& os, std::queue<T, Container> q);
+
+template <class T, class Container, class Comp>
+std::ostream& operator<<(std::ostream& os, std::priority_queue<T, Container, Comp> pq);
+
+template <class T, class Container>
+std::ostream& operator<<(std::ostream& os, std::stack<T, Container> st);
+
+template <class T, class U>
+std::ostream& operator<<(std::ostream& os, const std::pair<T, U>& p);
+
+template <class... Args>
+std::ostream& operator<<(std::ostream& os, const std::tuple<Args...>& t);
+
 namespace cp {
 
 namespace internal {
@@ -47,16 +88,14 @@ template <> struct delimiter_of<std::string> {
 
 } // namespace cp
 
-namespace std {
-
 // __int128
 
-istream& operator>>(istream& is, __int128& val) {
-  string s;
+std::istream& operator>>(std::istream& is, __int128& val) {
+  std::string s;
   if (is >> s) {
     val = 0;
     for (int i = (s[0] == '+' || s[0] == '-'); i < int(s.size()); i++) {
-      if (!isdigit(s[i])) break;
+      if (!std::isdigit(s[i])) break;
       val = val * 10 + (s[i] - '0');
     }
     if (s[0] == '-') val = -val;
@@ -64,12 +103,12 @@ istream& operator>>(istream& is, __int128& val) {
   return is;
 }
 
-istream& operator>>(istream& is, unsigned __int128& val) {
-  string s;
+std::istream& operator>>(std::istream& is, unsigned __int128& val) {
+  std::string s;
   if (is >> s) {
     val = 0;
     for (int i = (s[0] == '+' || s[0] == '-'); i < int(s.size()); i++) {
-      if (!isdigit(s[i])) break;
+      if (!std::isdigit(s[i])) break;
       val = val * 10 + (s[i] - '0');
     }
     if (s[0] == '-') val = ~val + 1;
@@ -77,65 +116,65 @@ istream& operator>>(istream& is, unsigned __int128& val) {
   return is;
 }
 
-ostream& operator<<(ostream& os, __int128 val) {
+std::ostream& operator<<(std::ostream& os, __int128 val) {
   if (val == 0) return os << '0';
   unsigned __int128 uval = val;
   if (val < 0) {
     os << '-';
     uval = -val;
   }
-  string s;
+  std::string s;
   while (uval) {
     s.push_back((char)('0' + (uval % 10)));
     uval /= 10;
   }
-  reverse(s.begin(), s.end());
+  std::reverse(s.begin(), s.end());
   return os << s;
 }
 
-ostream& operator<<(ostream& os, unsigned __int128 val) {
+std::ostream& operator<<(std::ostream& os, unsigned __int128 val) {
   if (val == 0) return os << '0';
-  string s;
+  std::string s;
   while (val) {
     s.push_back((char)('0' + (val % 10)));
     val /= 10;
   }
-  reverse(s.begin(), s.end());
+  std::reverse(s.begin(), s.end());
   return os << s;
 }
 
 // utilities for input
 
 template <class T, size_t Size>
-istream& operator>>(istream& is, array<T, Size>& a) {
+std::istream& operator>>(std::istream& is, std::array<T, Size>& a) {
   for (auto& x : a) is >> x;
   return is;
 }
 
 template <class T, class U>
-istream& operator>>(istream& is, pair<T, U>& p) {
+std::istream& operator>>(std::istream& is, std::pair<T, U>& p) {
   return is >> p.first >> p.second;
 }
 
 template <class... Args>
-istream& operator>>(istream& is, tuple<Args...>& t) {
-  [&]<size_t... I>(index_sequence<I...>) {
+std::istream& operator>>(std::istream& is, std::tuple<Args...>& t) {
+  [&]<size_t... I>(std::index_sequence<I...>) {
     (is >> ... >> get<I>(t));
-  }(make_index_sequence<sizeof...(Args)>());
+  }(std::make_index_sequence<sizeof...(Args)>());
   return is;
 }
 
 template <class T, class Alloc>
-istream& operator>>(istream& is, vector<T, Alloc>& v) {
+std::istream& operator>>(std::istream& is, std::vector<T, Alloc>& v) {
   for (auto& x : v) is >> x;
   return is;
 }
 
 // utilities for output
 
-template <ranges::range Range>
-  requires (!is_convertible_v<Range, string>)
-ostream& operator<<(ostream& os, const Range& r) {
+template <std::ranges::range Range>
+  requires (!std::is_convertible_v<Range, std::string>)
+std::ostream& operator<<(std::ostream& os, const Range& r) {
   if (r.empty()) return os;
 
   char delimiter = ' ';
@@ -156,8 +195,8 @@ ostream& operator<<(ostream& os, const Range& r) {
 }
 
 template <class T, class Container>
-ostream& operator<<(ostream& os, queue<T, Container> q) {
-  vector<T> v(q.size());
+std::ostream& operator<<(std::ostream& os, std::queue<T, Container> q) {
+  std::vector<T> v(q.size());
   int i = 0;
   while (!q.empty()) {
     v[i++] = q.front();
@@ -166,9 +205,9 @@ ostream& operator<<(ostream& os, queue<T, Container> q) {
   return os << v;
 }
 
-template <class T, class Container, class Compare>
-ostream& operator<<(ostream& os, priority_queue<T, Container, Compare> pq) {
-  vector<T> v(pq.size());
+template <class T, class Container, class Comp>
+std::ostream& operator<<(std::ostream& os, std::priority_queue<T, Container, Comp> pq) {
+  std::vector<T> v(pq.size());
   int i = 0;
   while (!pq.empty()) {
     v[i++] = pq.top();
@@ -178,8 +217,8 @@ ostream& operator<<(ostream& os, priority_queue<T, Container, Compare> pq) {
 }
 
 template <class T, class Container>
-ostream& operator<<(ostream& os, stack<T, Container> st) {
-  vector<T> v(st.size());
+std::ostream& operator<<(std::ostream& os, std::stack<T, Container> st) {
+  std::vector<T> v(st.size());
   int i = 0;
   while (!st.empty()) {
     v[i++] = st.top();
@@ -189,31 +228,29 @@ ostream& operator<<(ostream& os, stack<T, Container> st) {
 }
 
 template <class T, class U>
-ostream& operator<<(ostream& os, const pair<T, U>& p) {
-  return os << tie(p.first, p.second);
+std::ostream& operator<<(std::ostream& os, const std::pair<T, U>& p) {
+  return os << std::tie(p.first, p.second);
 }
 
 template <class... Args>
-ostream& operator<<(ostream& os, const tuple<Args...>& t) {
+std::ostream& operator<<(std::ostream& os, const std::tuple<Args...>& t) {
   constexpr size_t n = sizeof...(Args);
   if (n == 0) return os;
 
   char delimiter = ' ';
-  [&]<size_t... I>(index_sequence<I...>) {
+  [&]<size_t... I>(std::index_sequence<I...>) {
     ([&](const auto& x) {
       using cp::internal::delimiter_of;
-      if (delimiter_of<decay_t<decltype(x)>>()(x) == '\n') {
+      if (delimiter_of<std::decay_t<decltype(x)>>()(x) == '\n') {
         delimiter = '\n';
       }
-    }(get<I>(t)), ...);
-  }(make_index_sequence<n>());
+    }(std::get<I>(t)), ...);
+  }(std::make_index_sequence<n>());
 
-  apply([&](const auto&... args) {
+  std::apply([&](const auto&... args) {
     bool first = true;
     ((first ? (os << args) : (os << delimiter << args), first = false), ...);
   }, t);
 
   return os;
 }
-
-} // namespace std
