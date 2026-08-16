@@ -58,16 +58,34 @@ public:
   hash61 operator+() const { return *this; }
   hash61 operator-() const { return hash61() - *this; }
 
-  friend hash61 operator+(const hash61& lhs, const hash61& rhs) { return hash61(lhs) += rhs; }
-  friend hash61 operator-(const hash61& lhs, const hash61& rhs) { return hash61(lhs) -= rhs; }
-  friend hash61 operator*(const hash61& lhs, const hash61& rhs) { return hash61(lhs) *= rhs; }
+  friend hash61 operator+(const hash61& lhs, const hash61& rhs) {
+    return hash61(lhs) += rhs;
+  }
+  friend hash61 operator-(const hash61& lhs, const hash61& rhs) {
+    return hash61(lhs) -= rhs;
+  }
+  friend hash61 operator*(const hash61& lhs, const hash61& rhs) {
+    return hash61(lhs) *= rhs;
+  }
 
-  friend bool operator==(const hash61& lhs, const hash61& rhs) { return lhs.v == rhs.v; }
-  friend bool operator!=(const hash61& lhs, const hash61& rhs) { return lhs.v != rhs.v; }
-  friend bool operator<(const hash61& lhs, const hash61& rhs) { return lhs.v < rhs.v; }
-  friend bool operator>(const hash61& lhs, const hash61& rhs) { return lhs.v > rhs.v; }
-  friend bool operator<=(const hash61& lhs, const hash61& rhs) { return lhs.v <= rhs.v; }
-  friend bool operator>=(const hash61& lhs, const hash61& rhs) { return lhs.v >= rhs.v; }
+  friend bool operator==(const hash61& lhs, const hash61& rhs) {
+    return lhs.v == rhs.v;
+  }
+  friend bool operator!=(const hash61& lhs, const hash61& rhs) {
+    return lhs.v != rhs.v;
+  }
+  friend bool operator<(const hash61& lhs, const hash61& rhs) {
+    return lhs.v < rhs.v;
+  }
+  friend bool operator>(const hash61& lhs, const hash61& rhs) {
+    return lhs.v > rhs.v;
+  }
+  friend bool operator<=(const hash61& lhs, const hash61& rhs) {
+    return lhs.v <= rhs.v;
+  }
+  friend bool operator>=(const hash61& lhs, const hash61& rhs) {
+    return lhs.v >= rhs.v;
+  }
 
   hash61 pow(long long k) const {
     assert(0 <= k);
@@ -98,7 +116,8 @@ private:
   static constexpr unsigned long long m = (1LL << 61) - 1;
   unsigned long long v;
 
-  static unsigned long long pow(unsigned long long x, unsigned long long n) {
+  static unsigned long long pow(unsigned long long x,
+                                unsigned long long n) {
     unsigned long long r = 1;
     while (n) {
       if (n & 1) r = mul(r, x);
@@ -109,13 +128,16 @@ private:
   }
 
   static bool is_primitive(unsigned long long x) {
-    for (unsigned long long d : {2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321}) {
+    constexpr unsigned long long divs[]
+      = {2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321};
+    for (unsigned long long d : divs) {
       if (pow(x, (m - 1) / d) <= 1) return false;
     }
     return true;
   }
 
-  static unsigned long long mul(unsigned long long a, unsigned long long b) {
+  static unsigned long long mul(unsigned long long a,
+                                unsigned long long b) {
     unsigned __int128 r = a;
     r *= b;
     r = (r >> 61) + (r & m);
