@@ -52,9 +52,7 @@ public:
   friend std::ostream& operator<<(std::ostream& os,
                                   coordinate_compression& cc) {
     if (!cc.initialized) cc.init();
-    std::vector<T> v;
-    v.assign(cc.d.begin(), cc.d.end());
-    return os << v;
+    return os << cc.d;
   }
 
 private:
