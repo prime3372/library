@@ -17,6 +17,7 @@ using u128 = unsigned __int128;
 template <class T> using vec = vector<T>;
 using str = string;
 template <class T> using minque = priority_queue<T, vector<T>, greater<T>>;
+template <class T> using maxque = priority_queue<T>;
 
 using namespace cp;
 using mint = modint998244353;
