@@ -23,7 +23,7 @@ public:
     assert(!empty());
     return payload[pos];
   }
-  
+
   void clear() {
     payload.clear();
     pos = 0;
