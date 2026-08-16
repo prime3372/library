@@ -58,10 +58,18 @@ public:
     return *this = res;
   }
 
-  friend matrix operator+(const matrix& lhs, const matrix& rhs) { return matrix(lhs) += rhs; }  
-  friend matrix operator*(const matrix& lhs, const T& rhs) { return matrix(lhs) *= rhs; }
-  friend matrix operator*(const T& lhs, const matrix& rhs) { return matrix(rhs) *= lhs; }
-  friend matrix operator*(const matrix& lhs, const matrix& rhs) { return matrix(lhs) *= rhs; }
+  friend matrix operator+(const matrix& lhs, const matrix& rhs) {
+    return matrix(lhs) += rhs;
+  }
+  friend matrix operator*(const matrix& lhs, const T& rhs) {
+    return matrix(lhs) *= rhs;
+  }
+  friend matrix operator*(const T& lhs, const matrix& rhs) {
+    return matrix(rhs) *= lhs;
+  }
+  friend matrix operator*(const matrix& lhs, const matrix& rhs) {
+    return matrix(lhs) *= rhs;
+  }
 
   static matrix unit(int n) {
     matrix res(n, n);
