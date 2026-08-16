@@ -3,6 +3,7 @@
 #include "algebra/affine.hpp"
 #include "ds/slide_window_aggregation_deque.hpp"
 #include "util/static_modint.hpp"
+#include <iostream>
 
 using namespace std;
 using namespace cp;
