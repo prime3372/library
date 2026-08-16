@@ -2,9 +2,9 @@
 
 #include "algebra/min.hpp"
 #include "ds/cumsum_2d.hpp"
+#include <algorithm>
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -14,14 +14,14 @@ int main() {
   int n;
   cin >> n;
   cumsum_2d<int> cum(1001, 1001);
-  rep(i, 0, n) {
+  for (int i = 0; i < n; i++) {
     int x1, y1, x2, y2;
     cin >> x1 >> y1 >> x2 >> y2;
     cum.imos_add(x1, y1, x2, y2, 1);
   }
   int ans = 0;
-  rep(i, 0, 1001) {
-    rep(j, 0, 1001) {
+  for (int i = 0; i <= 1000; i++) {
+    for (int j = 0; j <= 1000; j++) {
       ans = max(ans, cum.imos_get(i, j));
     }
   }

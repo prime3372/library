@@ -2,8 +2,8 @@
 
 #include "algebra/min_assign.hpp"
 #include "ds/lazy_segtree.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
 using M = alg::min_assign<int, INT_MAX>;

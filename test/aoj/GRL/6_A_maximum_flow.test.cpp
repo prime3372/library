@@ -1,9 +1,8 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_6_A"
 
 #include "graph/max_flow.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -13,7 +12,7 @@ int main() {
   int n, m;
   cin >> n >> m;
   max_flow<int> mf(n);
-  rep(i, 0, m) {
+  for (int i = 0; i < m; i++) {
     int u, v, c;
     cin >> u >> v >> c;
     mf.add_edge(u, v, c);

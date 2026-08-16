@@ -2,8 +2,8 @@
 
 #include "algebra/min.hpp"
 #include "ds/segtree.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
 

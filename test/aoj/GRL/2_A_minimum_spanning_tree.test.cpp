@@ -1,9 +1,8 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_2_A"
 
 #include "graph/kruscal.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -13,7 +12,7 @@ int main() {
   int n, m;
   cin >> n >> m;
   kruscal<int> g(n);
-  rep(i, 0, m) {
+  for (int i = 0; i < m; i++) {
     int s, t, w;
     cin >> s >> t >> w;
     g.add_edge(s, t, w);

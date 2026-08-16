@@ -2,9 +2,8 @@
 
 #include "algebra/min.hpp"
 #include "ds/slide_window_aggregation.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using M = alg::min<int, int(1e9) + 1>;
@@ -15,14 +14,14 @@ int main() {
   int n, l;
   cin >> n >> l;
   slide_window_aggregation<M> swag;
-  rep(i, 0, l) {
+  for (int i = 0; i < l; i++) {
     int a;
     cin >> a;
     swag.push(a);
   }
   cout << swag.prod();
   if (l != n) cout << " ";
-  rep(i, 0, n - l) {
+  for (int i = 0; i < n - l; i++) {
     int a;
     cin >> a;
     swag.push(a);

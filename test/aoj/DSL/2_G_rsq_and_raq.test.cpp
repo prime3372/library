@@ -2,8 +2,8 @@
 
 #include "algebra/sum_add.hpp"
 #include "ds/lazy_segtree.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
 using ll = long long;
