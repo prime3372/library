@@ -50,7 +50,8 @@ std::vector<int> zip_sort(std::tuple<Containers&...> t, Comp comp) {
     std::vector<int> p(n);
     std::iota(p.begin(), p.end(), 0);
     std::sort(p.begin(), p.end(), [&](int i, int j) {
-      return comp(std::tie(containers[i]...), std::tie(containers[j]...));
+      return comp(std::tie(containers[i]...),
+                  std::tie(containers[j]...));
     });
 
     ([&](auto& container) {
@@ -67,7 +68,8 @@ std::vector<int> zip_sort(std::tuple<Containers&...> t, Comp comp) {
 template <class... Containers>
 std::vector<int> zip_sort(std::tuple<Containers&...> t) {
   return std::apply([&](auto&... containers) {
-    return zip_sort(t, std::less<decltype(std::make_tuple(containers[0]...))>());
+    auto comp = std::less<decltype(std::make_tuple(containers[0]...))>();
+    return zip_sort(t, comp);
   }, t);
 }
 

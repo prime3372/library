@@ -49,7 +49,8 @@ public:
     return int(d.size());
   }
 
-  friend std::ostream& operator<<(std::ostream& os, coordinate_compression cc) {
+  friend std::ostream& operator<<(std::ostream& os,
+                                  coordinate_compression cc) {
     if (!cc.initialized) cc.init();
     return os << cc.d;
   }
