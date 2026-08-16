@@ -90,7 +90,7 @@ public:
 
   int size() const { return size(root); }
 
-  friend std::ostream& operator<<(std::ostream& os, treap_base& tp) {
+  friend std::ostream& operator<<(std::ostream& os, treap_base tp) {
     std::vector<T> v(tp.size());
     for (int i = 0; i < tp.size(); i++) {
       v[i] = tp[i];

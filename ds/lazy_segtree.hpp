@@ -159,7 +159,7 @@ public:
 
   int size() const { return n; }
 
-  friend std::ostream& operator<<(std::ostream& os, lazy_segtree& seg) {
+  friend std::ostream& operator<<(std::ostream& os, lazy_segtree seg) {
     std::vector<S> v(seg.n);
     for (int i = 0; i < seg.n; i++) {
       v[i] = seg[i];
