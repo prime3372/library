@@ -66,10 +66,9 @@ template <class T> struct delimiter_of {
     if (is_integral_v<T>) return ' ';
     if (std::is_floating_point_v<T>) return ' ';
 
-    static std::ostringstream oss;
+    std::ostringstream oss;
     oss << x;
     std::string s = oss.str();
-    oss.str("");
 
     if (s.size() == 1) return ' ';
 
