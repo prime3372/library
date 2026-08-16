@@ -143,15 +143,15 @@ ostream& operator<<(ostream& os, const Range& r) {
   bool first = true;
   for (const auto& x : r) {
     if (!first) os << delimiter;
-    first = false;
     os << x;
+    first = false;
   }
   return os;
 }
 
 template <class T, class Container>
 ostream& operator<<(ostream& os, queue<T, Container> q) {
-  std::vector<T> v(q.size());
+  vector<T> v(q.size());
   int i = 0;
   while (!q.empty()) {
     v[i++] = q.front();
@@ -162,7 +162,7 @@ ostream& operator<<(ostream& os, queue<T, Container> q) {
 
 template <class T, class Container, class Compare>
 ostream& operator<<(ostream& os, priority_queue<T, Container, Compare> pq) {
-  std::vector<T> v(pq.size());
+  vector<T> v(pq.size());
   int i = 0;
   while (!pq.empty()) {
     v[i++] = pq.top();
@@ -173,7 +173,7 @@ ostream& operator<<(ostream& os, priority_queue<T, Container, Compare> pq) {
 
 template <class T, class Container>
 ostream& operator<<(ostream& os, stack<T, Container> st) {
-  std::vector<T> v(st.size());
+  vector<T> v(st.size());
   int i = 0;
   while (!st.empty()) {
     v[i++] = st.top();
@@ -184,7 +184,7 @@ ostream& operator<<(ostream& os, stack<T, Container> st) {
 
 template <class T, class U>
 ostream& operator<<(ostream& os, const pair<T, U>& p) {
-  return os << std::tie(p.first, p.second);
+  return os << tie(p.first, p.second);
 }
 
 template <class... Args>
@@ -201,13 +201,12 @@ ostream& operator<<(ostream& os, const tuple<Args...>& t) {
     }(get<I>(t)), ...);
   }(make_index_sequence<n>());
 
-  [&]<size_t... I>(index_sequence<I...>) {
-    ([&](const auto& x) {
-      os << x << delimiter;
-    }(get<I>(t)), ...);
-  }(make_index_sequence<n - 1>());
+  apply([&](const auto&... args) {
+    bool first = true;
+    ((first ? (os << args) : (os << delimiter << args), first = false), ...);
+  }, t);
 
-  return os << get<n - 1>(t);
+  return os;
 }
 
 } // namespace std
