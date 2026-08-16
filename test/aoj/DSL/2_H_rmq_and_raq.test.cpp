@@ -7,7 +7,7 @@
 
 using namespace std;
 using namespace cp;
-using M = alg::min_add<int, INT_MAX>;
+using M = alg::min_add<int, int((1U << 31) - 1)>;
 
 int main() {
   ios_base::sync_with_stdio(false);

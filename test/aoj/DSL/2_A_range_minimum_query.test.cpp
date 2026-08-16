@@ -2,7 +2,6 @@
 
 #include "algebra/min.hpp"
 #include "ds/segtree.hpp"
-#include <climits>
 #include <iostream>
 
 using namespace std;
@@ -13,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  segtree<alg::min<int, INT_MAX>> seg(n);
+  segtree<alg::min<int, int((1U << 31) - 1)>> seg(n);
   while (q--) {
     int com, x, y;
     cin >> com >> x >> y;
