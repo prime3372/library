@@ -1,9 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/bipartitematching"
 
 #include "graph/bipartite_matching.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -13,12 +12,12 @@ int main() {
   int l, r, m;
   cin >> l >> r >> m;
   bipartite_matching bm(l, r);
-  rep(i, 0, m) {
+  for (int i = 0; i < m; i++) {
     int a, b;
     cin >> a >> b;
     bm.add_edge(a, b);
   }
   cout << bm.init() << endl;
   auto es = bm.max_matching();
-  for (auto e : es) cout << e.from << " " << e.to << "\n";
+  for (auto& e : es) cout << e.from << " " << e.to << "\n";
 }

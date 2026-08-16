@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 
 #include "graph/two_edge_connected_components.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
 

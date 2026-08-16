@@ -1,9 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/minimum_spanning_tree"
 
 #include "graph/kruscal.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;
@@ -14,7 +13,7 @@ int main() {
   int n, m;
   cin >> n >> m;
   kruscal<ll> g(n);
-  rep(i, 0, m) {
+  for (int i = 0; i < m; i++) {
     int a, b;
     ll c;
     cin >> a >> b >> c;
@@ -22,5 +21,7 @@ int main() {
   }
   cout << g.min() << "\n";
   auto mst = g.mst();
-  rep(i, 0, n - 1) cout << mst[i] << " ";
+  for (int i = 0; i < n - 1; i++) {
+    cout << mst[i] << " ";
+  }
 }

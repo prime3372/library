@@ -1,9 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
 
 #include "graph/strongly_connected_components.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -13,7 +12,7 @@ int main() {
   int n, m;
   cin >> n >> m;
   strongly_connected_components scc(n);
-  rep(i, 0, m) {
+  for (int i = 0; i < m; i++) {
     int a, b;
     cin >> a >> b;
     scc.add_edge(a, b);

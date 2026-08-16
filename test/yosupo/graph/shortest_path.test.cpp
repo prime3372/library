@@ -1,9 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
 
 #include "graph/dijkstra.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;
@@ -14,7 +13,7 @@ int main() {
   int n, m, s, t;
   cin >> n >> m >> s >> t;
   dijkstra<ll> g(n);
-  rep(i, 0, m) {
+  for (int i = 0; i < m; i++) {
     int a, b;
     ll c;
     cin >> a >> b >> c;
