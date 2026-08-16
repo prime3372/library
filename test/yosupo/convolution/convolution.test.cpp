@@ -2,9 +2,9 @@
 
 #include "poly/convolution.hpp"
 #include "util/static_modint.hpp"
+#include <iostream>
+#include <vector>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
@@ -13,8 +13,8 @@ int main() {
   int n, m;
   cin >> n >> m;
   vector<mint> a(n), b(m);
-  rep(i, 0, n) cin >> a[i];
-  rep(i, 0, m) cin >> b[i];
+  for (auto& ai : a) cin >> ai;
+  for (auto& bi : b) cin >> bi;
   auto c = convolution(a, b);
   for (auto ci : c) cout << ci << " ";
 }

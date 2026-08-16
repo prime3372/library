@@ -2,8 +2,9 @@
 
 #include "util/static_modint.hpp"
 #include "setfunc/and_convolution.hpp"
+#include <iostream>
+#include <vector>
 
-#include <bits/stdc++.h>
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
