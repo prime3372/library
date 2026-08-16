@@ -60,7 +60,7 @@ public:
   }
 
 private:
-  friend class tree_lca;
+  friend struct tree_lca;
   int n, now_id = 0;
   std::vector<std::vector<int>> g;
   std::vector<int> size;
