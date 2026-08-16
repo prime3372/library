@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
 
 #include "string/suffix_array.hpp"
+#include <iostream>
+#include <string>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -13,5 +13,7 @@ int main() {
   string s;
   cin >> s;
   auto sa = suffix_array(s);
-  rep(i, 1, sa.size()) cout << sa[i] << " ";  
+  for(int i = 1; i < int(sa.size()); i++) {
+    cout << sa[i] << " ";  
+  }
 }

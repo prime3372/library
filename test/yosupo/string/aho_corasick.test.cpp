@@ -1,9 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aho_corasick"
 
 #include "string/aho_corasick.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -14,15 +13,15 @@ int main() {
   cin >> n;
   aho_corasick<26> aho;
   vector<int> v(n);
-  rep(i, 0, n) {
+  for (int i = 0; i < n; i++) {
     string s;
     cin >> s;
     v[i] = aho.insert(s);
   }
   aho.build();
   cout << aho.size() << "\n";
-  rep(i, 1, aho.size()) {
+  for (int i = 1; i < aho.size(); i++) {
     cout << aho.parent(i) << " " << aho.link(i) << "\n";
   }
-  rep(i, 0, n) cout << v[i] << " ";
+  for (int i = 0; i < n; i++) cout << v[i] << " ";
 }

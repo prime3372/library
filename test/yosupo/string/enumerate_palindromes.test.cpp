@@ -1,9 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_palindromes"
 
 #include "string/rolling_hash.hpp"
+#include <iostream>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -16,7 +15,7 @@ int main() {
   int n = int(s.size());
   reverse(s.begin(), s.end());
   rolling_hash rrlh(s);
-  rep(i, 0, 2 * n - 1) {
+  for (int i = 0; i < 2 * n - 1; i++) {
     int l = 0, r = n;
     while (r - l > 1) {
       int mid = (l + r) / 2, p = (i + 1) / 2, q = p + (i % 2 == 0);

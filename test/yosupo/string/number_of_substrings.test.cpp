@@ -1,9 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/number_of_substrings"
 
 #include "string/lcp_array.hpp"
+#include <iostream>
+#include <numeric>
+#include <string>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 using ll = long long;

@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
 
 #include "string/z_algorithm.hpp"
+#include <iostream>
+#include <string>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 

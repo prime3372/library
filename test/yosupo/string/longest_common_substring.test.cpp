@@ -2,9 +2,9 @@
 
 #include "string/suffix_array.hpp"
 #include "string/lcp_array.hpp"
+#include <iostream>
+#include <string>
 
-#include <bits/stdc++.h>
-#define rep(i, a, b) for (int i = (a); i < int(b); i++)
 using namespace std;
 using namespace cp;
 
@@ -17,7 +17,7 @@ int main() {
   auto sa = suffix_array(s);
   auto lcp = lcp_array(s, sa);
   int max = 0, idx = -1;
-  rep(i, 0, n + m + 1) {
+  for (int i = 0; i < n + m + 1; i++) {
     bool different = (sa[i] < n) != (sa[i + 1] < n);
     if (different && max < lcp[i]) {
       max = lcp[i];
