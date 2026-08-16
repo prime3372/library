@@ -2,6 +2,7 @@
 
 #include "algebra/min_assign.hpp"
 #include "ds/lazy_segtree.hpp"
+#include <climits>
 #include <iostream>
 
 using namespace std;
