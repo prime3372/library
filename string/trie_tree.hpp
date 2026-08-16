@@ -60,9 +60,7 @@ public:
   const std::array<int, char_size>& operator[](int v) const {
     return nodes[v].to;
   }
-
   int next(int v, char c) const { return nodes[v].to[index(c)]; }
-
   int parent(int v) const { return nodes[v].par; }
 
   int search(const std::string& s) const { return search(0, s); }
