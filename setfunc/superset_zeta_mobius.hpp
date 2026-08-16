@@ -5,7 +5,8 @@
 
 namespace cp {
 
-template <class T> std::vector<T> superset_zeta(int n, std::vector<T> a) {
+template <class T>
+std::vector<T> superset_zeta(int n, std::vector<T> a) {
   assert(0 <= n && int(a.size()) == 1 << n);
   for (int i = 0; i < n; i++) {
     int b = 1 << i;
@@ -18,7 +19,8 @@ template <class T> std::vector<T> superset_zeta(int n, std::vector<T> a) {
   return a;
 }
 
-template <class T> std::vector<T> superset_mobius(int n, std::vector<T> a) {
+template <class T>
+std::vector<T> superset_mobius(int n, std::vector<T> a) {
   assert(0 <= n && int(a.size()) == 1 << n);
   for (int i = 0; i < n; i++) {
     int b = 1 << i;
