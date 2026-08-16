@@ -9,13 +9,13 @@ struct hl_decomposition {
 public:
   hl_decomposition() : n(0) {}
   explicit hl_decomposition(int _n)
-  : id(_n, -1),
-    vertex(_n, -1),
-    head(_n, -1),
-    next(_n, -1),
-    n(_n),
-    g(_n),
-    size(_n) {}
+      : id(_n, -1),
+        vertex(_n, -1),
+        head(_n, -1),
+        next(_n, -1),
+        n(_n),
+        g(_n),
+        size(_n) {}
 
   void add_edge(int a, int b) {
     assert(0 <= a && a < n);
@@ -59,12 +59,10 @@ public:
     return *this;
   }
 
-protected:
-  int n;
-  std::vector<std::vector<int>> g;
-
 private:
-  int now_id = 0;
+  friend class tree_lca;
+  int n, now_id = 0;
+  std::vector<std::vector<int>> g;
   std::vector<int> size;
 };
 

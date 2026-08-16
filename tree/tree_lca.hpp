@@ -10,16 +10,20 @@
 
 namespace cp {
 
-struct tree_lca : private hl_decomposition {
+struct tree_lca {
 public:
   tree_lca() : tree_lca(0) {}
-  explicit tree_lca(int _n) : hl_decomposition(_n), dep(_n) {}
+  explicit tree_lca(int _n) : n(_n), dep(_n), hld(_n) {}
 
-  using hl_decomposition::add_edge;
+  void add_edge(int a, int b) {
+    assert(0 <= a && a < n);
+    assert(0 <= b && b < n);
+    hld.add_edge(a, b);
+  }
 
   void init(int r = 0) {
     assert(0 <= r && r < n);
-    build(r);
+    hld.build(r);
     dfs(r, -1, 0);
     initialized = true;
   }
@@ -27,25 +31,25 @@ public:
   int up(int v, int k) {
     assert(initialized);
     assert(0 <= v && v < n);
-    v = id[v];
-    while (k > v - head[v]) {
-      k -= v - head[v] + 1;
-      v = next[v];
+    v = hld.id[v];
+    while (k > v - hld.head[v]) {
+      k -= v - hld.head[v] + 1;
+      v = hld.next[v];
     }
-    return vertex[v - k];
+    return hld.vertex[v - k];
   }
 
   int lca(int a, int b) {
     assert(initialized);
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
-    a = id[a];
-    b = id[b];
-    while (head[a] != head[b]) {
+    a = hld.id[a];
+    b = hld.id[b];
+    while (hld.head[a] != hld.head[b]) {
       if (a > b) std::swap(a, b);
-      b = next[b];
+      b = hld.next[b];
     }
-    return vertex[std::min(a, b)];
+    return hld.vertex[std::min(a, b)];
   }
 
   int dist(int a, int b) {
@@ -66,21 +70,14 @@ public:
   }
 
 private:
-  using hl_decomposition::id;
-  using hl_decomposition::vertex;
-  using hl_decomposition::head;
-  using hl_decomposition::next;
-  using hl_decomposition::n;
-  using hl_decomposition::g;
-
+  int n;
   bool initialized = false;
   std::vector<int> dep;
-
-  using hl_decomposition::build;
+  hl_decomposition hld;
 
   void dfs(int v, int pv, int d) {
     dep[v] = d;
-    for (int nv : g[v]) {
+    for (int nv : hld.g[v]) {
       if (nv == pv) continue;
       dfs(nv, v, d + 1);
     }
