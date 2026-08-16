@@ -46,6 +46,7 @@ public:
   }
 
 protected:
+  friend struct two_edge_connected_components;
   int n, m;
   struct edge {
     int to, id;

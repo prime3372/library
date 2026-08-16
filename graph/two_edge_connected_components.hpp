@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <vector>
 
 #include "graph/low_link.hpp"
@@ -8,24 +9,28 @@ namespace cp {
 
 struct two_edge_connected_components : private low_link {
 public:
-  two_edge_connected_components(int _n) : low_link(_n), id(_n, -1) {}
+  two_edge_connected_components(int _n) : id(_n, -1), link(_n) {}
 
-  using low_link::add_edge;
+  void add_edge(int a, int b) {
+    assert(0 <= a && a < n);
+    assert(0 <= b && b < n);
+    link.add_edge(a, b);
+  }
 
   std::vector<int> id;
   std::vector<std::vector<int>> groups;
 
   two_edge_connected_components& build() {
-    low_link::build();
+    link.build();
 
     int group_num = 0;
     auto dfs = [&](auto self, int v, int pv, int& k) -> void {
-      if (pv != -1 && ord[pv] >= low[v]) {
+      if (pv != -1 && link.ord[pv] >= link.low[v]) {
         id[v] = id[pv];
       } else {
         id[v] = k++;
       }
-      for (const auto& e : g[v]) {
+      for (const auto& e : link.g[v]) {
         if (id[e.to] == -1) self(self, e.to, v, k);        
       }
     };
@@ -42,10 +47,7 @@ public:
   }
 
 private:
-  using low_link::ord;
-  using low_link::low;
-  using low_link::n;
-  using low_link::g;
+  low_link link;
 };
 
 } // namespace cp
