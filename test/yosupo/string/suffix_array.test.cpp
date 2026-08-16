@@ -13,7 +13,5 @@ int main() {
   string s;
   cin >> s;
   auto sa = suffix_array(s);
-  for(int i = 1; i < int(sa.size()); i++) {
-    cout << sa[i] << " ";  
-  }
+  for (int x : sa) cout << x << " ";
 }

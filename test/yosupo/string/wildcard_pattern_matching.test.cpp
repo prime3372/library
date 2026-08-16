@@ -45,5 +45,6 @@ int main() {
   for (int i = 0; i < n - m + 1; i++) {
     ans[i] = c1[m - 1 + i] - 2 * c2[m - 1 + i] + c3[m - 1 + i];
   }
-  for (int i = 0; i < n - m + 1; i++) cout << (ans[i] == 0);
+  for (ll& x : ans) cout << (x == 0);
+  cout << "\n";
 }

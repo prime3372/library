@@ -23,5 +23,5 @@ int main() {
   for (int i = 1; i < aho.size(); i++) {
     cout << aho.parent(i) << " " << aho.link(i) << "\n";
   }
-  for (int i = 0; i < n; i++) cout << v[i] << " ";
+  for (int vi : v) cout << vi << " ";
 }

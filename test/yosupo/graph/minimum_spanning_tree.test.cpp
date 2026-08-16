@@ -21,7 +21,5 @@ int main() {
   }
   cout << g.min() << "\n";
   auto mst = g.mst();
-  for (int i = 0; i < n - 1; i++) {
-    cout << mst[i] << " ";
-  }
+  for (int e : mst) cout << e << " ";
 }
