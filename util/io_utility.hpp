@@ -16,8 +16,6 @@
 
 #include "util/type_traits.hpp"
 
-// forward declarations
-
 std::istream& operator>>(std::istream& is, __int128& val);
 
 std::istream& operator>>(std::istream& is, unsigned __int128& val);
@@ -88,9 +86,6 @@ template <> struct delimiter_of<std::string> {
 
 } // namespace cp
 
-
-// utilities for input
-
 std::istream& operator>>(std::istream& is, __int128& val) {
   std::string s;
   if (is >> s) {
@@ -141,8 +136,6 @@ std::istream& operator>>(std::istream& is, std::vector<T, Alloc>& v) {
   for (auto& x : v) is >> x;
   return is;
 }
-
-// utilities for output
 
 std::ostream& operator<<(std::ostream& os, __int128 val) {
   if (val == 0) return os << '0';
