@@ -35,4 +35,12 @@ template <class T> T icbrt(T x) {
   return y;
 }
 
+template <class T, class U> T quot(T x, U d) {
+  return x >= 0 ? T(x / d) : T((x + 1) / d - 1);
+}
+
+template <class T, class U> U rem(T x, U m) {
+  return U(x - quot(x, m) * m);
+}
+
 } // namespace cp
