@@ -6,8 +6,7 @@
 
 namespace cp {
 
-template <class M, auto mapping = M::mapping>
-class rerooting_dp {
+template <class M> class rerooting_dp {
   using S = typename M::S;
   using F = typename M::F;
 
