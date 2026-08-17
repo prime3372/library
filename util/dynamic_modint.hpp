@@ -12,7 +12,7 @@
 namespace cp {
 
 template <int id> struct dynamic_modint {
-public:
+ public:
   using mint = dynamic_modint;
 
   static int mod() { return bt.umod(); }
@@ -135,7 +135,7 @@ public:
     return os << x.v;
   }
 
-private:
+ private:
   unsigned int v;
   inline static barrett bt = barrett(998244353);
   static unsigned int umod() { return bt.umod(); }

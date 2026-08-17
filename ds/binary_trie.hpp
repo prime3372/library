@@ -11,7 +11,7 @@ namespace cp {
 
 template <class T> requires internal::is_unsigned_int_v<T>
 class binary_trie : public trie_tree<2, '0'> {
-public:
+ public:
   using base = trie_tree<2, '0'>;
   using base::trie_tree;
 
@@ -28,7 +28,7 @@ public:
     return base::prefix(std::bitset<bit>(x).to_string());
   }
 
-private:
+ private:
   static constexpr int bit = std::numeric_limits<T>::digits;
 };
 

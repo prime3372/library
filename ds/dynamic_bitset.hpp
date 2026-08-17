@@ -11,7 +11,7 @@
 namespace cp {
 
 struct dynamic_bitset {
-public:
+ public:
   using bs = dynamic_bitset;
 
   dynamic_bitset() : n(0) {}
@@ -31,7 +31,7 @@ public:
   }
 
   struct ref {
-  public:
+   public:
     operator bool() const { return (*d & mask(pos)) != 0; }
     ref& flip() {
       *d ^= mask(pos);
@@ -47,7 +47,7 @@ public:
       d = b.a.data() + i / w;
       pos = i % w;
     }
-  private:
+   private:
     unsigned long long* d;
     int pos;
   };
@@ -218,7 +218,7 @@ public:
     return os;
   }
 
-private:
+ private:
   static constexpr int w = 64;
   int n;
   std::vector<unsigned long long> a;

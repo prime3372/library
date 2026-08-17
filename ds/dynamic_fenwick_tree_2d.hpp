@@ -12,7 +12,7 @@
 namespace cp {
 
 template <class T> struct dynamic_fenwick_tree_2d {
-public: 
+ public: 
   dynamic_fenwick_tree_2d() : h(0), w(0) {}
   dynamic_fenwick_tree_2d(int _h, size_t _w) : h(_h), w(_w), d(_h) {
     for (int i = 0; i < h; i++) {
@@ -31,13 +31,13 @@ public:
   }
 
   struct ref {
-  public:
+   public:
     T operator[](size_t j) const {
       assert(j < ptr->w);
       return ptr->sum(i, j, i + 1, j + 1);
     }
     ref(const dynamic_fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), i(_i) {}
-  private:
+   private:
     const dynamic_fenwick_tree_2d* ptr;
     int i;
   };
@@ -94,7 +94,7 @@ public:
     return os;
   }
 
-private:
+ private:
   int h;
   size_t w;
   std::vector<dynamic_fenwick_tree<T>> d;

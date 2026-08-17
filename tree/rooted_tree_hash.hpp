@@ -8,7 +8,7 @@
 namespace cp {
 
 struct rooted_tree_hash {
-public:
+ public:
   rooted_tree_hash(int _n) : hash(_n), depth(_n), n(_n), g(_n) {
     while (int(xs.size()) <= n) {
       xs.push_back(hash61::get_rand());
@@ -30,7 +30,7 @@ public:
     return *this;
   }
 
-private:
+ private:
   inline static std::vector<hash61> xs;
   int n;
   std::vector<std::vector<int>> g;

@@ -10,7 +10,7 @@
 namespace cp {
 
 template <class T> struct dynamic_fenwick_tree {
-public:
+ public:
   dynamic_fenwick_tree() : n(0) {}
   explicit dynamic_fenwick_tree(size_t _n) : n(_n) {}
 
@@ -93,7 +93,7 @@ public:
     return os;
   }
 
-private:
+ private:
   size_t n;
   hash_map<size_t, T> d;
 };

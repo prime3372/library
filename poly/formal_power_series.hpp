@@ -16,10 +16,10 @@ struct formal_power_series {};
 
 template <class mint> requires internal::is_static_modint_v<mint>
 struct formal_power_series<mint> {
-private:
+ private:
   using fps = formal_power_series;
 
-public:
+ public:
   formal_power_series() {}
   explicit formal_power_series(int n) : a(n) {}
   explicit formal_power_series(int n, const mint& val) : a(n, val) {}
@@ -221,7 +221,7 @@ public:
     return os;
   }
 
-private:
+ private:
   std::vector<mint> a;
 };
 

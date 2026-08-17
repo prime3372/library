@@ -7,7 +7,7 @@
 namespace cp {
 
 struct linear_sieve {
-public:
+ public:
   linear_sieve() : linear_sieve(0) {}
   explicit linear_sieve(int _n) : n(_n), f(_n + 1) {
     for (int i = 2; i <= n; i++) {
@@ -43,7 +43,7 @@ public:
     return ans;
   }
 
-private:
+ private:
   int n;
   std::vector<int> f, ps;
 };

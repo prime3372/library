@@ -9,7 +9,7 @@
 namespace cp {
 
 template <class T> struct cumsum_2d {
-public:
+ public:
   cumsum_2d() : h(0), w(0) {}
   cumsum_2d(int _h, int _w) : h(_h), w(_w), d(_h, std::vector<T>(_w)) {}
   cumsum_2d(int _h, int _w, T x) : h(_h), w(_w), d(_h, std::vector<T>(_w, x)) {}
@@ -81,7 +81,7 @@ public:
     return os;
   }
 
-private:
+ private:
   int h, w;
   bool accumulated = false;
   std::vector<std::vector<T>> d;

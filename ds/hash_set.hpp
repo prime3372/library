@@ -9,7 +9,7 @@
 namespace cp {
 
 template <class T> struct hash_set {
-public:
+ public:
   hash_set() : cap(8), sz(0), keys(cap), used(cap) {}
 
   bool insert(const T& k) {
@@ -40,7 +40,7 @@ public:
 
   int size() const { return sz; }
 
-private:
+ private:
   unsigned int cap, sz;
   std::vector<T> keys;
   std::vector<bool> used;

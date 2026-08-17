@@ -16,7 +16,7 @@ namespace cp {
 namespace internal {
 
 template <class node> struct treap_base {
-public:
+ public:
   using T = decltype(node::val);
 
   treap_base() {}
@@ -98,7 +98,7 @@ public:
     return os << v;
   }
 
-protected:
+ protected:
   node* root = nullptr;
 
   node* merge(node* left, node* right) {

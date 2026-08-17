@@ -11,7 +11,7 @@ namespace cp {
 
 template <int char_size, auto offset = 'a'>
 struct aho_corasick : public trie_tree<char_size, offset> {
-public:
+ public:
   using trie_tree<char_size, offset>::trie_tree;
   using trie_tree<char_size, offset>::index;
   using trie_tree<char_size, offset>::size;
@@ -44,7 +44,7 @@ public:
     return lnk[v];
   }
 
-private:
+ private:
   std::vector<int> lnk;
 };
 

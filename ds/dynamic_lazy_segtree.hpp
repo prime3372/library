@@ -13,7 +13,7 @@
 namespace cp {
 
 template <class M> struct dynamic_lazy_segtree {
-public:
+ public:
   using S = typename M::S;
   using F = typename M::F;
 
@@ -82,7 +82,7 @@ public:
     return os << v;
   }
 
-private:
+ private:
   struct node;
   using node_ptr = std::unique_ptr<node>;
   struct node {

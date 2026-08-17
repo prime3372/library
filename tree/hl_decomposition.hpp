@@ -6,7 +6,7 @@
 namespace cp {
 
 struct hl_decomposition {
-public:
+ public:
   hl_decomposition() : n(0) {}
   explicit hl_decomposition(int _n)
       : id(_n, -1),
@@ -59,7 +59,7 @@ public:
     return *this;
   }
 
-private:
+ private:
   friend struct tree_lca;
   int n, now_id = 0;
   std::vector<std::vector<int>> g;

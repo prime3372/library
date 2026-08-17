@@ -8,7 +8,7 @@ namespace cp {
 
 // Tarjan's strongly connected components algorithm
 struct strongly_connected_components {
-public:
+ public:
   strongly_connected_components() : strongly_connected_components(0) {}
   explicit strongly_connected_components(int _n) : id(_n, -1), n(_n), g(_n) {}
 
@@ -66,7 +66,7 @@ public:
     return *this;
   }
 
-private:
+ private:
   int n;
   std::vector<std::vector<int>> g;
 };

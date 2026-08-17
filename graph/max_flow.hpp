@@ -12,7 +12,7 @@ namespace cp {
 
 template <class Cap> requires internal::is_integral_v<Cap>
 struct max_flow {
-public:
+ public:
   max_flow() : max_flow(0) {}
   explicit max_flow(int _n) : n(_n), g(_n) {}
 
@@ -135,7 +135,7 @@ public:
     return visited;
   }
 
-private:
+ private:
   int n;
   struct _edge {
     int to, rev;

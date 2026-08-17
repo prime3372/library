@@ -6,7 +6,7 @@
 namespace cp {
 
 struct euler_tour {
-public:
+ public:
   euler_tour() : n(0) {}
   explicit euler_tour(int _n)
       : tour(_n, -1), in(_n, -1), out(_n, -1), n(_n), g(_n) {}
@@ -35,7 +35,7 @@ public:
     return *this;
   }
 
-private:
+ private:
   int n, k = 0;
   std::vector<std::vector<int>> g;
 };

@@ -11,7 +11,7 @@
 namespace cp {
 
 struct tree_lca {
-public:
+ public:
   tree_lca() : tree_lca(0) {}
   explicit tree_lca(int _n) : n(_n), dep(_n), hld(_n) {}
 
@@ -69,7 +69,7 @@ public:
     return k < dist(s, lca(s, t)) ? up(s, k) : up(t, l - k);
   }
 
-private:
+ private:
   int n;
   bool initialized = false;
   std::vector<int> dep;

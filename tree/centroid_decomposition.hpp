@@ -6,7 +6,7 @@
 namespace cp {
 
 struct centroid_decomposition {
-public:
+ public:
   centroid_decomposition() : n(0) {}
   explicit centroid_decomposition(int _n)
       : parent(_n, -1), size(_n), n(_n), g(_n), removed(_n) {}
@@ -27,7 +27,7 @@ public:
     return *this;
   }
 
-private:
+ private:
   int n;
   std::vector<std::vector<int>> g;
   std::vector<bool> removed;

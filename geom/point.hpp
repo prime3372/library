@@ -10,7 +10,7 @@
 namespace cp {
 
 struct point {
-public:
+ public:
   long double x, y;
   point() : x(0), y(0) {}
   point(long double _x, long double _y) : x(_x), y(_y) {}
@@ -92,7 +92,7 @@ public:
     return os << v.x << " " << v.y;
   }
 
-private:
+ private:
   static constexpr long double eps = 1e-9;
 };
 

@@ -8,7 +8,7 @@
 namespace cp {
 
 struct rollback_union_find {
-public:
+ public:
   rollback_union_find() : rollback_union_find(0) {}
   explicit rollback_union_find(int _n) : n(_n), inner_snap(0), parent_or_size(_n, -1) {}
 
@@ -77,7 +77,7 @@ public:
     return res;
   }
 
-private:
+ private:
   int n, inner_snap;
   std::vector<int> parent_or_size;
   std::vector<std::pair<int, int> > history;

@@ -11,7 +11,7 @@
 namespace cp {
 
 struct rolling_hash {
-public:
+ public:
   rolling_hash() : n(-1) {}
   template <class Str>
   explicit rolling_hash(const Str& s) : n(int(s.size())) {
@@ -37,7 +37,7 @@ public:
     return h;
   }
 
-private:
+ private:
   static hash61 basis;
   int n;
   std::vector<hash61> hs, pw;

@@ -8,7 +8,7 @@ namespace cp {
 
 template <class M, auto mapping = M::mapping>
 struct rerooting_dp {
-public:
+ public:
   using S = typename M::S;
   using F = typename M::F;
 
@@ -88,7 +88,7 @@ public:
     return *this;
   }
 
-private:
+ private:
   int n;
   struct edge {
     int to, rev;

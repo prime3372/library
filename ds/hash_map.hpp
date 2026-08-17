@@ -11,7 +11,7 @@
 namespace cp {
 
 template <class Key, class Val> struct hash_map {
-public:
+ public:
   hash_map() : cap(8), sz(0),
                keys(cap), vals(cap), used(cap),
                default_value() {}
@@ -51,7 +51,7 @@ public:
 
   void set_default(const Val& v) { default_value = v; }
 
-private:
+ private:
   unsigned int cap, sz;
   std::vector<Key> keys;
   std::vector<Val> vals;

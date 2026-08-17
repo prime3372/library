@@ -9,7 +9,7 @@ namespace cp {
 
 template <class mint> requires internal::is_modint_v<mint>
 struct binom_mod {
-public:
+ public:
   binom_mod() : binom_mod(1) {}
   explicit binom_mod(int n) : N(n) {
     assert(0 <= N);
@@ -66,7 +66,7 @@ public:
     return fi[n];
   }
 
-private:
+ private:
   int N;
   std::vector<mint> f, fi;
 };

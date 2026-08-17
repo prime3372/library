@@ -14,7 +14,7 @@
 namespace cp {
 
 struct hash61 {
-public:
+ public:
   static hash61 get_basis() {
     hash61 hs;
     do {
@@ -112,7 +112,7 @@ public:
     return os << hs.v;
   }
 
-private:
+ private:
   static constexpr unsigned long long m = (1LL << 61) - 1;
   unsigned long long v;
 

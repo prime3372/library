@@ -9,7 +9,7 @@
 namespace cp {
 
 template <class T> struct kruscal {
-public:
+ public:
   kruscal() : kruscal(0) {}
   explicit kruscal(int _n) : n(_n) {}
 
@@ -33,7 +33,7 @@ public:
 
   const std::vector<int>& mst() { return tree; }
 
-private:
+ private:
   int n;
   using edge = std::tuple<T, int, int, int>;
   std::vector<edge> edges;

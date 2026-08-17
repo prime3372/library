@@ -11,7 +11,7 @@
 namespace cp {
 
 template <int m> requires (1 <= m) struct static_modint {
-public:
+ public:
   using mint = static_modint;
 
   static constexpr int mod() { return m; }
@@ -137,7 +137,7 @@ public:
     return os << x.v;
   }
 
-private:
+ private:
   unsigned int v;
   static constexpr unsigned int umod() { return m; }
   static constexpr bool prime = is_prime(m);

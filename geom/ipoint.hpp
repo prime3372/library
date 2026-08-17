@@ -6,7 +6,7 @@
 namespace cp {
 
 struct ipoint {
-public:
+ public:
   long long x, y;
   ipoint() : x(0), y(0) {}
   ipoint(long long _x, long long _y) : x(_x), y(_y) {}

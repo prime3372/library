@@ -11,7 +11,7 @@
 namespace cp {
 
 struct formal_power_series_ll {
-public:
+ public:
   using fps = formal_power_series_ll;
   using ll = long long;
 
@@ -113,7 +113,7 @@ public:
     return os;
   }
 
-private:
+ private:
   std::vector<ll> a;
 };
 

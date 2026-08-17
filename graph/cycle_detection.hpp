@@ -7,7 +7,7 @@
 namespace cp {
 
 template <bool is_directed> struct cycle_detection {
-public:  
+ public:  
   cycle_detection() : n(0) {}
   explicit cycle_detection(int _n) : n(_n), g(_n) {}
 
@@ -53,7 +53,7 @@ public:
     return *this;
   }
 
-private:
+ private:
   int n, m = 0;
   struct edge {
     int to, id;

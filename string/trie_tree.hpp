@@ -8,7 +8,7 @@
 
 template <int char_size, auto offset = 'a'>
 class trie_tree {
-public:
+ public:
   trie_tree() { nodes.push_back(node(-1)); }
 
   int insert(const std::string& s) {
@@ -74,7 +74,7 @@ public:
 
   int size() const { return int(nodes.size()); }
 
-protected:
+ protected:
   constexpr int index(char c) const {
     // offset can be a function
     if constexpr (std::is_invocable_v<decltype(offset), char>) {
@@ -86,7 +86,7 @@ protected:
     return c - offset;
   }
 
-private:
+ private:
   struct node {
     std::array<int, char_size> to;
     int par, end, mid;

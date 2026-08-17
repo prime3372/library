@@ -10,7 +10,7 @@
 namespace cp {
 
 template <class T> struct matrix {
-public:
+ public:
   matrix() : h(0), w(0) {}
   explicit matrix(int _h, int _w) : h(_h), w(_w), d(_h, std::vector<T>(_w)) {}
 
@@ -100,7 +100,7 @@ public:
     return os;
   }
 
-private:
+ private:
   int h, w;
   std::vector<std::vector<T>> d;
 };

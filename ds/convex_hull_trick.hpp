@@ -6,7 +6,7 @@
 namespace cp {
 
 template <class T, bool is_max = false> struct convex_hull_trick {
-public:
+ public:
   convex_hull_trick() {}
 
   void add(T a, T b) {
@@ -37,7 +37,7 @@ public:
     return cur;
   }
 
-private:
+ private:
   struct line {
     T a, b;
     line(T _a = 0, T _b = 0) : a(_a), b(_b) {}

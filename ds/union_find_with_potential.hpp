@@ -8,7 +8,7 @@
 namespace cp {
 
 template <class T> struct union_find_with_potential {
-public:
+ public:
   union_find_with_potential() : n(0) {}
   explicit union_find_with_potential(int _n)
       : n(_n), parent_or_size(_n, -1), diff_weight(_n) {}
@@ -61,7 +61,7 @@ public:
     return weight(a) - weight(b);
   }
 
-private:
+ private:
   int n;
   std::vector<int> parent_or_size;
   std::vector<T> diff_weight;

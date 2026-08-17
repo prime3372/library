@@ -5,7 +5,7 @@
 namespace cp {
 
 template <class T> struct simple_queue {
-public:
+ public:
   simple_queue() {}
 
   void reserve(int n) { payload.reserve(n); }
@@ -34,7 +34,7 @@ public:
     pos++;
   }
 
-private:
+ private:
   std::vector<T> payload;
   int pos = 0;
 };

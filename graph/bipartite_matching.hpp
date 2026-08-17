@@ -9,7 +9,7 @@
 namespace cp {
 
 struct bipartite_matching {
-public: 
+ public: 
   bipartite_matching() : bipartite_matching(0, 0) {}
   explicit bipartite_matching(int _l, int _r)
   : l(_l),
@@ -90,7 +90,7 @@ public:
     return es;
   }
 
-private:
+ private:
   int l, r, s, t;
   bool initialized;
   max_flow<int> mf;

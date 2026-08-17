@@ -9,7 +9,7 @@
 namespace cp {
 
 template <class T> struct fenwick_tree {
-public:
+ public:
   fenwick_tree() : n(0) {}
   explicit fenwick_tree(int _n) : n(_n), d(_n) {}
 
@@ -91,7 +91,7 @@ public:
     return os;
   }
 
-private:
+ private:
   int n;
   std::vector<T> d;
 };

@@ -13,7 +13,7 @@
 namespace cp {
 
 template <class M> struct dynamic_segtree {
-public:
+ public:
   using S = typename M::S;
 
   dynamic_segtree() : dynamic_segtree(0) {}
@@ -71,7 +71,7 @@ public:
     return os << v;
   }
 
-private:
+ private:
   struct node;
   using node_ptr = std::unique_ptr<node>;
   struct node {

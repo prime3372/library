@@ -9,7 +9,7 @@
 namespace cp {
 
 template <class T> struct dijkstra {
-public:
+ public:
   dijkstra() : dijkstra(0) {}
   explicit dijkstra(int _n) : n(_n), g(_n), d(_n), prev_v(_n), prev_e(_n) {}
 
@@ -63,7 +63,7 @@ public:
     return {vs, es};
   }
 
-private:
+ private:
   int n, m = 0;
   bool initialized = false;
   struct edge {

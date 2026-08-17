@@ -11,7 +11,7 @@
 namespace cp {
 
 template <class M> struct segtree {
-public:
+ public:
   using S = typename M::S;
 
   segtree() : segtree(0) {}
@@ -110,7 +110,7 @@ public:
     return os << v;
   }
 
-private:
+ private:
   int n, sz, log;
   std::vector<S> d;
 

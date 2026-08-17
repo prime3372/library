@@ -8,7 +8,7 @@
 namespace cp {
 
 struct two_edge_connected_components {
-public:
+ public:
   two_edge_connected_components(int _n) : id(_n, -1), n(_n), link(_n) {}
 
   void add_edge(int a, int b) {
@@ -46,7 +46,7 @@ public:
     return *this;
   }
 
-private:
+ private:
   int n;
   low_link link;
 };

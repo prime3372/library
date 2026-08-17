@@ -8,7 +8,7 @@
 namespace cp {
 
 struct two_sat {
-public:
+ public:
   two_sat() : two_sat(0) {}
   explicit two_sat(int _n) : n(_n), scc(2 * _n) {}
 
@@ -29,7 +29,7 @@ public:
     return ans;
   }
 
-private:
+ private:
   int n;
   strongly_connected_components scc;
 };

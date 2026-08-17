@@ -12,7 +12,7 @@ namespace cp {
 // even index -> min heap
 // odd index  -> max heap
 template <class T> struct priority_deque {
-public:
+ public:
   priority_deque() : d(2) {}
 
   const T& min() const {
@@ -57,7 +57,7 @@ public:
 
   void clear() { d.resize(2); }
 
-private:
+ private:
   std::vector<T> d;
 
   int down(int cur) {

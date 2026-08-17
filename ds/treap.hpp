@@ -27,7 +27,7 @@ template <class T> struct treap_node {
 
 template <class T>
 struct treap : public internal::treap_base<internal::treap_node<T>> {
-public:
+ public:
   using node = internal::treap_node<T>;
   using node_ptr = std::shared_ptr<node>;
   using base = internal::treap_base<node>;
@@ -37,7 +37,7 @@ public:
   explicit treap(int n, const T& val) { build(std::vector<T>(n, val)); }
   explicit treap(const std::vector<T>& v) { build(v); }
 
-protected:
+ protected:
   using base::build;
 
   void toggle(node* p) override {

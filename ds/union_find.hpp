@@ -7,7 +7,7 @@
 namespace cp {
 
 struct union_find {
-public:
+ public:
   union_find() : n(0) {}
   explicit union_find(int _n) : n(_n), parent_or_size(_n, -1) {}
 
@@ -62,7 +62,7 @@ public:
     return res;
   }
 
-private:
+ private:
   int n;
   std::vector<int> parent_or_size;
   int _find(int a) {

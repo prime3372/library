@@ -12,7 +12,7 @@ namespace cp {
 namespace internal {
 
 template <class M> struct lazy_segtreap_node {
-public:
+ public:
   using S = typename M::S;
   using F = typename M::F;
   S val, prod;
@@ -37,7 +37,7 @@ public:
 template <class M, auto rev = std::identity()>
 struct lazy_segtreap 
   : public internal::treap_base<internal::lazy_segtreap_node<M>> {
-public:
+ public:
   using S = typename M::S;
   using F = typename M::F;
   using node = internal::lazy_segtreap_node<M>;
@@ -67,7 +67,7 @@ public:
     root = merge(s.first, merge(t.first, t.second));
   }
 
-protected:
+ protected:
   using base::build;
   using base::merge;
   using base::split;

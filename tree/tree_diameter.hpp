@@ -7,7 +7,7 @@
 namespace cp {
 
 template <class T> struct tree_diameter {
-public:
+ public:
   tree_diameter() : n(0) {}
   explicit tree_diameter(int _n) : n(_n), g(_n) {}
 
@@ -52,7 +52,7 @@ public:
     return *this;
   }
 
-private:
+ private:
   int n;
   struct edge {
     int to, id;

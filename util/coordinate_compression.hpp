@@ -10,7 +10,7 @@
 namespace cp {
 
 template <class T> struct coordinate_compression {
-public:
+ public:
   coordinate_compression() {}
   explicit coordinate_compression(const std::vector<T>& xs) {
     for (T x : xs) add(x);
@@ -55,7 +55,7 @@ public:
     return os << cc.d;
   }
 
-private:
+ private:
   bool initialized = false;
   std::vector<T> d;
 };

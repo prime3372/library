@@ -7,7 +7,7 @@
 namespace cp {
 
 template <class M> struct slide_window_aggregation {
-public:
+ public:
   using S = typename M::S;
 
   slide_window_aggregation() : prod0(M::e()), prod1(M::e()) {}
@@ -30,7 +30,7 @@ public:
   int size() const { return int(a0.size() + a1.size()); }
   bool empty() const { return size() == 0; }
 
-private:
+ private:
   std::vector<S> a0, a1, cum0, cum1;
   S prod0, prod1;
 

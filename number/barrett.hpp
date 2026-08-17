@@ -4,7 +4,7 @@ namespace cp {
 
 // Barrett reduction
 struct barrett {
-public:
+ public:
   explicit constexpr barrett(unsigned int _m) : m(_m), im((unsigned long long)(-1) / _m + 1) {}
 
   constexpr unsigned int umod() const { return m; }
@@ -26,7 +26,7 @@ public:
     return (unsigned int)(z - y + (z < y ? m : 0)); // d = a*b - c*m
   }
 
-private:
+ private:
   unsigned int m;
   unsigned long long im;
 };
