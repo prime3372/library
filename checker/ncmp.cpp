@@ -30,9 +30,10 @@ int main(int argc, char** argv) {
       return _fail;
     }
     if (!read_as_ll(t_p, n_p)) {
-      std::cout << "wrong output format Expected integer, but '" << t_p << "' found" << std::endl;
+      std::cout << "wrong output format Expected integer, ";
+      std::cout << "but '" << t_p << "' found" << std::endl;
       return _pe;
-    }
+    } 
 
     if (n_j != n_p) {
       std::cout << "wrong answer " << cnt << ordinal_suffix(cnt) << " numbers differ - ";
