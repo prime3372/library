@@ -3,9 +3,6 @@
 #include <cassert>
 #include <cmath>
 #include <iostream>
-#include <type_traits>
-
-#include "util/type_traits.hpp"
 
 namespace cp {
 
