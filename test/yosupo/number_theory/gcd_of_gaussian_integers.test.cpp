@@ -14,6 +14,6 @@ int main() {
   while (t--) {
     gint z1, z2;
     cin >> z1 >> z2;
-    cout << gcd_of_gaussian_integers(z1, z2) << "\n";
+    cout << gcd(z1, z2) << "\n";
   }
 }
