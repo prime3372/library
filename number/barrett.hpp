@@ -3,7 +3,7 @@
 namespace cp {
 
 // Barrett reduction
-struct barrett {
+class barrett {
  public:
   explicit constexpr barrett(unsigned int _m) : m(_m), im((unsigned long long)(-1) / _m + 1) {}
 

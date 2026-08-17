@@ -6,7 +6,7 @@
 
 namespace cp {
 
-template <class T> struct tree_diameter {
+template <class T> class tree_diameter {
  public:
   tree_diameter() : n(0) {}
   explicit tree_diameter(int _n) : n(_n), g(_n) {}

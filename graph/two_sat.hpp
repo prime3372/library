@@ -7,7 +7,7 @@
 
 namespace cp {
 
-struct two_sat {
+class two_sat {
  public:
   two_sat() : two_sat(0) {}
   explicit two_sat(int _n) : n(_n), scc(2 * _n) {}

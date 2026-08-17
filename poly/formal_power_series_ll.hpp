@@ -10,11 +10,11 @@
 
 namespace cp {
 
-struct formal_power_series_ll {
- public:
+class formal_power_series_ll {
   using fps = formal_power_series_ll;
   using ll = long long;
 
+ public:
   formal_power_series_ll() {}
   explicit formal_power_series_ll(int n) : a(n) {}
   explicit formal_power_series_ll(int n, ll val) : a(n, val) {}

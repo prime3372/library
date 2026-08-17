@@ -8,7 +8,7 @@
 
 namespace cp {
 
-template <class T> struct cumsum_2d {
+template <class T> class cumsum_2d {
  public:
   cumsum_2d() : h(0), w(0) {}
   cumsum_2d(int _h, int _w) : h(_h), w(_w), d(_h, std::vector<T>(_w)) {}

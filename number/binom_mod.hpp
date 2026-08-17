@@ -8,7 +8,7 @@
 namespace cp {
 
 template <class mint> requires internal::is_modint_v<mint>
-struct binom_mod {
+class binom_mod {
  public:
   binom_mod() : binom_mod(1) {}
   explicit binom_mod(int n) : N(n) {

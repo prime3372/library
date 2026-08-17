@@ -10,7 +10,7 @@
 
 namespace cp {
 
-struct tree_lca {
+class tree_lca {
  public:
   tree_lca() : tree_lca(0) {}
   explicit tree_lca(int _n) : n(_n), dep(_n), hld(_n) {}

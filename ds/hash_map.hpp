@@ -10,7 +10,7 @@
 
 namespace cp {
 
-template <class Key, class Val> struct hash_map {
+template <class Key, class Val> class hash_map {
  public:
   hash_map() : cap(8), sz(0),
                keys(cap), vals(cap), used(cap),

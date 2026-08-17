@@ -8,7 +8,7 @@
 
 namespace cp {
 
-template <class T> struct hash_set {
+template <class T> class hash_set {
  public:
   hash_set() : cap(8), sz(0), keys(cap), used(cap) {}
 

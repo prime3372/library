@@ -5,7 +5,7 @@
 
 namespace cp {
 
-template <class T, bool is_max = false> struct convex_hull_trick {
+template <class T, bool is_max = false> class convex_hull_trick {
  public:
   convex_hull_trick() {}
 

@@ -13,7 +13,7 @@
 
 namespace cp {
 
-struct hash61 {
+class hash61 {
  public:
   static hash61 get_basis() {
     hash61 hs;

@@ -10,7 +10,7 @@
 
 namespace cp {
 
-struct dynamic_bitset {
+class dynamic_bitset {
  public:
   using bs = dynamic_bitset;
 
@@ -30,7 +30,7 @@ struct dynamic_bitset {
     }
   }
 
-  struct ref {
+  class ref {
    public:
     operator bool() const { return (*d & mask(pos)) != 0; }
     ref& flip() {

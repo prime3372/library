@@ -7,7 +7,7 @@
 
 namespace cp {
 
-template <class T> struct union_find_with_potential {
+template <class T> class union_find_with_potential {
  public:
   union_find_with_potential() : n(0) {}
   explicit union_find_with_potential(int _n)

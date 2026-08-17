@@ -6,7 +6,7 @@
 
 namespace cp {
 
-struct linear_sieve {
+class linear_sieve {
  public:
   linear_sieve() : linear_sieve(0) {}
   explicit linear_sieve(int _n) : n(_n), f(_n + 1) {

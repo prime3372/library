@@ -11,7 +11,7 @@ namespace cp {
 
 // even index -> min heap
 // odd index  -> max heap
-template <class T> struct priority_deque {
+template <class T> class priority_deque {
  public:
   priority_deque() : d(2) {}
 

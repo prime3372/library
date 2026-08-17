@@ -12,10 +12,10 @@
 namespace cp {
 
 template <class>
-struct formal_power_series {};
+class formal_power_series {};
 
 template <class mint> requires internal::is_static_modint_v<mint>
-struct formal_power_series<mint> {
+class formal_power_series<mint> {
  private:
   using fps = formal_power_series;
 

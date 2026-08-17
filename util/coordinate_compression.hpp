@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T> struct coordinate_compression {
+template <class T> class coordinate_compression {
  public:
   coordinate_compression() {}
   explicit coordinate_compression(const std::vector<T>& xs) {

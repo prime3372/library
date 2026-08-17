@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T> struct fenwick_tree_2d {
+template <class T> class fenwick_tree_2d {
  public:
   fenwick_tree_2d() : h(0), w(0) {}
   fenwick_tree_2d(int _h, int _w) : h(_h), w(_w), d(_h) {
@@ -28,7 +28,7 @@ template <class T> struct fenwick_tree_2d {
     }
   }
 
-  struct ref {
+  class ref {
    public:
     T operator[](int j) const {
       assert(0 <= j && j < ptr->w);

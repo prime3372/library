@@ -6,7 +6,7 @@
 
 namespace cp {
 
-struct low_link {
+class low_link {
  public:
   low_link() : low_link(0) {}
   explicit low_link(int _n) : low(_n, _n), ord(_n, -1), n(_n), g(_n) {}
@@ -46,7 +46,7 @@ struct low_link {
   }
 
  protected:
-  friend struct two_edge_connected_components;
+  friend class two_edge_connected_components;
   int n, m = 0;
   struct edge {
     int to, id;

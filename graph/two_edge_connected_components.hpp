@@ -7,7 +7,7 @@
 
 namespace cp {
 
-struct two_edge_connected_components {
+class two_edge_connected_components {
  public:
   two_edge_connected_components(int _n) : id(_n, -1), n(_n), link(_n) {}
 

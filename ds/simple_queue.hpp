@@ -4,7 +4,7 @@
 
 namespace cp {
 
-template <class T> struct simple_queue {
+template <class T> class simple_queue {
  public:
   simple_queue() {}
 

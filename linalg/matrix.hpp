@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T> struct matrix {
+template <class T> class matrix {
  public:
   matrix() : h(0), w(0) {}
   explicit matrix(int _h, int _w) : h(_h), w(_w), d(_h, std::vector<T>(_w)) {}

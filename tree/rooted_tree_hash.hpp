@@ -7,7 +7,7 @@
 
 namespace cp {
 
-struct rooted_tree_hash {
+class rooted_tree_hash {
  public:
   rooted_tree_hash(int _n) : hash(_n), depth(_n), n(_n), g(_n) {
     while (int(xs.size()) <= n) {

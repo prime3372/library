@@ -8,7 +8,7 @@
 
 namespace cp {
 
-template <class T> struct dijkstra {
+template <class T> class dijkstra {
  public:
   dijkstra() : dijkstra(0) {}
   explicit dijkstra(int _n) : n(_n), g(_n), d(_n), prev_v(_n), prev_e(_n) {}

@@ -9,7 +9,7 @@
 
 namespace cp {
 
-struct point {
+class point {
  public:
   long double x, y;
   point() : x(0), y(0) {}

@@ -12,7 +12,6 @@ namespace cp {
 namespace internal {
 
 template <class M> struct lazy_segtreap_node {
- public:
   using S = typename M::S;
   using F = typename M::F;
   S val, prod;
@@ -35,7 +34,7 @@ template <class M> struct lazy_segtreap_node {
 } // namespace internal
 
 template <class M, auto rev = std::identity()>
-struct lazy_segtreap 
+class lazy_segtreap 
   : public internal::treap_base<internal::lazy_segtreap_node<M>> {
  public:
   using S = typename M::S;

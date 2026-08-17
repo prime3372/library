@@ -15,10 +15,10 @@ namespace cp {
 
 namespace internal {
 
-template <class node> struct treap_base {
- public:
+template <class node> class treap_base {
   using T = decltype(node::val);
 
+ public:
   treap_base() {}
   virtual ~treap_base() { delete root; }
 

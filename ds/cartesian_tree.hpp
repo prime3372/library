@@ -5,7 +5,7 @@
 
 namespace cp {
 
-template <bool root_is_max> struct cartesian_tree {
+template <bool root_is_max> class cartesian_tree {
   int root;
   std::vector<int> left, right, parent;
 

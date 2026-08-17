@@ -7,7 +7,7 @@
 
 namespace cp {
 
-template <class M> struct disjoint_sparse_table {
+template <class M> class disjoint_sparse_table {
  public:
   using S = typename M::S;
 

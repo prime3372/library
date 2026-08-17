@@ -5,7 +5,7 @@
 
 namespace cp {
 
-struct ipoint {
+class ipoint {
  public:
   long long x, y;
   ipoint() : x(0), y(0) {}

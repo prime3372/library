@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T> struct dynamic_fenwick_tree {
+template <class T> class dynamic_fenwick_tree {
  public:
   dynamic_fenwick_tree() : n(0) {}
   explicit dynamic_fenwick_tree(size_t _n) : n(_n) {}

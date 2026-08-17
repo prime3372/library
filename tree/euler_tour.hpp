@@ -5,7 +5,7 @@
 
 namespace cp {
 
-struct euler_tour {
+class euler_tour {
  public:
   euler_tour() : n(0) {}
   explicit euler_tour(int _n)

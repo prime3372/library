@@ -5,7 +5,7 @@
 
 namespace cp {
 
-struct centroid_decomposition {
+class centroid_decomposition {
  public:
   centroid_decomposition() : n(0) {}
   explicit centroid_decomposition(int _n)

@@ -6,7 +6,7 @@
 
 namespace cp {
 
-struct union_find {
+class union_find {
  public:
   union_find() : n(0) {}
   explicit union_find(int _n) : n(_n), parent_or_size(_n, -1) {}

@@ -8,7 +8,7 @@
 
 namespace cp {
 
-template <class T> struct fenwick_tree {
+template <class T> class fenwick_tree {
  public:
   fenwick_tree() : n(0) {}
   explicit fenwick_tree(int _n) : n(_n), d(_n) {}

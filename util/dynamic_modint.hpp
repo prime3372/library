@@ -11,10 +11,10 @@
 
 namespace cp {
 
-template <int id> struct dynamic_modint {
- public:
+template <int id> class dynamic_modint {
   using mint = dynamic_modint;
 
+ public:
   static int mod() { return bt.umod(); }
   static void set_mod(int m) {
     assert(1 <= m);

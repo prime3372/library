@@ -12,7 +12,7 @@
 
 namespace cp {
 
-template <class M> struct dynamic_lazy_segtree {
+template <class M> class dynamic_lazy_segtree {
  public:
   using S = typename M::S;
   using F = typename M::F;

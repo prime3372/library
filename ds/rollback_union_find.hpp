@@ -7,7 +7,7 @@
 
 namespace cp {
 
-struct rollback_union_find {
+class rollback_union_find {
  public:
   rollback_union_find() : rollback_union_find(0) {}
   explicit rollback_union_find(int _n) : n(_n), inner_snap(0), parent_or_size(_n, -1) {}

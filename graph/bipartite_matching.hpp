@@ -8,7 +8,7 @@
 
 namespace cp {
 
-struct bipartite_matching {
+class bipartite_matching {
  public: 
   bipartite_matching() : bipartite_matching(0, 0) {}
   explicit bipartite_matching(int _l, int _r)

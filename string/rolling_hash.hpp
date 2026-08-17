@@ -10,7 +10,7 @@
 
 namespace cp {
 
-struct rolling_hash {
+class rolling_hash {
  public:
   rolling_hash() : n(-1) {}
   template <class Str>
