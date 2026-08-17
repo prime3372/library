@@ -19,11 +19,15 @@ template <class T> struct sum_add {
       return os;
     }
   };
-  static S op(S x, S y) { return S{x.val + y.val, x.len + y.len}; }
+  static S op(S x, S y) {
+    return S{x.val + y.val, x.len + y.len};
+  }
   static S e() { return S{0, 0}; }
 
   using F = T;
-  static S mapping(F f, S x) { return S{x.val + f * T(x.len), x.len}; }
+  static S mapping(F f, S x) {
+    return S{x.val + f * T(x.len), x.len};
+  }
   static F composition(F g, F f) { return f + g; }
   static F id() { return 0; }
 };
