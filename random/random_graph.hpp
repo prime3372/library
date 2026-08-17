@@ -50,12 +50,12 @@ std::vector<std::pair<int, int>> random_undirected_graph(int n, int m) {
     return edges;
   }
 
-  long long max_m = has_self_loops ? 1LL * n * (n + 1) / 2 : 1LL * n * (n - 1) / 2;
+  long long max_m = has_self_loops ? 1LL * n * (n+1) / 2 : 1LL * n * (n-1) / 2;
   assert(m <= max_m);
 
   hash_set<long long> used_edges;
   for (auto [u, v] : edges) {
-    used_edges.insert(1LL * u * n + v);
+    used_edges.insert(1LL*u*n + v);
   }
 
   if (m > max_m / 2) {
@@ -64,7 +64,7 @@ std::vector<std::pair<int, int>> random_undirected_graph(int n, int m) {
     for (int u = 0; u < n; u++) {
       for (int v = u; v < n; v++) {
         if (!has_self_loops && u == v) continue;
-        if (!used_edges.count(1LL * u * n + v)) {
+        if (!used_edges.count(1LL*u*n + v)) {
           candidates.emplace_back(u, v);
         }
       }
@@ -84,9 +84,9 @@ std::vector<std::pair<int, int>> random_undirected_graph(int n, int m) {
         u = uniform(0, n - 2);
         v = uniform(u + 1, n - 1);
       }
-      if (used_edges.count(1LL * u * n + v)) continue;
+      if (used_edges.count(1LL*u*n + v)) continue;
       edges.emplace_back(u, v);
-      used_edges.insert(1LL * u * n + v);
+      used_edges.insert(1LL*u*n + v);
     }
   }
 
@@ -96,7 +96,7 @@ std::vector<std::pair<int, int>> random_undirected_graph(int n, int m) {
   return edges;
 }
 
-// @note if connected is true, all the vertices are reachable from vertex s
+// @note If connected is true, all the vertices are reachable from vertex s.
 template <bool has_self_loops = true,
           bool has_multiple_edges = true,
           bool connected = false>

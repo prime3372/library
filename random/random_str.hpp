@@ -28,7 +28,7 @@ std::string random_str(int n, std::string s) {
 std::string random_dec(int n) {
   assert(0 <= n);
   if (n == 0) return "";
-  else return random_str(1, "123456789") + random_str(n - 1, "0123456789");
+  return random_str(1, "123456789") + random_str(n - 1, "0123456789");
 }
 
 } // namespace cp

@@ -53,13 +53,13 @@ public:
     return edges;
   }
   void change_edge(int i, Cap new_cap, Cap new_flow) {
-      int m = int(pos.size());
-      assert(0 <= i && i < m);
-      assert(0 <= new_flow && new_flow <= new_cap);
-      auto& e = g[pos[i].first][pos[i].second];
-      auto& re = g[e.to][e.rev];
-      e.cap = new_cap - new_flow;
-      re.cap = new_flow;
+    int m = int(pos.size());
+    assert(0 <= i && i < m);
+    assert(0 <= new_flow && new_flow <= new_cap);
+    auto& e = g[pos[i].first][pos[i].second];
+    auto& re = g[e.to][e.rev];
+    e.cap = new_cap - new_flow;
+    re.cap = new_flow;
   }
 
   Cap flow(int s, int t) {

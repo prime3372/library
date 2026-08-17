@@ -3,8 +3,9 @@
 #include <cassert>
 #include <cmath>
 #include <iostream>
+#include <type_traits>
 
-#include "util/io_utility.hpp"
+#include "util/type_traits.hpp"
 
 namespace cp {
 
@@ -53,7 +54,7 @@ public:
   friend point operator/(const point& lhs, long double rhs) {
     return point(lhs) /= rhs;
   }
-  friend point operator/(double lhs, const point& rhs) {
+  friend point operator/(long double lhs, const point& rhs) {
     return point(rhs) /= lhs;
   }
 
@@ -64,28 +65,17 @@ public:
     return x * rhs.y - y * rhs.x;
   }
 
-  long double norm2() const { return x * x + y * y;}
+  long double norm2() const { return x * x + y * y; }
   long double norm() const { return std::sqrt(x * x + y * y); }
   point normalize() const { return *this / norm(); }
 
-  point rot() const { return point(y, -x);}
-  point rot(int n) const {
-    n = n < 0 ? n % 4 + 4 : n % 4;
-    if (n == 0) return *this;
-    if (n == 1) return rot();
-    if (n == 2) return -*this;
-    return -rot();
-  }
+  point rot() const { return point(y, -x); }
 
-  int ort() const {
-    if (std::abs(x) < eps && std::abs(y) < eps) return 0;
-    if (y > 0) return x > 0 ? 1 : 2;
-    else return x > 0 ? 4 : 3;
+  bool is_parallel(const point& rhs) const {
+    return std::abs(dot(rhs)) < eps;
   }
-  bool argless(const point& other) const {
-    int ort1 = ort(), ort2 = other.ort();
-    if (ort1 != ort2) return ort1 < ort2;
-    return cross(other) > 0;
+  bool is_vertical(const point& rhs) const {
+    return std::abs(cross(rhs)) < eps;
   }
 
   friend bool operator==(const point& lhs, const point& rhs) {
@@ -100,13 +90,6 @@ public:
   }
   friend std::ostream& operator<<(std::ostream& os, const point& v) {
     return os << v.x << " " << v.y;
-  }
-
-  bool is_parallel(const point& rhs) const {
-    return std::abs(dot(rhs)) < eps;
-  }
-  bool is_vertical(const point& rhs) const {
-    return std::abs(cross(rhs)) < eps;
   }
 
 private:
