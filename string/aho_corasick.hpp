@@ -11,11 +11,10 @@ namespace cp {
 
 template <int char_size, auto offset = 'a'>
 class aho_corasick : public trie_tree<char_size, offset> {
-  using trie_tree<char_size, offset>::trie_tree;
-  using trie_tree<char_size, offset>::index;
-  using trie_tree<char_size, offset>::size;
-  
  public:
+  using trie_tree<char_size, offset>::trie_tree;
+  using trie_tree<char_size, offset>::size;
+
   void build() {
     lnk.resize(size());
     lnk[0] = -1;
