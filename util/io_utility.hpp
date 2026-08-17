@@ -34,57 +34,6 @@ std::istream& operator>>(std::istream& is, std::tuple<Args...>& t);
 template <class T, class Alloc>
 std::istream& operator>>(std::istream& is, std::vector<T, Alloc>& v);
 
-std::ostream& operator<<(std::ostream& os, __int128 val);
-
-std::ostream& operator<<(std::ostream& os, unsigned __int128 val);
-
-template <std::ranges::range Range>
-  requires (!std::is_convertible_v<Range, std::string>)
-std::ostream& operator<<(std::ostream& os, const Range& r);
-
-template <class T, class Container>
-std::ostream& operator<<(std::ostream& os, std::queue<T, Container> q);
-
-template <class T, class Container, class Comp>
-std::ostream& operator<<(std::ostream& os,
-                         std::priority_queue<T, Container, Comp> pq);
-
-template <class T, class Container>
-std::ostream& operator<<(std::ostream& os, std::stack<T, Container> st);
-
-template <class T, class U>
-std::ostream& operator<<(std::ostream& os, const std::pair<T, U>& p);
-
-template <class... Args>
-std::ostream& operator<<(std::ostream& os, const std::tuple<Args...>& t);
-
-namespace internal {
-
-template <class T> struct delimiter_of {
-  char operator()(const T& x) {
-    if (is_integral_v<T>) return ' ';
-    if (std::is_floating_point_v<T>) return ' ';
-
-    std::ostringstream oss;
-    oss << x;
-    std::string s = oss.str();
-
-    if (s.size() == 1) return ' ';
-
-    long double dummy;
-    auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), dummy);
-    if (ec == std::errc{} && ptr == s.data() + s.size()) return ' ';
-
-    return '\n';
-  }
-};
-
-template <> struct delimiter_of<std::string> {
-  char operator()(const std::string&) { return '\n'; }
-};
-
-} // namespace internal
-
 std::istream& operator>>(std::istream& is, __int128& val) {
   std::string s;
   if (is >> s) {
@@ -135,6 +84,57 @@ std::istream& operator>>(std::istream& is, std::vector<T, Alloc>& v) {
   for (auto& x : v) is >> x;
   return is;
 }
+
+std::ostream& operator<<(std::ostream& os, __int128 val);
+
+std::ostream& operator<<(std::ostream& os, unsigned __int128 val);
+
+template <std::ranges::range Range>
+  requires (!std::is_convertible_v<Range, std::string>)
+std::ostream& operator<<(std::ostream& os, const Range& r);
+
+template <class T, class Container>
+std::ostream& operator<<(std::ostream& os, std::queue<T, Container> q);
+
+template <class T, class Container, class Comp>
+std::ostream& operator<<(std::ostream& os,
+                         std::priority_queue<T, Container, Comp> pq);
+
+template <class T, class Container>
+std::ostream& operator<<(std::ostream& os, std::stack<T, Container> st);
+
+template <class T, class U>
+std::ostream& operator<<(std::ostream& os, const std::pair<T, U>& p);
+
+template <class... Args>
+std::ostream& operator<<(std::ostream& os, const std::tuple<Args...>& t);
+
+namespace internal {
+
+template <class T> struct delimiter_of {
+  char operator()(const T& x) {
+    if (is_integral_v<T>) return ' ';
+    if (std::is_floating_point_v<T>) return ' ';
+
+    std::ostringstream oss;
+    oss << x;
+    std::string s = oss.str();
+
+    if (s.size() == 1) return ' ';
+
+    long double dummy;
+    auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), dummy);
+    if (ec == std::errc{} && ptr == s.data() + s.size()) return ' ';
+
+    return '\n';
+  }
+};
+
+template <> struct delimiter_of<std::string> {
+  char operator()(const std::string&) { return '\n'; }
+};
+
+} // namespace internal
 
 std::ostream& operator<<(std::ostream& os, __int128 val) {
   if (val == 0) return os << '0';
