@@ -82,10 +82,10 @@ public:
     if (y > 0) return x > 0 ? 1 : 2;
     else return x > 0 ? 4 : 3;
   }
-  bool argless(const point& lhs, const point& rhs) const {
-    int lo = lhs.ort(), ro = rhs.ort();
-    if (lo != ro) return lo < ro;
-    return lhs.cross(rhs) > 0;
+  bool argless(const point& other) const {
+    int ort1 = ort(), ort2 = other.ort();
+    if (ort1 != ort2) return ort1 < ort2;
+    return cross(other) > 0;
   }
 
   friend bool operator==(const point& lhs, const point& rhs) {
