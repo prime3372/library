@@ -13,8 +13,6 @@
 
 namespace cp {
 
-namespace internal {
-
 template <class node> class treap_base {
   using T = decltype(node::val);
 
@@ -140,7 +138,5 @@ template <class node> class treap_base {
 
   virtual void push(node* p) = 0;
 };
-
-} // namespace internal
 
 } // namespace cp

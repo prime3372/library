@@ -26,10 +26,10 @@ template <class T> struct treap_node {
 } // namespace internal
 
 template <class T>
-class treap : public internal::treap_base<internal::treap_node<T>> {
+class treap : public treap_base<internal::treap_node<T>> {
   using node = internal::treap_node<T>;
   using node_ptr = std::shared_ptr<node>;
-  using base = internal::treap_base<node>;
+  using base = treap_base<node>;
 
  public:
   treap() {}

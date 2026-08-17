@@ -35,12 +35,12 @@ template <class M> struct lazy_segtreap_node {
 
 template <class M, auto rev = std::identity()>
 class lazy_segtreap 
-  : public internal::treap_base<internal::lazy_segtreap_node<M>> {
+  : public treap_base<internal::lazy_segtreap_node<M>> {
  public:
   using S = typename M::S;
   using F = typename M::F;
   using node = internal::lazy_segtreap_node<M>;
-  using base = internal::treap_base<node>;
+  using base = treap_base<node>;
 
   lazy_segtreap() {}
   explicit lazy_segtreap(int n) { build(std::vector<S>(n)); }

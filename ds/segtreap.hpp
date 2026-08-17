@@ -32,10 +32,10 @@ template <class M> struct segtreap_node {
 } // namespace internal
 
 template <class M, auto rev = std::identity()>
-class segtreap : public internal::treap_base<internal::segtreap_node<M>> {
+class segtreap : public treap_base<internal::segtreap_node<M>> {
   using S = typename M::S;
   using node = internal::segtreap_node<M>;
-  using base = internal::treap_base<node>;
+  using base = treap_base<node>;
 
  public:
   segtreap() {}
