@@ -10,7 +10,8 @@ namespace cp {
 template <class T> struct union_find_with_potential {
 public:
   union_find_with_potential() : n(0) {}
-  explicit union_find_with_potential(int _n) : n(_n), parent_or_size(_n, -1), diff_weight(_n) {}
+  explicit union_find_with_potential(int _n)
+      : n(_n), parent_or_size(_n, -1), diff_weight(_n) {}
 
   bool unite(int a, int b, T d) {
     assert(0 <= a && a < n);

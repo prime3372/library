@@ -16,10 +16,14 @@ public:
 
   dynamic_bitset() : n(0) {}
   explicit dynamic_bitset(int _n) : n(_n), a((_n + w - 1) / w, 0) {}
-  explicit dynamic_bitset(int _n, bool b) : n(_n), a((_n + w - 1) / w, b ? -1 : 0) {
+  explicit dynamic_bitset(int _n, bool b)
+      : n(_n),
+        a((_n + w - 1) / w, b ? -1 : 0) {
     if (b && n % w) a.back() &= mask(n % w) - 1;
   }
-  explicit dynamic_bitset(const std::string& s) : n(int(s.size())), a((int(s.size()) + w - 1) / w) {
+  explicit dynamic_bitset(const std::string& s)
+      : n(int(s.size())),
+        a((int(s.size()) + w - 1) / w) {
     for (int i = 0; i < n; i++) {
       assert(s[n - 1 - i] == '0' || s[n - 1 - i] == '1');
       a[i / w] |= (unsigned long long)(s[n - 1 - i] - '0') << (i % w);
@@ -180,14 +184,28 @@ public:
     return *this;
   }
 
-  friend bs operator^(const bs& lhs, const bs& rhs) { return bs(lhs) ^= rhs; }
-  friend bs operator|(const bs& lhs, const bs& rhs) { return bs(lhs) |= rhs; }
-  friend bs operator&(const bs& lhs, const bs& rhs) { return bs(lhs) &= rhs; }
-  friend bs operator<<(const bs& lhs, int shift) { return bs(lhs) <<= shift; }
-  friend bs operator>>(const bs& lhs, int shift) { return bs(lhs) >>= shift; }
+  friend bs operator^(const bs& lhs, const bs& rhs) {
+    return bs(lhs) ^= rhs;
+  }
+  friend bs operator|(const bs& lhs, const bs& rhs) {
+    return bs(lhs) |= rhs;
+  }
+  friend bs operator&(const bs& lhs, const bs& rhs) {
+    return bs(lhs) &= rhs;
+  }
+  friend bs operator<<(const bs& lhs, int shift) {
+    return bs(lhs) <<= shift;
+  }
+  friend bs operator>>(const bs& lhs, int shift) {
+    return bs(lhs) >>= shift;
+  }
 
-  friend bool operator==(const bs& lhs, const bs& rhs) { return lhs.a == rhs.a; }
-  friend bool operator!=(const bs& lhs, const bs& rhs) { return !(lhs == rhs); }
+  friend bool operator==(const bs& lhs, const bs& rhs) {
+    return lhs.a == rhs.a;
+  }
+  friend bool operator!=(const bs& lhs, const bs& rhs) {
+    return !(lhs == rhs);
+  }
 
   friend std::istream& operator>>(std::istream& is, bs& x) {
     std::string t;

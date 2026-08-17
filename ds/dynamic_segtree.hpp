@@ -62,7 +62,8 @@ public:
 
   size_t size() const { return n; }
 
-  friend std::ostream& operator<<(std::ostream& os, const dynamic_segtree& seg) {
+  friend std::ostream& operator<<(std::ostream& os,
+                                  const dynamic_segtree& seg) {
     std::vector<S> v(std::min<size_t>(seg.n, 20));
     for (size_t i = 0; i < v.size(); i++) {
       v[i] = seg[i];

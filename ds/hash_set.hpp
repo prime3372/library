@@ -45,8 +45,12 @@ private:
   std::vector<T> keys;
   std::vector<bool> used;
 
+  unsigned int hash(const T& k) {
+    return (unsigned int)(safe_hash<T>()(k) & (cap - 1));
+  }
+
   unsigned int index(const T& k) const {
-    unsigned int hs = (unsigned int)(safe_hash<T>()(k) & (cap - 1));
+    unsigned int hs = hash(k);
     while (used[hs] && keys[hs] != k) hs = (hs + 1) & (cap - 1);
     return hs;
   }
@@ -57,7 +61,7 @@ private:
     std::vector<bool> u(cap);
     for (int i = 0; i < int(keys.size()); i++) {
       if (!used[i]) continue;
-      unsigned int hs = (unsigned int)(safe_hash<T>()(keys[i]) & (cap - 1));
+      unsigned int hs = hash(keys[i]);
       while (u[hs]) hs = (hs + 1) & (cap - 1);
       k[hs] = keys[i];
       u[hs] = true;

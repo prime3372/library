@@ -24,7 +24,8 @@ public:
   unsigned long long priority;
 
   lazy_segtreap_node() {}
-  explicit lazy_segtreap_node(const S& x) : val(x), prod(x), priority(mt64()) {}  
+  explicit lazy_segtreap_node(const S& x)
+      : val(x), prod(x), priority(mt64()) {}  
   ~lazy_segtreap_node() {
     delete left;
     delete right;
@@ -34,7 +35,8 @@ public:
 } // namespace internal
 
 template <class M, auto rev = std::identity()>
-struct lazy_segtreap : public internal::treap_base<internal::lazy_segtreap_node<M>> {
+struct lazy_segtreap 
+  : public internal::treap_base<internal::lazy_segtreap_node<M>> {
 public:
   using S = typename M::S;
   using F = typename M::F;

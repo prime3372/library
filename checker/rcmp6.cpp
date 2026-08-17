@@ -45,7 +45,9 @@ int main(int argc, char** argv) {
   }
 
   if (cnt == 1) {
-    std::cout << "ok found '" << n_p << "', expected '" << n_j << "', error '" << double_delta(n_j, n_p) << "'" << std::endl;
+    std::cout << "ok found '" << n_p << "'";
+    std::cout << "expected '" << n_j << "',";
+    std::cout << "error '" << double_delta(n_j, n_p) << "'" << std::endl;
   } else {
     std::cout << "ok " << cnt << " numbers" << std::endl;
   }
