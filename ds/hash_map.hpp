@@ -58,7 +58,7 @@ private:
   std::vector<bool> used;
   Val default_value;
 
-  unsigned int hash(const Key& k) {
+  unsigned int hash(const Key& k) const {
     return (unsigned int)(safe_hash<Key>()(k) & (cap - 1));
   }
 
