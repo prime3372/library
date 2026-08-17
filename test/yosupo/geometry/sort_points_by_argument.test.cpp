@@ -15,6 +15,13 @@ int main() {
   cin >> n;
   vector<point> ps(n);
   for (auto& p : ps) cin >> p;
-  sort(ps.begin(), ps.end());
+  sort(ps.begin(), ps.end(),
+      [](const point& lhs, const point& rhs) {
+        int lo = lhs.ort(), ro = rhs.ort();
+        if (lo > 2) lo -= 5;
+        if (ro > 2) ro -= 5;
+        if (lo != ro) return lo < ro;
+        return lhs.cross(rhs) > 0;
+  });
   for (auto& p : ps) cout << p << "\n";
 }

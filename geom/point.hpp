@@ -38,19 +38,35 @@ public:
     return *this;
   }
 
-  friend point operator+(const point& lhs, const point& rhs) { return point(lhs) += rhs; }
-  friend point operator-(const point& lhs, const point& rhs) { return point(lhs) -= rhs; }
-  friend point operator*(const point& lhs, long double rhs) { return point(lhs) *= rhs; }
-  friend point operator*(long double lhs, const point& rhs) { return point(rhs) *= lhs; }
-  friend point operator/(const point& lhs, long double rhs) { return point(lhs) /= rhs; }
-  friend point operator/(double lhs, const point& rhs) { return point(rhs) /= lhs; }
+  friend point operator+(const point& lhs, const point& rhs) {
+    return point(lhs) += rhs;
+  }
+  friend point operator-(const point& lhs, const point& rhs) {
+    return point(lhs) -= rhs;
+  }
+  friend point operator*(const point& lhs, long double rhs) {
+    return point(lhs) *= rhs;
+  }
+  friend point operator*(long double lhs, const point& rhs) {
+    return point(rhs) *= lhs;
+  }
+  friend point operator/(const point& lhs, long double rhs) {
+    return point(lhs) /= rhs;
+  }
+  friend point operator/(double lhs, const point& rhs) {
+    return point(rhs) /= lhs;
+  }
 
-  long double dot(const point& rhs) const { return x * rhs.x + y * rhs.y; }
-  long double cross(const point& rhs) const { return x * rhs.y - y * rhs.x; }
+  long double dot(const point& rhs) const {
+    return x * rhs.x + y * rhs.y;
+  }
+  long double cross(const point& rhs) const {
+    return x * rhs.y - y * rhs.x;
+  }
 
   long double norm2() const { return x * x + y * y;}
-  long double norm() const { return std::sqrt(x * x + y * y);}
-  point normalize() const { return *this / norm();}
+  long double norm() const { return std::sqrt(x * x + y * y); }
+  point normalize() const { return *this / norm(); }
 
   point rot() const { return point(y, -x);}
   point rot(int n) const {
@@ -60,25 +76,24 @@ public:
     if (n == 2) return -*this;
     return -rot();
   }
-  
+
   int ort() const {
     if (std::abs(x) < eps && std::abs(y) < eps) return 0;
-    if (y < 0) return x < 0 ? -2 : -1;
-    return x < 0 ? 2 : 1;
+    if (y > 0) return x > 0 ? 1 : 2;
+    else return x > 0 ? 4 : 3;
+  }
+  bool argless(const point& lhs, const point& rhs) const {
+    int lo = lhs.ort(), ro = rhs.ort();
+    if (lo != ro) return lo < ro;
+    return lhs.cross(rhs) > 0;
   }
 
   friend bool operator==(const point& lhs, const point& rhs) {
     return std::abs(lhs.x - rhs.x) < eps && std::abs(lhs.y - rhs.y) < eps;
   }
-  friend bool operator!=(const point& lhs, const point& rhs) { return !(lhs == rhs); }
-
-  friend int argcmp(const point& lhs, const point& rhs) {
-    int lo = lhs.ort(), ro = rhs.ort();
-    if (lo != ro) return lo < ro ? -1 : 1;
-    return lhs.cross(rhs) > eps ? -1 : lhs.cross(rhs) < eps ? 1 : 0;
+  friend bool operator!=(const point& lhs, const point& rhs) {
+    return !(lhs == rhs);
   }
-  friend bool operator<(const point& lhs, const point& rhs) { return argcmp(lhs, rhs) < 0; }
-  friend bool operator>(const point& lhs, const point& rhs) { return argcmp(lhs, rhs) > 0; }
 
   friend std::istream& operator>>(std::istream& is, point& v) {
     return is >> v.x >> v.y;
@@ -87,8 +102,12 @@ public:
     return os << v.x << " " << v.y;
   }
 
-  bool is_parallel(const point& rhs) const { return std::abs(dot(rhs)) < eps; }
-  bool is_vertical(const point& rhs) const { return std::abs(cross(rhs)) < eps; }
+  bool is_parallel(const point& rhs) const {
+    return std::abs(dot(rhs)) < eps;
+  }
+  bool is_vertical(const point& rhs) const {
+    return std::abs(cross(rhs)) < eps;
+  }
 
 private:
   static constexpr long double eps = 1e-9;
