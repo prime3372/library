@@ -16,6 +16,8 @@
 
 #include "util/type_traits.hpp"
 
+namespace cp {
+
 std::istream& operator>>(std::istream& is, __int128& val);
 
 std::istream& operator>>(std::istream& is, unsigned __int128& val);
@@ -56,8 +58,6 @@ std::ostream& operator<<(std::ostream& os, const std::pair<T, U>& p);
 template <class... Args>
 std::ostream& operator<<(std::ostream& os, const std::tuple<Args...>& t);
 
-namespace cp {
-
 namespace internal {
 
 template <class T> struct delimiter_of {
@@ -84,8 +84,6 @@ template <> struct delimiter_of<std::string> {
 };
 
 } // namespace internal
-
-} // namespace cp
 
 std::istream& operator>>(std::istream& is, __int128& val) {
   std::string s;
@@ -172,8 +170,7 @@ std::ostream& operator<<(std::ostream& os, const Range& r) {
 
   char delimiter = ' ';
   for (const auto& x : r) {
-    using cp::internal::delimiter_of;
-    if (delimiter_of<std::decay_t<decltype(x)>>()(x) == '\n') {
+    if (internal::delimiter_of<std::decay_t<decltype(x)>>()(x) == '\n') {
       delimiter = '\n';
     }
   }
@@ -234,8 +231,7 @@ std::ostream& operator<<(std::ostream& os, const std::tuple<Args...>& t) {
   char delimiter = ' ';
   [&]<size_t... I>(std::index_sequence<I...>) {
     ([&](const auto& x) {
-      using cp::internal::delimiter_of;
-      if (delimiter_of<std::decay_t<decltype(x)>>()(x) == '\n') {
+      if (internal::delimiter_of<std::decay_t<decltype(x)>>()(x) == '\n') {
         delimiter = '\n';
       }
     }(std::get<I>(t)), ...);
@@ -248,3 +244,5 @@ std::ostream& operator<<(std::ostream& os, const std::tuple<Args...>& t) {
 
   return os;
 }
+
+} // namespace cp
