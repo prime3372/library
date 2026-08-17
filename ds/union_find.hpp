@@ -55,7 +55,9 @@ public:
       res[root[i]].push_back(i);
     }
     res.erase(std::remove_if(res.begin(), res.end(),
-                             [&](const std::vector<int>& v) { return v.empty(); }),
+                             [&](const std::vector<int>& v) {
+                               return v.empty();
+                             }),
               res.end());
     return res;
   }
