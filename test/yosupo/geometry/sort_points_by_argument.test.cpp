@@ -1,8 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sort_points_by_argument"
 
-#include "geom/point.hpp"
+#include "geom/ipoint.hpp"
+#include <algorithm>
 #include <iostream>
 #include <iomanip>
+#include <vector>
 
 using namespace std;
 using namespace cp;
@@ -13,10 +15,12 @@ int main() {
   cout << fixed << setprecision(0);
   int n;
   cin >> n;
-  vector<point> ps(n);
+  vector<ipoint> ps(n);
   for (auto& p : ps) cin >> p;
   sort(ps.begin(), ps.end(),
-      [](const point& lhs, const point& rhs) {
+      [](const ipoint& lhs, const ipoint& rhs) {
+        if (lhs.x < 0 && lhs.y == 0) return false;
+        if (rhs.x < 0 && rhs.y == 0) return true;
         int lo = lhs.ort(), ro = rhs.ort();
         if (lo > 2) lo -= 5;
         if (ro > 2) ro -= 5;
