@@ -14,6 +14,7 @@ using ll = long long;
 using ull = unsigned long long;
 using i128 = __int128;
 using u128 = unsigned __int128;
+using ld = long double;
 template <class T> using vec = vector<T>;
 using str = string;
 template <class T> using minque = priority_queue<T, vector<T>, greater<T>>;
