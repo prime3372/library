@@ -137,8 +137,9 @@ std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
   return a;
 }
 
-template <int mod = 998244353, class T> requires internal::is_integral_v<T>
-std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
+template <int mod = 998244353, class T, class U = T>
+  requires internal::is_integral_v<T> && internal::is_integral_v<U>
+std::vector<U> convolution(std::vector<T> a, std::vector<T> b) {
   using mint = static_modint<mod>;
   int n = int(a.size()), m = int(b.size());
 
@@ -147,7 +148,7 @@ std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
   for (int i = 0; i < m; i++) b2[i] = mint(b[i]);
   
   auto c2 = convolution(std::move(a2), std::move(b2));
-  std::vector<T> c(n + m - 1);
+  std::vector<U> c(n + m - 1);
   for (int i = 0; i < n + m - 1; i++) c[i] = c2[i].val();
   return c;
 }

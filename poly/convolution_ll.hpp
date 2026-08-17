@@ -8,8 +8,8 @@
 namespace cp {
 
 // @note the values after convolution must be in [-2*10^18, 2*10^18]
-std::vector<long long> convolution_ll(std::vector<long long> a,
-                                      std::vector<long long> b) {
+template <class T>
+std::vector<long long> convolution_ll(std::vector<T> a, std::vector<T> b) {
   int n = int(a.size()), m = int(b.size());
   if (n == 0 || m == 0) return {};
 
@@ -20,8 +20,8 @@ std::vector<long long> convolution_ll(std::vector<long long> a,
 
   static constexpr long long im = inv_mod(MOD1, MOD2);
 
-  auto c1 = convolution<MOD1>(a, b);
-  auto c2 = convolution<MOD2>(a, b);
+  auto c1 = convolution<MOD1, T, long long>(a, b);
+  auto c2 = convolution<MOD2, T, long long>(a, b);
 
   // restore the true value using CRT
   for (int i = 0; i < n + m - 1; i++) {
