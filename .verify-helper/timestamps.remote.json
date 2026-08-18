@@ -26,6 +26,8 @@
   "test/aoj/GRL/6_A_maximum_flow.test.cpp": "2026-08-18 13:15:29 +0900",
   "test/aoj/GRL/7_A_bipartite_matching.test.cpp": "2026-08-18 17:03:00 +0900",
   "test/aoj/NTL/1_A_prime_factorize.test.cpp": "2026-08-18 17:03:12 +0900",
+  "test/aoj/NTL/1_B_power.test.cpp": "2026-08-18 17:39:18 +0900",
+  "test/aoj/NTL/1_E_extended_euclid_algorithm.test.cpp": "2026-08-18 17:39:18 +0900",
   "test/yosupo/convolution/bitwise_and_convolution.test.cpp": "2026-08-18 16:51:34 +0900",
   "test/yosupo/convolution/convolution.test.cpp": "2026-08-18 16:51:34 +0900",
   "test/yosupo/data_structure/associative_array.test.cpp": "2026-08-18 13:15:29 +0900",
