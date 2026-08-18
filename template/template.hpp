@@ -9,7 +9,6 @@
 #include "util/static_modint.hpp"
 
 using namespace std;
-using uint = unsigned int;
 using ll = long long;
 using ull = unsigned long long;
 using i128 = __int128;
