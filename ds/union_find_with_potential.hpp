@@ -73,4 +73,4 @@ template <class T> class union_find_with_potential {
   }
 };
 
-} // namespace cp
+}  // namespace cp

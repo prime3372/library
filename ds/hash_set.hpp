@@ -71,4 +71,4 @@ template <class T> class hash_set {
   }
 };
 
-} // namespace cp
+}  // namespace cp

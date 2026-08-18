@@ -13,9 +13,7 @@ template <class T> class fenwick_tree_2d {
  public:
   fenwick_tree_2d() : h(0), w(0) {}
   fenwick_tree_2d(int _h, int _w) : h(_h), w(_w), d(_h) {
-    for (int i = 0; i < h; i++) {
-      d[i] = fenwick_tree<T>(w);
-    }
+    for (int i = 0; i < h; i++) d[i] = fenwick_tree<T>(w);
   }
 
   void add(int i, int j, T x) {
@@ -35,6 +33,7 @@ template <class T> class fenwick_tree_2d {
       return ptr->sum(i, j, i + 1, j + 1);
     }
     ref(const fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), i(_i) {}
+
    private:
     const fenwick_tree_2d* ptr;
     int i;
@@ -96,4 +95,4 @@ template <class T> class fenwick_tree_2d {
   std::vector<fenwick_tree<T>> d;
 };
 
-} // namespace cp
+}  // namespace cp

@@ -21,14 +21,16 @@ template <class M> class slide_window_aggregation_deque {
   void pop_front() {
     assert(!empty());
     if (a0.empty()) rebalance();
-    a0.pop_back(); cum0.pop_back();
+    a0.pop_back();
+    cum0.pop_back();
     prod0 = cum0.empty() ? M::e() : cum0.back();
   }
 
   void pop_back() {
     assert(!empty());
     if (a1.empty()) rebalance();
-    a1.pop_back(); cum1.pop_back();
+    a1.pop_back();
+    cum1.pop_back();
     prod1 = cum1.empty() ? M::e() : cum1.back();
   }
 
@@ -65,11 +67,15 @@ template <class M> class slide_window_aggregation_deque {
     std::vector<S> a = a0;
     std::reverse(a.begin(), a.end());
     std::copy(a1.begin(), a1.end(), std::back_inserter(a));
-    a0.clear(); cum0.clear(); prod0 = M::e();
-    a1.clear(); cum1.clear(); prod1 = M::e();
+    a0.clear();
+    a1.clear();
+    cum0.clear();
+    cum1.clear();
+    prod0 = M::e();
+    prod1 = M::e();
     for (int i = s0 - 1; i >= 0; i--) push0(a[i]);
     for (int i = s0; i < n; i++) push1(a[i]);
   }
 };
 
-} // namespace cp
+}  // namespace cp

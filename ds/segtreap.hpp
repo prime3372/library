@@ -22,14 +22,14 @@ template <class M> struct segtreap_node {
   unsigned long long priority;
 
   segtreap_node() {}
-  explicit segtreap_node(const S& x) : val(x), prod(x), priority(mt64()) {}    
+  explicit segtreap_node(const S& x) : val(x), prod(x), priority(mt64()) {}
   ~segtreap_node() {
     delete left;
     delete right;
   }
 };
 
-} // namespace internal
+}  // namespace internal
 
 template <class M, auto rev = std::identity()>
 class segtreap : public treap_base<internal::segtreap_node<M>> {
@@ -56,9 +56,9 @@ class segtreap : public treap_base<internal::segtreap_node<M>> {
  protected:
   using base::build;
   using base::merge;
-  using base::split;
-  using base::size;
   using base::root;
+  using base::size;
+  using base::split;
 
   void toggle(node* p) override {
     std::swap(p->left, p->right);
@@ -88,4 +88,4 @@ class segtreap : public treap_base<internal::segtreap_node<M>> {
   }
 };
 
-} // namespace cp
+}  // namespace cp

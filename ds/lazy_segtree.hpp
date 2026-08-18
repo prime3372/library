@@ -17,7 +17,8 @@ template <class M> class lazy_segtree {
  public:
   lazy_segtree() : lazy_segtree(0) {}
   explicit lazy_segtree(int _n) : lazy_segtree(std::vector<S>(_n, M::e())) {}
-  explicit lazy_segtree(int _n, S val) : lazy_segtree(std::vector<S>(_n, val)) {}
+  explicit lazy_segtree(int _n, S val)
+      : lazy_segtree(std::vector<S>(_n, val)) {}
   explicit lazy_segtree(const std::vector<S>& v) : n(int(v.size())) {
     sz = int(std::bit_ceil((unsigned int)(n)));
     log = std::countr_zero((unsigned int)(sz));
@@ -161,9 +162,7 @@ template <class M> class lazy_segtree {
 
   friend std::ostream& operator<<(std::ostream& os, lazy_segtree seg) {
     std::vector<S> v(seg.n);
-    for (int i = 0; i < seg.n; i++) {
-      v[i] = seg[i];
-    }
+    for (int i = 0; i < seg.n; i++) v[i] = seg[i];
     return os << v;
   }
 
@@ -172,9 +171,7 @@ template <class M> class lazy_segtree {
   std::vector<S> d;
   std::vector<F> lz;
 
-  void update(int k) {
-    d[k] = M::op(d[2 * k], d[2 * k + 1]);
-  }
+  void update(int k) { d[k] = M::op(d[2 * k], d[2 * k + 1]); }
   void all_apply(int k, F f) {
     d[k] = M::mapping(f, d[k]);
     if (k < sz) lz[k] = M::composition(f, lz[k]);
@@ -186,4 +183,4 @@ template <class M> class lazy_segtree {
   }
 };
 
-} // namespace cp
+}  // namespace cp

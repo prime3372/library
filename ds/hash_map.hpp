@@ -12,9 +12,8 @@ namespace cp {
 
 template <class Key, class Val> class hash_map {
  public:
-  hash_map() : cap(8), sz(0),
-               keys(cap), vals(cap), used(cap),
-               default_value() {}
+  hash_map()
+      : cap(8), sz(0), keys(cap), vals(cap), used(cap), default_value() {}
 
   Val& operator[](const Key& k) {
     unsigned int i = index(k);
@@ -87,4 +86,4 @@ template <class Key, class Val> class hash_map {
   }
 };
 
-} // namespace cp
+}  // namespace cp

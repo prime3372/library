@@ -54,4 +54,4 @@ template <class M> class slide_window_aggregation {
   }
 };
 
-} // namespace cp
+}  // namespace cp

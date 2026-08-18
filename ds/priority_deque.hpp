@@ -44,7 +44,7 @@ template <class T> class priority_deque {
   void pop_max() {
     assert(!empty());
     if (int(d.size()) <= 4) {
-      d.pop_back(); 
+      d.pop_back();
       return;
     }
     std::swap(d[3], d.back());
@@ -69,7 +69,9 @@ template <class T> class priority_deque {
         if (nxt < n && d[cur] > d[nxt]) {
           std::swap(d[cur], d[nxt]);
           cur = nxt;
-        } else break;
+          continue;
+        }
+        break;
       }
     } else {
       while (true) {
@@ -78,7 +80,9 @@ template <class T> class priority_deque {
         if (nxt < n && d[cur] < d[nxt]) {
           std::swap(d[cur], d[nxt]);
           cur = nxt;
-        } else break;
+          continue;
+        }
+        break;
       }
     }
     return cur;
@@ -94,9 +98,11 @@ template <class T> class priority_deque {
       while (true) {
         int nxt = cur / 4 * 2;
         if (cur >= 4 && d[cur] < d[nxt]) {
-        std::swap(d[cur], d[nxt]);
-        cur = nxt;
-        } else break;
+          std::swap(d[cur], d[nxt]);
+          cur = nxt;
+          continue;
+        }
+        break;
       }
     } else {
       while (true) {
@@ -104,12 +110,13 @@ template <class T> class priority_deque {
         if (cur >= 4 && d[cur] > d[nxt]) {
           std::swap(d[cur], d[nxt]);
           cur = nxt;
-        } else break;
+          continue;
+        }
+        break;
       }
-
     }
     return cur;
   }
 };
 
-} // namespace cp
+}  // namespace cp

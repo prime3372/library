@@ -73,12 +73,9 @@ template <class M> class dynamic_lazy_segtree {
 
   size_t size() const { return n; }
 
-  friend std::ostream& operator<<(std::ostream& os,
-                                  dynamic_lazy_segtree seg) {
+  friend std::ostream& operator<<(std::ostream& os, dynamic_lazy_segtree seg) {
     std::vector<S> v(std::min<size_t>(seg.n, 20));
-    for (size_t i = 0; i < v.size(); i++) {
-      v[i] = seg[i];
-    }
+    for (size_t i = 0; i < v.size(); i++) v[i] = seg[i];
     return os << v;
   }
 
@@ -90,7 +87,7 @@ template <class M> class dynamic_lazy_segtree {
     F lz = M::id();
     bool lzflag = false;
     node_ptr left, right;
-    node(S v) : val(v)  {}
+    node(S v) : val(v) {}
   };
   size_t n, sz;
   int log;
@@ -119,7 +116,7 @@ template <class M> class dynamic_lazy_segtree {
   S pow_initial(size_t len, int dep) {
     S res = M::e();
     for (int k = 0; k <= log - dep; k++) {
-      if (len & 1) res = M::op(res, initial_vals[log - k]);      
+      if (len & 1) res = M::op(res, initial_vals[log - k]);
       len >>= 1;
     }
     return res;
@@ -133,8 +130,11 @@ template <class M> class dynamic_lazy_segtree {
     }
     push(p, dep);
     size_t c = (a + b) / 2;
-    if (i < c) set(p->left, a, c, dep + 1, i, x);
-    else set(p->right, c, b, dep + 1, i, x);
+    if (i < c) {
+      set(p->left, a, c, dep + 1, i, x);
+    } else {
+      set(p->right, c, b, dep + 1, i, x);
+    }
     update(p, dep);
   }
 
@@ -143,8 +143,11 @@ template <class M> class dynamic_lazy_segtree {
     if (b - a == 1) return p->val;
     push(p, dep);
     size_t c = (a + b) / 2;
-    if (i < c) return get(p->left, a, c, dep + 1, i);
-    else return get(p->right, c, b, dep + 1, i);
+    if (i < c) {
+      return get(p->left, a, c, dep + 1, i);
+    } else {
+      return get(p->right, c, b, dep + 1, i);
+    }
   }
 
   S prod(node_ptr& p, size_t a, size_t b, int dep, size_t l, size_t r) {
@@ -165,15 +168,17 @@ template <class M> class dynamic_lazy_segtree {
     }
     push(p, dep);
     size_t c = (a + b) / 2;
-    if (i < c) apply(p->left, a, c, dep + 1, i, f);
-    else apply(p->right, c, b, dep + 1, i, f);
+    if (i < c) {
+      apply(p->left, a, c, dep + 1, i, f);
+    } else {
+      apply(p->right, c, b, dep + 1, i, f);
+    }
     update(p, dep);
   }
 
-  void apply(node_ptr& p, size_t a, size_t b, int dep, size_t l, size_t r, F f) {
-    if (b <= l || r <= a) {
-      return;
-    }
+  void apply(node_ptr& p, size_t a, size_t b, int dep, size_t l, size_t r,
+             F f) {
+    if (b <= l || r <= a) { return; }
     if (!p) p = std::make_unique<node>(initial_vals[dep]);
     if (l <= a && b <= r) {
       all_apply(p, f);
@@ -187,7 +192,8 @@ template <class M> class dynamic_lazy_segtree {
   }
 
   template <class F>
-  size_t max_right(node_ptr& p, size_t a, size_t b, int dep, S& product, size_t l, F f) {
+  size_t max_right(node_ptr& p, size_t a, size_t b, int dep, S& product,
+                   size_t l, F f) {
     if (b <= l) return b;
     if (n <= a) return n;
     if (l <= a && b <= n) {
@@ -216,7 +222,8 @@ template <class M> class dynamic_lazy_segtree {
   }
 
   template <class F>
-  size_t min_left(node_ptr& p, size_t a, size_t b, int dep, S& product, size_t r, F f) {
+  size_t min_left(node_ptr& p, size_t a, size_t b, int dep, S& product,
+                  size_t r, F f) {
     if (r <= a) return a;
     if (b <= r) {
       S val = p ? p->val : initial_vals[dep];
@@ -244,4 +251,4 @@ template <class M> class dynamic_lazy_segtree {
   }
 };
 
-} // namespace cp
+}  // namespace cp

@@ -14,7 +14,8 @@ class union_find {
   bool unite(int a, int b) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
-    a = find(a); b = find(b);
+    a = find(a);
+    b = find(b);
     if (a == b) return false;
     if (-parent_or_size[a] < -parent_or_size[b]) std::swap(a, b);
     parent_or_size[a] += parent_or_size[b];
@@ -48,17 +49,12 @@ class union_find {
     }
 
     std::vector<std::vector<int>> res(n);
-    for (int i = 0; i < n; i++) {
-      res[i].reserve(group_size[i]);
-    }
-    for (int i = 0; i < n; i++) {
-      res[root[i]].push_back(i);
-    }
-    res.erase(std::remove_if(res.begin(), res.end(),
-                             [&](const std::vector<int>& v) {
-                               return v.empty();
-                             }),
-              res.end());
+    for (int i = 0; i < n; i++) res[i].reserve(group_size[i]);
+    for (int i = 0; i < n; i++) res[root[i]].push_back(i);
+    res.erase(
+        std::remove_if(res.begin(), res.end(),
+                       [&](const std::vector<int>& v) { return v.empty(); }),
+        res.end());
     return res;
   }
 
@@ -71,4 +67,4 @@ class union_find {
   }
 };
 
-} // namespace cp
+}  // namespace cp

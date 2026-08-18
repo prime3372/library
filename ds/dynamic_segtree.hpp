@@ -65,9 +65,7 @@ template <class M> class dynamic_segtree {
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_segtree& seg) {
     std::vector<S> v(std::min<size_t>(seg.n, 20));
-    for (size_t i = 0; i < v.size(); i++) {
-      v[i] = seg[i];
-    }
+    for (size_t i = 0; i < v.size(); i++) v[i] = seg[i];
     return os << v;
   }
 
@@ -92,7 +90,7 @@ template <class M> class dynamic_segtree {
   S pow_initial(size_t len, int dep) const {
     S res = M::e();
     for (int k = 0; k <= log - dep; k++) {
-      if (len & 1) res = M::op(res, initial_vals[log - k]);      
+      if (len & 1) res = M::op(res, initial_vals[log - k]);
       len >>= 1;
     }
     return res;
@@ -105,8 +103,11 @@ template <class M> class dynamic_segtree {
       return;
     }
     size_t c = (a + b) / 2;
-    if (i < c) set(p->left, a, c, dep + 1, i, x);
-    else set(p->right, c, b, dep + 1, i, x);
+    if (i < c) {
+      set(p->left, a, c, dep + 1, i, x);
+    } else {
+      set(p->right, c, b, dep + 1, i, x);
+    }
     update(p, dep);
   }
 
@@ -114,11 +115,15 @@ template <class M> class dynamic_segtree {
     if (!p) return initial_vals.back();
     if (b - a == 1) return p->val;
     size_t c = (a + b) / 2;
-    if (i < c) return get(p->left, a, c, dep + 1, i);
-    else return get(p->right, c, b, dep + 1, i);
+    if (i < c) {
+      return get(p->left, a, c, dep + 1, i);
+    } else {
+      return get(p->right, c, b, dep + 1, i);
+    }
   }
 
-  S prod(const node_ptr& p, size_t a, size_t b, int dep, size_t l, size_t r) const {
+  S prod(const node_ptr& p, size_t a, size_t b, int dep, size_t l,
+         size_t r) const {
     if (b <= l || r <= a) return M::e();
     if (l <= a && b <= r) return p ? p->val : initial_vals[dep];
     if (!p) return pow_initial(std::min(b, r) - std::max(a, l), dep);
@@ -129,7 +134,8 @@ template <class M> class dynamic_segtree {
   }
 
   template <class F>
-  size_t max_right(const node_ptr& p, size_t a, size_t b, int dep, S& product, size_t l, F f) const {
+  size_t max_right(const node_ptr& p, size_t a, size_t b, int dep, S& product,
+                   size_t l, F f) const {
     if (b <= l) return b;
     if (n <= a) return n;
     if (l <= a && b <= n) {
@@ -157,7 +163,8 @@ template <class M> class dynamic_segtree {
   }
 
   template <class F>
-  size_t min_left(const node_ptr& p, size_t a, size_t b, int dep, S& product, size_t r, F f) const {
+  size_t min_left(const node_ptr& p, size_t a, size_t b, int dep, S& product,
+                  size_t r, F f) const {
     if (r <= a) return a;
     if (b <= r) {
       S val = p ? p->val : initial_vals[dep];
@@ -184,4 +191,4 @@ template <class M> class dynamic_segtree {
   }
 };
 
-} // namespace cp
+}  // namespace cp

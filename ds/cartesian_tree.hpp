@@ -8,8 +8,9 @@ namespace cp {
 template <bool root_is_max> class cartesian_tree {
  public:
   cartesian_tree() {}
-  template <class T>
-  explicit cartesian_tree(const std::vector<T>& a) { build(a); }
+  template <class T> explicit cartesian_tree(const std::vector<T>& a) {
+    build(a);
+  }
 
   int root = -1;
   std::vector<int> left, right, parent;
@@ -35,9 +36,7 @@ template <bool root_is_max> class cartesian_tree {
       st.push_back(i);
     }
 
-    for(int i = 0; i < int(st.size()) - 1; i++) {
-      right[st[i]] = st[i + 1];
-    }
+    for (int i = 0; i < int(st.size()) - 1; i++) right[st[i]] = st[i + 1];
     root = st[0];
 
     parent.resize(n);
@@ -49,4 +48,4 @@ template <bool root_is_max> class cartesian_tree {
   }
 };
 
-} // namespace cp
+}  // namespace cp

@@ -22,9 +22,7 @@ template <class T> class cumsum_2d {
       }
     }
     for (int j = 0; j < w; j++) {
-      for (int i = 0; i < h; i++) {
-        cum[i + 1][j + 1] += cum[i][j + 1];
-      }
+      for (int i = 0; i < h; i++) cum[i + 1][j + 1] += cum[i][j + 1];
     }
     accumulated = true;
   }
@@ -88,4 +86,4 @@ template <class T> class cumsum_2d {
   std::vector<std::vector<T>> cum;
 };
 
-} // namespace cp
+}  // namespace cp

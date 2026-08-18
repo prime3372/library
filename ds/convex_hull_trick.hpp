@@ -11,8 +11,10 @@ template <class T, bool is_max = false> class convex_hull_trick {
 
   void add(T a, T b) {
     if (!ls.emtpy()) {
-      if (is_max) assert(ls.back().a <= a);
-      else assert(a <= ls.back().a);
+      if (is_max)
+        assert(ls.back().a <= a);
+      else
+        assert(a <= ls.back().a);
     }
     line l(a, b);
     while (ls.size() >= 2) {
@@ -30,7 +32,7 @@ template <class T, bool is_max = false> class convex_hull_trick {
     while (int(ls.size()) >= 2) {
       T nxt = ls[1](x);
       if (is_max && nxt < cur) break;
-      if (!is_max && nxt > cur) break; 
+      if (!is_max && nxt > cur) break;
       cur = nxt;
       ls.pop_front();
     }
@@ -46,4 +48,4 @@ template <class T, bool is_max = false> class convex_hull_trick {
   std::deque<line> ls;
 };
 
-} // namespace cp
+}  // namespace cp

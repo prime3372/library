@@ -23,19 +23,17 @@ template <class M> struct lazy_segtreap_node {
   unsigned long long priority;
 
   lazy_segtreap_node() {}
-  explicit lazy_segtreap_node(const S& x)
-      : val(x), prod(x), priority(mt64()) {}  
+  explicit lazy_segtreap_node(const S& x) : val(x), prod(x), priority(mt64()) {}
   ~lazy_segtreap_node() {
     delete left;
     delete right;
   }
 };
 
-} // namespace internal
+}  // namespace internal
 
 template <class M, auto rev = std::identity()>
-class lazy_segtreap 
-  : public treap_base<internal::lazy_segtreap_node<M>> {
+class lazy_segtreap : public treap_base<internal::lazy_segtreap_node<M>> {
  public:
   using S = typename M::S;
   using F = typename M::F;
@@ -69,9 +67,9 @@ class lazy_segtreap
  protected:
   using base::build;
   using base::merge;
-  using base::split;
-  using base::size;
   using base::root;
+  using base::size;
+  using base::split;
 
   void toggle(node* p) override {
     std::swap(p->left, p->right);
@@ -110,4 +108,4 @@ class lazy_segtreap
   }
 };
 
-} // namespace cp
+}  // namespace cp

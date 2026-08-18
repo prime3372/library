@@ -96,4 +96,4 @@ template <class T> class fenwick_tree {
   std::vector<T> d;
 };
 
-} // namespace cp
+}  // namespace cp

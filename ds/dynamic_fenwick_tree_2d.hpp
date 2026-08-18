@@ -12,12 +12,10 @@
 namespace cp {
 
 template <class T> class dynamic_fenwick_tree_2d {
- public: 
+ public:
   dynamic_fenwick_tree_2d() : h(0), w(0) {}
   dynamic_fenwick_tree_2d(int _h, size_t _w) : h(_h), w(_w), d(_h) {
-    for (int i = 0; i < h; i++) {
-      d[i] = dynamic_fenwick_tree<T>(w);
-    }
+    for (int i = 0; i < h; i++) d[i] = dynamic_fenwick_tree<T>(w);
   }
 
   void add(int i, size_t j, T x) {
@@ -37,6 +35,7 @@ template <class T> class dynamic_fenwick_tree_2d {
       return ptr->sum(i, j, i + 1, j + 1);
     }
     ref(const dynamic_fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), i(_i) {}
+
    private:
     const dynamic_fenwick_tree_2d* ptr;
     int i;
@@ -100,4 +99,4 @@ template <class T> class dynamic_fenwick_tree_2d {
   std::vector<dynamic_fenwick_tree<T>> d;
 };
 
-} // namespace cp
+}  // namespace cp

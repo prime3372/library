@@ -20,13 +20,12 @@ template <class T> struct treap_node {
   unsigned long long priority;
 
   treap_node() {};
-  explicit treap_node(const T& x) : val(x), priority(mt64()) {}    
+  explicit treap_node(const T& x) : val(x), priority(mt64()) {}
 };
 
-} // namespace internal
+}  // namespace internal
 
-template <class T>
-class treap : public treap_base<internal::treap_node<T>> {
+template <class T> class treap : public treap_base<internal::treap_node<T>> {
   using node = internal::treap_node<T>;
   using node_ptr = std::shared_ptr<node>;
   using base = treap_base<node>;
@@ -60,4 +59,4 @@ class treap : public treap_base<internal::treap_node<T>> {
   }
 };
 
-} // namespace cp
+}  // namespace cp

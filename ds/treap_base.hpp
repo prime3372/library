@@ -31,12 +31,8 @@ template <class node> class treap_base {
     }
     cartesian_tree<true> cart(pr);
     for (int i = 0; i < n; i++) {
-      if (cart.left[i] != -1) {
-        ps[i]->left = ps[cart.left[i]];
-      }
-      if (cart.right[i] != -1) {
-        ps[i]->right = ps[cart.right[i]];
-      }
+      if (cart.left[i] != -1) ps[i]->left = ps[cart.left[i]];
+      if (cart.right[i] != -1) ps[i]->right = ps[cart.right[i]];
     }
     auto dfs = [&](auto self, node* p) -> void {
       if (p->left) self(self, p->left);
@@ -90,9 +86,7 @@ template <class node> class treap_base {
 
   friend std::ostream& operator<<(std::ostream& os, treap_base tp) {
     std::vector<T> v(tp.size());
-    for (int i = 0; i < tp.size(); i++) {
-      v[i] = tp[i];
-    }
+    for (int i = 0; i < tp.size(); i++) v[i] = tp[i];
     return os << v;
   }
 
@@ -139,4 +133,4 @@ template <class node> class treap_base {
   virtual void push(node* p) = 0;
 };
 
-} // namespace cp
+}  // namespace cp

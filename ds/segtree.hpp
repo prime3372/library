@@ -114,9 +114,7 @@ template <class M> class segtree {
   int n, sz, log;
   std::vector<S> d;
 
-  void update(int k) {
-    d[k] = M::op(d[2 * k], d[2 * k + 1]);
-  }
+  void update(int k) { d[k] = M::op(d[2 * k], d[2 * k + 1]); }
 };
 
-} // namespace cp
+}  // namespace cp

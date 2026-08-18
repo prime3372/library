@@ -98,4 +98,4 @@ template <class T> class dynamic_fenwick_tree {
   hash_map<size_t, T> d;
 };
 
-} // namespace cp
+}  // namespace cp

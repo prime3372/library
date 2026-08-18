@@ -17,13 +17,11 @@ class dynamic_bitset {
   dynamic_bitset() : n(0) {}
   explicit dynamic_bitset(int _n) : n(_n), a((_n + w - 1) / w, 0) {}
   explicit dynamic_bitset(int _n, bool b)
-      : n(_n),
-        a((_n + w - 1) / w, b ? -1 : 0) {
+      : n(_n), a((_n + w - 1) / w, b ? -1 : 0) {
     if (b && n % w) a.back() &= mask(n % w) - 1;
   }
   explicit dynamic_bitset(const std::string& s)
-      : n(int(s.size())),
-        a((int(s.size()) + w - 1) / w) {
+      : n(int(s.size())), a((int(s.size()) + w - 1) / w) {
     for (int i = 0; i < n; i++) {
       assert(s[n - 1 - i] == '0' || s[n - 1 - i] == '1');
       a[i / w] |= (unsigned long long)(s[n - 1 - i] - '0') << (i % w);
@@ -38,8 +36,10 @@ class dynamic_bitset {
       return *this;
     }
     ref& operator=(bool x) {
-      if (x) *d |= mask(pos);
-      else *d &= ~mask(pos);
+      if (x)
+        *d |= mask(pos);
+      else
+        *d &= ~mask(pos);
       return *this;
     }
     ref& operator=(const ref& other) { return *this = bool(other); }
@@ -47,6 +47,7 @@ class dynamic_bitset {
       d = b.a.data() + i / w;
       pos = i % w;
     }
+
    private:
     unsigned long long* d;
     int pos;
@@ -63,21 +64,15 @@ class dynamic_bitset {
 
   bs& flip() {
     if (n == 0) return *this;
-    for (int i = 0; i < int(a.size()); i++) {
-      a[i] = ~a[i];
-    }
+    for (int i = 0; i < int(a.size()); i++) { a[i] = ~a[i]; }
     if (n % w) a.back() &= mask(n % w) - 1;
     return *this;
   }
-  bs operator~() const {
-    return bs(*this).flip();
-  }
+  bs operator~() const { return bs(*this).flip(); }
 
   int count() const {
     int res = 0;
-    for (int i = 0; i < int(a.size()); i++) {
-      res += std::popcount(a[i]);
-    }
+    for (int i = 0; i < int(a.size()); i++) { res += std::popcount(a[i]); }
     return res;
   }
 
@@ -138,7 +133,7 @@ class dynamic_bitset {
     int block_shift = shift / w;
     if (block_shift > 0) {
       for (int i = int(a.size()) - 1; i >= block_shift; i--) {
-        a[i] = a[i - block_shift]; 
+        a[i] = a[i - block_shift];
       }
       std::fill(a.begin(), a.begin() + block_shift, 0);
     }
@@ -184,28 +179,16 @@ class dynamic_bitset {
     return *this;
   }
 
-  friend bs operator^(const bs& lhs, const bs& rhs) {
-    return bs(lhs) ^= rhs;
-  }
-  friend bs operator|(const bs& lhs, const bs& rhs) {
-    return bs(lhs) |= rhs;
-  }
-  friend bs operator&(const bs& lhs, const bs& rhs) {
-    return bs(lhs) &= rhs;
-  }
-  friend bs operator<<(const bs& lhs, int shift) {
-    return bs(lhs) <<= shift;
-  }
-  friend bs operator>>(const bs& lhs, int shift) {
-    return bs(lhs) >>= shift;
-  }
+  friend bs operator^(const bs& lhs, const bs& rhs) { return bs(lhs) ^= rhs; }
+  friend bs operator|(const bs& lhs, const bs& rhs) { return bs(lhs) |= rhs; }
+  friend bs operator&(const bs& lhs, const bs& rhs) { return bs(lhs) &= rhs; }
+  friend bs operator<<(const bs& lhs, int shift) { return bs(lhs) <<= shift; }
+  friend bs operator>>(const bs& lhs, int shift) { return bs(lhs) >>= shift; }
 
   friend bool operator==(const bs& lhs, const bs& rhs) {
     return lhs.a == rhs.a;
   }
-  friend bool operator!=(const bs& lhs, const bs& rhs) {
-    return !(lhs == rhs);
-  }
+  friend bool operator!=(const bs& lhs, const bs& rhs) { return !(lhs == rhs); }
 
   friend std::istream& operator>>(std::istream& is, bs& x) {
     std::string t;
@@ -226,4 +209,4 @@ class dynamic_bitset {
   static unsigned long long mask(int pos) { return 1ULL << pos; }
 };
 
-} // namespace cp
+}  // namespace cp
