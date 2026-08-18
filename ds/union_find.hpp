@@ -50,8 +50,12 @@ class union_find {
       group_size[root[i]]++;
     }
     std::vector<std::vector<int>> result(n);
-    for (int i = 0; i < n; i++) result[i].reserve(group_size[i]);
-    for (int i = 0; i < n; i++) result[root[i]].push_back(i);
+    for (int i = 0; i < n; i++) {
+      result[i].reserve(group_size[i]);
+    }
+    for (int i = 0; i < n; i++) {
+      result[root[i]].push_back(i);
+    }
     result.erase(
         std::remove_if(result.begin(), result.end(),
                        [&](const std::vector<int>& v) { return v.empty(); }),

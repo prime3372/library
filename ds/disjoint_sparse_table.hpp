@@ -37,7 +37,9 @@ template <class M> class disjoint_sparse_table {
 
     logs.resize(1 << log);
     for (int k = 0; k < log; k++) {
-      for (int i = 1 << k; i < (1 << (k + 1)); i++) logs[i] = k;
+      for (int i = 1 << k; i < (1 << (k + 1)); i++) {
+        logs[i] = k;
+      }
     }
 
     return *this;

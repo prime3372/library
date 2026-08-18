@@ -19,5 +19,5 @@ int main() {
     rerooting.add_edge(s, t, w);
   }
   rerooting.build();
-  for (int i = 0; i < n; i++) cout << rerooting.ans[i] << "\n";
+  for (int x : rerooting.ans) cout << x << "\n";
 }

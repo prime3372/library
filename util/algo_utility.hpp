@@ -28,7 +28,9 @@ std::vector<int> sort(Container& a, Comp comp) {
   std::iota(p.begin(), p.end(), 0);
   std::sort(p.begin(), p.end(), [&](int i, int j) { return comp(a[i], a[j]); });
   auto tmp = a;
-  for (int i = 0; i < int(a.size()); i++) a[i] = std::move(tmp[p[i]]);
+  for (int i = 0; i < int(a.size()); i++) {
+    a[i] = std::move(tmp[p[i]]);
+  }
   return p;
 }
 

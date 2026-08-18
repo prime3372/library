@@ -152,7 +152,7 @@ std::vector<std::pair<int, int>> random_directed_graph(int n, int m,
     }
     std::shuffle(candidates.begin(), candidates.end(), mt32);
     int needed = m - int(edges.size());
-    for (int i = 0; i < needed; ++i) edges.emplace_back(candidates[i]);
+    for (int i = 0; i < needed; i++) edges.emplace_back(candidates[i]);
   } else {
     while (int(edges.size()) < m) {
       int u, v;

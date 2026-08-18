@@ -36,7 +36,9 @@ template <bool root_is_max> class cartesian_tree {
       st.push_back(i);
     }
 
-    for (int i = 0; i < int(st.size()) - 1; i++) right[st[i]] = st[i + 1];
+    for (int i = 0; i < int(st.size()) - 1; i++) {
+      right[st[i]] = st[i + 1];
+    }
     root = st[0];
 
     parent.resize(n);

@@ -28,14 +28,18 @@ template <class T> class matrix {
   matrix& operator+=(const matrix& rhs) {
     assert(h == rhs.h && w == rhs.w);
     for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) (*this)[i][j] += rhs[i][j];
+      for (int j = 0; j < w; j++) {
+        (*this)[i][j] += rhs[i][j];
+      }
     }
     return *this;
   }
 
   matrix& operator*=(const T& rhs) {
     for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) (*this)[i][j] *= rhs;
+      for (int j = 0; j < w; j++) {
+        (*this)[i][j] *= rhs;
+      }
     }
     return *this;
   }
@@ -86,7 +90,9 @@ template <class T> class matrix {
 
   friend std::istream& operator>>(std::istream& is, matrix& mat) {
     for (int i = 0; i < mat.h; i++) {
-      for (int j = 0; j < mat.w; j++) is >> mat[i][j];
+      for (int j = 0; j < mat.w; j++) {
+        is >> mat[i][j];
+      }
     }
     return is;
   }

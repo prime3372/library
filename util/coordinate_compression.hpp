@@ -32,7 +32,9 @@ template <class T> class coordinate_compression {
   std::vector<int> operator()(const std::vector<T>& xs) {
     if (!initialized) init();
     std::vector<int> res(xs.size());
-    for (int i = 0; i < int(xs.size()); i++) res[i] = (*this)(xs[i]);
+    for (int i = 0; i < int(xs.size()); i++) {
+      res[i] = (*this)(xs[i]);
+    }
     return res;
   }
 

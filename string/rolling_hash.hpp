@@ -30,7 +30,9 @@ class rolling_hash {
 
   template <class Str> static hash61 to_hash(const Str& s) {
     hash61 h = 0;
-    for (int i = 0; i < int(s.size()); i++) h = h * basis + hash_char(s[i]);
+    for (int i = 0; i < int(s.size()); i++) {
+      h = h * basis + hash_char(s[i]);
+    }
     return h;
   }
 

@@ -12,7 +12,9 @@ std::vector<int> totient(int n) {
   std::iota(ans.begin(), ans.end(), 0);
   for (int i = 2; i <= n; i++) {
     if (ans[i] != i) continue;
-    for (long long j = i; j <= n; j += i) ans[j] = ans[j] / i * (i - 1);
+    for (long long j = i; j <= n; j += i) {
+      ans[j] = ans[j] / i * (i - 1);
+    }
   }
   return ans;
 }
