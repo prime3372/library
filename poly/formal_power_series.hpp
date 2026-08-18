@@ -202,6 +202,10 @@ class formal_power_series {
     return r;
   }
 
+  friend std::istream& operator>>(std::istream& is, fps& rhs) {
+    for (mint& x : rhs.a) is >> x;
+    return is;
+  }
   friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
     for (int i = 0; i < rhs.size(); i++) {
       os << rhs.a[i];

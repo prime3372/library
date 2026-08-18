@@ -100,6 +100,10 @@ class formal_power_series_ll {
   void swap(fps& other) { a.swap(other.a); }
   void clear() { a.clear(); }
 
+  friend std::istream& operator>>(std::istream& is, fps& rhs) {
+    for (long long& x : rhs.a) is >> x;
+    return is;
+  }
   friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
     for (int i = 0; i < rhs.size(); i++) {
       os << rhs.a[i];
