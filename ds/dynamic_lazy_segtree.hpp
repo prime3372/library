@@ -13,10 +13,10 @@
 namespace cp {
 
 template <class M> class dynamic_lazy_segtree {
- public:
   using S = typename M::S;
   using F = typename M::F;
 
+ public:
   dynamic_lazy_segtree() : dynamic_lazy_segtree(0) {}
   explicit dynamic_lazy_segtree(size_t _n) : dynamic_lazy_segtree(_n, M::e()) {}
   explicit dynamic_lazy_segtree(size_t _n, S val) : n(_n) {
