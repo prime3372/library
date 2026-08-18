@@ -36,10 +36,11 @@ class dynamic_bitset {
       return *this;
     }
     ref& operator=(bool x) {
-      if (x)
+      if (x) {
         *d |= mask(pos);
-      else
+      } else {
         *d &= ~mask(pos);
+      }
       return *this;
     }
     ref& operator=(const ref& other) { return *this = bool(other); }
