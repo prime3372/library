@@ -8,9 +8,9 @@
 
 namespace cp {
 
-template <class T> class hash_set {
+template <class T> class hash_multiset {
  public:
-  hash_set() {}
+  hash_multiset() {}
 
   void insert(const T& k) {
     d[k]++;
