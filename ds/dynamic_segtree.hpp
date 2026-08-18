@@ -64,7 +64,7 @@ template <class M> class dynamic_segtree {
 
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_segtree& seg) {
-    std::vector<S> v(std::min<size_t>(seg.n, 20));
+    std::vector<S> v(seg.n);
     for (size_t i = 0; i < v.size(); i++) v[i] = seg[i];
     return os << v;
   }

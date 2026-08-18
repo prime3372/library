@@ -85,7 +85,7 @@ template <class T> class dynamic_fenwick_tree {
 
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_fenwick_tree& fw) {
-    for (size_t i = 0; i < std::min<size_t>(fw.n, 20); i++) {
+    for (size_t i = 0; i < fw.n; i++) {
       os << fw[i];
       if (i != fw.n - 1) os << " ";
     }
