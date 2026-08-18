@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include <array>
 
 #include "number/barrett.hpp"
 #include "number/pow_mod.hpp"
@@ -15,14 +15,18 @@ constexpr bool is_prime(long long n) {
   long long d = n - 1;
   while (d % 2 == 0) d /= 2;
 
-  std::vector<long long> bases;
+  int base_num;
+  std::array<long long, 7> bases;
   if (n < 4759123141) {
+    base_num = 3;
     bases = {2, 7, 61};
   } else {
+    base_num = 7;
     bases = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
   }
 
-  for (long long a : bases) {
+  for (int i = 0; i < base_num; i++) {
+    long long a = bases[i];
     if (a % n == 0) continue;
     long long t = d;
     __int128 y = pow_mod(a, d, n);
