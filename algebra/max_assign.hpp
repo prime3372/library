@@ -14,7 +14,7 @@ template <class T, T lower> struct max_assign {
   struct F {
     T val;
     bool id = false;
-  }
+  };
   static S mapping(F f, S x) { return f.id ? x : f; }
   static F composition(F g, F f) { return g.id ? f : g; }
   static F id() { return F{lower, true}; }
