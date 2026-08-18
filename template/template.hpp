@@ -2,6 +2,8 @@
 
 #include <bits/stdc++.h>
 
+#include "ds/hash_map.hpp"
+#include "ds/hash_set.hpp"
 #include "random/base.hpp"
 #include "util/algo_utility.hpp"
 #include "util/io_utility.hpp"
