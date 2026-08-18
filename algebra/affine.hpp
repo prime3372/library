@@ -21,6 +21,6 @@ template <class T> struct affine {
   static S e() { return S(); }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

@@ -17,6 +17,6 @@ template <class T, T lower> struct max_max {
   static F id() { return lower; }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

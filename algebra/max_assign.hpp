@@ -20,6 +20,6 @@ template <class T, T lower> struct max_assign {
   static F id() { return F{lower, true}; }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

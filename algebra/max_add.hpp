@@ -17,6 +17,6 @@ template <class T, T lower> struct max_add {
   static F id() { return 0; }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

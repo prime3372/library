@@ -20,6 +20,6 @@ template <class T, T upper> struct min_assign {
   static F id() { return F{upper, true}; }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

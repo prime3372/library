@@ -28,12 +28,10 @@ template <class T> struct arithmetic_add {
   static S mapping(F f, S x) {
     return S{x.val_sum + f.a * x.index_sum + f.b * x.len, x.index_sum, x.len};
   }
-  static F composition(F g, F f) {
-    return F{f.a + g.a, f.b + g.b};
-  }
+  static F composition(F g, F f) { return F{f.a + g.a, f.b + g.b}; }
   static F id() { return F{0, 0}; }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

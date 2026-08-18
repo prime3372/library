@@ -15,6 +15,6 @@ template <class T> struct bitwise_or_and {
   static F id() { return -1; }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

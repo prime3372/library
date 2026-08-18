@@ -17,6 +17,6 @@ template <class T, T upper> struct min_min {
   static F id() { return upper; }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

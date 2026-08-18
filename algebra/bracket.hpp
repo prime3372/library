@@ -10,9 +10,7 @@ namespace alg {
 struct bracket {
   struct S {
     int prefix_min, sum;
-    bool is_correct() const {
-      return prefix_min >= 0 && sum == 0;
-    }
+    bool is_correct() const { return prefix_min >= 0 && sum == 0; }
   };
 
   static S op(S x, S y) {
@@ -21,6 +19,6 @@ struct bracket {
   static S e() { return S{0, 0}; }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

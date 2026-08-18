@@ -12,6 +12,6 @@ template <class T, T upper> struct min {
   static S e() { return upper; }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

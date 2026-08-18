@@ -10,6 +10,6 @@ template <class T> struct bitwise_or {
   static S e() { return 0; }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

@@ -12,6 +12,6 @@ template <class T, T lower> struct max {
   static S e() { return lower; }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

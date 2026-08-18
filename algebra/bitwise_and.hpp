@@ -10,6 +10,6 @@ template <class T> struct bitwise_and {
   static S e() { return -1; }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp

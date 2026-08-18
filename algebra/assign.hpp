@@ -41,6 +41,6 @@ template <class M> struct assign {
   }
 };
 
-} // namespace alg
+}  // namespace alg
 
-} // namespace cp
+}  // namespace cp
