@@ -73,7 +73,7 @@ class dynamic_bitset {
 
   int count() const {
     int res = 0;
-    for (int i = 0; i < int(a.size()); i++) { res += std::popcount(a[i]); }
+    for (int i = 0; i < int(a.size()); i++) res += std::popcount(a[i]);
     return res;
   }
 
