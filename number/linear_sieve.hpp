@@ -48,4 +48,4 @@ class linear_sieve {
   std::vector<int> f, ps;
 };
 
-} // namespace cp
+}  // namespace cp

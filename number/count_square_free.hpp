@@ -32,8 +32,11 @@ long long count_square_free(long long n) {
     }
 
     for (int j = 2; j <= r; j++) {
-      if (xi / j <= D) Mxi -= M[xi / j];
-      else Mxi -= Mx[j * j * i];
+      if (xi / j <= D) {
+        Mxi -= M[xi / j];
+      } else {
+        Mxi -= Mx[j * j * i];
+      }
     }
 
     Mxi_sum += Mxi;
@@ -44,4 +47,4 @@ long long count_square_free(long long n) {
   return ans;
 }
 
-} // namespace cp
+}  // namespace cp

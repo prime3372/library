@@ -24,4 +24,4 @@ long long primitive_root(long long p) {
   assert(false);
 }
 
-} // namespace cp
+}  // namespace cp

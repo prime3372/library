@@ -11,11 +11,8 @@
 
 namespace cp {
 
-template <class>
-class formal_power_series {};
-
 template <class mint> requires internal::is_static_modint_v<mint>
-class formal_power_series<mint> {
+class formal_power_series {
  private:
   using fps = formal_power_series;
 
@@ -34,17 +31,13 @@ class formal_power_series<mint> {
     return a[i];
   }
 
-  fps& operator+=(const mint& rhs) {
-    return *this += fps(1, rhs);
-  }
+  fps& operator+=(const mint& rhs) { return *this += fps(1, rhs); }
   fps& operator+=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
     for (int i = 0; i < rhs.size(); i++) a[i] += rhs[i];
     return *this;
   }
-  fps& operator-=(const mint& rhs) {
-    return *this -= fps(1, rhs);
-  }
+  fps& operator-=(const mint& rhs) { return *this -= fps(1, rhs); }
   fps& operator-=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
     for (int i = 0; i < rhs.size(); i++) a[i] -= rhs[i];
@@ -142,12 +135,8 @@ class formal_power_series<mint> {
     fps res(size() + 1);
     res[1] = 1;
     int mod = mint::mod();
-    for (int i = 2; i <= size(); i++) {
-      res[i] = -res[mod % i] * (mod / i);
-    }
-    for (int i = 0; i < size(); i++) {
-      res[i + 1] *= a[i];
-    }
+    for (int i = 2; i <= size(); i++) { res[i] = -res[mod % i] * (mod / i); }
+    for (int i = 0; i < size(); i++) { res[i + 1] *= a[i]; }
     return res;
   }
 
@@ -225,4 +214,4 @@ class formal_power_series<mint> {
   std::vector<mint> a;
 };
 
-} // namespace cp
+}  // namespace cp

@@ -33,4 +33,4 @@ constexpr long long inv_mod(long long x, long long m) {
   return z.second;
 }
 
-} // namespace cp
+}  // namespace cp

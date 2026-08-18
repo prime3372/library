@@ -22,7 +22,7 @@ long long sqrt_mod(long long n, long long p) {
   // and let w = sqrt(a*a - n).
   long long a = 0;
   while (pow_mod(a * a - n, (p - 1) / 2, p) == 1) a++;
-  long long w2 = (a * a - n) % p; 
+  long long w2 = (a * a - n) % p;
   if (w2 < 0) w2 += p;
 
   // Let F_p^2 = F_p(w).
@@ -58,4 +58,4 @@ long long sqrt_mod(long long n, long long p) {
   return (long long)(z.re);
 }
 
-} // namespace cp
+}  // namespace cp

@@ -12,11 +12,9 @@ std::vector<int> enumerate_primes(int n) {
   for (int i = 2; i <= n; i++) {
     if (!prime[i]) continue;
     ps.push_back(i);
-    for (long long j = 1LL * i * i; j <= n; j += i) {
-      prime[j] = false;
-    }
+    for (long long j = 1LL * i * i; j <= n; j += i) prime[j] = false;
   }
   return ps;
 }
 
-} // namespace cp
+}  // namespace cp

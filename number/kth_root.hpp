@@ -25,4 +25,4 @@ unsigned long long kth_root(unsigned long long x, unsigned long long k) {
   return y;
 }
 
-} // namespace cp
+}  // namespace cp

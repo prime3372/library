@@ -31,12 +31,12 @@ unsigned long long floor_sum_unsigned(unsigned long long n,
   return ans;
 }
 
-} // namespace internal
+}  // namespace internal
 
 // @param 0 <= n,m < 2^32
 long long floor_sum(long long n, long long m, long long a, long long b) {
   assert(0 <= n && n < (1LL << 32));
-  assert(1 <= m && m < (1LL << 32)); 
+  assert(1 <= m && m < (1LL << 32));
   unsigned long long ans = 0;
   if (a < 0) {
     unsigned long long a2 = a % m + m;
@@ -51,4 +51,4 @@ long long floor_sum(long long n, long long m, long long a, long long b) {
   return ans + internal::floor_sum_unsigned(n, m, a, b);
 }
 
-} // namespace cp
+}  // namespace cp

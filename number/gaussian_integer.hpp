@@ -44,7 +44,7 @@ class gaussian_integer {
     y = quot(y + n / 2, n);
     return *this;
   }
-  gint& operator%=(const gint &rhs) {
+  gint& operator%=(const gint& rhs) {
     *this -= (*this / rhs) * rhs;
     return *this;
   }
@@ -92,4 +92,4 @@ class gaussian_integer {
   }
 };
 
-} // namespace cp
+}  // namespace cp

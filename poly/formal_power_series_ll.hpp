@@ -12,42 +12,37 @@ namespace cp {
 
 class formal_power_series_ll {
   using fps = formal_power_series_ll;
-  using ll = long long;
 
  public:
   formal_power_series_ll() {}
   explicit formal_power_series_ll(int n) : a(n) {}
-  explicit formal_power_series_ll(int n, ll val) : a(n, val) {}
-  explicit formal_power_series_ll(const std::vector<ll>& _a) : a(_a) {}
+  explicit formal_power_series_ll(int n, long long val) : a(n, val) {}
+  explicit formal_power_series_ll(const std::vector<long long>& _a) : a(_a) {}
 
-  ll& operator[](int i) {
+  long long& operator[](int i) {
     assert(0 <= i && i < size());
     return a[i];
   }
-  const ll& operator[](int i) const {
+  const long long& operator[](int i) const {
     assert(0 <= i && i < size());
     return a[i];
   }
 
-  fps& operator+=(ll rhs) {
-    return *this += fps(1, rhs);
-  }
+  fps& operator+=(long long rhs) { return *this += fps(1, rhs); }
   fps& operator+=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
     for (int i = 0; i < rhs.size(); i++) a[i] += rhs[i];
     return *this;
   }
 
-  fps& operator-=(ll rhs) {
-    return *this -= fps(1, rhs);
-  }
+  fps& operator-=(long long rhs) { return *this -= fps(1, rhs); }
   fps& operator-=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
     for (int i = 0; i < rhs.size(); i++) a[i] -= rhs[i];
     return *this;
   }
 
-  fps& operator*=(ll rhs) {
+  fps& operator*=(long long rhs) {
     for (int i = 0; i < size(); i++) a[i] *= rhs;
     return *this;
   }
@@ -56,7 +51,7 @@ class formal_power_series_ll {
     return *this;
   }
 
-  fps& operator/=(ll rhs) {
+  fps& operator/=(long long rhs) {
     for (int i = 0; i < size(); i++) a[i] /= rhs;
     return *this;
   }
@@ -64,37 +59,37 @@ class formal_power_series_ll {
   fps operator+() const { return *this; }
   fps operator-() const { return fps() - *this; }
 
-  friend fps operator+(const fps& lhs, ll rhs) {
+  friend fps operator+(const fps& lhs, long long rhs) {
     return fps(lhs) += rhs;
   }
-  friend fps operator+(ll lhs, const fps& rhs) {
+  friend fps operator+(long long lhs, const fps& rhs) {
     return fps(rhs) += lhs;
   }
   friend fps operator+(const fps& lhs, const fps& rhs) {
     return fps(lhs) += rhs;
   }
-  friend fps operator-(const fps& lhs, ll rhs) {
+  friend fps operator-(const fps& lhs, long long rhs) {
     return fps(lhs) -= rhs;
   }
-  friend fps operator-(ll lhs, const fps& rhs) {
+  friend fps operator-(long long lhs, const fps& rhs) {
     return fps(1, lhs) -= rhs;
   }
   friend fps operator-(const fps& lhs, const fps& rhs) {
     return fps(lhs) -= rhs;
   }
-  friend fps operator*(const fps& lhs, ll rhs) {
+  friend fps operator*(const fps& lhs, long long rhs) {
     return fps(lhs) *= rhs;
   }
-  friend fps operator*(ll lhs, const fps& rhs) {
+  friend fps operator*(long long lhs, const fps& rhs) {
     return fps(rhs) *= lhs;
   }
   friend fps operator*(const fps& lhs, const fps& rhs) {
     return fps(lhs) *= rhs;
   }
-  friend fps operator/(const fps& lhs, ll rhs) {
+  friend fps operator/(const fps& lhs, long long rhs) {
     return fps(lhs) /= rhs;
   }
-  friend fps operator/(ll lhs, const fps& rhs) {
+  friend fps operator/(long long lhs, const fps& rhs) {
     return fps(rhs) /= lhs;
   }
 
@@ -114,7 +109,7 @@ class formal_power_series_ll {
   }
 
  private:
-  std::vector<ll> a;
+  std::vector<long long> a;
 };
 
-} // namespace cp
+}  // namespace cp

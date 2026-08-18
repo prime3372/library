@@ -71,4 +71,4 @@ class binom_mod {
   std::vector<mint> f, fi;
 };
 
-} // namespace cp
+}  // namespace cp

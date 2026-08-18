@@ -22,7 +22,7 @@ long long pollard_rho(long long n) {
   if (is_prime(n)) return n;
 
   long long r;
-  auto f = [&](__int128 x) { return (long long)((x * x + r) % n); };  
+  auto f = [&](__int128 x) { return (long long)((x * x + r) % n); };
 
   int m = int(kth_root(n, 8));
   while (true) {
@@ -71,4 +71,4 @@ std::vector<std::pair<long long, int>> factorize(long long n) {
   return run_length_encoding(factors);
 }
 
-} // namespace cp
+}  // namespace cp

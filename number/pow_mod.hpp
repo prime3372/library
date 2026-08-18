@@ -32,4 +32,4 @@ constexpr long long pow_mod(long long x, long long n, long long m) {
   }
 }
 
-} // namespace cp
+}  // namespace cp

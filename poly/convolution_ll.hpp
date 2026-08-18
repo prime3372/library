@@ -13,8 +13,8 @@ std::vector<long long> convolution_ll(std::vector<T> a, std::vector<T> b) {
   int n = int(a.size()), m = int(b.size());
   if (n == 0 || m == 0) return {};
 
-  static constexpr int MOD1 = 2130706433; // 127 * 2^24 + 1
-  static constexpr int MOD2 = 2113929217; //  63 * 2^25 + 1
+  static constexpr int MOD1 = 2130706433;  // 127 * 2^24 + 1
+  static constexpr int MOD2 = 2113929217;  //  63 * 2^25 + 1
   static constexpr long long MOD12 = 1LL * MOD1 * MOD2;
   assert(n + m - 1 <= (1 << 24));
 
@@ -33,4 +33,4 @@ std::vector<long long> convolution_ll(std::vector<T> a, std::vector<T> b) {
   return c1;
 }
 
-} // namespace cp
+}  // namespace cp

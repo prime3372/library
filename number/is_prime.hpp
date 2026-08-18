@@ -11,7 +11,7 @@ namespace cp {
 // Fast Primality Testing for Integers That Fit into a Machine Word
 constexpr bool is_prime(long long n) {
   if (n <= 2) return n == 2;
-  if (n % 2 == 0) return false; 
+  if (n % 2 == 0) return false;
   long long d = n - 1;
   while (d % 2 == 0) d /= 2;
 
@@ -30,11 +30,9 @@ constexpr bool is_prime(long long n) {
       y = y * y % n;
       t <<= 1;
     }
-    if (y != n - 1 && t % 2 == 0) {
-      return false;
-    }
+    if (y != n - 1 && t % 2 == 0) return false;
   }
   return true;
 }
 
-} // namespace cp
+}  // namespace cp

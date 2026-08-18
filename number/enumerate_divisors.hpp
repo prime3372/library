@@ -28,4 +28,4 @@ std::vector<long long> enumerate_divisors(long long n) {
   return ans;
 }
 
-} // namespace cp
+}  // namespace cp

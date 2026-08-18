@@ -27,8 +27,8 @@ std::pair<long long, long long> crt(const std::vector<long long>& r,
     // Let (x, y) satisfies z = m0*x + r0 = m1*y + r1.
 
     if (m0 % m1 == 0) {
-      if (r0 % m1 != r1) return {0, 0}; // m0 = 0 (mod m1) -> r0 = r1 (mod m1)
-      continue; // m = m0, r = r0
+      if (r0 % m1 != r1) return {0, 0};  // m0 = 0 (mod m1) -> r0 = r1 (mod m1)
+      continue;                          // m = m0, r = r0
     }
 
     auto [g, im] = ext_gcd(m0, m1);
@@ -63,4 +63,4 @@ std::pair<long long, long long> crt(const std::vector<long long>& r,
   return {r0, m0};
 }
 
-} // namespace cp
+}  // namespace cp

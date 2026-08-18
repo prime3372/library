@@ -6,8 +6,8 @@
 
 #include "number/ext_gcd.hpp"
 #include "number/pow_mod.hpp"
-#include "util/type_traits.hpp"
 #include "util/static_modint.hpp"
+#include "util/type_traits.hpp"
 
 namespace cp {
 
@@ -28,12 +28,10 @@ constexpr int primitive_root_ntt(int m) {
   for (int i = 3; 1LL * i * i <= x; i += 2) {
     if (x % i == 0) {
       divs[cnt++] = i;
-      while (x % i == 0) x /= i;      
+      while (x % i == 0) x /= i;
     }
   }
-  if (x > 1) {
-    divs[cnt++] = x;  
-  }
+  if (x > 1) divs[cnt++] = x;
   for (int g = 2;; g++) {
     bool ok = true;
     for (int i = 0; i < cnt; i++) {
@@ -50,9 +48,7 @@ template <class mint, int g> std::vector<mint> ntt_root() {
   constexpr int rank2 = std::countr_zero((unsigned int)(mint::mod() - 1));
   std::vector<mint> root(rank2 + 1);
   root[rank2] = mint(g).pow((mint::mod() - 1) >> rank2);
-  for (int i = rank2 - 1; i >= 0; i--) {
-    root[i] = root[i + 1] * root[i + 1];
-  }
+  for (int i = rank2 - 1; i >= 0; i--) root[i] = root[i + 1] * root[i + 1];
   return root;
 }
 
@@ -98,14 +94,12 @@ std::vector<mint> convolution_naive(const std::vector<mint>& a,
   int n = int(a.size()), m = int(b.size());
   std::vector<mint> ans(n + m - 1);
   for (int i = 0; i < n; i++) {
-    for (int j = 0; j < m; j++) {
-      ans[i + j] += a[i] * b[j];
-    }
+    for (int j = 0; j < m; j++) ans[i + j] += a[i] * b[j];
   }
   return ans;
 }
 
-} // namespace internal
+}  // namespace internal
 
 template <class mint> requires internal::is_static_modint_v<mint>
 std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
@@ -138,7 +132,7 @@ std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
 }
 
 template <int mod = 998244353, class T, class U = T>
-  requires internal::is_integral_v<T> && internal::is_integral_v<U>
+requires internal::is_integral_v<T> && internal::is_integral_v<U>
 std::vector<U> convolution(std::vector<T> a, std::vector<T> b) {
   using mint = static_modint<mod>;
   int n = int(a.size()), m = int(b.size());
@@ -146,11 +140,11 @@ std::vector<U> convolution(std::vector<T> a, std::vector<T> b) {
   std::vector<mint> a2(n), b2(m);
   for (int i = 0; i < n; i++) a2[i] = mint(a[i]);
   for (int i = 0; i < m; i++) b2[i] = mint(b[i]);
-  
+
   auto c2 = convolution(std::move(a2), std::move(b2));
   std::vector<U> c(n + m - 1);
   for (int i = 0; i < n + m - 1; i++) c[i] = c2[i].val();
   return c;
 }
 
-} // namespace cp
+}  // namespace cp
