@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "util/type_traits.hpp"
-#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -29,22 +28,18 @@ template <class T> class matrix {
   matrix& operator+=(const matrix& rhs) {
     assert(h == rhs.h && w == rhs.w);
     for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) {
-        (*this)[i][j] += rhs[i][j];
-      }
+      for (int j = 0; j < w; j++) (*this)[i][j] += rhs[i][j];
     }
     return *this;
   }
 
   matrix& operator*=(const T& rhs) {
     for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) {
-        (*this)[i][j] *= rhs;
-      }
+      for (int j = 0; j < w; j++) (*this)[i][j] *= rhs;
     }
     return *this;
   }
-  
+
   matrix operator*=(const matrix& rhs) {
     assert(w == rhs.h);
     matrix res(h, rhs.w);
@@ -73,7 +68,7 @@ template <class T> class matrix {
 
   static matrix unit(int n) {
     matrix res(n, n);
-    for (int i = 0; i < n; i++) res[i][i] = 1;    
+    for (int i = 0; i < n; i++) res[i][i] = 1;
     return res;
   }
 
@@ -105,4 +100,4 @@ template <class T> class matrix {
   std::vector<std::vector<T>> d;
 };
 
-} // namespace cp
+}  // namespace cp
