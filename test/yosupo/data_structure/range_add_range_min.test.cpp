@@ -21,8 +21,7 @@ int main() {
     int t;
     cin >> t;
     if (t == 0) {
-      int l, r;
-      ll x;
+      int l, r, x;
       cin >> l >> r >> x;
       seg.apply(l, r, x);
     } else {

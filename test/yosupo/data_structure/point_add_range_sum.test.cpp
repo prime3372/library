@@ -14,7 +14,7 @@ int main() {
   cin >> n >> q;
   fenwick_tree<ll> fw(n);
   for (int i = 0; i < n; i++) {
-    ll a;
+    int a;
     cin >> a;
     fw.add(i, a);
   }
@@ -22,8 +22,7 @@ int main() {
     int t;
     cin >> t;
     if (t == 0) {
-      int p;
-      ll x;
+      int p, x;
       cin >> p >> x;
       fw.add(p, x);
     } else {
