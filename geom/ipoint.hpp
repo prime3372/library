@@ -68,7 +68,7 @@ class ipoint {
   }
 
   bool is_parallel(const ipoint& rhs) const { return dot(rhs) == 0; }
-  bool is_vertical(const ipoint& rhs) const { return cross(rhs) == 0; }
+  bool is_orthogonal(const ipoint& rhs) const { return cross(rhs) == 0; }
 
   int ort() const {
     if (x == 0 && y == 0) return 0;
