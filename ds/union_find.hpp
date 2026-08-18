@@ -6,6 +6,8 @@
 
 namespace cp {
 
+// The implementation is based on AC Library.
+// https://github.com/atcoder/ac-library/blob/master/atcoder/dsu.hpp
 class union_find {
  public:
   union_find() : n(0) {}
@@ -47,15 +49,14 @@ class union_find {
       root[i] = find(i);
       group_size[root[i]]++;
     }
-
-    std::vector<std::vector<int>> res(n);
-    for (int i = 0; i < n; i++) res[i].reserve(group_size[i]);
-    for (int i = 0; i < n; i++) res[root[i]].push_back(i);
-    res.erase(
-        std::remove_if(res.begin(), res.end(),
+    std::vector<std::vector<int>> result(n);
+    for (int i = 0; i < n; i++) result[i].reserve(group_size[i]);
+    for (int i = 0; i < n; i++) result[root[i]].push_back(i);
+    result.erase(
+        std::remove_if(result.begin(), result.end(),
                        [&](const std::vector<int>& v) { return v.empty(); }),
-        res.end());
-    return res;
+        result.end());
+    return result;
   }
 
  private:

@@ -7,14 +7,11 @@ namespace cp {
 template <class T> class simple_queue {
  public:
   simple_queue() {}
-
-  void reserve(int n) { payload.reserve(n); }
-
-  int size() const { return int(payload.size()) - pos; }
-  bool empty() const { return pos == int(payload.size()); }
-
   void push(const T& t) { payload.push_back(t); }
-
+  void pop() {
+    assert(!empty());
+    pos++;
+  }
   T& front() {
     assert(!empty());
     return payload[pos];
@@ -23,15 +20,12 @@ template <class T> class simple_queue {
     assert(!empty());
     return payload[pos];
   }
-
+  int size() const { return int(payload.size()) - pos; }
+  bool empty() const { return pos == int(payload.size()); }
+  void reserve(int n) { payload.reserve(n); }
   void clear() {
     payload.clear();
     pos = 0;
-  }
-
-  void pop() {
-    assert(!empty());
-    pos++;
   }
 
  private:

@@ -10,6 +10,8 @@
 
 namespace cp {
 
+// The implementation is based on AC Library.
+// https://github.com/atcoder/ac-library/blob/master/atcoder/lazysegtree.hpp
 template <class M> class lazy_segtree {
   using S = typename M::S;
   using F = typename M::F;

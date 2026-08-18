@@ -10,6 +10,8 @@
 
 namespace cp {
 
+// The implementation is based on AC Library.
+// https://github.com/atcoder/ac-library/blob/master/atcoder/segtree.hpp
 template <class M> class segtree {
   using S = typename M::S;
 

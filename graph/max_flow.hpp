@@ -10,6 +10,9 @@
 
 namespace cp {
 
+// Dinic's Algorithm
+// The implementaton is based on AC Library.
+// https://github.com/atcoder/ac-library/blob/master/atcoder/maxflow.hpp
 template <class Cap> requires internal::is_integral_v<Cap>
 class max_flow {
  public:
@@ -71,6 +74,7 @@ class max_flow {
     std::vector<int> level(n), iter(n);
     simple_queue<int> que;
 
+    // BFS to construct the level graph.
     auto bfs = [&]() {
       std::fill(level.begin(), level.end(), -1);
       level[s] = 0;
@@ -88,9 +92,14 @@ class max_flow {
       }
     };
 
+    // DFS to push augment flow backward from t to s along the level graph.
     auto dfs = [&](auto self, int v, Cap up) {
+      // Base case: reached the source s.
       if (v == s) return up;
+
       Cap res = 0;
+      // Current-edge optimization:
+      // resume loop from the last visited edge index.
       for (int& i = iter[v]; i < int(g[v].size()); i++) {
         auto e = g[v][i];
         if (g[e.to][e.rev].cap == 0 || level[v] <= level[e.to]) continue;
@@ -107,6 +116,7 @@ class max_flow {
     Cap flow = 0;
     while (flow < flow_limit) {
       bfs();
+      // If sink 't' is unreachable, no more augmenting paths exist.
       if (level[t] == -1) break;
       std::fill(iter.begin(), iter.end(), 0);
       flow += dfs(dfs, t, flow_limit - flow);
@@ -114,6 +124,7 @@ class max_flow {
     return flow;
   }
 
+  // @note It should be called after flow(s, t) exactly once without flow_limit.
   std::vector<bool> min_cut(int s) {
     assert(0 <= s && s < n);
     std::vector<bool> visited(n);

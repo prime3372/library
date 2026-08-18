@@ -7,6 +7,8 @@
 namespace cp {
 
 // Tarjan's strongly connected components algorithm
+// The implementaton is based on AC Library.
+// https://github.com/atcoder/ac-library/blob/master/atcoder/internal_scc.hpp
 class strongly_connected_components {
  public:
   strongly_connected_components() : strongly_connected_components(0) {}

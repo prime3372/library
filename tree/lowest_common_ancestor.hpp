@@ -28,17 +28,6 @@ class lowest_common_ancestor {
     initialized = true;
   }
 
-  int up(int v, int k) {
-    assert(initialized);
-    assert(0 <= v && v < n);
-    v = hld.id[v];
-    while (k > v - hld.head[v]) {
-      k -= v - hld.head[v] + 1;
-      v = hld.next[v];
-    }
-    return hld.vertex[v - k];
-  }
-
   int operator()(int a, int b) {
     assert(initialized);
     assert(0 <= a && a < n);
@@ -58,6 +47,17 @@ class lowest_common_ancestor {
     assert(0 <= b && b < n);
     int c = (*this)(a, b);
     return dep[a] + dep[b] - dep[c] * 2;
+  }
+
+  int up(int v, int k) {
+    assert(initialized);
+    assert(0 <= v && v < n);
+    v = hld.id[v];
+    while (k > v - hld.head[v]) {
+      k -= v - hld.head[v] + 1;
+      v = hld.next[v];
+    }
+    return hld.vertex[v - k];
   }
 
   int jump(int s, int t, int k) {
