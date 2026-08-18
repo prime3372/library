@@ -22,7 +22,7 @@ template <class M> struct treap_monoid_node {
   unsigned long long priority;
 
   treap_monoid_node() {}
-  explicit treap_monoid_node(const S& x) : val(x), prod(x), priority(mt64()) {}
+  explicit treap_monoid_node(S x) : val(x), prod(x), priority(mt64()) {}
   ~treap_monoid_node() {
     delete left;
     delete right;
