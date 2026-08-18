@@ -3,6 +3,7 @@
 #include <cassert>
 #include <chrono>
 #include <random>
+#include <vector>
 
 namespace cp {
 
@@ -25,5 +26,10 @@ template <class T> T uniform(T l, T r) {
 }
 
 bool uniform_bool() { return uniform(0, 1) == 1; }
+
+template <class T> T choice(const std::vector<T>& v) {
+  assert(!v.empty());
+  return v[uniform(0, int(v.size()))];
+}
 
 }  // namespace cp
