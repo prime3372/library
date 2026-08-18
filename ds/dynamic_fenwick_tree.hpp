@@ -5,7 +5,6 @@
 #include <iostream>
 
 #include "ds/hash_map.hpp"
-#include "util/io_utility.hpp"
 
 namespace cp {
 

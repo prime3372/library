@@ -7,7 +7,6 @@
 #include <vector>
 
 #include "ds/dynamic_fenwick_tree.hpp"
-#include "util/io_utility.hpp"
 
 namespace cp {
 

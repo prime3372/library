@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "ds/fenwick_tree.hpp"
-#include "util/io_utility.hpp"
 
 namespace cp {
 
