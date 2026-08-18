@@ -29,7 +29,7 @@ bool uniform_bool() { return uniform(0, 1) == 1; }
 
 template <class T> T choice(const std::vector<T>& v) {
   assert(!v.empty());
-  return v[uniform(0, int(v.size()))];
+  return v[uniform(0, int(v.size()) - 1)];
 }
 
 }  // namespace cp
