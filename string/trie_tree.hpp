@@ -74,7 +74,7 @@ template <int char_size, auto offset = 'a'> class trie_tree {
   int size() const { return int(nodes.size()); }
 
  protected:
-  constexpr int index(char c) const {
+  int index(char c) const {
     // offset can be a function
     if constexpr (std::is_invocable_v<decltype(offset), char>) {
       int idx = offset(c);
