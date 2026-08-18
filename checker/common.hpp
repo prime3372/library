@@ -1,8 +1,8 @@
 #pragma once
 
 #include <algorithm>
-#include <cmath>
 #include <charconv>
+#include <cmath>
 #include <cstddef>
 #include <cstdlib>
 #include <fstream>
@@ -10,12 +10,7 @@
 #include <stdexcept>
 #include <string>
 
-enum result {
-  _ok = 0,
-  _wa = 1,
-  _pe = 2,
-  _fail = 3
-};
+enum result { _ok = 0, _wa = 1, _pe = 2, _fail = 3 };
 
 std::ifstream fin, fout, fans;
 
