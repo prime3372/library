@@ -11,8 +11,10 @@ namespace cp {
 template <class T> class cumsum_2d {
  public:
   cumsum_2d() : h(0), w(0) {}
-  cumsum_2d(int _h, int _w) : h(_h), w(_w), d(_h, std::vector<T>(_w)) {}
-  cumsum_2d(int _h, int _w, T x) : h(_h), w(_w), d(_h, std::vector<T>(_w, x)) {}
+  explicit cumsum_2d(int _h, int _w)
+      : h(_h), w(_w), d(_h, std::vector<T>(_w)) {}
+  explicit cumsum_2d(int _h, int _w, T x)
+      : h(_h), w(_w), d(_h, std::vector<T>(_w, x)) {}
 
   void accumulate() {
     cum.resize(h + 1, std::vector<T>(w + 1));
