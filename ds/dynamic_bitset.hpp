@@ -189,7 +189,9 @@ class dynamic_bitset {
   friend bool operator==(const bs& lhs, const bs& rhs) {
     return lhs.a == rhs.a;
   }
-  friend bool operator!=(const bs& lhs, const bs& rhs) { return !(lhs == rhs); }
+  friend bool operator!=(const bs& lhs, const bs& rhs) {
+    return lhs.a != rhs.a;
+  }
 
   friend std::istream& operator>>(std::istream& is, bs& x) {
     std::string t;
