@@ -40,7 +40,7 @@
   "test/yosupo/data_structure/union_find.test.cpp": "2026-08-18 10:55:13 +0900",
   "test/yosupo/data_structure/union_find_with_potential.test.cpp": "2026-08-18 10:55:13 +0900",
   "test/yosupo/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp": "2026-08-18 04:49:34 +0900",
-  "test/yosupo/geometry/sort_points_by_argument.test.cpp": "2026-08-18 02:21:08 +0900",
+  "test/yosupo/geometry/sort_points_by_argument.test.cpp": "2026-08-18 10:58:00 +0900",
   "test/yosupo/graph/cycle_detection_directed.test.cpp": "2026-08-18 02:21:08 +0900",
   "test/yosupo/graph/cycle_detection_undirected.test.cpp": "2026-08-18 02:21:08 +0900",
   "test/yosupo/graph/matching_on_bipartite_graph.test.cpp": "2026-08-18 02:21:08 +0900",
