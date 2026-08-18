@@ -9,16 +9,16 @@
 namespace cp {
 
 class bipartite_matching {
- public: 
+ public:
   bipartite_matching() : bipartite_matching(0, 0) {}
   explicit bipartite_matching(int _l, int _r)
-  : l(_l),
-    r(_r),
-    s(l + r),
-    t(l + r + 1),
-    initialized(false),
-    mf(l + r + 2),
-    colored(l + r) {
+      : l(_l),
+        r(_r),
+        s(l + r),
+        t(l + r + 1),
+        initialized(false),
+        mf(l + r + 2),
+        colored(l + r) {
     for (int i = 0; i < l; i++) mf.add_edge(s, i);
     for (int i = 0; i < r; i++) mf.add_edge(l + i, t);
   }
@@ -40,7 +40,7 @@ class bipartite_matching {
     int from, to;
   };
 
-  std::vector<edge>  max_matching() {
+  std::vector<edge> max_matching() {
     if (!initialized) init();
     std::vector<edge> res;
     for (auto e : mf.edges()) {
@@ -77,9 +77,7 @@ class bipartite_matching {
   std::vector<edge> min_edge_cover() {
     auto es = max_matching();
     std::vector<bool> used(s);
-    for (auto e : es) {
-      used[e.from] = used[l + e.to] = true;
-    }
+    for (auto e : es) used[e.from] = used[l + e.to] = true;
     for (auto e : mf.edges()) {
       if (e.flow || e.from == s || e.to == t) continue;
       if (used[e.from] == false || used[e.to] == false) {
@@ -121,4 +119,4 @@ class bipartite_matching {
   }
 };
 
-} // namespace cp
+}  // namespace cp

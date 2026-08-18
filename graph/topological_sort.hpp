@@ -34,4 +34,4 @@ std::vector<int> topological_sort(const std::vector<std::vector<int>>& g) {
   return res;
 }
 
-} // namespace cp
+}  // namespace cp

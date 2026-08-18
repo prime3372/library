@@ -34,4 +34,4 @@ class two_sat {
   strongly_connected_components scc;
 };
 
-} // namespace cp
+}  // namespace cp

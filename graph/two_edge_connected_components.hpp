@@ -31,18 +31,16 @@ class two_edge_connected_components {
         id[v] = k++;
       }
       for (const auto& e : link.g[v]) {
-        if (id[e.to] == -1) self(self, e.to, v, k);        
+        if (id[e.to] == -1) self(self, e.to, v, k);
       }
     };
     for (int i = 0; i < n; i++) {
-      if (id[i] == -1) dfs(dfs, i, -1, group_num);      
+      if (id[i] == -1) dfs(dfs, i, -1, group_num);
     }
 
     groups.resize(group_num);
-    for (int i = 0; i < n; i++) {
-      groups[id[i]].push_back(i);
-    }
- 
+    for (int i = 0; i < n; i++) groups[id[i]].push_back(i);
+
     return *this;
   }
 
@@ -51,4 +49,4 @@ class two_edge_connected_components {
   low_link link;
 };
 
-} // namespace cp
+}  // namespace cp

@@ -62,9 +62,7 @@ class max_flow {
     re.cap = new_flow;
   }
 
-  Cap flow(int s, int t) {
-    return flow(s, t, std::numeric_limits<Cap>::max());
-  }
+  Cap flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max()); }
   Cap flow(int s, int t, Cap flow_limit) {
     assert(0 <= s && s < n);
     assert(0 <= t && t < n);
@@ -145,4 +143,4 @@ class max_flow {
   std::vector<std::vector<_edge>> g;
 };
 
-} // namespace cp
+}  // namespace cp

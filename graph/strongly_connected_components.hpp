@@ -53,15 +53,10 @@ class strongly_connected_components {
     for (int i = 0; i < n; i++) {
       if (ord[i] == -1) dfs(dfs, i);
     }
-
-    for (int& x : id) {
-      x = group_num - 1 - x;
-    }
+    for (int& x : id) x = group_num - 1 - x;
 
     groups.resize(group_num);
-    for (int i = 0; i < n; i++) {
-      groups[id[i]].push_back(i);
-    }
+    for (int i = 0; i < n; i++) groups[id[i]].push_back(i);
 
     return *this;
   }
@@ -71,4 +66,4 @@ class strongly_connected_components {
   std::vector<std::vector<int>> g;
 };
 
-} // namespace cp
+}  // namespace cp

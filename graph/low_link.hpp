@@ -54,4 +54,4 @@ class low_link {
   std::vector<std::vector<edge>> g;
 };
 
-} // namespace cp
+}  // namespace cp

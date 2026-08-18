@@ -54,4 +54,4 @@ template <class T> class kruscal {
   }
 };
 
-} // namespace cp
+}  // namespace cp

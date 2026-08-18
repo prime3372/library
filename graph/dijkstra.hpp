@@ -19,7 +19,7 @@ template <class T> class dijkstra {
     assert(0 <= cost);
     g[from].push_back(edge{to, m, cost});
     return m++;
-  }  
+  }
 
   void search(int from) {
     assert(0 <= from && from < n);
@@ -34,9 +34,7 @@ template <class T> class dijkstra {
       d[v] = c;
       prev_v[v] = pv;
       prev_e[v] = pe;
-      for (auto e : g[v]) {
-        pq.emplace(c + e.cost, e.to, v, e.id);
-      }
+      for (auto e : g[v]) pq.emplace(c + e.cost, e.to, v, e.id);
     }
     initialized = true;
   }
@@ -75,4 +73,4 @@ template <class T> class dijkstra {
   std::vector<int> prev_v, prev_e;
 };
 
-} // namespace cp
+}  // namespace cp
