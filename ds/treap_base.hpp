@@ -18,7 +18,7 @@ template <class node> class treap_base {
 
  public:
   treap_base() {}
-  virtual ~treap_base() { delete root; }
+  ~treap_base() { delete root; }
 
   void build(const std::vector<T>& v) {
     if (v.empty()) return;
