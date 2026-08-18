@@ -13,10 +13,10 @@ template <class T> class coordinate_compression {
  public:
   coordinate_compression() {}
   explicit coordinate_compression(const std::vector<T>& xs) {
-    for (T x : xs) add(x);
+    for (const T& x : xs) add(x);
   }
 
-  void add(T x) { d.push_back(x); }
+  void add(const T& x) { d.push_back(x); }
 
   void init() {
     std::sort(d.begin(), d.end());
