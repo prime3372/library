@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_reverse_range_sum"
 
 #include "algebra/add.hpp"
-#include "ds/segtreap.hpp"
+#include "ds/treap_monoid.hpp"
 #include <iostream>
 
 using namespace std;
@@ -15,7 +15,7 @@ int main() {
   cin >> n >> q;
   vector<ll> a(n);
   for (ll& ai : a) cin >> ai;
-  segtreap<alg::add<ll>> seg(a);
+  treap_monoid<alg::add<ll>> seg(a);
   while (q--) {
     int t, l, r;
     cin >> t >> l >> r;

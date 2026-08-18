@@ -12,18 +12,18 @@ namespace cp {
 
 namespace internal {
 
-template <class M> struct segtreap_node {
+template <class M> struct treap_monoid_node {
   using S = typename M::S;
   S val, prod;
   int sub = 1;
   bool rev = false;
-  segtreap_node* left = nullptr;
-  segtreap_node* right = nullptr;
+  treap_monoid_node* left = nullptr;
+  treap_monoid_node* right = nullptr;
   unsigned long long priority;
 
-  segtreap_node() {}
-  explicit segtreap_node(const S& x) : val(x), prod(x), priority(mt64()) {}
-  ~segtreap_node() {
+  treap_monoid_node() {}
+  explicit treap_monoid_node(const S& x) : val(x), prod(x), priority(mt64()) {}
+  ~treap_monoid_node() {
     delete left;
     delete right;
   }
@@ -32,16 +32,16 @@ template <class M> struct segtreap_node {
 }  // namespace internal
 
 template <class M, auto rev = std::identity()>
-class segtreap : public treap_base<internal::segtreap_node<M>> {
+class treap_monoid : public treap_base<internal::treap_monoid_node<M>> {
   using S = typename M::S;
-  using node = internal::segtreap_node<M>;
+  using node = internal::treap_monoid_node<M>;
   using base = treap_base<node>;
 
  public:
-  segtreap() {}
-  explicit segtreap(int n) { build(std::vector<S>(n)); }
-  explicit segtreap(int n, S val) { build(std::vector<S>(n, val)); }
-  explicit segtreap(const std::vector<S>& v) { build(v); }
+  treap_monoid() {}
+  explicit treap_monoid(int n) { build(std::vector<S>(n)); }
+  explicit treap_monoid(int n, S val) { build(std::vector<S>(n, val)); }
+  explicit treap_monoid(const std::vector<S>& v) { build(v); }
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());

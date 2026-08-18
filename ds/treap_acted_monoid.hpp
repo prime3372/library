@@ -11,20 +11,21 @@ namespace cp {
 
 namespace internal {
 
-template <class M> struct lazy_segtreap_node {
+template <class M> struct treap_acted_monoid_node {
   using S = typename M::S;
   using F = typename M::F;
   S val, prod;
   F lz = M::id();
   int sub = 1;
   bool rev = false;
-  lazy_segtreap_node* left = nullptr;
-  lazy_segtreap_node* right = nullptr;
+  treap_acted_monoid_node* left = nullptr;
+  treap_acted_monoid_node* right = nullptr;
   unsigned long long priority;
 
-  lazy_segtreap_node() {}
-  explicit lazy_segtreap_node(const S& x) : val(x), prod(x), priority(mt64()) {}
-  ~lazy_segtreap_node() {
+  treap_acted_monoid_node() {}
+  explicit treap_acted_monoid_node(const S& x)
+      : val(x), prod(x), priority(mt64()) {}
+  ~treap_acted_monoid_node() {
     delete left;
     delete right;
   }
@@ -33,17 +34,18 @@ template <class M> struct lazy_segtreap_node {
 }  // namespace internal
 
 template <class M, auto rev = std::identity()>
-class lazy_segtreap : public treap_base<internal::lazy_segtreap_node<M>> {
+class treap_acted_monoid
+    : public treap_base<internal::treap_acted_monoid_node<M>> {
  public:
   using S = typename M::S;
   using F = typename M::F;
-  using node = internal::lazy_segtreap_node<M>;
+  using node = internal::treap_acted_monoid_node<M>;
   using base = treap_base<node>;
 
-  lazy_segtreap() {}
-  explicit lazy_segtreap(int n) { build(std::vector<S>(n)); }
-  explicit lazy_segtreap(int n, S val) { build(std::vector<S>(n, val)); }
-  explicit lazy_segtreap(const std::vector<S>& v) { build(v); }
+  treap_acted_monoid() {}
+  explicit treap_acted_monoid(int n) { build(std::vector<S>(n)); }
+  explicit treap_acted_monoid(int n, S val) { build(std::vector<S>(n, val)); }
+  explicit treap_acted_monoid(const std::vector<S>& v) { build(v); }
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
