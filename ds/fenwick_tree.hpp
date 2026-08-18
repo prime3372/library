@@ -79,8 +79,6 @@ template <class T> class fenwick_tree {
     return ub;
   }
 
-  int size() const { return n; }
-
   friend std::ostream& operator<<(std::ostream& os, const fenwick_tree& fw) {
     for (int i = 0; i < fw.n; i++) {
       os << fw[i];

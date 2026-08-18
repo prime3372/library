@@ -10,81 +10,80 @@ namespace cp {
 
 template <class T> class cumsum_2d {
  public:
-  cumsum_2d() : h(0), w(0) {}
-  explicit cumsum_2d(int _h, int _w)
-      : h(_h), w(_w), d(_h, std::vector<T>(_w)) {}
-  explicit cumsum_2d(int _h, int _w, const T& x)
-      : h(_h), w(_w), d(_h, std::vector<T>(_w, x)) {}
+  cumsum_2d() : xmax(0), ymax(0) {}
+  explicit cumsum_2d(int x, int y)
+      : xmax(x), ymax(y), val(x, std::vector<T>(y)) {}
+  explicit cumsum_2d(int x, int y, const T& w)
+      : xmax(x), ymax(y), val(x, std::vector<T>(y, w)) {}
 
   void accumulate() {
-    cum.resize(h + 1, std::vector<T>(w + 1));
-    for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) {
-        cum[i + 1][j + 1] = cum[i + 1][j] + d[i][j];
+    cum.resize(xmax + 1, std::vector<T>(ymax + 1));
+    for (int x = 0; x < xmax; x++) {
+      for (int y = 0; y < ymax; y++) {
+        cum[x + 1][y + 1] = cum[x + 1][y] + val[x][y];
       }
     }
-    for (int j = 0; j < w; j++) {
-      for (int i = 0; i < h; i++) cum[i + 1][j + 1] += cum[i][j + 1];
+    for (int y = 0; y < ymax; y++) {
+      for (int x = 0; x < xmax; x++) {
+        cum[x + 1][y + 1] += cum[x][y + 1];
+      }
     }
     accumulated = true;
   }
 
-  std::vector<T>& operator[](int i) {
-    assert(0 <= i && i < h);
-    return d[i];
+  std::vector<T>& operator[](int x) {
+    assert(0 <= x && x < xmax);
+    return val[x];
   }
-  const std::vector<T>& operator[](int i) const {
-    assert(0 <= i && i < h);
-    return d[i];
+  const std::vector<T>& operator[](int x) const {
+    assert(0 <= x && x < xmax);
+    return val[x];
   }
 
-  T sum(int hr, int wr) {
-    assert(0 <= hr && hr <= h);
-    assert(0 <= wr && wr <= w);
+  T sum(int xr, int yr) {
+    assert(0 <= xr && xr <= xmax);
+    assert(0 <= yr && yr <= ymax);
     if (!accumulated) accumulate();
-    return cum[hr][wr];
+    return cum[xr][yr];
   }
 
-  T sum(int hl, int wl, int hr, int wr) {
-    assert(0 <= hl && hl <= hr && hr <= h);
-    assert(0 <= wl && wl <= wr && wr <= w);
+  T sum(int xl, int yl, int xr, int yr) {
+    assert(0 <= xl && xl <= xr && xr <= xmax);
+    assert(0 <= yl && yl <= yr && yr <= ymax);
     if (!accumulated) accumulate();
-    return cum[hr][wr] - cum[hr][wl] - cum[hl][wr] + cum[hl][wl];
+    return cum[xr][yr] - cum[xr][yl] - cum[xl][yr] + cum[xl][yl];
   }
 
-  void imos_add(int hl, int wl, int hr, int wr, T x) {
-    assert(0 <= hl && hl <= hr && hr <= h);
-    assert(0 <= wl && wl <= wr && wr <= w);
-    if (hl < h && wl < w) d[hl][wl] += x;
-    if (hl < h && wr < w) d[hl][wr] -= x;
-    if (hr < h && wl < w) d[hr][wl] -= x;
-    if (hr < h && wr < w) d[hr][wr] += x;
+  void imos_add(int xl, int yl, int xr, int yr, T w) {
+    assert(0 <= xl && xl <= xr && xr <= xmax);
+    assert(0 <= yl && yl <= yr && yr <= ymax);
+    if (xl < xmax && yl < ymax) val[xl][yl] += w;
+    if (xl < xmax && yr < ymax) val[xl][yr] -= w;
+    if (xr < xmax && yl < ymax) val[xr][yl] -= w;
+    if (xr < xmax && yr < ymax) val[xr][yr] += w;
   }
 
-  T imos_get(int i, int j) {
-    assert(0 <= i && i < h);
-    assert(0 <= j && j < w);
-    return sum(i + 1, j + 1);
+  T imos_get(int x, int y) {
+    assert(0 <= x && x < xmax);
+    assert(0 <= y && y < ymax);
+    return sum(x + 1, y + 1);
   }
-
-  int height() const { return h; }
-  int width() const { return w; }
 
   friend std::ostream& operator<<(std::ostream& os, const cumsum_2d& sum) {
-    for (int i = 0; i < sum.h; i++) {
-      for (int j = 0; j < sum.w; j++) {
-        os << sum[i][j];
-        if (j != sum.w - 1) os << " ";
+    for (int x = 0; x < sum.xmax; x++) {
+      for (int y = 0; y < sum.ymax; y++) {
+        os << sum[x][y];
+        if (y != sum.ymax - 1) os << " ";
       }
-      if (i != sum.h - 1) os << "\n";
+      if (x != sum.xmax - 1) os << "\n";
     }
     return os;
   }
 
  private:
-  int h, w;
+  int xmax, ymax;
   bool accumulated = false;
-  std::vector<std::vector<T>> d;
+  std::vector<std::vector<T>> val;
   std::vector<std::vector<T>> cum;
 };
 

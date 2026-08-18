@@ -12,89 +12,86 @@ namespace cp {
 
 template <class T> class dynamic_fenwick_tree_2d {
  public:
-  dynamic_fenwick_tree_2d() : h(0), w(0) {}
-  dynamic_fenwick_tree_2d(int _h, size_t _w) : h(_h), w(_w), d(_h) {
-    for (int i = 0; i < h; i++) d[i] = dynamic_fenwick_tree<T>(w);
+  dynamic_fenwick_tree_2d() : xmax(0), ymax(0) {}
+  dynamic_fenwick_tree_2d(int _h, size_t _w) : xmax(_h), ymax(_w), d(_h) {
+    for (int x = 0; x < xmax; x++) d[x] = dynamic_fenwick_tree<T>(ymax);
   }
 
-  void add(int i, size_t j, T x) {
-    assert(0 <= i && i < h);
-    assert(j < w);
-    i++;
-    while (i <= h) {
-      d[i - 1].add(j, x);
-      i += i & -i;
+  void add(int x, size_t y, T w) {
+    assert(0 <= x && x < xmax);
+    assert(y < ymax);
+    x++;
+    while (x <= xmax) {
+      d[x - 1].add(y, w);
+      x += x & -x;
     }
   }
 
   class ref {
    public:
-    T operator[](size_t j) const {
-      assert(j < ptr->w);
-      return ptr->sum(i, j, i + 1, j + 1);
+    T operator[](size_t y) const {
+      assert(y < ptr->ymax);
+      return ptr->sum(x, y, x + 1, y + 1);
     }
-    ref(const dynamic_fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), i(_i) {}
+    ref(const dynamic_fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), x(_i) {}
 
    private:
     const dynamic_fenwick_tree_2d* ptr;
-    int i;
+    int x;
   };
 
-  ref operator[](int i) const {
-    assert(i < h);
-    return ref(this, i);
+  ref operator[](int x) const {
+    assert(x < xmax);
+    return ref(this, x);
   }
 
-  T sum(int i, size_t j) const {
-    assert(0 <= i && i <= h);
-    assert(j <= w);
+  T sum(int x, size_t y) const {
+    assert(0 <= x && x <= xmax);
+    assert(y <= ymax);
     T s = 0;
-    while (i) {
-      s += d[i - 1].sum(j);
-      i -= i & -i;
+    while (x) {
+      s += d[x - 1].sum(y);
+      x -= x & -x;
     }
     return s;
   }
 
-  T sum(int hl, size_t wl, int hr, size_t wr) const {
-    assert(0 <= hl && hl <= hr && hr <= h);
-    assert(wl <= wr && wr <= w);
-    return sum(hr, wr) - sum(hr, wl) - sum(hl, wr) + sum(hl, wl);
+  T sum(int xl, size_t yl, int xr, size_t yr) const {
+    assert(0 <= xl && xl <= xr && xr <= xmax);
+    assert(yl <= yr && yr <= ymax);
+    return sum(xr, yr) - sum(xr, yl) - sum(xl, yr) + sum(xl, yl);
   }
 
-  void imos_add(int hl, size_t wl, int hr, size_t wr, T x) {
-    assert(0 <= hl && hl <= hr && hr <= h);
-    assert(wl <= wr && wr <= w);
-    if (hl < h && wl < w) add(hl, wl, x);
-    if (hl < h && wr < w) add(hl, wr, -x);
-    if (hr < h && wl < w) add(hr, wl, -x);
-    if (hr < h && wr < w) add(hr, wr, x);
+  void imos_add(int xl, size_t yl, int xr, size_t yr, T w) {
+    assert(0 <= xl && xl <= xr && xr <= xmax);
+    assert(yl <= yr && yr <= ymax);
+    if (xl < xmax && yl < ymax) add(xl, yl, w);
+    if (xl < xmax && yr < ymax) add(xl, yr, -w);
+    if (xr < xmax && yl < ymax) add(xr, yl, -w);
+    if (xr < xmax && yr < ymax) add(xr, yr, w);
   }
 
-  T imos_get(int i, size_t j) const {
-    assert(0 <= i && i < h);
-    assert(j < w);
-    return sum(i + 1, j + 1);
+  T imos_get(int x, size_t y) const {
+    assert(0 <= x && x < xmax);
+    assert(y < ymax);
+    return sum(x + 1, y + 1);
   }
-
-  int height() const { return h; }
-  size_t width() const { return w; }
 
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_fenwick_tree_2d& fw) {
-    for (int i = 0; i < fw.h; i++) {
-      for (size_t j = 0; j < fw.w; j++) {
-        os << fw[i][j];
-        if (j != fw.w - 1) os << " ";
+    for (int x = 0; x < fw.xmax; x++) {
+      for (size_t y = 0; y < fw.ymax; y++) {
+        os << fw[x][y];
+        if (y != fw.ymax - 1) os << " ";
       }
-      if (i != fw.h - 1) os << "\n";
+      if (x != fw.xmax - 1) os << "\n";
     }
     return os;
   }
 
  private:
-  int h;
-  size_t w;
+  int xmax;
+  size_t ymax;
   std::vector<dynamic_fenwick_tree<T>> d;
 };
 
