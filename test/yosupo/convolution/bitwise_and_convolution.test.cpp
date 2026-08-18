@@ -15,12 +15,8 @@ int main() {
   int n;
   cin >> n;
   vector<mint> a(1 << n), b(1 << n);
-  for (int i = 0; i < (1 << n); i++) {
-    cin >> a[i];
-  }
-  for (int i = 0; i < (1 << n); i++) {
-    cin >> b[i];
-  }
+  for (int i = 0; i < (1 << n); i++) cin >> a[i];  
+  for (int i = 0; i < (1 << n); i++) cin >> b[i];  
   auto ans = and_convolution(n, a, b);
   for (const mint& x : ans) cout << x.val() << " ";
 }

@@ -18,9 +18,7 @@ int main() {
     for (auto f : fac) k += f.second;
     cout << k << " ";
     for (auto f : fac) {
-      while (f.second--) {
-        cout << f.first << " ";
-      }
+      while (f.second--) cout << f.first << " ";      
     }
     cout << "\n";
   }

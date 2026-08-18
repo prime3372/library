@@ -33,7 +33,7 @@ int main() {
   cout << "s SATISFIABLE\n";
   cout << "v ";
   for (int i = 0; i < int(ans.size()); i++) {
-    cout << (ans[i] ? i + 1: -i - 1) << " ";
+    cout << (ans[i] ? i + 1 : -i - 1) << " ";
   }
   cout << "0\n";
 }

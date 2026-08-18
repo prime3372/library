@@ -21,7 +21,7 @@ int main() {
       int x, y;
       cin >> x >> y;
       if (!uf.same(x, y)) cout << "?" << "\n";
-      else cout << uf.diff(y, x) << "\n";
+      else cout << uf.diff(y, x) << "\n";      
     }
   }
 }

@@ -18,7 +18,5 @@ int main() {
     ans.push_back(ps[a * i + b]);
   }
   cout << ps.size() << " " << ans.size() << "\n";
-  for (int i = 0; i < int(ans.size()); i++) {
-    cout << ans[i] << " ";
-  }
+  for (int x : ans) cout << x << " ";
 }

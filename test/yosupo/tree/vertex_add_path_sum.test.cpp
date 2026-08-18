@@ -37,7 +37,8 @@ int main() {
     } else {
       int u, v;
       cin >> u >> v;
-      u = id[u]; v = id[v];
+      u = id[u];
+      v = id[v];
       ll ans = 0;
       while (head[u] != head[v]) {
         if (u > v) swap(u, v);

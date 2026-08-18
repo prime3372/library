@@ -24,8 +24,6 @@ int main() {
   };
   dfs(dfs, cart.root);
   ll ans = 0;
-  for (int i = 0; i < n; i++) {
-    ans = max(ans, a[i] * sub[i]);
-  }
+  for (int i = 0; i < n; i++) ans = max(ans, a[i] * sub[i]);
   cout << ans << "\n";
 }

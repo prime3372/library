@@ -23,8 +23,11 @@ int main() {
         r = mid;
         continue; 
       }
-      if (rlh.get(p - mid, p) == rrlh.get(n - q - mid, n - q)) l = mid;
-      else r = mid;        
+      if (rlh.get(p - mid, p) == rrlh.get(n - q - mid, n - q)) {
+        l = mid;
+      } else {
+        r = mid;
+      }
     }
     cout << 2 * l + (i % 2 == 0) << " ";
   }

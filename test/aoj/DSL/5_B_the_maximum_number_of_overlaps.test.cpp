@@ -21,9 +21,7 @@ int main() {
   }
   int ans = 0;
   for (int i = 0; i <= 1000; i++) {
-    for (int j = 0; j <= 1000; j++) {
-      ans = max(ans, cum.imos_get(i, j));
-    }
+    for (int j = 0; j <= 1000; j++) ans = max(ans, cum.imos_get(i, j));
   }
   cout << ans << "\n";
 }

@@ -67,7 +67,7 @@ int main() {
     return ans;
   };
 
-  for (int i = 0; i < n; i++) query0(i, a[i]);  
+  for (int i = 0; i < n; i++) query0(i, a[i]);
 
   while (q--) {
     int t;

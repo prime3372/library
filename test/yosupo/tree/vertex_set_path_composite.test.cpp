@@ -55,7 +55,8 @@ int main() {
       int u, v;
       mint x;
       cin >> u >> v >> x;
-      u = id[u]; v = id[v];
+      u = id[u];
+      v = id[v];
       M::S l = {1, 0}, r = {1, 0};
       while (head[u] != head[v]) {
         if (u < v) {

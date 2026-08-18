@@ -38,9 +38,7 @@ int main() {
         if (f[j].size() <= d) f[j].resize(d + 1);
         f[j][d]++;
         for (int nv : g[v]) {
-          if (!removed[nv] && nv != pv) {
-            self(self, nv, v, d + 1);
-          }
+          if (!removed[nv] && nv != pv) self(self, nv, v, d + 1);          
         }
       };
       if (!removed[g[c][j]]) dfs(dfs, g[c][j], c, 1);

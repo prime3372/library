@@ -17,9 +17,7 @@ int main() {
 
   vector<ll> x(n + q), y(n + q), w(n + q), l(q), d(q), r(q), u(q);
   vector<int> t(q);
-  for (int i = 0; i < n; i++) {
-    cin >> x[i] >> y[i] >> w[i];
-  }
+  for (int i = 0; i < n; i++) cin >> x[i] >> y[i] >> w[i];  
   for (int i = 0; i < q; i++) {
     cin >> t[i];
     if (!t[i]) cin >> x[n + i] >> y[n + i] >> w[n + i];
