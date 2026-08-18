@@ -11,9 +11,9 @@
 namespace cp {
 
 class dynamic_bitset {
- public:
   using bs = dynamic_bitset;
 
+ public:
   dynamic_bitset() : n(0) {}
   explicit dynamic_bitset(int _n) : n(_n), a((_n + w - 1) / w, 0) {}
   explicit dynamic_bitset(int _n, bool b)
