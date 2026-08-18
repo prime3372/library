@@ -21,6 +21,10 @@ template <class T> struct treap_node {
 
   treap_node() {};
   explicit treap_node(const T& x) : val(x), priority(mt64()) {}
+  ~treap_node() {
+    delete left;
+    delete right;
+  }
 };
 
 }  // namespace internal
