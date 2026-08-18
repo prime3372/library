@@ -58,4 +58,4 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
   return index;
 }
 
-} // namespace cp
+}  // namespace cp

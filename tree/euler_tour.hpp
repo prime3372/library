@@ -9,11 +9,7 @@ class euler_tour {
  public:
   euler_tour() : n(0) {}
   explicit euler_tour(int _n)
-      : tour(_n, -1),
-        in(_n, -1),
-        out(_n, -1),
-        n(_n),
-        g(_n) {}
+      : tour(_n, -1), in(_n, -1), out(_n, -1), n(_n), g(_n) {}
 
   void add_edge(int a, int b) {
     assert(0 <= a && a < n);
@@ -44,4 +40,4 @@ class euler_tour {
   std::vector<std::vector<int>> g;
 };
 
-} // namespace cp
+}  // namespace cp

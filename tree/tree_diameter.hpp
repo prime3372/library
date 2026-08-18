@@ -21,9 +21,7 @@ template <class T> class tree_diameter {
     return m;
   }
 
-  int farthest(int s) {
-    return farthest(s, -1).second;
-  }
+  int farthest(int s) { return farthest(s, -1).second; }
 
   T len = 0;
   std::vector<int> vertices, edges;
@@ -73,4 +71,4 @@ template <class T> class tree_diameter {
   };
 };
 
-} // namespace cp
+}  // namespace cp

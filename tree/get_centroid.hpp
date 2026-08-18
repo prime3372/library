@@ -29,4 +29,4 @@ int get_centroid(const std::vector<std::vector<int>>& g, int s = 0) {
   return centroid(centroid, s, -1);
 }
 
-} // namespace cp
+}  // namespace cp

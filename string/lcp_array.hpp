@@ -11,9 +11,7 @@ template <class Str>
 std::vector<int> lcp_array(const Str& s, const std::vector<int>& sa) {
   int n = int(s.size());
   std::vector<int> rank(n + 1);
-  for (int i = 0; i <= n; i++) {
-    rank[sa[i]] = i;
-  }
+  for (int i = 0; i <= n; i++) rank[sa[i]] = i;
   std::vector<int> lcp(n);
   int h = 0;
   for (int i = 0; i <= n; i++) {
@@ -26,9 +24,8 @@ std::vector<int> lcp_array(const Str& s, const std::vector<int>& sa) {
   return lcp;
 }
 
-template <class Str>
-std::vector<int> lcp_array(const Str& s) {
+template <class Str> std::vector<int> lcp_array(const Str& s) {
   return lcp_array(s, suffix_array(s));
 }
 
-} // namespace cp
+}  // namespace cp

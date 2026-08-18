@@ -27,10 +27,10 @@ using mint = modint998244353;
 
 #define iflocal if (true)
 #define ifnlocal if (false)
-#define debug(...) \
+#define debug(...)                               \
   []<class... _Debug>(const _Debug&... _debug) { \
-    (std::cerr << ... << _debug); \
-    std::cerr << "\n"; \
+    (std::cerr << ... << _debug);                \
+    std::cerr << "\n";                           \
   }(__VA_ARGS__)
 
 #else

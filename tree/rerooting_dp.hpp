@@ -12,12 +12,8 @@ template <class M> class rerooting_dp {
 
  public:
   rerooting_dp() : n(0) {}
-  explicit rerooting_dp(int _n) : rerooting_dp(std::vector<S>(_n, M::e())) {}
-  explicit rerooting_dp(int _n, S val) : rerooting_dp(std::vector<S>(_n, val)) {}
   explicit rerooting_dp(const std::vector<S>& v)
-      : n(int(v.size())),
-        g(int(v.size())),
-        vals(v) {}
+      : n(int(v.size())), g(int(v.size())), vals(v) {}
 
   void add_edge(int from, int to, F f) { add_edge(from, to, f, f); }
   void add_edge(int from, int to, F f, F rf) {
@@ -49,9 +45,7 @@ template <class M> class rerooting_dp {
     }
 
     dp.resize(n);
-    for (int v = 0; v < n; v++) {
-      dp[v].resize(g[v].size());
-    }
+    for (int v = 0; v < n; v++) dp[v].resize(g[v].size());
     for (int i = n - 1; i >= 0; i--) {
       int v = ord[i];
       int par_id = -1;
@@ -80,8 +74,8 @@ template <class M> class rerooting_dp {
       S cum = M::e();
       for (int j = 0; j < int(g[v].size()); j++) {
         int to = g[v][j].to, rev = g[v][j].rev;
-        dp[to][rev] = M::mapping(g[to][rev].f,
-                                 M::op(M::op(cum, rcum[j + 1]), vals[v]));
+        dp[to][rev] =
+            M::mapping(g[to][rev].f, M::op(M::op(cum, rcum[j + 1]), vals[v]));
         cum = M::op(cum, dp[v][j]);
       }
       ans[v] = M::op(cum, vals[v]);
@@ -99,4 +93,4 @@ template <class M> class rerooting_dp {
   std::vector<S> vals;
 };
 
-} // namespace cp
+}  // namespace cp

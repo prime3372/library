@@ -24,4 +24,4 @@ template <class Str> std::vector<int> z_algorithm(const Str& s) {
   return z;
 }
 
-} // namespace cp
+}  // namespace cp

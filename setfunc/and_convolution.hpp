@@ -7,9 +7,8 @@
 namespace cp {
 
 template <class T>
-std::vector<T> and_convolution(int n,
-                               const std::vector<T>& a,
-                               const std::vector<T>& b){
+std::vector<T> and_convolution(int n, const std::vector<T>& a,
+                               const std::vector<T>& b) {
   std::vector<T> za = superset_zeta(n, a);
   std::vector<T> zb = superset_zeta(n, b);
   std::vector<T> d(1 << n);
@@ -17,4 +16,4 @@ std::vector<T> and_convolution(int n,
   return superset_mobius(n, d);
 }
 
-} // namespace cp
+}  // namespace cp

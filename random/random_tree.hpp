@@ -14,12 +14,8 @@ std::vector<int> random_rooted_tree(int n, int root = 0) {
   assert(0 <= root && root < n);
   if (n == 1) return {};
   std::vector<int> par(n, -1);
-  for (int i = root + 1; i < n; i++) {
-    par[i] = uniform(root, i - 1);
-  }
-  for (int i = 0; i < root; i++) {
-    par[i] = uniform(root, n + i - 1) % n;
-  }
+  for (int i = root + 1; i < n; i++) par[i] = uniform(root, i - 1);
+  for (int i = 0; i < root; i++) par[i] = uniform(root, n + i - 1) % n;
   return par;
 }
 
@@ -63,4 +59,4 @@ std::vector<std::pair<int, int>> random_forest(int n) {
   return edges;
 }
 
-} // namespace cp
+}  // namespace cp

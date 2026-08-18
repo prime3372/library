@@ -44,9 +44,7 @@ class centroid_decomposition {
   int find_centroid(int v, int pv, int mid) {
     for (int nv : g[v]) {
       if (nv == pv || removed[nv]) continue;
-      if (size[nv] > mid) {
-        return find_centroid(nv, v, mid);
-      }
+      if (size[nv] > mid) return find_centroid(nv, v, mid);
     }
     return v;
   }
@@ -65,4 +63,4 @@ class centroid_decomposition {
   }
 };
 
-} // namespace cp
+}  // namespace cp

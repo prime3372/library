@@ -19,4 +19,4 @@ std::vector<int> random_perm(int n) {
   return p;
 }
 
-} // namespace cp
+}  // namespace cp

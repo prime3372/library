@@ -47,4 +47,4 @@ class aho_corasick : public trie_tree<char_size, offset> {
   std::vector<int> lnk;
 };
 
-} // namespace cp
+}  // namespace cp

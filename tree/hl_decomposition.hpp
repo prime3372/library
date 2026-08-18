@@ -31,9 +31,7 @@ class hl_decomposition {
 
     auto first_dfs = [&](auto self, int v, int pv) -> void {
       size[v] = 1;
-      if (!g[v].empty() && g[v][0] == pv) {
-        std::swap(g[v][0], g[v].back());
-      }
+      if (!g[v].empty() && g[v][0] == pv) std::swap(g[v][0], g[v].back());
       for (int& nv : g[v]) {
         if (nv == pv) continue;
         self(self, nv, v);
@@ -66,4 +64,4 @@ class hl_decomposition {
   std::vector<int> size;
 };
 
-} // namespace cp
+}  // namespace cp

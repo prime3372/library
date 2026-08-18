@@ -84,4 +84,4 @@ class tree_lca {
   }
 };
 
-} // namespace cp
+}  // namespace cp
