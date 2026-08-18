@@ -55,25 +55,14 @@ class point {
     return point(rhs) /= lhs;
   }
 
-  long double dot(const point& rhs) const {
-    return x * rhs.x + y * rhs.y;
-  }
-  long double cross(const point& rhs) const {
-    return x * rhs.y - y * rhs.x;
-  }
+  long double dot(const point& rhs) const { return x * rhs.x + y * rhs.y; }
+  long double cross(const point& rhs) const { return x * rhs.y - y * rhs.x; }
 
   long double norm2() const { return x * x + y * y; }
   long double norm() const { return std::sqrt(x * x + y * y); }
   point normalize() const { return *this / norm(); }
 
   point rot() const { return point(y, -x); }
-
-  bool is_parallel(const point& rhs) const {
-    return std::abs(dot(rhs)) < eps;
-  }
-  bool is_vertical(const point& rhs) const {
-    return std::abs(cross(rhs)) < eps;
-  }
 
   friend bool operator==(const point& lhs, const point& rhs) {
     return std::abs(lhs.x - rhs.x) < eps && std::abs(lhs.y - rhs.y) < eps;
@@ -93,4 +82,4 @@ class point {
   static constexpr long double eps = 1e-9;
 };
 
-} // namespace cp
+}  // namespace cp

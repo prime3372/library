@@ -54,12 +54,8 @@ class ipoint {
     return ipoint(rhs) /= lhs;
   }
 
-  long long dot(const ipoint& rhs) const {
-    return x * rhs.x + y * rhs.y;
-  }
-  long long cross(const ipoint& rhs) const {
-    return x * rhs.y - y * rhs.x;
-  }
+  long long dot(const ipoint& rhs) const { return x * rhs.x + y * rhs.y; }
+  long long cross(const ipoint& rhs) const { return x * rhs.y - y * rhs.x; }
 
   long long norm2() const { return x * x + y * y; }
 
@@ -71,6 +67,9 @@ class ipoint {
     return {-y, x};
   }
 
+  bool is_parallel(const ipoint& rhs) const { return dot(rhs) == 0; }
+  bool is_vertical(const ipoint& rhs) const { return cross(rhs) == 0; }
+
   int ort() const {
     if (x == 0 && y == 0) return 0;
     if (x > 0 && y >= 0) return 1;
@@ -78,17 +77,10 @@ class ipoint {
     if (x < 0 && y <= 0) return 3;
     return 4;
   }
-  bool arg_less(const ipoint& other) const {
+  bool argless(const ipoint& other) const {
     int ort1 = ort(), ort2 = other.ort();
     if (ort1 != ort2) return ort1 < ort2;
     return cross(other) > 0;
-  }
-
-  bool is_parallel(const ipoint& rhs) const {
-    return dot(rhs) == 0;
-  }
-  bool is_vertical(const ipoint& rhs) const {
-    return cross(rhs) == 0;
   }
 
   friend bool operator==(const ipoint& lhs, const ipoint& rhs) {
@@ -106,4 +98,4 @@ class ipoint {
   }
 };
 
-} // namespace cp
+}  // namespace cp
