@@ -2,7 +2,7 @@
 
 #include "ds/fenwick_tree.hpp"
 #include "tree/centroid_decomposition.hpp"
-#include "tree/tree_lca.hpp"
+#include "tree/lowest_common_ancestor.hpp"
 #include <vector>
 
 using namespace std;
@@ -19,7 +19,7 @@ int main() {
   for (ll& ai : a) cin >> ai;
   vector<vector<int>> tree(n);
   centroid_decomposition cd(n);
-  tree_lca lca(n);
+  lowest_common_ancestor lca(n);
   for (int i = 0; i < n - 1; i++) {
     int u, v;
     cin >> u >> v;

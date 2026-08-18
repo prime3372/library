@@ -10,10 +10,10 @@
 
 namespace cp {
 
-class tree_lca {
+class lowest_common_ancestor {
  public:
-  tree_lca() : tree_lca(0) {}
-  explicit tree_lca(int _n) : n(_n), dep(_n), hld(_n) {}
+  lowest_common_ancestor() : n(0) {}
+  explicit lowest_common_ancestor(int _n) : n(_n), dep(_n), hld(_n) {}
 
   void add_edge(int a, int b) {
     assert(0 <= a && a < n);
@@ -39,7 +39,7 @@ class tree_lca {
     return hld.vertex[v - k];
   }
 
-  int lca(int a, int b) {
+  int operator()(int a, int b) {
     assert(initialized);
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
@@ -56,7 +56,7 @@ class tree_lca {
     assert(initialized);
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
-    int c = lca(a, b);
+    int c = (*this)(a, b);
     return dep[a] + dep[b] - dep[c] * 2;
   }
 
@@ -66,7 +66,7 @@ class tree_lca {
     assert(0 <= t && t < n);
     int l = dist(s, t);
     if (l < k) return -1;
-    return k < dist(s, lca(s, t)) ? up(s, k) : up(t, l - k);
+    return k < dist(s, (*this)(s, t)) ? up(s, k) : up(t, l - k);
   }
 
  private:
