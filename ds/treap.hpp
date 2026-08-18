@@ -31,7 +31,6 @@ template <class T> struct treap_node {
 
 template <class T> class treap : public treap_base<internal::treap_node<T>> {
   using node = internal::treap_node<T>;
-  using node_ptr = std::shared_ptr<node>;
   using base = treap_base<node>;
 
  public:
