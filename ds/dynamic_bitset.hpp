@@ -65,7 +65,7 @@ class dynamic_bitset {
 
   bs& flip() {
     if (n == 0) return *this;
-    for (int i = 0; i < int(a.size()); i++) { a[i] = ~a[i]; }
+    for (int i = 0; i < int(a.size()); i++) a[i] = ~a[i];
     if (n % w) a.back() &= mask(n % w) - 1;
     return *this;
   }

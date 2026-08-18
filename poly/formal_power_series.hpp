@@ -135,8 +135,8 @@ class formal_power_series {
     fps res(size() + 1);
     res[1] = 1;
     int mod = mint::mod();
-    for (int i = 2; i <= size(); i++) { res[i] = -res[mod % i] * (mod / i); }
-    for (int i = 0; i < size(); i++) { res[i + 1] *= a[i]; }
+    for (int i = 2; i <= size(); i++) res[i] = -res[mod % i] * (mod / i);
+    for (int i = 0; i < size(); i++) res[i + 1] *= a[i];
     return res;
   }
 

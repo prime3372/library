@@ -54,7 +54,7 @@ std::vector<std::pair<int, int>> random_undirected_graph(int n, int m) {
   assert(m <= max_m);
 
   hash_set<long long> used_edges;
-  for (auto [u, v] : edges) { used_edges.insert(1LL * u * n + v); }
+  for (auto [u, v] : edges) used_edges.insert(1LL * u * n + v);
 
   if (m > max_m / 2) {
     std::vector<std::pair<int, int>> candidates;
@@ -137,7 +137,7 @@ std::vector<std::pair<int, int>> random_directed_graph(int n, int m,
   assert(m <= max_m);
 
   hash_set<long long> used_edges;
-  for (auto [u, v] : edges) { used_edges.insert(1LL * u * n + v); }
+  for (auto [u, v] : edges) used_edges.insert(1LL * u * n + v);
 
   if (m > max_m / 2) {
     std::vector<std::pair<int, int>> candidates;
@@ -152,7 +152,7 @@ std::vector<std::pair<int, int>> random_directed_graph(int n, int m,
     }
     std::shuffle(candidates.begin(), candidates.end(), mt32);
     int needed = m - int(edges.size());
-    for (int i = 0; i < needed; ++i) { edges.emplace_back(candidates[i]); }
+    for (int i = 0; i < needed; ++i) edges.emplace_back(candidates[i]);
   } else {
     while (int(edges.size()) < m) {
       int u, v;

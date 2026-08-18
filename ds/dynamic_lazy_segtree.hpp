@@ -178,7 +178,7 @@ template <class M> class dynamic_lazy_segtree {
 
   void apply(node_ptr& p, size_t a, size_t b, int dep, size_t l, size_t r,
              F f) {
-    if (b <= l || r <= a) { return; }
+    if (b <= l || r <= a) return;
     if (!p) p = std::make_unique<node>(initial_vals[dep]);
     if (l <= a && b <= r) {
       all_apply(p, f);

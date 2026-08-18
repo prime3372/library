@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
                 << n_p << "'" << std::endl;
       return _wa;
     } else if (cnt <= display_max) {
-      if (!t_first.empty()) { t_first.push_back(' '); }
+      if (!t_first.empty()) t_first.push_back(' ');
       t_first.append(std::to_string(n_p));
     }
   }
