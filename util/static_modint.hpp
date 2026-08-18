@@ -10,7 +10,8 @@
 
 namespace cp {
 
-template <int m> requires (1 <= m) struct static_modint {
+template <int m> requires(1 <= m)
+struct static_modint {
   using mint = static_modint;
 
  public:
@@ -67,9 +68,7 @@ template <int m> requires (1 <= m) struct static_modint {
     v = (unsigned int)(z % umod());
     return *this;
   }
-  mint& operator/=(const mint& rhs) {
-    return *this = *this * rhs.inv();
-  }
+  mint& operator/=(const mint& rhs) { return *this = *this * rhs.inv(); }
 
   mint operator+() const { return *this; }
   mint operator-() const { return mint() - *this; }
@@ -148,11 +147,10 @@ using modint1000000007 = static_modint<1000000007>;
 
 namespace internal {
 
-template <int m>
-struct is_modint<static_modint<m>> : public std::true_type {};
+template <int m> struct is_modint<static_modint<m>> : public std::true_type {};
 template <int m>
 struct is_static_modint<static_modint<m>> : public std::true_type {};
 
-} // namespace internal
+}  // namespace internal
 
-} // namespace cp
+}  // namespace cp

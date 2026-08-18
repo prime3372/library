@@ -90,7 +90,7 @@ std::ostream& operator<<(std::ostream& os, __int128 val);
 std::ostream& operator<<(std::ostream& os, unsigned __int128 val);
 
 template <std::ranges::range Range>
-  requires (!std::is_convertible_v<Range, std::string>)
+requires(!std::is_convertible_v<Range, std::string>)
 std::ostream& operator<<(std::ostream& os, const Range& r);
 
 template <class T, class Container>
@@ -134,7 +134,7 @@ template <> struct delimiter_of<std::string> {
   char operator()(const std::string&) { return '\n'; }
 };
 
-} // namespace internal
+}  // namespace internal
 
 std::ostream& operator<<(std::ostream& os, __int128 val) {
   if (val == 0) return os << '0';
@@ -164,7 +164,7 @@ std::ostream& operator<<(std::ostream& os, unsigned __int128 val) {
 }
 
 template <std::ranges::range Range>
-  requires (!std::is_convertible_v<Range, std::string>)
+requires(!std::is_convertible_v<Range, std::string>)
 std::ostream& operator<<(std::ostream& os, const Range& r) {
   if (r.empty()) return os;
 
@@ -230,19 +230,24 @@ std::ostream& operator<<(std::ostream& os, const std::tuple<Args...>& t) {
 
   char delimiter = ' ';
   [&]<size_t... I>(std::index_sequence<I...>) {
-    ([&](const auto& x) {
-      if (internal::delimiter_of<std::decay_t<decltype(x)>>()(x) == '\n') {
-        delimiter = '\n';
-      }
-    }(std::get<I>(t)), ...);
+    (
+        [&](const auto& x) {
+          if (internal::delimiter_of<std::decay_t<decltype(x)>>()(x) == '\n') {
+            delimiter = '\n';
+          }
+        }(std::get<I>(t)),
+        ...);
   }(std::make_index_sequence<n>());
 
-  std::apply([&](const auto&... args) {
-    bool first = true;
-    ((first ? (os << args) : (os << delimiter << args), first = false), ...);
-  }, t);
+  std::apply(
+      [&](const auto&... args) {
+        bool first = true;
+        ((first ? (os << args) : (os << delimiter << args), first = false),
+         ...);
+      },
+      t);
 
   return os;
 }
 
-} // namespace cp
+}  // namespace cp

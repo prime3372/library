@@ -20,4 +20,4 @@ std::vector<std::pair<T, int>> run_length_encoding(const std::vector<T>& v) {
   return res;
 }
 
-} // namespace cp
+}  // namespace cp

@@ -70,9 +70,7 @@ template <int id> class dynamic_modint {
     v = bt.mul(v, rhs.v);
     return *this;
   }
-  mint& operator/=(const mint& rhs) {
-    return *this = *this * rhs.inv();
-  }
+  mint& operator/=(const mint& rhs) { return *this = *this * rhs.inv(); }
 
   mint operator+() const { return *this; }
   mint operator-() const { return mint() - *this; }
@@ -145,11 +143,10 @@ using modint = dynamic_modint<-1>;
 
 namespace internal {
 
-template <int id>
-struct is_modint<dynamic_modint<id>> : std::true_type {};
+template <int id> struct is_modint<dynamic_modint<id>> : std::true_type {};
 template <int id>
 struct is_dynamic_modint<dynamic_modint<id>> : std::true_type {};
 
-} // namespace internal
+}  // namespace internal
 
-} // namespace cp
+}  // namespace cp

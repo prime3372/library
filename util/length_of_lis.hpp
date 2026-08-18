@@ -24,4 +24,4 @@ int length_of_lis(const std::vector<T>& a) {
   return ans;
 }
 
-} // namespace cp
+}  // namespace cp

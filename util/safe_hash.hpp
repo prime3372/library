@@ -26,12 +26,11 @@ static unsigned long long splitmix64(unsigned long long x) {
   return x ^ (x >> 31);
 }
 
-template <class T>
-void hash_combine(unsigned long long& seed, const T& val) {
+template <class T> void hash_combine(unsigned long long& seed, const T& val) {
   seed ^= safe_hash<T>()(val) + (seed << 6) + (seed >> 2) + 0x9e3779b9ULL;
 }
 
-} // namespace internal
+}  // namespace internal
 
 template <class T> requires internal::is_integral_v<T> && (sizeof(T) <= 8)
 struct safe_hash<T> {
@@ -41,7 +40,7 @@ struct safe_hash<T> {
 };
 
 template <class T>
-  requires internal::is_signed_int128_v<T> || internal::is_unsigned_int128_v<T>
+requires internal::is_signed_int128_v<T> || internal::is_unsigned_int128_v<T>
 struct safe_hash<T> {
   unsigned long long operator()(const T& x) const {
     unsigned __int128 ux = x;
@@ -69,8 +68,7 @@ struct safe_hash<T> {
   }
 };
 
-template <std::ranges::range Range>
-struct safe_hash<Range> {
+template <std::ranges::range Range> struct safe_hash<Range> {
   unsigned long long operator()(const Range& r) const {
     unsigned long long hs = 0;
     for (const auto& x : r) internal::hash_combine(hs, x);
@@ -78,8 +76,7 @@ struct safe_hash<Range> {
   }
 };
 
-template <class T, class U>
-struct safe_hash<std::pair<T, U>> {
+template <class T, class U> struct safe_hash<std::pair<T, U>> {
   unsigned long long operator()(const std::pair<T, U>& p) const {
     unsigned long long hs = 0;
     internal::hash_combine(hs, p.first);
@@ -88,8 +85,7 @@ struct safe_hash<std::pair<T, U>> {
   }
 };
 
-template <class... Args>
-struct safe_hash<std::tuple<Args...>> {
+template <class... Args> struct safe_hash<std::tuple<Args...>> {
   unsigned long long operator()(const std::tuple<Args...>& t) const {
     unsigned long long hs = 0;
     [&]<size_t... I>(std::index_sequence<I...>) {
@@ -99,4 +95,4 @@ struct safe_hash<std::tuple<Args...>> {
   }
 };
 
-} // namespace cp
+}  // namespace cp

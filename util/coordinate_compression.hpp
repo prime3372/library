@@ -32,9 +32,7 @@ template <class T> class coordinate_compression {
   std::vector<int> operator()(const std::vector<T>& xs) {
     if (!initialized) init();
     std::vector<int> res(xs.size());
-    for (int i = 0; i < int(xs.size()); i++) {
-      res[i] = (*this)(xs[i]);
-    }
+    for (int i = 0; i < int(xs.size()); i++) res[i] = (*this)(xs[i]);
     return res;
   }
 
@@ -49,8 +47,7 @@ template <class T> class coordinate_compression {
     return int(d.size());
   }
 
-  friend std::ostream& operator<<(std::ostream& os,
-                                  coordinate_compression cc) {
+  friend std::ostream& operator<<(std::ostream& os, coordinate_compression cc) {
     if (!cc.initialized) cc.init();
     return os << cc.d;
   }
@@ -60,4 +57,4 @@ template <class T> class coordinate_compression {
   std::vector<T> d;
 };
 
-} // namespace cp
+}  // namespace cp

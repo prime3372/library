@@ -6,8 +6,7 @@
 
 namespace cp {
 
-template <class T = long long>
-T ipow(long long x, long long n) {
+template <class T = long long> T ipow(long long x, long long n) {
   assert(0 <= n);
   T r = 1, t = x;
   while (n) {
@@ -21,7 +20,7 @@ T ipow(long long x, long long n) {
 template <class T> T isqrt(T x) {
   T y = T(std::sqrt(double(x)));
   if (sizeof(T) > 8) {
-    y = (y + x / y) / 2; // Newton's method
+    y = (y + x / y) / 2;  // Newton's method
   }
   while (y != 0 && y > x / y) y--;
   while ((y + 1) <= x / (y + 1)) y++;
@@ -39,8 +38,6 @@ template <class T, class U> T quot(T x, U d) {
   return x >= 0 ? T(x / d) : T((x + 1) / d - 1);
 }
 
-template <class T, class U> U rem(T x, U m) {
-  return U(x - quot(x, m) * m);
-}
+template <class T, class U> U rem(T x, U m) { return U(x - quot(x, m) * m); }
 
-} // namespace cp
+}  // namespace cp
