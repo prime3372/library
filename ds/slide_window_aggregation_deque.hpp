@@ -14,9 +14,8 @@ template <class M> class slide_window_aggregation_deque {
  public:
   slide_window_aggregation_deque() : prod0(M::e()), prod1(M::e()) {}
 
-  void push_front(S x) { push0(x); }
-
-  void push_back(S x) { push1(x); }
+  void push_front(const S& x) { push0(x); }
+  void push_back(const S& x) { push1(x); }
 
   void pop_front() {
     assert(!empty());
@@ -25,7 +24,6 @@ template <class M> class slide_window_aggregation_deque {
     cum0.pop_back();
     prod0 = cum0.empty() ? M::e() : cum0.back();
   }
-
   void pop_back() {
     assert(!empty());
     if (a1.empty()) rebalance();

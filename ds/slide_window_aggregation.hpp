@@ -12,7 +12,7 @@ template <class M> class slide_window_aggregation {
  public:
   slide_window_aggregation() : prod0(M::e()), prod1(M::e()) {}
 
-  void push(S x) { push1(x); }
+  void push(const S& x) { push1(x); }
   void pop() {
     assert(!empty());
     if (a0.empty()) transfer();

@@ -18,7 +18,7 @@ template <class M> class segtree {
  public:
   segtree() : segtree(0) {}
   explicit segtree(int _n) : segtree(std::vector<S>(_n, M::e())) {}
-  explicit segtree(int _n, S val) : segtree(std::vector<S>(_n, val)) {}
+  explicit segtree(int _n, const S& val) : segtree(std::vector<S>(_n, val)) {}
   explicit segtree(const std::vector<S>& v) : n(int(v.size())) {
     sz = int(std::bit_ceil((unsigned int)(n)));
     log = std::countr_zero((unsigned int)(sz));
@@ -27,7 +27,7 @@ template <class M> class segtree {
     for (int i = sz - 1; i >= 1; i--) update(i);
   }
 
-  void set(int i, S x) {
+  void set(int i, const S& x) {
     assert(0 <= i && i < n);
     i += sz;
     d[i] = x;

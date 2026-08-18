@@ -23,7 +23,8 @@ template <class M> struct treap_acted_monoid_node {
   unsigned long long priority;
 
   treap_acted_monoid_node() {}
-  explicit treap_acted_monoid_node(S x) : val(x), prod(x), priority(mt64()) {}
+  explicit treap_acted_monoid_node(const S& x)
+      : val(x), prod(x), priority(mt64()) {}
   ~treap_acted_monoid_node() {
     delete left;
     delete right;
@@ -43,7 +44,9 @@ class treap_acted_monoid
 
   treap_acted_monoid() {}
   explicit treap_acted_monoid(int n) { build(std::vector<S>(n)); }
-  explicit treap_acted_monoid(int n, S val) { build(std::vector<S>(n, val)); }
+  explicit treap_acted_monoid(int n, const S& val) {
+    build(std::vector<S>(n, val));
+  }
   explicit treap_acted_monoid(const std::vector<S>& v) { build(v); }
 
   S prod(int l, int r) {
@@ -56,7 +59,7 @@ class treap_acted_monoid
     return res;
   }
 
-  void apply(int l, int r, F f) {
+  void apply(int l, int r, const F& f) {
     assert(0 <= l && l <= r && r <= size());
     if (l == r) return;
     auto s = split(root, l);

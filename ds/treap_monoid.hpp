@@ -22,7 +22,7 @@ template <class M> struct treap_monoid_node {
   unsigned long long priority;
 
   treap_monoid_node() {}
-  explicit treap_monoid_node(S x) : val(x), prod(x), priority(mt64()) {}
+  explicit treap_monoid_node(const S& x) : val(x), prod(x), priority(mt64()) {}
   ~treap_monoid_node() {
     delete left;
     delete right;
@@ -40,7 +40,7 @@ class treap_monoid : public treap_base<internal::treap_monoid_node<M>> {
  public:
   treap_monoid() {}
   explicit treap_monoid(int n) { build(std::vector<S>(n)); }
-  explicit treap_monoid(int n, S val) { build(std::vector<S>(n, val)); }
+  explicit treap_monoid(int n, const S& val) { build(std::vector<S>(n, val)); }
   explicit treap_monoid(const std::vector<S>& v) { build(v); }
 
   S prod(int l, int r) {

@@ -19,7 +19,7 @@ template <class M> class lazy_segtree {
  public:
   lazy_segtree() : lazy_segtree(0) {}
   explicit lazy_segtree(int _n) : lazy_segtree(std::vector<S>(_n, M::e())) {}
-  explicit lazy_segtree(int _n, S val)
+  explicit lazy_segtree(int _n, const S& val)
       : lazy_segtree(std::vector<S>(_n, val)) {}
   explicit lazy_segtree(const std::vector<S>& v) : n(int(v.size())) {
     sz = int(std::bit_ceil((unsigned int)(n)));
@@ -30,7 +30,7 @@ template <class M> class lazy_segtree {
     for (int i = sz - 1; i >= 1; i--) update(i);
   }
 
-  void set(int i, S x) {
+  void set(int i, const S& x) {
     assert(0 <= i && i < n);
     i += sz;
     for (int j = log; j >= 1; j--) push(i >> j);
@@ -78,7 +78,7 @@ template <class M> class lazy_segtree {
     for (int j = 1; j <= log; j++) update(i >> j);
   }
 
-  void apply(int l, int r, F f) {
+  void apply(int l, int r, const F& f) {
     assert(0 <= l && l <= r && r <= n);
     if (l == r) return;
 
