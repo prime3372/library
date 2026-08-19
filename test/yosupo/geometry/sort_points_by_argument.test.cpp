@@ -21,8 +21,8 @@ int main() {
     if (lhs.x < 0 && lhs.y == 0) return false;
     if (rhs.x < 0 && rhs.y == 0) return true;
     int lo = lhs.ort(), ro = rhs.ort();
-    if (lo > 2) lo -= 5;
-    if (ro > 2) ro -= 5;
+    if (lo >= 3) lo -= 5;
+    if (ro >= 3) ro -= 5;
     if (lo != ro) return lo < ro;
     return lhs.cross(rhs) > 0;
   });
