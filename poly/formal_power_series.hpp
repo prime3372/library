@@ -88,9 +88,6 @@ class formal_power_series {
   friend fps operator/(const fps& lhs, const mint& rhs) {
     return fps(lhs) /= rhs;
   }
-  friend fps operator/(const mint& lhs, const fps& rhs) {
-    return fps(rhs) /= lhs;
-  }
 
   fps operator>>(int w) const {
     if (size() <= w) return fps();
@@ -98,7 +95,6 @@ class formal_power_series {
     b.erase(b.begin(), b.begin() + w);
     return fps(b);
   }
-
   fps operator<<(int w) const {
     auto b = a;
     b.insert(b.begin(), w, 0);

@@ -88,9 +88,6 @@ class formal_power_series_ll {
   friend fps operator/(const fps& lhs, long long rhs) {
     return fps(lhs) /= rhs;
   }
-  friend fps operator/(long long lhs, const fps& rhs) {
-    return fps(rhs) /= lhs;
-  }
 
   int size() const { return int(a.size()); }
   bool empty() const { return a.empty(); }
