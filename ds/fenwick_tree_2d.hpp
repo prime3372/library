@@ -11,7 +11,7 @@ namespace cp {
 template <class T> class fenwick_tree_2d {
  public:
   fenwick_tree_2d() : X(0), Y(0) {}
-  fenwick_tree_2d(int _h, int _w) : X(_h), Y(_w), d(_h) {
+  explicit fenwick_tree_2d(int _h, int _w) : X(_h), Y(_w), d(_h) {
     for (int x = 0; x < X; x++) {
       d[x] = fenwick_tree<T>(Y);
     }
@@ -45,6 +45,12 @@ template <class T> class fenwick_tree_2d {
     return ref(this, x);
   }
 
+  T sum(int xl, int yl, int xr, int yr) const {
+    assert(0 <= xl && xl <= xr && xr <= X);
+    assert(0 <= yl && yl <= yr && yr <= Y);
+    return sum(xr, yr) - sum(xr, yl) - sum(xl, yr) + sum(xl, yl);
+  }
+
   T sum(int x, int y) const {
     assert(0 <= x && x <= X);
     assert(0 <= y && y <= Y);
@@ -54,12 +60,6 @@ template <class T> class fenwick_tree_2d {
       x -= x & -x;
     }
     return res;
-  }
-
-  T sum(int xl, int yl, int xr, int yr) const {
-    assert(0 <= xl && xl <= xr && xr <= X);
-    assert(0 <= yl && yl <= yr && yr <= Y);
-    return sum(xr, yr) - sum(xr, yl) - sum(xl, yr) + sum(xl, yl);
   }
 
   void imos_add(int xl, int yl, int xr, int yr, T w) {

@@ -13,7 +13,7 @@ namespace cp {
 template <class T> class dynamic_fenwick_tree_2d {
  public:
   dynamic_fenwick_tree_2d() : X(0), Y(0) {}
-  dynamic_fenwick_tree_2d(int _h, size_t _w) : X(_h), Y(_w), d(_h) {
+  explicit dynamic_fenwick_tree_2d(int _h, size_t _w) : X(_h), Y(_w), d(_h) {
     for (int x = 0; x < X; x++) d[x] = dynamic_fenwick_tree<T>(Y);
   }
 
@@ -45,6 +45,12 @@ template <class T> class dynamic_fenwick_tree_2d {
     return ref(this, x);
   }
 
+  T sum(int xl, size_t yl, int xr, size_t yr) const {
+    assert(0 <= xl && xl <= xr && xr <= X);
+    assert(yl <= yr && yr <= Y);
+    return sum(xr, yr) - sum(xr, yl) - sum(xl, yr) + sum(xl, yl);
+  }
+
   T sum(int x, size_t y) const {
     assert(0 <= x && x <= X);
     assert(y <= Y);
@@ -54,12 +60,6 @@ template <class T> class dynamic_fenwick_tree_2d {
       x -= x & -x;
     }
     return s;
-  }
-
-  T sum(int xl, size_t yl, int xr, size_t yr) const {
-    assert(0 <= xl && xl <= xr && xr <= X);
-    assert(yl <= yr && yr <= Y);
-    return sum(xr, yr) - sum(xr, yl) - sum(xl, yr) + sum(xl, yl);
   }
 
   void imos_add(int xl, size_t yl, int xr, size_t yr, T w) {
