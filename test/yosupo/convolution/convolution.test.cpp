@@ -10,6 +10,8 @@ using namespace cp;
 using mint = modint998244353;
 
 int main() {
+  ios::sync_with_stdio(false);
+  std::cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
   vector<mint> a(n), b(m);
