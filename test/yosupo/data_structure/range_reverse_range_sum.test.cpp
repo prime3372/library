@@ -15,11 +15,11 @@ int main() {
   cin >> n >> q;
   vector<ll> a(n);
   for (ll& ai : a) cin >> ai;
-  treap_monoid<alg::add<ll>> seg(a);
+  treap_monoid<alg::add<ll>> tp(a);
   while (q--) {
     int t, l, r;
     cin >> t >> l >> r;
-    if (t == 0) seg.reverse(l, r);
-    else cout << seg.prod(l, r) << "\n";
+    if (t == 0) tp.reverse(l, r);
+    else cout << tp.prod(l, r) << "\n";
   }
 }
