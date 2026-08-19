@@ -73,9 +73,7 @@ std::istream& operator>>(std::istream& is, std::pair<T, U>& p) {
 
 template <class... Args>
 std::istream& operator>>(std::istream& is, std::tuple<Args...>& t) {
-  [&]<size_t... I>(std::index_sequence<I...>) {
-    (is >> ... >> get<I>(t));
-  }(std::make_index_sequence<sizeof...(Args)>());
+  std::apply([&](auto&... args) { (is >> ... >> args); }, t);
   return is;
 }
 
@@ -170,7 +168,8 @@ std::ostream& operator<<(std::ostream& os, const Range& r) {
 
   char delimiter = ' ';
   for (const auto& x : r) {
-    if (internal::delimiter_of<std::decay_t<decltype(x)>>()(x) == '\n') {
+    using T = std::decay_t<decltype(x)>;
+    if (internal::delimiter_of<T>()(x) == '\n') {
       delimiter = '\n';
     }
   }
@@ -232,7 +231,8 @@ std::ostream& operator<<(std::ostream& os, const std::tuple<Args...>& t) {
   [&]<size_t... I>(std::index_sequence<I...>) {
     (
         [&](const auto& x) {
-          if (internal::delimiter_of<std::decay_t<decltype(x)>>()(x) == '\n') {
+          using T = std::decay_t<decltype(x)>;
+          if (internal::delimiter_of<T>()(x) == '\n') {
             delimiter = '\n';
           }
         }(std::get<I>(t)),

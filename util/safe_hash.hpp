@@ -88,9 +88,9 @@ template <class T, class U> struct safe_hash<std::pair<T, U>> {
 template <class... Args> struct safe_hash<std::tuple<Args...>> {
   unsigned long long operator()(const std::tuple<Args...>& t) const {
     unsigned long long hs = 0;
-    [&]<size_t... I>(std::index_sequence<I...>) {
-      (internal::hash_combine(hs, get<I>(t)), ...);
-    }(std::make_index_sequence<sizeof...(Args)>());
+    std::apply(
+        [&](const auto&... args) { (internal::hash_combine(hs, args), ...); },
+        t);
     return hs;
   }
 };
