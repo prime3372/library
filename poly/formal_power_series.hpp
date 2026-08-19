@@ -147,32 +147,32 @@ class formal_power_series {
   fps inv(int n) const {
     assert(0 <= n);
     assert(!a.empty() && a[0] != 0);
-    fps g(1, a[0].inv());
+    fps ans(1, a[0].inv());
     for (int d = 1; d < n; d <<= 1) {
-      g = 2 * g - g * g * prefix(2 * d);
-      g.resize(2 * d);
+      ans = 2 * ans - ans * ans * prefix(2 * d);
+      ans.resize(2 * d);
     }
-    return g.prefix(n);
+    return ans.prefix(n);
   }
 
   fps log() const { return log(size()); }
   fps log(int n) const {
     assert(0 <= n);
     assert(!a.empty() && a[0] == 1);
-    fps g = prefix(n);
-    return (g.diff() * g.inv()).integral().prefix(n);
+    fps f = prefix(n);
+    return (f.diff() * f.inv()).integral().prefix(n);
   }
 
   fps exp() const { return exp(size()); }
   fps exp(int n) const {
     assert(0 <= n);
     assert(a.empty() || a[0] == 0);
-    fps g(1, 1);
+    fps ans(1, 1);
     for (int d = 1; d < n; d <<= 1) {
-      g = g - g * g.log(2 * d) + g * prefix(2 * d);
-      g.resize(2 * d);
+      ans = ans - ans * ans.log(2 * d) + ans * prefix(2 * d);
+      ans.resize(2 * d);
     }
-    return g.prefix(n);
+    return ans.prefix(n);
   }
 
   fps pow(long long k) const { return pow(k, size()); }
