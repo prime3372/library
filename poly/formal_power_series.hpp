@@ -169,7 +169,7 @@ class formal_power_series {
     assert(a.empty() || a[0] == 0);
     fps ans(1, 1);
     for (int d = 1; d < n; d <<= 1) {
-      ans = ans - ans * ans.log(2 * d) + ans * prefix(2 * d);
+      ans = ans * (1 - ans.log(2 * d) + prefix(2 * d));
       ans.resize(2 * d);
     }
     return ans.prefix(n);
