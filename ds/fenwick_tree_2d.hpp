@@ -11,7 +11,7 @@ namespace cp {
 template <class T> class fenwick_tree_2d {
  public:
   fenwick_tree_2d() : X(0), Y(0) {}
-  explicit fenwick_tree_2d(int _h, int _w) : X(_h), Y(_w), d(_h) {
+  explicit fenwick_tree_2d(int x, int y) : X(x), Y(y), d(_h) {
     for (int x = 0; x < X; x++) {
       d[x] = fenwick_tree<T>(Y);
     }

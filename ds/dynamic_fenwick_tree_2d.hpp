@@ -13,7 +13,7 @@ namespace cp {
 template <class T> class dynamic_fenwick_tree_2d {
  public:
   dynamic_fenwick_tree_2d() : X(0), Y(0) {}
-  explicit dynamic_fenwick_tree_2d(int _h, size_t _w) : X(_h), Y(_w), d(_h) {
+  explicit dynamic_fenwick_tree_2d(int x, size_t y) : X(x), Y(y), d(x) {
     for (int x = 0; x < X; x++) d[x] = dynamic_fenwick_tree<T>(Y);
   }
 
