@@ -15,7 +15,6 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-
   vector<ll> l(n + q), d(n + q), r(n + q), u(n + q), w(n + q), x(q), y(q);
   vector<int> t(q);
   for (int i = 0; i < n; i++) {
@@ -30,9 +29,10 @@ int main() {
     }
   }
 
-  coordinate_compression ccx(x), ccy(y);
-  dynamic_fenwick_tree_2d<ll> fw(ccx.size() + 1, ccy.size() + 1);
-  vector<int> cx = ccx(x), cy = ccy(y), cl = ccx(l), cd = ccy(d), cr = ccx(r), cu = ccy(u);
+  coordinate_compression comp_x(x), comp_y(y);
+  dynamic_fenwick_tree_2d<ll> fw(comp_x.size() + 1, comp_y.size() + 1);
+  auto cx = comp_x(x), cy = comp_y(y);
+  auto cl = comp_x(l), cd = comp_y(d), cr = comp_x(r), cu = comp_y(u);
   for (int i = 0; i < n; i++) {
     fw.imos_add(cl[i], cd[i], cr[i], cu[i], w[i]);
   }
