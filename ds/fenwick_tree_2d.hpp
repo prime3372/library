@@ -10,87 +10,87 @@ namespace cp {
 
 template <class T> class fenwick_tree_2d {
  public:
-  fenwick_tree_2d() : X(0), Y(0) {}
-  explicit fenwick_tree_2d(int x, int y) : X(x), Y(y), d(_h) {
-    for (int x = 0; x < X; x++) {
-      d[x] = fenwick_tree<T>(Y);
+  fenwick_tree_2d() : n(0), m(0) {}
+  explicit fenwick_tree_2d(int _n, int _m) : n(_n), m(_m), fw(_n) {
+    for (int i = 0; i < n; i++) {
+      fw[i] = fenwick_tree<T>(m);
     }
   }
 
-  void add(int x, int y, T w) {
-    assert(0 <= x && x < X);
-    assert(0 <= y && y < Y);
-    x++;
-    while (x <= X) {
-      d[x - 1].add(y, w);
-      x += x & -x;
+  void add(int i, int j, T w) {
+    assert(0 <= i && i < n);
+    assert(0 <= j && j < m);
+    i++;
+    while (i <= n) {
+      fw[i - 1].add(j, w);
+      i += i & -i;
     }
   }
 
   class ref {
    public:
-    T operator[](int y) const {
-      assert(0 <= y && y < ptr->Y);
-      return ptr->sum(x, y, x + 1, y + 1);
+    T operator[](int j) const {
+      assert(0 <= j && j < ptr->m);
+      return ptr->sum(i, j, i + 1, j + 1);
     }
-    ref(const fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), x(_i) {}
+    ref(const fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), i(_i) {}
 
    private:
     const fenwick_tree_2d* ptr;
-    int x;
+    int i;
   };
 
-  ref operator[](int x) const {
-    assert(0 <= x && x < X);
-    return ref(this, x);
+  ref operator[](int i) const {
+    assert(0 <= i && i < n);
+    return ref(this, i);
   }
 
-  T sum(int xl, int yl, int xr, int yr) const {
-    assert(0 <= xl && xl <= xr && xr <= X);
-    assert(0 <= yl && yl <= yr && yr <= Y);
-    return sum(xr, yr) - sum(xr, yl) - sum(xl, yr) + sum(xl, yl);
+  T sum(int l, int d, int r, int u) const {
+    assert(0 <= l && l <= r && r <= n);
+    assert(0 <= d && d <= u && u <= m);
+    return sum(r, u) - sum(r, d) - sum(l, u) + sum(l, d);
   }
 
-  T sum(int x, int y) const {
-    assert(0 <= x && x <= X);
-    assert(0 <= y && y <= Y);
+  T sum(int r, int u) const {
+    assert(0 <= r && r <= n);
+    assert(0 <= u && u <= m);
     T res = 0;
-    while (x) {
-      res += d[x - 1].sum(y);
-      x -= x & -x;
+    while (r) {
+      res += fw[r - 1].sum(u);
+      r -= r & -r;
     }
     return res;
   }
 
-  void imos_add(int xl, int yl, int xr, int yr, T w) {
-    assert(0 <= xl && xl <= xr && xr <= X);
-    assert(0 <= yl && yl <= yr && yr <= Y);
-    if (xl < X && yl < Y) add(xl, yl, w);
-    if (xl < X && yr < Y) add(xl, yr, -w);
-    if (xr < X && yl < Y) add(xr, yl, -w);
-    if (xr < X && yr < Y) add(xr, yr, w);
+  void imos_add(int l, int d, int r, int u, T x) {
+    assert(0 <= l && l <= r && r <= n);
+    assert(0 <= d && d <= u && u <= m);
+    if (l < n && d < m) add(l, d, x);
+    if (l < n && u < m) add(l, u, -x);
+    if (r < n && d < m) add(r, d, -x);
+    if (r < n && u < m) add(r, u, x);
   }
 
-  T imos_get(int x, int y) const {
-    assert(0 <= x && x < X);
-    assert(0 <= y && y < Y);
-    return sum(x + 1, y + 1);
+  T imos_get(int i, int j) const {
+    assert(0 <= i && i < n);
+    assert(0 <= j && j < m);
+    return sum(i + 1, j + 1);
   }
 
   friend std::ostream& operator<<(std::ostream& os, const fenwick_tree_2d& fw) {
-    for (int x = 0; x < fw.X; x++) {
-      for (int y = 0; y < fw.Y; y++) {
-        os << fw[x][y];
-        if (y != fw.Y - 1) os << " ";
+    for (int i = 0; i < fw.n; i++) {
+      for (int j = 0; j < fw.m; j++) {
+        os << fw[i][j];
+        if (j != fw.m - 1) os << " ";
       }
-      if (x != fw.X - 1) os << "\n";
+      if (i != fw.n - 1) os << "\n";
     }
     return os;
   }
 
  private:
-  int X, Y;
-  std::vector<fenwick_tree<T>> d;
+  int n, m;
+  std::vector<fenwick_tree<T>> fw;
 };
 
 }  // namespace cp

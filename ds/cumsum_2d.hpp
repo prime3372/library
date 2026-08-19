@@ -8,77 +8,77 @@ namespace cp {
 
 template <class T> class cumsum_2d {
  public:
-  cumsum_2d() : X(0), Y(0) {}
-  explicit cumsum_2d(int x, int y) : X(x), Y(y), val(x, std::vector<T>(y)) {}
-  explicit cumsum_2d(int x, int y, const T& w)
-      : X(x), Y(y), val(x, std::vector<T>(y, w)) {}
+  cumsum_2d() : n(0), m(0) {}
+  explicit cumsum_2d(int _n, int _m) : cumsum_2d(_n, _m, T()) {}
+  explicit cumsum_2d(int _n, int _m, const T& x)
+      : n(_n), m(_m), val(_n, std::vector<T>(_m, x)) {}
 
   void accumulate() {
-    cum.resize(X + 1, std::vector<T>(Y + 1));
-    for (int x = 0; x < X; x++) {
-      for (int y = 0; y < Y; y++) {
-        cum[x + 1][y + 1] = cum[x + 1][y] + val[x][y];
+    cum.resize(n + 1, std::vector<T>(m + 1));
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        cum[i + 1][j + 1] = cum[i + 1][j] + val[i][j];
       }
     }
-    for (int y = 0; y < Y; y++) {
-      for (int x = 0; x < X; x++) {
-        cum[x + 1][y + 1] += cum[x][y + 1];
+    for (int j = 0; j < m; j++) {
+      for (int i = 0; i < n; i++) {
+        cum[i + 1][j + 1] += cum[i][j + 1];
       }
     }
     accumulated = true;
   }
 
-  std::vector<T>& operator[](int x) {
-    assert(0 <= x && x < X);
-    return val[x];
+  std::vector<T>& operator[](int i) {
+    assert(0 <= i && i < n);
+    return val[i];
   }
-  const std::vector<T>& operator[](int x) const {
-    assert(0 <= x && x < X);
-    return val[x];
+  const std::vector<T>& operator[](int i) const {
+    assert(0 <= i && i < n);
+    return val[i];
   }
 
-  T sum(int xr, int yr) {
-    assert(0 <= xr && xr <= X);
-    assert(0 <= yr && yr <= Y);
+  T sum(int r, int u) {
+    assert(0 <= r && r <= n);
+    assert(0 <= u && u <= m);
     if (!accumulated) accumulate();
-    return cum[xr][yr];
+    return cum[r][u];
   }
 
-  T sum(int xl, int yl, int xr, int yr) {
-    assert(0 <= xl && xl <= xr && xr <= X);
-    assert(0 <= yl && yl <= yr && yr <= Y);
+  T sum(int l, int d, int r, int u) {
+    assert(0 <= l && l <= r && r <= n);
+    assert(0 <= d && d <= u && u <= m);
     if (!accumulated) accumulate();
-    return cum[xr][yr] - cum[xr][yl] - cum[xl][yr] + cum[xl][yl];
+    return cum[r][u] - cum[r][d] - cum[l][u] + cum[l][d];
   }
 
-  void imos_add(int xl, int yl, int xr, int yr, T w) {
-    assert(0 <= xl && xl <= xr && xr <= X);
-    assert(0 <= yl && yl <= yr && yr <= Y);
-    if (xl < X && yl < Y) val[xl][yl] += w;
-    if (xl < X && yr < Y) val[xl][yr] -= w;
-    if (xr < X && yl < Y) val[xr][yl] -= w;
-    if (xr < X && yr < Y) val[xr][yr] += w;
+  void imos_add(int l, int d, int r, int u, T x) {
+    assert(0 <= l && l <= r && r <= n);
+    assert(0 <= d && d <= u && u <= m);
+    if (l < n && d < m) val[l][d] += x;
+    if (l < n && u < m) val[l][u] -= x;
+    if (r < n && d < m) val[r][d] -= x;
+    if (r < n && u < m) val[r][u] += x;
   }
 
-  T imos_get(int x, int y) {
-    assert(0 <= x && x < X);
-    assert(0 <= y && y < Y);
-    return sum(x + 1, y + 1);
+  T imos_get(int i, int j) {
+    assert(0 <= i && i < n);
+    assert(0 <= j && j < m);
+    return sum(i + 1, j + 1);
   }
 
   friend std::ostream& operator<<(std::ostream& os, const cumsum_2d& sum) {
-    for (int x = 0; x < sum.X; x++) {
-      for (int y = 0; y < sum.Y; y++) {
-        os << sum[x][y];
-        if (y != sum.Y - 1) os << " ";
+    for (int i = 0; i < sum.n; i++) {
+      for (int j = 0; j < sum.m; j++) {
+        os << sum[i][j];
+        if (j != sum.m - 1) os << " ";
       }
-      if (x != sum.X - 1) os << "\n";
+      if (i != sum.n - 1) os << "\n";
     }
     return os;
   }
 
  private:
-  int X, Y;
+  int n, m;
   bool accumulated = false;
   std::vector<std::vector<T>> val;
   std::vector<std::vector<T>> cum;
