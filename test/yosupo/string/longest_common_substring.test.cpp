@@ -9,6 +9,8 @@ using namespace std;
 using namespace cp;
 
 int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
   string s, t;
   cin >> s >> t;
   int n = int(s.size()), m = int(t.size());
