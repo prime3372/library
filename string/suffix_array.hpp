@@ -7,7 +7,7 @@
 namespace cp {
 
 // https://cp-algorithms.com/string/suffix-array.html O(NlogN) approach
-// Note: index[] and rank[] are used instead of p[] and c[]
+// Note: idx[] and rank[] are used instead of p[] and c[]
 template <class Str> std::vector<int> suffix_array(const Str& s) {
   int n = int(s.size()) + 1;
 
@@ -24,12 +24,12 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
     rank_num = int(t.size());
   }
 
-  std::vector<int> index(n), cnt(n, 0);
+  std::vector<int> idx(n), cnt(n, 0);
   for (int i = 0; i < n; i++) cnt[rank[i]]++;
   for (int i = 1; i < n; i++) cnt[i] += cnt[i - 1];
-  for (int i = 0; i < n; i++) index[--cnt[rank[i]]] = i;
+  for (int i = 0; i < n; i++) idx[--cnt[rank[i]]] = i;
 
-  std::vector<int> nindex(n), nrank(n);
+  std::vector<int> nidx(n), nrank(n);
   for (int step = 0; (1 << step) < n; step++) {
     int w = 1 << step;
 
@@ -38,24 +38,24 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
     for (int i = 1; i < rank_num; i++) cnt[i] += cnt[i - 1];
 
     for (int i = n - 1; i >= 0; i--) {
-      int j = index[i] - w;
+      int j = idx[i] - w;
       if (j < 0) j += n;
-      nindex[--cnt[rank[j]]] = j;
+      nidx[--cnt[rank[j]]] = j;
     }
 
     rank_num = 1;
-    nrank[nindex[0]] = 0;
+    nrank[nidx[0]] = 0;
     for (int i = 1; i < n; i++) {
-      long long cur = 1LL * rank[nindex[i]] * n + rank[(nindex[i] + w) % n];
-      long long pre = 1LL * rank[nindex[i - 1]] * n + rank[(nindex[i - 1] + w) % n];
+      long long cur = 1LL * rank[nidx[i]] * n + rank[(nidx[i] + w) % n];
+      long long pre = 1LL * rank[nidx[i - 1]] * n + rank[(nidx[i - 1] + w) % n];
       if (cur != pre) rank_num++;
-      nrank[nindex[i]] = rank_num - 1;
+      nrank[nidx[i]] = rank_num - 1;
     }
 
-    index.swap(nindex);
+    idx.swap(nidx);
     rank.swap(nrank);
   }
-  return index;
+  return idx;
 }
 
 }  // namespace cp
