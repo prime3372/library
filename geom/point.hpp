@@ -52,21 +52,11 @@ class point {
     return point(lhs) /= rhs;
   }
 
-  point rot() const { return point(y, -x); }
-
+  long double norm() const { return std::sqrt(x * x + y * y); }
   long double norm2() const { return x * x + y * y; }
-  long double norm() const { return std::sqrtl(x * x + y * y); }
   point normalize() const { return *this / norm(); }
 
-  long double dot(const point& rhs) const { return x * rhs.x + y * rhs.y; }
-  long double cross(const point& rhs) const { return x * rhs.y - y * rhs.x; }
-
-  friend bool operator==(const point& lhs, const point& rhs) {
-    return std::abs(lhs.x - rhs.x) < eps && std::abs(lhs.y - rhs.y) < eps;
-  }
-  friend bool operator!=(const point& lhs, const point& rhs) {
-    return !(lhs == rhs);
-  }
+  point rot() const { return point(y, -x); }
 
   friend std::istream& operator>>(std::istream& is, point& v) {
     return is >> v.x >> v.y;
@@ -74,9 +64,13 @@ class point {
   friend std::ostream& operator<<(std::ostream& os, const point& v) {
     return os << v.x << " " << v.y;
   }
-
- private:
-  static constexpr long double eps = 1e-9;
 };
+
+long double dot(const point& lhs, const point& rhs) {
+  return lhs.x * rhs.x + lhs.y * rhs.y;
+}
+long double cross(const point& lhs, const point& rhs) {
+  return lhs.x * rhs.y - lhs.y * rhs.x;
+}
 
 }  // namespace cp

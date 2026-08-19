@@ -51,15 +51,9 @@ class ipoint {
     return ipoint(lhs) /= rhs;
   }
 
-  ipoint rot() const { return ipoint(y, -x); }
-
   long long norm2() const { return x * x + y * y; }
 
-  long long dot(const ipoint& rhs) const { return x * rhs.x + y * rhs.y; }
-  long long cross(const ipoint& rhs) const { return x * rhs.y - y * rhs.x; }
-
-  bool is_parallel(const ipoint& rhs) const { return dot(rhs) == 0; }
-  bool is_orthogonal(const ipoint& rhs) const { return cross(rhs) == 0; }
+  ipoint rot() const { return ipoint(y, -x); }
 
   int ort() const {
     if (x == 0 && y == 0) return 0;
@@ -67,11 +61,6 @@ class ipoint {
     if (x <= 0 && y > 0) return 2;
     if (x < 0 && y <= 0) return 3;
     return 4;
-  }
-  bool argless(const ipoint& other) const {
-    int ort1 = ort(), ort2 = other.ort();
-    if (ort1 != ort2) return ort1 < ort2;
-    return cross(other) > 0;
   }
 
   friend bool operator==(const ipoint& lhs, const ipoint& rhs) {
@@ -100,5 +89,25 @@ class ipoint {
     return os << v.x << " " << v.y;
   }
 };
+
+long long dot(const ipoint& lhs, const ipoint& rhs) {
+  return lhs.x * rhs.x + lhs.y * rhs.y;
+}
+long long cross(const ipoint& lhs, const ipoint& rhs) {
+  return lhs.x * rhs.y - lhs.y * rhs.x;
+}
+
+bool is_parallel(const ipoint& lhs, const ipoint& rhs) {
+  return dot(lhs, rhs) == 0;
+}
+bool is_orthogonal(const ipoint& lhs, const ipoint& rhs) {
+  return cross(lhs, rhs) == 0;
+}
+
+bool argless(const ipoint& lhs, const ipoint& rhs) {
+  int lo = lhs.ort(), ro = rhs.ort();
+  if (lo != ro) return lo < ro;
+  return cross(lhs, rhs) > 0;
+}
 
 }  // namespace cp

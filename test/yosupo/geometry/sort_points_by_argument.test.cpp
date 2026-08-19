@@ -24,7 +24,7 @@ int main() {
     if (lo >= 3) lo -= 5;
     if (ro >= 3) ro -= 5;
     if (lo != ro) return lo < ro;
-    return lhs.cross(rhs) > 0;
+    return cross(lhs, rhs) > 0;
   });
   for (auto& p : ps) cout << p << "\n";
 }
