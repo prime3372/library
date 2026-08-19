@@ -46,8 +46,8 @@ template <class Str> std::vector<int> suffix_array(const Str& s) {
     rank_num = 1;
     nrank[nindex[0]] = 0;
     for (int i = 1; i < n; i++) {
-      std::pair cur = {rank[nindex[i]], rank[(nindex[i] + w) % n]};
-      std::pair pre = {rank[nindex[i - 1]], rank[(nindex[i - 1] + w) % n]};
+      long long cur = rank[nindex[i]] + rank[(nindex[i] + w) % n] * n;
+      long long pre = rank[nindex[i - 1]] + rank[(nindex[i - 1] + w) % n] * n;
       if (cur != pre) rank_num++;
       nrank[nindex[i]] = rank_num - 1;
     }
