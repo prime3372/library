@@ -107,7 +107,7 @@ class treap_acted_monoid
 
   void all_apply(node* p, F f) {
     p->lz = M::composition(f, p->lz);
-    p->val = M::composition(f, p->val);
+    p->val = M::mapping(f, p->val);
     p->prod = M::mapping(f, p->prod);
   }
 };
