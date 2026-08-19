@@ -55,7 +55,7 @@ class point {
   point rot() const { return point(y, -x); }
 
   long double norm2() const { return x * x + y * y; }
-  long double norm() const { return std::sqrt(x * x + y * y); }
+  long double norm() const { return std::sqrtl(x * x + y * y); }
   point normalize() const { return *this / norm(); }
 
   long double dot(const point& rhs) const { return x * rhs.x + y * rhs.y; }
