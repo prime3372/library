@@ -30,7 +30,7 @@ class two_edge_connected_components {
       } else {
         id[v] = k++;
       }
-      for (const auto& e : link.g[v]) {
+      for (auto& e : link.g[v]) {
         if (id[e.to] == -1) self(self, e.to, v, k);
       }
     };
