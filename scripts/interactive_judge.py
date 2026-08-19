@@ -44,13 +44,11 @@ def main():
 
     targets = [(sol, "sol.exe"), (gen, "gen.exe"), (act, "act.exe")]
 
-    procs = [(src, subprocess.Popen(["g++", src] + opts + ["-o", exe])) for src, exe in targets]
+    procs = [subprocess.Popen(["g++", src] + opts + ["-o", exe]) for src, exe in targets]
 
     failed = False
-    for src, p in procs:
+    for p in procs:
         if p.wait() != 0 and not failed:
-            if os.path.exists(src):
-                subprocess.run(["code", src], shell=True)
             failed = True
 
     if failed:
@@ -66,14 +64,12 @@ def main():
                 subprocess.run(["./gen.exe"], stdout=f_in, timeout=timeout / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"{BLUE}Test {i} Fail Timed Out {gen}{RESET}")
-            subprocess.run(["code", "in.txt"], shell=True)
             break
         except subprocess.CalledProcessError:
             print(f"{BLUE}Test {i} Fail Runtime Error {gen}{RESET}")
-            subprocess.run(["code", "in.txt"], shell=True)
             break
 
-        # run sol.exe
+        # run sol.exe and act.exe
         p_sol = subprocess.Popen(["./sol.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
         p_act = subprocess.Popen(["./act.exe", "in.txt"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
 
@@ -100,32 +96,27 @@ def main():
 
         if tle:
             print(f"{YELLOW}Test {i} TLE > {timeout} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
         if p_sol.returncode != 0:
             print(f"{MAGENTA}Test {i} RE {t} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
         if t > timelimit:
             print(f"{YELLOW}Test {i} TLE {t} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
         if p_act.returncode == OK:
             print(f"{GREEN}Test {i} AC {t} ms{RESET}")
+            subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
         elif p_act.returncode == WA:
             print(f"{RED}Test {i} WA {t} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
         elif p_act.returncode == PE:
             print(f"{RED}Test {i} PE {t} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
         else:
             print(f"{BLUE}Test {i} Fail Runtime Error {act}{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
 if __name__ == "__main__":

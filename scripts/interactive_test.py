@@ -37,18 +37,15 @@ def main():
 
     targets = [(sol, "sol.exe"), (gen, "gen.exe"), (act, "act.exe")]
 
-    procs = [(src, subprocess.Popen(["g++", src] + opts + ["-o", exe])) for src, exe in targets]
+    procs = [subprocess.Popen(["g++", src] + opts + ["-o", exe]) for src, exe in targets]
 
     failed = False
-    for src, p in procs:
+    for p in procs:
         if p.wait() != 0 and not failed:
-            if os.path.exists(src):
-                subprocess.run(["code", src], shell=True)
             failed = True
 
     if failed:
         return
-
 
     print("compilation finished.")
     time.sleep(0.1)
@@ -60,11 +57,9 @@ def main():
                 subprocess.run(["./gen.exe"], stdout=f_in, timeout=timeout / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"{BLUE}Test {i} Fail Timed Out {gen}{RESET}")
-            subprocess.run(["code", "in.txt"], shell=True)
             break
         except subprocess.CalledProcessError:
             print(f"{BLUE}Test {i} Fail Runtime Error {gen}{RESET}")
-            subprocess.run(["code", "in.txt"], shell=True)
             break
 
         # run sol.exe
@@ -94,20 +89,18 @@ def main():
 
         if tle:
             print(f"{YELLOW}Test {i} Timed Out > {timeout} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
         if p_sol.returncode != 0:
             print(f"{MAGENTA}Test {i} Runtime Error {t} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
         if p_act.returncode != 0:
             print(f"{MAGENTA}Test {i} Interactor's Runtime Rrror {t} ms{RESET}")
-            subprocess.run(["code", "in.txt", "log.txt"], shell=True)
             break
 
         print(f"{GREEN}Test {i} Success {t} ms{RESET}")
+        subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
 
 if __name__ == "__main__":
     main()
