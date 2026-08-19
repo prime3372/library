@@ -43,7 +43,7 @@ template <class T> class dynamic_fenwick_tree_2d {
   };
 
   ref operator[](int i) const {
-    assert(i < n);
+    assert(0 <= i && i < n);
     return ref(this, i);
   }
 
