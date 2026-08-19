@@ -86,7 +86,7 @@ class dynamic_bitset {
     int j = i / w;
     if (i % w != w - 1) {
       unsigned long long start = a[j];
-      start &= (unsigned long long)(-1) << (i % w + 1);
+      start &= -1ULL << (i % w + 1);
       if (start) return j * w + std::countr_zero(start);
     }
     while (++j < int(a.size())) {
@@ -100,7 +100,7 @@ class dynamic_bitset {
     int j = i / w;
     if (i % w != 0) {
       unsigned long long start = a[j];
-      start &= (unsigned long long)(-1) >> (w - i % w);
+      start &= -1ULL >> (w - i % w);
       if (start) return j * w + (w - 1 - std::countl_zero(start));
     }
     while (--j >= 0) {
