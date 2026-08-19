@@ -18,7 +18,7 @@ template <class T> class dynamic_fenwick_tree {
     i++;
     while (i <= n) {
       d[i - 1] += x;
-      i += i & (~i + 1);
+      i += i & -i;
     }
   }
 
@@ -37,7 +37,7 @@ template <class T> class dynamic_fenwick_tree {
     T s = 0;
     while (r) {
       s += d.get(r - 1);
-      r -= r & (~r + 1);
+      r -= r & -r;
     }
     return s;
   }
