@@ -12,7 +12,7 @@ using ll = long long;
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
-  
+
   int n;
   cin >> n;
   std::vector<std::vector<int>> g(n);
@@ -51,6 +51,6 @@ int main() {
 
     removed[c] = true;
   }
-  
+
   for (int i = 1; i < n; i++) cout << freq[i] << " ";
 }
