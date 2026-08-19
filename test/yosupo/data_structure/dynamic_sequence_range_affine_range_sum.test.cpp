@@ -4,6 +4,7 @@
 #include "ds/treap_acted_monoid.hpp"
 #include "util/static_modint.hpp"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 using namespace cp;

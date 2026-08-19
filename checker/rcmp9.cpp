@@ -1,4 +1,6 @@
 #include <iomanip>
+#include <iostream>
+#include <string>
 
 #include "checker/common.hpp"
 

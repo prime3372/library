@@ -4,6 +4,7 @@
 #include "tree/hl_decomposition.hpp"
 #include <iostream>
 #include <utility>
+#include <vector>
 
 using namespace std;
 using namespace cp;

@@ -1,10 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/rectangle_add_point_get"
 
-#include <iostream>
-#include <vector>
-
 #include "ds/dynamic_fenwick_tree_2d.hpp"
 #include "util/coordinate_compression.hpp"
+#include <iostream>
+#include <vector>
 
 using namespace std;
 using namespace cp;

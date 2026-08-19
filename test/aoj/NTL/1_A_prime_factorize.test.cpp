@@ -2,6 +2,7 @@
 
 #include "number/factorize.hpp"
 #include <iostream>
+#include <string>
 
 using namespace std;
 using namespace cp;

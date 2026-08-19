@@ -1,4 +1,5 @@
-#include <iomanip>
+#include <iostream>
+#include <string>
 
 #include "checker/common.hpp"
 
@@ -47,7 +48,7 @@ int main(int argc, char** argv) {
   }
 
   int extra_out_cnt = 0;
-  while (fout >> t_p) extra_out_cnt++;  
+  while (fout >> t_p) extra_out_cnt++;
   if (extra_out_cnt > 0) {
     std::cout << "wrong answer Output contains longer sequence [length = "
               << cnt + extra_out_cnt << "], but answer contains " << cnt

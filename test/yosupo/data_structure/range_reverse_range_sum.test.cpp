@@ -3,6 +3,7 @@
 #include "algebra/add.hpp"
 #include "ds/treap_monoid.hpp"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 using namespace cp;

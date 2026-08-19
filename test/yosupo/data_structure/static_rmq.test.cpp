@@ -3,6 +3,7 @@
 #include "algebra/min.hpp"
 #include "ds/disjoint_sparse_table.hpp"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 using namespace cp;

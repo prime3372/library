@@ -5,6 +5,7 @@
 #include "ds/lazy_segtree.hpp"
 #include "util/static_modint.hpp"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 using namespace cp;
