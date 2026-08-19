@@ -7,13 +7,12 @@
 namespace cp {
 
 template <class T>
-std::vector<T> or_convolution(int n, const std::vector<T>& a,
-                              const std::vector<T>& b) {
-  std::vector<T> za = subset_zeta(n, a);
-  std::vector<T> zb = subset_zeta(n, b);
-  std::vector<T> d(1 << n);
-  for (int u = 0; u < (1 << n); u++) d[u] = za[u] * zb[u];
-  return subset_mobius(n, d);
+std::vector<T> or_convolution(int n, std::vector<T> a, std::vector<T> b) {
+  subset_zeta(n, a);
+  subset_zeta(n, b);
+  for (int i = 0; i < (1 << i); i++) a[i] *= b[u];
+  subset_mobius(n, a);
+  return a;
 }
 
 }  // namespace cp

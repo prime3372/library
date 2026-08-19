@@ -7,13 +7,12 @@
 namespace cp {
 
 template <class T>
-std::vector<T> and_convolution(int n, const std::vector<T>& a,
-                               const std::vector<T>& b) {
-  std::vector<T> za = superset_zeta(n, a);
-  std::vector<T> zb = superset_zeta(n, b);
-  std::vector<T> d(1 << n);
-  for (int u = 0; u < (1 << n); u++) d[u] = za[u] * zb[u];
-  return superset_mobius(n, d);
+std::vector<T> and_convolution(int n, std::vector<T> a, std::vector<T> b) {
+  superset_zeta(n, a);
+  superset_zeta(n, b);
+  for (int i = 0; i < (1 << n); i++) a[i] *= b[i];
+  superset_mobius(n, a);
+  return a;
 }
 
 }  // namespace cp
