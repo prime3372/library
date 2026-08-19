@@ -148,9 +148,9 @@ class formal_power_series {
     assert(0 <= n);
     assert(!a.empty() && a[0] != 0);
     fps g(1, a[0].inv());
-    for (int i = 0; (1 << i) < n; i++) {
-      g = 2 * g - g * g * prefix(1 << (i + 1));
-      g.resize(1 << (i + 1));
+    for (int d = 1; d < n; d <<= 1) {
+      g = 2 * g - g * g * prefix(2 * d);
+      g.resize(2 * d);
     }
     return g.prefix(n);
   }
@@ -168,9 +168,9 @@ class formal_power_series {
     assert(0 <= n);
     assert(a.empty() || a[0] == 0);
     fps g(1, 1);
-    for (int i = 0; (1 << i) < n; i++) {
-      g = g - g * g.log(1 << (i + 1)) + g * prefix(1 << (i + 1));
-      g.resize(1 << (i + 1));
+    for (int d = 1; d < n; d <<= 1) {
+      g = g - g * g.log(2 * d) + g * prefix(2 * d);
+      g.resize(2 * d);
     }
     return g.prefix(n);
   }
@@ -183,11 +183,9 @@ class formal_power_series {
       if (n) ans[0] = 1;
       return ans;
     }
-    int up = int((n - 1) / k + 1);
-    for (int i = 0; i < up; i++) {
+    for (int i = 0; i < int((n - 1) / k + 1); i++) {
       if (a[i] != 0) {
-        mint minv = a[i].inv();
-        fps ans = (((*this * minv) >> i).log(n) * k).exp(n);
+        fps ans = (((*this * a[i].inv()) >> i).log(n) * k).exp(n);
         ans *= a[i].pow(k);
         ans = (ans << int(i * k)).prefix(n);
         return ans.prefix(n);
