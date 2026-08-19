@@ -4,8 +4,6 @@
 #include <iostream>
 #include <vector>
 
-#include "util/io_utility.hpp"
-
 namespace cp {
 
 template <class T> class cumsum_2d {

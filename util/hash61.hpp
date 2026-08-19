@@ -7,7 +7,6 @@
 #include <type_traits>
 
 #include "random/base.hpp"
-#include "util/io_utility.hpp"
 #include "util/safe_hash.hpp"
 #include "util/type_traits.hpp"
 

@@ -6,7 +6,6 @@
 #include <vector>
 
 #include "poly/convolution_ll.hpp"
-#include "util/io_utility.hpp"
 
 namespace cp {
 

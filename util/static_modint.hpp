@@ -5,7 +5,6 @@
 
 #include "number/ext_gcd.hpp"
 #include "number/is_prime.hpp"
-#include "util/io_utility.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {

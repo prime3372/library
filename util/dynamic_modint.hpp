@@ -6,7 +6,6 @@
 
 #include "number/barrett.hpp"
 #include "number/ext_gcd.hpp"
-#include "util/io_utility.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
