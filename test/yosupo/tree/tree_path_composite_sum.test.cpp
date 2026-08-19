@@ -14,7 +14,7 @@ using M = alg::sum_affine<mint>;
 int main() {
   int n;
   cin >> n;
-  std::vector<M::S> a(n);
+  vector<M::S> a(n);
   for (auto& ai : a) {
     cin >> ai.val;
     ai.len = 1;
