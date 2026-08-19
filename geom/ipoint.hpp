@@ -50,22 +50,13 @@ class ipoint {
   friend ipoint operator/(const ipoint& lhs, long long rhs) {
     return ipoint(lhs) /= rhs;
   }
-  friend ipoint operator/(long long lhs, const ipoint& rhs) {
-    return ipoint(rhs) /= lhs;
-  }
 
-  long long dot(const ipoint& rhs) const { return x * rhs.x + y * rhs.y; }
-  long long cross(const ipoint& rhs) const { return x * rhs.y - y * rhs.x; }
+  ipoint rot() const { return ipoint(y, -x); }
 
   long long norm2() const { return x * x + y * y; }
 
-  ipoint rot(long long n = 1) const {
-    n = n < 0 ? n % 4 + 4 : n % 4;
-    if (n == 0) return {x, y};
-    if (n == 1) return {y, -x};
-    if (n == 2) return {-x, -y};
-    return {-y, x};
-  }
+  long long dot(const ipoint& rhs) const { return x * rhs.x + y * rhs.y; }
+  long long cross(const ipoint& rhs) const { return x * rhs.y - y * rhs.x; }
 
   bool is_parallel(const ipoint& rhs) const { return dot(rhs) == 0; }
   bool is_orthogonal(const ipoint& rhs) const { return cross(rhs) == 0; }
@@ -88,6 +79,18 @@ class ipoint {
   }
   friend bool operator!=(const ipoint& lhs, const ipoint& rhs) {
     return !(lhs == rhs);
+  }
+  friend bool operator<(const ipoint& lhs, const ipoint& rhs) {
+    return lhs.x < rhs.x || (lhs.x == rhs.x && lhs.y < rhs.y);
+  }
+  friend bool operator>(const ipoint& lhs, const ipoint& rhs) {
+    return rhs < lhs;
+  }
+  friend bool operator<=(const ipoint& lhs, const ipoint& rhs) {
+    return !(lhs > rhs);
+  }
+  friend bool operator>=(const ipoint& lhs, const ipoint& rhs) {
+    return !(lhs < rhs);
   }
 
   friend std::istream& operator>>(std::istream& is, ipoint& v) {

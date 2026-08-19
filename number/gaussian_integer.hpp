@@ -14,6 +14,7 @@ class gaussian_integer {
  public:
   long long x, y;
   gaussian_integer() : x(0), y(0) {}
+  gaussian_integer(long long _x) : x(_x), y(0) {}
   gaussian_integer(long long _x, long long _y) : x(_x), y(_y) {}
 
   gint conj() const { return gint(x, -y); }
@@ -74,11 +75,11 @@ class gaussian_integer {
   friend bool operator<(const gint& lhs, const gint& rhs) {
     return lhs.x < rhs.x || (lhs.x == rhs.x && lhs.y < rhs.y);
   }
-  friend bool operator<=(const gint& lhs, const gint& rhs) {
-    return lhs < rhs || lhs == rhs;
-  }
   friend bool operator>(const gint& lhs, const gint& rhs) {
-    return !(lhs <= rhs);
+    return rhs < lhs;
+  }
+  friend bool operator<=(const gint& lhs, const gint& rhs) {
+    return !(lhs > rhs);
   }
   friend bool operator>=(const gint& lhs, const gint& rhs) {
     return !(lhs < rhs);

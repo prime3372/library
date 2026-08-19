@@ -51,18 +51,15 @@ class point {
   friend point operator/(const point& lhs, long double rhs) {
     return point(lhs) /= rhs;
   }
-  friend point operator/(long double lhs, const point& rhs) {
-    return point(rhs) /= lhs;
-  }
 
-  long double dot(const point& rhs) const { return x * rhs.x + y * rhs.y; }
-  long double cross(const point& rhs) const { return x * rhs.y - y * rhs.x; }
+  point rot() const { return point(y, -x); }
 
   long double norm2() const { return x * x + y * y; }
   long double norm() const { return std::sqrt(x * x + y * y); }
   point normalize() const { return *this / norm(); }
 
-  point rot() const { return point(y, -x); }
+  long double dot(const point& rhs) const { return x * rhs.x + y * rhs.y; }
+  long double cross(const point& rhs) const { return x * rhs.y - y * rhs.x; }
 
   friend bool operator==(const point& lhs, const point& rhs) {
     return std::abs(lhs.x - rhs.x) < eps && std::abs(lhs.y - rhs.y) < eps;
