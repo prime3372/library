@@ -33,7 +33,7 @@ template <class T> class hash_set {
   std::vector<T> enumerate() {
     auto pairs = d.enumerate();
     std::vector<T> res;
-    for (const auto& p : pairs) {
+    for (auto& p : pairs) {
       if (p.second) res.push_back(p.first);
     }
     return res;

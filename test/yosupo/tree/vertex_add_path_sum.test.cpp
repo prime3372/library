@@ -23,7 +23,7 @@ int main() {
     hld.add_edge(u, v);
   }
   hld.build();
-  const auto& id = hld.id, head = hld.head, next = hld.next;
+  auto& id = hld.id, head = hld.head, next = hld.next;
   fenwick_tree<ll> fw(n);
   for (int i = 0; i < n; i++) fw.add(id[i], a[i]);
   while (q--) {

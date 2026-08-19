@@ -15,7 +15,7 @@ int main() {
     cin >> n;
     auto fac = factorize(n);
     int k = 0;
-    for (const auto& f : fac) k += f.second;
+    for (auto& f : fac) k += f.second;
     cout << k << " ";
     for (auto& f : fac) {
       while (f.second--) cout << f.first << " ";

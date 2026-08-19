@@ -30,10 +30,8 @@ template <class T> class hash_multiset {
   std::vector<T> enumerate() {
     auto pairs = d.enumerate();
     std::vector<T> res;
-    for (const auto& p : pairs) {
-      for (int i = 0; i < p.second; i++) {
-        res.push_back(p.first);
-      }
+    for (auto& p : pairs) {
+      while (p.second--) res.push_back(p.first);
     }
     return res;
   }

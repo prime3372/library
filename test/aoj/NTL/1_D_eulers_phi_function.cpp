@@ -11,7 +11,7 @@ int main() {
   ll n;
   cin >> n;
   auto fac = factorize(n);
-  for (const auto& f : fac) {
+  for (auto& f : fac) {
     n /= f.first;
     n *= (f.first - 1);
   }
