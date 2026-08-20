@@ -9,7 +9,8 @@ namespace cp {
 template <class T> class cumsum_2d {
  public:
   cumsum_2d() : n(0), m(0) {}
-  explicit cumsum_2d(int _n, int _m) : cumsum_2d(_n, _m, T()) {}
+  explicit cumsum_2d(int _n, int _m)
+      : n(_n), m(_m), val(_n, std::vector<T>(_m)) {}
   explicit cumsum_2d(int _n, int _m, const T& x)
       : n(_n), m(_m), val(_n, std::vector<T>(_m, x)) {}
 
