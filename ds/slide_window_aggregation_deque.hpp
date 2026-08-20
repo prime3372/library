@@ -53,7 +53,6 @@ template <class M> class slide_window_aggregation_deque {
     val0.push_back(x);
     cum0.push_back(prod0 = M::op(x, prod0));
   }
-
   void push1(S x) {
     val1.push_back(x);
     cum1.push_back(prod1 = M::op(prod1, x));
