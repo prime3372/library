@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <bit>
 #include <cassert>
+#include <limits>
 #include <utility>
 #include <vector>
 
@@ -12,7 +13,7 @@ namespace cp {
 
 namespace internal {
 
-struct bit_vector {
+class bit_vector {
  public:
   bit_vector() {}
   explicit bit_vector(int _n) : n(_n), block(n / w + 1), count(n / w + 1) {}
@@ -43,10 +44,13 @@ struct bit_vector {
 }  // namespace internal
 
 template <class T> requires internal::is_unsigned_int_v<T>
-struct wavelet_matrix {
+class wavelet_matrix {
  public:
-  wavelet_matrix(int _n) : n(std::max(_n, 1)), a(n) {}
-  wavelet_matrix(const std::vector<T>& _a) : n(_a.size()), a(_a) { build(); }
+  wavelet_matrix() : wavelet_matrix(0) {}
+  explicit wavelet_matrix(int _n) : n(_n), a(_n) {}
+  explicit wavelet_matrix(const std::vector<T>& _a) : n(_a.size()), a(_a) {
+    build();
+  }
 
   void set(int i, const T& x) {
     assert(0 <= i && i < n);
@@ -55,7 +59,6 @@ struct wavelet_matrix {
 
   void build() {
     if (n == 0) return;
-    log = std::bit_width(std::max<T>(*std::max_element(a.begin(), a.end()), 1));
     bv.assign(log, internal::bit_vector(n));
     std::vector<T> cur = a, nxt(n);
     for (int h = log - 1; h >= 0; h--) {
@@ -78,8 +81,9 @@ struct wavelet_matrix {
   T kth_smallest(int l, int r, int k) const {
     assert(initialized);
     assert(0 <= l && l <= r && r <= n);
+    assert(0 <= k && k < r - l);
     T ans = 0;
-    for (int h = log - 1; h >= 0; --h) {
+    for (int h = log - 1; h >= 0; h--) {
       int l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);
       if (k < r0 - l0) {
         l = l0;
@@ -101,9 +105,8 @@ struct wavelet_matrix {
   int range_freq(int l, int r, T upper) {
     assert(initialized);
     assert(0 <= l && l <= r && r <= n);
-    if (upper >= (T(1) << log)) return r - l;
     int ans = 0;
-    for (int h = log - 1; h >= 0; --h) {
+    for (int h = log - 1; h >= 0; h--) {
       bool f = (upper >> h) & 1;
       int l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);
       if (f) {
@@ -123,7 +126,8 @@ struct wavelet_matrix {
   }
 
  private:
-  int n, log;
+  static constexpr int log = std::numeric_limits<T>::digits;
+  int n;
   bool initialized = false;
   std::vector<T> a;
   std::vector<internal::bit_vector> bv;
