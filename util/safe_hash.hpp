@@ -54,13 +54,6 @@ struct safe_hash<T> {
   }
 };
 
-template <class T> requires std::is_floating_point_v<T>
-struct safe_hash<T> {
-  unsigned long long operator()(const T& x) const {
-    return internal::splitmix64(std::hash<T>()(x));
-  }
-};
-
 template <class T> requires internal::is_modint_v<T>
 struct safe_hash<T> {
   unsigned long long operator()(const T& x) const {
