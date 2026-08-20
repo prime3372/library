@@ -15,7 +15,7 @@ using ll = long long;
 using mint = modint998244353;
 using M = alg::affine<mint>;
 
-struct Rev_M {
+struct RM {
   using S = M::S;
   static S op(S g, S f) { return {g.a * f.a, g.a * f.b + g.b}; }
   static S e() { return S(); }
@@ -37,7 +37,7 @@ int main() {
   hld.build();
   auto id = hld.id, head = hld.head, next = hld.next;
   segtree<M> seg(n);
-  segtree<Rev_M> rseg(n);
+  segtree<RM> rseg(n);
   for (int i = 0; i < n; i++) {
     seg.set(id[i], f[i]);
     rseg.set(id[i], f[i]);
