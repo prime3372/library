@@ -10,6 +10,8 @@ namespace cp {
 template <class T> class basic_point {
  public:
   T x, y;
+  basic_point() : x(0), y(0) {}
+  basic_point(T _x, T _y) : x(_x), y(_y) {}
 
   basic_point& operator+=(const basic_point& p) {
     x += p.x;
@@ -41,14 +43,14 @@ template <class T> class basic_point {
   friend basic_point operator-(const basic_point& p, const basic_point& q) {
     return basic_point(p) -= q;
   }
-  friend basic_point operator*(const basic_point& p, T q) {
-    return basic_point(p) *= q;
+  friend basic_point operator*(const basic_point& p, T s) {
+    return basic_point(p) *= s;
   }
-  friend basic_point operator*(T p, const basic_point& q) {
-    return basic_point(q) *= p;
+  friend basic_point operator*(T s, const basic_point& p) {
+    return basic_point(p) *= s;
   }
-  friend basic_point operator/(const basic_point& p, T q) {
-    return basic_point(p) /= q;
+  friend basic_point operator/(const basic_point& p, T s) {
+    return basic_point(p) /= s;
   }
 
   friend T norm(const basic_point& p) { return p.x * p.x + p.y * p.y; }
@@ -73,6 +75,13 @@ template <class T> class basic_point {
     return norm(p) * basic_point(std::cos(theta), std::sin(theta));
   }
 
+  friend basic_point projection(const basic_point& p, const basic_point& q) {
+    return dot(p, q) * (q) / norm(q);
+  }
+  friend basic_point reflection(const basic_point& p, const basic_point& q) {
+    return 2 * projection(p, q) - p;
+  }
+
   friend bool is_same(const basic_point& p, const basic_point& q) {
     return equal(p.x, q.x) && equal(p.y, q.y);
   }
@@ -91,8 +100,6 @@ template <class T> class basic_point {
   }
 
  private:
-  friend class line;
-
   static bool equal(T x, T y) {
     if (std::is_floating_point_v<T>) {
       static constexpr double eps = 1e-9;
