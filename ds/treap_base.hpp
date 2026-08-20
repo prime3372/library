@@ -87,7 +87,7 @@ template <class node> class treap_base {
   int size() const { return size(root); }
 
   friend std::ostream& operator<<(std::ostream& os, treap_base tp) {
-    std::vector<std::string> outs(tp.n);
+    std::vector<std::string> outs(tp.size());
     for (int i = 0; i < int(outs.size()); i++) {
       std::ostringstream oss;
       oss << tp[i];
