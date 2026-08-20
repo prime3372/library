@@ -96,5 +96,5 @@
   "test/yosupo/tree/vertex_add_path_sum.test.cpp": "2026-08-20 04:52:55 +0900",
   "test/yosupo/tree/vertex_add_range_contour_sum_on_tree.test.cpp": "2026-08-19 08:58:03 +0900",
   "test/yosupo/tree/vertex_add_subtree_sum.test.cpp": "2026-08-19 08:58:03 +0900",
-  "test/yosupo/tree/vertex_set_path_composite.test.cpp": "2026-08-20 11:13:21 +0900"
+  "test/yosupo/tree/vertex_set_path_composite.test.cpp": "2026-08-20 13:13:12 +0900"
 }
