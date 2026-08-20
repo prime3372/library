@@ -62,7 +62,7 @@ template <class M> class slide_window_aggregation_deque {
     int n = int(val0.size() + val1.size());
     int s0 = n / 2 + (val0.empty() ? n % 2 : 0);
     std::vector<S> tmp = val0;
-    std::reverse(tmp.begin(), val0.end());
+    std::reverse(tmp.begin(), tmp.end());
     std::copy(val1.begin(), val1.end(), std::back_inserter(tmp));
     val0.clear();
     val1.clear();
