@@ -11,7 +11,7 @@ namespace internal {
 std::string combine_outputs(const std::vector<std::string>& outs) {
   char delimiter = ' ';
   for (const auto& s : outs) {
-    long double dummy;
+    double dummy;
     auto [ptr, ec] = std::from_chars(s.data(), s.data() + s.size(), dummy);
     if (ec != std::errc{} || ptr != s.data() + s.size()) {
       delimiter = '\n';
