@@ -4,12 +4,14 @@
 #include <functional>
 #include <iostream>
 #include <memory>
+#include <sstream>
+#include <string>
 #include <type_traits>
 #include <utility>
 #include <vector>
 
 #include "ds/cartesian_tree.hpp"
-#include "util/io_utility.hpp"
+#include "util/io_utility_base.hpp"
 
 namespace cp {
 
@@ -85,9 +87,13 @@ template <class node> class treap_base {
   int size() const { return size(root); }
 
   friend std::ostream& operator<<(std::ostream& os, treap_base tp) {
-    std::vector<T> v(tp.size());
-    for (int i = 0; i < tp.size(); i++) v[i] = tp[i];
-    return os << v;
+    std::vector<std::string> outs(tp.n);
+    for (int i = 0; i < int(outs.size()); i++) {
+      std::ostringstream oss;
+      oss << tp[i];
+      outs[i] = oss.str();
+    }
+    return os << internal::combine_outputs(outs);
   }
 
  protected:

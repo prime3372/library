@@ -4,9 +4,11 @@
 #include <bit>
 #include <cassert>
 #include <iostream>
+#include <sstream>
+#include <string>
 #include <vector>
 
-#include "util/io_utility.hpp"
+#include "util/io_utility_base.hpp"
 
 namespace cp {
 
@@ -163,9 +165,13 @@ template <class M> class lazy_segtree {
   int size() const { return n; }
 
   friend std::ostream& operator<<(std::ostream& os, lazy_segtree seg) {
-    std::vector<S> v(seg.n);
-    for (int i = 0; i < seg.n; i++) v[i] = seg[i];
-    return os << v;
+    std::vector<std::string> outs(seg.n);
+    for (int i = 0; i < int(outs.size()); i++) {
+      std::ostringstream oss;
+      oss << seg[i];
+      outs[i] = oss.str();
+    }
+    return os << internal::combine_outputs(outs);
   }
 
  private:

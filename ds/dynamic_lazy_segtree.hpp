@@ -5,10 +5,12 @@
 #include <cassert>
 #include <cstddef>
 #include <iostream>
+#include <sstream>
 #include <memory>
+#include <string>
 #include <vector>
 
-#include "util/io_utility.hpp"
+#include "util/io_utility_base.hpp"
 
 namespace cp {
 
@@ -74,9 +76,13 @@ template <class M> class dynamic_lazy_segtree {
   size_t size() const { return n; }
 
   friend std::ostream& operator<<(std::ostream& os, dynamic_lazy_segtree seg) {
-    std::vector<S> v(seg.n);
-    for (size_t i = 0; i < v.size(); i++) v[i] = seg[i];
-    return os << v;
+    std::vector<std::string> outs(seg.n);
+    for (int i = 0; i < int(outs.size()); i++) {
+      std::ostringstream oss;
+      oss << seg[i];
+      outs[i] = oss.str();
+    }
+    return os << internal::combine_outputs(outs);
   }
 
  private:

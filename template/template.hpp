@@ -6,6 +6,7 @@
 #include "ds/hash_set.hpp"
 #include "random/base.hpp"
 #include "util/algo_utility.hpp"
+#include "util/io_int128.hpp"
 #include "util/io_utility.hpp"
 #include "util/math_utility.hpp"
 #include "util/static_modint.hpp"
