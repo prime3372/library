@@ -41,8 +41,8 @@ class gaussian_integer {
   gint& operator/=(const gint& rhs) {
     long long n = rhs.norm();
     *this *= rhs.conj();
-    x = div_floor(x + n / 2, n);
-    y = div_floor(y + n / 2, n);
+    x = floor(x + n / 2, n);
+    y = floor(y + n / 2, n);
     return *this;
   }
   gint& operator%=(const gint& rhs) {
