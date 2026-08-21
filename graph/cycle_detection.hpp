@@ -22,7 +22,7 @@ template <bool is_directed> class cycle_detection {
   int len = 0;
   std::vector<int> vertices, edges;
 
-  cycle_detection& detect() {
+  bool detect() {
     vertices.clear();
     edges.clear();
     std::vector<bool> processing(n), processed(n);
@@ -48,7 +48,7 @@ template <bool is_directed> class cycle_detection {
     std::reverse(vertices.begin(), vertices.end());
     std::reverse(edges.begin(), edges.end());
     len = int(vertices.size());
-    return *this;
+    return len != 0;
   }
 
  private:

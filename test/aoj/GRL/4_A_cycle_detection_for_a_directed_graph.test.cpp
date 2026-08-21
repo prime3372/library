@@ -17,6 +17,5 @@ int main() {
     cin >> s >> t;
     cycle.add_edge(s, t);
   }
-  cycle.detect();
-  cout << (cycle.len != 0) << "\n";
+  cout << cycle.detect() << "\n";
 }
