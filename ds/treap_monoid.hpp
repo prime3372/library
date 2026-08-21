@@ -39,7 +39,7 @@ class treap_monoid : public treap_base<internal::treap_monoid_node<M>> {
 
  public:
   treap_monoid() {}
-  explicit treap_monoid(int n) { build(std::vector<S>(n)); }
+  explicit treap_monoid(int n) { build(std::vector<S>(n, M::e())); }
   explicit treap_monoid(int n, const S& val) { build(std::vector<S>(n, val)); }
   explicit treap_monoid(const std::vector<S>& v) { build(v); }
 

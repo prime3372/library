@@ -43,7 +43,7 @@ class treap_acted_monoid
   using base = treap_base<node>;
 
   treap_acted_monoid() {}
-  explicit treap_acted_monoid(int n) { build(std::vector<S>(n)); }
+  explicit treap_acted_monoid(int n) { build(std::vector<S>(n, M::e())); }
   explicit treap_acted_monoid(int n, const S& val) {
     build(std::vector<S>(n, val));
   }
