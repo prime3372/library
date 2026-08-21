@@ -4,7 +4,6 @@
 #include <utility>
 
 #include "util/math_utility.hpp"
-#include "util/type_traits.hpp"
 
 namespace cp {
 
