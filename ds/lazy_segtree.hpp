@@ -20,7 +20,7 @@ template <class M> class lazy_segtree {
 
  public:
   lazy_segtree() : lazy_segtree(0) {}
-  explicit lazy_segtree(int _n) : lazy_segtree(std::vector<S>(_n, M::e())) {}
+  explicit lazy_segtree(int _n) : lazy_segtree(_n, M::e()) {}
   explicit lazy_segtree(int _n, const S& val)
       : lazy_segtree(std::vector<S>(_n, val)) {}
   explicit lazy_segtree(const std::vector<S>& v) : n(int(v.size())) {

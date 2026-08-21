@@ -19,7 +19,7 @@ template <class M> class segtree {
 
  public:
   segtree() : segtree(0) {}
-  explicit segtree(int _n) : segtree(std::vector<S>(_n, M::e())) {}
+  explicit segtree(int _n) : segtree(_n, M::e()) {}
   explicit segtree(int _n, const S& val) : segtree(std::vector<S>(_n, val)) {}
   explicit segtree(const std::vector<S>& v) : n(int(v.size())) {
     sz = int(std::bit_ceil((unsigned int)(n)));
