@@ -36,7 +36,6 @@ template <class T> T icbrt(T x) {
 
 template <class T> int sign(T x) { return x < 0 ? -1 : x == 0 ? 0 : 1; }
 
-// @return the largest integer that does not exceed n / d
 template <class T, class U> T floor(T n, U d) {
   assert(d != 0);
   if (d < 0) {
