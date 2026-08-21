@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind_with_potential"
 
-#include "ds/union_find_with_potential.hpp"
+#include "ds/weighted_union_find.hpp"
 #include "util/static_modint.hpp"
 #include <iostream>
 
@@ -13,7 +13,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  union_find_with_potential<mint> uf(n);
+  weighted_union_find<mint> uf(n);
   while (q--) {
     int t;
     cin >> t;

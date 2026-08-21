@@ -1,18 +1,18 @@
 #pragma once
 
-#include <algorithm>
 #include <cassert>
 #include <utility>
 #include <vector>
 
 namespace cp {
 
-template <class T> class union_find_with_potential {
+template <class T> class weighted_union_find {
  public:
-  union_find_with_potential() : n(0) {}
-  explicit union_find_with_potential(int _n)
+  weighted_union_find() : n(0) {}
+  explicit weighted_union_find(int _n)
       : n(_n), parent_or_size(_n, -1), diff_weight(_n) {}
 
+  // @return satisfiablility
   bool unite(int a, int b, T d) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
@@ -46,6 +46,8 @@ template <class T> class union_find_with_potential {
     return -parent_or_size[find(a)];
   }
 
+  int size() const { return n; }
+
   T weight(int a) {
     assert(0 <= a && a < n);
     find(a);
@@ -63,6 +65,7 @@ template <class T> class union_find_with_potential {
   int n;
   std::vector<int> parent_or_size;
   std::vector<T> diff_weight;
+
   int _find(int a) {
     if (parent_or_size[a] < 0) return a;
     int r = _find(parent_or_size[a]);

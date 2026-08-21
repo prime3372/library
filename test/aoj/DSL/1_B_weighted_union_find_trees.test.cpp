@@ -1,6 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_1_B"
 
-#include "ds/union_find_with_potential.hpp"
+#include "ds/weighted_union_find.hpp"
 #include <iostream>
 
 using namespace std;
@@ -9,7 +9,7 @@ using namespace cp;
 int main() {
   int n, q;
   cin >> n >> q;
-  union_find_with_potential<int> uf(n);
+  weighted_union_find<int> uf(n);
   while (q--) {
     int com;
     cin >> com;
