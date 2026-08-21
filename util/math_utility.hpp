@@ -43,9 +43,9 @@ template <class T, class U> T floor(T n, U d) {
     d = -d;
   }
   if (n < 0) {
-    return (n + 1) / d - 1;
+    return T((n + 1) / d - 1);
   } else {
-    return n / d;
+    return T(n / d);
   }
 }
 
