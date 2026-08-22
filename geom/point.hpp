@@ -64,13 +64,6 @@ template <class T> class basic_point {
   template <class U> friend basic_point operator/(const basic_point& p, U s) {
     return basic_point(p) /= s;
   }
-
-  friend std::istream& operator>>(std::istream& is, basic_point& p) {
-    return is >> p.x >> p.y;
-  }
-  friend std::ostream& operator<<(std::ostream& os, const basic_point& p) {
-    return os << p.x << " " << p.y;
-  }
 };
 
 using point = basic_point<double>;
@@ -109,6 +102,15 @@ bool is_parallel(const basic_point<T>& p, const basic_point<T>& q) {
 template <class T>
 bool is_orthogonal(const basic_point<T>& p, const basic_point<T>& q) {
   return internal::geom_cmp(dot(p, q)) == 0;
+}
+
+template <class T>
+std::istream& operator>>(std::istream& is, basic_point<T>& p) {
+  return is >> p.x >> p.y;
+}
+template <class T>
+std::ostream& operator<<(std::ostream& os, const basic_point<T>& p) {
+  return os << p.x << " " << p.y;
 }
 
 }  // namespace cp
