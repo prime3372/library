@@ -29,15 +29,15 @@ using mint = modint998244353;
 
 #define iflocal if (true)
 #define ifnlocal if (false)
-#define debug(...)                               \
-  []<class... _Debug>(const _Debug&... _debug) { \
-    (std::cerr << ... << _debug);                \
-    std::cerr << "\n";                           \
+#define debug(...)                                  \
+  []<class... __Debug>(const __Debug&... __debug) { \
+    (std::cerr << ... << __debug);                  \
+    std::cerr << "\n";                              \
   }(__VA_ARGS__)
-#define debugs(...)                              \
-  []<class... _Debug>(const _Debug&... _debug) { \
-    (std::cerr << ... << _debug);                \
-    std::cerr << " ";                            \
+#define debugs(...)                                 \
+  []<class... __Debug>(const __Debug&... __debug) { \
+    (std::cerr << ... << __debug);                  \
+    std::cerr << " ";                               \
   }(__VA_ARGS__)
 
 #else
@@ -45,6 +45,7 @@ using mint = modint998244353;
 #define iflocal if (false)
 #define ifnlocal if (true)
 #define debug(...)
+#define debugs(...)
 
 #endif
 
