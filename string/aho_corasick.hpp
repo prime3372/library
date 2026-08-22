@@ -16,7 +16,7 @@ class aho_corasick : public trie_tree<char_size, offset> {
   using trie_tree<char_size, offset>::size;
 
   void build() {
-    lnk.resize(size());
+    lnk.assign(size(), 0);
     lnk[0] = -1;
     simple_queue<int> que;
     que.push(0);
@@ -24,9 +24,11 @@ class aho_corasick : public trie_tree<char_size, offset> {
       int v = que.front();
       que.pop();
       for (int i = 0; i < char_size; i++) {
-        int u = (*this)[v][i], l = lnk[v];
+        int u = (*this)[v][i];
         if (u == -1) continue;
         que.push(u);
+
+        int l = lnk[v];
         while (l != -1) {
           if ((*this)[l][i] != -1) {
             lnk[u] = (*this)[l][i];
