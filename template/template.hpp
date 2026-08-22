@@ -34,6 +34,11 @@ using mint = modint998244353;
     (std::cerr << ... << _debug);                \
     std::cerr << "\n";                           \
   }(__VA_ARGS__)
+#define debugs(...)                              \
+  []<class... _Debug>(const _Debug&... _debug) { \
+    (std::cerr << ... << _debug);                \
+    std::cerr << " ";                            \
+  }(__VA_ARGS__)
 
 #else
 
