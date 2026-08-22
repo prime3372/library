@@ -9,10 +9,18 @@
 
 namespace cp {
 
+template <class T> T min(const std::vector<T>& v) {
+  assert(!v.empty());
+  return *std::min_element(v.begin(), v.end());
+}
+template <class T> T max(const std::vector<T>& v) {
+  assert(!v.empty());
+  return *std::max_element(v.begin(), v.end());
+}
+
 template <class T> bool chmin(T& a, const T& b) {
   return b < a ? (a = b, true) : false;
 }
-
 template <class T> bool chmax(T& a, const T& b) {
   return b > a ? (a = b, true) : false;
 }
