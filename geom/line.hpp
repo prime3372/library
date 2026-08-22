@@ -17,7 +17,9 @@ template <class T> class basic_line {
 using line = basic_line<long double>;
 using iline = basic_line<long long>;
 
-template <class T> long double arg(const basic_line<T>& l) { return arg(l.q - l.p); }
+template <class T> long double arg(const basic_line<T>& l) {
+  return arg(l.q - l.p);
+}
 
 template <class T>
 bool is_parallel(const basic_line<T>& l, const basic_line<T>& m) {
