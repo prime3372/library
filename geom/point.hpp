@@ -9,7 +9,7 @@ namespace cp {
 namespace internal {
 
 template <class T> int geom_cmp(T x, T y = 0) {
-  constexpr double eps = 1e-9;
+  constexpr long double eps = 1e-9;
   if (std::is_floating_point_v<T>) {
     return x - y < -eps ? -1 : x - y > eps ? 1 : 0;
   } else {
@@ -66,13 +66,13 @@ template <class T> class basic_point {
   }
 };
 
-using point = basic_point<double>;
+using point = basic_point<long double>;
 using ipoint = basic_point<long long>;
 
 template <class T> T norm(const basic_point<T>& p) {
   return p.x * p.x + p.y * p.y;
 }
-template <class T> double abs(const basic_point<T>& p) {
+template <class T> long double abs(const basic_point<T>& p) {
   return std::sqrt(norm(p));
 }
 
@@ -83,7 +83,7 @@ template <class T> T cross(const basic_point<T>& p, const basic_point<T>& q) {
   return p.x * q.y - p.y * q.x;
 }
 
-template <class T> double arg(const basic_point<T>& p) {
+template <class T> long double arg(const basic_point<T>& p) {
   return std::atan2(p.y, p.x);
 }
 

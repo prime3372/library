@@ -21,7 +21,7 @@ template <class T> class basic_segment : public basic_line<T> {
   explicit operator basic_line<T>() { return basic_line<T>(p, q); }
 };
 
-using segment = basic_segment<double>;
+using segment = basic_segment<long double>;
 using isegment = basic_segment<long long>;
 
 template <class T>
