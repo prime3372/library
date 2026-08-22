@@ -31,6 +31,7 @@ template <class T> class kruscal {
     return greedy();
   }
 
+  // @return edge ids
   const std::vector<int>& mst() { return tree; }
 
  private:
