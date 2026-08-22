@@ -16,11 +16,11 @@ case_num = 50
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # colors
+RESET = "\033[0m"
 GREEN = "\033[32m"
 YELLOW = "\033[33m"
 BLUE = "\033[34m"
 MAGENTA = "\033[35m"
-RESET = "\033[0m"
 
 def pump(src, dst, prefix, f_log):
     try:
@@ -56,10 +56,10 @@ def main():
             with open("in.txt", "w") as f_in:
                 subprocess.run(["./gen.exe"], stdout=f_in, timeout=timeout / 1000.0, check=True)
         except subprocess.TimeoutExpired:
-            print(f"{BLUE}Test {i} Fail Timed Out {gen}{RESET}")
+            print(f"Test {i} {BLUE}Fail{RESET} Timed Out {gen}")
             break
         except subprocess.CalledProcessError:
-            print(f"{BLUE}Test {i} Fail Runtime Error {gen}{RESET}")
+            print(f"Test {i} {BLUE}Fail{RESET} Runtime Error {gen}")
             break
 
         # run sol.exe
@@ -88,18 +88,18 @@ def main():
         t = int((time.perf_counter() - start) * 1000)
 
         if tle:
-            print(f"{YELLOW}Test {i} Timed Out > {timeout} ms{RESET}")
+            print(f"Test {i} {YELLOW}Timed Out{RESET} > {timeout} ms")
             break
 
         if p_sol.returncode != 0:
-            print(f"{MAGENTA}Test {i} Runtime Error {t} ms{RESET}")
+            print(f"Test {i} {MAGENTA}Runtime Error{RESET} {t} ms")
             break
 
         if p_act.returncode != 0:
-            print(f"{MAGENTA}Test {i} Interactor's Runtime Rrror {t} ms{RESET}")
+            print(f"Test {i} {MAGENTA}Interactor's Runtime Rrror{RESET} {t} ms")
             break
 
-        print(f"{GREEN}Test {i} Success {t} ms{RESET}")
+        print(f"Test {i} {GREEN}Success{RESET} {t} ms")
         subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
 
 if __name__ == "__main__":

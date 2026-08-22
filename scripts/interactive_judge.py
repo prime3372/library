@@ -17,17 +17,16 @@ case_num = 50
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # colors
+RESET = "\033[0m"
 RED = "\033[31m"
 GREEN = "\033[32m"
 YELLOW = "\033[33m"
 BLUE = "\033[34m"
 MAGENTA = "\033[35m"
-RESET = "\033[0m"
 
-# results
-OK = 0
-WA = 1
-PE = 2
+# result code
+OK = [0]
+WA = [1, 2]
 
 def pump(src, dst, prefix, f_log):
     try:
@@ -63,10 +62,10 @@ def main():
             with open("in.txt", "w") as f_in:
                 subprocess.run(["./gen.exe"], stdout=f_in, timeout=timeout / 1000.0, check=True)
         except subprocess.TimeoutExpired:
-            print(f"{BLUE}Test {i} Fail Timed Out {gen}{RESET}")
+            print(f"Test {i} {BLUE}Fail{RESET} Timed Out {gen}")
             break
         except subprocess.CalledProcessError:
-            print(f"{BLUE}Test {i} Fail Runtime Error {gen}{RESET}")
+            print(f"Test {i} {BLUE}Fail{RESET} Runtime Error {gen}")
             break
 
         # run sol.exe and act.exe
@@ -95,28 +94,25 @@ def main():
         t = int((time.perf_counter() - start) * 1000)
 
         if tle:
-            print(f"{YELLOW}Test {i} TLE > {timeout} ms{RESET}")
+            print(f"Test {i} {YELLOW}TLE{RESET} > {timeout} ms")
             break
 
         if p_sol.returncode != 0:
-            print(f"{MAGENTA}Test {i} RE {t} ms{RESET}")
+            print(f"Test {i} {MAGENTA}RE{RESET} {t} ms")
             break
 
         if t > timelimit:
-            print(f"{YELLOW}Test {i} TLE {t} ms{RESET}")
+            print(f"Test {i} {YELLOW}TLE{RESET} {t} ms")
             break
 
-        if p_act.returncode == OK:
-            print(f"{GREEN}Test {i} AC {t} ms{RESET}")
+        if p_act.returncode in OK:
+            print(f"Test {i} {GREEN}AC{RESET} {t} ms")
             subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
-        elif p_act.returncode == WA:
-            print(f"{RED}Test {i} WA {t} ms{RESET}")
-            break
-        elif p_act.returncode == PE:
-            print(f"{RED}Test {i} PE {t} ms{RESET}")
+        elif p_act.returncode in WA:
+            print(f"Test {i} {RED}WA{RESET} {t} ms")
             break
         else:
-            print(f"{BLUE}Test {i} Fail Runtime Error {act}{RESET}")
+            print(f"Test {i} {BLUE}Fail{RESET} Runtime Error {act}")
             break
 
 if __name__ == "__main__":

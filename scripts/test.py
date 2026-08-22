@@ -14,11 +14,11 @@ case_num = 50
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # colors
+RESET = "\033[0m"
 GREEN = "\033[32m"
 YELLOW = "\033[33m"
 BLUE = "\033[34m"
 MAGENTA = "\033[35m"
-RESET = "\033[0m"
 
 def main():
     print("compiling...")
@@ -44,10 +44,10 @@ def main():
             with open("in.txt", "w") as f_in:
                 subprocess.run(["./gen.exe"], stdout=f_in, timeout=timeout / 1000.0, check=True)
         except subprocess.TimeoutExpired:
-            print(f"{BLUE}Test {i} Fail Timed Out {gen}{RESET}")
+            print(f"Test {i} {BLUE}Fail{RESET} Timed Out {gen}")
             break
         except subprocess.CalledProcessError:
-            print(f"{BLUE}Test {i} Fail Runtime Error {gen}{RESET}")
+            print(f"Test {i} {BLUE}Fail{RESET} Runtime Error {gen}")
             break
 
         # run sol.exe
@@ -56,14 +56,14 @@ def main():
             with open("in.txt", "r") as f_in, open("out.txt", "w") as f_out:
                 subprocess.run(["./sol.exe"], stdin=f_in, stdout=f_out, timeout=timeout / 1000.0, check=True)
             t = int((time.perf_counter() - start) * 1000)
-            print(f"{GREEN}Test {i} Success {t} ms{RESET}")
+            print(f"Test {i} {GREEN}Success{RESET} {t} ms")
             subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt"])
         except subprocess.TimeoutExpired:
-            print(f"{YELLOW}Test {i} Timed Out > {timeout} ms{RESET}")
+            print(f"Test {i} {YELLOW}Timed Out{RESET} > {timeout} ms")
             break
         except subprocess.CalledProcessError:
             t = int((time.perf_counter() - start) * 1000)
-            print(f"{MAGENTA}Test {i} Runtime Error {t} ms{RESET}")
+            print(f"Test {i} {MAGENTA}Runtime Error{RESET} {t} ms")
             break
 
 if __name__ == "__main__":
