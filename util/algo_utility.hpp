@@ -41,7 +41,7 @@ template <class Container> std::vector<int> sort(Container& a) {
   return sort(a, std::less<typename Container::value_type>());
 }
 
-template <class Container> void unique(Container& a) {
+template <class Container> void uniq(Container& a) {
   std::sort(a.begin(), a.end());
   a.erase(std::unique(a.begin(), a.end()), a.end());
 }
