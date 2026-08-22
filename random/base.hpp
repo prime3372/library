@@ -27,6 +27,14 @@ template <class T> T uniform(T l, T r) {
 
 bool uniform_bool() { return uniform(0, 1) == 1; }
 
+// random choice 2 disjoint elements from [l, r]
+template <class T> std::pair<T, T> uniform_pair(T l, T r) {
+  assert(l < r);
+  T a = uniform(0, r - 1);
+  T b = uniform(a + 1, r);
+  return {a, b};
+}
+
 template <class T> T choice(const std::vector<T>& v) {
   assert(!v.empty());
   return v[uniform(0, int(v.size()) - 1)];

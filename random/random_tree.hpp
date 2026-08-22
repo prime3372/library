@@ -9,6 +9,7 @@
 
 namespace cp {
 
+template <bool one_indexed = true>
 std::vector<int> random_rooted_tree(int n, int root = 0) {
   assert(1 <= n);
   assert(0 <= root && root < n);
@@ -16,9 +17,13 @@ std::vector<int> random_rooted_tree(int n, int root = 0) {
   std::vector<int> par(n, -1);
   for (int i = root + 1; i < n; i++) par[i] = uniform(root, i - 1);
   for (int i = 0; i < root; i++) par[i] = uniform(root, n + i - 1) % n;
+  if (one_indexed) {
+    for (int p : par) p++;
+  }
   return par;
 }
 
+template <bool one_indexed = true>
 std::vector<std::pair<int, int>> random_tree(int n) {
   assert(1 <= n);
 
@@ -36,9 +41,16 @@ std::vector<std::pair<int, int>> random_tree(int n) {
     if (uniform_bool()) std::swap(e.first, e.second);
   }
 
+  if (one_indexed) {
+    for (auto& e : edges) {
+      e.first++;
+      e.second++;
+    }
+  }
   return edges;
 }
 
+template <bool one_indexed = true>
 std::vector<std::pair<int, int>> random_forest(int n) {
   assert(1 <= n);
   if (n == 1) return {};
@@ -56,6 +68,12 @@ std::vector<std::pair<int, int>> random_forest(int n) {
     if (uniform_bool()) std::swap(e.first, e.second);
   }
 
+  if (one_indexed) {
+    for (auto& e : edges) {
+      e.first++;
+      e.second++;
+    }
+  }
   return edges;
 }
 
