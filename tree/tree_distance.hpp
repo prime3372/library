@@ -41,7 +41,7 @@ template <class T> class tree_distance {
   std::vector<T> cost;
   lowest_common_ancestor lca;
 
-  void dfs(int v, int pv, int c) {
+  void dfs(int v, int pv, T c) {
     cost[v] = c;
     for (auto [nv, x] : g[v]) {
       if (nv == pv) continue;
