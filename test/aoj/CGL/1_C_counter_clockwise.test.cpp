@@ -11,7 +11,6 @@ using namespace cp;
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
-  cout << fixed << setprecision(10);
   ipoint p0, p1;
   int q;
   cin >> p0 >> p1 >> q;
