@@ -2,7 +2,6 @@
 
 #include "geom/intersect.hpp"
 #include "geom/segment.hpp"
-#include <iomanip>
 #include <iostream>
 
 using namespace std;

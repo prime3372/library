@@ -2,7 +2,6 @@
 
 #include "geom/ccw.hpp"
 #include "geom/point.hpp"
-#include <iomanip>
 #include <iostream>
 
 using namespace std;
