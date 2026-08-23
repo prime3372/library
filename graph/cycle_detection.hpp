@@ -6,7 +6,7 @@
 
 namespace cp {
 
-template <bool is_directed> class cycle_detection {
+template <bool directed> class cycle_detection {
  public:
   cycle_detection() : n(0) {}
   explicit cycle_detection(int _n) : n(_n), g(_n) {}
@@ -15,7 +15,7 @@ template <bool is_directed> class cycle_detection {
     assert(0 <= from && from < n);
     assert(0 <= to && to < n);
     g[from].push_back(edge{to, m});
-    if (!is_directed) g[to].push_back(edge{from, m});
+    if (!directed) g[to].push_back(edge{from, m});
     return m++;
   }
 
