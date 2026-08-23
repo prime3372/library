@@ -2,11 +2,12 @@
 
 #include "algebra/min_assign.hpp"
 #include "ds/lazy_segtree.hpp"
+#include <climits>
 #include <iostream>
 
 using namespace std;
 using namespace cp;
-using M = alg::min_assign<int, int((1U << 31) - 1)>;
+using M = alg::min_assign<int, INT_MAX>;
 
 int main() {
   ios_base::sync_with_stdio(false);
