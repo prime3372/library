@@ -7,8 +7,10 @@
 namespace cp {
 
 template <class T> point<T> intersection(const line<T>& l, const line<T>& m) {
-  point<T> a = m.p - l.p, b = m.q - l.p, c = l.q - l.p;
-  return l.p + a + (b - a) * cross(c, a) / cross(c, a - b);
+  T a = cross(l.q - l.p, m.q - m.p);
+  T b = cross(l.q - l.p, l.q - m.p);
+  if (internal::equal(a, 0) && internal::equal(b, 0)) return m.p;
+  return m.p + (m.q - m.p) * b / a;
 }
 
 template <class T> requires internal::is_integral_v<T>

@@ -38,5 +38,9 @@ template <class T> long double dist(const segment<T>& l, const segment<T>& m) {
   if (intersect(l, m)) return 0;
   return std::min({dist(l.p, m), dist(l.q, m), dist(m.p, l), dist(m.q, l)});
 }
+template <class T> requires internal::is_integral_v<T>
+long double dist(const segment<T>& l, const segment<T>& m) {
+  return dist(segment<long double>(l), segment<long double>(m));
+}
 
 }  // namespace cp

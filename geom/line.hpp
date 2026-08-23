@@ -16,9 +16,10 @@ template <class T> class line {
   explicit line(const line<U>& l) : p(point<T>(l.p)), q(point<T>(l.q)) {}
 };
 
-template <class T> long double arg(const line<T>& l) {
-  line<long double> m(l);
-  return arg(m.q - m.p);
+template <class T> long double arg(const line<T>& l) { return arg(m.q - m.p); }
+template <class T> requires internal::is_integral_v<T>
+long double arg(const line<T>& l) {
+  return arg(line<long double>(l));
 }
 
 template <class T> bool is_parallel(const line<T>& l, const line<T>& m) {
