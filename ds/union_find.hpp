@@ -2,16 +2,15 @@
 
 #include <algorithm>
 #include <cassert>
+#include <utility>
 #include <vector>
 
 namespace cp {
 
-// The implementation is based on AC Library.
-// https://github.com/atcoder/ac-library/blob/master/atcoder/dsu.hpp
 class union_find {
  public:
   union_find() : n(0) {}
-  explicit union_find(int _n) : n(_n), parent_or_size(_n, -1) {}
+  explicit union_find(int _n) : n(_n), data(_n, -1) {}
 
   bool unite(int a, int b) {
     assert(0 <= a && a < n);
@@ -19,9 +18,9 @@ class union_find {
     a = find(a);
     b = find(b);
     if (a == b) return false;
-    if (-parent_or_size[a] < -parent_or_size[b]) std::swap(a, b);
-    parent_or_size[a] += parent_or_size[b];
-    parent_or_size[b] = a;
+    if (-data[a] < -data[b]) std::swap(a, b);
+    data[a] += data[b];
+    data[b] = a;
     return true;
   }
 
@@ -38,7 +37,7 @@ class union_find {
 
   int size(int a) {
     assert(0 <= a && a < n);
-    return -parent_or_size[find(a)];
+    return -data[find(a)];
   }
 
   int size() const { return n; }
@@ -49,26 +48,26 @@ class union_find {
       root[i] = find(i);
       group_size[root[i]]++;
     }
-    std::vector<std::vector<int>> result(n);
+    std::vector<std::vector<int>> res(n);
     for (int i = 0; i < n; i++) {
-      result[i].reserve(group_size[i]);
+      res[i].reserve(group_size[i]);
     }
     for (int i = 0; i < n; i++) {
-      result[root[i]].push_back(i);
+      res[root[i]].push_back(i);
     }
-    result.erase(
-        std::remove_if(result.begin(), result.end(),
+    res.erase(
+        std::remove_if(res.begin(), res.end(),
                        [&](const std::vector<int>& v) { return v.empty(); }),
-        result.end());
-    return result;
+        res.end());
+    return res;
   }
 
  private:
   int n;
-  std::vector<int> parent_or_size;
+  std::vector<int> data;
   int _find(int a) {
-    if (parent_or_size[a] < 0) return a;
-    return parent_or_size[a] = _find(parent_or_size[a]);
+    if (data[a] < 0) return a;
+    return data[a] = _find(data[a]);
   }
 };
 

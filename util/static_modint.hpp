@@ -9,8 +9,6 @@
 
 namespace cp {
 
-// The implementation is based on AC Library.
-// https://github.com/atcoder/ac-library/blob/master/atcoder/modint.hpp
 template <int m> requires(1 <= m)
 struct static_modint {
   using mint = static_modint;

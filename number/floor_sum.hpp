@@ -33,9 +33,6 @@ unsigned long long floor_sum_unsigned(unsigned long long n,
 
 }  // namespace internal
 
-// The implementation is based on AC Library.
-// https://github.com/atcoder/ac-library/blob/master/atcoder/math.hpp
-// https://github.com/atcoder/ac-library/blob/master/atcoder/internal_math.hpp
 // @param 0 <= n,m < 2^32
 long long floor_sum(long long n, long long m, long long a, long long b) {
   assert(0 <= n && n < (1LL << 32));

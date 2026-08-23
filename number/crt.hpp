@@ -9,8 +9,6 @@
 namespace cp {
 
 // CRT: Chinese Remainder Theorem
-// The implementation is based on AC Library.
-// https://github.com/atcoder/ac-library/blob/master/atcoder/math.hpp
 // @return (rem, mod)
 std::pair<long long, long long> crt(const std::vector<long long>& r,
                                     const std::vector<long long>& m) {

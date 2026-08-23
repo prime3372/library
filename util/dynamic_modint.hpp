@@ -10,8 +10,6 @@
 
 namespace cp {
 
-// The implementation is based on AC Library.
-// https://github.com/atcoder/ac-library/blob/master/atcoder/modint.hpp
 template <int id> class dynamic_modint {
   using mint = dynamic_modint;
 

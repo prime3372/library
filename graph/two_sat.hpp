@@ -7,8 +7,6 @@
 
 namespace cp {
 
-// The implementation is based on AC Library.
-// https://github.com/atcoder/ac-library/blob/master/atcoder/twosat.hpp
 class two_sat {
  public:
   two_sat() : two_sat(0) {}
