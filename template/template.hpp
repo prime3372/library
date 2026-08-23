@@ -34,7 +34,7 @@ using mint = modint998244353;
     (std::cerr << ... << __debug);                  \
     std::cerr << "\n";                              \
   }(__VA_ARGS__)
-#define debugs(...)                                 \
+#define debugsp(...)                                 \
   []<class... __Debug>(const __Debug&... __debug) { \
     (std::cerr << ... << __debug);                  \
     std::cerr << " ";                               \
@@ -45,7 +45,7 @@ using mint = modint998244353;
 #define iflocal if (false)
 #define ifnlocal if (true)
 #define debug(...)
-#define debugs(...)
+#define debugsp(...)
 
 #endif
 
