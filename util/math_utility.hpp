@@ -18,15 +18,14 @@ long long ipow(long long x, long long n) {
 }
 
 unsigned long long isqrt(unsigned long long x) {
-  unsigned long long y = std::sqrt(double(x));
+  unsigned long long y = (unsigned long long)(std::sqrt(double(x)));
   while (y != 0 && y > x / y) y--;
   while ((y + 1) <= x / (y + 1)) y++;
   return y;
 }
 
 unsigned long long icbrt(unsigned long long x) {
-  assert(0 <= x);
-  unsigned long long y = std::cbrt(double(x));
+  unsigned long long y = (unsigned long long)(std::cbrt(double(x)));
   while (y != 0 && y * y > x / y) y--;
   while ((y + 1) * (y + 1) <= x / (y + 1)) y++;
   return y;
