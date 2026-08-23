@@ -15,7 +15,7 @@ template <class T> class basic_segment : public basic_line<T> {
   using basic_line<T>::p;
   using basic_line<T>::q;
   basic_segment() {}
-  explicit basic_segment(const basic_point<T>& _p, const basic_point<T>& _q)
+  basic_segment(const basic_point<T>& _p, const basic_point<T>& _q)
       : basic_line<T>(_p, _q) {}
 
   explicit operator basic_line<T>() { return basic_line<T>(p, q); }

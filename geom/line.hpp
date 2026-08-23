@@ -10,7 +10,7 @@ template <class T> class basic_line {
  public:
   basic_point<T> p, q;
   basic_line() : p(0, 0), q(1, 0) {}
-  explicit basic_line(const basic_point<T>& _p, const basic_point<T>& _q)
+  basic_line(const basic_point<T>& _p, const basic_point<T>& _q)
       : p(_p), q(_q) {}
 };
 
