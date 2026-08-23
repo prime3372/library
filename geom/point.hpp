@@ -63,7 +63,7 @@ template <class T> class point {
     return point(p) /= s;
   }
 
-  template <class U> operator point<U>() { return point<U>() }
+  template <class U> operator point<U>() { return point<U>(U(x), U(y)); }
 };
 
 template <class T> T norm(const point<T>& p) { return p.x * p.x + p.y * p.y; }
