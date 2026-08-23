@@ -7,12 +7,13 @@
 
 namespace cp {
 
-template <class T> long double area(const std::vector<basic_point<T>>& ps) {
-  T ans = 0;
-  for (int i = 0; i < int(ps.size()); ++i) {
-    ans += cross(ps[i], ps[(i + 1) % ps.size()]);
+// @return signed area of polygon p
+template <class T> long double area(const std::vector<point<T>>& p) {
+  long double ans = 0;
+  for (int i = 0; i < int(p.size()); ++i) {
+    ans += cross(p[i], p[(i + 1) % p.size()]);
   }
-  return std::abs((long double)(ans) * 0.5);
+  return ans * 0.5;
 }
 
 }  // namespace cp

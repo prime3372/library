@@ -3,48 +3,46 @@
 #include <iostream>
 
 #include "geom/point.hpp"
+#include "util/type_traits.hpp"
 
 namespace cp {
 
-template <class T> class basic_line {
+template <class T> class line {
  public:
-  basic_point<T> p, q;
-  basic_line() : p(0, 0), q(1, 0) {}
-  basic_line(const basic_point<T>& _p, const basic_point<T>& _q)
-      : p(_p), q(_q) {}
+  point<T> p, q;
+  line() : p(0, 0), q(1, 0) {}
+  line(const point<T>& _p, const point<T>& _q) : p(_p), q(_q) {}
+
+  template <class U> explicit operator line<U>() {
+    return line<U>(point<U>(p), point<U>(q));
+  }
 };
 
-using line = basic_line<long double>;
-using iline = basic_line<long long>;
-
-template <class T> long double arg(const basic_line<T>& l) {
-  return arg(l.q - l.p);
+template <class T> long double arg(const line<T>& l) {
+  line<long double> m(l);
+  return arg(m.q - m.p);
 }
 
-template <class T>
-bool is_parallel(const basic_line<T>& l, const basic_line<T>& m) {
+template <class T> bool is_parallel(const line<T>& l, const line<T>& m) {
   return is_parallel(l.q - l.p, m.q - m.p);
 }
-template <class T>
-bool is_orthogonal(const basic_line<T>& l, const basic_line<T>& m) {
+template <class T> bool is_orthogonal(const line<T>& l, const line<T>& m) {
   return is_orthogonal(l.q - l.p, m.q - m.p);
 }
 
-template <class T> bool is_on(const basic_point<T>& p, const basic_line<T>& l) {
-  return internal::geom_cmp(cross(l.p - p, l.q - p)) == 0;
+template <class T> bool is_on(const point<T>& p, const line<T>& l) {
+  return internal::equal(cross(l.p - p, l.q - p), 0);
 }
 
-template <class T>
-bool is_same(const basic_line<T>& l, const basic_line<T>& m) {
+template <class T> bool is_same(const line<T>& l, const line<T>& m) {
   return is_parallel(l, m) && is_on(m.p, l);
 }
 
-template <class T>
-std::istream& operator>>(std::istream& is, basic_line<T>& l) {
+template <class T> std::istream& operator>>(std::istream& is, line<T>& l) {
   return is >> l.p >> l.q;
 }
 template <class T>
-std::ostream& operator<<(std::ostream& os, const basic_line<T>& l) {
+std::ostream& operator<<(std::ostream& os, const line<T>& l) {
   return os << l.p << " " << l.q;
 }
 

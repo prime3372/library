@@ -6,6 +6,7 @@
 
 using namespace std;
 using namespace cp;
+using ll = long long;
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -13,7 +14,7 @@ int main() {
   int q;
   cin >> q;
   while (q--) {
-    isegment l, m;
+    segment<ll> l, m;
     cin >> l >> m;
     cout << intersect(l, m) << "\n";
   }

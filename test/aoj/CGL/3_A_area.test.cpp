@@ -8,6 +8,7 @@
 
 using namespace std;
 using namespace cp;
+using ll = long long;
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -15,7 +16,7 @@ int main() {
   cout << fixed << setprecision(1);
   int n;
   cin >> n;
-  vector<ipoint> ps(n);
+  vector<point<ll>> ps(n);
   for (auto& p : ps) cin >> p;
   cout << area(ps) << "\n";
 }

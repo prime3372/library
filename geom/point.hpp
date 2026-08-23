@@ -2,114 +2,106 @@
 
 #include <cmath>
 #include <iostream>
-#include <type_traits>
+
+#include "util/type_traits.hpp"
 
 namespace cp {
 
 namespace internal {
 
-template <class T> int geom_cmp(T x, T y = 0) {
-  constexpr long double eps = 1e-9;
-  if (std::is_floating_point_v<T>) {
-    return x - y < -eps ? -1 : x - y > eps ? 1 : 0;
-  } else {
-    return x < y ? -1 : x > y ? 1 : 0;
-  }
-}
+constexpr long double eps = 1e-9;
+
+template <class T> bool equal(T x, T y) { return std::abs(x - y) < eps; }
+
+template <class T> bool less(T x, T y) { return x < y - eps; }
 
 }  // namespace internal
 
-template <class T> class basic_point {
+template <class T> class point {
  public:
   T x, y;
-  basic_point() : x(0), y(0) {}
-  basic_point(T _x, T _y) : x(_x), y(_y) {}
+  point() : x(0), y(0) {}
+  point(T _x, T _y) : x(_x), y(_y) {}
 
-  basic_point& operator+=(const basic_point& p) {
+  point& operator+=(const point& p) {
     x += p.x;
     y += p.y;
     return *this;
   }
-  basic_point& operator-=(const basic_point& p) {
+  point& operator-=(const point& p) {
     x -= p.x;
     y -= p.y;
     return *this;
   }
-  template <class U> basic_point& operator*=(U s) {
+  template <class U> point& operator*=(U s) {
     x *= s;
     y *= s;
     return *this;
   }
-  template <class U> basic_point& operator/=(U s) {
+  template <class U> point& operator/=(U s) {
     x /= s;
     y /= s;
     return *this;
   }
 
-  basic_point operator+() const { return basic_point(x, y); }
-  basic_point operator-() const { return basic_point(-x, -y); }
+  point operator+() const { return point(x, y); }
+  point operator-() const { return point(-x, -y); }
 
-  friend basic_point operator+(const basic_point& p, const basic_point& q) {
-    return basic_point(p) += q;
+  friend point operator+(const point& p, const point& q) {
+    return point(p) += q;
   }
-  friend basic_point operator-(const basic_point& p, const basic_point& q) {
-    return basic_point(p) -= q;
+  friend point operator-(const point& p, const point& q) {
+    return point(p) -= q;
   }
-  template <class U> friend basic_point operator*(const basic_point& p, U s) {
-    return basic_point(p) *= s;
+  template <class U> friend point operator*(const point& p, U s) {
+    return point(p) *= s;
   }
-  template <class U> friend basic_point operator*(U s, const basic_point& p) {
-    return basic_point(p) *= s;
+  template <class U> friend point operator*(U s, const point& p) {
+    return point(p) *= s;
   }
-  template <class U> friend basic_point operator/(const basic_point& p, U s) {
-    return basic_point(p) /= s;
+  template <class U> friend point operator/(const point& p, U s) {
+    return point(p) /= s;
   }
+
+  template <class U> operator point<U>() { return point<U>() }
 };
 
-using point = basic_point<long double>;
-using ipoint = basic_point<long long>;
+template <class T> T norm(const point<T>& p) { return p.x * p.x + p.y * p.y; }
 
-template <class T> T norm(const basic_point<T>& p) {
-  return p.x * p.x + p.y * p.y;
-}
-template <class T> long double abs(const basic_point<T>& p) {
-  return std::sqrt(norm(p));
+template <class T> long double abs(const point<T>& p) {
+  return std::sqrt((long double)(p.x) * p.x + (long double)(p.y) * p.y);
 }
 
-template <class T> T dot(const basic_point<T>& p, const basic_point<T>& q) {
+template <class T> T dot(const point<T>& p, const point<T>& q) {
   return p.x * q.x + p.y * q.y;
 }
-template <class T> T cross(const basic_point<T>& p, const basic_point<T>& q) {
+template <class T> T cross(const point<T>& p, const point<T>& q) {
   return p.x * q.y - p.y * q.x;
 }
 
-template <class T> long double arg(const basic_point<T>& p) {
-  return std::atan2(p.y, p.x);
+template <class T> long double arg(const point<T>& p) {
+  return std::atan2((long double)(p.y), (long double)(p.x));
 }
 
-template <class T> basic_point<T> rot90(const basic_point<T>& p) {
-  return basic_point<T>(p.y, -p.x);
+template <class T> point<T> rot90(const point<T>& p) {
+  return point<T>(p.y, -p.x);
 }
 
-template <class T>
-bool is_same(const basic_point<T>& p, const basic_point<T>& q) {
-  return internal::geom_cmp(p.x, q.x) == 0 && internal::geom_cmp(p.y, q.y) == 0;
+template <class T> bool is_same(const point<T>& p, const point<T>& q) {
+  return internal::equal(p.x, q.x) && internal::equal(p.y, q.y);
 }
-template <class T>
-bool is_parallel(const basic_point<T>& p, const basic_point<T>& q) {
-  return internal::geom_cmp(cross(p, q)) == 0;
+template <class T> bool is_parallel(const point<T>& p, const point<T>& q) {
+  return internal::equal(cross(p, q), 0);
 }
-template <class T>
-bool is_orthogonal(const basic_point<T>& p, const basic_point<T>& q) {
-  return internal::geom_cmp(dot(p, q)) == 0;
+template <class T> bool is_orthogonal(const point<T>& p, const point<T>& q) {
+  return internal::equal(dot(p, q), 0);
 }
 
-template <class T>
-std::istream& operator>>(std::istream& is, basic_point<T>& p) {
+template <class T> std::istream& operator>>(std::istream& is, point<T>& p) {
   return is >> p.x >> p.y;
 }
 template <class T>
-std::ostream& operator<<(std::ostream& os, const basic_point<T>& p) {
+std::ostream& operator<<(std::ostream& os, const point<T>& p) {
   return os << p.x << " " << p.y;
 }
 

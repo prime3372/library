@@ -8,6 +8,7 @@
 
 using namespace std;
 using namespace cp;
+using ll = long long;
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -16,7 +17,7 @@ int main() {
   int q;
   cin >> q;
   while (q--) {
-    line l, m;
+    line<ll> l, m;
     cin >> l >> m;
     cout << intersection(l, m) << "\n";
   }

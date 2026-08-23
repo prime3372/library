@@ -9,16 +9,17 @@
 
 using namespace std;
 using namespace cp;
+using ll = long long;
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   cout << fixed << setprecision(10);
-  line l;
+  line<ll> l;
   int q;
   cin >> l >> q;
   while (q--) {
-    point p;
+    point<ll> p;
     cin >> p;
     cout << reflection(p, l) << "\n";
   }

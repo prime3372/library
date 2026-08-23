@@ -5,6 +5,7 @@
 
 using namespace std;
 using namespace cp;
+using ll = long long;
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -12,7 +13,7 @@ int main() {
   int q;
   cin >> q;
   while (q--) {
-    iline l, m;
+    line<ll> l, m;
     cin >> l >> m;
     if (is_parallel(l, m)) {
       cout << 2 << "\n";
