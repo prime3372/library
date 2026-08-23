@@ -88,10 +88,11 @@ template <class node> class treap_base {
 
   friend std::ostream& operator<<(std::ostream& os, treap_base tp) {
     std::vector<std::string> outs(tp.size());
+    std::ostringstream oss;
     for (int i = 0; i < int(outs.size()); i++) {
-      std::ostringstream oss;
       oss << tp[i];
       outs[i] = oss.str();
+      oss.str("");
     }
     return os << internal::combine_outputs(outs);
   }

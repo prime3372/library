@@ -77,10 +77,11 @@ template <class M> class dynamic_lazy_segtree {
 
   friend std::ostream& operator<<(std::ostream& os, dynamic_lazy_segtree seg) {
     std::vector<std::string> outs(seg.n);
+    std::ostringstream oss;
     for (int i = 0; i < int(outs.size()); i++) {
-      std::ostringstream oss;
       oss << seg[i];
       outs[i] = oss.str();
+      oss.str("");
     }
     return os << internal::combine_outputs(outs);
   }

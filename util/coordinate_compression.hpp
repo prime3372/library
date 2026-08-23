@@ -53,10 +53,11 @@ template <class T> class coordinate_compression {
 
   friend std::ostream& operator<<(std::ostream& os, coordinate_compression cc) {
     std::vector<std::string> outs(cc.size());
+    std::ostringstream oss;
     for (int i = 0; i < int(outs.size()); i++) {
-      std::ostringstream oss;
       oss << cc[i];
       outs[i] = oss.str();
+      oss.str("");
     }
     return os << internal::combine_outputs(outs);
   }
