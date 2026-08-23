@@ -78,10 +78,11 @@ template <std::ranges::range Range>
 requires(!std::is_convertible_v<Range, std::string>)
 std::ostream& operator<<(std::ostream& os, const Range& r) {
   std::vector<std::string> outs;
+  std::ostringstream oss;
   for (const auto& x : r) {
-    std::ostringstream oss;
     oss << x;
     outs.push_back(oss.str());
+    oss.str("");
   }
   return os << internal::combine_outputs(outs);
 }
