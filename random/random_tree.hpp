@@ -13,7 +13,7 @@ template <bool one_indexed = true>
 std::vector<int> random_rooted_tree(int n, int root = 0) {
   assert(1 <= n);
   assert(0 <= root && root < n);
-  if (n == 1) return {};
+  if (n == 1) return {-1};
   std::vector<int> par(n, -1);
   for (int i = root + 1; i < n; i++) par[i] = uniform(root, i - 1);
   for (int i = 0; i < root; i++) par[i] = uniform(root, n + i - 1) % n;
