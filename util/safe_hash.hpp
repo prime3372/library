@@ -41,7 +41,7 @@ struct safe_hash<T> {
   unsigned long long operator()(const T& x) const {
     unsigned __int128 ux = x;
     if ((ux >> 64) == 0) {
-      return safe_hash<unsigned long long>()((unsigned long long)(ux));
+      return internal::splitmix64((unsigned long long)(ux));
     }
     unsigned long long hs = 0;
     internal::hash_combine(hs, (unsigned long long)(ux >> 64));
