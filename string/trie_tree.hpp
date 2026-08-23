@@ -80,9 +80,10 @@ template <int char_size, auto offset = 'a'> class trie_tree {
       int idx = offset(c);
       assert(0 <= idx && idx < char_size);
       return idx;
+    } else {
+      assert(offset <= c && c < offset + char_size);
+      return c - offset;
     }
-    assert(offset <= c && c < offset + char_size);
-    return c - offset;
   }
 
  private:
