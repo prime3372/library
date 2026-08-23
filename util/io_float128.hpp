@@ -37,7 +37,6 @@ std::istream& operator>>(std::istream& is, __float128& val) {
 // @note output in fixed-point format
 std::ostream& operator<<(std::ostream& os, __float128 x) {
   assert(!__builtin_isnan(x) && !__builtin_isinf(x));
-
   const int prec = int(os.precision());
 
   if (x < 0) {
@@ -47,7 +46,6 @@ std::ostream& operator<<(std::ostream& os, __float128 x) {
 
   __float128 p10 = 1;
   for (int i = 0; i < prec; i++) p10 *= 10;
-
   x += (__float128)(0.5) / p10;
 
   unsigned __int128 int_part = (unsigned __int128)(x);
