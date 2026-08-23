@@ -50,7 +50,7 @@ std::ostream& operator<<(std::ostream& os, __float128 x) {
 
   unsigned __int128 int_part = (unsigned __int128)(x);
   os << int_part;
-  x -= (__float128)int_part;
+  x -= (__float128)(int_part);
 
   if (prec > 0) {
     os << '.';
