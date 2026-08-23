@@ -18,6 +18,7 @@ template <class T> class tree_distance {
     assert(0 <= b && b < n);
     g[a].emplace_back(b, c);
     g[b].emplace_back(a, c);
+    lca.add_edge(a, b);
   }
 
   void init() {
