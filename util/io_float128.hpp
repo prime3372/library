@@ -15,10 +15,9 @@ std::istream& operator>>(std::istream& is, __float128& val) {
   if (!(is >> s)) return is;
 
   val = 0;
+  int i = (s[0] == '+' || s[0] == '-');
   __float128 p10 = 1;
   bool has_dec = false;
-
-  int i = (s[0] == '+' || s[0] == '-');
   while (i < int(s.size()) && (std::isdigit(s[i]) || s[i] == '.')) {
     if (s[i] == '.') {
       has_dec = true;
