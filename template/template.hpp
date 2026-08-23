@@ -15,9 +15,9 @@
 using namespace std;
 using ll = long long;
 using ull = unsigned long long;
+using ld = long double;
 using i128 = __int128;
 using u128 = unsigned __int128;
-using ld = long double;
 using f128 = __float128;
 template <class T> using vec = vector<T>;
 using str = string;
