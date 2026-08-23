@@ -5,27 +5,49 @@
 #include <utility>
 #include <vector>
 
-#include "ds/union_find.hpp"
-
 namespace cp {
 
-class enumeratable_union_find : public union_find {
+class enumeratable_union_find {
  public:
-  using union_find::size;
-
-  enumeratable_union_find() {}
-  explicit enumeratable_union_find(int _n) : nxt(_n) {
-    for (int i = 0; i < _n; i++) nxt[i] = i;
+  enumeratable_union_find() : n(0) {}
+  explicit enumeratable_union_find(int _n) : n(_n), par_size(_n, -1), nxt(_n) {
+    for (int i = 0; i < n; i++) nxt[i] = i;
   }
 
   template <class F> bool unite(int a, int b, F f) {
-    assert(0 <= a && a < size());
-    assert(0 <= b && b < size());
-    if (unite(a, b)) f(a, b);
+    assert(0 <= a && a < n);
+    assert(0 <= b && b < n);
+    a = find(a);
+    b = find(b);
+    if (a == b) return false;
+    if (-par_size[a] < -par_size[b]) std::swap(a, b);
+    par_size[a] += par_size[b];
+    par_size[b] = a;
+    f(a, b);
+    std::swap(nxt[x], nxt[y]);
+    return true;
   }
 
+  int find(int a) {
+    assert(0 <= a && a < n);
+    return _find(a);
+  }
+
+  bool same(int a, int b) {
+    assert(0 <= a && a < n);
+    assert(0 <= b && b < n);
+    return find(a) == find(b);
+  }
+
+  int size(int a) {
+    assert(0 <= a && a < n);
+    return -par_size[find(a)];
+  }
+
+  int size() const { return n; }
+
   std::vector<int> enumerate(int a) const {
-    assert(0 <= a && a < size());
+    assert(0 <= a && a < n);
     std::vector<int> res = {a};
     for (int i = nxt[a]; i != a; i = nxt[i]) {
       res.push_back(i);
@@ -34,7 +56,12 @@ class enumeratable_union_find : public union_find {
   }
 
  private:
-  std::vector<int> nxt;
+  int n;
+  std::vector<int> par_size, nxt;
+  int _find(int a) {
+    if (par_size[a] < 0) return a;
+    return par_size[a] = _find(par_size[a]);
+  }
 };
 
 }  // namespace cp
