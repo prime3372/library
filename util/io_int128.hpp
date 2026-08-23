@@ -1,8 +1,8 @@
 #pragma once
 
 #include <algorithm>
-#include <iostream>
 #include <cctype>
+#include <iostream>
 #include <string>
 
 namespace cp {
