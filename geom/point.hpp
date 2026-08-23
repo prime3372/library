@@ -22,6 +22,7 @@ template <class T> class point {
   T x, y;
   point() : x(0), y(0) {}
   point(T _x, T _y) : x(_x), y(_y) {}
+  template <class U> explicit point(const point<U>& p) : x(T(p.x)), y(T(p.y)) {}
 
   point& operator+=(const point& p) {
     x += p.x;
@@ -62,8 +63,6 @@ template <class T> class point {
   template <class U> friend point operator/(const point& p, U s) {
     return point(p) /= s;
   }
-
-  template <class U> operator point<U>() { return point<U>(U(x), U(y)); }
 };
 
 template <class T> T norm(const point<T>& p) { return p.x * p.x + p.y * p.y; }
@@ -91,10 +90,10 @@ template <class T> bool is_same(const point<T>& p, const point<T>& q) {
   return internal::equal(p.x, q.x) && internal::equal(p.y, q.y);
 }
 template <class T> bool is_parallel(const point<T>& p, const point<T>& q) {
-  return internal::equal(cross(p, q), 0);
+  return internal::equal<T>(cross(p, q), 0);
 }
 template <class T> bool is_orthogonal(const point<T>& p, const point<T>& q) {
-  return internal::equal(dot(p, q), 0);
+  return internal::equal<T>(dot(p, q), 0);
 }
 
 template <class T> std::istream& operator>>(std::istream& is, point<T>& p) {

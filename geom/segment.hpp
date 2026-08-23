@@ -16,11 +16,9 @@ template <class T> class segment : public line<T> {
   using line<T>::q;
   segment() {}
   segment(const point<T>& _p, const point<T>& _q) : line<T>(_p, _q) {}
-
-  explicit operator line<T>() { return line<T>(p, q); }
-  template <class U> explicit operator segment<U>() {
-    return segment<U>(point<U>(p), point<U>(q));
-  }
+  template <class U>
+  explicit segment(const segment<U>& l)
+      : line<T>(point<T>(l.p), point<T>(l.q)) {}
 };
 
 template <class T> bool is_on(const point<T>& p, const segment<T>& l) {

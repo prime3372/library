@@ -12,10 +12,8 @@ template <class T> class line {
   point<T> p, q;
   line() : p(0, 0), q(1, 0) {}
   line(const point<T>& _p, const point<T>& _q) : p(_p), q(_q) {}
-
-  template <class U> explicit operator line<U>() {
-    return line<U>(point<U>(p), point<U>(q));
-  }
+  template <class U>
+  explicit line(const line<U>& l) : p(point<T>(l.p)), q(point<T>(l.q)) {}
 };
 
 template <class T> long double arg(const line<T>& l) {
