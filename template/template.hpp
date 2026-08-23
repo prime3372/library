@@ -55,6 +55,6 @@ using mint = modint998244353;
 #define REP(i, a, b) for (ll i = (a); i <= ll(b); i++)
 #define rrep(i, a, b) for (ll i = ll(b) - 1; i >= (a); i--)
 #define RREP(i, a, b) for (ll i = ll(b); i >= (a); i--)
-#define fore(x, a) for (auto& x : (a))
+#define fore(x, a) for (auto&& x : (a))
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
