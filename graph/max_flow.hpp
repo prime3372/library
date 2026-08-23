@@ -116,7 +116,7 @@ class max_flow {
     Cap flow = 0;
     while (flow < flow_limit) {
       bfs();
-      // If sink 't' is unreachable, no more augmenting paths exist.
+      // If sink t is unreachable, no more augmenting paths exist.
       if (level[t] == -1) break;
       std::fill(iter.begin(), iter.end(), 0);
       flow += dfs(dfs, t, flow_limit - flow);
@@ -124,7 +124,6 @@ class max_flow {
     return flow;
   }
 
-  // @note It should be called after flow(s, t) exactly once without flow_limit.
   std::vector<bool> min_cut(int s) {
     assert(0 <= s && s < n);
     std::vector<bool> visited(n);
