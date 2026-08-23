@@ -6,6 +6,7 @@
 #include "ds/hash_set.hpp"
 #include "random/base.hpp"
 #include "util/algo_utility.hpp"
+#include "util/io_float128.hpp"
 #include "util/io_int128.hpp"
 #include "util/io_utility.hpp"
 #include "util/math_utility.hpp"
@@ -17,6 +18,7 @@ using ull = unsigned long long;
 using i128 = __int128;
 using u128 = unsigned __int128;
 using ld = long double;
+using lld = __float128;
 template <class T> using vec = vector<T>;
 using str = string;
 template <class T> using minque = priority_queue<T, vector<T>, greater<T>>;
