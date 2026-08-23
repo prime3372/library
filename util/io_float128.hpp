@@ -61,7 +61,7 @@ std::ostream& operator<<(std::ostream& os, __float128 x) {
       int d = int(x);
       if (d > 9) d = 9;
       if (d < 0) d = 0;
-      os << '0' + d;
+      os << d;
       x -= d;
     }
   }
