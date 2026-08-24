@@ -21,19 +21,18 @@ int main() {
     } else if (t == 1) {
       trie.erase(x);
     } else {
-      unsigned int m = 0;
+      unsigned int ans = 0;
       int v = 0;
       for (int i = 31; i >= 0; i--) {
         bool b = (x >> i) & 1;
-        m <<= 1;
         if (trie[v][b] != -1) {
           v = trie[v][b];
         } else {
           v = trie[v][!b];
-          m++;
+          ans |= 1U << i;
         }
       }
-      cout << m << "\n";
+      cout << ans << "\n";
     }
   }
 }

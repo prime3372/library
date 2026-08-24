@@ -18,5 +18,5 @@ int main() {
     diam.add_edge(s, t, w);
   }
   diam.build();
-  cout << diam.len << "\n";
+  cout << diam.dist << "\n";
 }
