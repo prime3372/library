@@ -21,6 +21,7 @@ template <bool root_is_max> class cartesian_tree {
     int n = int(a.size());
     left.assign(n, -1);
     right.assign(n, -1);
+    parent.resize(n);
     size.resize(n);
     std::vector<int> st;
     for (int i = 0; i < n; i++) {
@@ -29,29 +30,31 @@ template <bool root_is_max> class cartesian_tree {
         if (root_is_max && a[st.back()] >= a[i]) break;
         if (!root_is_max && a[st.back()] <= a[i]) break;
         k = st.back();
-        size[k] = 1;
-        if (left[k] != -1) size[k] += size[left[k]];
-        if (right[k] != -1) size[k] += size[right[k]];
+        update(k);
         st.pop_back();
       }
-      if (!st.empty()) right[st.back()] = i;      
+      if (!st.empty()) right[st.back()] = i;
       left[i] = k;
       st.push_back(i);
     }
     for (int i = int(st.size()) - 1; i >= 0; i--) {
-      int k = st[i];
-      size[k] = 1;
-      if (left[k] != -1) size[k] += size[left[k]];
-      if (right[k] != -1) size[k] += size[right[k]];
+      update(st[i]);
     }
     root = st[0];
-
-    parent.resize(n);
-    for (int i = 0; i < n; i++) {
-      if (left[i] != -1) parent[left[i]] = i;
-      if (right[i] != -1) parent[right[i]] = i;
-    }
     parent[root] = -1;
+  }
+
+ private:
+  void update(int k) {
+    size[k] = 1;
+    if (left[k] != -1) {
+      parent[left[k]] = k;
+      size[k] += size[left[k]];
+    }
+    if (right[k] != -1) {
+      parent[right[k]] = k;
+      size[k] += size[right[k]];
+    }
   }
 };
 
