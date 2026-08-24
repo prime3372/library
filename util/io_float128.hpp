@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <cctype>
+#include <cmath>
 #include <iostream>
 #include <string>
 
@@ -35,7 +36,7 @@ std::istream& operator>>(std::istream& is, __float128& val) {
 
 // output in fixed-point format
 std::ostream& operator<<(std::ostream& os, __float128 x) {
-  assert(!__builtin_isnan(x) && !__builtin_isinf(x));
+  assert(!std::isnan(x) && !std::isinf(x));
   const int prec = int(os.precision());
 
   if (x < 0) {
