@@ -9,7 +9,7 @@
 
 namespace cp {
 
-// @note fixed-point format only
+// fixed-point format only
 std::istream& operator>>(std::istream& is, __float128& val) {
   std::string s;
   if (!(is >> s)) return is;
@@ -33,7 +33,7 @@ std::istream& operator>>(std::istream& is, __float128& val) {
   return is;
 }
 
-// @note output in fixed-point format
+// output in fixed-point format
 std::ostream& operator<<(std::ostream& os, __float128 x) {
   assert(!__builtin_isnan(x) && !__builtin_isinf(x));
   const int prec = int(os.precision());
