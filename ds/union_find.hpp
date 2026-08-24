@@ -9,8 +9,8 @@ namespace cp {
 
 class union_find {
  public:
-  union_find() : n(0) {}
-  explicit union_find(int _n) : n(_n), par_size(_n, -1) {}
+  union_find() : n(0), cnt(0) {}
+  explicit union_find(int _n) : n(_n), cnt(_n), par_size(_n, -1) {}
 
   bool unite(int a, int b) {
     assert(0 <= a && a < n);
@@ -21,6 +21,7 @@ class union_find {
     if (-par_size[a] < -par_size[b]) std::swap(a, b);
     par_size[a] += par_size[b];
     par_size[b] = a;
+    cnt--;
     return true;
   }
 
@@ -42,6 +43,8 @@ class union_find {
 
   int size() const { return n; }
 
+  int count() const { return cnt; }
+
   std::vector<std::vector<int>> groups() {
     std::vector<int> root(n);
     for (int i = 0; i < n; i++) {
@@ -59,7 +62,7 @@ class union_find {
   }
 
  private:
-  int n;
+  int n, cnt;
   // root node: -1 * component size
   // otherwise: parent
   std::vector<int> par_size;

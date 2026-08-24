@@ -9,8 +9,9 @@ namespace cp {
 
 class enumeratable_union_find {
  public:
-  enumeratable_union_find() : n(0) {}
-  explicit enumeratable_union_find(int _n) : n(_n), par_size(_n, -1), nxt(_n) {
+  enumeratable_union_find() : n(0), cnt(0) {}
+  explicit enumeratable_union_find(int _n)
+      : n(_n), cnt(_n), par_size(_n, -1), nxt(_n) {
     for (int i = 0; i < n; i++) nxt[i] = i;
   }
 
@@ -23,6 +24,7 @@ class enumeratable_union_find {
     if (-par_size[a] < -par_size[b]) std::swap(a, b);
     par_size[a] += par_size[b];
     par_size[b] = a;
+    cnt--;
     f(a, b);
     std::swap(nxt[x], nxt[y]);
     return true;
@@ -46,6 +48,8 @@ class enumeratable_union_find {
 
   int size() const { return n; }
 
+  int count() const { return cnt; }
+
   std::vector<int> enumerate(int a) const {
     assert(0 <= a && a < n);
     std::vector<int> res = {a};
@@ -56,7 +60,7 @@ class enumeratable_union_find {
   }
 
  private:
-  int n;
+  int n, cnt;
   std::vector<int> par_size, nxt;
   int _find(int a) {
     if (par_size[a] < 0) return a;

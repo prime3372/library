@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -9,21 +10,21 @@ namespace cp {
 
 class rollback_union_find {
  public:
-  rollback_union_find() : rollback_union_find(0) {}
+  rollback_union_find() : n(0), cnt(0), inner_snap(0) {}
   explicit rollback_union_find(int _n)
-      : n(_n), inner_snap(0), par_size(_n, -1) {}
+      : n(_n), cnt(_n), inner_snap(0), par_size(_n, -1) {}
 
   bool unite(int a, int b) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
     a = find(a);
     b = find(b);
-    history.emplace_back(a, par_size[a]);
-    history.emplace_back(b, par_size[b]);
+    history.emplace_back(a, b, par_size[a], par_size[b]);
     if (a == b) return false;
     if (-par_size[a] < -par_size[b]) std::swap(a, b);
     par_size[a] += par_size[b];
     par_size[b] = a;
+    cnt--;
     return true;
   }
 
@@ -46,11 +47,14 @@ class rollback_union_find {
 
   int size() const { return n; }
 
+  int count() const { return cnt; }
+
   void undo() {
-    par_size[history.back().first] = history.back().second;
+    auto [a, b, x, y] = history.back();
     history.pop_back();
-    par_size[history.back().first] = history.back().second;
-    history.pop_back();
+    par_size[a] = x;
+    par_size[b] = y;
+    if (a != b) cnt++;
   }
 
   void snapshot() { inner_snap = int(history.size()); }
@@ -75,9 +79,9 @@ class rollback_union_find {
   }
 
  private:
-  int n, inner_snap;
+  int n, cnt, inner_snap;
   std::vector<int> par_size;
-  std::vector<std::pair<int, int>> history;
+  std::vector<std::tuple<int, int, int, int>> history;
 };
 
 }  // namespace cp
