@@ -9,8 +9,9 @@ class barrett {
 
   constexpr unsigned int umod() const { return m; }
 
-  // @param a, b (0 <= a < m, 0 <= b < m)
-  // @return a * b % m
+  // @param a `0 <= a < m`
+  // @param b `0 <= b < m`
+  // @return `a * b % m`
   constexpr unsigned int mul(unsigned int a, unsigned int b) const {
     // im = ceil(2^64 / m)
     // -> im * m = 2^64 + r (0 <= r < m)

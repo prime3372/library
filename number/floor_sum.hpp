@@ -33,7 +33,9 @@ unsigned long long floor_sum_unsigned(unsigned long long n,
 
 }  // namespace internal
 
-// @param 0 <= n,m < 2^32
+// @param n `0 <= n < 2^32`
+// @param m `1 <= m < 2^32`
+// @return sum_{i=0}^{n-1} floor((ai + b) / m) (mod 2^64)
 long long floor_sum(long long n, long long m, long long a, long long b) {
   assert(0 <= n && n < (1LL << 32));
   assert(1 <= m && m < (1LL << 32));
