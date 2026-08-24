@@ -31,7 +31,8 @@ template <class Container, class Comp>
 std::vector<int> sort(Container&& a, Comp comp) {
   std::vector<int> p(int(a.size()));
   std::iota(p.begin(), p.end(), 0);
-  std::sort(p.begin(), p.end(), [&](int i, int j) { return comp(a[i], a[j]); });
+  std::stable_sort(p.begin(), p.end(),
+                   [&](int i, int j) { return comp(a[i], a[j]); });
   auto a2 = a;
   for (int i = 0; i < int(a.size()); i++) {
     a[i] = std::move(a2[p[i]]);
