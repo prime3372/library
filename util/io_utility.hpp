@@ -101,7 +101,7 @@ std::ostream& operator<<(std::ostream& os, std::queue<T, Container> q) {
 template <class T, class Container, class Comp>
 std::ostream& operator<<(std::ostream& os,
                          std::priority_queue<T, Container, Comp> pq) {
-  std::vector<std::string> v;
+  std::vector<T> v;
   v.reserve(pq.size());
   while (!pq.empty()) {
     v.push_back(pq.top());
