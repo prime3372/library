@@ -28,7 +28,7 @@ template <class T> bool chmax(T& a, const T& b) {
 }
 
 template <class Container, class Comp>
-std::vector<int> sort(Container& a, Comp comp) {
+std::vector<int> sort(Container&& a, Comp comp) {
   std::vector<int> p(int(a.size()));
   std::iota(p.begin(), p.end(), 0);
   std::sort(p.begin(), p.end(), [&](int i, int j) { return comp(a[i], a[j]); });
@@ -39,7 +39,7 @@ std::vector<int> sort(Container& a, Comp comp) {
   return p;
 }
 
-template <class Container> std::vector<int> sort(Container& a) {
+template <class Container> std::vector<int> sort(Container&& a) {
   return sort(a, std::less<typename Container::value_type>());
 }
 
