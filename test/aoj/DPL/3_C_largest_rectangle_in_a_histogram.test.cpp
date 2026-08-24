@@ -15,18 +15,9 @@ int main() {
   vector<ll> a(n);
   for (auto& ai : a) cin >> ai;
   cartesian_tree<false> cart(a);
-  vector<int> sub(n);
-  auto dfs = [&](auto self, int v) -> int {
-    if (v == -1) return 0;
-    sub[v] = 1;
-    sub[v] += self(self, cart.left[v]);
-    sub[v] += self(self, cart.right[v]);
-    return sub[v];
-  };
-  dfs(dfs, cart.root);
   ll ans = 0;
   for (int i = 0; i < n; i++) {
-    ans = max(ans, a[i] * sub[i]);
+    ans = max(ans, a[i] * cart.size[i]);
   }
   cout << ans << "\n";
 }

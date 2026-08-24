@@ -11,18 +11,9 @@ using ll = long long;
 
 ll largest_rectanle_in_a_histogram(int n, const vector<ll>& a) {
   cartesian_tree<false> cart(a);
-  vector<int> sub(n);
-  auto dfs = [&](auto self, int v) -> int {
-    if (v == -1) return 0;
-    sub[v] = 1;
-    sub[v] += self(self, cart.left[v]);
-    sub[v] += self(self, cart.right[v]);
-    return sub[v];
-  };
-  dfs(dfs, cart.root);
   ll ans = 0;
   for (int i = 0; i < n; i++) {
-    ans = max(ans, a[i] * sub[i]);
+    ans = max(ans, a[i] * cart.size[i]);
   }
   return ans;
 }
