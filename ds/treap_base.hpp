@@ -134,9 +134,7 @@ template <class node> class treap_base {
   int size(const node* p) const { return p ? p->sub : 0; }
 
   virtual void toggle(node* p) = 0;
-
   virtual void update(node* p) = 0;
-
   virtual void push(node* p) = 0;
 };
 
