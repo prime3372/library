@@ -1,6 +1,8 @@
 #include "template/template.hpp"
 
 int main() {
-  ios_base::sync_with_stdio(false);
-  cin.tie(nullptr);
+  ifnlocal {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+  }
 }
