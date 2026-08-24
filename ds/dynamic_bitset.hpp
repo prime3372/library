@@ -16,10 +16,6 @@ class dynamic_bitset {
  public:
   dynamic_bitset() : n(0) {}
   explicit dynamic_bitset(int _n) : n(_n), a((_n + w - 1) / w, 0) {}
-  explicit dynamic_bitset(int _n, bool b)
-      : n(_n), a((_n + w - 1) / w, b ? -1 : 0) {
-    if (b && n % w) a.back() &= mask(n % w) - 1;
-  }
   explicit dynamic_bitset(const std::string& s)
       : n(int(s.size())), a((int(s.size()) + w - 1) / w) {
     for (int i = 0; i < n; i++) {
@@ -81,32 +77,34 @@ class dynamic_bitset {
     return res;
   }
 
-  int next(int i) const {
-    assert(0 <= i && i < n);
-    int j = i / w;
-    if (i % w != w - 1) {
-      unsigned long long start = a[j];
-      start &= -1ULL << (i % w + 1);
-      if (start) return j * w + std::countr_zero(start);
-    }
-    while (++j < int(a.size())) {
-      if (a[j]) return j * w + std::countr_zero(a[j]);
+  // @param l `0 <= l <= size()`
+  // @return max `r` s.t. `l <= r <= size() && (*this)[l]+...+(*this)[r-1] == 0`
+  int next(int l) const {
+    assert(0 <= l && l <= n);
+    if (l == n) return n;
+    int i = l / w;
+    unsigned long long start = a[i];
+    start &= -1ULL << (l % w);
+    if (start) return i * w + std::countr_zero(start);
+    while (++i < int(a.size())) {
+      if (a[i]) return i * w + std::countr_zero(a[i]);
     }
     return n;
   }
 
-  int prev(int i) const {
-    assert(0 <= i && i < n);
-    int j = i / w;
-    if (i % w != 0) {
-      unsigned long long start = a[j];
-      start &= -1ULL >> (w - i % w);
-      if (start) return j * w + (w - 1 - std::countl_zero(start));
+  // @param r `0 <= r <= size()`
+  // @return min `l` s.t. `0 <= l <= r && (*this)[l]+...+(*this)[r-1] == 0`
+  int prev(int r) const {
+    assert(0 <= r && r <= n);
+    if (r == 0) return 0;
+    int i = (r - 1) / w;
+    unsigned long long start = a[i];
+    start &= -1ULL >> ((w - r) % w);
+    if (start) return i * w + (w - std::countl_zero(start));
+    while (--i >= 0) {
+      if (a[i]) return i * w + (w - std::countl_zero(a[i]));
     }
-    while (--j >= 0) {
-      if (a[j]) return j * w + (w - 1 - std::countl_zero(a[j]));
-    }
-    return -1;
+    return 0;
   }
 
   int size() const { return n; }
@@ -197,18 +195,12 @@ class dynamic_bitset {
   friend bs operator>>(const bs& lhs, int shift) { return bs(lhs) >>= shift; }
 
   friend bool operator==(const bs& lhs, const bs& rhs) {
-    return lhs.a == rhs.a;
+    return lhs.n == rhs.n && lhs.a == rhs.a;
   }
   friend bool operator!=(const bs& lhs, const bs& rhs) {
-    return lhs.a != rhs.a;
+    return !(lhs == rhs);
   }
 
-  friend std::istream& operator>>(std::istream& is, bs& x) {
-    std::string t;
-    is >> t;
-    x = bs(t);
-    return is;
-  }
   friend std::ostream& operator<<(std::ostream& os, const bs& x) {
     for (int i = x.n - 1; i >= 0; i--) os << x[i];
     return os;
