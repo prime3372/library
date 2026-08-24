@@ -7,14 +7,17 @@
 
 namespace cp {
 
-class enumeratable_union_find {
+class enumerate_union_find {
  public:
-  enumeratable_union_find() : n(0), cnt(0) {}
-  explicit enumeratable_union_find(int _n)
+  enumerate_union_find() : n(0), cnt(0) {}
+  explicit enumerate_union_find(int _n)
       : n(_n), cnt(_n), par_size(_n, -1), nxt(_n) {
     for (int i = 0; i < n; i++) nxt[i] = i;
   }
 
+  bool unite(int a, int b) {
+    return unite(a, b, [](int, int) {});
+  }
   template <class F> bool unite(int a, int b, F f) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
@@ -26,7 +29,7 @@ class enumeratable_union_find {
     par_size[b] = a;
     cnt--;
     f(a, b);
-    std::swap(nxt[x], nxt[y]);
+    std::swap(nxt[a], nxt[b]);
     return true;
   }
 
@@ -50,6 +53,7 @@ class enumeratable_union_find {
 
   int count() const { return cnt; }
 
+  // @note The result is not necessarily sorted.
   std::vector<int> enumerate(int a) const {
     assert(0 <= a && a < n);
     std::vector<int> res = {a};
