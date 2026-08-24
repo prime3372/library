@@ -49,19 +49,6 @@ class rollback_union_find {
 
   int count() const { return cnt; }
 
-  void undo() {
-    auto [a, b, x, y] = history.back();
-    history.pop_back();
-    par_size[a] = x;
-    par_size[b] = y;
-    if (a != b) cnt++;
-  }
-
-  void snapshot() { inner_snap = int(history.size()); }
-  void rollback() {
-    while (inner_snap < int(history.size())) undo();
-  }
-
   std::vector<std::vector<int>> groups() {
     std::vector<int> root(n);
     for (int i = 0; i < n; i++) {
@@ -76,6 +63,19 @@ class rollback_union_find {
                        [&](const std::vector<int>& v) { return v.empty(); }),
         res.end());
     return res;
+  }
+
+  void undo() {
+    auto [a, b, x, y] = history.back();
+    history.pop_back();
+    par_size[a] = x;
+    par_size[b] = y;
+    if (a != b) cnt++;
+  }
+
+  void snapshot() { inner_snap = int(history.size()); }
+  void rollback() {
+    while (inner_snap < int(history.size())) undo();
   }
 
  private:
