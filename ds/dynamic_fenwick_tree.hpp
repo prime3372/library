@@ -22,6 +22,12 @@ template <class T> class dynamic_fenwick_tree {
     }
   }
 
+  void set(size_t i, T x) {
+    assert(i < n);
+    add(i, -(*this)[i]);
+    add(i, x);
+  }
+
   T operator[](size_t i) const {
     assert(i < n);
     return sum(i + 1) - sum(i);
