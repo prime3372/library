@@ -19,9 +19,6 @@ template <class node> class treap_base {
   using T = decltype(node::val);
 
  public:
-  treap_base() {}
-  ~treap_base() { delete root; }
-
   void build(const std::vector<T>& v) {
     if (v.empty()) return;
     int n = int(v.size());
@@ -99,6 +96,9 @@ template <class node> class treap_base {
 
  protected:
   node* root = nullptr;
+
+  treap_base() {}
+  ~treap_base() { delete root; }
 
   node* merge(node* left, node* right) {
     if (!left || !right) return left ? left : right;
