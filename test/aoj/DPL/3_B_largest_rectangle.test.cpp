@@ -9,7 +9,7 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-ll largest_rectanle_in_a_histogram(int n, vector<ll> a) {
+ll largest_rectanle_in_a_histogram(int n, const vector<ll>& a) {
   cartesian_tree<false> cart(a);
   vector<int> sub(n);
   auto dfs = [&](auto self, int v) -> int {
