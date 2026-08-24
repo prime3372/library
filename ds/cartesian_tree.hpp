@@ -18,7 +18,6 @@ template <bool root_is_max> class cartesian_tree {
   // @note parent[root] = -1
   template <class T> void build(const std::vector<T>& a) {
     assert(!a.empty());
-
     int n = int(a.size());
     left.assign(n, -1);
     right.assign(n, -1);
