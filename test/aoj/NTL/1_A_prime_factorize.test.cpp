@@ -11,7 +11,6 @@ int main() {
   int n;
   cin >> n;
   auto fac = factorize(n);
-  cout << n << ": ";
   string ans;
   for (auto f : fac) {
     while (f.second--) {
@@ -20,5 +19,5 @@ int main() {
     }
   }
   ans.pop_back();
-  cout << ans << "\n";
+  cout << n << ": " << ans << "\n";
 }
