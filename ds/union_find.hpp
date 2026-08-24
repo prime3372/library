@@ -13,6 +13,9 @@ class union_find {
   explicit union_find(int _n) : n(_n), cnt(_n), par_size(_n, -1) {}
 
   bool unite(int a, int b) {
+    return unite(a, b, [](int, int) {});
+  }
+  template <class F> bool unite(int a, int b, F f) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
     a = find(a);
@@ -22,6 +25,7 @@ class union_find {
     par_size[a] += par_size[b];
     par_size[b] = a;
     cnt--;
+    f(a, b);
     return true;
   }
 
