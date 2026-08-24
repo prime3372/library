@@ -23,7 +23,7 @@ template <class T> class tree_diameter {
 
   int farthest(int s) { return farthest(s, -1).second; }
 
-  T len = 0;
+  T dist = 0;
   std::vector<int> vertices, edges;
 
   tree_diameter& build(int s = 0) {
@@ -45,8 +45,8 @@ template <class T> class tree_diameter {
     };
     construct(construct, t, -1);
 
-    len = 0;
-    for (int i : edges) len += co[i];
+    dist = 0;
+    for (int i : edges) dist += co[i];
     return *this;
   }
 
