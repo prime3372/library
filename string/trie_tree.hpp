@@ -48,22 +48,35 @@ template <int char_size, auto offset = 'a'> class trie_tree {
     int v = search(s);
     return v == -1 ? 0 : count(v);
   }
-  int count(int v) const { return nodes[v].end; }
+  int count(int v) const {
+    assert(0 <= v && v < int(nodes.size()));
+    return nodes[v].end;
+  }
 
   int prefix(const std::string& s) const {
     int v = search(s);
     return v == -1 ? 0 : prefix(v);
   }
-  int prefix(int v) const { return nodes[v].mid; }
+  int prefix(int v) const {
+    assert(0 <= v && v < int(nodes.size()));
+    return nodes[v].mid;
+  }
 
   const std::array<int, char_size>& operator[](int v) const {
+    assert(0 <= v && v < int(nodes.size()));
     return nodes[v].to;
   }
-  int next(int v, char c) const { return nodes[v].to[index(c)]; }
-  int parent(int v) const { return nodes[v].par; }
+  int next(int v, char c) const {
+    assert(0 <= v && v < int(nodes.size()));
+    return nodes[v].to[index(c)];
+  }
+  int parent(int v) const {
+    assert(0 <= v && v < int(nodes.size()));
+    return nodes[v].par;
+  }
 
-  int search(const std::string& s) const { return search(0, s); }
-  int search(int v, const std::string& s) const {
+  int search(const std::string& s, int v = 0) const {
+    assert(0 <= v && v < int(nodes.size()));
     for (char c : s) {
       v = next(v, c);
       if (v == -1) return -1;
@@ -81,7 +94,7 @@ template <int char_size, auto offset = 'a'> class trie_tree {
       assert(0 <= idx && idx < char_size);
       return idx;
     } else {
-      assert(offset <= c && c < offset + char_size);
+      assert(0 <= c - offset && c - offset < char_size);
       return c - offset;
     }
   }
