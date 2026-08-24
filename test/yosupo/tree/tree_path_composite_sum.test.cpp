@@ -12,6 +12,8 @@ using mint = modint998244353;
 using M = alg::sum_affine<mint>;
 
 int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
   int n;
   cin >> n;
   vector<M::S> a(n);
