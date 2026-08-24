@@ -8,6 +8,7 @@
 
 namespace cp {
 
+// @param n `1 <= n`
 std::vector<long long> enumerate_quotients(long long n) {
   assert(1 <= n);
   long long r = isqrt(n);

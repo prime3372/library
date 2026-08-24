@@ -5,6 +5,7 @@
 
 namespace cp {
 
+// @param n `0 <= n`
 std::vector<int> enumerate_primes(int n) {
   assert(0 <= n);
   std::vector<int> ps;

@@ -9,6 +9,7 @@
 
 namespace cp {
 
+// @param n `1 <= n`
 std::vector<long long> enumerate_divisors(long long n) {
   assert(1 <= n);
   std::vector<std::pair<long long, int>> fac = factorize(n);

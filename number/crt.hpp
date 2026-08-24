@@ -9,7 +9,7 @@
 namespace cp {
 
 // CRT: Chinese Remainder Theorem
-// @return (rem, mod)
+// @return pair(rem, mod)
 std::pair<long long, long long> crt(const std::vector<long long>& r,
                                     const std::vector<long long>& m) {
   assert(r.size() == m.size());
