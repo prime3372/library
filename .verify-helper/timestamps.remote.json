@@ -32,7 +32,7 @@
   "test/aoj/GRL/5_E_range_query_on_a_tree_2.test.cpp": "2026-08-23 16:43:06 +0900",
   "test/aoj/GRL/6_A_maximum_flow.test.cpp": "2026-08-24 08:44:53 +0900",
   "test/aoj/GRL/7_A_bipartite_matching.test.cpp": "2026-08-24 08:44:53 +0900",
-  "test/aoj/NTL/1_A_prime_factorize.test.cpp": "2026-08-24 14:39:31 +0900",
+  "test/aoj/NTL/1_A_prime_factorize.test.cpp": "2026-08-24 14:52:51 +0900",
   "test/aoj/NTL/1_B_power.test.cpp": "2026-08-24 14:39:31 +0900",
   "test/aoj/NTL/1_E_extended_euclid_algorithm.test.cpp": "2026-08-24 14:39:31 +0900",
   "test/yosupo/convolution/bitwise_and_convolution.test.cpp": "2026-08-24 14:39:31 +0900",
