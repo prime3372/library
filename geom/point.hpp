@@ -63,6 +63,16 @@ template <class T> class point {
   template <class U> friend point operator/(const point& p, U s) {
     return point(p) /= s;
   }
+
+  friend bool operator==(const point& p, const point& q) {
+    return (p.x == q.x) && (p.y == q.y);
+  }
+  friend bool operator<(const point& p, const point& q) {
+    return (p.x < q.x) || (p.x == q.x && p.y < q.y);
+  }
+  friend bool operator>(const point& p, const point& q) { return q < p; }
+  friend bool operator<=(const point& p, const point& q) { return !(p > q); }
+  friend bool operator>=(const point& p, const point& q) { return !(p < q); }
 };
 
 template <class T> T norm(const point<T>& p) { return p.x * p.x + p.y * p.y; }
