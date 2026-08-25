@@ -3,9 +3,12 @@
 #include <cassert>
 #include <cstddef>
 #include <iostream>
+#include <sstream>
+#include <string>
 #include <utility>
 #include <vector>
 
+#include "util/io_utility_base.hpp"
 #include "util/safe_hash.hpp"
 
 namespace cp {
@@ -49,6 +52,22 @@ template <class Key, class Val> class hash_map {
   int size() const { return sz; }
 
   void set_default(const Val& v) { default_value = v; }
+
+  friend std::ostream& operator<<(std::ostream& os, const hash_map& mp) {
+    std::vector<std::string> outs;
+    outs.reserve(mp.size());
+    auto pairs = mp.enumerate();
+    std::ostringstream oss;
+    for (auto& p : pairs) {
+      oss << p.first;
+      outs.push_back(oss.str());
+      oss.str("");
+      oss << p.second;
+      outs.push_back(oss.str());
+      oss.str("");
+    }
+    return os << internal::combine_outputs(outs);
+  }
 
  private:
   unsigned int cap, sz;

@@ -28,9 +28,9 @@ template <class T> class hash_set {
     return true;
   }
 
-  bool count(const T& k) { return d[k]; }
+  bool count(const T& k) const { return d.get(k); }
 
-  std::vector<T> enumerate() {
+  std::vector<T> enumerate() const {
     auto pairs = d.enumerate();
     std::vector<T> res;
     for (auto& p : pairs) {
@@ -39,7 +39,20 @@ template <class T> class hash_set {
     return res;
   }
 
-  int size() { return sz; }
+  int size() const { return sz; }
+
+  friend std::ostream& operator<<(std::ostream& os, const hash_set& s) {
+    std::vector<std::string> outs;
+    outs.reserve(s.size());
+    auto elems = s.enumerate();
+    std::ostringstream oss;
+    for (auto& x : elems) {
+      oss << x;
+      outs.push_back(oss.str());
+      oss.str("");
+    }
+    return os << internal::combine_outputs(outs);
+  }
 
  private:
   int sz = 0;
