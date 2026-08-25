@@ -53,7 +53,7 @@ class enumerate_union_find {
 
   int count() const { return cnt; }
 
-  // @note The result is not necessarily sorted.
+  // @note The order of the vertices is undefined.
   std::vector<int> enumerate(int a) const {
     assert(0 <= a && a < n);
     std::vector<int> res = {a};
