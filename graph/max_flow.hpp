@@ -11,8 +11,6 @@
 namespace cp {
 
 // Dinic's Algorithm
-// The implementaton is based on AC Library.
-// https://github.com/atcoder/ac-library/blob/master/atcoder/maxflow.hpp
 template <class Cap> requires internal::is_integral_v<Cap>
 class max_flow {
  public:
