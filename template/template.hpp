@@ -29,23 +29,21 @@ using mint = modint998244353;
 
 #ifdef LOCAL
 
+#define GET_STRING(a) #a
+
 #define local 1
-#define debug(...)                               \
+#define debug(...) \
+  std::cerr << GET_STRING(__VA_ARGS__) << " = " << (__VA_ARGS__) << "\n";
+#define write(...)                               \
   []<class... _Debug>(const _Debug&... _debug) { \
     (std::cerr << ... << _debug);                \
-    std::cerr << "\n";                           \
-  }(__VA_ARGS__)
-#define debugsp(...)                             \
-  []<class... _Debug>(const _Debug&... _debug) { \
-    (std::cerr << ... << _debug);                \
-    std::cerr << " ";                            \
   }(__VA_ARGS__)
 
 #else
 
 #define local 0
 #define debug(...)
-#define debugsp(...)
+#define write(...)
 
 #endif
 
