@@ -29,8 +29,7 @@ using mint = modint998244353;
 
 #ifdef LOCAL
 
-#define iflocal if (true)
-#define ifnlocal if (false)
+#define local 1
 #define debug(...)                               \
   []<class... _Debug>(const _Debug&... _debug) { \
     (std::cerr << ... << _debug);                \
@@ -44,8 +43,7 @@ using mint = modint998244353;
 
 #else
 
-#define iflocal if (false)
-#define ifnlocal if (true)
+#define local 0
 #define debug(...)
 #define debugsp(...)
 
