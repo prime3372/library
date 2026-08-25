@@ -32,8 +32,10 @@ template <class T, class U> using dict = hash_map<T, U>;
 #define GET_STRING(a) #a
 
 #define local 1
-#define debug(...) \
-  std::cerr << GET_STRING(__VA_ARGS__) << " = " << (__VA_ARGS__) << "\n";
+#define debug(...)                                                         \
+  do {                                                                     \
+    std::cerr << GET_STRING(__VA_ARGS__) << ": " << (__VA_ARGS__) << "\n"; \
+  } while (0)
 #define write(...)                               \
   []<class... _Debug>(const _Debug&... _debug) { \
     (std::cerr << ... << _debug);                \
