@@ -57,6 +57,19 @@ template <class T> class priority_deque {
 
   void clear() { d.resize(2); }
 
+  friend std::ostream& operator<<(std::ostream& os, priority_deque dq) {
+    std::vector<std::string> outs;
+    outs.reserve(dq.size());
+    std::ostringstream oss;
+    while (!dq.empty()) {
+      oss << dq.min();
+      dq.pop_min();
+      outs.push_back(oss.str());
+      oss.str("");
+    }
+    return os << internal::combine_outputs(outs);
+  }
+
  private:
   std::vector<T> d;
 
