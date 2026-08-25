@@ -38,6 +38,7 @@
   "test/aoj/NTL/1_E_extended_euclid_algorithm.test.cpp": "2026-08-24 14:39:31 +0900",
   "test/yosupo/convolution/bitwise_and_convolution.test.cpp": "2026-08-25 15:48:58 +0900",
   "test/yosupo/convolution/convolution.test.cpp": "2026-08-24 22:17:52 +0900",
+  "test/yosupo/convolution/gcd_convolution.test.cpp": "2026-08-25 16:28:38 +0900",
   "test/yosupo/data_structure/associative_array.test.cpp": "2026-08-25 11:33:21 +0900",
   "test/yosupo/data_structure/deque_operate_all_composite.test.cpp": "2026-08-24 14:39:31 +0900",
   "test/yosupo/data_structure/double_ended_priority_queue.test.cpp": "2026-08-25 10:50:45 +0900",
