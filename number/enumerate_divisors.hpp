@@ -10,22 +10,22 @@
 namespace cp {
 
 // @param n `1 <= n`
+// @note The order of the divisors is undefined.
 std::vector<long long> enumerate_divisors(long long n) {
   assert(1 <= n);
   std::vector<std::pair<long long, int>> fac = factorize(n);
   std::vector<long long> ans;
-  auto f = [&](auto self, int i, long long x) -> void {
+  auto enumerate = [&](auto self, int i, long long d) -> void {
     if (i == int(fac.size())) {
-      ans.push_back(x);
+      ans.push_back(d);
       return;
     }
-    self(self, i + 1, x);
+    self(self, i + 1, d);
     for (int j = 0; j < fac[i].second; j++) {
-      self(self, i + 1, x *= fac[i].first);
+      self(self, i + 1, d *= fac[i].first);
     }
   };
-  f(f, 0, 1);
-  std::sort(ans.begin(), ans.end());
+  enumerate(enumerate, 0, 1);
   return ans;
 }
 
