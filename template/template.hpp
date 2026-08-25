@@ -25,6 +25,7 @@ template <class T> using maxque = priority_queue<T>;
 
 using namespace cp;
 using mint = modint998244353;
+template <class T, class U> using dict = hash_map<T, U>;
 
 #ifdef LOCAL
 
