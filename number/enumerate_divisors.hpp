@@ -13,19 +13,18 @@ namespace cp {
 // @note The order of the divisors is undefined.
 std::vector<long long> enumerate_divisors(long long n) {
   assert(1 <= n);
-  std::vector<std::pair<long long, int>> fac = factorize(n);
-  std::vector<long long> ans;
-  auto enumerate = [&](auto self, int i, long long d) -> void {
-    if (i == int(fac.size())) {
-      ans.push_back(d);
-      return;
+  std::vector<long long> ans = {1};
+  auto fac = factorize(n);
+  for (const auto& [p, e] : fac) {
+    int sz = int(ans.size());
+    long long cur = 1;
+    for (int i = 0; i < e; i++) {
+      cur *= p;
+      for (int j = 0; j < sz; j++) {
+        ans.push_back(ans[j] * cur);
+      }
     }
-    self(self, i + 1, d);
-    for (int j = 0; j < fac[i].second; j++) {
-      self(self, i + 1, d *= fac[i].first);
-    }
-  };
-  enumerate(enumerate, 0, 1);
+  }
   return ans;
 }
 
