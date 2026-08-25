@@ -8,6 +8,8 @@
 #include <utility>
 #include <vector>
 
+#include "util/io_utility_base.hpp"
+
 namespace cp {
 
 // even index -> min heap
