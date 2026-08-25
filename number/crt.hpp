@@ -9,15 +9,17 @@
 namespace cp {
 
 // CRT: Chinese Remainder Theorem
-// @return pair(rem, mod)
-std::pair<long long, long long> crt(const std::vector<long long>& r,
-                                    const std::vector<long long>& m) {
+// @return if there is solution: `pair(rem, mod)` otherwise: `pair(0, 0)`
+// @note lcm(m[i]) must be in `long long`
+template <class T>
+std::pair<long long, long long> crt(const std::vector<T>& r,
+                                    const std::vector<T>& m) {
   assert(r.size() == m.size());
   int n = int(r.size());
   long long r0 = 0, m0 = 1;
   for (int i = 0; i < n; ++i) {
     assert(1 <= m[i]);
-    long long r1 = r[i] % m[i], m1 = m[i];
+    long long r1 = (long long)(r[i] % m[i]), m1 = m[i];
     if (r1 < 0) r1 += m1;
     if (m0 < m1) {
       std::swap(r0, r1);
