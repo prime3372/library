@@ -21,9 +21,10 @@ template <class node, class derived> class treap_base {
  public:
   treap_base() {}
   explicit treap_base(int n) : treap_base(std::vector<T>(n)) {}
-  explicit treap_base(int n, const T& val) : treap_base(std::vector<T>(n, val)) {}
+  explicit treap_base(int n, const T& val)
+      : treap_base(std::vector<T>(n, val)) {}
   explicit treap_base(const std::vector<T>& v) { build(v); }
-  
+
   // @warning Coping can have side effects on the original.
   treap_base(treap_base& other) {
     if (!other.root) return;
@@ -44,7 +45,7 @@ template <class node, class derived> class treap_base {
     std::swap(root, other.root);
     return *this;
   }
-  
+
   ~treap_base() { delete root; }
 
   void build(const std::vector<T>& v) {
