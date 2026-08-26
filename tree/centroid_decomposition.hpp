@@ -19,10 +19,10 @@ class centroid_decomposition {
   }
 
   int root = -1;
-  std::vector<int> centroid, parent, size;
+  std::vector<int> parent, size, dfs_order;
 
   centroid_decomposition& build() {
-    centroid.reserve(n);
+    dfs_order.reserve(n);
     root = build(0);
     return *this;
   }
@@ -52,7 +52,7 @@ class centroid_decomposition {
   int build(int v) {
     calc_size(v, -1);
     int c = find_centroid(v, -1, size[v] / 2);
-    centroid.push_back(c);
+    dfs_order.push_back(c);
     size[c] = size[v];
     removed[c] = true;
     for (int to : g[c]) {
