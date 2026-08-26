@@ -10,7 +10,7 @@
 namespace cp {
 
 template <int m> requires(1 <= m)
-struct static_modint {
+class static_modint {
   using mint = static_modint;
 
  public:
