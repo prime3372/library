@@ -4,13 +4,13 @@ import time
 import subprocess
 
 # arguments
-sol = sys.argv[1]
-gen = sys.argv[2]
-include = sys.argv[3]
+gen = sys.argv[1]
+sol = sys.argv[2]
+case_num = int(sys.argv[3])
+include = sys.argv[4]
 
 # variables
 timeout = 10000
-case_num = 50
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # colors
@@ -23,7 +23,7 @@ MAGENTA = "\033[35m"
 def main():
     print("compiling...")
 
-    targets = [(sol, "sol.exe"), (gen, "gen.exe")]
+    targets = [(gen, "gen.exe"), (sol, "sol.exe")]
 
     procs = [subprocess.Popen(["g++", src] + opts + ["-o", exe]) for src, exe in targets]
 

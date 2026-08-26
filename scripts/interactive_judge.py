@@ -5,15 +5,15 @@ import subprocess
 import threading
 
 # arguments
-sol = sys.argv[1]
-gen = sys.argv[2]
+gen = sys.argv[1]
+sol = sys.argv[2]
 act = sys.argv[3]
-include = sys.argv[4]
+case_num = int(sys.argv[4])
+include = sys.argv[5]
 
 # variables
 timelimit = 5000
 timeout = 10000
-case_num = 50
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # colors
@@ -41,7 +41,7 @@ def pump(src, dst, prefix, f_log):
 def main():
     print("compiling...")
 
-    targets = [(sol, "sol.exe"), (gen, "gen.exe"), (act, "act.exe")]
+    targets = [(gen, "gen.exe"), (sol, "sol.exe"), (act, "act.exe")]
 
     procs = [subprocess.Popen(["g++", src] + opts + ["-o", exe]) for src, exe in targets]
 
