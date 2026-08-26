@@ -157,7 +157,7 @@ template <class node, class derived> class treap_base {
     }
   }
 
-  static int size(const node* p) /*const*/ { return p ? p->sub : 0; }
+  static int size(const node* p) { return p ? p->sub : 0; }
 };
 
 }  // namespace cp
