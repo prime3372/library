@@ -25,8 +25,7 @@ template <class node, class derived> class treap_base {
       : treap_base(std::vector<T>(n, val)) {}
   explicit treap_base(const std::vector<T>& v) { build(v); }
 
-  // @warning Coping can have side effects on the original.
-  treap_base(treap_base& other) {
+  treap_base(const treap_base& other) {
     if (!other.root) return;
     std::vector<T> data(other.size());
     auto dfs = [&](auto self, node* p, int k) -> void {
@@ -102,6 +101,17 @@ template <class node, class derived> class treap_base {
     root = merge(s.first, t.second);
   }
 
+  void push_back(const T& x) { insert(size(), x); }
+  void push_front(const T& x) { insert(0, x); }
+  void pop_back(const T& x) {
+    assert(!empty());
+    erase(size() - 1);
+  }
+  void pop_front(const T& x) {
+    assert(!empty());
+    erase(0);
+  }
+
   void reverse(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
     if (l == r) return;
@@ -112,6 +122,7 @@ template <class node, class derived> class treap_base {
   }
 
   int size() const { return size(root); }
+  bool empty() const { return size() == 0; }
 
   friend std::ostream& operator<<(std::ostream& os, derived tp) {
     std::vector<std::string> outs(tp.size());
