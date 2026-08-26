@@ -16,7 +16,9 @@ class hash61 {
  public:
   static hash61 get_basis() {
     hash61 hs;
-    do { hs.v = uniform(1ULL, m - 1); } while (!is_primitive(hs.v));
+    do {
+      hs.v = uniform(1ULL, m - 1);
+    } while (!is_primitive(hs.v));
     return hs;
   }
   static hash61 get_rand() { return hash61(uniform(1ULL, m - 1)); }
