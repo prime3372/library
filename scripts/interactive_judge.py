@@ -107,7 +107,8 @@ def main():
 
         if p_act.returncode in OK:
             print(f"Test {i} {GREEN}AC{RESET} {t} ms")
-            subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
+            if i != case_num:
+                subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
         elif p_act.returncode in WA:
             print(f"Test {i} {RED}WA{RESET} {t} ms")
             break

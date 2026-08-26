@@ -92,7 +92,8 @@ def main():
             res = subprocess.run(["./che.exe", "in.txt", "out.txt", "ans.txt"], timeout=timeout / 1000.0)
             if res.returncode in OK:
                 print(f"Test {i} {GREEN}AC{RESET} {t} ms")
-                subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt", "ans.txt"])
+                if i != case_num:
+                    subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt", "ans.txt"])
             elif res.returncode in WA:
                 print(f"Test {i} {RED}WA{RESET} {t} ms")
                 break

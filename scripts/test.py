@@ -57,7 +57,8 @@ def main():
                 subprocess.run(["./sol.exe"], stdin=f_in, stdout=f_out, timeout=timeout / 1000.0, check=True)
             t = int((time.perf_counter() - start) * 1000)
             print(f"Test {i} {GREEN}Success{RESET} {t} ms")
-            subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt"])
+            if i != case_num:
+                subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt"])
         except subprocess.TimeoutExpired:
             print(f"Test {i} {YELLOW}Timed Out{RESET} > {timeout} ms")
             break

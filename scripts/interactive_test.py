@@ -100,7 +100,8 @@ def main():
             break
 
         print(f"Test {i} {GREEN}Success{RESET} {t} ms")
-        subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
+        if i != case_num:
+            subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
 
 if __name__ == "__main__":
     main()
