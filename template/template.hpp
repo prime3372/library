@@ -36,9 +36,9 @@ template <class T, class U> using dict = hash_map<T, U>;
   do {                                                                     \
     std::cerr << GET_STRING(__VA_ARGS__) << ": " << (__VA_ARGS__) << "\n"; \
   } while (0)
-#define write(...)                               \
-  []<class... _Debug>(const _Debug&... _debug) { \
-    (std::cerr << ... << _debug);                \
+#define write(...)                            \
+  []<class... _Args>(const _Args&... _args) { \
+    (std::cerr << ... << _args);              \
   }(__VA_ARGS__)
 
 #else
