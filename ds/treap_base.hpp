@@ -15,10 +15,38 @@
 
 namespace cp {
 
-template <class node> class treap_base {
+template <class node, class derived> class treap_base {
   using T = decltype(node::val);
 
  public:
+  treap_base() {}
+  explicit treap_base(int n) : treap_base(std::vector<T>(n)) {}
+  explicit treap_base(int n, const T& val) : treap_base(std::vector<T>(n, val)) {}
+  explicit treap_base(const std::vector<T>& v) { build(v); }
+
+  ~treap_base() { delete root; }
+
+  // @warning Coping can have side effects on the original.
+  treap_base(treap_base& other) {
+    if (!other.root) return;
+    std::vector<T> data(other.size());
+    auto dfs = [&](auto self, node* p, int k) -> void {
+      if (!p) return;
+      derived::push(p);
+      self(self, p->left, k);
+      self(self, p->right, k + size(p->left) + 1);
+      derived::update(p);
+      data[k + size(p->left)] = p->val;
+    };
+    dfs(dfs, other.root, 0);
+    build(data);
+  }
+  treap_base(treap_base&& other) : root(other.root) { other.root = nullptr; }
+  treap_base& operator=(treap_base other) {
+    std::swap(root, other.root);
+    return *this;
+  }
+
   void build(const std::vector<T>& v) {
     if (v.empty()) return;
     int n = int(v.size());
@@ -34,9 +62,10 @@ template <class node> class treap_base {
       if (cart.right[i] != -1) ps[i]->right = ps[cart.right[i]];
     }
     auto dfs = [&](auto self, node* p) -> void {
-      if (p->left) self(self, p->left);
-      if (p->right) self(self, p->right);
-      update(p);
+      if (!p) return;
+      self(self, p->left);
+      self(self, p->right);
+      derived::update(p);
     };
     dfs(dfs, root = ps[cart.root]);
   }
@@ -77,13 +106,13 @@ template <class node> class treap_base {
     if (l == r) return;
     auto s = split(root, l);
     auto t = split(s.second, r - l);
-    toggle(t.first);
+    derived::toggle(t.first);
     root = merge(s.first, merge(t.first, t.second));
   }
 
   int size() const { return size(root); }
 
-  friend std::ostream& operator<<(std::ostream& os, treap_base tp) {
+  friend std::ostream& operator<<(std::ostream& os, derived tp) {
     std::vector<std::string> outs(tp.size());
     std::ostringstream oss;
     for (int i = 0; i < int(outs.size()); i++) {
@@ -97,45 +126,38 @@ template <class node> class treap_base {
  protected:
   node* root = nullptr;
 
-  treap_base() {}
-  ~treap_base() { delete root; }
-
-  node* merge(node* left, node* right) {
+  static node* merge(node* left, node* right) {
     if (!left || !right) return left ? left : right;
     if (left->priority > right->priority) {
-      push(left);
+      derived::push(left);
       left->right = merge(left->right, right);
-      update(left);
+      derived::update(left);
       return left;
     } else {
-      push(right);
+      derived::push(right);
       right->left = merge(left, right->left);
-      update(right);
+      derived::update(right);
       return right;
     }
   }
 
-  std::pair<node*, node*> split(node* p, int k) {
+  static std::pair<node*, node*> split(node* p, int k) {
     if (!p) return {nullptr, nullptr};
-    push(p);
+    derived::push(p);
     if (k <= size(p->left)) {
       auto s = split(p->left, k);
       p->left = s.second;
-      update(p);
+      derived::update(p);
       return {s.first, p};
     } else {
       auto s = split(p->right, k - size(p->left) - 1);
       p->right = s.first;
-      update(p);
+      derived::update(p);
       return {p, s.second};
     }
   }
 
-  int size(const node* p) const { return p ? p->sub : 0; }
-
-  virtual void toggle(node* p) = 0;
-  virtual void update(node* p) = 0;
-  virtual void push(node* p) = 0;
+  static int size(const node* p) /*const*/ { return p ? p->sub : 0; }
 };
 
 }  // namespace cp

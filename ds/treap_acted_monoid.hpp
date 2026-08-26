@@ -18,9 +18,9 @@ template <class M> struct treap_acted_monoid_node {
   F lz = M::id();
   int sub = 1;
   bool rev = false;
+  unsigned long long priority;
   treap_acted_monoid_node* left = nullptr;
   treap_acted_monoid_node* right = nullptr;
-  unsigned long long priority;
 
   treap_acted_monoid_node() {}
   explicit treap_acted_monoid_node(const S& x)
@@ -29,25 +29,23 @@ template <class M> struct treap_acted_monoid_node {
     delete left;
     delete right;
   }
+  treap_acted_monoid_node(const treap_acted_monoid_node&) = delete;
+  treap_acted_monoid_node& operator=(const treap_acted_monoid_node&) = delete;
 };
 
 }  // namespace internal
 
 template <class M, auto rev = std::identity()>
 class treap_acted_monoid
-    : public treap_base<internal::treap_acted_monoid_node<M>> {
- public:
+    : public treap_base<internal::treap_acted_monoid_node<M>,
+                        treap_acted_monoid<M, rev>> {
   using S = typename M::S;
   using F = typename M::F;
   using node = internal::treap_acted_monoid_node<M>;
-  using base = treap_base<node>;
+  using base = treap_base<node, treap_acted_monoid>;
 
-  treap_acted_monoid() {}
-  explicit treap_acted_monoid(int n) { build(std::vector<S>(n, M::e())); }
-  explicit treap_acted_monoid(int n, const S& val) {
-    build(std::vector<S>(n, val));
-  }
-  explicit treap_acted_monoid(const std::vector<S>& v) { build(v); }
+ public:
+  using base::base;
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
@@ -68,20 +66,20 @@ class treap_acted_monoid
     root = merge(s.first, merge(t.first, t.second));
   }
 
- protected:
-  using base::build;
+ private:
   using base::merge;
   using base::root;
   using base::size;
   using base::split;
+  friend base;
 
-  void toggle(node* p) override {
+  static void toggle(node* p) {
     std::swap(p->left, p->right);
     p->prod = rev(p->prod);
     p->rev = !p->rev;
   }
 
-  void update(node* p) override {
+  static void update(node* p) {
     p->sub = 1;
     p->prod = p->val;
     if (p->left) {
@@ -94,7 +92,7 @@ class treap_acted_monoid
     }
   }
 
-  void push(node* p) override {
+  static void push(node* p) {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);
@@ -105,7 +103,7 @@ class treap_acted_monoid
     p->lz = M::id();
   }
 
-  void all_apply(node* p, F f) {
+  static void all_apply(node* p, F f) {
     p->lz = M::composition(f, p->lz);
     p->val = M::mapping(f, p->val);
     p->prod = M::mapping(f, p->prod);

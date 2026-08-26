@@ -17,9 +17,9 @@ template <class M> struct treap_monoid_node {
   S val, prod;
   int sub = 1;
   bool rev = false;
+  unsigned long long priority;
   treap_monoid_node* left = nullptr;
   treap_monoid_node* right = nullptr;
-  unsigned long long priority;
 
   treap_monoid_node() {}
   explicit treap_monoid_node(const S& x) : val(x), prod(x), priority(mt64()) {}
@@ -27,21 +27,21 @@ template <class M> struct treap_monoid_node {
     delete left;
     delete right;
   }
+  treap_monoid_node(const treap_monoid_node&) = delete;
+  treap_monoid_node& operator=(const treap_monoid_node&) = delete;
 };
 
 }  // namespace internal
 
 template <class M, auto rev = std::identity()>
-class treap_monoid : public treap_base<internal::treap_monoid_node<M>> {
+class treap_monoid
+    : public treap_base<internal::treap_monoid_node<M>, treap_monoid<M, rev>> {
   using S = typename M::S;
   using node = internal::treap_monoid_node<M>;
-  using base = treap_base<node>;
+  using base = treap_base<node, treap_monoid>;
 
  public:
-  treap_monoid() {}
-  explicit treap_monoid(int n) { build(std::vector<S>(n, M::e())); }
-  explicit treap_monoid(int n, const S& val) { build(std::vector<S>(n, val)); }
-  explicit treap_monoid(const std::vector<S>& v) { build(v); }
+   using base::base;
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
@@ -53,20 +53,20 @@ class treap_monoid : public treap_base<internal::treap_monoid_node<M>> {
     return res;
   }
 
- protected:
-  using base::build;
+ private:
   using base::merge;
   using base::root;
   using base::size;
   using base::split;
+  friend base;
 
-  void toggle(node* p) override {
+  static void toggle(node* p) {
     std::swap(p->left, p->right);
     p->prod = rev(p->prod);
     p->rev = !p->rev;
   }
 
-  void update(node* p) override {
+  static void update(node* p) {
     p->sub = 1;
     p->prod = p->val;
     if (p->left) {
@@ -79,7 +79,7 @@ class treap_monoid : public treap_base<internal::treap_monoid_node<M>> {
     }
   }
 
-  void push(node* p) override {
+  static void push(node* p) {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);

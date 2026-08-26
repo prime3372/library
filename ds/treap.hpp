@@ -15,9 +15,9 @@ template <class T> struct treap_node {
   T val;
   int sub = 1;
   bool rev = false;
+  unsigned long long priority;
   treap_node* left = nullptr;
   treap_node* right = nullptr;
-  unsigned long long priority;
 
   treap_node() {};
   explicit treap_node(const T& x) : val(x), priority(mt64()) {}
@@ -25,35 +25,35 @@ template <class T> struct treap_node {
     delete left;
     delete right;
   }
+  treap_node(const treap_node&) = delete;
+  treap_node& operator=(const treap_node&) = delete;
 };
 
 }  // namespace internal
 
-template <class T> class treap : public treap_base<internal::treap_node<T>> {
+template <class T>
+class treap : public treap_base<internal::treap_node<T>, treap<T>> {
   using node = internal::treap_node<T>;
-  using base = treap_base<node>;
+  using base = treap_base<node, treap>;
 
  public:
-  treap() {}
-  explicit treap(int n) { build(std::vector<T>(n)); }
-  explicit treap(int n, const T& val) { build(std::vector<T>(n, val)); }
-  explicit treap(const std::vector<T>& v) { build(v); }
+  using base::base;
 
- protected:
-  using base::build;
+ private:
+  friend base;
 
-  void toggle(node* p) override {
+  static void toggle(node* p) {
     std::swap(p->left, p->right);
     p->rev = !p->rev;
   }
 
-  void update(node* p) override {
+  static void update(node* p) {
     p->sub = 1;
     if (p->left) p->sub += p->left->sub;
     if (p->right) p->sub += p->right->sub;
   }
 
-  void push(node* p) override {
+  static void push(node* p) {
     if (p->rev) {
       if (p->left) toggle(p->left);
       if (p->right) toggle(p->right);
