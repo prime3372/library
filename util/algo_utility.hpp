@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cstddef>
 #include <numeric>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -41,7 +42,7 @@ std::vector<int> sort(Container&& a, Comp comp) {
 }
 
 template <class Container> std::vector<int> sort(Container&& a) {
-  return sort(a, std::less<typename Container::value_type>());
+  return sort(a, std::less<typename std::decay_t<Container>::value_type>());
 }
 
 template <class Container> void uniq(Container& a) {
