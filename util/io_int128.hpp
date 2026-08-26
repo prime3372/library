@@ -2,7 +2,6 @@
 
 #include <algorithm>
 #include <cctype>
-#include <climits>
 #include <iostream>
 #include <string>
 
@@ -35,7 +34,7 @@ std::istream& operator>>(std::istream& is, unsigned __int128& val) {
 }
 
 std::ostream& operator<<(std::ostream& os, __int128 val) {
-  if (LLONG_MIN <= val && val <= LLONG_MAX) {
+  if (val == (long long)(val)) {
     return os << (long long)(val);
   }
   unsigned __int128 uval = val;
@@ -53,7 +52,7 @@ std::ostream& operator<<(std::ostream& os, __int128 val) {
 }
 
 std::ostream& operator<<(std::ostream& os, unsigned __int128 val) {
-  if (val <= ULLONG_MAX) {
+  if (val == (unsigned long long)(val)) {
     return os << (unsigned long long)(val);
   }
   std::string s;
