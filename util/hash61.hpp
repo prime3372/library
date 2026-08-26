@@ -7,7 +7,6 @@
 #include <type_traits>
 
 #include "random/base.hpp"
-#include "util/safe_hash.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
@@ -138,12 +137,6 @@ class hash61 {
     r = (r >> 61) + (r & m);
     if (r >= m) r -= m;
     return (unsigned long long)(r);
-  }
-};
-
-template <> struct safe_hash<hash61> {
-  unsigned long long operator()(const hash61& hs) const {
-    return safe_hash<unsigned long long>()(hs.val());
   }
 };
 
