@@ -47,6 +47,7 @@ class union_find {
 
   int size() const { return n; }
 
+  // @return the number of connected components
   int count() const { return cnt; }
 
   std::vector<std::vector<int>> groups() {
@@ -67,8 +68,6 @@ class union_find {
 
  private:
   int n, cnt;
-  // root node: -1 * component size
-  // otherwise: parent
   std::vector<int> par_size;
   int _find(int a) {
     if (par_size[a] < 0) return a;
