@@ -95,6 +95,9 @@ template <class T> long double arg(const point<T>& p) {
 template <class T> point<T> rot90(const point<T>& p) {
   return point<T>(p.y, -p.x);
 }
+template <class T> point<T> rot270(const point<T>& p) {
+  return point<T>(-p.y, p.x);
+}
 
 template <class T> bool is_same(const point<T>& p, const point<T>& q) {
   return internal::equal(p.x, q.x) && internal::equal(p.y, q.y);
