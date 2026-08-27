@@ -7,7 +7,7 @@ namespace cp {
 
 // subset zeta transfrom
 template <class T> void subset_zeta(int n, std::vector<T>& a) {
-  assert(0 <= n && int(a.size()) == 1 << n);
+  assert(0 <= n && int(a.size()) == (1 << n));
   // example: n = 8
   // [000] -> [000] -> [000] -> [000]
   // [001] -> [00*] -> [00*] -> [00*]
@@ -29,7 +29,7 @@ template <class T> void subset_zeta(int n, std::vector<T>& a) {
 
 // subset mobius transform
 template <class T> void subset_mobius(int n, std::vector<T>& a) {
-  assert(0 <= n && int(a.size()) == 1 << n);
+  assert(0 <= n && int(a.size()) == (1 << n));
   // example: n = 8
   // [000] -> [000] -> [000] -> [000]
   // [00*] -> [001] -> [001] -> [001]

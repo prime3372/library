@@ -7,7 +7,7 @@ namespace cp {
 
 // superset zeta transform
 template <class T> void superset_zeta(int n, std::vector<T>& a) {
-  assert(0 <= n && int(a.size()) == 1 << n);
+  assert(0 <= n && int(a.size()) == (1 << n));
   // example: n = 8
   // [000] -> [00*] -> [0**] -> [***]
   // [001] -> [001] -> [0*1] -> [**1]
@@ -29,7 +29,7 @@ template <class T> void superset_zeta(int n, std::vector<T>& a) {
 
 // superset mobius transform
 template <class T> void superset_mobius(int n, std::vector<T>& a) {
-  assert(0 <= n && int(a.size()) == 1 << n);
+  assert(0 <= n && int(a.size()) == (1 << n));
   // example: n = 8
   // [***] -> [**0] -> [*00] -> [000]
   // [**1] -> [**1] -> [*01] -> [001]
