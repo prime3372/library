@@ -27,7 +27,14 @@ template <class M> struct treap_monoid_node {
     delete left;
     delete right;
   }
-  treap_monoid_node(const treap_monoid_node&) = delete;
+  treap_monoid_node(const treap_monoid_node& other)
+      : val(other.val),
+        prod(other.prod),
+        sub(other.sub),
+        rev(other.rev),
+        priority(other.priority),
+        left(other.left ? new treap_monoid_node(*other.left) : nullptr),
+        right(other.right ? new treap_monoid_node(*other.right) : nullptr) {}
   treap_monoid_node& operator=(const treap_monoid_node&) = delete;
 };
 
@@ -41,7 +48,7 @@ class treap_monoid
   using base = treap_base<node, treap_monoid>;
 
  public:
-   using base::base;
+  using base::base;
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());

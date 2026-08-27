@@ -25,20 +25,8 @@ template <class node, class derived> class treap_base {
       : treap_base(std::vector<T>(n, val)) {}
   explicit treap_base(const std::vector<T>& v) { build(v); }
 
-  treap_base(const treap_base& other) {
-    if (!other.root) return;
-    std::vector<T> data(other.size());
-    auto dfs = [&](auto self, node* p, int k) -> void {
-      if (!p) return;
-      derived::push(p);
-      self(self, p->left, k);
-      self(self, p->right, k + size(p->left) + 1);
-      derived::update(p);
-      data[k + size(p->left)] = p->val;
-    };
-    dfs(dfs, other.root, 0);
-    build(data);
-  }
+  treap_base(const treap_base& other)
+      : root(other.root ? new node(*other.root) : nullptr) {}
   treap_base(treap_base&& other) : root(other.root) { other.root = nullptr; }
   treap_base& operator=(treap_base other) {
     std::swap(root, other.root);

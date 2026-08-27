@@ -19,13 +19,19 @@ template <class T> struct treap_node {
   treap_node* left = nullptr;
   treap_node* right = nullptr;
 
-  treap_node() {};
+  treap_node() {}
   explicit treap_node(const T& x) : val(x), priority(mt64()) {}
   ~treap_node() {
     delete left;
     delete right;
   }
-  treap_node(const treap_node&) = delete;
+  treap_node(const treap_node& other)
+      : val(other.val),
+        sub(other.sub),
+        rev(other.rev),
+        priority(other.priority),
+        left(other.left ? new treap_node(*other.left) : nullptr),
+        right(other.right ? new treap_node(*other.right) : nullptr) {}
   treap_node& operator=(const treap_node&) = delete;
 };
 

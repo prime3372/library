@@ -29,7 +29,16 @@ template <class M> struct treap_acted_monoid_node {
     delete left;
     delete right;
   }
-  treap_acted_monoid_node(const treap_acted_monoid_node&) = delete;
+  treap_acted_monoid_node(const treap_acted_monoid_node& other)
+      : val(other.val),
+        prod(other.prod),
+        lz(other.lz),
+        sub(other.sub),
+        rev(other.rev),
+        priority(other.priority),
+        left(other.left ? new treap_acted_monoid_node(*other.left) : nullptr),
+        right(other.right ? new treap_acted_monoid_node(*other.right)
+                          : nullptr) {}
   treap_acted_monoid_node& operator=(const treap_acted_monoid_node&) = delete;
 };
 
