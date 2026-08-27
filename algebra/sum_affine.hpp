@@ -13,7 +13,6 @@ template <class T> struct sum_affine {
   struct S {
     T val;
     size_t len;
-
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
       os << x.val;
       return os;

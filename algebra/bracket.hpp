@@ -13,10 +13,6 @@ struct bracket {
     S() : sum(0), prefix_min(0), suffix_max(0) {}
     S(int x) : sum(x), prefix_min(x), suffix_max(x) {}
     S(int s, int pre, int suf) : sum(s), prefix_min(pre), suffix_max(suf) {}
-
-    friend std::ostream& operator<<(std::ostream& os, const S& x) {
-      return os << x.sum;
-    }
   };
 
   static S op(S x, S y) {

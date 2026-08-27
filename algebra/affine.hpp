@@ -9,9 +9,7 @@ namespace alg {
 template <class T> struct affine {
   struct S {
     T a = 1, b = 0;
-
     T operator()(T x) const { return a * x + b; }
-
     friend std::ostream& operator<<(std::ostream& os, const S& x) {
       os << x.a << "x + " << x.b;
       return os;
