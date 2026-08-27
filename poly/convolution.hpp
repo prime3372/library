@@ -60,6 +60,7 @@ template <class mint, int g> void ntt(std::vector<mint>& a) {
   int log = int(std::countr_zero((unsigned int)(n)));
 
   // First, rearrange the array in bit-reversed order.
+
   std::vector<int> bitrev(n);
   for (int i = 0; i < n; i++) {
     bitrev[i] = (bitrev[i >> 1] >> 1) + ((i & 1) << (log - 1));
@@ -75,6 +76,7 @@ template <class mint, int g> void ntt(std::vector<mint>& a) {
   // ->  a = [000   010   100   110] [001   011   101   111]
   // ->  a = [000   001   010   011   100   101   110   111]
   // Here, [i_0 ... i_k] denotes the NTT of a[i_0,...,i_k] before rearranging.
+
   for (int step = 1; step <= log; step++) {
     int width = 1 << step;
     int half = width / 2;
