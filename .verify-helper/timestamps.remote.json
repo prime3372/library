@@ -110,7 +110,8 @@
   "test/yosupo/tree/tree_diameter.test.cpp": "2026-08-24 09:49:29 +0900",
   "test/yosupo/tree/tree_path_composite_sum.test.cpp": "2026-08-27 23:09:57 +0900",
   "test/yosupo/tree/vertex_add_path_sum.test.cpp": "2026-08-25 18:08:31 +0900",
-  "test/yosupo/tree/vertex_add_range_contour_sum_on_tree.test.cpp": "2026-08-27 00:48:05 +0900",
+  "test/yosupo/tree/vertex_add_range_contour_sum_on_tree.test.cpp": "2026-08-27 23:49:16 +0900",
   "test/yosupo/tree/vertex_add_subtree_sum.test.cpp": "2026-08-24 23:26:50 +0900",
+  "test/yosupo/tree/vertex_get_range_counter_add_on_tree.test.cpp": "2026-08-28 00:08:34 +0900",
   "test/yosupo/tree/vertex_set_path_composite.test.cpp": "2026-08-27 23:09:57 +0900"
 }
