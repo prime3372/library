@@ -31,36 +31,34 @@ int main() {
   cd.build();
   lca.init();
 
-  vector<fenwick_tree<ll>> fw_all(n), fw_par(n);
+  vector<fenwick_tree<ll>> contour(n), contour_par(n);
   for (int i = 0; i < n; i++) {
-    fw_all[i] = fw_par[i] = fenwick_tree<ll>(cd.size[i] + 1);
+    contour[i] = contour_par[i] = fenwick_tree<ll>(cd.size[i] + 1);
   }
 
-  auto query0 = [&](int v, ll x) -> void {
-    int cur = v;
+  auto query0 = [&](int p, ll x) -> void {
+    int cur = p;
     while (true) {
-      fw_all[cur].add(lca.dist(cur, v), x);
-
+      contour[cur].add(lca.dist(cur, p), x);
       int par = cd.parent[cur];
       if (par == -1) break;
-      fw_par[cur].add(lca.dist(par, v), x);
+      contour_par[cur].add(lca.dist(par, p), x);
       cur = par;
     }
   };
-  auto query1 = [&](int v, int r) -> ll {
+  auto query1 = [&](int p, int r) -> ll {
     ll ans = 0;
-    int cur = v;
+    int cur = p;
     while (true) {
-      int dcur = lca.dist(cur, v);
-      if (r - dcur > 0) {
-        ans += fw_all[cur].sum(min(r - dcur, fw_all[cur].size()));
+      int d1 = lca.dist(cur, p);
+      if (r - d1 > 0) {
+        ans += contour[cur].sum(min(r - d1, contour[cur].size()));
       }
-
       int par = cd.parent[cur];
       if (par == -1) break;
-      int dpar = lca.dist(par, v);
-      if (r - dpar > 0) {
-        ans -= fw_par[cur].sum(min(r - dpar, fw_all[cur].size()));
+      int d2 = lca.dist(par, p);
+      if (r - d2 > 0) {
+        ans -= contour_par[cur].sum(min(r - d2, contour_par[cur].size()));
       }
       cur = par;
     }
