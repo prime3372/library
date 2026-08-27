@@ -46,7 +46,6 @@ int main() {
   vector<bool> removed(n);
   for (int i = 0; i < n; i++) {
     int c = cd.dfs_order[i];
-
     vector<ll> fsum(1), f2sum;
     for (int j = 0; j < int(g[c].size()); j++) {
       vector<ll> f;
@@ -58,7 +57,6 @@ int main() {
         }
       };
       if (!removed[g[c][j]]) dfs(dfs, g[c][j], c, 1);
-
       fsum += f;
       f2sum += f * f;
     }
