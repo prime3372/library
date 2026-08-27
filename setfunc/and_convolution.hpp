@@ -6,6 +6,7 @@
 
 namespace cp {
 
+// @param n `|a| == 2^n && |b| == 2^n`
 template <class T>
 std::vector<T> and_convolution(int n, std::vector<T> a, std::vector<T> b) {
   superset_zeta(n, a);
