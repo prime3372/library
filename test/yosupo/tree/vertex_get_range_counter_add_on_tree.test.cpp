@@ -3,6 +3,7 @@
 #include "ds/fenwick_tree.hpp"
 #include "tree/centroid_decomposition.hpp"
 #include "tree/lowest_common_ancestor.hpp"
+#include <iostream>
 #include <vector>
 
 using namespace std;
