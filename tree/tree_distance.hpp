@@ -52,8 +52,7 @@ template <class T> class tree_distance {
   void dfs(int v, int pv, T c) {
     cost[v] = c;
     for (auto [nv, x] : g[v]) {
-      if (nv == pv) continue;
-      dfs(nv, v, c + x);
+      if (nv != pv) dfs(nv, v, c + x);
     }
   }
 };

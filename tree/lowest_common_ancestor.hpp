@@ -80,8 +80,7 @@ class lowest_common_ancestor {
   void dfs(int v, int pv, int d) {
     dep[v] = d;
     for (int nv : g[v]) {
-      if (nv == pv) continue;
-      dfs(nv, v, d + 1);
+      if (nv != pv) dfs(nv, v, d + 1);
     }
   }
 };
