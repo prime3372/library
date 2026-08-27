@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/min_plus_convolution_convex_convex"
 
-#include "convex/min_plus_convolution_convex_convex.hpp"
+#include "convex/min_plus_convolution_both_convex.hpp"
 #include <iostream>
 #include <vector>
 
@@ -15,6 +15,6 @@ int main() {
   vector<int> a(n), b(m);
   for (int& ai : a) cin >> ai;
   for (int& bi : b) cin >> bi;
-  auto c = min_plus_convolution_convex_convex(a, b);
+  auto c = min_plus_convolution_both_convex(a, b);
   for (int& ci : c) cout << ci << " ";
 }

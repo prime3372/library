@@ -9,8 +9,8 @@ namespace cp {
 // @param b `b[i+1] - b[i] <= b[i+2] - b[i+1] (i = 0, ..., |b|-2)`
 // @note The difference sequences of a and b must not overflow.
 template <class T>
-std::vector<T> min_plus_convolution_convex_convex(const std::vector<T>& a,
-                                                  const std::vector<T>& b) {
+std::vector<T> min_plus_convolution_both_convex(const std::vector<T>& a,
+                                                const std::vector<T>& b) {
   int n = int(a.size()), m = int(b.size());
   if (n == 0 || m == 0) return {};
   std::vector<T> da(n - 1), db(m - 1);
