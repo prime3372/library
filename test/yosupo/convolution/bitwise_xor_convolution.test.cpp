@@ -2,6 +2,7 @@
 
 #include "setfunc/xor_convolution.hpp"
 #include "util/static_modint.hpp"
+#include <iostream>
 #include <vector>
 
 using namespace std;
