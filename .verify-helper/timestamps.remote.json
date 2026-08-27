@@ -36,7 +36,7 @@
   "test/aoj/NTL/1_A_prime_factorize.test.cpp": "2026-08-24 14:52:51 +0900",
   "test/aoj/NTL/1_B_power.test.cpp": "2026-08-24 14:39:31 +0900",
   "test/aoj/NTL/1_E_extended_euclid_algorithm.test.cpp": "2026-08-24 14:39:31 +0900",
-  "test/yosupo/convolution/bitwise_and_convolution.test.cpp": "2026-08-26 22:09:31 +0900",
+  "test/yosupo/convolution/bitwise_and_convolution.test.cpp": "2026-08-27 13:16:46 +0900",
   "test/yosupo/convolution/convolution.test.cpp": "2026-08-27 00:57:23 +0900",
   "test/yosupo/convolution/gcd_convolution.test.cpp": "2026-08-26 22:09:31 +0900",
   "test/yosupo/convolution/lcm_convolution.test.cpp": "2026-08-26 22:09:31 +0900",
