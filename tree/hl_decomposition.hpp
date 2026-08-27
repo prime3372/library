@@ -9,7 +9,7 @@ class hl_decomposition {
  public:
   hl_decomposition() : n(0) {}
   explicit hl_decomposition(int _n)
-      : id(_n, -1),
+      : ord(_n, -1),
         vertex(_n, -1),
         head(_n, -1),
         next(_n, -1),
@@ -24,7 +24,7 @@ class hl_decomposition {
     g[b].push_back(a);
   }
 
-  std::vector<int> id, vertex, head, next;
+  std::vector<int> ord, vertex, head, next;
 
   hl_decomposition& build(int r = 0) {
     assert(0 <= r && r < n);
@@ -41,15 +41,16 @@ class hl_decomposition {
     };
     first_dfs(first_dfs, r, -1);
 
-    head[now_id] = now_id;
-    next[now_id] = -1;
+    int now_ord = 0;
+    head[0] = 0;
+    next[0] = -1;
     auto second_dfs = [&](auto self, int v, int pv) -> void {
-      id[v] = now_id;
-      vertex[now_id++] = v;
+      ord[v] = now_ord;
+      vertex[now_ord++] = v;
       for (int nv : g[v]) {
         if (nv == pv) continue;
-        head[now_id] = g[v][0] == nv ? head[id[v]] : now_id;
-        next[now_id] = g[v][0] == nv ? next[id[v]] : id[v];
+        head[now_ord] = (g[v][0] == nv ? head[ord[v]] : now_ord);
+        next[now_ord] = (g[v][0] == nv ? next[ord[v]] : ord[v]);
         self(self, nv, v);
       }
     };
@@ -58,7 +59,7 @@ class hl_decomposition {
   }
 
  private:
-  int n, now_id = 0;
+  int n;
   std::vector<std::vector<int>> g;
   std::vector<int> size;
 };

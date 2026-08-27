@@ -33,8 +33,8 @@ class lowest_common_ancestor {
     assert(initialized);
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
-    a = hld.id[a];
-    b = hld.id[b];
+    a = hld.ord[a];
+    b = hld.ord[b];
     while (hld.head[a] != hld.head[b]) {
       if (a > b) std::swap(a, b);
       b = hld.next[b];
@@ -53,7 +53,7 @@ class lowest_common_ancestor {
   int up(int v, int k) {
     assert(initialized);
     assert(0 <= v && v < n);
-    v = hld.id[v];
+    v = hld.ord[v];
     while (k > v - hld.head[v]) {
       k -= v - hld.head[v] + 1;
       v = hld.next[v];

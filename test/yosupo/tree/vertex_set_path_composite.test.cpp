@@ -35,12 +35,12 @@ int main() {
     hld.add_edge(u, v);
   }
   hld.build();
-  auto id = hld.id, head = hld.head, next = hld.next;
+  auto& ord = hld.ord, head = hld.head, next = hld.next;
   segtree<M> seg(n);
   segtree<RM> rseg(n);
   for (int i = 0; i < n; i++) {
-    seg.set(id[i], f[i]);
-    rseg.set(id[i], f[i]);
+    seg.set(ord[i], f[i]);
+    rseg.set(ord[i], f[i]);
   }
   while (q--) {
     int t;
@@ -49,14 +49,14 @@ int main() {
       int p;
       mint c, d;
       cin >> p >> c >> d;
-      seg.set(id[p], {c, d});
-      rseg.set(id[p], {c, d});
+      seg.set(ord[p], {c, d});
+      rseg.set(ord[p], {c, d});
     } else {
       int u, v;
       mint x;
       cin >> u >> v >> x;
-      u = id[u];
-      v = id[v];
+      u = ord[u];
+      v = ord[v];
       M::S l = {1, 0}, r = {1, 0};
       while (head[u] != head[v]) {
         if (u < v) {

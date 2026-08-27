@@ -24,9 +24,9 @@ int main() {
     hld.add_edge(u, v);
   }
   hld.build();
-  auto& id = hld.id, head = hld.head, next = hld.next;
+  auto& ord = hld.ord, head = hld.head, next = hld.next;
   fenwick_tree<ll> fw(n);
-  for (int i = 0; i < n; i++) fw.add(id[i], a[i]);
+  for (int i = 0; i < n; i++) fw.add(ord[i], a[i]);
   while (q--) {
     int t;
     cin >> t;
@@ -34,12 +34,12 @@ int main() {
       int p;
       ll x;
       cin >> p >> x;
-      fw.add(id[p], x);
+      fw.add(ord[p], x);
     } else {
       int u, v;
       cin >> u >> v;
-      u = id[u];
-      v = id[v];
+      u = ord[u];
+      v = ord[v];
       ll ans = 0;
       while (head[u] != head[v]) {
         if (u > v) swap(u, v);

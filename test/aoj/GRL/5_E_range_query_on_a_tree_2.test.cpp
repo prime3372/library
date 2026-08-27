@@ -36,7 +36,7 @@ int main() {
       int v;
       ll w;
       cin >> v >> w;
-      v = hld.id[v];
+      v = hld.ord[v];
       while (v != -1) {
         seg.apply(hld.head[v], v + 1, w);
         v = hld.next[v];
@@ -44,7 +44,7 @@ int main() {
     } else {
       int u;
       cin >> u;
-      u = hld.id[u];
+      u = hld.ord[u];
       ll ans = 0;
       while (u != -1) {
         ans += seg.prod(hld.head[u], u + 1).val;
