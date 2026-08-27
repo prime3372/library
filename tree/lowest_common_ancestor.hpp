@@ -29,7 +29,7 @@ class lowest_common_ancestor {
     initialized = true;
   }
 
-  int operator()(int a, int b) {
+  int operator()(int a, int b) const {
     assert(initialized);
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
@@ -42,7 +42,7 @@ class lowest_common_ancestor {
     return hld.vertex[std::min(a, b)];
   }
 
-  int dist(int a, int b) {
+  int dist(int a, int b) const {
     assert(initialized);
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
@@ -50,7 +50,7 @@ class lowest_common_ancestor {
     return dep[a] + dep[b] - dep[c] * 2;
   }
 
-  int up(int v, int k) {
+  int up(int v, int k) const {
     assert(initialized);
     assert(0 <= v && v < n);
     v = hld.ord[v];
@@ -61,7 +61,7 @@ class lowest_common_ancestor {
     return hld.vertex[v - k];
   }
 
-  int jump(int s, int t, int k) {
+  int jump(int s, int t, int k) const {
     assert(initialized);
     assert(0 <= s && s < n);
     assert(0 <= t && t < n);
