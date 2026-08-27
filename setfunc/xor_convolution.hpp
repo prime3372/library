@@ -35,9 +35,6 @@ std::vector<mint> xor_convolution(int n, std::vector<mint> a,
     }
   }
 
-  //     [b000   b001   b010   b011   b100   b101   b110   b111]
-  // ->  [b***] [b**~] [b*~*] [b*~~] [b~**] [b~*~] [b~~*] [b~~~]
-
   for (int step = 0; step < n; step++) {
     int width = 1 << (n - step);
     int half = width / 2;
