@@ -13,7 +13,6 @@ namespace cp {
 std::istream& operator>>(std::istream& is, __float128& val) {
   std::string s;
   if (!(is >> s)) return is;
-
   val = 0;
   int i = (s[0] == '+' || s[0] == '-');
   __float128 p10 = 1;
@@ -29,7 +28,6 @@ std::istream& operator>>(std::istream& is, __float128& val) {
   }
   val /= p10;
   if (s[0] == '-') val = -val;
-
   return is;
 }
 
