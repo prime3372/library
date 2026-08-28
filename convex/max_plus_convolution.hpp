@@ -10,7 +10,7 @@ namespace cp {
 template <class T>
 std::vector<T> max_plus_convolution(const std::vector<T>& a,
                                     const std::vector<T>& b) {
-  constexpr T ninf = std::numeric_limits<T>::min();
+  constexpr T ninf = std::numeric_limits<T>::lowest();
   int n = int(a.size()), m = int(b.size());
   if (n == 0 || m == 0) return {};
 
