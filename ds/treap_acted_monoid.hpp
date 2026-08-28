@@ -25,10 +25,6 @@ template <class M> struct treap_acted_monoid_node {
   treap_acted_monoid_node() {}
   explicit treap_acted_monoid_node(const S& x)
       : val(x), prod(x), priority(mt64()) {}
-  ~treap_acted_monoid_node() {
-    delete left;
-    delete right;
-  }
   treap_acted_monoid_node(const treap_acted_monoid_node& other)
       : val(other.val),
         prod(other.prod),
@@ -40,6 +36,10 @@ template <class M> struct treap_acted_monoid_node {
         right(other.right ? new treap_acted_monoid_node(*other.right)
                           : nullptr) {}
   treap_acted_monoid_node& operator=(const treap_acted_monoid_node&) = delete;
+  ~treap_acted_monoid_node() {
+    delete left;
+    delete right;
+  }
 };
 
 }  // namespace internal
