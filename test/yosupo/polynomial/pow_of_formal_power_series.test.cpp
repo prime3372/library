@@ -8,6 +8,7 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
+using fps = formal_power_series<mint>;
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -15,7 +16,7 @@ int main() {
   int n;
   long long m;
   cin >> n >> m;
-  formal_power_series<mint> f(n);
+  fps f(n);
   cin >> f;
   cout << pow(f, m) << "\n";
 }

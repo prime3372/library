@@ -8,13 +8,14 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
+using fps = formal_power_series<mint>;
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n;
   cin >> n;
-  formal_power_series<mint> f(n);
+  fps f(n);
   cin >> f;
-  cout << inv(f) << " ";  
+  cout << inv(f) << " ";
 }
