@@ -5,13 +5,13 @@
 
 namespace cp {
 
-template <class T, bool max = false> class convex_hull_trick {
+template <class T, bool is_max = false> class convex_hull_trick {
  public:
   convex_hull_trick() {}
 
   void add(T a, T b) {
     if (!ls.empty()) {
-      assert(max ? a >= ls.back().a : a <= ls.back().a);
+      assert(is_max ? a >= ls.back().a : a <= ls.back().a);
     }
     line l(a, b);
     while (ls.size() >= 2) {
@@ -28,7 +28,7 @@ template <class T, bool max = false> class convex_hull_trick {
     T cur = ls[0](x);
     while (int(ls.size()) >= 2) {
       T nxt = ls[1](x);
-      if (max ? nxt < cur : nxt > cur) break;
+      if (is_max ? nxt < cur : nxt > cur) break;
       cur = nxt;
       ls.pop_front();
     }
