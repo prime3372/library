@@ -28,8 +28,9 @@ template <class T> bool chmax(T& a, const T& b) {
   return b > a ? (a = b, true) : false;
 }
 
-template <class Container, class Comp>
-std::vector<int> sort(Container&& a, Comp comp) {
+template <class Container,
+          class Comp = std::less<typename std::decay_t<Container>::value_type>>
+std::vector<int> sort(Container&& a, Comp comp = Comp()) {
   std::vector<int> p(int(a.size()));
   std::iota(p.begin(), p.end(), 0);
   std::stable_sort(p.begin(), p.end(),
@@ -39,10 +40,6 @@ std::vector<int> sort(Container&& a, Comp comp) {
     a[i] = std::move(a2[p[i]]);
   }
   return p;
-}
-
-template <class Container> std::vector<int> sort(Container&& a) {
-  return sort(a, std::less<typename std::decay_t<Container>::value_type>());
 }
 
 template <class Container> void uniq(Container& a) {
