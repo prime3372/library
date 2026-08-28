@@ -12,7 +12,7 @@ formal_power_series<mint> exp(const formal_power_series<mint>& f) {
   for (int d = 1; d < f.size(); d <<= 1) {
     g = g * (1 - log(g.prefix(2 * d)) + f.prefix(2 * d));
   }
-  return g.prefix(f.size());
+  return g.resize(f.size());
 }
 
 }  // namespace cp
