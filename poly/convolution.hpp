@@ -94,6 +94,29 @@ template <class mint, int g> void ntt(std::vector<mint>& a) {
 }
 
 template <class mint>
+std::vector<mint> convolution_ntt(std::vector<mint> a, std::vector<mint> b) {
+  static constexpr int g = internal::primitive_root_ntt(mint::mod());
+  static constexpr int ig = inv_mod(g, mint::mod());
+
+  int n = int(a.size()), m = int(b.size());
+  int z = int(std::bit_ceil((unsigned int)(n + m - 1)));
+
+  a.resize(z);
+  internal::ntt<mint, g>(a);
+  b.resize(z);
+  internal::ntt<mint, g>(b);
+
+  for (int i = 0; i < z; i++) a[i] *= b[i];
+
+  internal::ntt<mint, ig>(a);
+  a.resize(n + m - 1);
+  mint iz = mint(z).inv();
+  for (int i = 0; i < n + m - 1; i++) a[i] *= iz;
+
+  return a;
+}
+
+template <class mint>
 std::vector<mint> convolution_naive(const std::vector<mint>& a,
                                     const std::vector<mint>& b) {
   int n = int(a.size()), m = int(b.size());
@@ -109,33 +132,16 @@ std::vector<mint> convolution_naive(const std::vector<mint>& a,
 }  // namespace internal
 
 template <class mint> requires internal::is_static_modint_v<mint>
-std::vector<mint> convolution(std::vector<mint> a, std::vector<mint> b) {
-  static constexpr int g = internal::primitive_root_ntt(mint::mod());
-  static constexpr int ig = inv_mod(g, mint::mod());
-
+std::vector<mint> convolution(const std::vector<mint>& a,
+                              const std::vector<mint>& b) {
   int n = int(a.size()), m = int(b.size());
   if (n == 0 || m == 0) return {};
 
   int z = int(std::bit_ceil((unsigned int)(n + m - 1)));
   assert((mint::mod() - 1) % z == 0);
 
-  if (std::min(n, m) <= 60) {
-    return internal::convolution_naive(std::move(a), std::move(b));
-  }
-
-  a.resize(z);
-  internal::ntt<mint, g>(a);
-  b.resize(z);
-  internal::ntt<mint, g>(b);
-
-  for (int i = 0; i < z; i++) a[i] *= b[i];
-
-  internal::ntt<mint, ig>(a);
-  a.resize(n + m - 1);
-  mint iz = mint(z).inv();
-  for (int i = 0; i < n + m - 1; i++) a[i] *= iz;
-
-  return a;
+  if (std::min(n, m) <= 60) return internal::convolution_naive(a, b);
+  return internal::convolution_ntt(a, b);
 }
 
 template <int mod = 998244353, class T> requires internal::is_integral_v<T>
