@@ -10,7 +10,7 @@ using namespace cp;
 using ll = long long;
 
 ll largest_rectanle_in_a_histogram(int n, const vector<ll>& a) {
-  cartesian_tree<false> cart(a);
+  cartesian_tree cart(a);
   ll ans = 0;
   for (int i = 0; i < n; i++) {
     ans = max(ans, a[i] * cart.size[i]);

@@ -14,7 +14,7 @@ int main() {
   cin >> n;
   vector<ll> a(n);
   for (auto& ai : a) cin >> ai;
-  cartesian_tree<false> cart(a);
+  cartesian_tree cart(a);
   ll ans = 0;
   for (int i = 0; i < n; i++) {
     ans = max(ans, a[i] * cart.size[i]);
