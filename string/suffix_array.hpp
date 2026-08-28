@@ -7,7 +7,7 @@
 namespace cp {
 
 // https://cp-algorithms.com/string/suffix-array.html O(NlogN) approach
-// Note: idx[] and rank[] are used instead of p[] and c[]
+// @note idx[] and rank[] are used instead of p[] and c[]
 template <class Str> std::vector<int> suffix_array(const Str& s) {
   int n = int(s.size()) + 1;
 
