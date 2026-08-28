@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/pow_of_formal_power_series"
 
 #include "poly/formal_power_series.hpp"
+#include "poly/fps_pow.hpp"
 #include "util/static_modint.hpp"
 #include <iostream>
 
@@ -16,5 +17,5 @@ int main() {
   cin >> n >> m;
   formal_power_series<mint> f(n);
   cin >> f;
-  cout << f.pow(m) << "\n";
+  cout << pow(f, m) << "\n";
 }
