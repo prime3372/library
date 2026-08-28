@@ -39,7 +39,7 @@ template <class T> class tree_distance {
       b = hld.next[b];
     }
     int l = hld.vertex[std::min(a, b)];
-    return cost[a] + cost[b] - cost[c] * 2;
+    return cost[a] + cost[b] - cost[l] * 2;
   }
 
  private:
