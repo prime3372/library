@@ -13,10 +13,9 @@ formal_power_series<mint> pow(const formal_power_series<mint>& f, long long k) {
     g[0] = 1;
     return g;
   }
-  for (int i = 0; i < int((f.size() - 1) / k + 1); i++) {
+  for (int i = 0; i * k < f.size(); i++) {
     if (f[i] != 0) {
-      formal_power_series<mint> g = exp(log((f * f[i].inv()) >> i) * k);
-      g *= f[i].pow(k);
+      auto g = exp(log((f * f[i].inv()) >> i) * k) * f[i].pow(k);
       g <<= int(i * k);
       return g.resize(f.size());
     }
