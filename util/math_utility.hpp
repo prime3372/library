@@ -39,11 +39,8 @@ long long floor(long long n, long long d) {
     n = -n;
     d = -d;
   }
-  if (n < 0) {
-    return (n + 1) / d - 1;
-  } else {
-    return n / d;
-  }
+  if (n < 0) return (n + 1) / d - 1;
+  return n / d;
 }
 
 long long ceil(long long n, long long d) { return floor(n - sign(d), d) + 1; }
