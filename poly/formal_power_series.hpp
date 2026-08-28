@@ -70,11 +70,11 @@ class formal_power_series {
     return *this;
   }
 
-  fps operator>>=(int w) {
+  fps& operator>>=(int w) {
     a.erase(a.begin(), a.begin() + std::min(w, size()));
     return *this;
   }
-  fps operator<<=(int w) {
+  fps& operator<<=(int w) {
     a.insert(a.begin(), w, 0);
     return *this;
   }
