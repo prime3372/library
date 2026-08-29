@@ -66,4 +66,3 @@ template <class T, class U> using dict = hash_map<T, U>;
 #define fore(x, a) for (auto&& x : (a))
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
-#define elif else if
