@@ -16,7 +16,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  vector<formal_power_series<mint>> f(n);
+  vector<fps> f(n);
   for (int i = 0; i < n; i++) {
     int d;
     cin >> d;
