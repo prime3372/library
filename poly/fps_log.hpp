@@ -8,7 +8,7 @@ namespace cp {
 template <class mint>
 formal_power_series<mint> log(const formal_power_series<mint>& f) {
   assert(!f.empty() && f[0] == 1);
-  return integral(diff(f) * inv(f)).resize(f.size());
+  return integ(diff(f) * inv(f)).resize(f.size());
 }
 
 }  // namespace cp

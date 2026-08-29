@@ -139,7 +139,7 @@ class formal_power_series {
     return f >>= 1;
   }
 
-  friend fps integral(fps f) {
+  friend fps integ(fps f) {
     static int mod = mint::mod();
     std::vector<mint> minv(f.size() + 1);
     minv[1] = 1;
