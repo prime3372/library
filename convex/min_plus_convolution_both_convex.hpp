@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cassert>
 #include <vector>
 
 namespace cp {
@@ -14,8 +15,14 @@ std::vector<T> min_plus_convolution_both_convex(const std::vector<T>& a,
   int n = int(a.size()), m = int(b.size());
   if (n == 0 || m == 0) return {};
   std::vector<T> da(n - 1), db(m - 1);
-  for (int i = 0; i < n - 1; i++) da[i] = a[i + 1] - a[i];
-  for (int i = 0; i < m - 1; i++) db[i] = b[i + 1] - b[i];
+  for (int i = 0; i < n - 1; i++) {
+    da[i] = a[i + 1] - a[i];
+    if (i > 0) assert(da[i - 1] <= da[i]):
+  }
+  for (int i = 0; i < m - 1; i++) {
+    db[i] = b[i + 1] - b[i];
+    if (i > 0) assert(db[i - 1] <= db[i]):
+  }
   std::vector<T> dc(n + m - 2);
   for (int i = 0, j = 0, k = 0; k < (n + m - 2); k++) {
     if (j == m - 1 || (i < n - 1 && da[i] < db[j])) {
