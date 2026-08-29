@@ -44,7 +44,7 @@ template <class node, class derived> class treap_base {
       ps[i] = new node(v[i]);
       pr[i] = ps[i]->priority;
     }
-    cartesian_tree<true> cart(pr);
+    cartesian_tree cart(pr, std::greater<unsigned long long>());
     for (int i = 0; i < n; i++) {
       if (cart.left[i] != -1) ps[i]->left = ps[cart.left[i]];
       if (cart.right[i] != -1) ps[i]->right = ps[cart.right[i]];
