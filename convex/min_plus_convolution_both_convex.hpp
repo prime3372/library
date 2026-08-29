@@ -17,11 +17,11 @@ std::vector<T> min_plus_convolution_both_convex(const std::vector<T>& a,
   std::vector<T> da(n - 1), db(m - 1);
   for (int i = 0; i < n - 1; i++) {
     da[i] = a[i + 1] - a[i];
-    if (i > 0) assert(da[i - 1] <= da[i]):
+    if (i > 0) assert(da[i - 1] <= da[i]);
   }
   for (int i = 0; i < m - 1; i++) {
     db[i] = b[i + 1] - b[i];
-    if (i > 0) assert(db[i - 1] <= db[i]):
+    if (i > 0) assert(db[i - 1] <= db[i]);
   }
   std::vector<T> dc(n + m - 2);
   for (int i = 0, j = 0, k = 0; k < (n + m - 2); k++) {
