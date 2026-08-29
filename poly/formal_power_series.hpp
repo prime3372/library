@@ -130,28 +130,6 @@ class formal_power_series {
   friend fps operator>>(const fps& f, int w) { return fps(f) >>= w; }
   friend fps operator<<(const fps& f, int w) { return fps(f) <<= w; }
 
-  friend fps diff(fps f) {
-    mint coeff = 1;
-    for (int i = 1; i < f.size(); i++) {
-      f[i] *= coeff;
-      coeff++;
-    }
-    return f >>= 1;
-  }
-
-  friend fps integ(fps f) {
-    static int mod = mint::mod();
-    std::vector<mint> minv(f.size() + 1);
-    minv[1] = 1;
-    for (int i = 2; i <= f.size(); i++) {
-      minv[i] = -minv[mod % i] * (mod / i);
-    }
-    for (int i = 0; i < f.size(); i++) {
-      f[i] *= minv[i + 1];
-    }
-    return f <<= 1;
-  }
-
   friend std::istream& operator>>(std::istream& is, fps& rhs) {
     for (mint& x : rhs.a) is >> x;
     return is;
@@ -167,5 +145,29 @@ class formal_power_series {
  private:
   std::vector<mint> a;
 };
+
+template <class mint>
+formal_power_series<mint> diff(formal_power_series<mint> f) {
+  mint coeff = 1;
+  for (int i = 1; i < f.size(); i++) {
+    f[i] *= coeff;
+    coeff++;
+  }
+  return f >>= 1;
+}
+
+template <class mint>
+formal_power_series<mint> integral(formal_power_series<mint> f) {
+  static int mod = mint::mod();
+  std::vector<mint> minv(f.size() + 1);
+  minv[1] = 1;
+  for (int i = 2; i <= f.size(); i++) {
+    minv[i] = -minv[mod % i] * (mod / i);
+  }
+  for (int i = 0; i < f.size(); i++) {
+    f[i] *= minv[i + 1];
+  }
+  return f <<= 1;
+}
 
 }  // namespace cp
