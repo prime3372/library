@@ -16,12 +16,6 @@ std::vector<mint> xor_convolution(int n, std::vector<mint> a,
   assert(int(a.size()) == (1 << n));
   assert(int(b.size()) == (1 << n));
 
-  // n = 3
-  //     [a000   a001   a010   a011   a100   a101   a110   a111]
-  // ->  [a*00   a*01   a*10   a*11] [a~00   a~01   a~10   a~11]
-  // ->  [a**0   a**1] [a*~0   a*~1] [a~*0   a~*1   a~~0   a~~1]
-  // ->  [a***] [a**~] [a*~*] [a*~~] [a~**] [a~*~] [a~~*] [a~~~]
-
   for (int step = 0; step < n; step++) {
     int width = 1 << (n - step);
     int half = width / 2;
@@ -49,11 +43,6 @@ std::vector<mint> xor_convolution(int n, std::vector<mint> a,
   }
 
   for (int i = 0; i < (1 << n); i++) a[i] *= b[i];
-
-  //    [c***] [c**~] [c*~*] [c*~~] [c~**] [c~*~] [c~~*] [c~~~]
-  // -> [c**0   c**1] [c*~0   c*~1] [c~*0   c~*1   c~~0   c~~1]
-  // -> [c*00   c*01   c*10   c*11] [c~00   c~01   c~10   c~11]
-  // -> [c000   c001   c010   c011   c100   c101   c110   c111]
 
   mint inv2 = mint(2).inv();
   for (int step = 1; step <= n; step++) {
