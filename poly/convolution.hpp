@@ -77,8 +77,8 @@ template <class mint, int g> void ntt(std::vector<mint>& a) {
   // ->  a = [000   001   010   011   100   101   110   111]
   // Here, [i_0 ... i_k] denotes the NTT of a[i_0,...,i_k] before rearranging.
 
-  for (int step = 1; step <= log; step++) {
-    int width = 1 << step;
+  for (int k = 1; k <= log; k++) {
+    int width = 1 << k;
     int half = width / 2;
     for (int i = 0; i < n; i += width) {
       mint w = 1;
@@ -87,7 +87,7 @@ template <class mint, int g> void ntt(std::vector<mint>& a) {
         mint r = a[i + j + half] * w;
         a[i + j] = l + r;
         a[i + j + half] = l - r;
-        w *= root[step];
+        w *= root[k];
       }
     }
   }
