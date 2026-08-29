@@ -17,6 +17,5 @@ int main() {
   cin >> n;
   fps f(n);
   cin >> f;
-  f.resize(2 * n);
-  cout << inv(f, n) << "\n";
+  cout << inv(f) << "\n";
 }
