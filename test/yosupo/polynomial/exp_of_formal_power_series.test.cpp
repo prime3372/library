@@ -17,5 +17,5 @@ int main() {
   cin >> n;
   fps f(n);
   cin >> f;
-  cout << exp(f) << " ";
+  cout << exp(f) << "\n";
 }

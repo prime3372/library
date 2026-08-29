@@ -17,5 +17,5 @@ int main() {
   cin >> n;
   fps f(n);
   cin >> f;
-  cout << log(f) << " ";
+  cout << log(f) << "\n";
 }
