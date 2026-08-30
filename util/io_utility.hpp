@@ -19,7 +19,7 @@
 
 namespace cp {
 
-template <class T, size_t Size>
+template <class T, std::size_t Size>
 std::istream& operator>>(std::istream& is, std::array<T, Size>& a);
 
 template <class T, class U>
@@ -31,7 +31,7 @@ std::istream& operator>>(std::istream& is, std::tuple<Args...>& t);
 template <class T, class Alloc>
 std::istream& operator>>(std::istream& is, std::vector<T, Alloc>& v);
 
-template <class T, size_t Size>
+template <class T, std::size_t Size>
 std::istream& operator>>(std::istream& is, std::array<T, Size>& a) {
   for (auto& x : a) is >> x;
   return is;
