@@ -24,7 +24,7 @@ std::vector<T> min_plus_convolution_both_convex(const std::vector<T>& a,
     if (i > 0) assert(db[i - 1] <= db[i]);
   }
   std::vector<T> dc(n + m - 2);
-  for (int i = 0, j = 0, k = 0; k < (n + m - 2); k++) {
+  for (int i = 0, j = 0, k = 0; k < n + m - 2; k++) {
     if (j == m - 1 || (i < n - 1 && da[i] < db[j])) {
       dc[k] = da[i++];
     } else {
