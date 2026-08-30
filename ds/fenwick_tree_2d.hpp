@@ -11,11 +11,8 @@ namespace cp {
 template <class T> class fenwick_tree_2d {
  public:
   fenwick_tree_2d() : n(0), m(0) {}
-  explicit fenwick_tree_2d(int _n, int _m) : n(_n), m(_m), fw(_n) {
-    for (int i = 0; i < n; i++) {
-      fw[i] = fenwick_tree<T>(m);
-    }
-  }
+  explicit fenwick_tree_2d(int _n, int _m)
+      : n(_n), m(_m), fw(_n, fenwick_tree<T>(m)) {}
 
   void add(int i, int j, T w) {
     assert(0 <= i && i < n);

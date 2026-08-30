@@ -13,11 +13,8 @@ namespace cp {
 template <class T> class dynamic_fenwick_tree_2d {
  public:
   dynamic_fenwick_tree_2d() : n(0), m(0) {}
-  explicit dynamic_fenwick_tree_2d(int _n, size_t _m) : n(_n), m(_m), fw(_n) {
-    for (int i = 0; i < n; i++) {
-      fw[i] = dynamic_fenwick_tree<T>(_m);
-    }
-  }
+  explicit dynamic_fenwick_tree_2d(int _n, size_t _m)
+      : n(_n), m(_m), fw(_n, dynamic_fenwick_tree<T>(_m)) {}
 
   void add(int i, size_t j, T x) {
     assert(0 <= i && i < n);
