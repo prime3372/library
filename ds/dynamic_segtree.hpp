@@ -5,21 +5,19 @@
 #include <cassert>
 #include <cstddef>
 #include <iostream>
+#include <memory>
 #include <sstream>
 #include <string>
-#include <memory>
 #include <vector>
 
 #include "util/io_utility_base.hpp"
 
 namespace cp {
 
-template <class M> class dynamic_segtree {
-  using S = typename M::S;
-
+template <class S, auto op, auto e> class dynamic_segtree {
  public:
   dynamic_segtree() : dynamic_segtree(0) {}
-  explicit dynamic_segtree(size_t _n) : dynamic_segtree(_n, M::e()) {}
+  explicit dynamic_segtree(size_t _n) : dynamic_segtree(_n, e()) {}
   explicit dynamic_segtree(size_t _n, S val) : n(_n) {
     assert(n <= (1ULL << 63));
     sz = std::bit_ceil(n);
@@ -27,7 +25,7 @@ template <class M> class dynamic_segtree {
     initial_vals.resize(log + 1);
     for (int i = log; i >= 0; i--) {
       initial_vals[i] = val;
-      val = M::op(val, val);
+      val = op(val, val);
     }
   }
 
@@ -50,15 +48,15 @@ template <class M> class dynamic_segtree {
 
   template <class F> size_t max_right(size_t l, F f) const {
     assert(l <= n);
-    assert(f(M::e()));
-    S product = M::e();
+    assert(f(e()));
+    S product = e();
     return max_right(root, 0, sz, 0, product, l, f);
   }
 
   template <class F> size_t min_left(size_t r, F f) const {
     assert(r <= n);
-    assert(f(M::e()));
-    S product = M::e();
+    assert(f(e()));
+    S product = e();
     return min_left(root, 0, sz, 0, product, r, f);
   }
 
@@ -90,14 +88,14 @@ template <class M> class dynamic_segtree {
   node_ptr root = nullptr;
 
   void update(node_ptr& p, int dep) {
-    p->val = M::op(p->left ? p->left->val : initial_vals[dep + 1],
-                   p->right ? p->right->val : initial_vals[dep + 1]);
+    p->val = op(p->left ? p->left->val : initial_vals[dep + 1],
+                p->right ? p->right->val : initial_vals[dep + 1]);
   }
 
   S pow_initial(size_t len, int dep) const {
-    S res = M::e();
+    S res = e();
     for (int k = 0; k <= log - dep; k++) {
-      if (len & 1) res = M::op(res, initial_vals[log - k]);
+      if (len & 1) res = op(res, initial_vals[log - k]);
       len >>= 1;
     }
     return res;
@@ -131,13 +129,13 @@ template <class M> class dynamic_segtree {
 
   S prod(const node_ptr& p, size_t a, size_t b, int dep, size_t l,
          size_t r) const {
-    if (b <= l || r <= a) return M::e();
+    if (b <= l || r <= a) return e();
     if (l <= a && b <= r) return p ? p->val : initial_vals[dep];
     if (!p) return pow_initial(std::min(b, r) - std::max(a, l), dep);
     if (l <= a && b <= r) return p->val;
     size_t c = (a + b) / 2;
-    return M::op(prod(p->left, a, c, dep + 1, l, r),
-                 prod(p->right, c, b, dep + 1, l, r));
+    return op(prod(p->left, a, c, dep + 1, l, r),
+              prod(p->right, c, b, dep + 1, l, r));
   }
 
   template <class F>
@@ -147,8 +145,8 @@ template <class M> class dynamic_segtree {
     if (n <= a) return n;
     if (l <= a && b <= n) {
       S val = p ? p->val : initial_vals[dep];
-      if (f(M::op(product, val))) {
-        product = M::op(product, val);
+      if (f(op(product, val))) {
+        product = op(product, val);
         return b;
       }
     }
@@ -157,8 +155,8 @@ template <class M> class dynamic_segtree {
       size_t res = std::max(a, l);
       for (int k = log - dep; k >= 0; k--) {
         if (res + (1ULL << k) > std::min(b, n)) continue;
-        if (f(M::op(product, initial_vals[log - k]))) {
-          product = M::op(product, initial_vals[log - k]);
+        if (f(op(product, initial_vals[log - k]))) {
+          product = op(product, initial_vals[log - k]);
           res += 1ULL << k;
         }
       }
@@ -175,8 +173,8 @@ template <class M> class dynamic_segtree {
     if (r <= a) return a;
     if (b <= r) {
       S val = p ? p->val : initial_vals[dep];
-      if (f(M::op(val, product))) {
-        product = M::op(val, product);
+      if (f(op(val, product))) {
+        product = op(val, product);
         return a;
       }
     }
@@ -185,8 +183,8 @@ template <class M> class dynamic_segtree {
       size_t res = std::min(b, r);
       for (int k = log - dep; k >= 0; k--) {
         if (res < a + (1ULL << k)) continue;
-        if (f(M::op(initial_vals[log - k], product))) {
-          product = M::op(initial_vals[log - k], product);
+        if (f(op(initial_vals[log - k], product))) {
+          product = op(initial_vals[log - k], product);
           res -= 1ULL << k;
         }
       }
