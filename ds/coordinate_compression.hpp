@@ -14,42 +14,45 @@ namespace cp {
 template <class T> class coordinate_compression {
  public:
   coordinate_compression() {}
-  explicit coordinate_compression(const std::vector<T>& xs) {
-    for (const T& x : xs) add(x);
+  template <class Comp = std::less<T>>
+  explicit coordinate_compression(const std::vector<T>& v, Comp comp = Comp()) {
+    for (const T& x : v) add(x);
+    init(comp);
   }
 
   void add(const T& x) { d.push_back(x); }
 
-  void init() {
-    std::sort(d.begin(), d.end());
-    d.erase(std::unique(d.begin(), d.end()), d.end());
+  template <class Comp = std::less<T>> void init(Comp comp = Comp()) {
+    std::sort(d.begin(), d.end(), comp);
+    d.erase(std::unique(d.begin(), d.end(),
+                        [&](const T& x, const T& y) {
+                          return !comp(x, y) && !comp(y, x);
+                        }),
+            d.end());
     initialized = true;
   }
 
-  int operator()(const T& x) {
-    if (!initialized) init();
+  int operator()(const T& x) const {
+    assert(initialized);
     return int(std::lower_bound(d.begin(), d.end(), x) - d.begin());
   }
 
-  std::vector<int> operator()(const std::vector<T>& xs) {
-    if (!initialized) init();
-    std::vector<int> res(xs.size());
-    for (int i = 0; i < int(xs.size()); i++) {
-      res[i] = (*this)(xs[i]);
+  std::vector<int> operator()(const std::vector<T>& v) const {
+    assert(initialized);
+    std::vector<int> res(v.size());
+    for (int i = 0; i < int(v.size()); i++) {
+      res[i] = (*this)(v[i]);
     }
     return res;
   }
 
-  T operator[](int i) {
-    if (!initialized) init();
+  T operator[](int i) const {
+    assert(initialized);
     assert(0 <= i && i < int(d.size()));
     return d[i];
   }
 
-  int size() {
-    if (!initialized) init();
-    return int(d.size());
-  }
+  int size() const { return int(d.size()); }
 
   friend std::ostream& operator<<(std::ostream& os, coordinate_compression cc) {
     std::vector<std::string> outs(cc.size());
