@@ -10,10 +10,7 @@
 
 namespace cp {
 
-namespace internal {
-
-template <class M> struct treap_monoid_node {
-  using S = typename M::S;
+template <class S> struct treap_monoid_node {
   S val, prod;
   int sub = 1;
   bool rev = false;
@@ -38,13 +35,10 @@ template <class M> struct treap_monoid_node {
   }
 };
 
-}  // namespace internal
-
-template <class M, auto rev = std::identity()>
+template <class S, auto op, auto e, auto reverse = std::identity()>
 class treap_monoid
-    : public treap_base<internal::treap_monoid_node<M>, treap_monoid<M, rev>> {
-  using S = typename M::S;
-  using node = internal::treap_monoid_node<M>;
+    : public treap_base<treap_monoid_node<S>, treap_monoid<S, op, e, reverse>> {
+  using node = treap_monoid_node<S>;
   using base = treap_base<node, treap_monoid>;
 
  public:
@@ -52,7 +46,7 @@ class treap_monoid
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
-    if (l == r) return M::e();
+    if (l == r) return e();
     auto s = split(root, l);
     auto t = split(s.second, r - l);
     auto res = t.first->prod;
@@ -69,7 +63,7 @@ class treap_monoid
 
   static void toggle(node* p) {
     std::swap(p->left, p->right);
-    p->prod = rev(p->prod);
+    p->prod = reverse(p->prod);
     p->rev = !p->rev;
   }
 
@@ -78,11 +72,11 @@ class treap_monoid
     p->prod = p->val;
     if (p->left) {
       p->sub += p->left->sub;
-      p->prod = M::op(p->left->prod, p->prod);
+      p->prod = op(p->left->prod, p->prod);
     }
     if (p->right) {
       p->sub += p->right->sub;
-      p->prod = M::op(p->prod, p->right->prod);
+      p->prod = op(p->prod, p->right->prod);
     }
   }
 

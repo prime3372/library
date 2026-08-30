@@ -9,13 +9,9 @@
 
 namespace cp {
 
-namespace internal {
-
-template <class M> struct treap_acted_monoid_node {
-  using S = typename M::S;
-  using F = typename M::F;
+template <class S, class F, auto id> struct treap_acted_monoid_node {
   S val, prod;
-  F lz = M::id();
+  F lz = id();
   int sub = 1;
   bool rev = false;
   unsigned long long priority;
@@ -42,15 +38,13 @@ template <class M> struct treap_acted_monoid_node {
   }
 };
 
-}  // namespace internal
-
-template <class M, auto rev = std::identity()>
+template <class S, auto op, auto e, class F, auto act, auto compose, auto id,
+          auto reverse = std::identity()>
 class treap_acted_monoid
-    : public treap_base<internal::treap_acted_monoid_node<M>,
-                        treap_acted_monoid<M, rev>> {
-  using S = typename M::S;
-  using F = typename M::F;
-  using node = internal::treap_acted_monoid_node<M>;
+    : public treap_base<
+          treap_acted_monoid_node<S, F, id>,
+          treap_acted_monoid<S, op, e, F, act, compose, id, reverse>> {
+  using node = treap_acted_monoid_node<S, F, id>;
   using base = treap_base<node, treap_acted_monoid>;
 
  public:
@@ -58,7 +52,7 @@ class treap_acted_monoid
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
-    if (l == r) return M::e();
+    if (l == r) return e();
     auto s = split(root, l);
     auto t = split(s.second, r - l);
     auto res = t.first->prod;
@@ -84,7 +78,7 @@ class treap_acted_monoid
 
   static void toggle(node* p) {
     std::swap(p->left, p->right);
-    p->prod = rev(p->prod);
+    p->prod = reverse(p->prod);
     p->rev = !p->rev;
   }
 
@@ -93,11 +87,11 @@ class treap_acted_monoid
     p->prod = p->val;
     if (p->left) {
       p->sub += p->left->sub;
-      p->prod = M::op(p->left->prod, p->prod);
+      p->prod = op(p->left->prod, p->prod);
     }
     if (p->right) {
       p->sub += p->right->sub;
-      p->prod = M::op(p->prod, p->right->prod);
+      p->prod = op(p->prod, p->right->prod);
     }
   }
 
@@ -109,13 +103,13 @@ class treap_acted_monoid
     }
     if (p->left) all_apply(p->left, p->lz);
     if (p->right) all_apply(p->right, p->lz);
-    p->lz = M::id();
+    p->lz = id();
   }
 
   static void all_apply(node* p, F f) {
-    p->lz = M::composition(f, p->lz);
-    p->val = M::mapping(f, p->val);
-    p->prod = M::mapping(f, p->prod);
+    p->lz = compose(f, p->lz);
+    p->val = act(f, p->val);
+    p->prod = act(f, p->prod);
   }
 };
 

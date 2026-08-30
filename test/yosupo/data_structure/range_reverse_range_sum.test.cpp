@@ -1,6 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_reverse_range_sum"
 
-#include "algebra/add.hpp"
 #include "ds/treap_monoid.hpp"
 #include <iostream>
 #include <vector>
@@ -9,6 +8,9 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
+ll op(ll x, ll y) { return x + y; }
+ll e() { return 0; }
+
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
@@ -16,7 +18,7 @@ int main() {
   cin >> n >> q;
   vector<ll> a(n);
   for (ll& ai : a) cin >> ai;
-  treap_monoid<alg::add<ll>> tp(a);
+  treap_monoid<ll, op, e> tp(a);
   while (q--) {
     int t, l, r;
     cin >> t >> l >> r;
