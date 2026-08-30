@@ -8,11 +8,13 @@
 namespace cp {
 
 template <class T> class dynamic_fenwick_tree {
+  using ull = unsigned long long;
+
  public:
   dynamic_fenwick_tree() : n(0) {}
-  explicit dynamic_fenwick_tree(unsigned long long _n) : n(_n) {}
+  explicit dynamic_fenwick_tree(ull _n) : n(_n) {}
 
-  void add(unsigned long long i, T x) {
+  void add(ull i, T x) {
     assert(i < n);
     i++;
     while (i <= n) {
@@ -21,22 +23,22 @@ template <class T> class dynamic_fenwick_tree {
     }
   }
 
-  void set(unsigned long long i, T x) {
+  void set(ull i, T x) {
     assert(i < n);
     add(i, x - (*this)[i]);
   }
 
-  T operator[](unsigned long long i) const {
+  T operator[](ull i) const {
     assert(i < n);
     return sum(i + 1) - sum(i);
   }
 
-  T sum(unsigned long long l, unsigned long long r) const {
+  T sum(ull l, ull r) const {
     assert(l <= r && r <= n);
     return sum(r) - sum(l);
   }
 
-  T sum(unsigned long long r) const {
+  T sum(ull r) const {
     assert(r <= n);
     T s = 0;
     while (r) {
@@ -46,20 +48,20 @@ template <class T> class dynamic_fenwick_tree {
     return s;
   }
 
-  void imos_add(unsigned long long l, unsigned long long r, T x) {
+  void imos_add(ull l, ull r, T x) {
     assert(l <= r && r <= n);
     if (l < n) add(l, x);
     if (r < n) add(r, -x);
   }
 
-  T imos_get(unsigned long long i) const {
+  T imos_get(ull i) const {
     assert(i < n);
     return sum(i + 1);
   }
 
-  unsigned long long lower_bound(T w) const {
+  ull lower_bound(T w) const {
     if (w <= 0) return 0;
-    unsigned long long lb = 0, k = 1;
+    ull lb = 0, k = 1;
     while ((k << 1) <= n) k <<= 1;
     while (k) {
       if (lb + k <= n && d.get(lb + k - 1) < w) {
@@ -71,9 +73,9 @@ template <class T> class dynamic_fenwick_tree {
     return lb;
   }
 
-  unsigned long long upper_bound(T w) const {
+  ull upper_bound(T w) const {
     if (w < 0) return 0;
-    unsigned long long ub = 0, k = 1;
+    ull ub = 0, k = 1;
     while ((k << 1) <= n) k <<= 1;
     while (k) {
       if (ub + k <= n && d.get(ub + k - 1) <= w) {
@@ -85,11 +87,11 @@ template <class T> class dynamic_fenwick_tree {
     return ub;
   }
 
-  unsigned long long size() const { return n; }
+  ull size() const { return n; }
 
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_fenwick_tree& fw) {
-    for (unsigned long long i = 0; i < fw.n; i++) {
+    for (ull i = 0; i < fw.n; i++) {
       os << fw[i];
       if (i != fw.n - 1) os << " ";
     }
@@ -97,8 +99,8 @@ template <class T> class dynamic_fenwick_tree {
   }
 
  private:
-  unsigned long long n;
-  hash_map<unsigned long long, T> d;
+  ull n;
+  hash_map<ull, T> d;
 };
 
 }  // namespace cp
