@@ -24,16 +24,14 @@ using is_unsigned_int128 = std::is_same<T, unsigned __int128>;
 template <class T>
 inline constexpr bool is_unsigned_int128_v = is_unsigned_int128<T>::value;
 
-// is_integral
-
 template <class T>
-using is_integral =
-    std::conditional_t<std::is_integral_v<T> ||
-                           is_signed_int128_v<std::remove_cv_t<T>> ||
-                           is_unsigned_int128_v<std::remove_cv_t<T>>,
+using is_int128 =
+    std::conditional_t<is_signed_int128_v<T> || is_unsigned_int128_v<T>,
                        std::true_type, std::false_type>;
 
-template <class T> inline constexpr bool is_integral_v = is_integral<T>::value;
+template <class T> inline constexpr bool is_int128_v = is_int128<T>::value;
+
+// is_integral
 
 template <class T>
 using is_signed_int =
@@ -52,6 +50,13 @@ using is_unsigned_int =
 
 template <class T>
 inline constexpr bool is_unsigned_int_v = is_unsigned_int<T>::value;
+
+template <class T>
+using is_integral = std::conditional_t<std::is_integral_v<T> ||
+                                           is_int128_v<std::remove_cv_t<T>>,
+                                       std::true_type, std::false_type>;
+
+template <class T> inline constexpr bool is_integral_v = is_integral<T>::value;
 
 // is_modint
 

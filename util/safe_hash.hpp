@@ -28,15 +28,15 @@ template <class T> void hash_combine(unsigned long long& seed, const T& val) {
 
 }  // namespace internal
 
-template <class T> requires internal::is_integral_v<T> && (sizeof(T) <= 8)
+template <class T>
+requires(internal::is_integral_v<T> && !internal::is_int128_v<T>)
 struct safe_hash<T> {
   unsigned long long operator()(const T& x) const {
     return internal::splitmix64((unsigned long long)(x));
   }
 };
 
-template <class T>
-requires internal::is_signed_int128_v<T> || internal::is_unsigned_int128_v<T>
+template <class T> requires internal::is_int128_v<T>
 struct safe_hash<T> {
   unsigned long long operator()(const T& x) const {
     unsigned __int128 ux = x;
