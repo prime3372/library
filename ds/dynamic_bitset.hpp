@@ -16,7 +16,7 @@ class dynamic_bitset {
 
  public:
   dynamic_bitset() : n(0) {}
-  explicit dynamic_bitset(int _n) : n(_n), a((_n + w - 1) / w, 0) {}
+  explicit dynamic_bitset(int _n) : n(_n), a((_n + w - 1) / w) {}
   explicit dynamic_bitset(const std::string& s)
       : n(int(s.size())), a((int(s.size()) + w - 1) / w) {
     for (int i = 0; i < n; i++) {
@@ -100,7 +100,7 @@ class dynamic_bitset {
     if (r == 0) return 0;
     int i = (r - 1) / w;
     ull start = a[i];
-    start &= -1ULL >> ((w - r) % w);
+    start &= -1ULL >> (w - 1 - ((r - 1) % w));
     if (start) return i * w + (w - std::countl_zero(start));
     while (--i >= 0) {
       if (a[i]) return i * w + (w - std::countl_zero(a[i]));
