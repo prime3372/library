@@ -39,7 +39,7 @@ template <class S, class F, auto id> struct treap_acted_monoid_node {
 };
 
 template <class S, auto op, auto e, class F, auto act, auto compose, auto id,
-          auto reverse = std::identity()>
+          auto reverse = [](const auto& x) { return x; }>
 class treap_acted_monoid
     : public treap_base<
           treap_acted_monoid_node<S, F, id>,
