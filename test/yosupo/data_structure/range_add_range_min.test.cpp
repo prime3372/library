@@ -1,6 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_add_range_min"
 
-#include "algebra/min_add.hpp"
 #include "ds/lazy_segtree.hpp"
 #include <iostream>
 #include <vector>
@@ -9,6 +8,12 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
+ll op(ll x, ll y) { return min(x, y); }
+ll e() { return ll(1e18); }
+ll act(ll f, ll x) { return x + f; }
+ll compose(ll g, ll f) { return g + f; }
+ll id() { return 0; }
+
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
@@ -16,7 +21,7 @@ int main() {
   cin >> n >> q;
   vector<ll> a(n);
   for (ll& ai : a) cin >> ai;
-  lazy_segtree<alg::min_add<ll, ll(1e18)>> seg(a);
+  lazy_segtree<ll, op, e, ll, act, compose, id> seg(a);
   while (q--) {
     int t;
     cin >> t;
