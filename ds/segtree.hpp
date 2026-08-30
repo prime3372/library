@@ -12,12 +12,10 @@
 
 namespace cp {
 
-template <class M> class segtree {
-  using S = typename M::S;
-
+template <class S, auto op, auto e> class segtree {
  public:
   segtree() : segtree(0) {}
-  explicit segtree(int _n) : segtree(_n, M::e()) {}
+  explicit segtree(int _n) : segtree(_n, e()) {}
   explicit segtree(int _n, const S& val) : segtree(std::vector<S>(_n, val)) {}
   explicit segtree(const std::vector<S>& v) : n(int(v.size())) {
     sz = int(std::bit_ceil((unsigned int)(n)));
@@ -41,40 +39,40 @@ template <class M> class segtree {
 
   S prod(int l, int r) const {
     assert(0 <= l && l <= r && r <= n);
-    S prodl = M::e(), prodr = M::e();
+    S prodl = e(), prodr = e();
     l += sz;
     r += sz;
 
     while (l < r) {
-      if (l & 1) prodl = M::op(prodl, d[l++]);
-      if (r & 1) prodr = M::op(d[--r], prodr);
+      if (l & 1) prodl = op(prodl, d[l++]);
+      if (r & 1) prodr = op(d[--r], prodr);
       l >>= 1;
       r >>= 1;
     }
-    return M::op(prodl, prodr);
+    return op(prodl, prodr);
   }
 
   S all_prod() const { return d[1]; }
 
   template <class F> int max_right(int l, F f) const {
     assert(0 <= l && l <= n);
-    assert(f(M::e()));
+    assert(f(e()));
     if (l == n) return n;
     l += sz;
-    S product = M::e();
+    S product = e();
     do {
       while (l % 2 == 0) l >>= 1;
-      if (!f(M::op(product, d[l]))) {
+      if (!f(op(product, d[l]))) {
         while (l < sz) {
           l = 2 * l;
-          if (f(M::op(product, d[l]))) {
-            product = M::op(product, d[l]);
+          if (f(op(product, d[l]))) {
+            product = op(product, d[l]);
             l++;
           }
         }
         return l - sz;
       }
-      product = M::op(product, d[l]);
+      product = op(product, d[l]);
       l++;
     } while ((l & -l) != l);
     return n;
@@ -82,24 +80,24 @@ template <class M> class segtree {
 
   template <class F> int min_left(int r, F f) const {
     assert(0 <= r && r <= n);
-    assert(f(M::e()));
+    assert(f(e()));
     if (r == 0) return 0;
     r += sz;
-    S product = M::e();
+    S product = e();
     do {
       r--;
       while (r > 1 && r % 2) r >>= 1;
-      if (!f(M::op(d[r], product))) {
+      if (!f(op(d[r], product))) {
         while (r < sz) {
           r = 2 * r + 1;
-          if (f(M::op(d[r], product))) {
-            product = M::op(d[r], product);
+          if (f(op(d[r], product))) {
+            product = op(d[r], product);
             r--;
           }
         }
         return r + 1 - sz;
       }
-      product = M::op(d[r], product);
+      product = op(d[r], product);
     } while ((r & -r) != r);
     return 0;
   }
@@ -121,7 +119,7 @@ template <class M> class segtree {
   int n, sz, log;
   std::vector<S> d;
 
-  void update(int k) { d[k] = M::op(d[2 * k], d[2 * k + 1]); }
+  void update(int k) { d[k] = op(d[2 * k], d[2 * k + 1]); }
 };
 
 }  // namespace cp

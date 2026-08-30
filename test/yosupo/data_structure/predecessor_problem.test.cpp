@@ -1,18 +1,20 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
 
-#include "algebra/max.hpp"
 #include "ds/segtree.hpp"
 #include <iostream>
 
 using namespace std;
 using namespace cp;
 
+bool op(bool x, bool y) { return max(x, y); }
+bool e() { return false; }
+
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  segtree<alg::max<bool, false>> seg(n);
+  segtree<bool, op, e> seg(n);
   for (int i = 0; i < n; i++) {
     char ti;
     cin >> ti;

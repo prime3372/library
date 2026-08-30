@@ -1,6 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
 
-#include "algebra/affine.hpp"
 #include "ds/segtree.hpp"
 #include "util/static_modint.hpp"
 #include "tree/hl_decomposition.hpp"
@@ -13,21 +12,21 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 using mint = modint998244353;
-using M = alg::affine<mint>;
 
-struct RM {
-  using S = M::S;
-  static S op(S g, S f) { return {g.a * f.a, g.a * f.b + g.b}; }
-  static S e() { return S(); }
+struct S {
+  mint a, b;
 };
+S op(S f, S g) { return {g.a * f.a, g.a * f.b + g.b}; }
+S rop(S g, S f) { return {g.a * f.a, g.a * f.b + g.b}; }
+S e() { return {1, 0}; }
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  vector<M::S> f(n);
-  for (auto& fi : f) cin >> fi.a >> fi.b;
+  vector<S> a(n);
+  for (auto& f : a) cin >> f.a >> f.b;
   hl_decomposition hld(n);
   for (int i = 0; i < n - 1; i++) {
     int u, v;
@@ -36,11 +35,11 @@ int main() {
   }
   hld.build();
   auto& ord = hld.ord, head = hld.head, next = hld.next;
-  segtree<M> seg(n);
-  segtree<RM> rseg(n);
+  segtree<S, op, e> seg(n);
+  segtree<S, rop, e> rseg(n);
   for (int i = 0; i < n; i++) {
-    seg.set(ord[i], f[i]);
-    rseg.set(ord[i], f[i]);
+    seg.set(ord[i], a[i]);
+    rseg.set(ord[i], a[i]);
   }
   while (q--) {
     int t;
@@ -57,20 +56,20 @@ int main() {
       cin >> u >> v >> x;
       u = ord[u];
       v = ord[v];
-      M::S l = {1, 0}, r = {1, 0};
+      S l = {1, 0}, r = {1, 0};
       while (head[u] != head[v]) {
         if (u < v) {
-          r = M::op(seg.prod(head[v], v + 1), r);
+          r = op(seg.prod(head[v], v + 1), r);
           v = next[v];
         } else {
-          l = M::op(l, rseg.prod(head[u], u + 1));
+          l = op(l, rseg.prod(head[u], u + 1));
           u = next[u];
         }
       }
-      if (u < v) r = M::op(seg.prod(u, v + 1), r);
-      else l = M::op(l, rseg.prod(v, u + 1));
-      M::S ans = M::op(l, r);
-      cout << ans.a * x + ans.b << "\n";
+      if (u < v) r = op(seg.prod(u, v + 1), r);
+      else l = op(l, rseg.prod(v, u + 1));
+      S f = op(l, r);
+      cout << f.a * x + f.b << "\n";
     }
   }
 }
