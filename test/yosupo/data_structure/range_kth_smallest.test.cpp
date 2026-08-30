@@ -11,11 +11,11 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  wavelet_matrix<unsigned int> wm(n);
+  wavelet_matrix wm(n);
   for (int i = 0; i < n; i++) {
-    unsigned int a;
-    cin >> a;
-    wm.set(i, a);
+    int ai;
+    cin >> ai;
+    wm.set(i, ai);
   }
   wm.build();
   while (q--) {
