@@ -24,8 +24,7 @@ template <class T> class dynamic_fenwick_tree {
 
   void set(size_t i, T x) {
     assert(i < n);
-    add(i, -(*this)[i]);
-    add(i, x);
+    add(i, x - (*this)[i]);
   }
 
   T operator[](size_t i) const {

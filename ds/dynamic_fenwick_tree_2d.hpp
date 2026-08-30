@@ -29,8 +29,7 @@ template <class T> class dynamic_fenwick_tree_2d {
   void set(int i, size_t j, T x) {
     assert(0 <= i && i < n);
     assert(j < m);
-    add(i, j, -(*this)[i][j]);
-    add(i, j, x);
+    add(i, j, x - (*this)[i][j]);
   }
 
   class ref {
