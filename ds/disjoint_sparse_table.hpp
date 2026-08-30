@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <bit>
 #include <cassert>
 #include <iostream>
 #include <vector>
@@ -14,8 +15,7 @@ template <class S, auto op, auto e> class disjoint_sparse_table {
 
   disjoint_sparse_table& build(const std::vector<S>& _a) {
     n = int(_a.size());
-    log = 0;
-    while ((1 << log) < n) log++;
+    log = std::countr_zero(std::bit_ceil((unsigned int)(n)));
     a = _a;
 
     table.resize(log);
