@@ -12,13 +12,13 @@ struct S {
   mint val;
   int len;
 };
-S op(S x, S y) { return S{x.val + y.val, x.len + y.len}; }
-S e() { return S{0, 0}; }
+S op(S x, S y) { return {x.val + y.val, x.len + y.len}; }
+S e() { return {0, 0}; }
 struct F {
   mint a, b;
 };
-S act(F f, S x) { return S{f.a * x.val + f.b * x.len, x.len}; }
-F compose(F g, F f) { return F{g.a * f.a, g.a * f.b + g.b}; }
+S act(F f, S x) { return {f.a * x.val + f.b * x.len, x.len}; }
+F compose(F g, F f) { return {g.a * f.a, g.a * f.b + g.b}; }
 F id() { return {1, 0}; }
 
 int main() {
