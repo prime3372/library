@@ -12,6 +12,8 @@
 namespace cp {
 
 class hash61 {
+  using ull = unsigned long long;
+
  public:
   static hash61 get_basis() {
     hash61 hs;
@@ -31,10 +33,10 @@ class hash61 {
   }
   template <class T> requires internal::is_unsigned_int_v<T>
   hash61(T _v) {
-    v = (unsigned long long)(_v % m);
+    v = (ull)(_v % m);
   }
 
-  unsigned long long val() const { return v; }
+  ull val() const { return v; }
 
   hash61& operator+=(const hash61& rhs) {
     v += rhs.v;
@@ -109,11 +111,11 @@ class hash61 {
   }
 
  private:
-  static constexpr unsigned long long m = (1LL << 61) - 1;
-  unsigned long long v;
+  static constexpr ull m = (1LL << 61) - 1;
+  ull v;
 
-  static unsigned long long pow(unsigned long long x, unsigned long long n) {
-    unsigned long long r = 1;
+  static ull pow(ull x, ull n) {
+    ull r = 1;
     while (n) {
       if (n & 1) r = mul(r, x);
       x = mul(x, x);
@@ -122,21 +124,21 @@ class hash61 {
     return r;
   }
 
-  static bool is_primitive(unsigned long long x) {
-    constexpr unsigned long long divs[] = {2,  3,  5,  7,   11,  13,
+  static bool is_primitive(ull x) {
+    constexpr ull divs[] = {2,  3,  5,  7,   11,  13,
                                            31, 41, 61, 151, 331, 1321};
-    for (unsigned long long d : divs) {
+    for (ull d : divs) {
       if (pow(x, (m - 1) / d) <= 1) return false;
     }
     return true;
   }
 
-  static unsigned long long mul(unsigned long long a, unsigned long long b) {
+  static ull mul(ull a, ull b) {
     unsigned __int128 r = a;
     r *= b;
     r = (r >> 61) + (r & m);
     if (r >= m) r -= m;
-    return (unsigned long long)(r);
+    return (ull)(r);
   }
 };
 

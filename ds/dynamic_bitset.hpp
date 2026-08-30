@@ -12,6 +12,7 @@ namespace cp {
 
 class dynamic_bitset {
   using bs = dynamic_bitset;
+  using ull = unsigned long long;
 
  public:
   dynamic_bitset() : n(0) {}
@@ -20,7 +21,7 @@ class dynamic_bitset {
       : n(int(s.size())), a((int(s.size()) + w - 1) / w) {
     for (int i = 0; i < n; i++) {
       assert(s[n - 1 - i] == '0' || s[n - 1 - i] == '1');
-      a[i / w] |= (unsigned long long)(s[n - 1 - i] - '0') << (i % w);
+      a[i / w] |= (ull)(s[n - 1 - i] - '0') << (i % w);
     }
   }
 
@@ -46,7 +47,7 @@ class dynamic_bitset {
     }
 
    private:
-    unsigned long long* d;
+    ull* d;
     int pos;
   };
 
@@ -83,7 +84,7 @@ class dynamic_bitset {
     assert(0 <= l && l <= n);
     if (l == n) return n;
     int i = l / w;
-    unsigned long long start = a[i];
+    ull start = a[i];
     start &= -1ULL << (l % w);
     if (start) return i * w + std::countr_zero(start);
     while (++i < int(a.size())) {
@@ -98,7 +99,7 @@ class dynamic_bitset {
     assert(0 <= r && r <= n);
     if (r == 0) return 0;
     int i = (r - 1) / w;
-    unsigned long long start = a[i];
+    ull start = a[i];
     start &= -1ULL >> ((w - r) % w);
     if (start) return i * w + (w - std::countl_zero(start));
     while (--i >= 0) {
@@ -197,9 +198,7 @@ class dynamic_bitset {
   friend bool operator==(const bs& lhs, const bs& rhs) {
     return lhs.n == rhs.n && lhs.a == rhs.a;
   }
-  friend bool operator!=(const bs& lhs, const bs& rhs) {
-    return !(lhs == rhs);
-  }
+  friend bool operator!=(const bs& lhs, const bs& rhs) { return !(lhs == rhs); }
 
   friend std::ostream& operator<<(std::ostream& os, const bs& x) {
     for (int i = x.n - 1; i >= 0; i--) os << x[i];
@@ -209,9 +208,9 @@ class dynamic_bitset {
  private:
   static constexpr int w = 64;
   int n;
-  std::vector<unsigned long long> a;
+  std::vector<ull> a;
 
-  static unsigned long long mask(int pos) { return 1ULL << pos; }
+  static ull mask(int pos) { return 1ULL << pos; }
 };
 
 }  // namespace cp
