@@ -1,12 +1,14 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 
-#include "algebra/min.hpp"
 #include "ds/disjoint_sparse_table.hpp"
 #include <iostream>
 #include <vector>
 
 using namespace std;
 using namespace cp;
+
+int op(int a, int b) { return min(a, b); }
+int e() { return int(1e9); }
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -15,7 +17,7 @@ int main() {
   cin >> n >> q;
   vector<int> a(n);
   for (int& ai : a) cin >> ai;
-  disjoint_sparse_table<alg::min<int, int(1e9)>> dst(a);
+  disjoint_sparse_table<int, op, e> dst(a);
   while (q--) {
     int l, r;
     cin >> l >> r;

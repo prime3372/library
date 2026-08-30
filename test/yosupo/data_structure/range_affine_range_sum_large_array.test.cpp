@@ -1,6 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum_large_array"
 
-#include "algebra/sum_affine.hpp"
 #include "ds/dynamic_lazy_segtree.hpp"
 #include "util/static_modint.hpp"
 #include <iostream>
@@ -8,7 +7,19 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using M = alg::sum_affine<mint>;
+
+struct S {
+  mint val;
+  int len;
+};
+S op(S x, S y) { return S{x.val + y.val, x.len + y.len}; }
+S e() { return S{0, 0}; }
+struct F {
+  mint a, b;
+};
+S act(F f, S x) { return S{f.a * x.val + f.b * x.len, x.len}; }
+F compose(F g, F f) { return F{g.a * f.a, g.a * f.b + g.b}; }
+F id() { return {1, 0}; }
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -16,7 +27,7 @@ int main() {
   size_t n;
   int q;
   cin >> n >> q;
-  dynamic_lazy_segtree<M> seg(n, {0, 1});
+  dynamic_lazy_segtree<S, op, e, F, act, compose, id> seg(n, S{0, 1});
   while (q--) {
     int t;
     cin >> t;
