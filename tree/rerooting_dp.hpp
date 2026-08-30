@@ -6,13 +6,10 @@
 
 namespace cp {
 
-template <class M> class rerooting_dp {
-  using S = typename M::S;
-  using F = typename M::F;
-
+template <class S, auto op, auto e, class F, auto act> class rerooting_dp {
  public:
   rerooting_dp() : n(0) {}
-  explicit rerooting_dp(int _n) : rerooting_dp(std::vector<S>(_n, M::e())) {}
+  explicit rerooting_dp(int _n) : rerooting_dp(std::vector<S>(_n, e())) {}
   explicit rerooting_dp(int _n, S val) : rerooting_dp(std::vector<S>(n, val)) {}
   explicit rerooting_dp(const std::vector<S>& v)
       : n(int(v.size())), g(int(v.size())), vals(v) {}
@@ -38,8 +35,8 @@ template <class M> class rerooting_dp {
     auto dfs = [&](auto self, int v, int pv) -> void {
       par[v] = pv;
       ord[now_ord++] = v;
-      for (edge e : g[v]) {
-        if (e.to != pv) self(self, e.to, v);
+      for (int i = 0; i < int(g[v].size()); i++) {
+        if (g[v][i].to != pv) self(self, g[v][i].to, v);
       }
     };
     for (int i = 0; i < n; i++) {
@@ -51,36 +48,35 @@ template <class M> class rerooting_dp {
     for (int i = n - 1; i >= 0; i--) {
       int v = ord[i];
       int par_id = -1;
-      S cum = M::e();
+      S cum = e();
       for (int j = 0; j < int(g[v].size()); j++) {
         if (g[v][j].to == par[v]) {
           par_id = j;
           continue;
         }
-        cum = M::op(cum, dp[v][j]);
+        cum = op(cum, dp[v][j]);
       }
       if (par_id == -1) continue;
       int rev = g[v][par_id].rev;
-      dp[par[v]][rev] = M::mapping(g[par[v]][rev].f, M::op(cum, vals[v]));
+      dp[par[v]][rev] = act(g[par[v]][rev].f, op(cum, vals[v]));
     }
 
     ans.resize(n);
     for (int i = 0; i < n; i++) {
       int v = ord[i];
       std::vector<S> rcum(g[v].size() + 1);
-      rcum[g[v].size()] = M::e();
+      rcum[g[v].size()] = e();
       for (int j = int(g[v].size()); j >= 1; j--) {
-        rcum[j - 1] = M::op(rcum[j], dp[v][j - 1]);
+        rcum[j - 1] = op(rcum[j], dp[v][j - 1]);
       }
 
-      S cum = M::e();
+      S cum = e();
       for (int j = 0; j < int(g[v].size()); j++) {
         int to = g[v][j].to, rev = g[v][j].rev;
-        dp[to][rev] =
-            M::mapping(g[to][rev].f, M::op(M::op(cum, rcum[j + 1]), vals[v]));
-        cum = M::op(cum, dp[v][j]);
+        dp[to][rev] = act(g[to][rev].f, op(op(cum, rcum[j + 1]), vals[v]));
+        cum = op(cum, dp[v][j]);
       }
-      ans[v] = M::op(cum, vals[v]);
+      ans[v] = op(cum, vals[v]);
     }
     return *this;
   }
