@@ -24,8 +24,7 @@ F id() { return {1, 0}; }
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
-  size_t n;
-  int q;
+  int n, q;
   cin >> n >> q;
   dynamic_lazy_segtree<S, op, e, F, act, compose, id> seg(n, S{0, 1});
   while (q--) {
