@@ -59,7 +59,7 @@ int main() {
       int l, r;
       mint x;
       cin >> l >> r >> x;
-      auto f = seg.prod(l, r);
+      S f = seg.prod(l, r);
       cout << f.a * x + f.b << "\n";
     }
   }
