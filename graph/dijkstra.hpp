@@ -21,7 +21,7 @@ template <class T> class dijkstra {
     return m++;
   }
 
-  void search(int from) {
+  void init(int from) {
     assert(0 <= from && from < n);
     std::fill(d.begin(), d.end(), -1);
     using tup = std::tuple<T, int, int, int>;

@@ -17,7 +17,7 @@ int main() {
     cin >> s >> t >> d;
     g.add_edge(s, t, d);
   }
-  g.search(r);
+  g.init(r);
   for (int i = 0; i < n; i++) {
     int ans = g.dist(i);
     if (ans == -1) cout << "INF\n";

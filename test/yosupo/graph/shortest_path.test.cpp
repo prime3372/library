@@ -24,7 +24,7 @@ int main() {
     g.add_edge(a, b, c);
     edges[i] = {a, b};
   }
-  g.search(s);
+  g.init(s);
   if (g.dist(t) == -1) {
     cout << -1 << "\n";
     return 0;
