@@ -1,19 +1,20 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_3_D"
 
-#include "algebra/min.hpp"
 #include "ds/slide_window_aggregation.hpp"
 #include <iostream>
 
 using namespace std;
 using namespace cp;
-using M = alg::min<int, int(1e9) + 1>;
+
+int op(int x, int y) { return min(x, y); }
+int e() { return int(1e9); }
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, l;
   cin >> n >> l;
-  slide_window_aggregation<M> swag;
+  slide_window_aggregation<int, op, e> swag;
   for (int i = 0; i < l; i++) {
     int a;
     cin >> a;
