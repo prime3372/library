@@ -24,7 +24,7 @@ int main() {
   vector<int> t(q);
   for (int i = 0; i < q; i++) {
     cin >> t[i];
-    if (!t[i]) {
+    if (t[i] == 0) {
       auto& [l, d, r, u, w] = query[i];
       cin >> l >> d >> r >> u >> w;
     } else {
@@ -41,7 +41,7 @@ int main() {
     fw.dual_add(cx(l), cy(d), cx(r), cy(u), w);
   }
   for (int i = 0; i < q; i++) {
-    if (!t[i]) {
+    if (t[i] == 0) {
       auto [l, d, r, u, w] = query[i];
       fw.dual_add(cx(l), cy(d), cx(r), cy(u), w);
     } else {
