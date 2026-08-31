@@ -10,9 +10,8 @@ namespace cp {
 
 class rollback_union_find {
  public:
-  rollback_union_find() : n(0), cnt(0), inner_snap(0) {}
-  explicit rollback_union_find(int _n)
-      : n(_n), cnt(_n), inner_snap(0), par_size(_n, -1) {}
+  rollback_union_find() : n(0) {}
+  explicit rollback_union_find(int _n) : n(_n), par_size(_n, -1) {}
 
   bool unite(int a, int b) {
     assert(0 <= a && a < n);
@@ -24,7 +23,6 @@ class rollback_union_find {
     if (-par_size[a] < -par_size[b]) std::swap(a, b);
     par_size[a] += par_size[b];
     par_size[b] = a;
-    cnt--;
     return true;
   }
 
@@ -47,8 +45,6 @@ class rollback_union_find {
 
   int size() const { return n; }
 
-  int count() const { return cnt; }
-
   std::vector<std::vector<int>> groups() {
     std::vector<int> root(n);
     for (int i = 0; i < n; i++) {
@@ -70,16 +66,16 @@ class rollback_union_find {
     history.pop_back();
     par_size[a] = x;
     par_size[b] = y;
-    if (a != b) cnt++;
   }
 
   void snapshot() { inner_snap = int(history.size()); }
   void rollback() {
+    assert(inner_snap != -1);
     while (inner_snap < int(history.size())) undo();
   }
 
  private:
-  int n, cnt, inner_snap;
+  int n, inner_snap = -1;
   std::vector<int> par_size;
   std::vector<std::tuple<int, int, int, int>> history;
 };
