@@ -15,11 +15,11 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  vector<tuple<ll, ll, ll, ll, ll>> data(n);
+  vector<array<ll, 5>> data(n);
   for (auto& [l, d, r, u, w] : data) {
     cin >> l >> d >> r >> u >> w;
   }
-  vector<tuple<ll, ll, ll, ll, ll>> query(q);
+  vector<array<ll, 5>> query(q);
   vector<ll> xs, ys;
   vector<int> t(q);
   for (int i = 0; i < q; i++) {
@@ -28,7 +28,7 @@ int main() {
       auto& [l, d, r, u, w] = query[i];
       cin >> l >> d >> r >> u >> w;
     } else {
-      auto& [x, y, a, b, c] = query[i];
+      auto& x = query[i][0], y = query[i][1];
       cin >> x >> y;
       xs.push_back(x);
       ys.push_back(y);
@@ -45,7 +45,7 @@ int main() {
       auto [l, d, r, u, w] = query[i];
       fw.dual_add(cx(l), cy(d), cx(r), cy(u), w);
     } else {
-      auto [x, y, a, b, c] = query[i];
+      auto& x = query[i][0], y = query[i][1];
       cout << fw.dual_get(cx(x), cy(y)) << "\n";
     }
   }
