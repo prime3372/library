@@ -20,15 +20,15 @@ int main() {
     cin >> l >> d >> r >> u >> w;
   }
   vector<array<ll, 5>> query(q);
-  vector<ll> xs, ys;
   vector<int> t(q);
+  vector<ll> xs, ys;
   for (int i = 0; i < q; i++) {
     cin >> t[i];
     if (t[i] == 0) {
       auto& [l, d, r, u, w] = query[i];
       cin >> l >> d >> r >> u >> w;
     } else {
-      auto& x = query[i][0], y = query[i][1];
+      auto& [x, y, a, b, c] = query[i];
       cin >> x >> y;
       xs.push_back(x);
       ys.push_back(y);
@@ -38,15 +38,15 @@ int main() {
   coordinate_compression cx(xs), cy(ys);
   dynamic_fenwick_tree_2d<ll> fw(cx.size(), cy.size());
   for (auto [l, d, r, u, w] : data) {
-    fw.dual_add(cx(l), cy(d), cx(r), cy(u), w);
+    fw.imos_add(cx(l), cy(d), cx(r), cy(u), w);
   }
   for (int i = 0; i < q; i++) {
     if (t[i] == 0) {
       auto [l, d, r, u, w] = query[i];
-      fw.dual_add(cx(l), cy(d), cx(r), cy(u), w);
+      fw.imos_add(cx(l), cy(d), cx(r), cy(u), w);
     } else {
-      auto& x = query[i][0], y = query[i][1];
-      cout << fw.dual_get(cx(x), cy(y)) << "\n";
+      auto& [x, y, a, b, c] = query[i];
+      cout << fw.imos_get(cx(x), cy(y)) << "\n";
     }
   }
 }
