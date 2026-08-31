@@ -30,6 +30,7 @@ template <class T> bool chmax(T& a, const T& b) {
 
 template <class Container, class Indices>
 void rearrange(Container& a, const Indices& p) {
+  assert(a.size() == p.size());
   Container b = a;
   for (int i = 0; i < int(p.size()); i++) {
     a[i] = std::move(b[p[i]]);
