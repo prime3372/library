@@ -152,7 +152,7 @@ class dynamic_bitset {
     if (bit_shift > 0) {
       for (int i = int(a.size()) - 1; i > block_shift; i--) {
         a[i] <<= bit_shift;
-        if (i) a[i] |= a[i - 1] >> (w - bit_shift);
+        a[i] |= a[i - 1] >> (w - bit_shift);
       }
       a[block_shift] <<= bit_shift;
     }
