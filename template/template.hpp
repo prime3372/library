@@ -2,7 +2,6 @@
 
 #include <bits/stdc++.h>
 
-#include "ds/hash_map.hpp"
 #include "random/base.hpp"
 #include "util/algo_utility.hpp"
 #include "util/io_float128.hpp"
@@ -25,7 +24,6 @@ template <class T> using maxque = priority_queue<T>;
 
 using namespace cp;
 using mint = modint998244353;
-template <class T, class U> using dict = hash_map<T, U>;
 
 #ifdef LOCAL
 
