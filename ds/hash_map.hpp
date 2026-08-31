@@ -61,16 +61,12 @@ template <class Key, class Val> class hash_map {
     auto pairs = mp.enumerate();
     std::sort(pairs.begin(), pairs.end(),
               [](const auto& x, const auto& y) { return x.first < y.first; });
+
     std::ostringstream oss;
     for (auto& p : pairs) {
-      std::vector<std::string> outs_pair(2);
-      oss << p.first;
-      outs_pair[0] = oss.str();
+      oss << p.first << " " << p.second;
+      outs.push_back(oss.str());
       oss.str("");
-      oss << p.second;
-      outs_pair[1] = oss.str();
-      oss.str("");
-      outs.push_back(internal::combine_outputs(outs_pair));
     }
 
     return os << internal::combine_outputs(outs);
