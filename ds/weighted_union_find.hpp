@@ -8,9 +8,9 @@ namespace cp {
 
 template <class T> class weighted_union_find {
  public:
-  weighted_union_find() : n(0), cnt(0) {}
+  weighted_union_find() : n(0) {}
   explicit weighted_union_find(int _n)
-      : n(_n), cnt(_n), parent_or_size(_n, -1), diff_weight(_n) {}
+      : n(_n), parent_or_size(_n, -1), diff_weight(_n) {}
 
   // @return satisfiablility
   bool unite(int a, int b, T d) {
@@ -27,7 +27,6 @@ template <class T> class weighted_union_find {
     parent_or_size[b] += parent_or_size[a];
     parent_or_size[a] = b;
     diff_weight[a] = d;
-    cnt--;
     return true;
   }
 
@@ -49,8 +48,6 @@ template <class T> class weighted_union_find {
 
   int size() const { return n; }
 
-  int count() const { return cnt; }
-
   T weight(int a) {
     assert(0 <= a && a < n);
     find(a);
@@ -65,7 +62,7 @@ template <class T> class weighted_union_find {
   }
 
  private:
-  int n, cnt;
+  int n;
   std::vector<int> parent_or_size;
   std::vector<T> diff_weight;
 
