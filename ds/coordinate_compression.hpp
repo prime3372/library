@@ -35,15 +35,6 @@ template <class T> class coordinate_compression {
     return int(std::lower_bound(d.begin(), d.end(), x) - d.begin());
   }
 
-  std::vector<int> operator()(const std::vector<T>& v) const {
-    assert(initialized);
-    std::vector<int> res(v.size());
-    for (int i = 0; i < int(v.size()); i++) {
-      res[i] = (*this)(v[i]);
-    }
-    return res;
-  }
-
   T operator[](int i) const {
     assert(initialized);
     assert(0 <= i && i < int(d.size()));
