@@ -81,13 +81,6 @@ template <class T> long double abs(const point<T>& p) {
   return std::sqrt((long double)(p.x) * p.x + (long double)(p.y) * p.y);
 }
 
-template <class T> T dot(const point<T>& p, const point<T>& q) {
-  return p.x * q.x + p.y * q.y;
-}
-template <class T> T cross(const point<T>& p, const point<T>& q) {
-  return p.x * q.y - p.y * q.x;
-}
-
 template <class T> long double arg(const point<T>& p) {
   return std::atan2((long double)(p.y), (long double)(p.x));
 }
@@ -97,6 +90,13 @@ template <class T> point<T> rot90(const point<T>& p) {
 }
 template <class T> point<T> rot270(const point<T>& p) {
   return point<T>(-p.y, p.x);
+}
+
+template <class T> T dot(const point<T>& p, const point<T>& q) {
+  return p.x * q.x + p.y * q.y;
+}
+template <class T> T cross(const point<T>& p, const point<T>& q) {
+  return p.x * q.y - p.y * q.x;
 }
 
 template <class T> bool is_same(const point<T>& p, const point<T>& q) {
