@@ -85,13 +85,6 @@ template <class T> long double arg(const point<T>& p) {
   return std::atan2((long double)(p.y), (long double)(p.x));
 }
 
-template <class T> point<T> rot90(const point<T>& p) {
-  return point<T>(p.y, -p.x);
-}
-template <class T> point<T> rot270(const point<T>& p) {
-  return point<T>(-p.y, p.x);
-}
-
 template <class T> T dot(const point<T>& p, const point<T>& q) {
   return p.x * q.x + p.y * q.y;
 }
