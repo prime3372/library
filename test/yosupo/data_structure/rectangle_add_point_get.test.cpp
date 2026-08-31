@@ -14,32 +14,38 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  vector<ll> l(n + q), d(n + q), r(n + q), u(n + q), w(n + q), x(q), y(q);
-  vector<int> t(q);
-  for (int i = 0; i < n; i++) {
-    cin >> l[i] >> d[i] >> r[i] >> u[i] >> w[i];
+  vector<tuple<ll, ll, ll, ll, ll>> data(n);
+  for (auto& [l, d, r, u, w] : data) {
+    cin >> l >> d >> r >> u >> w;
   }
+  vector<tuple<ll, ll, ll, ll, ll>> query(q);
+  vector<ll> xs, ys;
+  vector<int> t(q);
   for (int i = 0; i < q; i++) {
     cin >> t[i];
     if (!t[i]) {
-      cin >> l[n + i] >> d[n + i] >> r[n + i] >> u[n + i] >> w[n + i];
+      auto& [l, d, r, u, w] = query[i];
+      cin >> l >> d >> r >> u >> w;
     } else {
-      cin >> x[i] >> y[i];
+      auto& [x, y, a, b, c] = query[i];
+      cin >> x >> y;
+      xs.push_back(x);
+      ys.push_back(y);
     }
   }
 
-  coordinate_compression comp_x(x), comp_y(y);
-  dynamic_fenwick_tree_2d<ll> fw(comp_x.size() + 1, comp_y.size() + 1);
-  auto cx = comp_x(x), cy = comp_y(y);
-  auto cl = comp_x(l), cd = comp_y(d), cr = comp_x(r), cu = comp_y(u);
-  for (int i = 0; i < n; i++) {
-    fw.dual_add(cl[i], cd[i], cr[i], cu[i], w[i]);
+  coordinate_compression cx(xs), cy(ys);
+  dynamic_fenwick_tree_2d<ll> fw(cx.size(), cy.size());
+  for (auto [l, d, r, u, w] : data) {
+    fw.dual_add(cx(l), cy(d), cx(r), cy(u), w);
   }
   for (int i = 0; i < q; i++) {
     if (!t[i]) {
-      fw.dual_add(cl[n + i], cd[n + i], cr[n + i], cu[n + i], w[n + i]);
+      auto [l, d, r, u, w] = query[i];
+      fw.dual_add(cx(l), cy(d), cx(r), cy(u), w);
     } else {
-      cout << fw.dual_get(cx[i], cy[i]) << "\n";
+      auto [x, y, a, b, c] = query[i];
+      cout << fw.dual_get(cx(x), cy(y)) << "\n";
     }
   }
 }
