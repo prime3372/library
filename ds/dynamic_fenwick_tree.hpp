@@ -48,13 +48,13 @@ template <class T> class dynamic_fenwick_tree {
     return s;
   }
 
-  void imos_add(ull l, ull r, T x) {
+  void dual_add(ull l, ull r, T x) {
     assert(l <= r && r <= n);
     if (l < n) add(l, x);
     if (r < n) add(r, -x);
   }
 
-  T imos_get(ull i) const {
+  T dual_get(ull i) const {
     assert(i < n);
     return sum(i + 1);
   }

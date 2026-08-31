@@ -35,11 +35,11 @@ int main() {
       int v;
       ll w;
       cin >> v >> w;
-      fw.imos_add(et.in[v], et.out[v], w);
+      fw.dual_add(et.in[v], et.out[v], w);
     } else {
       int u;
       cin >> u;
-      cout << fw.imos_get(et.in[u]) << "\n";
+      cout << fw.dual_get(et.in[u]) << "\n";
     }
   }
 }

@@ -33,13 +33,13 @@ int main() {
   auto cx = comp_x(x), cy = comp_y(y);
   auto cl = comp_x(l), cd = comp_y(d), cr = comp_x(r), cu = comp_y(u);
   for (int i = 0; i < n; i++) {
-    fw.imos_add(cl[i], cd[i], cr[i], cu[i], w[i]);
+    fw.dual_add(cl[i], cd[i], cr[i], cu[i], w[i]);
   }
   for (int i = 0; i < q; i++) {
     if (!t[i]) {
-      fw.imos_add(cl[n + i], cd[n + i], cr[n + i], cu[n + i], w[n + i]);
+      fw.dual_add(cl[n + i], cd[n + i], cr[n + i], cu[n + i], w[n + i]);
     } else {
-      cout << fw.imos_get(cx[i], cy[i]) << "\n";
+      cout << fw.dual_get(cx[i], cy[i]) << "\n";
     }
   }
 }

@@ -18,11 +18,11 @@ int main() {
     if (com == 0) {
       int s, t, x;
       cin >> s >> t >> x;
-      fw.imos_add(s - 1, t, x);
+      fw.dual_add(s - 1, t, x);
     } else {
       int i;
       cin >> i;
-      cout << fw.imos_get(i - 1) << "\n";
+      cout << fw.dual_get(i - 1) << "\n";
     }
   }
 }
