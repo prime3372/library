@@ -50,7 +50,7 @@
   "test/yosupo/data_structure/double_ended_priority_queue.test.cpp": "2026-08-25 10:50:45 +0900",
   "test/yosupo/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp": "2026-08-31 03:51:05 +0900",
   "test/yosupo/data_structure/point_add_range_sum.test.cpp": "2026-08-31 23:50:10 +0900",
-  "test/yosupo/data_structure/point_add_rectangle_sum.test.cpp": "2026-08-31 23:50:10 +0900",
+  "test/yosupo/data_structure/point_add_rectangle_sum.test.cpp": "2026-08-31 23:56:23 +0900",
   "test/yosupo/data_structure/point_set_range_composite.test.cpp": "2026-08-31 03:51:05 +0900",
   "test/yosupo/data_structure/point_set_range_composite_large_array.test.cpp": "2026-08-31 04:00:23 +0900",
   "test/yosupo/data_structure/predecessor_problem.test.cpp": "2026-08-31 01:48:19 +0900",
