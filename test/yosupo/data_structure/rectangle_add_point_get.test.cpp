@@ -36,7 +36,10 @@ int main() {
     fw.imos_add(cl[i], cd[i], cr[i], cu[i], w[i]);
   }
   for (int i = 0; i < q; i++) {
-    if (!t[i]) fw.imos_add(cl[n + i], cd[n + i], cr[n + i], cu[n + i], w[n + i]);
-    else cout << fw.imos_get(cx[i], cy[i]) << "\n";
+    if (!t[i]) {
+      fw.imos_add(cl[n + i], cd[n + i], cr[n + i], cu[n + i], w[n + i]);
+    } else {
+      cout << fw.imos_get(cx[i], cy[i]) << "\n";
+    }
   }
 }
