@@ -35,9 +35,4 @@ template <class T> std::pair<T, T> uniform_pair(T l, T r) {
   return {a, b};
 }
 
-template <class T> T choice(const std::vector<T>& v) {
-  assert(!v.empty());
-  return v[uniform(0, int(v.size()) - 1)];
-}
-
 }  // namespace cp
