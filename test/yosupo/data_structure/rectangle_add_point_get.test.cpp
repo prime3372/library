@@ -3,6 +3,7 @@
 #include "ds/coordinate_compression.hpp"
 #include "ds/dynamic_fenwick_tree_2d.hpp"
 #include <iostream>
+#include <tuple>
 #include <vector>
 
 using namespace std;
