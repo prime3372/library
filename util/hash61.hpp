@@ -125,8 +125,7 @@ class hash61 {
   }
 
   static bool is_primitive(ull x) {
-    constexpr ull divs[] = {2,  3,  5,  7,   11,  13,
-                                           31, 41, 61, 151, 331, 1321};
+    constexpr ull divs[] = {2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321};
     for (ull d : divs) {
       if (pow(x, (m - 1) / d) <= 1) return false;
     }
