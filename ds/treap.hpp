@@ -9,8 +9,6 @@
 
 namespace cp {
 
-namespace internal {
-
 template <class T> struct treap_node {
   T val;
   int sub = 1;
@@ -35,11 +33,9 @@ template <class T> struct treap_node {
   }
 };
 
-}  // namespace internal
-
 template <class T>
-class treap : public treap_base<internal::treap_node<T>, treap<T>> {
-  using node = internal::treap_node<T>;
+class treap : public treap_base<treap_node<T>, treap<T>> {
+  using node = treap_node<T>;
   using base = treap_base<node, treap>;
 
  public:
