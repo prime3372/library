@@ -17,16 +17,12 @@ std::vector<point<T>> convex_hull(std::vector<point<T>> p) {
   std::vector<point<T>> ch(2 * n);
   int k = 0;
   for (int i = 0; i < n; i++) {
-    while (k >= 2 && cross(ch[k - 1] - ch[k - 2], p[i] - ch[k - 1]) < th) {
-      k--;
-    }
+    while (k >= 2 && cross(ch[k - 1] - ch[k - 2], p[i] - ch[k - 1]) < th) k--;
     ch[k++] = p[i];
   }
-  int tmp = k + 1;
+  int t = k + 1;
   for (int i = n - 2; i >= 0; i--) {
-    while (k >= tmp && cross(ch[k - 1] - ch[k - 2], p[i] - ch[k - 2]) < th) {
-      k--;
-    }
+    while (k >= t && cross(ch[k - 1] - ch[k - 2], p[i] - ch[k - 2]) < th) k--;
     ch[k++] = p[i];
   }
   ch.resize(k - 1);
