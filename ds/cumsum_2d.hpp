@@ -52,7 +52,7 @@ template <class T> class cumsum_2d {
     return cum[r][u] - cum[r][d] - cum[l][u] + cum[l][d];
   }
 
-  void dual_add(int l, int d, int r, int u, T x) {
+  void imos_add(int l, int d, int r, int u, T x) {
     assert(0 <= l && l <= r && r <= n);
     assert(0 <= d && d <= u && u <= m);
     if (l < n && d < m) val[l][d] += x;
@@ -61,7 +61,7 @@ template <class T> class cumsum_2d {
     if (r < n && u < m) val[r][u] += x;
   }
 
-  T dual_get(int i, int j) {
+  T imos_get(int i, int j) {
     assert(0 <= i && i < n);
     assert(0 <= j && j < m);
     return sum(i + 1, j + 1);

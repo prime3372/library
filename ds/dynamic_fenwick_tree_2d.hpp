@@ -69,7 +69,7 @@ template <class T> class dynamic_fenwick_tree_2d {
     return s;
   }
 
-  void dual_add(int l, ull d, int r, ull u, T x) {
+  void imos_add(int l, ull d, int r, ull u, T x) {
     assert(0 <= l && l <= r && r <= n);
     assert(d <= u && u <= m);
     if (l < n && d < m) add(l, d, x);
@@ -78,7 +78,7 @@ template <class T> class dynamic_fenwick_tree_2d {
     if (r < n && u < m) add(r, u, x);
   }
 
-  T dual_get(int i, ull j) const {
+  T imos_get(int i, ull j) const {
     assert(0 <= i && i < n);
     assert(j < m);
     return sum(i + 1, j + 1);

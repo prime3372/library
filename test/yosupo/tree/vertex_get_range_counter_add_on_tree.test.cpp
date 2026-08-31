@@ -42,13 +42,13 @@ int main() {
     while (true) {
       int d1 = lca.dist(cur, p);
       if (r - d1 > 0) {
-        contour[cur].dual_add(0, min(r - d1, contour[cur].size()), x);
+        contour[cur].imos_add(0, min(r - d1, contour[cur].size()), x);
       }
       int par = cd.parent[cur];
       if (par == -1) break;
       int d2 = lca.dist(par, p);
       if (r - d2 > 0) {
-        contour_par[cur].dual_add(0, min(r - d2, contour_par[cur].size()), x);
+        contour_par[cur].imos_add(0, min(r - d2, contour_par[cur].size()), x);
       }
       cur = par;
     }
@@ -57,10 +57,10 @@ int main() {
     ll ans = 0;
     int cur = p;
     while (true) {
-      ans += contour[cur].dual_get(lca.dist(cur, p));
+      ans += contour[cur].imos_get(lca.dist(cur, p));
       int par = cd.parent[cur];
       if (par == -1) break;
-      ans -= contour_par[cur].dual_get(lca.dist(par, p));
+      ans -= contour_par[cur].imos_get(lca.dist(par, p));
       cur = par;
     }
     return ans;
