@@ -10,9 +10,7 @@ namespace cp {
 namespace internal {
 
 constexpr long double eps = 1e-9;
-
 template <class T> bool equal(T x, T y) { return std::abs(x - y) < eps; }
-
 template <class T> bool less(T x, T y) { return x < y - eps; }
 
 }  // namespace internal
@@ -47,32 +45,6 @@ template <class T> class point {
 
   point operator+() const { return point(x, y); }
   point operator-() const { return point(-x, -y); }
-
-  friend point operator+(const point& p, const point& q) {
-    return point(p) += q;
-  }
-  friend point operator-(const point& p, const point& q) {
-    return point(p) -= q;
-  }
-  template <class U> friend point operator*(const point& p, U s) {
-    return point(p) *= s;
-  }
-  template <class U> friend point operator*(U s, const point& p) {
-    return point(p) *= s;
-  }
-  template <class U> friend point operator/(const point& p, U s) {
-    return point(p) /= s;
-  }
-
-  friend bool operator==(const point& p, const point& q) {
-    return (p.x == q.x) && (p.y == q.y);
-  }
-  friend bool operator<(const point& p, const point& q) {
-    return (p.x < q.x) || (p.x == q.x && p.y < q.y);
-  }
-  friend bool operator>(const point& p, const point& q) { return q < p; }
-  friend bool operator<=(const point& p, const point& q) { return !(p > q); }
-  friend bool operator>=(const point& p, const point& q) { return !(p < q); }
 };
 
 template <class T> T norm(const point<T>& p) { return p.x * p.x + p.y * p.y; }
@@ -100,6 +72,38 @@ template <class T> bool is_parallel(const point<T>& p, const point<T>& q) {
 }
 template <class T> bool is_orthogonal(const point<T>& p, const point<T>& q) {
   return internal::equal<T>(dot(p, q), 0);
+}
+
+template <class T> point<T> operator+(const point<T>& p, const point<T>& q) {
+  return point<T>(p) += q;
+}
+template <class T> point<T> operator-(const point<T>& p, const point<T>& q) {
+  return point<T>(p) -= q;
+}
+template <class T, class U> point<T> operator*(const point<T>& p, U s) {
+  return point<T>(p) *= s;
+}
+template <class T, class U> point<T> operator*(U s, const point<T>& p) {
+  return point<T>(p) *= s;
+}
+template <class T, class U> point<T> operator/(const point<T>& p, U s) {
+  return point<T>(p) /= s;
+}
+
+template <class T> bool operator==(const point<T>& p, const point<T>& q) {
+  return (p.x == q.x) && (p.y == q.y);
+}
+template <class T> bool operator<(const point<T>& p, const point<T>& q) {
+  return (p.x < q.x) || (p.x == q.x && p.y < q.y);
+}
+template <class T> bool operator>(const point<T>& p, const point<T>& q) {
+  return q < p;
+}
+template <class T> bool operator<=(const point<T>& p, const point<T>& q) {
+  return !(p > q);
+}
+template <class T> bool operator>=(const point<T>& p, const point<T>& q) {
+  return !(p < q);
 }
 
 template <class T> std::istream& operator>>(std::istream& is, point<T>& p) {
