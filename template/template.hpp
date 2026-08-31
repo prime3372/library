@@ -30,21 +30,19 @@ using mint = modint998244353;
 #define GET_STRING(a, ...) #a
 
 #define local 1
-#define dump(...)                                            \
-  []<class... _Args>(const _Args&... _args) -> void {        \
-    string _args_str = GET_STRING((__VA_ARGS__));            \
-    if (sizeof...(_Args) <= 1) {                             \
-      _args_str = _args_str.substr(1, _args_str.size() - 2); \
-    }                                                        \
-    _args_str += ": ";                                       \
-    cerr << _args_str;                                       \
-    ostringstream _oss;                                      \
-    _oss << make_tuple(_args...);                            \
-    string _outs = _oss.str();                               \
-    if (count(_outs.begin(), _outs.end(), '\n')) {           \
-      cerr << "\n";                                          \
-    }                                                        \
-    cerr << _outs << "\n";                                   \
+#define dump(...)                                              \
+  []<class... _Args>(const _Args&... _args) -> void {          \
+    string _args_str = GET_STRING((__VA_ARGS__));              \
+    if (sizeof...(_Args) <= 1) {                               \
+      _args_str = _args_str.substr(1, _args_str.size() - 2);   \
+    }                                                          \
+    _args_str += ": ";                                         \
+    cerr << _args_str;                                         \
+    ostringstream _oss;                                        \
+    _oss << make_tuple(_args...);                              \
+    string _outs = _oss.str();                                 \
+    if (count(_outs.begin(), _outs.end(), '\n')) cerr << "\n"; \
+    cerr << _outs << "\n";                                     \
   }(__VA_ARGS__)
 #define write(...) \
   [](const auto&... _args) -> void { (cerr << ... << _args); }(__VA_ARGS__)
