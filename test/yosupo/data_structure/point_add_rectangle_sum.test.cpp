@@ -29,7 +29,7 @@ int main() {
   }
 
   coordinate_compression comp_x(x), comp_y(y);
-  dynamic_fenwick_tree_2d<ll> fw(comp_x.size() + 1, comp_y.size() + 1);
+  dynamic_fenwick_tree_2d<ll> fw(comp_x.size(), comp_y.size());
   auto cx = comp_x(x), cy = comp_y(y);
   auto cl = comp_x(l), cd = comp_y(d), cr = comp_x(r), cu = comp_y(u);
   for (int i = 0; i < n; i++) {
