@@ -28,6 +28,14 @@ template <class T> bool chmax(T& a, const T& b) {
   return b > a ? (a = b, true) : false;
 }
 
+template <class Container, class Indices>
+void rearrange(Container& a, const Indices& p) {
+  Container b = a;
+  for (int i = 0; i < int(p.size()); i++) {
+    a[i] = std::move(b[p[i]]);
+  }
+}
+
 // stable sort
 template <class Container,
           class Comp = std::less<typename std::decay_t<Container>::value_type>>
@@ -37,10 +45,7 @@ std::vector<int> sort(Container&& a, Comp comp = Comp()) {
   std::sort(p.begin(), p.end(), [&](int i, int j) {
     return comp(a[i], a[j]) || (!comp(a[j], a[i]) && i < j);
   });
-  auto a2 = a;
-  for (int i = 0; i < int(a.size()); i++) {
-    a[i] = std::move(a2[p[i]]);
-  }
+  rearrange(a, p);
   return p;
 }
 
