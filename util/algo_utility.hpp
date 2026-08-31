@@ -41,7 +41,7 @@ void rearrange(Container& a, const Indices& p) {
 template <class Container,
           class Comp = std::less<typename std::decay_t<Container>::value_type>>
 std::vector<int> sort(Container&& a, Comp comp = Comp()) {
-  std::vector<int> p(int(a.size()));
+  std::vector<int> p(a.size());
   std::iota(p.begin(), p.end(), 0);
   std::sort(p.begin(), p.end(), [&](int i, int j) {
     return comp(a[i], a[j]) || (!comp(a[j], a[i]) && i < j);
