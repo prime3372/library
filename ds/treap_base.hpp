@@ -15,6 +15,7 @@
 
 namespace cp {
 
+// implicit treap
 template <class node, class derived> class treap_base {
   using T = decltype(node::val);
 
