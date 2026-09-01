@@ -2,16 +2,16 @@
 
 #include "geom/point.hpp"
 #include "geom/projection.hpp"
-#include "util/type_traits.hpp"
 
 namespace cp {
 
-template <class T> point<T> reflection(const point<T>& p, const line<T>& l) {
+point<long double> reflection(const point<long double>& p,
+                              const line<long double>& l) {
   return 2 * projection(p, l) - p;
 }
 
-template <class T> requires internal::is_integral_v<T>
-point<long double> reflection(const point<T>& p, const line<T>& l) {
+template <class T, class U>
+point<long double> reflection(const point<T>& p, const line<U>& l) {
   return reflection(point<long double>(p), line<long double>(l));
 }
 

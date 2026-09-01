@@ -17,24 +17,12 @@ template <class T> class line {
 };
 
 template <class T> long double arg(const line<T>& l) { return arg(l.q - l.p); }
-template <class T> requires internal::is_integral_v<T>
-long double arg(const line<T>& l) {
-  return arg(line<long double>(l));
-}
 
 template <class T> bool is_parallel(const line<T>& l, const line<T>& m) {
   return is_parallel(l.q - l.p, m.q - m.p);
 }
 template <class T> bool is_orthogonal(const line<T>& l, const line<T>& m) {
   return is_orthogonal(l.q - l.p, m.q - m.p);
-}
-
-template <class T> bool is_on(const point<T>& p, const line<T>& l) {
-  return internal::equal(cross(l.p - p, l.q - p), 0);
-}
-
-template <class T> bool is_same(const line<T>& l, const line<T>& m) {
-  return is_parallel(l, m) && is_on(m.p, l);
 }
 
 template <class T> std::istream& operator>>(std::istream& is, line<T>& l) {
