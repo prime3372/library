@@ -28,12 +28,6 @@ template <class T> class dynamic_fenwick_tree_2d {
     }
   }
 
-  void set(int i, ull j, T x) {
-    assert(0 <= i && i < n);
-    assert(j < m);
-    add(i, j, x - (*this)[i][j]);
-  }
-
   class ref {
    public:
     T operator[](ull j) const {

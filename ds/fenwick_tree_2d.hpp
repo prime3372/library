@@ -24,12 +24,6 @@ template <class T> class fenwick_tree_2d {
     }
   }
 
-  void set(int i, int j, T x) {
-    assert(0 <= i && i < n);
-    assert(0 <= j && j < m);
-    add(i, j, x - (*this)[i][j]);
-  }
-
   class ref {
    public:
     T operator[](int j) const {

@@ -20,11 +20,6 @@ template <class T> class fenwick_tree {
     }
   }
 
-  void set(int i, T x) {
-    assert(0 <= i && i < n);
-    add(i, x - (*this)[i]);
-  }
-
   T operator[](int i) const {
     assert(0 <= i && i < n);
     return sum(i + 1) - sum(i);
