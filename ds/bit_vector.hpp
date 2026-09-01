@@ -34,6 +34,7 @@ class bit_vector {
     return count[i / w] + std::popcount(block[i / w] & ((1ULL << (i % w)) - 1));
   }
   int zeros() const { return rank0(n); }
+  int ones() const { return rank1(n); }
 
  private:
   static constexpr int w = 64;
