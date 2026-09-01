@@ -28,6 +28,7 @@ template <class T> bool chmax(T& a, const T& b) {
   return b > a ? (a = b, true) : false;
 }
 
+// a[i] <- a[p[i]]
 template <class Container, class Indices>
 void rearrange(Container& a, const Indices& p) {
   assert(a.size() == p.size());
@@ -38,6 +39,7 @@ void rearrange(Container& a, const Indices& p) {
 }
 
 // stable sort
+// @return let `b` be the sorted array, return `p` s.t. `b[i] = a[p[i]]`.
 template <class Container,
           class Comp = std::less<typename std::decay_t<Container>::value_type>>
 std::vector<int> sort(Container&& a, Comp comp = Comp()) {
