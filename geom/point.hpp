@@ -64,14 +64,15 @@ template <class T> T cross(const point<T>& p, const point<T>& q) {
   return p.x * q.y - p.y * q.x;
 }
 
-template <class T> bool is_same(const point<T>& p, const point<T>& q) {
-  return internal::equal(p.x, q.x) && internal::equal(p.y, q.y);
-}
 template <class T> bool is_parallel(const point<T>& p, const point<T>& q) {
   return internal::equal<T>(cross(p, q), 0);
 }
 template <class T> bool is_orthogonal(const point<T>& p, const point<T>& q) {
   return internal::equal<T>(dot(p, q), 0);
+}
+
+template <class T> bool is_same(const point<T>& p, const point<T>& q) {
+  return internal::equal(p.x, q.x) && internal::equal(p.y, q.y);
 }
 
 template <class T> point<T> operator+(const point<T>& p, const point<T>& q) {
