@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_2_C"
 #define ERROR 1e-8
 
-#include "geom/intersection.hpp"
+#include "geom/cross_point.hpp"
 #include "geom/line.hpp"
 #include <iomanip>
 #include <iostream>
@@ -19,6 +19,6 @@ int main() {
   while (q--) {
     line<ll> l, m;
     cin >> l >> m;
-    cout << intersection(l, m) << "\n";
+    cout << cross_point(l, m) << "\n";
   }
 }
