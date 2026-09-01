@@ -1,7 +1,6 @@
 #pragma once
 
 #include <algorithm>
-#include <cmath>
 #include <iostream>
 
 #include "geom/line.hpp"
