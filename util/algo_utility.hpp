@@ -52,9 +52,15 @@ std::vector<int> sort(Container&& a, Comp comp = Comp()) {
   return p;
 }
 
-template <class Container> void uniq(Container& a) {
-  std::sort(a.begin(), a.end());
-  a.erase(std::unique(a.begin(), a.end()), a.end());
+template <class Container,
+          class Comp = std::less<typename Container::value_type>>
+void uniq(Container& a, Comp comp = Comp()) {
+  std::sort(a.begin(), a.end(), comp);
+  a.erase(std::unique(a.begin(), a.end(),
+                      [&](const auto& x, const auto& y) {
+                        return !comp(x, y) && !comp(y, x);
+                      }),
+          a.end());
 }
 
 }  // namespace cp
