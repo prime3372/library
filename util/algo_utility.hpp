@@ -68,9 +68,9 @@ template <class Container,
           class Comp = std::less<typename Container::value_type>>
 std::vector<int> compress(const Container& a, Comp comp = Comp()) {
   int n = int(a.size());
+  std::vector<int> res(n);
   Container b = a;
   auto idx = sort(b, comp);
-  std::vector<int> res(n);
   for (int i = 0, j = 0; i < n; i++) {
     if (i > 0 && comp(b[i - 1], b[i])) j++;
     res[idx[i]] = j;
