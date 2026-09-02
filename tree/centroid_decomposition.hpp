@@ -21,6 +21,8 @@ class centroid_decomposition {
   int root = -1;
   std::vector<int> parent, size, dfs_order;
 
+  // @note The behavior when this function is called multiple times is
+  // undefined.
   centroid_decomposition& build() {
     dfs_order.reserve(n);
     root = build(0);
