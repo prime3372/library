@@ -12,6 +12,7 @@ namespace internal {
 constexpr long double eps = 1e-9;
 template <class T> bool equal(T x, T y) { return std::abs(x - y) < eps; }
 template <class T> bool less(T x, T y) { return x < y - eps; }
+template <class T> bool less_equal(T x, T y) { return x < y + eps; }
 
 }  // namespace internal
 
@@ -20,7 +21,7 @@ template <class T> class point {
   T x, y;
   point() : x(0), y(0) {}
   point(T _x, T _y) : x(_x), y(_y) {}
-  template <class U> explicit point(const point<U>& p) : x(T(p.x)), y(T(p.y)) {}
+  template <class U> explicit point(const point<U>& p) : x(p.x), y(p.y) {}
 
   point& operator+=(const point& p) {
     x += p.x;
