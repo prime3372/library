@@ -7,7 +7,6 @@
 #include <vector>
 
 #include "random/base.hpp"
-#include "util/type_traits.hpp"
 
 namespace cp {
 
