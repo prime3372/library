@@ -27,6 +27,7 @@ template <class T> class tree_diameter {
   std::vector<int> vertices, edges;
 
   tree_diameter& build(int s = 0) {
+    assert(0 <= s && s < n);
     vertices.clear();
     edges.clear();
 
@@ -60,7 +61,7 @@ template <class T> class tree_diameter {
   std::vector<std::vector<edge>> g;
 
   std::pair<T, int> farthest(int v, int pv) {
-    std::pair<T, int> res{0, v};
+    std::pair<T, int> res = {0, v};
     for (auto e : g[v]) {
       if (e.to == pv) continue;
       auto p = farthest(e.to, v);
