@@ -44,6 +44,7 @@ class max_flow {
     auto re = g[e.to][e.rev];
     return edge{pos[i].first, e.to, e.cap + re.cap, re.cap};
   }
+
   std::vector<edge> edges() {
     std::vector<edge> edges(pos.size());
     for (int i = 0; i < int(pos.size()); i++) {
@@ -52,15 +53,6 @@ class max_flow {
       edges[i] = edge{pos[i].first, e.to, e.cap + re.cap, re.cap};
     }
     return edges;
-  }
-  void change_edge(int i, Cap new_cap, Cap new_flow) {
-    int m = int(pos.size());
-    assert(0 <= i && i < m);
-    assert(0 <= new_flow && new_flow <= new_cap);
-    auto& e = g[pos[i].first][pos[i].second];
-    auto& re = g[e.to][e.rev];
-    e.cap = new_cap - new_flow;
-    re.cap = new_flow;
   }
 
   Cap flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max()); }
@@ -81,7 +73,7 @@ class max_flow {
       while (!que.empty()) {
         int v = que.front();
         que.pop();
-        for (auto e : g[v]) {
+        for (auto& e : g[v]) {
           if (e.cap == 0 || level[e.to] != -1) continue;
           level[e.to] = level[v] + 1;
           if (e.to == t) return;
@@ -99,7 +91,7 @@ class max_flow {
       // Current-edge optimization:
       // resume loop from the last visited edge index.
       for (int& i = iter[v]; i < int(g[v].size()); i++) {
-        auto e = g[v][i];
+        auto& e = g[v][i];
         if (g[e.to][e.rev].cap == 0 || level[v] <= level[e.to]) continue;
         Cap d = self(self, e.to, std::min(up - res, g[e.to][e.rev].cap));
         g[v][i].cap += d;
