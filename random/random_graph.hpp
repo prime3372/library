@@ -85,9 +85,6 @@ void make_graph(int n, int m, std::vector<std::pair<int, int>>& edges) {
 
 }  // namespace internal
 
-// @param n `0 <= n`
-// @param m `0 <= m`
-// @param s `0 <= s < n`
 template <bool directed = false, bool no_self_loops = false,
           bool no_multiple_edges = false, bool connected = false,
           bool one_indexed = true>
