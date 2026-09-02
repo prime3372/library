@@ -13,7 +13,7 @@ template <class T> class area_of_union_of_rectangles {
  public:
   area_of_union_of_rectangles() {}
 
-  // add `l <= x <= r && d <= y <= u`
+  // add [l, r] * [d, u]
   void add_rect(T l, T d, T r, T u) {
     assert(l <= r && d <= u);
     if (l == r || d == u) return;
