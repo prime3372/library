@@ -17,7 +17,8 @@ int main() {
     cin >> a >> b;
     bm.add_edge(a, b);
   }
-  cout << bm.init() << endl;
-  auto es = bm.max_matching();
-  for (auto& e : es) cout << e.from << " " << e.to << "\n";
+  cout << bm.max_matching() << endl;
+  for (auto&& e : bm.edges()) {
+    cout << e.first << " " << e.second << "\n";
+  }
 }

@@ -17,5 +17,5 @@ int main() {
     cin >> u >> v;
     bm.add_edge(u, v);
   }  
-  cout << bm.init() << "\n";
+  cout << bm.max_matching() << "\n";
 }
