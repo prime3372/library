@@ -22,9 +22,9 @@ class low_link {
   std::vector<int> low, ord;
 
   low_link& build() {
-    int now_ord = 0;
     std::fill(low.begin(), low.end(), n);
     std::fill(ord.begin(), ord.end(), -1);
+    int now_ord = 0;
     auto dfs = [&](auto self, int v, int pv) -> void {
       low[v] = ord[v] = now_ord++;
       bool multiple = false;
