@@ -7,7 +7,6 @@
 
 namespace cp {
 
-// @return the vertices contained in the convex hull in counter-clockwise order
 template <bool include_boundary = false, class T>
 std::vector<point<T>> convex_hull(std::vector<point<T>> p) {
   std::sort(p.begin(), p.end());
