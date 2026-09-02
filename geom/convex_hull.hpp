@@ -7,25 +7,36 @@
 
 namespace cp {
 
+// @return the vertices contained in the convex hull in counter-clockwise order
 template <bool include_boundary = false, class T>
 std::vector<point<T>> convex_hull(std::vector<point<T>> p) {
-  constexpr long double th = include_boundary ? -internal::eps : internal::eps;
   std::sort(p.begin(), p.end());
   p.erase(std::unique(p.begin(), p.end()), p.end());
   int n = int(p.size());
   if (n <= 2) return p;
-  std::vector<point<T>> ch(2 * n);
-  int k = 0;
+
+  std::vector<point<T>> ch;
+  auto check_convex = [&](const point<T>& q) {
+    const point<T>& p1 = ch[ch.size() - 1];
+    const point<T>& p0 = ch[ch.size() - 2];
+    return include_boundary ? internal::less_equal<T>(0, cross(p1 - p0, q - p1))
+                            : internal::less<T>(0, cross(p1 - p0, q - p1));
+  };
+
+  // lower convex hull
   for (int i = 0; i < n; i++) {
-    while (k >= 2 && cross(ch[k - 1] - ch[k - 2], p[i] - ch[k - 1]) < th) k--;
-    ch[k++] = p[i];
+    while (ch.size() >= 2 && !check_convex(p[i])) ch.pop_back();
+    ch.push_back(p[i]);
   }
-  int t = k + 1;
+
+  // upper convex hull
+  int t = int(ch.size()) + 1;
   for (int i = n - 2; i >= 0; i--) {
-    while (k >= t && cross(ch[k - 1] - ch[k - 2], p[i] - ch[k - 2]) < th) k--;
-    ch[k++] = p[i];
+    while (int(ch.size()) >= t && !check_convex(p[i])) ch.pop_back();
+    ch.push_back(p[i]);
   }
-  ch.resize(k - 1);
+  ch.pop_back();
+
   return ch;
 }
 
