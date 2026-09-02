@@ -7,7 +7,7 @@ namespace cp {
 template <class T> class simple_queue {
  public:
   simple_queue() {}
-  void push(const T& t) { payload.push_back(t); }
+  void push(const T& x) { payload.push_back(x); }
   void pop() {
     assert(!empty());
     pos++;
