@@ -10,7 +10,7 @@ namespace cp {
 class strongly_connected_components {
  public:
   strongly_connected_components() : strongly_connected_components(0) {}
-  explicit strongly_connected_components(int _n) : id(_n, -1), n(_n), g(_n) {}
+  explicit strongly_connected_components(int _n) : id(_n), n(_n), g(_n) {}
 
   void add_edge(int from, int to) {
     assert(0 <= from && from < n);
