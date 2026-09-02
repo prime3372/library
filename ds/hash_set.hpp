@@ -44,16 +44,10 @@ template <class T> class hash_set {
   int size() const { return sz; }
 
   friend std::ostream& operator<<(std::ostream& os, const hash_set& s) {
-    std::vector<std::string> outs;
-    outs.reserve(s.size());
+    using io_utility::operator<<;
     auto elems = s.enumerate();
-    std::ostringstream oss;
-    for (auto& x : elems) {
-      oss << x;
-      outs.push_back(oss.str());
-      oss.str("");
-    }
-    return os << internal::combine_outputs(outs);
+    std::sort(elems.begin(), elems.end());
+    return os << elems;
   }
 
  private:

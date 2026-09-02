@@ -14,6 +14,7 @@
 
 namespace cp {
 
+// @note `Val` cannot be `bool`
 template <class Key, class Val> class hash_map {
  public:
   hash_map()
@@ -55,21 +56,10 @@ template <class Key, class Val> class hash_map {
   void set_default(const Val& v) { default_value = v; }
 
   friend std::ostream& operator<<(std::ostream& os, const hash_map& mp) {
-    std::vector<std::string> outs;
-    outs.reserve(mp.size());
-
-    auto pairs = mp.enumerate();
-    std::sort(pairs.begin(), pairs.end(),
-              [](const auto& x, const auto& y) { return x.first < y.first; });
-
-    std::ostringstream oss;
-    for (auto& p : pairs) {
-      oss << p.first << " " << p.second;
-      outs.push_back(oss.str());
-      oss.str("");
-    }
-
-    return os << internal::combine_outputs(outs);
+    using io_utility::operator<<;
+    auto elems = mp.enumerate();
+    std::sort(elems.begin(), elems.end());
+    os << elems;
   }
 
  private:

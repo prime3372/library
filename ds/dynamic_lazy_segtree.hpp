@@ -75,14 +75,10 @@ class dynamic_lazy_segtree {
   ull size() const { return n; }
 
   friend std::ostream& operator<<(std::ostream& os, dynamic_lazy_segtree seg) {
-    std::vector<std::string> outs(seg.n);
-    std::ostringstream oss;
-    for (int i = 0; i < int(outs.size()); i++) {
-      oss << seg[i];
-      outs[i] = oss.str();
-      oss.str("");
-    }
-    return os << internal::combine_outputs(outs);
+    using io_utility::operator<<;
+    std::vector<S> v(seg.n);
+    for (int i = 0; i < seg.n; i++) v[i] = seg[i];
+    return os << v;
   }
 
  private:

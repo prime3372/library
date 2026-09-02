@@ -103,14 +103,10 @@ template <class node, class derived> class treap_base {
   bool empty() const { return size() == 0; }
 
   friend std::ostream& operator<<(std::ostream& os, derived tp) {
-    std::vector<std::string> outs(tp.size());
-    std::ostringstream oss;
-    for (int i = 0; i < int(outs.size()); i++) {
-      oss << tp[i];
-      outs[i] = oss.str();
-      oss.str("");
-    }
-    return os << internal::combine_outputs(outs);
+    using io_utility::operator<<;
+    std::vector<T> v(tp.size());
+    for (int i = 0; i < tp.size(); i++) v[i] = tp[i];
+    return os << v;
   }
 
  protected:

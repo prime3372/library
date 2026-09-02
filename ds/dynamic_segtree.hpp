@@ -65,14 +65,10 @@ template <class S, auto op, auto e> class dynamic_segtree {
 
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_segtree& seg) {
-    std::vector<std::string> outs(seg.n);
-    std::ostringstream oss;
-    for (int i = 0; i < int(outs.size()); i++) {
-      oss << seg[i];
-      outs[i] = oss.str();
-      oss.str("");
-    }
-    return os << internal::combine_outputs(outs);
+    using io_utility::operator<<;
+    std::vector<S> v(seg.n);
+    for (int i = 0; i < seg.n; i++) v[i] = seg[i];
+    return os << v;
   }
 
  private:
