@@ -70,20 +70,10 @@ std::vector<std::pair<int, int>> random_graph(int n, int m, int s = 0) {
     return std::make_pair(u, v);
   };
 
-  [&] {
-    if (!no_multiple_edges) {
-      while (int(edges.size()) < m) {
-        edges.emplace_back(next_edge());
-      }
-      return;
-    }
-
-    long long max_m;
-    if (directed) {
-      max_m = no_self_loops ? 1LL * n * (n - 1) : 1LL * n * n;
-    } else {
-      max_m = no_self_loops ? 1LL * n * (n - 1) / 2 : n * (n + 1) / 2;
-    }
+  if (no_multiple_edges) {
+    long long max_m =
+        directed ? (no_self_loops ? 1LL * n * (n - 1) : 1LL * n * n)
+                 : (no_self_loops ? 1LL * n * (n - 1) / 2 : n * (n + 1) / 2);
     assert(m <= max_m);
 
     hash_set<long long> used_edges;
@@ -96,23 +86,26 @@ std::vector<std::pair<int, int>> random_graph(int n, int m, int s = 0) {
         edges.emplace_back(u, v);
         used_edges.insert(1LL * u * n + v);
       }
-      return;
-    }
-
-    std::vector<std::pair<int, int>> candidates;
-    candidates.reserve(max_m - used_edges.size());
-    for (int u = 0; u < n; u++) {
-      for (int v = directed ? 0 : u; v < n; v++) {
-        if (no_self_loops && u == v) continue;
-        if (!used_edges.count(1LL * u * n + v)) candidates.emplace_back(u, v);
+    } else {
+      std::vector<std::pair<int, int>> candidates;
+      candidates.reserve(max_m - used_edges.size());
+      for (int u = 0; u < n; u++) {
+        for (int v = directed ? 0 : u; v < n; v++) {
+          if (no_self_loops && u == v) continue;
+          if (!used_edges.count(1LL * u * n + v)) candidates.emplace_back(u, v);
+        }
+      }
+      std::shuffle(candidates.begin(), candidates.end(), mt32);
+      int needed = m - int(edges.size());
+      for (int i = 0; i < needed; i++) {
+        edges.emplace_back(candidates[i]);
       }
     }
-    std::shuffle(candidates.begin(), candidates.end(), mt32);
-    int needed = m - int(edges.size());
-    for (int i = 0; i < needed; i++) {
-      edges.emplace_back(candidates[i]);
+  } else {
+    while (int(edges.size()) < m) {
+      edges.emplace_back(next_edge());
     }
-  }();
+  }
 
   if (!directed) {
     for (auto& e : edges) {
