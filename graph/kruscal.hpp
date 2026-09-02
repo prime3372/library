@@ -35,8 +35,8 @@ template <class T> class kruscal {
   const std::vector<int>& mst() { return tree; }
 
  private:
-  int n;
   using edge = std::tuple<T, int, int, int>;
+  int n;
   std::vector<edge> edges;
   std::vector<int> tree;
 
