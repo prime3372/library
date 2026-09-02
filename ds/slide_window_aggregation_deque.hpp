@@ -40,8 +40,8 @@ template <class S, auto op, auto e> class slide_window_aggregation_deque {
   }
   S prod() const { return op(prod0, prod1); }
 
-  int size() { return int(val0.size() + val1.size()); }
-  bool empty() { return size() == 0; }
+  int size() const { return int(val0.size() + val1.size()); }
+  bool empty() const { return size() == 0; }
 
  private:
   std::vector<S> val0, val1, cum0, cum1;
