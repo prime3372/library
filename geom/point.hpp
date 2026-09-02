@@ -3,8 +3,6 @@
 #include <cmath>
 #include <iostream>
 
-#include "util/type_traits.hpp"
-
 namespace cp {
 
 namespace internal {
