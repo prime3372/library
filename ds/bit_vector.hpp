@@ -14,6 +14,7 @@ class bit_vector {
     assert(0 <= i && i < n);
     block[i / w] |= 1LL << (i % w);
   }
+
   void build() {
     for (int i = 1; i < int(block.size()); i++) {
       count[i] = count[i - 1] + std::popcount(block[i - 1]);
