@@ -59,7 +59,7 @@
   "test/yosupo/data_structure/range_affine_point_get.test.cpp": "2026-09-03 00:27:35 +0900",
   "test/yosupo/data_structure/range_affine_range_sum.test.cpp": "2026-09-03 00:27:35 +0900",
   "test/yosupo/data_structure/range_affine_range_sum_large_array.test.cpp": "2026-09-03 00:27:35 +0900",
-  "test/yosupo/data_structure/range_kth_smallest.test.cpp": "2026-09-02 00:59:54 +0900",
+  "test/yosupo/data_structure/range_kth_smallest.test.cpp": "2026-09-03 02:16:48 +0900",
   "test/yosupo/data_structure/range_reverse_range_sum.test.cpp": "2026-09-03 00:27:35 +0900",
   "test/yosupo/data_structure/range_set_range_composite.test.cpp": "2026-09-03 00:27:35 +0900",
   "test/yosupo/data_structure/rectangle_add_point_get.test.cpp": "2026-09-03 00:27:35 +0900",
