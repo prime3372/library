@@ -66,13 +66,12 @@ void uniq(Container& a, Comp comp = Comp()) {
 
 template <class Container,
           class Comp = std::less<typename Container::value_type>>
-std::vector<int> compress(const Container& a, Comp comp = Comp()) {
+std::vector<int> compress(Container a, Comp comp = Comp()) {
   int n = int(a.size());
   std::vector<int> res(n);
-  Container b = a;
-  auto idx = sort(b, comp);
+  auto idx = sort(a, comp);
   for (int i = 0, j = 0; i < n; i++) {
-    if (i > 0 && comp(b[i - 1], b[i])) j++;
+    if (i > 0 && comp(a[i - 1], a[i])) j++;
     res[idx[i]] = j;
   }
   return res;

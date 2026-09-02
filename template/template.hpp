@@ -33,9 +33,8 @@ using mint = modint998244353;
 #define dump(...)                                              \
   []<class... _Args>(const _Args&... _args) -> void {          \
     string _args_str = GET_STRING((__VA_ARGS__));              \
-    if (sizeof...(_Args) <= 1) {                               \
+    if (sizeof...(_Args) <= 1)                                 \
       _args_str = _args_str.substr(1, _args_str.size() - 2);   \
-    }                                                          \
     _args_str += ": ";                                         \
     cerr << _args_str;                                         \
     ostringstream _oss;                                        \

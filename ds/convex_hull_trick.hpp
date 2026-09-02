@@ -10,9 +10,7 @@ template <class T, bool is_max = false> class convex_hull_trick {
   convex_hull_trick() {}
 
   void add(T a, T b) {
-    if (!ls.empty()) {
-      assert(is_max ? a >= ls.back().a : a <= ls.back().a);
-    }
+    assert(ls.empty() || (is_max ? a >= ls.back().a : a <= ls.back().a));
     line l(a, b);
     while (ls.size() >= 2) {
       const line& l1 = ls[ls.size() - 2];

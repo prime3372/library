@@ -19,7 +19,7 @@ class cartesian_tree {
 
   // @note The smallest element becomes the root.
   // @note For equivalent elements, the one with the smaller index is smaller.
-  // @note `parent[root]` is `-1`
+  // @note `parent[root]` is `-1`.
   template <class T, class Comp = std::less<T>>
   void build(const std::vector<T>& a, Comp comp = Comp()) {
     if (a.empty()) return;
@@ -40,9 +40,7 @@ class cartesian_tree {
       left[i] = k;
       st.push_back(i);
     }
-    for (int i = int(st.size()) - 1; i >= 0; i--) {
-      update(st[i]);
-    }
+    for (int i = int(st.size()) - 1; i >= 0; i--) update(st[i]);    
     root = st[0];
     parent[root] = -1;
   }

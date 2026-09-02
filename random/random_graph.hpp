@@ -73,9 +73,7 @@ void make_graph(int n, int m, std::vector<std::pair<int, int>>& edges) {
   for (int u = 0; u < n; u++) {
     for (int v = directed ? 0 : u; v < n; v++) {
       if (no_self_loops && u == v) continue;
-      if (!used_edges.count(1LL * u * n + v)) {
-        candidates.emplace_back(u, v);
-      }
+      if (!used_edges.count(1LL * u * n + v)) candidates.emplace_back(u, v);
     }
   }
   std::shuffle(candidates.begin(), candidates.end(), mt32);

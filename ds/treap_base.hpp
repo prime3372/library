@@ -90,17 +90,6 @@ template <class node, class derived> class treap_base {
     root = merge(s.first, t.second);
   }
 
-  void push_back(const T& x) { insert(size(), x); }
-  void push_front(const T& x) { insert(0, x); }
-  void pop_back(const T& x) {
-    assert(!empty());
-    erase(size() - 1);
-  }
-  void pop_front(const T& x) {
-    assert(!empty());
-    erase(0);
-  }
-
   void reverse(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
     if (l == r) return;
