@@ -49,7 +49,7 @@ class enumerate_union_find {
 
   int size() const { return n; }
 
-  // @note The order of the vertices is undefined.
+  // @note The order of vertices in the return value is undefined.
   std::vector<int> enumerate(int a) const {
     assert(0 <= a && a < n);
     std::vector<int> res = {a};
