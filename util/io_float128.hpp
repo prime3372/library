@@ -34,28 +34,35 @@ std::istream& operator>>(std::istream& is, __float128& val) {
 // output in fixed-point format
 std::ostream& operator<<(std::ostream& os, __float128 x) {
   assert(!__builtin_isnan(x) && !__builtin_isinf(x));
-  const int prec = int(os.precision());
+  int prec = int(os.precision());
 
   if (x < 0) {
     os << '-';
     x = -x;
   }
 
-  __float128 p10 = 1;
-  for (int i = 0; i < prec; i++) p10 *= 10;
-  x += (__float128)(0.5) / p10;
+  __float128 r = 1;
+  for (int i = 0; i < prec; i++) r *= 10;
+  x += __float128(0.5) / r;
 
-  unsigned __int128 int_part = (unsigned __int128)(x);
-  os << int_part;
-  x -= (__float128)(int_part);
+  int int_len = 0;
+  while (x >= 1) {
+    x /= 10;
+    int_len++;
+  }
+  for (int i = 0; i < int_len; i++) {
+    x *= 10;
+    os << int(x);
+    x -= int(x);
+  }
+  if (int_len == 0) os << 0;
 
   if (prec > 0) {
     os << '.';
     for (int i = 0; i < prec; i++) {
       x *= 10;
-      int d = int(x);
-      os << d;
-      x -= d;
+      os << int(x);
+      x -= int(x);
     }
   }
 
