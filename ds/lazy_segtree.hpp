@@ -111,21 +111,21 @@ class lazy_segtree {
     if (l == n) return n;
     l += sz;
     for (int i = log; i >= 1; i--) push(l >> i);
-    S product = e();
+    S cur = e();
     do {
       while (l % 2 == 0) l >>= 1;
-      if (!g(op(product, d[l]))) {
+      if (!g(op(cur, d[l]))) {
         while (l < sz) {
           push(l);
           l = 2 * l;
-          if (g(op(product, d[l]))) {
-            product = op(product, d[l]);
+          if (g(op(cur, d[l]))) {
+            cur = op(cur, d[l]);
             l++;
           }
         }
         return l - sz;
       }
-      product = op(product, d[l]);
+      cur = op(cur, d[l]);
       l++;
     } while ((l & -l) != l);
     return n;
@@ -137,22 +137,22 @@ class lazy_segtree {
     if (r == 0) return 0;
     r += sz;
     for (int i = log; i >= 1; i--) push((r - 1) >> i);
-    S product = e();
+    S cur = e();
     do {
       r--;
       while (r > 1 && r % 2) r >>= 1;
-      if (!g(op(d[r], product))) {
+      if (!g(op(d[r], cur))) {
         while (r < sz) {
           push(r);
           r = 2 * r + 1;
-          if (g(op(d[r], product))) {
-            product = op(d[r], product);
+          if (g(op(d[r], cur))) {
+            cur = op(d[r], cur);
             r--;
           }
         }
         return r + 1 - sz;
       }
-      product = op(d[r], product);
+      cur = op(d[r], cur);
     } while ((r & -r) != r);
     return 0;
   }

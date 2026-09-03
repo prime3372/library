@@ -59,20 +59,20 @@ template <class S, auto op, auto e> class segtree {
     assert(f(e()));
     if (l == n) return n;
     l += sz;
-    S product = e();
+    S cur = e();
     do {
       while (l % 2 == 0) l >>= 1;
-      if (!f(op(product, d[l]))) {
+      if (!f(op(cur, d[l]))) {
         while (l < sz) {
           l = 2 * l;
-          if (f(op(product, d[l]))) {
-            product = op(product, d[l]);
+          if (f(op(cur, d[l]))) {
+            cur = op(cur, d[l]);
             l++;
           }
         }
         return l - sz;
       }
-      product = op(product, d[l]);
+      cur = op(cur, d[l]);
       l++;
     } while ((l & -l) != l);
     return n;
@@ -83,21 +83,21 @@ template <class S, auto op, auto e> class segtree {
     assert(f(e()));
     if (r == 0) return 0;
     r += sz;
-    S product = e();
+    S cur = e();
     do {
       r--;
       while (r > 1 && r % 2) r >>= 1;
-      if (!f(op(d[r], product))) {
+      if (!f(op(d[r], cur))) {
         while (r < sz) {
           r = 2 * r + 1;
-          if (f(op(d[r], product))) {
-            product = op(d[r], product);
+          if (f(op(d[r], cur))) {
+            cur = op(d[r], cur);
             r--;
           }
         }
         return r + 1 - sz;
       }
-      product = op(d[r], product);
+      cur = op(d[r], cur);
     } while ((r & -r) != r);
     return 0;
   }
