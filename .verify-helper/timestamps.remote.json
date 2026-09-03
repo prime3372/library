@@ -42,7 +42,7 @@
   "test/aoj/NTL/1_B_power.test.cpp": "2026-09-04 03:07:09 +0900",
   "test/aoj/NTL/1_E_extended_euclid_algorithm.test.cpp": "2026-09-04 03:07:09 +0900",
   "test/yosupo/convolution/bitwise_and_convolution.test.cpp": "2026-08-31 03:51:05 +0900",
-  "test/yosupo/convolution/bitwise_xor_convolution.test.cpp": "2026-08-31 03:51:05 +0900",
+  "test/yosupo/convolution/bitwise_xor_convolution.test.cpp": "2026-09-04 03:53:46 +0900",
   "test/yosupo/convolution/convolution.test.cpp": "2026-08-31 03:51:05 +0900",
   "test/yosupo/convolution/gcd_convolution.test.cpp": "2026-08-31 03:51:05 +0900",
   "test/yosupo/convolution/lcm_convolution.test.cpp": "2026-08-31 03:51:05 +0900",
