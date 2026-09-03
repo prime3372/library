@@ -76,7 +76,8 @@ template <class S, auto op, auto e> class dynamic_segtree {
   struct node {
     S val;
     node_ptr left, right;
-    node(S v) : val(v) {}
+    node() {}
+    explicit node(S v) : val(v) {}
   };
   ull n, sz;
   int log;
