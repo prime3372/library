@@ -11,7 +11,7 @@ template <class T, bool is_max = false> class convex_hull_trick {
 
   void add(T a, T b) {
     assert(ls.empty() || (is_max ? a >= ls.back().a : a <= ls.back().a));
-    line l(a, b);
+    line l{a, b};
     while (ls.size() >= 2) {
       const line& l1 = ls[ls.size() - 2];
       const line& l2 = ls.back();
@@ -36,7 +36,6 @@ template <class T, bool is_max = false> class convex_hull_trick {
  private:
   struct line {
     T a, b;
-    line(T _a = 0, T _b = 0) : a(_a), b(_b) {}
     T operator()(T x) const { return a * x + b; }
   };
   std::deque<line> ls;
