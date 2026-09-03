@@ -18,13 +18,15 @@ int main() {
   vector<ll> a(n);
   hl_decomposition hld(n);
   for (ll& ai : a) cin >> ai;
-  for(int i = 0; i < n - 1; i++) {
+  for (int i = 0; i < n - 1; i++) {
     int u, v;
     cin >> u >> v;
     hld.add_edge(u, v);
   }
   hld.build();
-  auto& ord = hld.ord, head = hld.head, next = hld.next;
+  auto& ord = hld.ord;
+  auto& head = hld.head;
+  auto& next = hld.next;
   fenwick_tree<ll> fw(n);
   for (int i = 0; i < n; i++) fw.add(ord[i], a[i]);
   while (q--) {
