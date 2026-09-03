@@ -45,11 +45,11 @@ template <class node, class derived> class implicit_treap_base {
       if (cart.left[i] != -1) ps[i]->left = ps[cart.left[i]];
       if (cart.right[i] != -1) ps[i]->right = ps[cart.right[i]];
     }
-    auto dfs = [&](auto self, node* p) -> void {
-      if (!p) return;
-      self(self, p->left);
-      self(self, p->right);
-      derived::update(p);
+    auto dfs = [&](auto self, node* t) -> void {
+      if (!t) return;
+      self(self, t->left);
+      self(self, t->right);
+      derived::update(t);
     };
     dfs(dfs, root = ps[cart.root]);
   }
@@ -107,21 +107,21 @@ template <class node, class derived> class implicit_treap_base {
  protected:
   node* root = nullptr;
 
-  static int size(const node* p) { return p ? p->sub : 0; }
+  static int size(const node* t) { return t ? t->sub : 0; }
 
-  static std::pair<node*, node*> split(node* p, int k) {
-    if (!p) return {nullptr, nullptr};
-    derived::push(p);
-    if (k <= size(p->left)) {
-      auto s = split(p->left, k);
-      p->left = s.second;
-      derived::update(p);
-      return {s.first, p};
+  static std::pair<node*, node*> split(node* t, int k) {
+    if (!t) return {nullptr, nullptr};
+    derived::push(t);
+    if (k <= size(t->left)) {
+      auto s = split(t->left, k);
+      t->left = s.second;
+      derived::update(t);
+      return {s.first, t};
     } else {
-      auto s = split(p->right, k - size(p->left) - 1);
-      p->right = s.first;
-      derived::update(p);
-      return {p, s.second};
+      auto s = split(t->right, k - size(t->left) - 1);
+      t->right = s.first;
+      derived::update(t);
+      return {t, s.second};
     }
   }
 

@@ -96,57 +96,57 @@ class dynamic_lazy_segtree {
   std::vector<S> initial_vals;
   node_ptr root = nullptr;
 
-  void update(node_ptr& p, int h) {
-    p->val = op(p->left ? p->left->val : initial_vals[h - 1],
-                p->right ? p->right->val : initial_vals[h - 1]);
+  void update(node_ptr& t, int h) {
+    t->val = op(t->left ? t->left->val : initial_vals[h - 1],
+                t->right ? t->right->val : initial_vals[h - 1]);
   }
-  void all_apply(node_ptr& p, F f) {
-    p->val = act(f, p->val);
-    p->lz = compose(f, p->lz);
-    p->lzflag = true;
+  void all_apply(node_ptr& t, F f) {
+    t->val = act(f, t->val);
+    t->lz = compose(f, t->lz);
+    t->lzflag = true;
   }
-  void push(node_ptr& p, int h) {
-    if (!p->lzflag) return;
-    if (!p->left) p->left = std::make_unique<node>(initial_vals[h - 1]);
-    if (!p->right) p->right = std::make_unique<node>(initial_vals[h - 1]);
-    all_apply(p->left, p->lz);
-    all_apply(p->right, p->lz);
-    p->lz = id();
-    p->lzflag = false;
+  void push(node_ptr& t, int h) {
+    if (!t->lzflag) return;
+    if (!t->left) t->left = std::make_unique<node>(initial_vals[h - 1]);
+    if (!t->right) t->right = std::make_unique<node>(initial_vals[h - 1]);
+    all_apply(t->left, t->lz);
+    all_apply(t->right, t->lz);
+    t->lz = id();
+    t->lzflag = false;
   }
 
-  void set(node_ptr& p, ull a, ull b, int h, ull i, S x) {
-    if (!p) p = std::make_unique<node>(initial_vals[h]);
+  void set(node_ptr& t, ull a, ull b, int h, ull i, S x) {
+    if (!t) t = std::make_unique<node>(initial_vals[h]);
     if (b - a == 1) {
-      p->val = x;
+      t->val = x;
       return;
     }
-    push(p, h);
+    push(t, h);
     ull c = (a + b) / 2;
     if (i < c) {
-      set(p->left, a, c, h - 1, i, x);
+      set(t->left, a, c, h - 1, i, x);
     } else {
-      set(p->right, c, b, h - 1, i, x);
+      set(t->right, c, b, h - 1, i, x);
     }
-    update(p, h);
+    update(t, h);
   }
 
-  S get(node_ptr& p, ull a, ull b, int h, ull i) {
-    if (!p) return initial_vals[0];
-    if (b - a == 1) return p->val;
-    push(p, h);
+  S get(node_ptr& t, ull a, ull b, int h, ull i) {
+    if (!t) return initial_vals[0];
+    if (b - a == 1) return t->val;
+    push(t, h);
     ull c = (a + b) / 2;
     if (i < c) {
-      return get(p->left, a, c, h - 1, i);
+      return get(t->left, a, c, h - 1, i);
     } else {
-      return get(p->right, c, b, h - 1, i);
+      return get(t->right, c, b, h - 1, i);
     }
   }
 
-  S prod(node_ptr& p, ull a, ull b, int h, ull l, ull r) {
+  S prod(node_ptr& t, ull a, ull b, int h, ull l, ull r) {
     if (b <= l || r <= a) return e();
-    if (l <= a && b <= r) return p ? p->val : initial_vals[h];
-    if (!p) {
+    if (l <= a && b <= r) return t ? t->val : initial_vals[h];
+    if (!t) {
       S res = e();
       ull len = std::min(b, r) - std::max(a, l);
       for (int k = 0; len; k++) {
@@ -155,55 +155,55 @@ class dynamic_lazy_segtree {
       }
       return res;
     }
-    push(p, h);
+    push(t, h);
     ull c = (a + b) / 2;
-    return op(prod(p->left, a, c, h - 1, l, r),
-              prod(p->right, c, b, h - 1, l, r));
+    return op(prod(t->left, a, c, h - 1, l, r),
+              prod(t->right, c, b, h - 1, l, r));
   }
 
-  void apply(node_ptr& p, ull a, ull b, int h, ull i, F f) {
-    if (!p) p = std::make_unique<node>(initial_vals[h]);
+  void apply(node_ptr& t, ull a, ull b, int h, ull i, F f) {
+    if (!t) t = std::make_unique<node>(initial_vals[h]);
     if (b - a == 1) {
-      p->val = act(f, p->val);
+      t->val = act(f, t->val);
       return;
     }
-    push(p, h);
+    push(t, h);
     ull c = (a + b) / 2;
     if (i < c) {
-      apply(p->left, a, c, h - 1, i, f);
+      apply(t->left, a, c, h - 1, i, f);
     } else {
-      apply(p->right, c, b, h - 1, i, f);
+      apply(t->right, c, b, h - 1, i, f);
     }
-    update(p, h);
+    update(t, h);
   }
 
-  void apply(node_ptr& p, ull a, ull b, int h, ull l, ull r, F f) {
+  void apply(node_ptr& t, ull a, ull b, int h, ull l, ull r, F f) {
     if (b <= l || r <= a) return;
-    if (!p) p = std::make_unique<node>(initial_vals[h]);
+    if (!t) t = std::make_unique<node>(initial_vals[h]);
     if (l <= a && b <= r) {
-      all_apply(p, f);
+      all_apply(t, f);
       return;
     }
-    push(p, h);
+    push(t, h);
     ull c = (a + b) / 2;
-    apply(p->left, a, c, h - 1, l, r, f);
-    apply(p->right, c, b, h - 1, l, r, f);
-    update(p, h);
+    apply(t->left, a, c, h - 1, l, r, f);
+    apply(t->right, c, b, h - 1, l, r, f);
+    update(t, h);
   }
 
   template <class G>
-  ull max_right(node_ptr& p, ull a, ull b, int h, ull l, G g, S& product) {
+  ull max_right(node_ptr& t, ull a, ull b, int h, ull l, G g, S& product) {
     if (b <= l) return b;
     if (n <= a) return n;
     if (l <= a && b <= n) {
-      S val = p ? p->val : initial_vals[h];
+      S val = t ? t->val : initial_vals[h];
       if (g(op(product, val))) {
         product = op(product, val);
         return b;
       }
     }
     if (b - a == 1) return a;
-    if (!p) {
+    if (!t) {
       ull res = std::max(a, l);
       for (int k = h; k >= 0; k--) {
         if (res + (1ULL << k) > std::min(b, n)) continue;
@@ -214,24 +214,24 @@ class dynamic_lazy_segtree {
       }
       return res;
     }
-    push(p, h);
+    push(t, h);
     ull c = (a + b) / 2;
-    ull test = max_right(p->left, a, c, h - 1, l, g, product);
-    return test < c ? test : max_right(p->right, c, b, h - 1, l, g, product);
+    ull test = max_right(t->left, a, c, h - 1, l, g, product);
+    return test < c ? test : max_right(t->right, c, b, h - 1, l, g, product);
   }
 
   template <class G>
-  ull min_left(node_ptr& p, ull a, ull b, int h, ull r, G g, S& product) {
+  ull min_left(node_ptr& t, ull a, ull b, int h, ull r, G g, S& product) {
     if (r <= a) return a;
     if (b <= r) {
-      S val = p ? p->val : initial_vals[h];
+      S val = t ? t->val : initial_vals[h];
       if (g(op(val, product))) {
         product = op(val, product);
         return a;
       }
     }
     if (b - a == 1) return b;
-    if (!p) {
+    if (!t) {
       ull res = std::min(b, r);
       for (int k = h; k >= 0; k--) {
         if (res < a + (1ULL << k)) continue;
@@ -242,10 +242,10 @@ class dynamic_lazy_segtree {
       }
       return res;
     }
-    push(p, h);
+    push(t, h);
     ull c = (a + b) / 2;
-    ull test = min_left(p->right, c, b, h - 1, r, g, product);
-    return test > c ? test : min_left(p->left, a, c, h - 1, r, g, product);
+    ull test = min_left(t->right, c, b, h - 1, r, g, product);
+    return test > c ? test : min_left(t->left, a, c, h - 1, r, g, product);
   }
 };
 

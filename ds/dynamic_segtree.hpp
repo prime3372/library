@@ -84,41 +84,41 @@ template <class S, auto op, auto e> class dynamic_segtree {
   std::vector<S> initial_vals;
   node_ptr root = nullptr;
 
-  void update(node_ptr& p, int h) {
-    p->val = op(p->left ? p->left->val : initial_vals[h - 1],
-                p->right ? p->right->val : initial_vals[h - 1]);
+  void update(node_ptr& t, int h) {
+    t->val = op(t->left ? t->left->val : initial_vals[h - 1],
+                t->right ? t->right->val : initial_vals[h - 1]);
   }
 
-  void set(node_ptr& p, ull a, ull b, int h, ull i, S x) {
-    if (!p) p = std::make_unique<node>(initial_vals[h]);
+  void set(node_ptr& t, ull a, ull b, int h, ull i, S x) {
+    if (!t) t = std::make_unique<node>(initial_vals[h]);
     if (b - a == 1) {
-      p->val = x;
+      t->val = x;
       return;
     }
     ull c = (a + b) / 2;
     if (i < c) {
-      set(p->left, a, c, h - 1, i, x);
+      set(t->left, a, c, h - 1, i, x);
     } else {
-      set(p->right, c, b, h - 1, i, x);
+      set(t->right, c, b, h - 1, i, x);
     }
-    update(p, h);
+    update(t, h);
   }
 
-  S get(const node_ptr& p, ull a, ull b, int h, ull i) const {
-    if (!p) return initial_vals[0];
-    if (b - a == 1) return p->val;
+  S get(const node_ptr& t, ull a, ull b, int h, ull i) const {
+    if (!t) return initial_vals[0];
+    if (b - a == 1) return t->val;
     ull c = (a + b) / 2;
     if (i < c) {
-      return get(p->left, a, c, h - 1, i);
+      return get(t->left, a, c, h - 1, i);
     } else {
-      return get(p->right, c, b, h - 1, i);
+      return get(t->right, c, b, h - 1, i);
     }
   }
 
-  S prod(const node_ptr& p, ull a, ull b, int h, ull l, ull r) const {
+  S prod(const node_ptr& t, ull a, ull b, int h, ull l, ull r) const {
     if (b <= l || r <= a) return e();
-    if (l <= a && b <= r) return p ? p->val : initial_vals[h];
-    if (!p) {
+    if (l <= a && b <= r) return t ? t->val : initial_vals[h];
+    if (!t) {
       S res = e();
       ull len = std::min(b, r) - std::max(a, l);
       for (int k = 0; len; k++) {
@@ -127,26 +127,26 @@ template <class S, auto op, auto e> class dynamic_segtree {
       }
       return res;
     }
-    if (l <= a && b <= r) return p->val;
+    if (l <= a && b <= r) return t->val;
     ull c = (a + b) / 2;
-    return op(prod(p->left, a, c, h - 1, l, r),
-              prod(p->right, c, b, h - 1, l, r));
+    return op(prod(t->left, a, c, h - 1, l, r),
+              prod(t->right, c, b, h - 1, l, r));
   }
 
   template <class F>
-  ull max_right(const node_ptr& p, ull a, ull b, int h, ull l, F f,
+  ull max_right(const node_ptr& t, ull a, ull b, int h, ull l, F f,
                 S& product) const {
     if (b <= l) return b;
     if (n <= a) return n;
     if (l <= a && b <= n) {
-      S val = p ? p->val : initial_vals[h];
+      S val = t ? t->val : initial_vals[h];
       if (f(op(product, val))) {
         product = op(product, val);
         return b;
       }
     }
     if (b - a == 1) return a;
-    if (!p) {
+    if (!t) {
       ull res = std::max(a, l);
       for (int k = h; k >= 0; k--) {
         if (res + (1ULL << k) > std::min(b, n)) continue;
@@ -158,23 +158,23 @@ template <class S, auto op, auto e> class dynamic_segtree {
       return res;
     }
     ull c = (a + b) / 2;
-    ull test = max_right(p->left, a, c, h - 1, l, f, product);
-    return test < c ? test : max_right(p->right, c, b, h - 1, l, f, product);
+    ull test = max_right(t->left, a, c, h - 1, l, f, product);
+    return test < c ? test : max_right(t->right, c, b, h - 1, l, f, product);
   }
 
   template <class F>
-  ull min_left(const node_ptr& p, ull a, ull b, int h, ull r, F f,
+  ull min_left(const node_ptr& t, ull a, ull b, int h, ull r, F f,
                S& product) const {
     if (r <= a) return a;
     if (b <= r) {
-      S val = p ? p->val : initial_vals[h];
+      S val = t ? t->val : initial_vals[h];
       if (f(op(val, product))) {
         product = op(val, product);
         return a;
       }
     }
     if (b - a == 1) return b;
-    if (!p) {
+    if (!t) {
       ull res = std::min(b, r);
       for (int k = h; k >= 0; k--) {
         if (res < a + (1ULL << k)) continue;
@@ -186,8 +186,8 @@ template <class S, auto op, auto e> class dynamic_segtree {
       return res;
     }
     ull c = (a + b) / 2;
-    ull test = min_left(p->right, c, b, h - 1, r, f, product);
-    return test > c ? test : min_left(p->left, a, c, h - 1, r, f, product);
+    ull test = min_left(t->right, c, b, h - 1, r, f, product);
+    return test > c ? test : min_left(t->left, a, c, h - 1, r, f, product);
   }
 };
 

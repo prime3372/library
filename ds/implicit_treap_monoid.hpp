@@ -50,10 +50,10 @@ class implicit_treap_monoid
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
     if (l == r) return e();
-    auto s = split(root, l);
-    auto t = split(s.second, r - l);
-    auto res = t.first->prod;
-    root = merge(s.first, merge(t.first, t.second));
+    auto s1 = split(root, l);
+    auto s2 = split(s1.second, r - l);
+    auto res = s2.first->prod;
+    root = merge(s1.first, merge(s2.first, s2.second));
     return res;
   }
 
@@ -67,30 +67,30 @@ class implicit_treap_monoid
   using base::size;
   using base::split;
 
-  static void toggle(node* p) {
-    std::swap(p->left, p->right);
-    p->prod = reverse(p->prod);
-    p->rev = !p->rev;
+  static void toggle(node* t) {
+    std::swap(t->left, t->right);
+    t->prod = reverse(t->prod);
+    t->rev = !t->rev;
   }
 
-  static void update(node* p) {
-    p->sub = 1;
-    p->prod = p->val;
-    if (p->left) {
-      p->sub += p->left->sub;
-      p->prod = op(p->left->prod, p->prod);
+  static void update(node* t) {
+    t->sub = 1;
+    t->prod = t->val;
+    if (t->left) {
+      t->sub += t->left->sub;
+      t->prod = op(t->left->prod, t->prod);
     }
-    if (p->right) {
-      p->sub += p->right->sub;
-      p->prod = op(p->prod, p->right->prod);
+    if (t->right) {
+      t->sub += t->right->sub;
+      t->prod = op(t->prod, t->right->prod);
     }
   }
 
-  static void push(node* p) {
-    if (p->rev) {
-      if (p->left) toggle(p->left);
-      if (p->right) toggle(p->right);
-      p->rev = false;
+  static void push(node* t) {
+    if (t->rev) {
+      if (t->left) toggle(t->left);
+      if (t->right) toggle(t->right);
+      t->rev = false;
     }
   }
 };

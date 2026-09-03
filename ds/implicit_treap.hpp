@@ -49,22 +49,22 @@ class implicit_treap
   friend base;
   using base::build;
 
-  static void toggle(node* p) {
-    std::swap(p->left, p->right);
-    p->rev = !p->rev;
+  static void toggle(node* t) {
+    std::swap(t->left, t->right);
+    t->rev = !t->rev;
   }
 
-  static void update(node* p) {
-    p->sub = 1;
-    if (p->left) p->sub += p->left->sub;
-    if (p->right) p->sub += p->right->sub;
+  static void update(node* t) {
+    t->sub = 1;
+    if (t->left) t->sub += t->left->sub;
+    if (t->right) t->sub += t->right->sub;
   }
 
-  static void push(node* p) {
-    if (p->rev) {
-      if (p->left) toggle(p->left);
-      if (p->right) toggle(p->right);
-      p->rev = false;
+  static void push(node* t) {
+    if (t->rev) {
+      if (t->left) toggle(t->left);
+      if (t->right) toggle(t->right);
+      t->rev = false;
     }
   }
 };
