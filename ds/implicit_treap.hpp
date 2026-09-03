@@ -54,7 +54,7 @@ class implicit_treap
     t->rev = !t->rev;
   }
 
-  static void update(node* t) { t->sub = 1 + size(t->left) + size(t->right); }
+  static void update(node* t) { t->sub = size(t->left) + size(t->right) + 1; }
 
   static void push(node* t) {
     if (t->rev) {

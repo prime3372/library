@@ -73,7 +73,7 @@ class implicit_treap_monoid
   }
 
   static void update(node* t) {
-    t->sub = 1 + size(t->left) + size(t->right);
+    t->sub = size(t->left) + size(t->right) + 1;
     t->prod = t->val;
     if (t->left) t->prod = op(t->left->prod, t->prod);
     if (t->right) t->prod = op(t->prod, t->right->prod);
