@@ -17,9 +17,8 @@ template <class T> class hash_set {
   bool insert(const T& k) {
     char& flag = d[k];
     if (flag) return false;
-    flag = true;
     sz++;
-    return true;
+    return flag = true;
   }
 
   bool erase(const T& k) {
