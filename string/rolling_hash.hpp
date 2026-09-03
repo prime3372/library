@@ -45,7 +45,7 @@ class rolling_hash {
   int n;
   std::vector<hash61> hs, pw;
 
-  template <class T> unsigned long long hash_char(const T& c) {
+  template <class T> static unsigned long long hash_char(const T& c) {
     return safe_hash<T>()(c);
   }
 };
