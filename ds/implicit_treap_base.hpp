@@ -15,26 +15,28 @@
 
 namespace cp {
 
-// implicit treap
-template <class node, class derived> class treap_base {
+template <class node, class derived> class implicit_treap_base {
   using T = decltype(node::val);
 
  public:
-  treap_base() {}
-  explicit treap_base(int n) : treap_base(std::vector<T>(n)) {}
-  explicit treap_base(int n, const T& val)
-      : treap_base(std::vector<T>(n, val)) {}
-  explicit treap_base(const std::vector<T>& v) { build(v); }
+  implicit_treap_base() {}
+  explicit implicit_treap_base(int n)
+      : implicit_treap_base(std::vector<T>(n)) {}
+  explicit implicit_treap_base(int n, const T& val)
+      : implicit_treap_base(std::vector<T>(n, val)) {}
+  explicit implicit_treap_base(const std::vector<T>& v) { build(v); }
 
-  treap_base(const treap_base& other)
+  implicit_treap_base(const implicit_treap_base& other)
       : root(other.root ? new node(*other.root) : nullptr) {}
-  treap_base(treap_base&& other) : root(other.root) { other.root = nullptr; }
-  treap_base& operator=(treap_base other) {
+  implicit_treap_base(implicit_treap_base&& other) noexcept : root(other.root) {
+    other.root = nullptr;
+  }
+  implicit_treap_base& operator=(implicit_treap_base other) {
     std::swap(root, other.root);
     return *this;
   }
 
-  ~treap_base() { delete root; }
+  ~implicit_treap_base() { delete root; }
 
   void build(const std::vector<T>& v) {
     if (v.empty()) return;
@@ -84,19 +86,19 @@ template <class node, class derived> class treap_base {
 
   void erase(int k) {
     assert(0 <= k && k < size());
-    auto s = split(root, k);
-    auto t = split(s.second, 1);
-    delete t.first;
-    root = merge(s.first, t.second);
+    auto s1 = split(root, k);
+    auto s2 = split(s1.second, 1);
+    delete s2.first;
+    root = merge(s1.first, s2.second);
   }
 
   void reverse(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
     if (l == r) return;
-    auto s = split(root, l);
-    auto t = split(s.second, r - l);
-    derived::toggle(t.first);
-    root = merge(s.first, merge(t.first, t.second));
+    auto s1 = split(root, l);
+    auto s2 = split(s1.second, r - l);
+    derived::toggle(s2.first);
+    root = merge(s1.first, merge(s2.first, s2.second));
   }
 
   int size() const { return size(root); }

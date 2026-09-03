@@ -4,35 +4,35 @@
 #include <functional>
 #include <memory>
 
-#include "ds/treap_base.hpp"
+#include "ds/implicit_treap_base.hpp"
 #include "random/base.hpp"
 
 namespace cp {
 
-template <class S, class F, auto id> struct treap_acted_monoid_node {
+template <class S, class F, auto id> struct implicit_treap_acted_monoid_node {
+  using self = implicit_treap_acted_monoid_node;
   S val, prod;
   F lz = id();
   int sub = 1;
   bool rev = false;
   unsigned long long priority;
-  treap_acted_monoid_node* left = nullptr;
-  treap_acted_monoid_node* right = nullptr;
+  self* left = nullptr;
+  self* right = nullptr;
 
-  treap_acted_monoid_node() {}
-  explicit treap_acted_monoid_node(const S& x)
+  implicit_treap_acted_monoid_node() {}
+  explicit implicit_treap_acted_monoid_node(const S& x)
       : val(x), prod(x), priority(mt64()) {}
-  treap_acted_monoid_node(const treap_acted_monoid_node& other)
+  implicit_treap_acted_monoid_node(const self& other)
       : val(other.val),
         prod(other.prod),
         lz(other.lz),
         sub(other.sub),
         rev(other.rev),
         priority(other.priority),
-        left(other.left ? new treap_acted_monoid_node(*other.left) : nullptr),
-        right(other.right ? new treap_acted_monoid_node(*other.right)
-                          : nullptr) {}
-  treap_acted_monoid_node& operator=(const treap_acted_monoid_node&) = delete;
-  ~treap_acted_monoid_node() {
+        left(other.left ? new self(*other.left) : nullptr),
+        right(other.right ? new self(*other.right) : nullptr) {}
+  self& operator=(const self&) = delete;
+  ~implicit_treap_acted_monoid_node() {
     delete left;
     delete right;
   }
@@ -40,12 +40,12 @@ template <class S, class F, auto id> struct treap_acted_monoid_node {
 
 template <class S, auto op, auto e, class F, auto act, auto compose, auto id,
           auto reverse = std::identity()>
-class treap_acted_monoid
-    : public treap_base<
-          treap_acted_monoid_node<S, F, id>,
-          treap_acted_monoid<S, op, e, F, act, compose, id, reverse>> {
-  using node = treap_acted_monoid_node<S, F, id>;
-  using base = treap_base<node, treap_acted_monoid>;
+class implicit_treap_acted_monoid
+    : public implicit_treap_base<
+          implicit_treap_acted_monoid_node<S, F, id>,
+          implicit_treap_acted_monoid<S, op, e, F, act, compose, id, reverse>> {
+  using node = implicit_treap_acted_monoid_node<S, F, id>;
+  using base = implicit_treap_base<node, implicit_treap_acted_monoid>;
 
  public:
   using base::base;

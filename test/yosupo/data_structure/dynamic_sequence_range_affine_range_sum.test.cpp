@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum"
 
-#include "ds/treap_acted_monoid.hpp"
+#include "ds/implicit_treap_acted_monoid.hpp"
 #include "util/static_modint.hpp"
 #include <iostream>
 #include <vector>
@@ -30,7 +30,7 @@ int main() {
     cin >> a[i].val;
     a[i].len = 1;
   }
-  treap_acted_monoid<S, op, e, F, act, compose, id> tp(a);
+  implicit_treap_acted_monoid<S, op, e, F, act, compose, id> tp(a);
   while (q--) {
     int t;
     cin >> t;

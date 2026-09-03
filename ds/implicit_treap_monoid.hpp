@@ -5,41 +5,44 @@
 #include <memory>
 #include <utility>
 
-#include "ds/treap_base.hpp"
+#include "ds/implicit_treap_base.hpp"
 #include "random/base.hpp"
 
 namespace cp {
 
-template <class S> struct treap_monoid_node {
+template <class S> struct implicit_treap_monoid_node {
+  using self = implicit_treap_monoid_node;
   S val, prod;
   int sub = 1;
   bool rev = false;
   unsigned long long priority;
-  treap_monoid_node* left = nullptr;
-  treap_monoid_node* right = nullptr;
+  self* left = nullptr;
+  self* right = nullptr;
 
-  treap_monoid_node() {}
-  explicit treap_monoid_node(const S& x) : val(x), prod(x), priority(mt64()) {}
-  treap_monoid_node(const treap_monoid_node& other)
+  implicit_treap_monoid_node() {}
+  explicit implicit_treap_monoid_node(const S& x)
+      : val(x), prod(x), priority(mt64()) {}
+  implicit_treap_monoid_node(const self& other)
       : val(other.val),
         prod(other.prod),
         sub(other.sub),
         rev(other.rev),
         priority(other.priority),
-        left(other.left ? new treap_monoid_node(*other.left) : nullptr),
-        right(other.right ? new treap_monoid_node(*other.right) : nullptr) {}
-  treap_monoid_node& operator=(const treap_monoid_node&) = delete;
-  ~treap_monoid_node() {
+        left(other.left ? new self(*other.left) : nullptr),
+        right(other.right ? new self(*other.right) : nullptr) {}
+  self& operator=(const self&) = delete;
+  ~implicit_treap_monoid_node() {
     delete left;
     delete right;
   }
 };
 
 template <class S, auto op, auto e, auto reverse = std::identity()>
-class treap_monoid
-    : public treap_base<treap_monoid_node<S>, treap_monoid<S, op, e, reverse>> {
-  using node = treap_monoid_node<S>;
-  using base = treap_base<node, treap_monoid>;
+class implicit_treap_monoid
+    : public implicit_treap_base<implicit_treap_monoid_node<S>,
+                                 implicit_treap_monoid<S, op, e, reverse>> {
+  using node = implicit_treap_monoid_node<S>;
+  using base = implicit_treap_base<node, implicit_treap_monoid>;
 
  public:
   using base::base;

@@ -4,39 +4,41 @@
 #include <functional>
 #include <memory>
 
-#include "ds/treap_base.hpp"
+#include "ds/implicit_treap_base.hpp"
 #include "random/base.hpp"
 
 namespace cp {
 
-template <class T> struct treap_node {
+template <class T> struct implicit_treap_node {
+  using self = implicit_treap_node;
   T val;
   int sub = 1;
   bool rev = false;
   unsigned long long priority;
-  treap_node* left = nullptr;
-  treap_node* right = nullptr;
+  self* left = nullptr;
+  self* right = nullptr;
 
-  treap_node() {}
-  explicit treap_node(const T& x) : val(x), priority(mt64()) {}
-  treap_node(const treap_node& other)
+  implicit_treap_node() {}
+  explicit implicit_treap_node(const T& x) : val(x), priority(mt64()) {}
+  implicit_treap_node(const self& other)
       : val(other.val),
         sub(other.sub),
         rev(other.rev),
         priority(other.priority),
-        left(other.left ? new treap_node(*other.left) : nullptr),
-        right(other.right ? new treap_node(*other.right) : nullptr) {}
-  treap_node& operator=(const treap_node&) = delete;
-  ~treap_node() {
+        left(other.left ? new self(*other.left) : nullptr),
+        right(other.right ? new self(*other.right) : nullptr) {}
+  self& operator=(const self&) = delete;
+  ~implicit_treap_node() {
     delete left;
     delete right;
   }
 };
 
 template <class T>
-class treap : public treap_base<treap_node<T>, treap<T>> {
-  using node = treap_node<T>;
-  using base = treap_base<node, treap>;
+class implicit_treap
+    : public implicit_treap_base<implicit_treap_node<T>, implicit_treap<T>> {
+  using node = implicit_treap_node<T>;
+  using base = implicit_treap_base<node, implicit_treap>;
 
  public:
   using base::base;

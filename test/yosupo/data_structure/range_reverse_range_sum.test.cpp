@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_reverse_range_sum"
 
-#include "ds/treap_monoid.hpp"
+#include "ds/implicit_treap_monoid.hpp"
 #include <iostream>
 #include <vector>
 
@@ -18,7 +18,7 @@ int main() {
   cin >> n >> q;
   vector<ll> a(n);
   for (ll& ai : a) cin >> ai;
-  treap_monoid<ll, op, e> tp(a);
+  implicit_treap_monoid<ll, op, e> tp(a);
   while (q--) {
     int t, l, r;
     cin >> t >> l >> r;
