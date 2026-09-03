@@ -106,8 +106,8 @@ template <class S, auto op, auto e> class segtree {
 
   friend std::ostream& operator<<(std::ostream& os, const segtree& seg) {
     using io_utility::operator<<;
-    std::vector<S> v(seg.d.begin() + seg.sz, seg.d.begin() + seg.sz + seg.n);
-    return os << v;
+    return os << std::vector<S>(seg.d.begin() + seg.sz,
+                                seg.d.begin() + seg.sz + seg.n);
   }
 
  private:
