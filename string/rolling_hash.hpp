@@ -12,10 +12,14 @@ namespace cp {
 
 class rolling_hash {
  public:
-  rolling_hash() : n(-1) {}
-  template <class Str> explicit rolling_hash(const Str& s) : n(int(s.size())) {
+  rolling_hash() : n(0) {}
+  template <class Str> explicit rolling_hash(const Str& s) { build(s); }
+
+  template <class Str> void build(const Str& s) {
+    n = int(s.size());
     hs.resize(n + 1);
     pw.resize(n + 1);
+    hs[0] = 0;
     pw[0] = 1;
     for (int i = 0; i < n; i++) {
       hs[i + 1] = hs[i] * basis + hash_char(s[i]);
