@@ -47,17 +47,14 @@ class implicit_treap
   using node = implicit_treap_node<T>;
   using base = implicit_treap_base<node, implicit_treap>;
   friend base;
+  using base::size;
 
   static void toggle(node* t) {
     std::swap(t->left, t->right);
     t->rev = !t->rev;
   }
 
-  static void update(node* t) {
-    t->sub = 1;
-    if (t->left) t->sub += t->left->sub;
-    if (t->right) t->sub += t->right->sub;
-  }
+  static void update(node* t) { t->sub = 1 + size(t->left) + size(t->right); }
 
   static void push(node* t) {
     if (t->rev) {
