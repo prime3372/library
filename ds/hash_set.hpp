@@ -24,8 +24,8 @@ template <class T> class hash_set {
   bool erase(const T& k) {
     char& flag = d[k];
     if (!flag) return false;
-    flag = false;
     sz--;
+    flag = false;
     return true;
   }
 
