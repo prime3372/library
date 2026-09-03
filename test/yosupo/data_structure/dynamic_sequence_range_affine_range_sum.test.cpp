@@ -1,4 +1,5 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum"
 
 #include "ds/implicit_treap_acted_monoid.hpp"
 #include "util/static_modint.hpp"

@@ -27,7 +27,8 @@ int main() {
     return 0;
   }
   int len = cycle.len;
-  auto& v = cycle.vertices, e = cycle.edges;
+  auto& v = cycle.vertices;
+  auto& e = cycle.edges;
   cout << len << "\n";
   for (int i = 0; i < len; i++) {
     assert(edges[e[i]].first == v[i]);

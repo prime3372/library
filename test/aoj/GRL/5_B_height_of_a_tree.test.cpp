@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_5_B"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_5_B"
 
 #include "tree/rerooting_dp.hpp"
 #include <iostream>

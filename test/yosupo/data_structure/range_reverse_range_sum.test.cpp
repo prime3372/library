@@ -22,7 +22,10 @@ int main() {
   while (q--) {
     int t, l, r;
     cin >> t >> l >> r;
-    if (t == 0) tp.reverse(l, r);
-    else cout << tp.prod(l, r) << "\n";
+    if (t == 0) {
+      tp.reverse(l, r);
+    } else {
+      cout << tp.prod(l, r) << "\n";
+    }
   }
 }

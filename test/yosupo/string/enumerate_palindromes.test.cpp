@@ -21,7 +21,7 @@ int main() {
       int mid = (l + r) / 2, p = (i + 1) / 2, q = p + (i % 2 == 0);
       if (p - mid < 0 || n - q - mid < 0) {
         r = mid;
-        continue; 
+        continue;
       }
       if (rlh.get(p - mid, p) == rrlh.get(n - q - mid, n - q)) {
         l = mid;

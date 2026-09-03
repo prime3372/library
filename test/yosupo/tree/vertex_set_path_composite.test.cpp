@@ -68,8 +68,11 @@ int main() {
           u = next[u];
         }
       }
-      if (u < v) r = op(seg.prod(u, v + 1), r);
-      else l = op(l, rseg.prod(v, u + 1));
+      if (u < v) {
+        r = op(seg.prod(u, v + 1), r);
+      } else {
+        l = op(l, rseg.prod(v, u + 1));
+      }
       S f = op(l, r);
       cout << f.a * x + f.b << "\n";
     }

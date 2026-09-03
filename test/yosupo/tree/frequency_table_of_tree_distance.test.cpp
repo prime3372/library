@@ -1,4 +1,5 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
 
 #include "poly/convolution_ll.hpp"
 #include "tree/centroid_decomposition.hpp"
@@ -53,7 +54,7 @@ int main() {
         while (int(f.size()) <= d) f.push_back(0);
         f[d]++;
         for (int nv : g[v]) {
-          if (!removed[nv] && nv != pv) self(self, nv, v, d + 1);          
+          if (!removed[nv] && nv != pv) self(self, nv, v, d + 1);
         }
       };
       if (!removed[g[c][j]]) dfs(dfs, g[c][j], c, 1);

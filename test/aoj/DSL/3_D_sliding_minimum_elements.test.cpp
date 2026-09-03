@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_3_D"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_3_D"
 
 #include "ds/slide_window_aggregation.hpp"
 #include <iostream>

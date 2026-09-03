@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_E"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_E"
 
 #include "number/ext_gcd.hpp"
 #include <iostream>

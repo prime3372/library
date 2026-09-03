@@ -17,7 +17,7 @@ int main() {
     unsigned int x;
     cin >> t >> x;
     if (t == 0) {
-      if (trie.count(x) == 0) trie.insert(x);      
+      if (trie.count(x) == 0) trie.insert(x);
     } else if (t == 1) {
       trie.erase(x);
     } else {

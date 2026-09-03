@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_2_A"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_2_A"
 
 #include "graph/kruscal.hpp"
 #include <iostream>

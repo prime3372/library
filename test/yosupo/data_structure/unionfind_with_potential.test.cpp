@@ -25,8 +25,11 @@ int main() {
     } else {
       int u, v;
       cin >> u >> v;
-      if (!uf.same(u, v)) cout << -1 << "\n";
-      else cout << uf.diff(u, v) << "\n";
-    }  
+      if (!uf.same(u, v)) {
+        cout << -1 << "\n";
+      } else {
+        cout << uf.diff(u, v) << "\n";
+      }
+    }
   }
 }

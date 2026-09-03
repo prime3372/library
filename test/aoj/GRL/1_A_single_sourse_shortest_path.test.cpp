@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_1_A"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_1_A"
 
 #include "graph/dijkstra.hpp"
 #include <iostream>
@@ -20,7 +21,10 @@ int main() {
   g.init(r);
   for (int i = 0; i < n; i++) {
     int ans = g.dist(i);
-    if (ans == -1) cout << "INF\n";
-    else cout << ans << "\n";
+    if (ans == -1) {
+      cout << "INF\n";
+    } else {
+      cout << ans << "\n";
+    }
   }
 }

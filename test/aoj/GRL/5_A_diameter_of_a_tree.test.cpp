@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_5_A"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_5_A"
 
 #include "tree/tree_diameter.hpp"
 #include <iostream>

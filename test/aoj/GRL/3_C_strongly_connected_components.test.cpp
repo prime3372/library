@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_3_C"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_3_C"
 
 #include "graph/strongly_connected_components.hpp"
 #include <iostream>

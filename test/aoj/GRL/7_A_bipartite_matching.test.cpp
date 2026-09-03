@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_7_A"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_7_A"
 
 #include "graph/bipartite_matching.hpp"
 #include <iostream>
@@ -16,6 +17,6 @@ int main() {
     int u, v;
     cin >> u >> v;
     bm.add_edge(u, v);
-  }  
+  }
   cout << bm.max_matching() << "\n";
 }

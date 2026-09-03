@@ -16,5 +16,5 @@ int main() {
   cin >> s;
   ll n = s.size();
   auto lcp = lcp_array(s);
-  cout << n * (n + 1) / 2 - std::accumulate(lcp.begin(), lcp.end(), 0LL) << "\n";
+  cout << n * (n + 1) / 2 - accumulate(lcp.begin(), lcp.end(), 0LL) << "\n";
 }

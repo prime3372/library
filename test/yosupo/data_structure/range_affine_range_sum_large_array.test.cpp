@@ -1,4 +1,5 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum_large_array"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/range_affine_range_sum_large_array"
 
 #include "ds/dynamic_lazy_segtree.hpp"
 #include "util/static_modint.hpp"

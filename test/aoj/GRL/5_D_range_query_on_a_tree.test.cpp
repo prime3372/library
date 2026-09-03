@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_5_D"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_5_D"
 
 #include "ds/fenwick_tree.hpp"
 #include "tree/euler_tour.hpp"
@@ -24,7 +25,7 @@ int main() {
     }
   }
   et.build();
-  
+
   int q;
   cin >> q;
   fenwick_tree<ll> fw(n);

@@ -1,4 +1,5 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification"
 
 #include "tree/rooted_tree_hash.hpp"
 #include <iostream>

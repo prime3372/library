@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/all/DPL_3_B"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/all/DPL_3_B"
 
 #include "ds/cartesian_tree.hpp"
 #include <algorithm>
@@ -33,8 +34,7 @@ int main() {
   for (int j = 0; j < w; j++) {
     cnt[0][j] = !c[0][j];
     for (int i = 1; i < h; i++) {
-      if (c[i][j]) cnt[i][j] = 0;
-      else cnt[i][j] = cnt[i - 1][j] + 1;
+      cnt[i][j] = c[i][j] ? 0 : cnt[i - 1][j] + 1;
     }
   }
   ll ans = 0;

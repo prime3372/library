@@ -1,4 +1,5 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary"
 
 #include "convex/min_plus_convolution.hpp"
 #include <iostream>

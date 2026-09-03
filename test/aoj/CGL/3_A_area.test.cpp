@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/all/CGL_3_A"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/all/CGL_3_A"
 
 #include "geom/area.hpp"
 #include "geom/point.hpp"

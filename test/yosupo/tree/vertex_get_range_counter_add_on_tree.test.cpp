@@ -1,4 +1,5 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/vertex_get_range_contour_add_on_tree"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/vertex_get_range_contour_add_on_tree"
 
 #include "ds/fenwick_tree.hpp"
 #include "tree/centroid_decomposition.hpp"

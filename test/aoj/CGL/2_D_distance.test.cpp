@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_2_D"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_2_D"
 #define ERROR 1e-8
 
 #include "geom/dist.hpp"

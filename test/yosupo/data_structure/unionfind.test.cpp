@@ -15,7 +15,10 @@ int main() {
   while (q--) {
     int t, u, v;
     cin >> t >> u >> v;
-    if (t == 0) uf.unite(u, v);
-    else cout << uf.same(u, v) << "\n";    
+    if (t == 0) {
+      uf.unite(u, v);
+    } else {
+      cout << uf.same(u, v) << "\n";
+    }
   }
 }

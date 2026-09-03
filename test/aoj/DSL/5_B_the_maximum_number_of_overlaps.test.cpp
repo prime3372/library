@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_5_B"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_5_B"
 
 #include "ds/cumsum_2d.hpp"
 #include <algorithm>

@@ -1,4 +1,5 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_1_B"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_1_B"
 
 #include "ds/weighted_union_find.hpp"
 #include <iostream>
@@ -20,8 +21,11 @@ int main() {
     } else {
       int x, y;
       cin >> x >> y;
-      if (!uf.same(x, y)) cout << "?" << "\n";
-      else cout << uf.diff(y, x) << "\n";      
+      if (!uf.same(x, y)) {
+        cout << "?" << "\n";
+      } else {
+        cout << uf.diff(y, x) << "\n";
+      }
     }
   }
 }
