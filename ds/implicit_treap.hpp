@@ -41,13 +41,12 @@ class implicit_treap
   implicit_treap() {}
   explicit implicit_treap(int n, const T& val = T())
       : implicit_treap(std::vector<T>(n, val)) {}
-  explicit implicit_treap(const std::vector<T>& v) { build(v); }
+  explicit implicit_treap(const std::vector<T>& v) : base(v) {}
 
  private:
   using node = implicit_treap_node<T>;
   using base = implicit_treap_base<node, implicit_treap>;
   friend base;
-  using base::build;
 
   static void toggle(node* t) {
     std::swap(t->left, t->right);

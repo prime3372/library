@@ -48,7 +48,7 @@ class implicit_treap_acted_monoid
   implicit_treap_acted_monoid() {}
   explicit implicit_treap_acted_monoid(int n, const S& val = e())
       : implicit_treap_acted_monoid(std::vector<S>(n, val)) {}
-  explicit implicit_treap_acted_monoid(const std::vector<S>& v) { build(v); }
+  explicit implicit_treap_acted_monoid(const std::vector<S>& v) : base(v) {}
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
@@ -73,7 +73,6 @@ class implicit_treap_acted_monoid
   using node = implicit_treap_acted_monoid_node<S, F, id>;
   using base = implicit_treap_base<node, implicit_treap_acted_monoid>;
   friend base;
-  using base::build;
   using base::merge;
   using base::root;
   using base::size;

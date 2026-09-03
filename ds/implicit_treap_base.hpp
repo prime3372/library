@@ -20,18 +20,7 @@ template <class node, class derived> class implicit_treap_base {
 
  public:
   implicit_treap_base() {}
-  implicit_treap_base(const implicit_treap_base& other)
-      : root(other.root ? new node(*other.root) : nullptr) {}
-  implicit_treap_base(implicit_treap_base&& other) noexcept : root(other.root) {
-    other.root = nullptr;
-  }
-  implicit_treap_base& operator=(implicit_treap_base other) {
-    std::swap(root, other.root);
-    return *this;
-  }
-  ~implicit_treap_base() { delete root; }
-
-  void build(const std::vector<T>& v) {
+  explicit implicit_treap_base(const std::vector<T>& v) {
     if (v.empty()) return;
     int n = int(v.size());
     std::vector<node*> ps(n);
@@ -53,6 +42,16 @@ template <class node, class derived> class implicit_treap_base {
     };
     dfs(dfs, root = ps[cart.root]);
   }
+  implicit_treap_base(const implicit_treap_base& other)
+      : root(other.root ? new node(*other.root) : nullptr) {}
+  implicit_treap_base(implicit_treap_base&& other) noexcept : root(other.root) {
+    other.root = nullptr;
+  }
+  implicit_treap_base& operator=(implicit_treap_base other) {
+    std::swap(root, other.root);
+    return *this;
+  }
+  ~implicit_treap_base() { delete root; }
 
   void set(int k, const T& x) {
     assert(0 <= k && k < size());
