@@ -23,7 +23,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
     sz = std::bit_ceil(n);
     log = std::countr_zero(sz);
     initial_vals.resize(log + 1);
-    for (int i = log; i >= 0; i--) {
+    for (int i = 0; i <= log; i++) {
       initial_vals[i] = val;
       val = op(val, val);
     }
@@ -31,33 +31,33 @@ template <class S, auto op, auto e> class dynamic_segtree {
 
   void set(ull i, S x) {
     assert(i < n);
-    set(root, 0, sz, 0, i, x);
+    set(root, 0, sz, log, i, x);
   }
 
   S operator[](ull i) const {
     assert(i < n);
-    return get(root, 0, sz, 0, i);
+    return get(root, 0, sz, log, i);
   }
 
   S prod(ull l, ull r) const {
     assert(l <= r && r <= n);
-    return prod(root, 0, sz, 0, l, r);
+    return prod(root, 0, sz, log, l, r);
   }
 
-  S all_prod() const { return root ? root->val : initial_vals[0]; }
+  S all_prod() const { return root ? root->val : initial_vals.back(); }
 
   template <class F> ull max_right(ull l, F f) const {
     assert(l <= n);
     assert(f(e()));
     S product = e();
-    return max_right(root, 0, sz, 0, product, l, f);
+    return max_right(root, 0, sz, log, l, f, product);
   }
 
   template <class F> ull min_left(ull r, F f) const {
     assert(r <= n);
     assert(f(e()));
     S product = e();
-    return min_left(root, 0, sz, 0, product, r, f);
+    return min_left(root, 0, sz, log, r, f, product);
   }
 
   ull size() const { return n; }
@@ -83,63 +83,62 @@ template <class S, auto op, auto e> class dynamic_segtree {
   std::vector<S> initial_vals;
   node_ptr root = nullptr;
 
-  void update(node_ptr& p, int dep) {
-    p->val = op(p->left ? p->left->val : initial_vals[dep + 1],
-                p->right ? p->right->val : initial_vals[dep + 1]);
+  void update(node_ptr& p, int h) {
+    p->val = op(p->left ? p->left->val : initial_vals[h - 1],
+                p->right ? p->right->val : initial_vals[h - 1]);
   }
 
-  S pow_initial(ull len, int dep) const {
-    S res = e();
-    for (int k = 0; k <= log - dep; k++) {
-      if (len & 1) res = op(res, initial_vals[log - k]);
-      len >>= 1;
-    }
-    return res;
-  }
-
-  void set(node_ptr& p, ull a, ull b, int dep, ull i, S x) {
-    if (!p) p = std::make_unique<node>(initial_vals[dep]);
+  void set(node_ptr& p, ull a, ull b, int h, ull i, S x) {
+    if (!p) p = std::make_unique<node>(initial_vals[h]);
     if (b - a == 1) {
       p->val = x;
       return;
     }
     ull c = (a + b) / 2;
     if (i < c) {
-      set(p->left, a, c, dep + 1, i, x);
+      set(p->left, a, c, h - 1, i, x);
     } else {
-      set(p->right, c, b, dep + 1, i, x);
+      set(p->right, c, b, h - 1, i, x);
     }
-    update(p, dep);
+    update(p, h);
   }
 
-  S get(const node_ptr& p, ull a, ull b, int dep, ull i) const {
+  S get(const node_ptr& p, ull a, ull b, int h, ull i) const {
     if (!p) return initial_vals.back();
     if (b - a == 1) return p->val;
     ull c = (a + b) / 2;
     if (i < c) {
-      return get(p->left, a, c, dep + 1, i);
+      return get(p->left, a, c, h - 1, i);
     } else {
-      return get(p->right, c, b, dep + 1, i);
+      return get(p->right, c, b, h - 1, i);
     }
   }
 
-  S prod(const node_ptr& p, ull a, ull b, int dep, ull l, ull r) const {
+  S prod(const node_ptr& p, ull a, ull b, int h, ull l, ull r) const {
     if (b <= l || r <= a) return e();
-    if (l <= a && b <= r) return p ? p->val : initial_vals[dep];
-    if (!p) return pow_initial(std::min(b, r) - std::max(a, l), dep);
+    if (l <= a && b <= r) return p ? p->val : initial_vals[h];
+    if (!p) {
+      S res = e();
+      ull len = std::min(b, r) - std::max(a, l);
+      for (int k = 0; len; k++) {
+        if (len & 1) res = op(res, initial_vals[k]);
+        len >>= 1;
+      }
+      return res;
+    }
     if (l <= a && b <= r) return p->val;
     ull c = (a + b) / 2;
-    return op(prod(p->left, a, c, dep + 1, l, r),
-              prod(p->right, c, b, dep + 1, l, r));
+    return op(prod(p->left, a, c, h - 1, l, r),
+              prod(p->right, c, b, h - 1, l, r));
   }
 
   template <class F>
-  ull max_right(const node_ptr& p, ull a, ull b, int dep, S& product, ull l,
-                F f) const {
+  ull max_right(const node_ptr& p, ull a, ull b, int h, ull l, F f,
+                S& product) const {
     if (b <= l) return b;
     if (n <= a) return n;
     if (l <= a && b <= n) {
-      S val = p ? p->val : initial_vals[dep];
+      S val = p ? p->val : initial_vals[h];
       if (f(op(product, val))) {
         product = op(product, val);
         return b;
@@ -148,26 +147,26 @@ template <class S, auto op, auto e> class dynamic_segtree {
     if (b - a == 1) return a;
     if (!p) {
       ull res = std::max(a, l);
-      for (int k = log - dep; k >= 0; k--) {
+      for (int k = h; k >= 0; k--) {
         if (res + (1ULL << k) > std::min(b, n)) continue;
-        if (f(op(product, initial_vals[log - k]))) {
-          product = op(product, initial_vals[log - k]);
+        if (f(op(product, initial_vals[k]))) {
+          product = op(product, initial_vals[k]);
           res += 1ULL << k;
         }
       }
       return res;
     }
     ull c = (a + b) / 2;
-    ull test = max_right(p->left, a, c, dep + 1, product, l, f);
-    return test < c ? test : max_right(p->right, c, b, dep + 1, product, l, f);
+    ull test = max_right(p->left, a, c, h - 1, l, f, product);
+    return test < c ? test : max_right(p->right, c, b, h - 1, l, f, product);
   }
 
   template <class F>
-  ull min_left(const node_ptr& p, ull a, ull b, int dep, S& product, ull r,
-               F f) const {
+  ull min_left(const node_ptr& p, ull a, ull b, int h, ull r, F f,
+               S& product) const {
     if (r <= a) return a;
     if (b <= r) {
-      S val = p ? p->val : initial_vals[dep];
+      S val = p ? p->val : initial_vals[h];
       if (f(op(val, product))) {
         product = op(val, product);
         return a;
@@ -176,18 +175,18 @@ template <class S, auto op, auto e> class dynamic_segtree {
     if (b - a == 1) return b;
     if (!p) {
       ull res = std::min(b, r);
-      for (int k = log - dep; k >= 0; k--) {
+      for (int k = h; k >= 0; k--) {
         if (res < a + (1ULL << k)) continue;
-        if (f(op(initial_vals[log - k], product))) {
-          product = op(initial_vals[log - k], product);
+        if (f(op(initial_vals[k], product))) {
+          product = op(initial_vals[k], product);
           res -= 1ULL << k;
         }
       }
       return res;
     }
     ull c = (a + b) / 2;
-    ull test = min_left(p->right, c, b, dep + 1, product, r, f);
-    return test > c ? test : min_left(p->left, a, c, dep + 1, product, r, f);
+    ull test = min_left(p->right, c, b, h - 1, r, f, product);
+    return test > c ? test : min_left(p->left, a, c, h - 1, r, f, product);
   }
 };
 
