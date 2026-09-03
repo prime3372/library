@@ -38,6 +38,27 @@ class hash61 {
 
   ull val() const { return v; }
 
+  hash61& operator++() {
+    v++;
+    if (v == m) v = 0;
+    return *this;
+  }
+  hash61& operator--() {
+    if (v == 0) v = m;
+    v--;
+    return *this;
+  }
+  hash61 operator++(int) {
+    hash61 res = *this;
+    ++*this;
+    return res;
+  }
+  hash61 operator--(int) {
+    hash61 res = *this;
+    --*this;
+    return res;
+  }
+
   hash61& operator+=(const hash61& rhs) {
     v += rhs.v;
     if (v >= m) v -= m;
@@ -52,6 +73,7 @@ class hash61 {
     v = mul(v, rhs.v);
     return *this;
   }
+  hash61& operator/=(const hash61& rhs) { return *this = *this * rhs.inv(); }
 
   hash61 operator+() const { return *this; }
   hash61 operator-() const { return hash61() - *this; }
