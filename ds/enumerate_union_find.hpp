@@ -14,10 +14,8 @@ class enumerate_union_find {
     for (int i = 0; i < n; i++) nxt[i] = i;
   }
 
-  bool unite(int a, int b) {
-    return unite(a, b, [](int, int) {});
-  }
-  template <class F> bool unite(int a, int b, F f) {
+  template <class F = void (*)(int, int)>
+  bool unite(int a, int b, F f = [](int, int) {}) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
     a = find(a);

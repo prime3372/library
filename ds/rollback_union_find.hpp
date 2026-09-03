@@ -13,7 +13,8 @@ class rollback_union_find {
   rollback_union_find() : n(0) {}
   explicit rollback_union_find(int _n) : n(_n), par_size(_n, -1) {}
 
-  bool unite(int a, int b) {
+  template <class F = void (*)(int, int)>
+  bool unite(int a, int b, F f = [](int, int) {}) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
     a = find(a);
@@ -23,6 +24,7 @@ class rollback_union_find {
     if (-par_size[a] < -par_size[b]) std::swap(a, b);
     par_size[a] += par_size[b];
     par_size[b] = a;
+    f(a, b);
     return true;
   }
 

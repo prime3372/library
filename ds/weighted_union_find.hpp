@@ -12,21 +12,23 @@ template <class T> class weighted_union_find {
   explicit weighted_union_find(int _n)
       : n(_n), parent_or_size(_n, -1), diff_weight(_n) {}
 
-  // @return satisfiablility
-  bool unite(int a, int b, T d) {
+  // @return whether diff(a) - diff(b) = d is satisfiable.
+  template <class F = void (*)(int, int)>
+  bool unite(int a, int b, T d, F f = [](int, int) {}) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
     d += weight(b) - weight(a);
     a = find(a);
     b = find(b);
     if (a == b) return d == 0;
-    if (-parent_or_size[a] > -parent_or_size[b]) {
+    if (-parent_or_size[a] < -parent_or_size[b]) {
       std::swap(a, b);
       d = -d;
     }
-    parent_or_size[b] += parent_or_size[a];
-    parent_or_size[a] = b;
-    diff_weight[a] = d;
+    parent_or_size[a] += parent_or_size[b];
+    parent_or_size[b] = a;
+    diff_weight[b] = -d;
+    f(a, b);
     return true;
   }
 
