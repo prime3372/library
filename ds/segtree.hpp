@@ -39,17 +39,17 @@ template <class S, auto op, auto e> class segtree {
 
   S prod(int l, int r) const {
     assert(0 <= l && l <= r && r <= n);
-    S prodl = e(), prodr = e();
+    S sml = e(), smr = e();
     l += sz;
     r += sz;
 
     while (l < r) {
-      if (l & 1) prodl = op(prodl, d[l++]);
-      if (r & 1) prodr = op(d[--r], prodr);
+      if (l & 1) sml = op(sml, d[l++]);
+      if (r & 1) smr = op(d[--r], smr);
       l >>= 1;
       r >>= 1;
     }
-    return op(prodl, prodr);
+    return op(sml, smr);
   }
 
   S all_prod() const { return d[1]; }
@@ -59,20 +59,20 @@ template <class S, auto op, auto e> class segtree {
     assert(f(e()));
     if (l == n) return n;
     l += sz;
-    S cur = e();
+    S sm = e();
     do {
       while (l % 2 == 0) l >>= 1;
-      if (!f(op(cur, d[l]))) {
+      if (!f(op(sm, d[l]))) {
         while (l < sz) {
           l = 2 * l;
-          if (f(op(cur, d[l]))) {
-            cur = op(cur, d[l]);
+          if (f(op(sm, d[l]))) {
+            sm = op(sm, d[l]);
             l++;
           }
         }
         return l - sz;
       }
-      cur = op(cur, d[l]);
+      sm = op(sm, d[l]);
       l++;
     } while ((l & -l) != l);
     return n;
@@ -83,21 +83,21 @@ template <class S, auto op, auto e> class segtree {
     assert(f(e()));
     if (r == 0) return 0;
     r += sz;
-    S cur = e();
+    S sm = e();
     do {
       r--;
       while (r > 1 && r % 2) r >>= 1;
-      if (!f(op(d[r], cur))) {
+      if (!f(op(d[r], sm))) {
         while (r < sz) {
           r = 2 * r + 1;
-          if (f(op(d[r], cur))) {
-            cur = op(d[r], cur);
+          if (f(op(d[r], sm))) {
+            sm = op(d[r], sm);
             r--;
           }
         }
         return r + 1 - sz;
       }
-      cur = op(d[r], cur);
+      sm = op(d[r], sm);
     } while ((r & -r) != r);
     return 0;
   }
