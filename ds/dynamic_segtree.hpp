@@ -18,8 +18,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
 
  public:
   dynamic_segtree() : dynamic_segtree(0) {}
-  explicit dynamic_segtree(ull _n) : dynamic_segtree(_n, e()) {}
-  explicit dynamic_segtree(ull _n, S val) : n(_n) {
+  explicit dynamic_segtree(ull _n, S val = e()) : n(_n) {
     assert(n <= (1ULL << 63));
     sz = std::bit_ceil(n);
     log = std::countr_zero(sz);
