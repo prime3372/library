@@ -116,9 +116,9 @@
   "test/yosupo/tree/rooted_tree_isomorphism_classification.test.cpp": "2026-09-03 20:09:12 +0900",
   "test/yosupo/tree/tree_diameter.test.cpp": "2026-09-03 03:43:01 +0900",
   "test/yosupo/tree/tree_path_composite_sum.test.cpp": "2026-08-31 03:51:05 +0900",
-  "test/yosupo/tree/vertex_add_path_sum.test.cpp": "2026-09-01 23:33:47 +0900",
+  "test/yosupo/tree/vertex_add_path_sum.test.cpp": "2026-09-04 02:50:18 +0900",
   "test/yosupo/tree/vertex_add_range_contour_sum_on_tree.test.cpp": "2026-09-03 03:47:19 +0900",
   "test/yosupo/tree/vertex_add_subtree_sum.test.cpp": "2026-09-01 23:33:47 +0900",
   "test/yosupo/tree/vertex_get_range_counter_add_on_tree.test.cpp": "2026-09-03 03:47:19 +0900",
-  "test/yosupo/tree/vertex_set_path_composite.test.cpp": "2026-09-04 01:39:36 +0900"
+  "test/yosupo/tree/vertex_set_path_composite.test.cpp": "2026-09-04 02:50:51 +0900"
 }
