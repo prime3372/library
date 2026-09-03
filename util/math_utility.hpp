@@ -19,6 +19,7 @@ template <class T = long long> T ipow(long long x, long long n) {
 }
 
 template <class T> T isqrt(T x) {
+  assert(0 <= x);
   T y = T(std::sqrt(double(x)));
   if (sizeof(T) > 8) y = (y + x / y) / 2;  // Newton's method
   while (y != 0 && y > x / y) y--;
