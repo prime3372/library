@@ -44,11 +44,11 @@ class implicit_treap_acted_monoid
     : public implicit_treap_base<
           implicit_treap_acted_monoid_node<S, F, id>,
           implicit_treap_acted_monoid<S, op, e, F, act, compose, id, reverse>> {
-  using node = implicit_treap_acted_monoid_node<S, F, id>;
-  using base = implicit_treap_base<node, implicit_treap_acted_monoid>;
-
  public:
-  using base::base;
+  implicit_treap_acted_monoid() {}
+  explicit implicit_treap_acted_monoid(int n, const S& val = e())
+      : implicit_treap_acted_monoid(std::vector<S>(n, val)) {}
+  explicit implicit_treap_acted_monoid(const std::vector<S>& v) { build(v); }
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
@@ -70,11 +70,14 @@ class implicit_treap_acted_monoid
   }
 
  private:
+  using node = implicit_treap_acted_monoid_node<S, F, id>;
+  using base = implicit_treap_base<node, implicit_treap_acted_monoid>;
+  friend base;
+  using base::build;
   using base::merge;
   using base::root;
   using base::size;
   using base::split;
-  friend base;
 
   static void toggle(node* p) {
     std::swap(p->left, p->right);

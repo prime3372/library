@@ -37,14 +37,17 @@ template <class T> struct implicit_treap_node {
 template <class T>
 class implicit_treap
     : public implicit_treap_base<implicit_treap_node<T>, implicit_treap<T>> {
-  using node = implicit_treap_node<T>;
-  using base = implicit_treap_base<node, implicit_treap>;
-
  public:
-  using base::base;
+  implicit_treap() {}
+  explicit implicit_treap(int n, const T& val = T())
+      : implicit_treap(std::vector<T>(n, val)) {}
+  explicit implicit_treap(const std::vector<T>& v) { build(v); }
 
  private:
+  using node = implicit_treap_node<T>;
+  using base = implicit_treap_base<node, implicit_treap>;
   friend base;
+  using base::build;
 
   static void toggle(node* p) {
     std::swap(p->left, p->right);

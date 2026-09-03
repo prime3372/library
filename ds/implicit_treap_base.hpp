@@ -20,12 +20,6 @@ template <class node, class derived> class implicit_treap_base {
 
  public:
   implicit_treap_base() {}
-  explicit implicit_treap_base(int n)
-      : implicit_treap_base(std::vector<T>(n)) {}
-  explicit implicit_treap_base(int n, const T& val)
-      : implicit_treap_base(std::vector<T>(n, val)) {}
-  explicit implicit_treap_base(const std::vector<T>& v) { build(v); }
-
   implicit_treap_base(const implicit_treap_base& other)
       : root(other.root ? new node(*other.root) : nullptr) {}
   implicit_treap_base(implicit_treap_base&& other) noexcept : root(other.root) {
@@ -35,7 +29,6 @@ template <class node, class derived> class implicit_treap_base {
     std::swap(root, other.root);
     return *this;
   }
-
   ~implicit_treap_base() { delete root; }
 
   void build(const std::vector<T>& v) {
