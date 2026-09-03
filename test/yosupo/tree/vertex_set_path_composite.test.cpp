@@ -34,7 +34,9 @@ int main() {
     hld.add_edge(u, v);
   }
   hld.build();
-  auto& ord = hld.ord, head = hld.head, next = hld.next;
+  auto& ord = hld.ord;
+  auto& head = hld.head;
+  auto& next = hld.next;
   segtree<S, op, e> seg(n);
   segtree<S, rop, e> rseg(n);
   for (int i = 0; i < n; i++) {
