@@ -24,6 +24,8 @@ F compose(F g, F f) { return {g.a * f.a, g.a * f.b + g.b}; }
 F id() { return {1, 0}; }
 
 int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
   vector<S> a(n);
