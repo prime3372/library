@@ -59,7 +59,7 @@ template <class Key, class Val> class hash_map {
     using io_utility::operator<<;
     auto elems = mp.enumerate();
     std::sort(elems.begin(), elems.end());
-    os << elems;
+    return os << elems;
   }
 
  private:
