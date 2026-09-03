@@ -104,7 +104,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
   }
 
   S get(const node_ptr& p, ull a, ull b, int h, ull i) const {
-    if (!p) return initial_vals.back();
+    if (!p) return initial_vals[0];
     if (b - a == 1) return p->val;
     ull c = (a + b) / 2;
     if (i < c) {
