@@ -114,20 +114,7 @@ template <class node, class derived> class implicit_treap_base {
  protected:
   node* root = nullptr;
 
-  static node* merge(node* left, node* right) {
-    if (!left || !right) return left ? left : right;
-    if (left->priority > right->priority) {
-      derived::push(left);
-      left->right = merge(left->right, right);
-      derived::update(left);
-      return left;
-    } else {
-      derived::push(right);
-      right->left = merge(left, right->left);
-      derived::update(right);
-      return right;
-    }
-  }
+  static int size(const node* p) { return p ? p->sub : 0; }
 
   static std::pair<node*, node*> split(node* p, int k) {
     if (!p) return {nullptr, nullptr};
@@ -145,7 +132,20 @@ template <class node, class derived> class implicit_treap_base {
     }
   }
 
-  static int size(const node* p) { return p ? p->sub : 0; }
+  static node* merge(node* left, node* right) {
+    if (!left || !right) return left ? left : right;
+    if (left->priority > right->priority) {
+      derived::push(left);
+      left->right = merge(left->right, right);
+      derived::update(left);
+      return left;
+    } else {
+      derived::push(right);
+      right->left = merge(left, right->left);
+      derived::update(right);
+      return right;
+    }
+  }
 };
 
 }  // namespace cp
