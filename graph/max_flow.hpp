@@ -17,8 +17,7 @@ class max_flow {
   max_flow() : max_flow(0) {}
   explicit max_flow(int _n) : n(_n), g(_n) {}
 
-  int add_edge(int from, int to) { return add_edge(from, to, 1); }
-  int add_edge(int from, int to, Cap cap) {
+  int add_edge(int from, int to, Cap cap = 1) {
     assert(0 <= from && from < n);
     assert(0 <= to && to < n);
     assert(0 <= cap);
