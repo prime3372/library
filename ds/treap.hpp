@@ -67,7 +67,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     if constexpr (multiset) {
       insert(root, new node(k));
     } else {
-      return contains(k) ? (insert(root, new node(k)), true) : false;
+      return contains(k) ? false : (insert(root, new node(k)), true);
     }
   }
 
