@@ -17,31 +17,32 @@ using ld = long double;
 using i128 = __int128;
 using u128 = unsigned __int128;
 using f128 = __float128;
-template <class T> using vec = vector<T>;
-using str = string;
-template <class T> using minque = priority_queue<T, vector<T>, greater<T>>;
-template <class T> using maxque = priority_queue<T>;
+template <class T> using vec = std::vector<T>;
+using str = std::string;
+template <class T>
+using minque = std::priority_queue<T, std::vector<T>, std::greater<T>>;
+template <class T> using maxque = std::priority_queue<T>;
 
 using namespace cp;
-using mint = modint998244353;
+using mint = cp::modint998244353;
 
 #ifdef LOCAL
 
 #define GET_STRING(a, ...) #a
 
 #define local 1
-#define dump(...)                                              \
-  []<class... _Args>(const _Args&... _args) -> void {          \
-    string _args_str = GET_STRING((__VA_ARGS__));              \
-    if (sizeof...(_Args) <= 1)                                 \
-      _args_str = _args_str.substr(1, _args_str.size() - 2);   \
-    _args_str += ": ";                                         \
-    cerr << _args_str;                                         \
-    ostringstream _oss;                                        \
-    _oss << make_tuple(_args...);                              \
-    string _outs = _oss.str();                                 \
-    if (count(_outs.begin(), _outs.end(), '\n')) cerr << "\n"; \
-    cerr << _outs << "\n";                                     \
+#define dump(...)                                                   \
+  []<class... _Args>(const _Args&... _args) -> void {               \
+    std::string _args_str = GET_STRING((__VA_ARGS__));              \
+    if (sizeof...(_Args) <= 1)                                      \
+      _args_str = _args_str.substr(1, _args_str.size() - 2);        \
+    _args_str += ": ";                                              \
+    cerr << _args_str;                                              \
+    std::ostringstream _oss;                                        \
+    _oss << std::make_tuple(_args...);                              \
+    std::string _outs = _oss.str();                                 \
+    if (std::count(_outs.begin(), _outs.end(), '\n')) cerr << "\n"; \
+    cerr << _outs << "\n";                                          \
   }(__VA_ARGS__)
 #define write(...) \
   [](const auto&... _args) -> void { (cerr << ... << _args); }(__VA_ARGS__)
