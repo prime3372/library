@@ -29,7 +29,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
     }
   }
 
-  void set(ull i, S x) {
+  void set(ull i, const S& x) {
     assert(i < n);
     set(root, 0, sz, log, i, x);
   }
@@ -77,7 +77,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
     S val;
     node_ptr left, right;
     node() {}
-    explicit node(S v) : val(v) {}
+    explicit node(const S& v) : val(v) {}
   };
   ull n, sz;
   int log;
@@ -89,7 +89,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
                 t->right ? t->right->val : initial_vals[h - 1]);
   }
 
-  void set(node_ptr& t, ull a, ull b, int h, ull i, S x) {
+  void set(node_ptr& t, ull a, ull b, int h, ull i, const S& x) {
     if (!t) t = std::make_unique<node>(initial_vals[h]);
     if (b - a == 1) {
       t->val = x;

@@ -30,7 +30,7 @@ class dynamic_lazy_segtree {
     }
   }
 
-  void set(ull i, S x) {
+  void set(ull i, const S& x) {
     assert(i < n);
     set(root, 0, sz, log, i, x);
   }
@@ -47,12 +47,12 @@ class dynamic_lazy_segtree {
 
   S all_prod() { return root ? root->val : initial_vals[log]; }
 
-  void apply(ull i, F f) {
+  void apply(ull i, const F& f) {
     assert(i < n);
     apply(root, 0, sz, log, i, f);
   }
 
-  void apply(ull l, ull r, F f) {
+  void apply(ull l, ull r, const F& f) {
     assert(l <= r && r <= n);
     apply(root, 0, sz, log, l, r, f);
   }
@@ -89,7 +89,7 @@ class dynamic_lazy_segtree {
     bool lzflag = false;
     node_ptr left, right;
     node() {}
-    explicit node(S v) : val(v) {}
+    explicit node(const S& v) : val(v) {}
   };
   ull n, sz;
   int log;
@@ -100,7 +100,7 @@ class dynamic_lazy_segtree {
     t->val = op(t->left ? t->left->val : initial_vals[h - 1],
                 t->right ? t->right->val : initial_vals[h - 1]);
   }
-  void all_apply(node_ptr& t, F f) {
+  void all_apply(node_ptr& t, const F& f) {
     t->val = act(f, t->val);
     t->lz = compose(f, t->lz);
     t->lzflag = true;
@@ -115,7 +115,7 @@ class dynamic_lazy_segtree {
     t->lzflag = false;
   }
 
-  void set(node_ptr& t, ull a, ull b, int h, ull i, S x) {
+  void set(node_ptr& t, ull a, ull b, int h, ull i, const S& x) {
     if (!t) t = std::make_unique<node>(initial_vals[h]);
     if (b - a == 1) {
       t->val = x;
@@ -161,7 +161,7 @@ class dynamic_lazy_segtree {
               prod(t->right, c, b, h - 1, l, r));
   }
 
-  void apply(node_ptr& t, ull a, ull b, int h, ull i, F f) {
+  void apply(node_ptr& t, ull a, ull b, int h, ull i, const F& f) {
     if (!t) t = std::make_unique<node>(initial_vals[h]);
     if (b - a == 1) {
       t->val = act(f, t->val);
@@ -177,7 +177,7 @@ class dynamic_lazy_segtree {
     update(t, h);
   }
 
-  void apply(node_ptr& t, ull a, ull b, int h, ull l, ull r, F f) {
+  void apply(node_ptr& t, ull a, ull b, int h, ull l, ull r, const F& f) {
     if (b <= l || r <= a) return;
     if (!t) t = std::make_unique<node>(initial_vals[h]);
     if (l <= a && b <= r) {

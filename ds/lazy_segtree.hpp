@@ -67,7 +67,7 @@ class lazy_segtree {
 
   S all_prod() const { return d[1]; }
 
-  void apply(int i, F f) {
+  void apply(int i, const F& f) {
     assert(0 <= i && i < n);
     i += sz;
     for (int j = log; j >= 1; j--) push(i >> j);
@@ -172,7 +172,7 @@ class lazy_segtree {
   std::vector<F> lz;
 
   void update(int k) { d[k] = op(d[2 * k], d[2 * k + 1]); }
-  void all_apply(int k, F f) {
+  void all_apply(int k, const F& f) {
     d[k] = act(f, d[k]);
     if (k < sz) lz[k] = compose(f, lz[k]);
   }
