@@ -15,18 +15,13 @@ template <class T> class hash_set {
   hash_set() {}
 
   bool insert(const T& k) {
-    char& flag = d[k];
-    if (flag) return false;
-    sz++;
-    return flag = true;
+    char& f = d[k];
+    return f ? false : (sz++, f = true);
   }
 
   bool erase(const T& k) {
-    char& flag = d[k];
-    if (!flag) return false;
-    sz--;
-    flag = false;
-    return true;
+    char& f = d[k];
+    return f ? (sz--, !(f = false)) : false;
   }
 
   bool count(const T& k) const { return d.get(k); }

@@ -19,10 +19,7 @@ template <class T> class hash_multiset {
 
   bool erase(const T& k) {
     int& num = d[k];
-    if (num == 0) return false;
-    num--;
-    sz--;
-    return true;
+    return num ? (num--, sz--, true) : false;
   }
 
   int count(const T& k) const { return d.get(k); }

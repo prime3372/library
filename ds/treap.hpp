@@ -4,6 +4,7 @@
 #include <functional>
 #include <iostream>
 #include <tuple>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -62,8 +63,12 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
 
   ~treap() { delete root; }
 
-  void insert(const T& k) {
-    if (multiset || !contains(k)) insert(root, new node(k));
+  std::conditional_t<multiset, void, bool> insert(const T& k) {
+    if constexpr (multiset) {
+      insert(root, new node(k));
+    } else {
+      return contains(k) ? (insert(root, new node(k)), true) : false;
+    }
   }
 
   // @note If there are elements equivalent to x, select one of them and remove
