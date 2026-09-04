@@ -57,7 +57,7 @@
   "test/yosupo/data_structure/point_add_rectangle_sum.test.cpp": "2026-09-04 02:44:32 +0900",
   "test/yosupo/data_structure/point_set_range_composite.test.cpp": "2026-09-04 01:39:36 +0900",
   "test/yosupo/data_structure/point_set_range_composite_large_array.test.cpp": "2026-09-04 11:18:43 +0900",
-  "test/yosupo/data_structure/predecessor_problem.test.cpp": "2026-09-04 14:11:02 +0900",
+  "test/yosupo/data_structure/predecessor_problem.test.cpp": "2026-09-04 14:42:55 +0900",
   "test/yosupo/data_structure/queue_operate_all_composite.test.cpp": "2026-08-31 03:51:05 +0900",
   "test/yosupo/data_structure/range_add_range_min.test.cpp": "2026-09-04 11:18:43 +0900",
   "test/yosupo/data_structure/range_affine_point_get.test.cpp": "2026-09-04 11:18:43 +0900",
