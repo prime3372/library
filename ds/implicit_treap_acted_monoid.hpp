@@ -102,7 +102,7 @@ class implicit_treap_acted_monoid
     t->lz = id();
   }
 
-  static void all_apply(node* t, F f) {
+  static void all_apply(node* t, const F& f) {
     t->lz = compose(f, t->lz);
     t->val = act(f, t->val);
     t->prod = act(f, t->prod);
