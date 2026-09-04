@@ -210,19 +210,17 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
   }
 
   bool erase(node*& t, const T& k) {
-    if (!t) {
-      return false;
-    } else if (equal(t->key, k)) {
+    if (!t) return false;    
+    if (equal(t->key, k)) {
       node* t2 = merge(t->left, t->right);
       t->left = t->right = nullptr;
       delete t;
       t = t2;
       return true;
-    } else {
-      bool res = erase(k < t->key ? t->left : t->right, k);
-      update(t);
-      return res;
     }
+    bool res = erase(k < t->key ? t->left : t->right, k);
+    update(t);
+    return res;
   }
 
   template <class F> int binary_search(F f) const {
