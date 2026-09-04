@@ -23,6 +23,7 @@ template <class T> class hash_multiset {
   }
 
   int count(const T& k) const { return d.get(k); }
+  bool contains(const T& k) const { return count(k); }
 
   std::vector<T> enumerate() const {
     auto pairs = d.enumerate();

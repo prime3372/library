@@ -24,7 +24,8 @@ template <class T> class hash_set {
     return f ? (sz--, !(f = false)) : false;
   }
 
-  bool count(const T& k) const { return d.get(k); }
+  int count(const T& k) const { return d.get(k); }
+  bool contains(const T& k) const { return count(k); }
 
   std::vector<T> enumerate() const {
     auto pairs = d.enumerate();
