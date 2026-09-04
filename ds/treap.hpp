@@ -19,14 +19,19 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
   explicit treap(std::vector<T> v) {
     if (v.empty()) return;
     int n = int(v.size());
-    bool sorted = true;
+    bool sorted = true, unique = true;
     for (int i = 0; i < n - 1; i++) {
       if (less(v[i + 1], v[i])) {
         sorted = false;
         break;
       }
+      if (equal(v[i], v[i + 1])) unique = false;
     }
     if (!sorted) std::sort(v.begin(), v.end(), less);
+    if (!multiset && (!sorted || !unique)) {
+      v.erase(std::unique(v.begin(), v.end(), equal), v.end());
+      n = int(v.size());
+    }
     std::vector<node*> ps(n);
     std::vector<unsigned long long> pr(n);
     for (int i = 0; i < n; i++) {
@@ -98,20 +103,24 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     return t;
   }
 
+  std::vector<T> enumerate() const {
+    std::vector<T> elems(size());
+    auto dfs = [&](auto self, const node* t, int i) {
+      if (!t) return;
+      elems[i + size(t->left)] = t->key;
+      self(self, t->left, i);
+      self(self, t->right, i + size(t->left) + 1);
+    };
+    dfs(dfs, root, 0);
+    return elems;
+  }
+
   int size() const { return size(root); }
   bool empty() const { return size() == 0; }
 
   friend std::ostream& operator<<(std::ostream& os, const treap& tp) {
     using io_utility::operator<<;
-    std::vector<T> v(tp.size());
-    auto dfs = [&](auto self, node* t, int i) {
-      if (!t) return;
-      v[i + size(t->left)] = t->key;
-      self(self, t->left, i);
-      self(self, t->right, i + size(t->left) + 1);
-    };
-    dfs(dfs, tp.root, 0);
-    return os << v;
+    return os << tp.enumerate();
   }
 
  private:
