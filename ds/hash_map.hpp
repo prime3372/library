@@ -87,8 +87,8 @@ template <class Key, class Val> class hash_map {
       if (!used[i]) continue;
       unsigned int hs = hash(keys[i]);
       while (u[hs]) hs = (hs + 1) & (cap - 1);
-      k[hs] = keys[i];
-      v[hs] = vals[i];
+      k[hs] = std::move(keys[i]);
+      v[hs] = std::move(vals[i]);
       u[hs] = true;
     }
     keys.swap(k);
