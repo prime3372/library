@@ -31,6 +31,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
       v.erase(std::unique(v.begin(), v.end(), equal), v.end());
       n = int(v.size());
     }
+
     std::vector<node*> ps(n);
     std::vector<unsigned long long> pr(n);
     for (int i = 0; i < n; i++) {
@@ -50,6 +51,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     };
     dfs(dfs, root = ps[cart.root]);
   }
+
   treap(const treap& other)
       : root(other.root ? new node(*other.root) : nullptr) {}
   treap(treap&& other) noexcept : root(other.root) { other.root = nullptr; }
@@ -57,12 +59,11 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     std::swap(root, other.root);
     return *this;
   }
+
   ~treap() { delete root; }
 
-  bool insert(const T& k) {
-    if (!multiset && contains(k)) return false;
-    insert(root, new node(k));
-    return true;
+  void insert(const T& k) {
+    if (multiset || !contains(k)) insert(root, new node(k));
   }
 
   // @note If there are elements equivalent to x, select one of them and remove
@@ -82,6 +83,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
     return t->key;
   }
+
   const T& front() const {
     assert(!empty());
     return (*this)[0];
