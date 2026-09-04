@@ -61,8 +61,8 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     return true;
   }
 
-  // @note This function removes exactly one element equivalent to k. Which of
-  // the equivalent elements is selected is undefined.
+  // @note If there are elements equivalent to x, select one of them and remove
+  // it; otherwise, do nothing.
   bool erase(const T& k) { return erase(root, k); }
 
   const T& operator[](int i) const {
