@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
 
-#include "ds/dynamic_segtree.hpp"
+#include "ds/segtree.hpp"
 #include <iostream>
 
 using namespace std;
@@ -14,7 +14,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  dynamic_segtree<bool, op, e> seg(n);
+  segtree<bool, op, e> seg(n);
   for (int i = 0; i < n; i++) {
     char ti;
     cin >> ti;
@@ -33,10 +33,10 @@ int main() {
     } else if (c == 2) {
       cout << seg[k] << "\n";
     } else if (c == 3) {
-      int mr = int(seg.max_right(k, f));
+      int mr = seg.max_right(k, f);
       cout << (mr == n ? -1 : mr) << "\n";
     } else {
-      int ml = int(seg.min_left(k + 1, f));
+      int ml = seg.min_left(k + 1, f);
       cout << ml - 1 << "\n";
     }
   }
