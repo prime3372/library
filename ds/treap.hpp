@@ -19,16 +19,15 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
   explicit treap(std::vector<T> v) {
     if (v.empty()) return;
     int n = int(v.size());
-    bool sorted = true, unique = true;
+    bool sorted = true;
     for (int i = 0; i < n - 1; i++) {
       if (less(v[i + 1], v[i])) {
         sorted = false;
         break;
       }
-      if (equal(v[i], v[i + 1])) unique = false;
     }
     if (!sorted) std::sort(v.begin(), v.end(), less);
-    if (!multiset && (!sorted || !unique)) {
+    if (!multiset) {
       v.erase(std::unique(v.begin(), v.end(), equal), v.end());
       n = int(v.size());
     }
@@ -82,6 +81,14 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
       }
     }
     return t->key;
+  }
+  const T& min() const {
+    assert(!empty());
+    return (*this)[0];
+  }
+  const T& max() const {
+    assert(!empty());
+    return (*this)[size() - 1];
   }
 
   int lower_bound(const T& k) const {
