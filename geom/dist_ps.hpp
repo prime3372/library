@@ -1,6 +1,5 @@
 #pragma once
 
-#include "geom/intersect_ps.hpp"
 #include "geom/point.hpp"
 #include "geom/projection.hpp"
 #include "geom/segment.hpp"
@@ -9,7 +8,7 @@ namespace cp {
 
 long double dist(const point<long double>& p, const segment<long double>& s) {
   point<long double> h = projection(p, line<long double>(s));
-  if (intersect(h, s)) return abs(h - p);
+  if (on(h, s)) return abs(h - p);
   return std::min(abs(s.p - p), abs(s.q - p));
 }
 
