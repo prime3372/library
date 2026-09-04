@@ -32,6 +32,10 @@ template <class T> bool is_orthogonal(const line<T>& l, const line<T>& m) {
   return is_orthogonal(l.q - l.p, m.q - m.p);
 }
 
+template <class T> bool on(const point<T>& p, const line<T>& l) {
+  return internal::equal(cross(l.p - p, l.q - p), 0);
+}
+
 template <class T> std::istream& operator>>(std::istream& is, line<T>& l) {
   return is >> l.p >> l.q;
 }

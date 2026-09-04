@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 
+#include "geom/ccw.hpp"
 #include "geom/line.hpp"
 #include "geom/point.hpp"
 
@@ -27,6 +28,10 @@ template <class T> bool is_parallel(const segment<T>& s, const segment<T>& t) {
 template <class T>
 bool is_orthogonal(const segment<T>& s, const segment<T>& t) {
   return is_orthogonal(line<T>(s), line<T>(t));
+}
+
+template <class T> bool on(const point<T>& p, const segment<T>& s) {
+  return ccw(s.p, s.q, p) == 0;
 }
 
 template <class T> std::istream& operator>>(std::istream& is, segment<T>& l) {
