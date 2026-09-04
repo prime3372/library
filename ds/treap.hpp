@@ -159,14 +159,14 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
   }* root = nullptr;
 
-  static int size(const node* t) { return t ? t->sub : 0; }
-
-  static void update(node* t) { t->sub = size(t->left) + size(t->right) + 1; }
-
   static bool less(const T& x, const T& y) { return Comp()(x, y); }
   static bool equal(const T& x, const T& y) {
     return !Comp()(x, y) && !Comp()(y, x);
   }
+
+  int size(const node* t) const { return t ? t->sub : 0; }
+
+  void update(node* t) { t->sub = size(t->left) + size(t->right) + 1; }
 
   std::pair<node*, node*> split(node* t, const T& k) {
     if (!t) return {nullptr, nullptr};
