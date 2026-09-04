@@ -82,11 +82,11 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
     return t->key;
   }
-  const T& min() const {
+  const T& front() const {
     assert(!empty());
     return (*this)[0];
   }
-  const T& max() const {
+  const T& back() const {
     assert(!empty());
     return (*this)[size() - 1];
   }
