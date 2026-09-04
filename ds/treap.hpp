@@ -29,7 +29,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
     if (!sorted) std::sort(v.begin(), v.end(), less);
     if (!multiset) {
-      v.erase(std::unique(v.begin(), v.end(), equal), v.end());
+      v.erase(std::unique(v.begin(), v.end(), equiv), v.end());
       n = int(v.size());
     }
 
@@ -71,8 +71,6 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
   }
 
-  // @note If there are elements equivalent to x, select one of them and remove
-  // it; otherwise, do nothing.
   bool erase(const T& k) { return erase(root, k); }
 
   const T& operator[](int i) const {
@@ -88,7 +86,6 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
     return t->key;
   }
-
   const T& front() const {
     assert(!empty());
     return (*this)[0];
@@ -99,10 +96,30 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
   }
 
   int lower_bound(const T& k) const {
-    return binary_search([&](const T& x) { return less(x, k); });
+    const node* t = root;
+    int res = 0;
+    while (t) {
+      if (!less(t->key, k)) {
+        t = t->left;
+      } else {
+        res += size(t->left) + 1;
+        t = t->right;
+      }
+    }
+    return res;
   }
   int upper_bound(const T& k) const {
-    return binary_search([&](const T& x) { return !less(k, x); });
+    const node* t = root;
+    int res = 0;
+    while (t) {
+      if (less(k, t->key)) {
+        t = t->left;
+      } else {
+        res += size(t->left) + 1;
+        t = t->right;
+      }
+    }
+    return res;
   }
 
   int count(const T& k) const {
@@ -111,7 +128,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
   }
   bool contains(const T& k) const {
     const node* t = root;
-    while (t && !equal(t->key, k)) {
+    while (t && !equiv(t->key, k)) {
       t = less(k, t->key) ? t->left : t->right;
     }
     return t;
@@ -160,7 +177,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
   }* root = nullptr;
 
   static bool less(const T& x, const T& y) { return Comp()(x, y); }
-  static bool equal(const T& x, const T& y) {
+  static bool equiv(const T& x, const T& y) {
     return !Comp()(x, y) && !Comp()(y, x);
   }
 
@@ -210,8 +227,8 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
   }
 
   bool erase(node*& t, const T& k) {
-    if (!t) return false;    
-    if (equal(t->key, k)) {
+    if (!t) return false;
+    if (equiv(t->key, k)) {
       node* t2 = merge(t->left, t->right);
       t->left = t->right = nullptr;
       delete t;
@@ -220,20 +237,6 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
     bool res = erase(k < t->key ? t->left : t->right, k);
     update(t);
-    return res;
-  }
-
-  template <class F> int binary_search(F f) const {
-    const node* t = root;
-    int res = 0;
-    while (t) {
-      if (f(t->key)) {
-        res += size(t->left) + 1;
-        t = t->right;
-      } else {
-        t = t->left;
-      }
-    }
     return res;
   }
 };
