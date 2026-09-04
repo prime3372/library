@@ -11,12 +11,19 @@ template <class T> class line {
  public:
   point<T> p, q;
   line() : p(0, 0), q(1, 0) {}
-  line(const point<T>& _p, const point<T>& _q) : p(_p), q(_q) {}
+  explicit line(const point<T>& _p, const point<T>& _q) : p(_p), q(_q) {}
   template <class U>
   explicit line(const line<U>& l) : p(point<T>(l.p)), q(point<T>(l.q)) {}
 };
 
 template <class T> long double arg(const line<T>& l) { return arg(l.q - l.p); }
+
+point<long double> direction(const line<long double>& l) {
+  return (l.q - l.p) / abs(l.q - l.p);
+}
+template <class T> point<long double> direction(const line<T>& l) {
+  return direction(line<long double>(l));
+}
 
 template <class T> bool is_parallel(const line<T>& l, const line<T>& m) {
   return is_parallel(l.q - l.p, m.q - m.p);
