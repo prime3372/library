@@ -12,7 +12,7 @@ template <class T> class segment {
  public:
   point<T> p, q;
   segment() {}
-  segment(const point<T>& _p, const point<T>& _q) : p(_p), q(_q) {}
+  explicit segment(const point<T>& _p, const point<T>& _q) : p(_p), q(_q) {}
   template <class U> explicit segment(const segment<U>& s) : p(s.p), q(s.q) {}
   explicit operator line<T>() const { return line<T>(p, q); }
 };
