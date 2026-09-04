@@ -17,8 +17,7 @@ namespace cp {
 // @note `Val` cannot be `bool`
 template <class Key, class Val> class hash_map {
  public:
-  hash_map()
-      : cap(8), sz(0), keys(cap), vals(cap), used(cap), default_value() {}
+  hash_map() : cap(8), sz(0), keys(cap), vals(cap), used(cap) {}
 
   Val& operator[](const Key& k) {
     unsigned int i = index(k);
@@ -67,7 +66,7 @@ template <class Key, class Val> class hash_map {
   std::vector<Key> keys;
   std::vector<Val> vals;
   std::vector<bool> used;
-  Val default_value;
+  Val default_value = Val();
 
   unsigned int hash(const Key& k) const {
     return (unsigned int)(safe_hash<Key>()(k) & (cap - 1));
