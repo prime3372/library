@@ -24,7 +24,7 @@ YELLOW = "\033[33m"
 BLUE = "\033[34m"
 MAGENTA = "\033[35m"
 
-# result code
+# exit status of the checker
 OK = [0]
 WA = [1, 2]
 
@@ -56,16 +56,18 @@ def main():
     print("compilation finished.")
     time.sleep(0.1)
 
+    t_max = 0
+
     for i in range(1, case_num + 1):
         # run gen.exe
         try:
             with open("in.txt", "w") as f_in:
                 subprocess.run(["./gen.exe"], stdout=f_in, timeout=timeout / 1000.0, check=True)
         except subprocess.TimeoutExpired:
-            print(f"Test {i} {BLUE}Fail{RESET} Timed Out {gen}")
+            print(f"Test {i} {BLUE}Aborted{RESET} {gen} timed out")
             break
         except subprocess.CalledProcessError:
-            print(f"Test {i} {BLUE}Fail{RESET} Runtime Error {gen}")
+            print(f"Test {i} {BLUE}Aborted{RESET} {gen} returned a non-zero exit status")
             break
 
         # run sol.exe and act.exe
@@ -79,12 +81,12 @@ def main():
             t2.start()
 
             start = time.perf_counter()
-            tle = False
+            timedout = False
             while p_sol.poll() is None or p_act.poll() is None:
                 if time.perf_counter() - start > timeout / 1000.0:
                     p_sol.kill()
                     p_act.kill()
-                    tle = True
+                    timedout = True
                     break
                 time.sleep(0.01)
 
@@ -92,29 +94,33 @@ def main():
             t2.join()
 
         t = int((time.perf_counter() - start) * 1000)
+        t_max = max(t_max, t)
 
-        if tle:
-            print(f"Test {i} {YELLOW}TLE{RESET} > {timeout} ms")
+        if timedout:
+            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timeout} ms")
             break
 
         if p_sol.returncode != 0:
-            print(f"Test {i} {MAGENTA}RE{RESET} {t} ms")
+            print(f"Test {i} {MAGENTA}Runtime Error{RESET} {t} ms")
             break
 
         if t > timelimit:
-            print(f"Test {i} {YELLOW}TLE{RESET} {t} ms")
+            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} {t} ms")
             break
 
         if p_act.returncode in OK:
-            print(f"Test {i} {GREEN}AC{RESET} {t} ms")
-            if i != case_num:
-                subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
+            print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
         elif p_act.returncode in WA:
-            print(f"Test {i} {RED}WA{RESET} {t} ms")
+            print(f"Test {i} {RED}Wrong Answer{RESET} {t} ms")
             break
         else:
-            print(f"Test {i} {BLUE}Fail{RESET} Runtime Error {act}")
+            print(f"Test {i} {BLUE}Aborted{RESET} {act} returned an unexpected exit status")
             break
+
+        if i != case_num:
+            subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
+        else:
+            print(f"All tests passed. [max {t_max} ms]")
 
 if __name__ == "__main__":
     main()
