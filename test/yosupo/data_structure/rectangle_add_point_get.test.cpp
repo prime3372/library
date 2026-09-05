@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/rectangle_add_point_get"
 
-#include "ds/coordinate_compression.hpp"
 #include "ds/dynamic_fenwick_tree_2d.hpp"
+#include "util/coordinate_compression.hpp"
 #include <iostream>
 #include <tuple>
 #include <vector>
