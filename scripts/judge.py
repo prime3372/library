@@ -109,7 +109,7 @@ def main():
         if i != case_num:
             subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt"])
         else:
-            print(f"All tests passed. [max {t_max} ms]")
+            print(f"All tests passed. max {t_max} ms")
 
 if __name__ == "__main__":
     main()
