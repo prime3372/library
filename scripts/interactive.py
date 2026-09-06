@@ -51,9 +51,10 @@ def main():
             failed = True
 
     if failed:
+        print("compilation failed")
         return
 
-    print("compilation finished.")
+    print("compilation finished")
 
     t_max = 0
 
@@ -115,8 +116,6 @@ def main():
 
         if i != case_num:
             subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
-        else:
-            print(f"All tests passed. Time: {t_max} ms")
 
 if __name__ == "__main__":
     main()
