@@ -115,7 +115,7 @@ def main():
 
         if p_act.returncode in OK:
             print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
-        elif p_act.returncode in WA:
+        else:
             print(f"Test {i} {RED}Wrong Answer{RESET} {t} ms")
             break
 
