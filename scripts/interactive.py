@@ -25,7 +25,7 @@ YELLOW = "\033[33m"
 BLUE = "\033[34m"
 MAGENTA = "\033[35m"
 
-# exit status of the checker
+# exit status of the interactor
 OK = [0]
 WA = [1, 2]
 
