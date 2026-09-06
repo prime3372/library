@@ -55,10 +55,10 @@ def main():
                 subprocess.run(["./gen.exe"], stdout=f_in, timeout=timelimit * 1.1 / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"Test {i} {BLUE}Aborted{RESET} {gen} timed out")
-            break
+            return
         except subprocess.CalledProcessError:
             print(f"Test {i} {BLUE}Aborted{RESET} {gen} returned a non-zero exit status")
-            break
+            return
 
         # run sol.exe
         start = time.perf_counter()
@@ -67,18 +67,18 @@ def main():
                 subprocess.run(["./sol.exe"], stdin=f_in, stdout=f_out, timeout=timelimit * 1.1 / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
-            break
+            return
         except subprocess.CalledProcessError:
             t = math.ceil((time.perf_counter() - start) * 1000)
             print(f"Test {i} {MAGENTA}Runtime Error{RESET} {t} ms")
-            break
+            return
 
         t = math.ceil((time.perf_counter() - start) * 1000)
         t_max = max(t_max, t)
 
         if t > timelimit:
             print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
-            break
+            return
 
         # run ans.exe
         try:
@@ -86,10 +86,10 @@ def main():
                 subprocess.run(["./ans.exe"], stdin=f_in, stdout=f_ans, timeout=timelimit * 1.1 / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"Test {i} {BLUE}Aborted{RESET} {ans} timed out")
-            break
+            return
         except subprocess.CalledProcessError:
             print(f"Test {i} {BLUE}Aborted{RESET} {ans} returned a non-zero exit status")
-            break
+            return
 
         # run che.exe
         try:
@@ -98,13 +98,13 @@ def main():
                 print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
             elif res.returncode in WA:
                 print(f"Test {i} {RED}Wrong Answer{RESET} {t} ms")
-                break
+                return
             else:
                 print(f"Test {i} {BLUE}Aborted{RESET} {che} returned an unexpected exit status")
-                break
+                return
         except subprocess.TimeoutExpired:
             print(f"Test {i} {BLUE}Aborted{RESET} {che} timed out")
-            break
+            return
 
         subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt", "ans.txt"])
 

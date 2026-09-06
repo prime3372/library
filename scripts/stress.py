@@ -48,10 +48,10 @@ def main():
                 subprocess.run(["./gen.exe"], stdout=f_in, timeout=timelimit * 1.1 / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"Test {i} {BLUE}Aborted{RESET} {gen} timed out")
-            break
+            return
         except subprocess.CalledProcessError:
             print(f"Test {i} {BLUE}Aborted{RESET} {gen} returned a non-zero exit status")
-            break
+            return
 
         # run sol.exe
         start = time.perf_counter()
@@ -60,21 +60,20 @@ def main():
                 subprocess.run(["./sol.exe"], stdin=f_in, stdout=f_out, timeout=timelimit * 1.1 / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
-            break
+            return
         except subprocess.CalledProcessError:
             t = math.ceil((time.perf_counter() - start) * 1000)
             print(f"Test {i} {MAGENTA}Runtime Error{RESET} {t} ms")
-            break
+            return
 
         t = math.ceil((time.perf_counter() - start) * 1000)
         t_max = max(t_max, t)
 
         if t > timelimit:
             print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
-            break
+            return
 
         print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
-
         subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt"])
 
 if __name__ == "__main__":
