@@ -19,10 +19,15 @@ opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", 
 
 # colors
 RESET = "\033[0m"
+RED = "\033[31m"
 GREEN = "\033[32m"
 YELLOW = "\033[33m"
 BLUE = "\033[34m"
 MAGENTA = "\033[35m"
+
+# exit status of the checker
+OK = [0]
+WA = [1, 2]
 
 def pump(src, dst, prefix, f_log):
     try:
@@ -66,7 +71,7 @@ def main():
             print(f"Test {i} {BLUE}Aborted{RESET} {gen} returned a non-zero exit status")
             break
 
-        # run sol.exe
+        # run sol.exe and act.exe
         p_sol = subprocess.Popen(["./sol.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
         p_act = subprocess.Popen(["./act.exe", "in.txt"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
 
@@ -92,6 +97,10 @@ def main():
         t = math.ceil((time.perf_counter() - start) * 1000)
         t_max = max(t_max, t)
 
+        if not p_act.returncode in OK + WA:
+            print(f"Test {i} {BLUE}Aborted{RESET} {act} returned an unexpected exit status")
+            break            
+
         if timedout:
             print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timeout} ms")
             break
@@ -100,15 +109,15 @@ def main():
             print(f"Test {i} {MAGENTA}Runtime Error{RESET} {t} ms")
             break
 
-        if p_act.returncode != 0:
-            print(f"Test {i} {BLUE}Aborted{RESET} {act} returned a non-zero exit status")
-            break
-
         if t > timelimit:
             print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} {t} ms")
             break
 
-        print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
+        if p_act.returncode in OK:
+            print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
+        elif p_act.returncode in WA:
+            print(f"Test {i} {RED}Wrong Answer{RESET} {t} ms")
+            break
 
         if i != case_num:
             subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
