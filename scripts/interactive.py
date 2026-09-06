@@ -55,7 +55,6 @@ def main():
         return
 
     print("compilation finished.")
-    time.sleep(0.1)
 
     t_max = 0
 
