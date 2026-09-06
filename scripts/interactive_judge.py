@@ -2,6 +2,7 @@ import sys
 import os
 import time
 import subprocess
+import math
 import threading
 
 # arguments
@@ -83,7 +84,7 @@ def main():
             start = time.perf_counter()
             timedout = False
             while p_sol.poll() is None or p_act.poll() is None:
-                if time.perf_counter() - start > timeout / 1000.0:
+                if math.ceil((time.perf_counter() - start) * 1000) > timeout:
                     p_sol.kill()
                     p_act.kill()
                     timedout = True
@@ -93,7 +94,7 @@ def main():
             t1.join()
             t2.join()
 
-        t = int((time.perf_counter() - start) * 1000)
+        t = math.ceil((time.perf_counter() - start) * 1000)
         t_max = max(t_max, t)
 
         if timedout:

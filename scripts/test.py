@@ -2,6 +2,7 @@ import sys
 import os
 import time
 import subprocess
+import math
 
 # arguments
 gen = sys.argv[1]
@@ -62,11 +63,11 @@ def main():
             print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timeout} ms")
             break
         except subprocess.CalledProcessError:
-            t = int((time.perf_counter() - start) * 1000)
+            t = math.ceil((time.perf_counter() - start) * 1000)
             print(f"Test {i} {MAGENTA}Runtime Error{RESET} {t} ms")
             break
 
-        t = int((time.perf_counter() - start) * 1000)
+        t = math.ceil((time.perf_counter() - start) * 1000)
         t_max = max(t_max, t)
 
         if t > timelimit:
