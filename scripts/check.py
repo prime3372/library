@@ -106,8 +106,7 @@ def main():
             print(f"Test {i} {BLUE}Aborted{RESET} {che} timed out")
             break
 
-        if i != case_num:
-            subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt", "ans.txt"])
+        subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt", "ans.txt"])
 
 if __name__ == "__main__":
     main()

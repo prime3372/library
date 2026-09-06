@@ -75,8 +75,7 @@ def main():
 
         print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
 
-        if i != case_num:
-            subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt"])
+        subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt"])
 
 if __name__ == "__main__":
     main()
