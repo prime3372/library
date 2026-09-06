@@ -14,7 +14,6 @@ include = sys.argv[5]
 
 # variables
 timelimit = 5000
-timeout = 10000
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # colors
@@ -62,7 +61,7 @@ def main():
         # run gen.exe
         try:
             with open("in.txt", "w") as f_in:
-                subprocess.run(["./gen.exe"], stdout=f_in, timeout=timeout / 1000.0, check=True)
+                subprocess.run(["./gen.exe"], stdout=f_in, timeout=timelimit / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"Test {i} {BLUE}Aborted{RESET} {gen} timed out")
             break
@@ -83,7 +82,7 @@ def main():
             start = time.perf_counter()
             timedout = False
             while p_sol.poll() is None or p_act.poll() is None:
-                if math.ceil((time.perf_counter() - start) * 1000) > timeout:
+                if time.perf_counter() - start > timelimit * 1.1 / 1000.0:
                     p_sol.kill()
                     p_act.kill()
                     timedout = True
@@ -98,18 +97,14 @@ def main():
 
         if not p_act.returncode in OK + WA:
             print(f"Test {i} {BLUE}Aborted{RESET} {act} returned an unexpected exit status")
-            break            
-
-        if timedout:
-            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timeout} ms")
             break
 
         if p_sol.returncode != 0:
             print(f"Test {i} {MAGENTA}Runtime Error{RESET} {t} ms")
             break
 
-        if t > timelimit:
-            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} {t} ms")
+        if timedout or t > timelimit:
+            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
             break
 
         if p_act.returncode in OK:

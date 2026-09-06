@@ -12,7 +12,6 @@ include = sys.argv[4]
 
 # variables
 timelimit = 5000
-timeout = 10000
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # colors
@@ -45,7 +44,7 @@ def main():
         # run gen.exe
         try:
             with open("in.txt", "w") as f_in:
-                subprocess.run(["./gen.exe"], stdout=f_in, timeout=timeout / 1000.0, check=True)
+                subprocess.run(["./gen.exe"], stdout=f_in, timeout=timelimit * 1.1 / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"Test {i} {BLUE}Aborted{RESET} {gen} timed out")
             break
@@ -57,9 +56,9 @@ def main():
         start = time.perf_counter()
         try:
             with open("in.txt", "r") as f_in, open("out.txt", "w") as f_out:
-                subprocess.run(["./sol.exe"], stdin=f_in, stdout=f_out, timeout=timeout / 1000.0, check=True)
+                subprocess.run(["./sol.exe"], stdin=f_in, stdout=f_out, timeout=timelimit * 1.1 / 1000.0, check=True)
         except subprocess.TimeoutExpired:
-            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timeout} ms")
+            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
             break
         except subprocess.CalledProcessError:
             t = math.ceil((time.perf_counter() - start) * 1000)
@@ -70,13 +69,13 @@ def main():
         t_max = max(t_max, t)
 
         if t > timelimit:
-            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} {t} ms")
+            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
             break
 
         print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
 
         if i != case_num:
-            subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt", "ans.txt"])
+            subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt"])
         else:
             print(f"All tests passed. Time: {t_max} ms")
 
