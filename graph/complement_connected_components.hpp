@@ -9,7 +9,7 @@ namespace cp {
 class complement_connected_components {
  public:
   complement_connected_components() : n(0) {}
-  complement_connected_components(int _n) : n(_n), g(_n) {}
+  explicit complement_connected_components(int _n) : n(_n), g(_n) {}
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
     assert(0 <= v && v < n);
