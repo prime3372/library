@@ -145,6 +145,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-    for f in ["sol.exe", "gen.exe", "act.exe", "in.txt", "log.txt"]:
+    for f in ["sol.exe", "gen.exe", "act.exe"]:
         if os.path.exists(f):
             os.remove(f)
