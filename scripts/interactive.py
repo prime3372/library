@@ -16,14 +16,6 @@ include = sys.argv[5]
 timelimit = 5000
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
-# colors
-RESET = "\033[0m"
-RED = "\033[31m"
-GREEN = "\033[32m"
-YELLOW = "\033[33m"
-BLUE = "\033[34m"
-MAGENTA = "\033[35m"
-
 # exit status of the interactor
 OK = [0]
 WA = [1, 2]
@@ -33,21 +25,33 @@ def pump(src, dst, prefix, f_log):
         for line in src:
             f_log.write(prefix + line)
             f_log.flush()
-            dst.write(line)
-            dst.flush()
+            if dst:
+                dst.write(line)
+                dst.flush()
     except Exception:
         pass
+    finally:
+        if dst:
+            try:
+                dst.close()
+            except Exception:
+                pass
 
 def main():
+    RESET = "\033[0m"
+    RED = "\033[31m"
+    GREEN = "\033[32m"
+    YELLOW = "\033[33m"
+    BLUE = "\033[34m"
+    MAGENTA = "\033[35m"
+
     print("compiling...")
-
     targets = [(gen, "gen.exe"), (sol, "sol.exe"), (act, "act.exe")]
-
     procs = [subprocess.Popen(["g++", src] + opts + ["-o", exe]) for src, exe in targets]
 
     failed = False
     for p in procs:
-        if p.wait() != 0 and not failed:
+        if p.wait() != 0:
             failed = True
 
     if failed:
@@ -62,7 +66,7 @@ def main():
         # run gen.exe
         try:
             with open("in.txt", "w") as f_in:
-                subprocess.run(["./gen.exe"], stdout=f_in, timeout=timelimit / 1000.0, check=True)
+                subprocess.run(["./gen.exe"], stdout=f_in, timeout=timelimit * 1.1 / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"Test {i} {BLUE}Aborted{RESET} {gen} timed out")
             break
@@ -73,51 +77,74 @@ def main():
         # run sol.exe and act.exe
         p_sol = subprocess.Popen(["./sol.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
         p_act = subprocess.Popen(["./act.exe", "in.txt"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+        stopped = False
 
         with open("log.txt", "w") as f_log:
-            t1 = threading.Thread(target=pump, args=(p_sol.stdout, p_act.stdin, "   [send] ", f_log))
-            t2 = threading.Thread(target=pump, args=(p_act.stdout, p_sol.stdin, "[receive] ", f_log))
+            t1 = threading.Thread(target=pump, args=(p_sol.stdout, p_act.stdin, "  [solution] ", f_log))
+            t2 = threading.Thread(target=pump, args=(p_act.stdout, p_sol.stdin, "[interactor] ", f_log))
             t1.start()
             t2.start()
 
             start = time.perf_counter()
-            timedout = False
-            while p_sol.poll() is None or p_act.poll() is None:
+            while True:
+                t = math.ceil((time.perf_counter() - start) * 1000)
+                sol_code = p_sol.poll()
+                act_code = p_act.poll()
+
                 if time.perf_counter() - start > timelimit * 1.1 / 1000.0:
+                    print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
                     p_sol.kill()
                     p_act.kill()
-                    timedout = True
+                    stopped = True
                     break
+
+                if sol_code is not None and sol_code != 0:
+                    print(f"Test {i} {MAGENTA}Runtime Error{RESET} {t} ms")
+                    p_sol.kill()
+                    p_act.kill()
+                    stopped = True
+                    break
+
+                if act_code is not None and act_code not in OK + WA:
+                    print(f"Test {i} {BLUE}Aborted{RESET} {act} returned an unexpected exit status")
+                    p_sol.kill()
+                    p_act.kill()
+                    stopped = True
+                    break
+
+                if sol_code is not None and act_code is not None:
+                    break
+
                 time.sleep(0.01)
 
             t1.join()
             t2.join()
 
+        if stopped:
+            break
+
         t = math.ceil((time.perf_counter() - start) * 1000)
         t_max = max(t_max, t)
 
-        if not p_act.returncode in OK + WA:
-            print(f"Test {i} {BLUE}Aborted{RESET} {act} returned an unexpected exit status")
-            break
-
-        if p_sol.returncode != 0:
-            print(f"Test {i} {MAGENTA}Runtime Error{RESET} {t} ms")
-            break
-
-        if timedout or t > timelimit:
+        if t > timelimit:
             print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
             break
 
-        if p_act.returncode in OK:
+        if act_code in OK:
             print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
-        else:
+        elif act_code in WA:
             print(f"Test {i} {RED}Wrong Answer{RESET} {t} ms")
             break
+        else:
+            print(f"Test {i} {BLUE}Aborted{RESET} {act} returned an unexpected exit status")
+            break
 
-        subprocess.run(["cmd", "/c", "del", "in.txt", "log.txt"])
+        for f in ["in.txt", "log.txt"]:
+            if os.path.exists(f):
+                os.remove(f)
 
 if __name__ == "__main__":
     main()
-    for f in ["sol.exe", "gen.exe", "act.exe"]:
+    for f in ["sol.exe", "gen.exe", "act.exe", "in.txt", "log.txt"]:
         if os.path.exists(f):
             os.remove(f)

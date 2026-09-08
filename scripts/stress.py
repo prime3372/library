@@ -14,14 +14,13 @@ include = sys.argv[4]
 timelimit = 5000
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
-# colors
-RESET = "\033[0m"
-GREEN = "\033[32m"
-YELLOW = "\033[33m"
-BLUE = "\033[34m"
-MAGENTA = "\033[35m"
-
 def main():
+    RESET = "\033[0m"
+    GREEN = "\033[32m"
+    YELLOW = "\033[33m"
+    BLUE = "\033[34m"
+    MAGENTA = "\033[35m"
+
     print("compiling...")
 
     targets = [(gen, "gen.exe"), (sol, "sol.exe")]

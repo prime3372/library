@@ -16,19 +16,18 @@ include = sys.argv[6]
 timelimit = 5000
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
-# colors
-RESET = "\033[0m"
-RED = "\033[31m"
-GREEN = "\033[32m"
-YELLOW = "\033[33m"
-BLUE = "\033[34m"
-MAGENTA = "\033[35m"
-
 # exit status of the checker
 OK = [0]
 WA = [1, 2]
 
 def main():
+    RESET = "\033[0m"
+    RED = "\033[31m"
+    GREEN = "\033[32m"
+    YELLOW = "\033[33m"
+    BLUE = "\033[34m"
+    MAGENTA = "\033[35m"
+
     print("compiling...")
 
     targets = [(gen, "gen.exe"), (sol, "sol.exe"), (ans, "ans.exe"), (che, "che.exe")]
