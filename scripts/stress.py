@@ -74,7 +74,8 @@ def main():
             break
 
         print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
-        subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt"])
+        for f in ["in.txt", "out.txt"]:
+            os.remove(f)
 
 if __name__ == "__main__":
     main()

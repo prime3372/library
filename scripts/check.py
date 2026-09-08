@@ -106,7 +106,8 @@ def main():
             print(f"Test {i} {BLUE}Aborted{RESET} {che} timed out")
             break
 
-        subprocess.run(["cmd", "/c", "del", "in.txt", "out.txt", "ans.txt"])
+        for f in ["in.txt", "out.txt", "ans.txt"]:
+            os.remove(f)
 
 if __name__ == "__main__":
     main()
