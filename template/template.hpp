@@ -28,14 +28,13 @@ using mint = cp::modint998244353;
 
 #ifdef LOCAL
 
-#define GET_STRING(a, ...) #a
+#define GET_STRING(a) #a
 
 #define local 1
 #define dump(...)                                                        \
   []<class... _Args>(const _Args&... _args) -> void {                    \
     std::string _args_str = GET_STRING((__VA_ARGS__));                   \
-    if (sizeof...(_Args) <= 1)                                           \
-      _args_str = _args_str.substr(1, _args_str.size() - 2);             \
+    _args_str = _args_str.substr(1, _args_str.size() - 2);               \
     std::cerr << _args_str << ": " << std::make_tuple(_args...) << "\n"; \
   }(__VA_ARGS__)
 #define write(...) \
