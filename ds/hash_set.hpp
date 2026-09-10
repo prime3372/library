@@ -10,6 +10,7 @@
 
 namespace cp {
 
+// @note `Val` cannot be `bool`
 template <class T> class hash_set {
  public:
   hash_set() {}

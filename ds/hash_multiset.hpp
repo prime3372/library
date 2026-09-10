@@ -8,6 +8,7 @@
 
 namespace cp {
 
+// @note `Val` cannot be `bool`
 template <class T> class hash_multiset {
  public:
   hash_multiset() {}
