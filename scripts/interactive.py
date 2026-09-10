@@ -100,15 +100,16 @@ def main():
 
                 if sol_code is not None and sol_code != 0:
                     print(f"Test {i} {MAGENTA}Runtime Error{RESET} {t} ms")
-                    p_sol.kill()
                     p_act.kill()
                     stopped = True
                     break
 
-                if act_code is not None and act_code not in OK + WA:
-                    print(f"Test {i} {BLUE}Aborted{RESET} {act} returned an unexpected exit status")
+                if act_code is not None and act_code not in OK:
+                    if act_code in WA:
+                        print(f"Test {i} {RED}Wrong Answer{RESET} {t} ms")
+                    else:
+                        print(f"Test {i} {BLUE}Aborted{RESET} {act} returned an unexpected exit status")
                     p_sol.kill()
-                    p_act.kill()
                     stopped = True
                     break
 
@@ -130,21 +131,20 @@ def main():
             print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
             break
 
-        if act_code in OK:
-            print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
-        elif act_code in WA:
-            print(f"Test {i} {RED}Wrong Answer{RESET} {t} ms")
-            break
-        else:
-            print(f"Test {i} {BLUE}Aborted{RESET} {act} returned an unexpected exit status")
-            break
+        print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
 
         for f in ["in.txt", "log.txt"]:
             if os.path.exists(f):
-                os.remove(f)
+                try:
+                    os.remove(f)
+                except Exception:
+                    pass
 
 if __name__ == "__main__":
     main()
     for f in ["sol.exe", "gen.exe", "act.exe"]:
         if os.path.exists(f):
-            os.remove(f)
+            try:
+                os.remove(f)
+            except Exception:
+                pass
