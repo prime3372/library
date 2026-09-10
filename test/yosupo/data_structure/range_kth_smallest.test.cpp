@@ -23,15 +23,15 @@ int main() {
     cin >> l >> r >> k;
     unsigned int ans = 0;
     for (int h = 31; h >= 0; h--) {
-      int l0 = wm[h].rank0(l), r0 = wm[h].rank0(r);
+      int l0 = wm[h].child0(l), r0 = wm[h].child0(r);
       if (r0 - l0 > k) {
         l = l0;
         r = r0;
       } else {
         ans |= 1 << h;
         k -= r0 - l0;
-        l += wm[h].rank0() - l0;
-        r += wm[h].rank0() - r0;
+        l = wm[h].child1(l);
+        r = wm[h].child1(r);
       }
     }
     cout << ans << "\n";

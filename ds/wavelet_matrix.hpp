@@ -12,51 +12,55 @@
 
 namespace cp {
 
-class bit_vector {
- public:
-  bit_vector() {}
-  explicit bit_vector(int _n) : n(_n), block(n / w + 1), count(n / w + 1) {}
-
-  void set(int i) {
-    assert(0 <= i && i < n);
-    block[i / w] |= 1LL << (i % w);
-  }
-
-  void build() {
-    for (int i = 1; i < int(block.size()); i++) {
-      count[i] = count[i - 1] + std::popcount(block[i - 1]);
-    }
-  }
-
-  bool operator[](int i) const {
-    assert(0 <= i && i < n);
-    return (block[i / w] & (1ULL << (i % w))) != 0;
-  }
-
-  int rank0(int i) const {
-    assert(0 <= i && i <= n);
-    return i - rank1(i);
-  }
-  int rank0() const { return rank0(n); }
-
-  int rank1(int i) const {
-    assert(0 <= i && i <= n);
-    return count[i / w] + std::popcount(block[i / w] & ((1ULL << (i % w)) - 1));
-  }
-  int rank1() const { return rank1(n); }
-
- private:
-  static constexpr int w = 64;
-  int n;
-  std::vector<unsigned long long> block;
-  std::vector<int> count;
-};
-
 template <class T> requires(internal::is_unsigned_int_v<T>)
 class wavelet_matrix {
   using ull = unsigned long long;
 
  public:
+  class bit_vector {
+   public:
+    bit_vector() {}
+    explicit bit_vector(int _n) : n(_n), block(n / w + 1), count(n / w + 1) {}
+
+    void set(int i) {
+      assert(0 <= i && i < n);
+      block[i / w] |= 1LL << (i % w);
+    }
+
+    void build() {
+      for (int i = 1; i < int(block.size()); i++) {
+        count[i] = count[i - 1] + std::popcount(block[i - 1]);
+      }
+    }
+
+    bool operator[](int i) const {
+      assert(0 <= i && i < n);
+      return (block[i / w] & (1ULL << (i % w))) != 0;
+    }
+
+    int rank0(int i) const {
+      assert(0 <= i && i <= n);
+      return i - rank1(i);
+    }
+    int rank0() const { return rank0(n); }
+
+    int rank1(int i) const {
+      assert(0 <= i && i <= n);
+      return count[i / w] +
+             std::popcount(block[i / w] & ((1ULL << (i % w)) - 1));
+    }
+    int rank1() const { return rank1(n); }
+
+    int child0(int i) const { return rank0(i); }
+    int child1(int i) const { return rank0() + rank1(i); }
+
+   private:
+    static constexpr int w = 64;
+    int n;
+    std::vector<unsigned long long> block;
+    std::vector<int> count;
+  };
+
   wavelet_matrix() : wavelet_matrix(0) {}
   explicit wavelet_matrix(int _n) : n(_n), a(_n) {}
 
@@ -74,7 +78,7 @@ class wavelet_matrix {
         if ((cur[i] >> h) & 1) bv[h].set(i);
       }
       bv[h].build();
-      std::array itr = {nxt.begin(), nxt.begin() + bv[h].zeros()};
+      std::array itr = {nxt.begin(), nxt.begin() + bv[h].rank0()};
       for (int i = 0; i < n; i++) *(itr[bv[h][i]]++) = cur[i];
       std::swap(cur, nxt);
     }
