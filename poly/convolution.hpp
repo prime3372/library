@@ -131,7 +131,7 @@ std::vector<mint> convolution_naive(const std::vector<mint>& a,
 
 }  // namespace internal
 
-template <class mint> requires internal::is_static_modint_v<mint>
+template <class mint> requires(internal::is_static_modint_v<mint>)
 std::vector<mint> convolution(const std::vector<mint>& a,
                               const std::vector<mint>& b) {
   int n = int(a.size()), m = int(b.size());
@@ -144,7 +144,7 @@ std::vector<mint> convolution(const std::vector<mint>& a,
   return internal::convolution_ntt(a, b);
 }
 
-template <int mod = 998244353, class T> requires internal::is_integral_v<T>
+template <int mod = 998244353, class T> requires(internal::is_integral_v<T>)
 std::vector<T> convolution(const std::vector<T>& a, const std::vector<T>& b) {
   using mint = static_modint<mod>;
   int n = int(a.size()), m = int(b.size());

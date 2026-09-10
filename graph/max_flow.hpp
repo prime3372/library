@@ -11,7 +11,7 @@
 namespace cp {
 
 // Dinic's Algorithm
-template <class Cap> requires internal::is_integral_v<Cap>
+template <class Cap> requires(internal::is_integral_v<Cap>)
 class max_flow {
  public:
   max_flow() : max_flow(0) {}

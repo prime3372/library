@@ -36,7 +36,7 @@ struct safe_hash<T> {
   }
 };
 
-template <class T> requires internal::is_int128_v<T>
+template <class T> requires(internal::is_int128_v<T>)
 struct safe_hash<T> {
   unsigned long long operator()(const T& x) const {
     unsigned __int128 ux = x;
@@ -50,7 +50,7 @@ struct safe_hash<T> {
   }
 };
 
-template <class T> requires internal::is_modint_v<T>
+template <class T> requires(internal::is_modint_v<T>)
 struct safe_hash<T> {
   unsigned long long operator()(const T& x) const {
     return safe_hash<int>()(x.val());

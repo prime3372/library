@@ -25,13 +25,13 @@ class hash61 {
   static hash61 get_rand() { return hash61(uniform(1ULL, m - 1)); }
 
   hash61() : v(0) {}
-  template <class T> requires internal::is_signed_int_v<T>
+  template <class T> requires(internal::is_signed_int_v<T>)
   hash61(T _v) {
     long long x = (long long)(_v % m);
     if (x < 0) x += m;
     v = x;
   }
-  template <class T> requires internal::is_unsigned_int_v<T>
+  template <class T> requires(internal::is_unsigned_int_v<T>)
   hash61(T _v) {
     v = (ull)(_v % m);
   }

@@ -9,7 +9,7 @@
 
 namespace cp {
 
-  template <class T> requires internal::is_unsigned_int_v<T>
+template <class T> requires(internal::is_unsigned_int_v<T>)
 class binary_trie : public trie<2, '0'> {
   using base = trie<2, '0'>;
 

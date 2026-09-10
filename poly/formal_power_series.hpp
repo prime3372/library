@@ -11,7 +11,7 @@
 
 namespace cp {
 
-template <class mint> requires internal::is_static_modint_v<mint>
+template <class mint> requires(internal::is_static_modint_v<mint>)
 class formal_power_series {
  private:
   using fps = formal_power_series;
