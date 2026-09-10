@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <int char_size, auto offset = [](char c) { return c - 'a'; }>
+template <int char_size, char offset = 'a'>
 class aho_corasick : public trie<char_size, offset> {
  public:
   using trie<char_size, offset>::trie;

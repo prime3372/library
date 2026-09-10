@@ -6,8 +6,7 @@
 #include <type_traits>
 #include <vector>
 
-template <int char_size, auto offset = [](char c) { return c - 'a'; }>
-class trie {
+template <int char_size, char offset = 'a'> class trie {
  public:
   trie() { nodes.push_back(node(-1)); }
 
@@ -15,7 +14,7 @@ class trie {
     int v = 0;
     nodes[v].mid++;
     for (char c : s) {
-      int i = _offset(c);
+      int i = index(c);
       if (nodes[v].to[i] == -1) {
         nodes[v].to[i] = size();
         nodes.push_back(node(v));
@@ -34,7 +33,7 @@ class trie {
     int v = 0;
     nodes[v].mid--;
     for (char c : s) {
-      int i = _offset(c);
+      int i = index(c);
       int nv = nodes[v].to[i];
       nodes[nv].mid--;
       if (nodes[nv].mid == 0) {
@@ -77,7 +76,7 @@ class trie {
   int search(const std::string& s, int v = 0) const {
     assert(0 <= v && v < int(nodes.size()));
     for (char c : s) {
-      v = (*this)[v][_offset(c)];
+      v = (*this)[v][index(c)];
       if (v == -1) return -1;
     }
     return v;
@@ -95,8 +94,8 @@ class trie {
 
   std::vector<node> nodes;
 
-  int _offset(char c) const {
-    int i = offset(c);
+  int index(char c) const {
+    int i = c - offset;
     assert(0 <= i && i < char_size);
     return i;
   }
