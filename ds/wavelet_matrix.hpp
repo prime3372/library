@@ -85,10 +85,9 @@ class wavelet_matrix {
       std::swap(cur, nxt);
     }
 
-    index.assign(w + 1, std::vector<int>(n));
+    index.assign(w, std::vector<int>(n));
     for (int i = 0; i < n; i++) {
       int k = i;
-      index[w][k] = i;
       for (int h = w - 1; h >= 0; h--) {
         k = data[h][k] ? data[h].next1(k) : data[h].next0(k);
         index[h][k] = i;
