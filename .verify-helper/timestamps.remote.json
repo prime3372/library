@@ -108,7 +108,7 @@
   "test/yosupo/polynomial/pow_of_formal_power_series.test.cpp": "2026-08-31 03:51:05 +0900",
   "test/yosupo/polynomial/product_of_polynomial_sequence.test.cpp": "2026-08-31 03:51:05 +0900",
   "test/yosupo/sample/many_aplusb_128bit.test.cpp": "2026-08-26 19:13:55 +0900",
-  "test/yosupo/string/aho_corasick.test.cpp": "2026-09-10 16:47:23 +0900",
+  "test/yosupo/string/aho_corasick.test.cpp": "2026-09-10 17:00:15 +0900",
   "test/yosupo/string/enumerate_palindromes.test.cpp": "2026-09-10 09:23:55 +0900",
   "test/yosupo/string/longest_common_substring.test.cpp": "2026-09-03 22:57:22 +0900",
   "test/yosupo/string/number_of_substrings.test.cpp": "2026-09-04 03:07:09 +0900",
