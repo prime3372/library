@@ -77,4 +77,18 @@ std::vector<int> compress(Container a, Comp comp = Comp()) {
   return res;
 }
 
+template <class Container,
+          class Comp = std::less<typename Container::value_type>>
+int lower_bound(const Container& a, typename Container::value_type val,
+                Comp comp = Comp()) {
+  return int(std::lower_bound(a.begin(), a.end(), val, comp) - a.begin());
+}
+
+template <class Container,
+          class Comp = std::less<typename Container::value_type>>
+int upper_bound(const Container& a, typename Container::value_type val,
+                Comp comp = Comp()) {
+  return int(std::upper_bound(a.begin(), a.end(), val, comp) - a.begin());
+}
+
 }  // namespace cp
