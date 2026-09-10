@@ -15,8 +15,8 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  vector<array<ll, 5>> data(n);
-  for (auto& [l, d, r, u, w] : data) {
+  vector<array<ll, 5>> init(n);
+  for (auto& [l, d, r, u, w] : init) {
     cin >> l >> d >> r >> u >> w;
   }
   vector<array<ll, 5>> query(q);
@@ -37,7 +37,7 @@ int main() {
 
   coordinate_compression cx(xs), cy(ys);
   dynamic_fenwick_tree_2d<ll> fw(cx.size(), cy.size());
-  for (auto [l, d, r, u, w] : data) {
+  for (auto [l, d, r, u, w] : init) {
     fw.imos_add(cx(l), cy(d), cx(r), cy(u), w);
   }
   for (int i = 0; i < q; i++) {
