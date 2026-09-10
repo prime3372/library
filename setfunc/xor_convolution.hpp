@@ -9,7 +9,7 @@
 
 namespace cp {
 
-// @param n `|a| = |b| = 2^n`
+// @param n `|a| = |b| = 2**n`
 // @note The mod must be an odd number.
 template <class mint> requires internal::is_modint_v<mint>
 std::vector<mint> xor_convolution(int n, std::vector<mint> a,
