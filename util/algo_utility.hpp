@@ -28,7 +28,7 @@ template <class T> bool chmax(T& a, const T& b) {
   return b > a ? (a = b, true) : false;
 }
 
-// a[i] <- a[p[i]]
+// replace `a[i]` with `a[p[i]]`
 // @param p must be a permutation
 template <class Container, class Indices>
 void rearrange(Container& a, const Indices& p) {
