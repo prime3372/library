@@ -20,14 +20,12 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
   explicit treap(std::vector<T> v) {
     if (v.empty()) return;
     int n = int(v.size());
-    bool sorted = true;
     for (int i = 0; i < n - 1; i++) {
       if (less(v[i + 1], v[i])) {
-        sorted = false;
+        std::sort(v.begin(), v.end(), less);
         break;
       }
     }
-    if (!sorted) std::sort(v.begin(), v.end(), less);
     if (!multiset) {
       v.erase(std::unique(v.begin(), v.end(), equiv), v.end());
       n = int(v.size());
