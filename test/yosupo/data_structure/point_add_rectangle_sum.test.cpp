@@ -27,7 +27,7 @@ int main() {
   for (int i = 0; i < q; i++) {
     cin >> t[i];
     if (t[i] == 0) {
-      auto& [x, y, w, _] = query[i];
+      auto& [x, y, w, a] = query[i];
       cin >> x >> y >> w;
       xs.push_back(x);
       ys.push_back(y);
@@ -44,7 +44,7 @@ int main() {
   }
   for (int i = 0; i < q; i++) {
     if (t[i] == 0) {
-      auto& [x, y, w, _] = query[i];
+      auto& [x, y, w, a] = query[i];
       fw.add(cx(x), cy(y), w);
     } else {
       auto& [l, d, r, u] = query[i];
