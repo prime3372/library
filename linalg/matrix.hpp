@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <functional>
 #include <iostream>
 #include <vector>
 
@@ -8,49 +9,46 @@
 
 namespace cp {
 
-template <class T> class matrix {
+template <class T, auto add = std::plus(), auto mul = std::multiplies(),
+          auto zero = []() { return T(0); }, auto one = []() { return T(1); }>
+class matrix : public std::vector<std::vector<T>> {
  public:
-  matrix() : h(0), w(0) {}
-  explicit matrix(int _h, int _w) : h(_h), w(_w), d(_h, std::vector<T>(_w)) {}
+  using base = std::vector<std::vector<T>>;
+  using base::empty;
+  using base::size;
 
-  int height() const { return h; }
-  int width() const { return w; }
+  matrix() {}
+  explicit matrix(int _h, int _w) : base(_h, std::vector<T>(_w, zero())) {}
 
-  std::vector<T>& operator[](int i) {
-    assert(0 <= i && i < h);
-    return d[i];
-  }
-  const std::vector<T>& operator[](int i) const {
-    assert(0 <= i && i < h);
-    return d[i];
-  }
+  int height() const { return int(size()); }
+  int width() const { return empty() ? 0 : int((*this)[0].size()); }
 
   matrix& operator+=(const matrix& rhs) {
-    assert(h == rhs.h && w == rhs.w);
-    for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) {
-        (*this)[i][j] += rhs[i][j];
+    assert(height() == rhs.height() && width() == rhs.width());
+    for (int i = 0; i < height(); i++) {
+      for (int j = 0; j < width(); j++) {
+        (*this)[i][j] = add((*this)[i][j], rhs[i][j]);
       }
     }
     return *this;
   }
 
   matrix& operator*=(const T& rhs) {
-    for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) {
-        (*this)[i][j] *= rhs;
+    for (int i = 0; i < height(); i++) {
+      for (int j = 0; j < width(); j++) {
+        (*this)[i][j] = mul((*this)[i][j], rhs);
       }
     }
     return *this;
   }
 
   matrix operator*=(const matrix& rhs) {
-    assert(w == rhs.h);
-    matrix res(h, rhs.w);
-    for (int i = 0; i < h; i++) {
-      for (int k = 0; k < w; k++) {
-        for (int j = 0; j < rhs.w; j++) {
-          res[i][j] += (*this)[i][k] * rhs[k][j];
+    assert(width() == rhs.height());
+    matrix res(height(), rhs.width());
+    for (int i = 0; i < height(); i++) {
+      for (int k = 0; k < width(); k++) {
+        for (int j = 0; j < rhs.width(); j++) {
+          res[i][j] = add(res[i][j], mul((*this)[i][k], rhs[k][j]));
         }
       }
     }
@@ -72,14 +70,14 @@ template <class T> class matrix {
 
   static matrix unit(int n) {
     matrix res(n, n);
-    for (int i = 0; i < n; i++) res[i][i] = 1;
+    for (int i = 0; i < n; i++) res[i][i] = one();
     return res;
   }
 
   matrix pow(long long n) const {
-    assert(h == w);
+    assert(height() == width());
     assert(0 <= n);
-    matrix r = unit(h), mat = *this;
+    matrix r = unit(height()), mat = *this;
     while (n) {
       if (n & 1) r *= mat;
       mat *= mat;
@@ -89,27 +87,23 @@ template <class T> class matrix {
   }
 
   friend std::istream& operator>>(std::istream& is, matrix& mat) {
-    for (int i = 0; i < mat.h; i++) {
-      for (int j = 0; j < mat.w; j++) {
+    for (int i = 0; i < mat.height(); i++) {
+      for (int j = 0; j < mat.width(); j++) {
         is >> mat[i][j];
       }
     }
     return is;
   }
   friend std::ostream& operator<<(std::ostream& os, const matrix& mat) {
-    for (int i = 0; i < mat.h; i++) {
-      for (int j = 0; j < mat.w; j++) {
+    for (int i = 0; i < mat.height(); i++) {
+      for (int j = 0; j < mat.width(); j++) {
         os << mat[i][j];
-        if (j != mat.w - 1) os << " ";
+        if (j != mat.width() - 1) os << " ";
       }
-      if (i != mat.h - 1) os << "\n";
+      if (i != mat.height() - 1) os << "\n";
     }
     return os;
   }
-
- private:
-  int h, w;
-  std::vector<std::vector<T>> d;
 };
 
 }  // namespace cp
