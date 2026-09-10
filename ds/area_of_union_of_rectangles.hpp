@@ -26,22 +26,21 @@ template <class T> class area_of_union_of_rectangles {
   T calc() {
     int n = int(x.size());
 
-    std::vector<int> idx_x = sort(x);
-    std::vector<int> idx_y = sort(y);
-    std::vector<int> comp_y(n);
-    for (int i = 0; i < n; i++) comp_y[idx_y[i]] = i;
+    std::vector<int> p = sort(y);
+    for (int i = 0; i < n; i++) compressed[p[i]] = i;
 
-    std::vector<S> a(n - 1);
-    for (int i = 0; i < n - 1; i++) a[i] = {0, y[i + 1] - y[i]};
-    lazy_segtree<S, op, e, T, act, compose, id> seg(a);
+    std::vector<S> init(n - 1);
+    for (int i = 0; i < n - 1; i++) init[i] = {0, y[i + 1] - y[i]};
+    lazy_segtree<S, op, e, T, act, compose, id> seg(init);
 
     T ans = 0;
     T total = y[n - 1] - y[0];
+    std::vector<int> idx = sort(x);
     for (int i = 0; i < n - 1; i++) {
-      int j = idx_x[i] / 2;
-      int d = comp_y[2 * j];
-      int u = comp_y[2 * j + 1];
-      T w = idx_x[i] % 2 ? -1 : 1;
+      int j = idx[i] / 2;
+      int d = compressed[2 * j];
+      int u = compressed[2 * j + 1];
+      T w = idx[i] % 2 ? -1 : 1;
       seg.apply(d, u, w);
 
       auto [min, cnt] = seg.all_prod();
