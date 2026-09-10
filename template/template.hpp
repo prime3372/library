@@ -28,14 +28,26 @@ using mint = cp::modint998244353;
 
 #ifdef LOCAL
 
-#define GET_STRING(a) #a
+#define GET_STRING_SINGLE(a) #a
+#define GET_STRING(...)                                \
+  []() {                                               \
+    std::string _s = GET_STRING_SINGLE((__VA_ARGS__)); \
+    return _s.substr(1, _s.size() - 2);                \
+  }()
 
 #define local 1
-#define dump(...)                                                        \
-  []<class... _Args>(const _Args&... _args) -> void {                    \
-    std::string _args_str = GET_STRING((__VA_ARGS__));                   \
-    _args_str = _args_str.substr(1, _args_str.size() - 2);               \
-    std::cerr << _args_str << ": " << std::make_tuple(_args...) << "\n"; \
+#define dump(...)                                    \
+  [](const auto&... _args) {                         \
+    std::string _args_str = GET_STRING(__VA_ARGS__); \
+    _args_str.append(": ");                          \
+    std::cerr << _args_str;                          \
+    std::string _indent(_args_str.size(), ' ');      \
+    std::ostringstream _oss;                         \
+    _oss << std::make_tuple(_args...);               \
+    for (char _c : _oss.str()) {                     \
+      std::cerr << _c;                               \
+      if (_c == '\n') std::cerr << _indent;          \
+    }                                                \
   }(__VA_ARGS__)
 #define write(...) \
   [](const auto&... _args) -> void { (cerr << ... << _args); }(__VA_ARGS__)
