@@ -8,7 +8,7 @@ namespace cp {
 
 // @param a `a[i+1] - a[i] >= a[i+2] - a[i+1] (i = 0, ..., |a|-2)`
 // @param b `b[i+1] - b[i] >= b[i+2] - b[i+1] (i = 0, ..., |b|-2)`
-// @note The difference sequences of a and b must not overflow.
+// @note `a[i]` and `b[i]` must be in [-10^9, 10^9]
 template <class T>
 std::vector<T> max_plus_convolution_both_concave(const std::vector<T>& a,
                                                  const std::vector<T>& b) {

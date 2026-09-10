@@ -1,18 +1,23 @@
 #pragma once
 
 #include <algorithm>
+#include <cassert>
 #include <limits>
 #include <vector>
 
 namespace cp {
 
 // @param a `a[i+1] - a[i] >= a[i+2] - a[i+1] (i = 0, ..., |a|-2)`
+// @note `a[i]` and `b[i]` must be in [-10^9, 10^9]
 template <class T>
 std::vector<T> max_plus_convolution(const std::vector<T>& a,
                                     const std::vector<T>& b) {
   constexpr T ninf = std::numeric_limits<T>::lowest();
   int n = int(a.size()), m = int(b.size());
   if (n == 0 || m == 0) return {};
+
+  for (int i = 0; i < n - 2; i++) assert(a[i + 1] - a[i] <= a[i + 2] - a[i + 1]);
+  for (int i = 0; i < m - 2; i++) assert(b[i + 1] - b[i] <= b[i + 2] - b[i + 1]);
 
   auto f = [&](int k, int i) -> T {
     if (k - i < 0 || n <= k - i) return ninf;
