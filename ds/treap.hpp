@@ -179,11 +179,11 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     return !Comp()(x, y) && !Comp()(y, x);
   }
 
-  int size(const node* t) const { return t ? t->sub : 0; }
+  static int size(const node* t) { return t ? t->sub : 0; }
 
-  void update(node* t) { t->sub = size(t->left) + size(t->right) + 1; }
+  static void update(node* t) { t->sub = size(t->left) + size(t->right) + 1; }
 
-  std::pair<node*, node*> split(node* t, const T& k) {
+  static std::pair<node*, node*> split(node* t, const T& k) {
     if (!t) return {nullptr, nullptr};
     if (less(k, t->key)) {
       auto s = split(t->left, k);
@@ -198,7 +198,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
   }
 
-  node* merge(node* left, node* right) {
+  static node* merge(node* left, node* right) {
     if (!left || !right) return left ? left : right;
     if (left->priority > right->priority) {
       left->right = merge(left->right, right);
@@ -211,7 +211,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
   }
 
-  void insert(node*& t, node* p) {
+  static void insert(node*& t, node* p) {
     if (!t) {
       t = p;
     } else if (p->priority > t->priority) {
@@ -224,7 +224,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
   }
 
-  bool erase(node*& t, const T& k) {
+  static bool erase(node*& t, const T& k) {
     if (!t) return false;
     if (equiv(t->key, k)) {
       node* t2 = merge(t->left, t->right);
