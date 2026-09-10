@@ -1,5 +1,5 @@
 #define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_B"
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/all/NTL_1_B"
 
 #include "number/pow_mod.hpp"
 #include <iostream>

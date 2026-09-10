@@ -1,5 +1,5 @@
 #define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_A"
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/all/NTL_1_A"
 
 #include "number/factorize.hpp"
 #include <iostream>

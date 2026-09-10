@@ -1,5 +1,5 @@
 #define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_14_B"
+  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/all/ALDS1/all/ALDS1_14_B"
 
 #include "util/hash61.hpp"
 #include "string/rolling_hash.hpp"
