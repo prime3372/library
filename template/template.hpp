@@ -48,6 +48,7 @@ using mint = cp::modint998244353;
       std::cerr << _c;                               \
       if (_c == '\n') std::cerr << _indent;          \
     }                                                \
+    std::cerr << "\n";                               \
   }(__VA_ARGS__)
 #define write(...) \
   [](const auto&... _args) -> void { (cerr << ... << _args); }(__VA_ARGS__)
