@@ -22,7 +22,7 @@ template <class T> class hash_set {
 
   bool erase(const T& k) {
     char& f = d[k];
-    return f ? (sz--, !(f = false)) : false;
+    return f ? (sz--, f = false, true) : false;
   }
 
   int count(const T& k) const { return d.get(k); }
