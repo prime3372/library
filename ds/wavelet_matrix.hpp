@@ -4,14 +4,54 @@
 #include <array>
 #include <bit>
 #include <cassert>
+#include <limits>
 #include <utility>
 #include <vector>
 
-#include "ds/bit_vector.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
 
+class bit_vector {
+ public:
+  bit_vector() {}
+  explicit bit_vector(int _n) : n(_n), block(n / w + 1), count(n / w + 1) {}
+
+  void set(int i) {
+    assert(0 <= i && i < n);
+    block[i / w] |= 1LL << (i % w);
+  }
+
+  void build() {
+    for (int i = 1; i < int(block.size()); i++) {
+      count[i] = count[i - 1] + std::popcount(block[i - 1]);
+    }
+  }
+
+  bool operator[](int i) const {
+    assert(0 <= i && i < n);
+    return (block[i / w] & (1ULL << (i % w))) != 0;
+  }
+
+  int rank0(int i) const {
+    assert(0 <= i && i <= n);
+    return i - rank1(i);
+  }
+  int rank1(int i) const {
+    assert(0 <= i && i <= n);
+    return count[i / w] + std::popcount(block[i / w] & ((1ULL << (i % w)) - 1));
+  }
+  int zeros() const { return rank0(n); }
+  int ones() const { return rank1(n); }
+
+ private:
+  static constexpr int w = 64;
+  int n;
+  std::vector<unsigned long long> block;
+  std::vector<int> count;
+};
+
+template <class T> requires(internal::is_unsigned_int_v<T>)
 class wavelet_matrix {
   using ull = unsigned long long;
 
@@ -19,19 +59,16 @@ class wavelet_matrix {
   wavelet_matrix() : wavelet_matrix(0) {}
   explicit wavelet_matrix(int _n) : n(_n), a(_n) {}
 
-  void set(int i, ull x) {
+  void set(int i, T x) {
     assert(0 <= i && i < n);
     a[i] = x;
   }
 
   void build() {
     if (n == 0) return;
-    ull max_a = *std::max_element(a.begin(), a.end());
-    log = max_a ? std::bit_width(max_a) : 1;
-
-    bv.assign(log, bit_vector(n));
-    std::vector<ull> cur = a, nxt(n);
-    for (int h = log - 1; h >= 0; h--) {
+    bv.assign(w, bit_vector(n));
+    std::vector<T> cur = a, nxt(n);
+    for (int h = w - 1; h >= 0; h--) {
       for (int i = 0; i < n; i++) {
         if ((cur[i] >> h) & 1) bv[h].set(i);
       }
@@ -40,65 +77,14 @@ class wavelet_matrix {
       for (int i = 0; i < n; i++) *(itr[bv[h][i]]++) = cur[i];
       std::swap(cur, nxt);
     }
-    initialized = true;
   }
 
-  ull operator[](int k) const {
-    assert(0 <= k && k < n);
-    return a[k];
-  }
-
-  ull kth_smallest(int l, int r, int k) const {
-    assert(initialized);
-    assert(0 <= l && l <= r && r <= n);
-    assert(0 <= k && k < r - l);
-    ull ans = 0;
-    for (int h = log - 1; h >= 0; h--) {
-      int l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);
-      if (k < r0 - l0) {
-        l = l0;
-        r = r0;
-      } else {
-        k -= r0 - l0;
-        ans |= ull(1) << h;
-        l += bv[h].zeros() - l0;
-        r += bv[h].zeros() - r0;
-      }
-    }
-    return ans;
-  }
-
-  ull kth_largest(int l, int r, int k) {
-    return kth_smallest(l, r, r - l - k - 1);
-  }
-
-  int range_freq(int l, int r, ull upper) {
-    assert(initialized);
-    assert(0 <= l && l <= r && r <= n);
-    int ans = 0;
-    for (int h = log - 1; h >= 0; h--) {
-      bool f = (upper >> h) & 1;
-      int l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);
-      if (f) {
-        ans += r0 - l0;
-        l = bv[h].zeros() - l0;
-        r += bv[h].zeros() - r0;
-      } else {
-        l = l0;
-        r = r0;
-      }
-    }
-    return ans;
-  }
-
-  int range_freq(int l, int r, ull lower, ull upper) {
-    return range_freq(l, r, upper) - range_freq(l, r, lower);
-  }
+  const bit_vector& operator[](int i) { return bv[i]; }
 
  private:
-  int n, log;
-  bool initialized = false;
-  std::vector<ull> a;
+  int w = std::numeric_limits<T>::digits;
+  int n;
+  std::vector<T> a;
   std::vector<bit_vector> bv;
 };
 

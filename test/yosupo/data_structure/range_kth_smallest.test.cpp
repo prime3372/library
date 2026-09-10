@@ -11,7 +11,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  wavelet_matrix wm(n);
+  wavelet_matrix<unsigned int> wm(n);
   for (int i = 0; i < n; i++) {
     int ai;
     cin >> ai;
@@ -21,6 +21,19 @@ int main() {
   while (q--) {
     int l, r, k;
     cin >> l >> r >> k;
-    cout << wm.kth_smallest(l, r, k) << "\n";
+    unsigned int ans = 0;
+    for (int h = 31; h >= 0; h--) {
+      int l0 = wm[h].rank0(l), r0 = wm[h].rank0(r);
+      if (r0 - l0 > k) {
+        l = l0;
+        r = r0;
+      } else {
+        ans |= 1 << h;
+        k -= r0 - l0;
+        l += wm[h].zeros() - l0;
+        r += wm[h].zeros() - r0;
+      }
+    }
+    cout << ans << "\n";
   }
 }
