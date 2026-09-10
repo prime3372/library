@@ -29,27 +29,15 @@ class binom_mod {
   }
 
   mint operator()(int n, int r) const {
-    if (r < 0) return 0;
-    if (n < 0) {
-      mint res = (*this)(-n + r - 1, r);
-      if (r % 2) res = -res;
-      return res;
-    }
-    if (r > n) return 0;
-    assert(n <= N);
+    if (r < 0 || n < r) return 0;
+    assert(0 <= n && n <= N);
     assert(fi[n - r] != 0 && fi[r] != 0);
     return f[n] * fi[n - r] * fi[r];
   }
 
   mint perm(int n, int r) const {
-    if (r < 0) return 0;
-    if (n < 0) {
-      mint res = perm(-n + r - 1, r);
-      if (r % 2) res = -res;
-      return res;
-    }
-    if (r > n) return 0;
-    assert(n <= N);
+    if (r < 0 || n < r) return 0;
+    assert(0 <= n && n <= N);
     assert(fi[n - r] != 0);
     return f[n] * fi[n - r];
   }
@@ -60,8 +48,7 @@ class binom_mod {
   }
 
   mint ifact(int n) const {
-    assert(n <= N);
-    if (n < 0) return 0;
+    assert(0 <= n && n <= N);
     assert(fi[n] != 0);
     return fi[n];
   }
