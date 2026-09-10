@@ -5,15 +5,15 @@
 #include <vector>
 
 #include "ds/simple_queue.hpp"
-#include "string/trie_tree.hpp"
+#include "string/trie.hpp"
 
 namespace cp {
 
 template <int char_size, auto offset = 'a'>
-class aho_corasick : public trie_tree<char_size, offset> {
+class aho_corasick : public trie<char_size, offset> {
  public:
-  using trie_tree<char_size, offset>::trie_tree;
-  using trie_tree<char_size, offset>::size;
+  using trie<char_size, offset>::trie;
+  using trie<char_size, offset>::size;
 
   void build() {
     lnk.assign(size(), 0);

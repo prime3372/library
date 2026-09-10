@@ -6,9 +6,9 @@
 #include <type_traits>
 #include <vector>
 
-template <int char_size, auto offset = 'a'> class trie_tree {
+template <int char_size, auto offset = 'a'> class trie {
  public:
-  trie_tree() { nodes.push_back(node(-1)); }
+  trie() { nodes.push_back(node(-1)); }
 
   int insert(const std::string& s) {
     int v = 0;
