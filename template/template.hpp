@@ -68,3 +68,4 @@ using mint = cp::modint998244353;
 #define fore(x, a) for (auto&& x : (a))
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
+#define inrange(i, a, b) ((a) <= (i) && (i) < (b))
