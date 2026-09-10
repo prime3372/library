@@ -30,8 +30,8 @@ int main() {
       } else {
         ans |= 1 << h;
         k -= r0 - l0;
-        l += wm[h].zeros() - l0;
-        r += wm[h].zeros() - r0;
+        l += wm[h].rank0() - l0;
+        r += wm[h].rank0() - r0;
       }
     }
     cout << ans << "\n";

@@ -37,12 +37,13 @@ class bit_vector {
     assert(0 <= i && i <= n);
     return i - rank1(i);
   }
+  int rank0() const { return rank0(n); }
+
   int rank1(int i) const {
     assert(0 <= i && i <= n);
     return count[i / w] + std::popcount(block[i / w] & ((1ULL << (i % w)) - 1));
   }
-  int zeros() const { return rank0(n); }
-  int ones() const { return rank1(n); }
+  int rank1() const { return rank1(n); }
 
  private:
   static constexpr int w = 64;
