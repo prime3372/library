@@ -6,7 +6,7 @@
 #include <random>
 #include <type_traits>
 
-#include "random/base.hpp"
+#include "random/engine.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {

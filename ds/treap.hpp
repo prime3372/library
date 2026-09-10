@@ -9,7 +9,7 @@
 #include <vector>
 
 #include "ds/cartesian_tree.hpp"
-#include "random/base.hpp"
+#include "random/engine.hpp"
 #include "util/io_utility_base.hpp"
 
 namespace cp {

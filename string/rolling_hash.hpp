@@ -4,7 +4,7 @@
 #include <type_traits>
 #include <vector>
 
-#include "random/base.hpp"
+#include "random/engine.hpp"
 #include "util/hash61.hpp"
 #include "util/safe_hash.hpp"
 

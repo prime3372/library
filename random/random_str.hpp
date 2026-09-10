@@ -3,7 +3,7 @@
 #include <cassert>
 #include <string>
 
-#include "random/base.hpp"
+#include "random/engine.hpp"
 
 namespace cp {
 

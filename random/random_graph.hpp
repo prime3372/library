@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "ds/hash_set.hpp"
-#include "random/base.hpp"
+#include "random/engine.hpp"
 #include "random/random_tree.hpp"
 
 namespace cp {
