@@ -51,8 +51,8 @@ class wavelet_matrix {
     }
     int rank1() const { return rank1(n); }
 
-    int child0(int i) const { return rank0(i); }
-    int child1(int i) const { return rank0() + rank1(i); }
+    int next0(int i) const { return rank0(i); }
+    int next1(int i) const { return rank0() + rank1(i); }
 
    private:
     static constexpr int w = 64;
@@ -69,28 +69,40 @@ class wavelet_matrix {
     a[i] = x;
   }
 
-  void build() {
-    if (n == 0) return;
-    bv.assign(w, bit_vector(n));
+  std::vector<bit_vector> data;
+  std::vector<std::vector<int>> index;
+
+  wavelet_matrix build() {
+    data.assign(w, bit_vector(n));
     std::vector<T> cur = a, nxt(n);
     for (int h = w - 1; h >= 0; h--) {
       for (int i = 0; i < n; i++) {
-        if ((cur[i] >> h) & 1) bv[h].set(i);
+        if ((cur[i] >> h) & 1) data[h].set(i);
       }
-      bv[h].build();
-      std::array itr = {nxt.begin(), nxt.begin() + bv[h].rank0()};
-      for (int i = 0; i < n; i++) *(itr[bv[h][i]]++) = cur[i];
+      data[h].build();
+      std::array itr = {nxt.begin(), nxt.begin() + data[h].rank0()};
+      for (int i = 0; i < n; i++) *(itr[data[h][i]]++) = cur[i];
       std::swap(cur, nxt);
     }
+
+    index.assign(w + 1, std::vector<int>(n));
+    for (int i = 0; i < n; i++) {
+      int k = i;
+      index[w][k] = i;
+      for (int h = w - 1; h >= 0; h--) {
+        k = data[h][k] ? data[h].next1(k) : data[h].next0(k);
+        index[h][k] = i;
+      }
+    }
+    return *this;
   }
 
-  const bit_vector& operator[](int i) { return bv[i]; }
+  const bit_vector& operator[](int i) { return data[i]; }
 
  private:
   int w = std::numeric_limits<T>::digits;
   int n;
   std::vector<T> a;
-  std::vector<bit_vector> bv;
 };
 
 }  // namespace cp
