@@ -27,6 +27,7 @@ template <class T> class area_of_union_of_rectangles {
     int n = int(x.size());
 
     std::vector<int> p = sort(y);
+    std::vector<int> compressed(n);
     for (int i = 0; i < n; i++) compressed[p[i]] = i;
 
     std::vector<S> init(n - 1);
