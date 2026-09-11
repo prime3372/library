@@ -38,7 +38,7 @@ def main():
 
     print("compilation finished")
 
-    t_max = 0
+    max_t = 0
 
     for i in range(1, case_num + 1):
         # run gen.exe
@@ -66,7 +66,7 @@ def main():
             break
 
         t = math.ceil((time.perf_counter() - start) * 1000)
-        t_max = max(t_max, t)
+        max_t = max(max_t, t)
 
         if t > timelimit:
             print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
