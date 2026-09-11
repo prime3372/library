@@ -35,8 +35,7 @@ class hl_decomposition {
     };
     first_dfs(first_dfs, r, -1);
 
-    int now_ord = 0;
-    head[0] = 0;
+    head[0] = now_ord;
     next[0] = -1;
     auto second_dfs = [&](auto self, int v, int pv) -> void {
       ord[v] = now_ord;
@@ -53,7 +52,7 @@ class hl_decomposition {
   }
 
  private:
-  int n;
+  int n, now_ord = 0;
   std::vector<std::vector<int>> g;
   std::vector<int> size;
 };

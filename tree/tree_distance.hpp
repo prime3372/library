@@ -21,10 +21,10 @@ template <class T> class tree_distance {
     hld.add_edge(a, b);
   }
 
-  void init() {
-    assert(n != 0);
-    hld.build(0);
-    dfs(0, -1, 0);
+  void init(int r = 0) {
+    assert(0 <= r && r < n);
+    hld.build(r);
+    dfs(r, -1, 0);
     initialized = true;
   }
 

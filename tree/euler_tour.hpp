@@ -21,22 +21,21 @@ class euler_tour {
 
   euler_tour& build(int r = 0) {
     assert(0 <= r && r < n);
-    int k = 0;
     auto dfs = [&](auto self, int v, int pv) -> void {
-      in[v] = k;
-      tour[k++] = v;
+      in[v] = now_ord;
+      tour[now_ord++] = v;
       for (int nv : g[v]) {
         if (nv == pv) continue;
         self(self, nv, v);
       }
-      out[v] = k;
+      out[v] = now_ord;
     };
     dfs(dfs, r, -1);
     return *this;
   }
 
  private:
-  int n;
+  int n, now_ord = 0;
   std::vector<std::vector<int>> g;
 };
 
