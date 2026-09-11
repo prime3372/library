@@ -29,9 +29,9 @@ template <class T> class tree_distance {
   }
 
   int operator()(int a, int b) {
+    assert(initialized);
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
-    if (!initialized) init();
     a = hld.ord[a];
     b = hld.ord[b];
     while (hld.head[a] != hld.head[b]) {
