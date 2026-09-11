@@ -93,13 +93,13 @@ def main():
 
         # compare out.txt and ans.txt
         with open("out.txt", 'r') as f_out, open("ans.txt", 'r') as f_ans:
-          tokens_out = f_out.read().split()
-          tokens_ans = f_ans.read().split()
-          if tokens_out == tokens_ans:
-              print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
-          else:
-              print(f"Test {i} {RED}Wrong Answer{RESET} {t} ms")
-              break
+            tokens_out = f_out.read().split()
+            tokens_ans = f_ans.read().split()
+            if tokens_out == tokens_ans:
+                print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
+            else:
+                print(f"Test {i} {RED}Wrong Answer{RESET} {t} ms")
+                break
 
 if __name__ == "__main__":
     main()
