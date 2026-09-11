@@ -12,6 +12,7 @@ using namespace cp;
 using ll = long long;
 
 int main() {
+  constexpr int bit_width = 32;
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, q;
@@ -25,15 +26,15 @@ int main() {
   for (int i = 0; i < n; i++) wm.set(i, y[p[i]]);
   wm.build();
 
-  vector<vector<ll>> cum(32, vector<ll>(n + 1));
+  vector<vector<ll>> cum(bit_width, vector<ll>(n + 1));
   for (int i = 0; i < n; i++) {
     int k = i;
-    for (int h = 31; h >= 0; h--) {
+    for (int h = bit_width - 1; h >= 0; h--) {
       k = wm[h].next(k);
       cum[h][k + 1] = w[p[i]];
     }
   }
-  for (int h = 0; h < 32; h++) {
+  for (int h = 0; h < bit_width; h++) {
     for (int i = 0; i < n; i++) {
       cum[h][i + 1] += cum[h][i];
     }
@@ -41,7 +42,7 @@ int main() {
 
   auto sum = [&](int l, int r, unsigned int u) -> ll {
     ll ans = 0;
-    for (int h = 31; h >= 0; h--) {
+    for (int h = bit_width - 1; h >= 0; h--) {
       int l0 = wm[h].next0(l);
       int r0 = wm[h].next0(r);
       if ((u >> h) & 1) {
