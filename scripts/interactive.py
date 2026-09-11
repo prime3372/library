@@ -63,6 +63,13 @@ def main():
     max_t = 0
 
     for i in range(1, case_num + 1):
+        for f in ["in.txt", "log.txt"]:
+            if os.path.exists(f):
+                try:
+                    os.remove(f)
+                except Exception:
+                    pass
+
         # run gen.exe
         try:
             with open("in.txt", "w") as f_in:
@@ -132,13 +139,6 @@ def main():
             break
 
         print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
-
-        for f in ["in.txt", "log.txt"]:
-            if os.path.exists(f):
-                try:
-                    os.remove(f)
-                except Exception:
-                    pass
 
 if __name__ == "__main__":
     main()

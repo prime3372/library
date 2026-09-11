@@ -48,6 +48,12 @@ def main():
     max_t = 0
 
     for i in range(1, case_num + 1):
+        for f in ["in.txt", "out.txt", "ans.txt"]:
+            try:
+                os.remove(f)
+            except Exception:
+                pass
+
         # run gen.exe
         try:
             with open("in.txt", "w") as f_in:
@@ -105,11 +111,11 @@ def main():
             print(f"Test {i} {BLUE}Aborted{RESET} {che} timed out")
             break
 
-        for f in ["in.txt", "out.txt", "ans.txt"]:
-            os.remove(f)
-
 if __name__ == "__main__":
     main()
     for f in ["sol.exe", "gen.exe", "ans.exe", "che.exe"]:
         if os.path.exists(f):
-            os.remove(f)
+            try:
+                os.remove(f)
+            except Exception:
+                pass
