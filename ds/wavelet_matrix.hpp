@@ -82,7 +82,7 @@ class wavelet_matrix {
     return *this;
   }
 
-  const bit_vector& operator[](int h) {
+  const bit_vector& operator[](int h) const {
     assert(0 <= h && h < w);
     return data[h];
   }
