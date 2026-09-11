@@ -42,6 +42,7 @@ template <class node, class derived> class implicit_treap_base {
     };
     dfs(dfs, root = ps[cart.root]);
   }
+
   implicit_treap_base(const implicit_treap_base& other)
       : root(other.root ? new node(*other.root) : nullptr) {}
   implicit_treap_base(implicit_treap_base&& other) noexcept : root(other.root) {
@@ -51,6 +52,7 @@ template <class node, class derived> class implicit_treap_base {
     std::swap(root, other.root);
     return *this;
   }
+
   ~implicit_treap_base() { delete root; }
 
   void set(int k, const T& x) {
