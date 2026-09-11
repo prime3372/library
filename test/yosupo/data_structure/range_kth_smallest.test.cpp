@@ -17,21 +17,21 @@ int main() {
     cin >> ai;
     wm.set(i, ai);
   }
-  auto mat = wm.build().data;
+  wm.build();
   while (q--) {
     int l, r, k;
     cin >> l >> r >> k;
     unsigned int ans = 0;
     for (int h = 31; h >= 0; h--) {
-      int l0 = mat[h].next0(l), r0 = mat[h].next0(r);
+      int l0 = wm[h].next0(l), r0 = wm[h].next0(r);
       if (r0 - l0 > k) {
         l = l0;
         r = r0;
       } else {
         ans |= 1 << h;
         k -= r0 - l0;
-        l = mat[h].next1(l);
-        r = mat[h].next1(r);
+        l = wm[h].next1(l);
+        r = wm[h].next1(r);
       }
     }
     cout << ans << "\n";
