@@ -52,14 +52,14 @@ template <class mint, int g> std::vector<mint> ntt_root() {
   return root;
 }
 
-// Cooley-Tukey algorithm
+// Cooley-Tukey FFT algorithm
 // https://en.wikipedia.org/wiki/Cooley%E2%80%93Tukey_FFT_algorithm
 template <class mint, int g> void ntt(std::vector<mint>& a) {
   static auto root = ntt_root<mint, g>();
   int n = int(a.size());
   int log = int(std::countr_zero((unsigned int)(n)));
 
-  // First, rearrange the array in bit-reversed order.
+  // bit-reversal first
 
   std::vector<int> bitrev(n);
   for (int i = 0; i < n; i++) {
@@ -69,13 +69,11 @@ template <class mint, int g> void ntt(std::vector<mint>& a) {
     if (i < bitrev[i]) std::swap(a[i], a[bitrev[i]]);
   }
 
-  // Second, recursively compute an length-N NTT from two length-N/2 NTTs.
-  // example: n = 8
+  // recursively merge NTTs
   //     a = [000] [100] [010] [110] [001] [101] [011] [111]
   // ->  a = [000   100] [010   110] [001   101] [011   111]
   // ->  a = [000   010   100   110] [001   011   101   111]
   // ->  a = [000   001   010   011   100   101   110   111]
-  // Here, [i_0 ... i_k] denotes the NTT of a[i_0,...,i_k] before rearranging.
 
   for (int k = 1; k <= log; k++) {
     int width = 1 << k;
