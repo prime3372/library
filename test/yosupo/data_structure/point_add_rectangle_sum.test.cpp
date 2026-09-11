@@ -53,24 +53,24 @@ int main() {
   for (int i = 0; i < m; i++) wm.set(i, ys[p[i]]);
   wm.build();
 
-  vector<fenwick_tree<ll>> fw(31, fenwick_tree<ll>(m + 1));
+  vector<fenwick_tree<ll>> fw(32, fenwick_tree<ll>(m + 1));
   for (int i = 0; i < n; i++) {
     int k = ip[i];
-    for (int h = 30; h >= 0; h--) {
+    for (int h = 31; h >= 0; h--) {
       k = wm[h].next(k);
       fw[h].add(k, ws[i]);
     }
   }
 
   auto add = [&](int k, ll w) -> void {
-    for (int h = 30; h >= 0; h--) {
+    for (int h = 31; h >= 0; h--) {
       k = wm[h].next(k);
       fw[h].add(k, w);
     }
   };
   auto sum = [&](int l, int r, unsigned int u) -> ll {
     ll ans = 0;
-    for (int h = 30; h >= 0; h--) {
+    for (int h = 31; h >= 0; h--) {
       int l0 = wm[h].next0(l);
       int r0 = wm[h].next0(r);
       if ((u >> h) & 1) {

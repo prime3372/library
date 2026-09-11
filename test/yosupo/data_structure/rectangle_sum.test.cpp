@@ -25,15 +25,15 @@ int main() {
   for (int i = 0; i < n; i++) wm.set(i, y[p[i]]);
   wm.build();
 
-  vector<vector<ll>> cum(31, vector<ll>(n + 1));
+  vector<vector<ll>> cum(32, vector<ll>(n + 1));
   for (int i = 0; i < n; i++) {
     int k = i;
-    for (int h = 30; h >= 0; h--) {
+    for (int h = 31; h >= 0; h--) {
       k = wm[h].next(k);
       cum[h][k + 1] = w[p[i]];
     }
   }
-  for (int h = 0; h < 31; h++) {
+  for (int h = 0; h < 32; h++) {
     for (int i = 0; i < n; i++) {
       cum[h][i + 1] += cum[h][i];
     }
@@ -41,7 +41,7 @@ int main() {
 
   auto sum = [&](int l, int r, unsigned int u) -> ll {
     ll ans = 0;
-    for (int h = 30; h >= 0; h--) {
+    for (int h = 31; h >= 0; h--) {
       int l0 = wm[h].next0(l);
       int r0 = wm[h].next0(r);
       if ((u >> h) & 1) {
