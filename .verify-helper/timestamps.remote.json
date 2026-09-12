@@ -107,7 +107,7 @@
   "test/yosupo/polynomial/inv_of_formal_power_series.test.cpp": "2026-09-11 22:30:29 +0900",
   "test/yosupo/polynomial/log_of_formal_power_series.test.cpp": "2026-09-11 22:30:29 +0900",
   "test/yosupo/polynomial/pow_of_formal_power_series.test.cpp": "2026-09-11 22:30:29 +0900",
-  "test/yosupo/polynomial/product_of_polynomial_sequence.test.cpp": "2026-09-11 22:30:29 +0900",
+  "test/yosupo/polynomial/product_of_polynomial_sequence.test.cpp": "2026-09-12 14:50:56 +0900",
   "test/yosupo/sample/many_aplusb_128bit.test.cpp": "2026-08-26 19:13:55 +0900",
   "test/yosupo/string/aho_corasick.test.cpp": "2026-09-10 17:16:06 +0900",
   "test/yosupo/string/enumerate_palindromes.test.cpp": "2026-09-10 19:26:41 +0900",
