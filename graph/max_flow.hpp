@@ -130,11 +130,11 @@ class max_flow {
   }
 
  private:
-  int n;
   struct _edge {
     int to, rev;
     Cap cap;
   };
+  int n;
   std::vector<std::pair<int, int>> pos;
   std::vector<std::vector<_edge>> g;
 };
