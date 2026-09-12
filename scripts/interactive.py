@@ -13,7 +13,7 @@ case_num = int(sys.argv[4])
 include = sys.argv[5]
 
 # variables
-timelimit = 5000
+time_limit = 5000
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # exit status of the interactor
@@ -73,7 +73,7 @@ def main():
         # run gen.exe
         try:
             with open("in.txt", "w") as f_in:
-                subprocess.run(["./gen.exe"], stdout=f_in, timeout=timelimit * 1.1 / 1000.0, check=True)
+                subprocess.run(["./gen.exe"], stdout=f_in, timeout=time_limit * 1.1 / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"Test {i} {BLUE}Aborted{RESET} {gen} timed out")
             break
@@ -98,8 +98,8 @@ def main():
                 sol_code = p_sol.poll()
                 act_code = p_act.poll()
 
-                if time.perf_counter() - start > timelimit * 1.1 / 1000.0:
-                    print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
+                if time.perf_counter() - start > time_limit * 1.1 / 1000.0:
+                    print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {time_limit} ms")
                     p_sol.kill()
                     p_act.kill()
                     stopped = True
@@ -134,8 +134,8 @@ def main():
         t = math.ceil((time.perf_counter() - start) * 1000)
         max_t = max(max_t, t)
 
-        if t > timelimit:
-            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
+        if t > time_limit:
+            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {time_limit} ms")
             break
 
         print(f"Test {i} {GREEN}Passed{RESET} {t} ms")

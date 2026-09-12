@@ -12,7 +12,7 @@ case_num = int(sys.argv[4])
 include = sys.argv[5]
 
 # variables
-timelimit = 5000
+time_limit = 5000
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 def main():
@@ -52,7 +52,7 @@ def main():
         # run gen.exe
         try:
             with open("in.txt", "w") as f_in:
-                subprocess.run(["./gen.exe"], stdout=f_in, timeout=timelimit * 1.1 / 1000.0, check=True)
+                subprocess.run(["./gen.exe"], stdout=f_in, timeout=time_limit * 1.1 / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"Test {i} {BLUE}Aborted{RESET} {gen} timed out")
             break
@@ -64,9 +64,9 @@ def main():
         start = time.perf_counter()
         try:
             with open("in.txt", "r") as f_in, open("out.txt", "w") as f_out:
-                subprocess.run(["./sol.exe"], stdin=f_in, stdout=f_out, timeout=timelimit * 1.1 / 1000.0, check=True)
+                subprocess.run(["./sol.exe"], stdin=f_in, stdout=f_out, timeout=time_limit * 1.1 / 1000.0, check=True)
         except subprocess.TimeoutExpired:
-            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
+            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {time_limit} ms")
             break
         except subprocess.CalledProcessError:
             t = math.ceil((time.perf_counter() - start) * 1000)
@@ -76,14 +76,14 @@ def main():
         t = math.ceil((time.perf_counter() - start) * 1000)
         max_t = max(max_t, t)
 
-        if t > timelimit:
-            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {timelimit} ms")
+        if t > time_limit:
+            print(f"Test {i} {YELLOW}Time Limit Exceeded{RESET} > {time_limit} ms")
             break
 
         # run ans.exe
         try:
             with open("in.txt", "r") as f_in, open("ans.txt", "w") as f_ans:
-                subprocess.run(["./ans.exe"], stdin=f_in, stdout=f_ans, timeout=timelimit * 1.1 / 1000.0, check=True)
+                subprocess.run(["./ans.exe"], stdin=f_in, stdout=f_ans, timeout=time_limit * 1.1 / 1000.0, check=True)
         except subprocess.TimeoutExpired:
             print(f"Test {i} {BLUE}Aborted{RESET} {ans} timed out")
             break
