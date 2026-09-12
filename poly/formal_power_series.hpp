@@ -142,8 +142,8 @@ formal_power_series<mint> diff(formal_power_series<mint> f) {
 
 template <class mint>
 formal_power_series<mint> integral(formal_power_series<mint> f) {
-  int m = mint::mod();
   if (f.empty()) return f;
+  int m = mint::mod();
   std::vector<mint> minv(f.size() + 1);
   minv[1] = 1;
   for (int i = 2; i <= int(f.size()); i++) {
