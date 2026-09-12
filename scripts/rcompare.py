@@ -96,20 +96,20 @@ def main():
         with open("out.txt", 'r') as f_out, open("ans.txt", 'r') as f_ans:
             tokens_out = f_out.read().split()
             tokens_ans = f_ans.read().split()
-            if len(tokens_out != len(tokens_ans)):
+            if len(tokens_out) != len(tokens_ans):
                 print(f"Test {i} {RED}Wrong Answer{RESET} {t} ms")
-                break
+                break            
             for t_out, t_ans in zip(tokens_out, tokens_ans):
                 try:
                     f_out = float(t_out)
                     f_ans = float(t_ans)
                     if abs(f_out - f_ans) > max_error:
                         print(f"Test {i} {RED}Wrong Answer{RESET} {t} ms")
-                        break
+                        return
                 except Exception:
                     if t_out != t_ans:
                         print(f"Test {i} {RED}Wrong Answer{RESET} {t} ms")
-                        break
+                        return
             print(f"Test {i} {GREEN}Passed{RESET} {t} ms")
 
 if __name__ == "__main__":
