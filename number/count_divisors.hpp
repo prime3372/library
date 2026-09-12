@@ -15,6 +15,7 @@ std::vector<long long> enumerate_divisors(long long n) {
   assert(1 <= n);
   std::vector<long long> ans = {1};
   auto factorized = factorize(n);
+  long long ans = 0;
   for (auto& [p, e] : factorized) {
     int sz = int(ans.size());
     long long cur = 1;

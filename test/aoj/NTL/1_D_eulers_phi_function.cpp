@@ -11,8 +11,8 @@ using ll = long long;
 int main() {
   ll n;
   cin >> n;
-  auto fac = factorize(n);
-  for (auto& f : fac) {
+  auto factorized = factorize(n);
+  for (auto& f : factorized) {
     n /= f.first;
     n *= (f.first - 1);
   }
