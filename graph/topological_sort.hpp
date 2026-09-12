@@ -7,7 +7,7 @@
 
 namespace cp {
 
-// @note if g has cycles, return an empty vector
+// @note If g has cycles, return an empty vector.
 std::vector<int> topological_sort(const std::vector<std::vector<int>>& g) {
   int n = int(g.size());
   std::vector<int> in_deg(n);
