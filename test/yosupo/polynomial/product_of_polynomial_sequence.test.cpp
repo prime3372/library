@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/product_of_polynomial_sequence"
 
 #include "poly/formal_power_series.hpp"
-#include "poly/fps_prod.hpp"
+#include "poly/product_of_polynomials.hpp"
 #include "util/static_modint.hpp"
 #include <iostream>
 #include <vector>
