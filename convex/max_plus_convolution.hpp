@@ -8,7 +8,7 @@
 namespace cp {
 
 // @param a `a[i+1] - a[i] >= a[i+2] - a[i+1] (i = 0, ..., |a|-2)`
-// @note `a[i]` and `b[i]` must be in [-10^9, 10^9]
+// @note The difference sequence of `a` must not overflow.
 template <class T>
 std::vector<T> max_plus_convolution(const std::vector<T>& a,
                                     const std::vector<T>& b) {
