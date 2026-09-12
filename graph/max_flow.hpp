@@ -61,14 +61,12 @@ class max_flow {
     assert(s != t);
 
     std::vector<int> level(n), iter(n);
-    simple_queue<int> que;
 
     // BFS to construct the level graph.
     auto bfs = [&]() {
-      std::fill(level.begin(), level.end(), -1);
-      level[s] = 0;
-      while (!que.empty()) que.pop();
+      simple_queue<int> que;
       que.push(s);
+      level[s] = 0;
       while (!que.empty()) {
         int v = que.front();
         que.pop();
@@ -104,6 +102,7 @@ class max_flow {
 
     Cap flow = 0;
     while (flow < flow_limit) {
+      std::fill(level.begin(), level.end(), -1);
       bfs();
       // If sink t is unreachable, no more augmenting paths exist.
       if (level[t] == -1) break;
@@ -118,15 +117,13 @@ class max_flow {
     std::vector<bool> visited(n);
     simple_queue<int> que;
     que.push(s);
-    visited[s] = true;
     while (!que.empty()) {
       int v = que.front();
+      if (visited[v]) continue;
+      visited[v] = true;
       que.pop();
       for (auto e : g[v]) {
-        if (e.cap && !visited[e.to]) {
-          que.push(e.to);
-          visited[e.to] = true;
-        }
+        if (e.cap) que.push(e.to);
       }
     }
     return visited;
