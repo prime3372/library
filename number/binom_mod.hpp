@@ -14,7 +14,7 @@ class binom_mod {
  public:
   binom_mod() : binom_mod(1) {}
   explicit binom_mod(int _n) : max_n(_n) {
-    static int m = mint::mod();
+    int m = mint::mod();
     assert(is_prime(m));
     assert(0 <= max_n);
     int n = (max_n == 0 ? 1 : std::min(max_n, m - 1));
