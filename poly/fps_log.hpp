@@ -13,7 +13,7 @@ formal_power_series<mint> log(const formal_power_series<mint>& f, int n) {
 
 template <class mint>
 formal_power_series<mint> log(const formal_power_series<mint>& f) {
-  return log(f, f.size());
+  return log(f, int(f.size()));
 }
 
 }  // namespace cp

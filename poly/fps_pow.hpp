@@ -25,7 +25,7 @@ formal_power_series<mint> pow(const formal_power_series<mint>& f, long long k,
 
 template <class mint>
 formal_power_series<mint> pow(const formal_power_series<mint>& f, long long k) {
-  return pow(f, k, f.size());
+  return pow(f, k, int(f.size()));
 }
 
 }  // namespace cp

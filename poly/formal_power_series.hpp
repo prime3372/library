@@ -12,70 +12,65 @@
 namespace cp {
 
 template <class mint> requires(internal::is_static_modint_v<mint>)
-class formal_power_series {
- private:
+class formal_power_series : public std::vector<mint> {
+  using base = std::vector<mint>;
   using fps = formal_power_series;
 
  public:
-  formal_power_series() {}
-  explicit formal_power_series(int n) : a(n) {}
-  explicit formal_power_series(const std::vector<mint>& _a) : a(_a) {}
-  formal_power_series(std::initializer_list<mint> il) : a(il) {}
+  using base::base;
+  using base::begin;
+  using base::empty;
+  using base::erase;
+  using base::insert;
+  using base::resize;
+  using base::size;
+
+  explicit formal_power_series(const std::vector<mint>& a) : base(a) {}
   formal_power_series(std::initializer_list<std::pair<int, mint>> il) {
     int n = 0;
     for (const auto& p : il) n = std::max(n, p.first);
-    a.resize(n + 1);
-    for (const auto& p : il) a[p.first] = p.second;
-  }
-
-  mint& operator[](int i) {
-    assert(0 <= i && i < size());
-    return a[i];
-  }
-  const mint& operator[](int i) const {
-    assert(0 <= i && i < size());
-    return a[i];
+    resize(n + 1);
+    for (const auto& p : il) (*this)[p.first] = p.second;
   }
 
   fps& operator+=(const mint& rhs) {
     if (empty()) resize(1);
-    a[0] += rhs;
+    (*this)[0] += rhs;
     return *this;
   }
   fps& operator+=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
-    for (int i = 0; i < rhs.size(); i++) a[i] += rhs[i];
+    for (int i = 0; i < int(rhs.size()); i++) (*this)[i] += rhs[i];
     return *this;
   }
   fps& operator-=(const mint& rhs) {
     if (empty()) resize(1);
-    a[0] += rhs;
+    (*this)[0] += rhs;
     return *this;
   }
   fps& operator-=(const fps& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
-    for (int i = 0; i < rhs.size(); i++) a[i] -= rhs[i];
+    for (int i = 0; i < int(rhs.size()); i++) (*this)[i] -= rhs[i];
     return *this;
   }
   fps& operator*=(const mint& rhs) {
-    for (int i = 0; i < size(); i++) a[i] *= rhs;
+    for (int i = 0; i < int(size()); i++) (*this)[i] *= rhs;
     return *this;
   }
   fps& operator*=(const fps& rhs) {
-    a = convolution(a, rhs.a);
-    return *this;
+    return *this = fps(convolution(*this, rhs));
   }
   fps& operator/=(const mint& rhs) {
-    for (int i = 0; i < size(); i++) a[i] /= rhs;
+    for (int i = 0; i < int(size()); i++) (*this)[i] /= rhs;
     return *this;
   }
 
   fps& operator>>=(int w) {
-    a.erase(a.begin(), a.begin() + std::min(w, size()));
+    erase(begin(), begin() + std::min(w, int(size())));
     return *this;
   }
   fps& operator<<=(int w) {
-    a.insert(a.begin(), w, 0);
+    insert(begin(), w, 0);
     return *this;
   }
 
@@ -83,15 +78,10 @@ class formal_power_series {
   fps operator-() const { return fps() - *this; }
 
   fps prefix(int n) const {
-    std::vector<mint> b(a.begin(), a.begin() + std::min(n, size()));
+    fps b(begin(), begin() + std::min(n, int(size())));
     b.resize(n);
-    return fps(b);
+    return b;
   }
-
-  int size() const { return int(a.size()); }
-  bool empty() const { return a.empty(); }
-  void resize(int n) { a.resize(n); }
-  void clear() { a.clear(); }
 
   friend fps operator+(const fps& lhs, const mint& rhs) {
     return fps(lhs) += rhs;
@@ -128,25 +118,22 @@ class formal_power_series {
   friend fps operator<<(const fps& f, int w) { return fps(f) <<= w; }
 
   friend std::istream& operator>>(std::istream& is, fps& rhs) {
-    for (mint& x : rhs.a) is >> x;
+    for (mint& x : rhs) is >> x;
     return is;
   }
   friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
-    for (int i = 0; i < rhs.size(); i++) {
-      os << rhs.a[i];
-      if (i != rhs.size() - 1) os << " ";
+    for (int i = 0; i < int(rhs.size()); i++) {
+      os << rhs[i];
+      if (i != int(rhs.size()) - 1) os << " ";
     }
     return os;
   }
-
- private:
-  std::vector<mint> a;
 };
 
 template <class mint>
 formal_power_series<mint> diff(formal_power_series<mint> f) {
   mint coeff = 1;
-  for (int i = 1; i < f.size(); i++) {
+  for (int i = 1; i < int(f.size()); i++) {
     f[i] *= coeff;
     coeff++;
   }
@@ -156,12 +143,13 @@ formal_power_series<mint> diff(formal_power_series<mint> f) {
 template <class mint>
 formal_power_series<mint> integral(formal_power_series<mint> f) {
   static int mod = mint::mod();
+  if (f.empty()) return f;
   std::vector<mint> minv(f.size() + 1);
   minv[1] = 1;
-  for (int i = 2; i <= f.size(); i++) {
+  for (int i = 2; i <= int(f.size()); i++) {
     minv[i] = -minv[mod % i] * (mod / i);
   }
-  for (int i = 0; i < f.size(); i++) {
+  for (int i = 0; i < int(f.size()); i++) {
     f[i] *= minv[i + 1];
   }
   return f <<= 1;

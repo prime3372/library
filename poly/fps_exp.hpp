@@ -18,7 +18,7 @@ formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
 
 template <class mint>
 formal_power_series<mint> exp(const formal_power_series<mint>& f) {
-  return exp(f, f.size());
+  return exp(f, int(f.size()));
 }
 
 }  // namespace cp

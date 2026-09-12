@@ -11,7 +11,7 @@ formal_power_series<mint> inv(const formal_power_series<mint>& f, int n) {
   assert(!f.empty() && f[0] != 0);
   formal_power_series<mint> g = {f[0].inv()};
   for (int d = 1; d < n; d <<= 1) {
-    g = 2 * g - g * g * f.prefix(std::min(2 * d, f.size()));
+    g = 2 * g - g * g * f.prefix(std::min(2 * d, int(f.size())));
     g.resize(2 * d);
   }
   return g.prefix(n);
