@@ -14,7 +14,7 @@ formal_power_series<mint> inv(const formal_power_series<mint>& f, int n) {
     g = 2 * g - g * g * f.prefix(std::min(2 * d, f.size()));
     g.resize(2 * d);
   }
-  return g.resize(n);
+  return g.prefix(n);
 }
 
 template <class mint>

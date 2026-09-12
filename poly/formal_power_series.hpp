@@ -90,10 +90,7 @@ class formal_power_series {
 
   int size() const { return int(a.size()); }
   bool empty() const { return a.empty(); }
-  fps& resize(int n) {
-    a.resize(n);
-    return *this;
-  }
+  void resize(int n) { a.resize(n); }
   void clear() { a.clear(); }
 
   friend fps operator+(const fps& lhs, const mint& rhs) {

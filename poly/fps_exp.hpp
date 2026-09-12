@@ -13,7 +13,7 @@ formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
     g = g * (1 - log(g, 2 * d) + f.prefix(2 * d));
     g.resize(2 * d);
   }
-  return g.resize(n);
+  return g.prefix(n);
 }
 
 template <class mint>
