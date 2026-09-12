@@ -106,6 +106,7 @@
   "test/yosupo/polynomial/exp_of_formal_power_series.test.cpp": "2026-09-12 18:49:35 +0900",
   "test/yosupo/polynomial/inv_of_formal_power_series.test.cpp": "2026-09-12 18:49:35 +0900",
   "test/yosupo/polynomial/log_of_formal_power_series.test.cpp": "2026-09-12 18:49:35 +0900",
+  "test/yosupo/polynomial/polynomial_taylor_shift.test.cpp": "2026-09-12 19:00:22 +0900",
   "test/yosupo/polynomial/pow_of_formal_power_series.test.cpp": "2026-09-12 18:49:35 +0900",
   "test/yosupo/polynomial/product_of_polynomial_sequence.test.cpp": "2026-09-12 18:49:35 +0900",
   "test/yosupo/sample/many_aplusb_128bit.test.cpp": "2026-08-26 19:13:55 +0900",
