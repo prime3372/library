@@ -27,4 +27,6 @@ template <class T> T uniform(T l, T r) {
 
 bool uniform_bool() { return uniform(0, 1) == 1; }
 
+double uniform01() { return std::uniform_real_distribution(0.0, 1.0)(mt32); }
+
 }  // namespace cp
