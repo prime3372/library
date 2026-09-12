@@ -9,11 +9,11 @@ gen = sys.argv[1]
 sol = sys.argv[2]
 ans = sys.argv[3]
 che = sys.argv[4]
-case_num = int(sys.argv[5])
-include = sys.argv[6]
+time_limit = int(sys.argv[5])
+case_num = int(sys.argv[6])
+include = sys.argv[7]
 
 # variables
-time_limit = 5000
 opts = ["-I", include, "-O2", "-Wall", "-Wextra", "-fdiagnostics-color=always", "-std=c++23"]
 
 # exit status of the checker
