@@ -8,8 +8,7 @@ namespace cp {
 
 long long totient(long long n) {
   assert(1 <= n);
-  auto f = factorize(n);
-  for (auto& [p, e] : f) {
+  for (auto [p, e] : factorize(n)) {
     n /= p;
     n *= (p - 1);
   }

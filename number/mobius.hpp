@@ -7,9 +7,8 @@
 namespace cp {
 
 int mobius(long long n) {
-  auto f = factorize(n);
   int ans = 1;
-  for (auto [p, e] : f) {
+  for (auto [p, e] : factorize(n)) {
     if (e >= 2) return 0;
     ans = -ans;
   }

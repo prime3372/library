@@ -11,9 +11,8 @@ using namespace cp;
 int main() {
   int n;
   cin >> n;
-  auto f = factorize(n);
   string ans;
-  for (auto [p, e] : f) {
+  for (auto [p, e] : factorize(n)) {
     while (e--) {
       ans.append(to_string(p));
       ans.push_back(' ');

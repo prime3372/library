@@ -14,8 +14,7 @@ namespace cp {
 std::vector<long long> enumerate_divisors(long long n) {
   assert(1 <= n);
   std::vector<long long> ans = {1};
-  auto f = factorize(n);
-  for (auto& [p, e] : f) {
+  for (auto [p, e] : factorize(n)) {
     int sz = int(ans.size());
     long long cur = 1;
     for (int i = 0; i < e; i++) {
