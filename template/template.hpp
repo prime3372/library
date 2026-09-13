@@ -45,11 +45,11 @@ using mint = cp::modint998244353;
 #define rrep4(i, a, b, c) for (ll i = ll(b) - 1; i >= ll(a); i -= (c))
 #define rrep(...) CHOOSE5(__VA_ARGS__, rrep4, rrep3, rrep2)(__VA_ARGS__)
 
-#define fore1(x, a) for (auto&& x : (a))
-#define fore2(x, y, a) for (auto&& [x, y] : (a))
-#define fore3(x, y, z, a) for (auto&& [x, y, z] : (a))
-#define fore4(x, y, z, w, a) for (auto&& [x, y, z, w] : (a))
-#define fore(...) CHOOSE6(__VA_ARGS__, fore4, fore3, fore2, fore1)(__VA_ARGS__)
+#define fore2(x, a) for (auto&& x : (a))
+#define fore3(x, y, a) for (auto&& [x, y] : (a))
+#define fore4(x, y, z, a) for (auto&& [x, y, z] : (a))
+#define fore5(x, y, z, w, a) for (auto&& [x, y, z, w] : (a))
+#define fore(...) CHOOSE6(__VA_ARGS__, fore5, fore4, fore3, fore2)(__VA_ARGS__)
 
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
