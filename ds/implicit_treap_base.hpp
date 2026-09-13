@@ -11,7 +11,7 @@
 #include <vector>
 
 #include "ds/cartesian_tree.hpp"
-#include "util/io_utility_base.hpp"
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -99,7 +99,6 @@ template <class node, class derived> class implicit_treap_base {
   bool empty() const { return size() == 0; }
 
   friend std::ostream& operator<<(std::ostream& os, derived tp) {
-    using io_utility::operator<<;
     std::vector<T> v(tp.size());
     for (int i = 0; i < tp.size(); i++) v[i] = tp[i];
     return os << v;

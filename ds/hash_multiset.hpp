@@ -39,7 +39,6 @@ template <class T> class hash_multiset {
   int size() const { return sz; }
 
   friend std::ostream& operator<<(std::ostream& os, const hash_multiset& s) {
-    using io_utility::operator<<;
     auto elems = s.enumerate();
     std::sort(elems.begin(), elems.end());
     return os << elems;

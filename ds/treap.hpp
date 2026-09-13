@@ -10,7 +10,7 @@
 
 #include "ds/cartesian_tree.hpp"
 #include "random/engine.hpp"
-#include "util/io_utility_base.hpp"
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -148,7 +148,6 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
   bool empty() const { return size() == 0; }
 
   friend std::ostream& operator<<(std::ostream& os, const treap& tp) {
-    using io_utility::operator<<;
     return os << tp.enumerate();
   }
 

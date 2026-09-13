@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-#include "util/io_utility_base.hpp"
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -64,7 +64,6 @@ template <class S, auto op, auto e> class dynamic_segtree {
 
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_segtree& seg) {
-    using io_utility::operator<<;
     std::vector<S> v(seg.n);
     for (int i = 0; i < seg.n; i++) v[i] = seg[i];
     return os << v;

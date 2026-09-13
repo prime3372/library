@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-#include "util/io_utility_base.hpp"
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -74,7 +74,6 @@ class dynamic_lazy_segtree {
   ull size() const { return n; }
 
   friend std::ostream& operator<<(std::ostream& os, dynamic_lazy_segtree seg) {
-    using io_utility::operator<<;
     std::vector<S> v(seg.n);
     for (int i = 0; i < seg.n; i++) v[i] = seg[i];
     return os << v;

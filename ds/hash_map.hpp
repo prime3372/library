@@ -9,7 +9,7 @@
 #include <utility>
 #include <vector>
 
-#include "util/io_utility_base.hpp"
+#include "util/io_utility.hpp"
 #include "util/safe_hash.hpp"
 
 namespace cp {
@@ -55,7 +55,6 @@ template <class Key, class Val> class hash_map {
   void set_default(const Val& v) { default_value = v; }
 
   friend std::ostream& operator<<(std::ostream& os, const hash_map& mp) {
-    using io_utility::operator<<;
     auto elems = mp.enumerate();
     std::sort(elems.begin(), elems.end());
     return os << elems;
