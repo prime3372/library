@@ -25,11 +25,12 @@ template <class T>
 inline constexpr bool is_unsigned_int128_v = is_unsigned_int128<T>::value;
 
 template <class T>
-using is_int128 =
+using is_128bit_int =
     std::conditional_t<is_signed_int128_v<T> || is_unsigned_int128_v<T>,
                        std::true_type, std::false_type>;
 
-template <class T> inline constexpr bool is_int128_v = is_int128<T>::value;
+template <class T>
+inline constexpr bool is_128bit_int_v = is_128bit_int<T>::value;
 
 // is_integral
 
@@ -53,7 +54,7 @@ inline constexpr bool is_unsigned_int_v = is_unsigned_int<T>::value;
 
 template <class T>
 using is_integral = std::conditional_t<std::is_integral_v<T> ||
-                                           is_int128_v<std::remove_cv_t<T>>,
+                                           is_128bit_int_v<std::remove_cv_t<T>>,
                                        std::true_type, std::false_type>;
 
 template <class T> inline constexpr bool is_integral_v = is_integral<T>::value;
