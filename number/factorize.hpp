@@ -21,17 +21,17 @@ long long pollard_rho(long long n) {
   if (n % 2 == 0) return 2;
   if (is_prime(n)) return n;
 
-  long long r;
-  auto f = [&](__int128 x) { return (long long)((x * x + r) % n); };
+  long long c;
+  auto f = [&](__int128 x) { return (long long)((x * x + c) % n); };
 
-  int m = int(kth_root(n, 8));
+  int r = int(kth_root(n, 8));
   while (true) {
-    long long x = 0, y = 0, x_tmp, y_tmp, q = 1, d = 1;
-    r = uniform(2LL, n - 1);
+    long long x = 0, y = 0, sx, sy, q = 1, d = 1;
+    c = uniform(2LL, n - 1);
     while (d == 1) {
-      x_tmp = x;
-      y_tmp = y;
-      for (int i = 0; i < m; i++) {
+      sx = x;
+      sy = y;
+      for (int i = 0; i < r; i++) {
         x = f(x);
         y = f(f(y));
         long long z = (x - y) % n;
@@ -40,8 +40,8 @@ long long pollard_rho(long long n) {
       d = std::gcd(q, n);
     }
     if (d == n) {
-      x = x_tmp;
-      y = y_tmp;
+      x = sx;
+      y = sy;
       do {
         x = f(x);
         y = f(f(y));
