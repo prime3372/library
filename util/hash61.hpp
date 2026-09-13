@@ -16,9 +16,10 @@ class hash61 {
 
  public:
   static hash61 get_basis() {
+    std::uniform_int_distribution dist(1ULL, m - 1);
     hash61 hs;
     do {
-      hs.v = uniform(1ULL, m - 1);
+      hs.v = dist(mt32);
     } while (!is_primitive(hs.v));
     return hs;
   }
