@@ -32,17 +32,17 @@ using mint = cp::modint998244353;
 #define rep1(n) for (ll _ = 0; _ < ll(n); _++)
 #define rep2(i, n) for (ll i = 0; i < ll(n); i++)
 #define rep3(i, a, b) for (ll i = (a); i < ll(b); i++)
-#define rep4(i, a, b, c) for (ll i = (a); i < ll(b); i += c)
+#define rep4(i, a, b, c) for (ll i = (a); i < ll(b); i += (c))
 #define rep(...) CHOOSE5(__VA_ARGS__, rep4, rep3, rep2, rep1)(__VA_ARGS__)
 
 #define REP2(i, n) for (ll i = 0; i <= ll(n); i++)
 #define REP3(i, a, b) for (ll i = (a); i <= ll(b); i++)
-#define REP4(i, a, b, c) for (ll i = (a); i <= ll(b); i += c)
+#define REP4(i, a, b, c) for (ll i = (a); i <= ll(b); i += (c))
 #define REP(...) CHOOSE5(__VA_ARGS__, REP4, REP3, REP2)(__VA_ARGS__)
 
 #define rrep2(i, n) for (ll i = ll(n) - 1; i >= 0; i--)
 #define rrep3(i, a, b) for (ll i = ll(b) - 1; i >= ll(a); i--)
-#define rrep4(i, a, b, c) for (ll i = ll(b) - 1; i >= ll(a); i -= c)
+#define rrep4(i, a, b, c) for (ll i = ll(b) - 1; i >= ll(a); i -= (c))
 #define rrep(...) CHOOSE5(__VA_ARGS__, rrep4, rrep3, rrep2)(__VA_ARGS__)
 
 #define fore1(x, a) for (auto&& x : (a))
