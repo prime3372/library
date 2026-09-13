@@ -12,12 +12,9 @@ int length_of_lis(const std::vector<T>& a) {
   std::vector<T> dp(n, std::numeric_limits<T>::max());
   int ans = 0;
   for (int i = 0; i < n; i++) {
-    int j;
-    if (strong) {
-      j = int(std::lower_bound(dp.begin(), dp.end(), a[i]) - dp.begin());
-    } else {
-      j = int(std::upper_bound(dp.begin(), dp.end(), a[i]) - dp.begin());
-    }
+    int j =
+        strong ? int(std::lower_bound(dp.begin(), dp.end(), a[i]) - dp.begin())
+               : int(std::upper_bound(dp.begin(), dp.end(), a[i]) - dp.begin());
     dp[j] = a[i];
     ans = std::max(ans, j + 1);
   }
