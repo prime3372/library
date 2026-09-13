@@ -82,7 +82,7 @@ using mint = cp::modint998244353;
     std::cerr << "\n";                               \
   }(__VA_ARGS__)
 #define write(...) \
-  [](const auto&... _args) -> void { (cerr << ... << _args); }(__VA_ARGS__)
+  [](const auto&... _args) -> void { (std::cerr << ... << _args); }(__VA_ARGS__)
 
 #else
 
