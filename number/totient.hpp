@@ -1,22 +1,19 @@
 #pragma once
 
 #include <cassert>
-#include <numeric>
-#include <vector>
+
+#include "number/factorize.hpp"
 
 namespace cp {
 
-std::vector<int> totient(int n) {
-  assert(0 <= n);
-  std::vector<int> ans(n + 1);
-  std::iota(ans.begin(), ans.end(), 0);
-  for (int i = 2; i <= n; i++) {
-    if (ans[i] != i) continue;
-    for (long long j = i; j <= n; j += i) {
-      ans[j] = ans[j] / i * (i - 1);
-    }
+long long totient(long long n) {
+  assert(1 <= n);
+  auto factorized = factorize(n);
+  for (auto& [p, e] : factorized) {
+    n /= p;
+    n *= (p - 1);
   }
-  return ans;
+  return n;
 }
 
 }  // namespace cp

@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/all/NTL_1_D"
 
-#include "number/factorize.hpp"
+#include "number/totient.hpp"
 #include <iostream>
 
 using namespace std;
@@ -11,10 +11,5 @@ using ll = long long;
 int main() {
   ll n;
   cin >> n;
-  auto factorized = factorize(n);
-  for (auto& f : factorized) {
-    n /= f.first;
-    n *= (f.first - 1);
-  }
-  cout << n << "\n";
+  cout << totient(n) << "\n";
 }
