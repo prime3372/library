@@ -11,7 +11,6 @@ formal_power_series<mint> taylor_shift(formal_power_series<mint> f, mint c) {
   int n = int(f.size()), m = mint::mod();
   if (n <= 1) return f;
 
-  formal_power_series<mint> g(n);
   std::vector<mint> minv(n), ifact(n);
   minv[1] = 1;
   ifact[0] = ifact[1] = 1;
@@ -20,6 +19,7 @@ formal_power_series<mint> taylor_shift(formal_power_series<mint> f, mint c) {
     ifact[i] = ifact[i - 1] * minv[i];
   }
 
+  formal_power_series<mint> g(n);
   mint fact = 1, cpow = 1;
   g[0] = 1;
   for (int i = 1; i < n; i++) {
