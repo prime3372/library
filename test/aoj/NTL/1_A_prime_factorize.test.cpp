@@ -11,11 +11,11 @@ using namespace cp;
 int main() {
   int n;
   cin >> n;
-  auto factorized = factorize(n);
+  auto f = factorize(n);
   string ans;
-  for (auto f : factorized) {
-    while (f.second--) {
-      ans.append(std::to_string(f.first));
+  for (auto [p, e] : f) {
+    while (e--) {
+      ans.append(to_string(p));
       ans.push_back(' ');
     }
   }
