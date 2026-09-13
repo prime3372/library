@@ -83,14 +83,9 @@ class static_modint {
     return r;
   }
   mint inv() const {
-    if (prime) {
-      assert(v);
-      return pow(umod() - 2);
-    } else {
-      auto eg = ext_gcd(v, m);
-      assert(eg.first == 1);
-      return eg.second;
-    }
+    auto eg = ext_gcd(v, m);
+    assert(eg.first == 1);
+    return eg.second;
   }
 
   friend mint operator+(const mint& lhs, const mint& rhs) {
@@ -138,7 +133,6 @@ class static_modint {
  private:
   unsigned int v;
   static constexpr unsigned int umod() { return m; }
-  static constexpr bool prime = is_prime(m);
 };
 
 using modint998244353 = static_modint<998244353>;
