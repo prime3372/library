@@ -1,25 +1,19 @@
 #pragma once
 
 #include <cassert>
-#include <vector>
+
+#include "number/factorize.hpp"
 
 namespace cp {
 
-std::vector<int> mobius(int n) {
-  assert(0 <= n);
-  std::vector<int> ans(n + 1, 1);
-  std::vector<bool> prime(n + 1, true);
-  for (int i = 2; i <= n; i++) {
-    if (!prime[i]) continue;
-    ans[i] = -1;
-    for (long long j = 2LL * i; j <= n; j += i) {
-      ans[j] *= -1;
-      prime[j] = false;
-    }
-    for (long long j = 1LL * i * i; j <= n; j += 1LL * i * i) ans[j] = 0;
+int mobius(long long n) {
+  auto factorized = factorize(n);
+  int ans = 1;
+  for (auto [p, e] : factorized) {
+    if (e >= 2) return 0;
+    ans = -ans;
   }
-  ans[0] = 0;
   return ans;
 }
 
-}  // namespace cp
+} //

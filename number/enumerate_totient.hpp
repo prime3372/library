@@ -6,7 +6,7 @@
 
 namespace cp {
 
-std::vector<int> totient(int n) {
+std::vector<int> enumerate_totient(int n) {
   assert(0 <= n);
   std::vector<int> ans(n + 1);
   std::iota(ans.begin(), ans.end(), 0);
