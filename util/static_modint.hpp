@@ -137,8 +137,8 @@ class static_modint {
 
  private:
   static constexpr bool prime = is_prime(m);
-  unsigned int v;
   static constexpr unsigned int umod() { return m; }
+  unsigned int v;
 };
 
 using modint998244353 = static_modint<998244353>;
