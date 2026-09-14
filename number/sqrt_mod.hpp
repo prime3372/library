@@ -43,7 +43,7 @@ long long sqrt_mod(long long n, long long p) {
   // [1] a^p = a (mod p) ...Fermat's little theorem
   // [2] w^(p-1) = (w^2)^{(p-1)/2} = -1 (mod p) ...Euler's criterion
   // [3] (x + yw)^p = x^p + y^pw^p (mod p) ...Freshman's dream
-  // -> (a + w)^p = a^p - w^p = a - w (mod p)
+  // -> (a + w)^p = a^p + w^p = a - w (mod p)
 
   // z = (a + w)^{(p+1)/2} (in F_p^2)
   // z^2 = (a + w)^(p+1)
