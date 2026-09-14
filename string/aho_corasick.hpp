@@ -27,7 +27,6 @@ class aho_corasick : public trie<char_size, offset> {
         int u = (*this)[v][i];
         if (u == -1) continue;
         que.push(u);
-
         int l = lnk[v];
         while (l != -1) {
           if ((*this)[l][i] != -1) {
