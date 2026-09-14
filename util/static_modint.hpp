@@ -83,9 +83,14 @@ class static_modint {
     return r;
   }
   mint inv() const {
-    auto eg = ext_gcd(v, m);
-    assert(eg.first == 1);
-    return eg.second;
+    if (prime) {
+      assert(v);
+      return pow(umod() - 2);
+    } else {
+      auto eg = ext_gcd(v, m);
+      assert(eg.first == 1);
+      return eg.second;
+    }
   }
 
   friend mint operator+(const mint& lhs, const mint& rhs) {
@@ -131,6 +136,7 @@ class static_modint {
   }
 
  private:
+  static constexpr bool prime = is_prime(m);
   unsigned int v;
   static constexpr unsigned int umod() { return m; }
 };
