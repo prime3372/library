@@ -151,7 +151,7 @@ std::ostream& operator<<(std::ostream& os, const std::pair<T, U>& p) {
   return os << std::tie(p.first, p.second);
 }
 
-template <typename... Args>
+template <class... Args>
 std::ostream& operator<<(std::ostream& os, const std::tuple<Args...>& t) {
   std::vector<std::string> outs;
   outs.reserve(sizeof...(Args));
