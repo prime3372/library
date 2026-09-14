@@ -37,15 +37,11 @@ std::vector<std::pair<int, int>> random_tree(int n) {
   }
 
   std::shuffle(edges.begin(), edges.end(), mt32);
-  for (auto& e : edges) {
-    if (uniform_bool()) std::swap(e.first, e.second);
+  for (auto& [u, v] : edges) {
+    if (uniform_bool()) std::swap(u, v);
   }
-
   if (one_indexed) {
-    for (auto& e : edges) {
-      e.first++;
-      e.second++;
-    }
+    for (auto& [u, v] : edges) u++, v++;
   }
   return edges;
 }
@@ -64,15 +60,11 @@ std::vector<std::pair<int, int>> random_forest(int n) {
   }
 
   std::shuffle(edges.begin(), edges.end(), mt32);
-  for (auto& e : edges) {
-    if (uniform_bool()) std::swap(e.first, e.second);
+  for (auto& [u, v] : edges) {
+    if (uniform_bool()) std::swap(u, v);
   }
-
   if (one_indexed) {
-    for (auto& e : edges) {
-      e.first++;
-      e.second++;
-    }
+    for (auto& [u, v] : edges) u++, v++;
   }
   return edges;
 }

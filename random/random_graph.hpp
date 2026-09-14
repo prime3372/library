@@ -40,9 +40,9 @@ std::vector<std::pair<int, int>> random_graph(int n, int m, int s = 0) {
       }
     } else {
       auto tree = random_tree<false>(n);
-      for (auto& e : tree) {
-        if (e.first > e.second) std::swap(e.first, e.second);
-        edges.emplace_back(e);
+      for (auto [u, v] : tree) {
+        if (u > v) std::swap(u, v);
+        edges.emplace_back(u, v);
       }
     }
   }
@@ -108,15 +108,12 @@ std::vector<std::pair<int, int>> random_graph(int n, int m, int s = 0) {
   }
 
   if (!directed) {
-    for (auto& e : edges) {
-      if (uniform_bool()) std::swap(e.first, e.second);
+    for (auto& [u, v] : edges) {
+      if (uniform_bool()) std::swap(u, v);
     }
   }
   if (one_indexed) {
-    for (auto& e : edges) {
-      e.first++;
-      e.second++;
-    }
+    for (auto& [u, v] : edges) u++, v++;
   }
   return edges;
 }
