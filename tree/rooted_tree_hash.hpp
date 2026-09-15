@@ -24,7 +24,8 @@ class rooted_tree_hash {
   std::vector<hash61> hash;
   std::vector<int> depth;
 
-  rooted_tree_hash& build(int r) {
+  rooted_tree_hash& build(int r = 0) {
+    assert(0 <= r && r < n);
     dfs(r, -1);
     return *this;
   }

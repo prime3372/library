@@ -19,13 +19,11 @@ class centroid_decomposition {
     g[v].push_back(u);
   }
 
-  int root = -1;
   std::vector<int> parent, size, dfs_order;
 
-  centroid_decomposition& build(int v = 0) {
-    assert(0 <= v && v < n);
-    dfs(v, -1, n, -1);
-    root = dfs_order[0];
+  centroid_decomposition& build(int s = 0) {
+    assert(0 <= s && s < n);
+    dfs(s, -1, n, -1);
     return *this;
   }
 
