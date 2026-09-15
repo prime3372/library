@@ -18,7 +18,7 @@ int main() {
   for (int i = 0; i < n; i++) {
     string s;
     cin >> s;
-    v[i] = aho.insert(s);
+    v[i] = aho.add(s);
   }
   aho.build();
   cout << aho.size() << "\n";
