@@ -71,6 +71,14 @@ template <class node, class derived> class implicit_treap_base {
     root = merge(s1.first, merge(s2.first, s2.second));
     return res;
   }
+  const T& front() {
+    assert(!empty());
+    return (*this)[0];
+  }
+  const T& back() {
+    assert(!empty());
+    return (*this)[size() - 1];
+  }
 
   void insert(int k, const T& x) {
     assert(0 <= k && k <= size());
