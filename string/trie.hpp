@@ -86,8 +86,8 @@ template <int char_size, char offset = 'a'> class trie {
 
  private:
   struct node {
-    std::array<int, char_size> to;
     int par, end, mid;
+    std::array<int, char_size> to;
 
     node() : node(-1) {}
     explicit node(int p) : par(p), end(0), mid(0) { to.fill(-1); }
