@@ -17,20 +17,20 @@ template <class T> struct implicit_treap_node {
 
   T val;
   int sub = 1;
-  bool rev = false;
   unsigned long long priority;
   self* left = nullptr;
   self* right = nullptr;
+  bool rev = false;
 
   implicit_treap_node() {}
   explicit implicit_treap_node(const T& x) : val(x), priority(xs64()) {}
   implicit_treap_node(const self& other)
       : val(other.val),
         sub(other.sub),
-        rev(other.rev),
         priority(other.priority),
         left(other.left ? new self(*other.left) : nullptr),
-        right(other.right ? new self(*other.right) : nullptr) {}
+        right(other.right ? new self(*other.right) : nullptr),
+        rev(other.rev) {}
   self& operator=(const self&) = delete;
   ~implicit_treap_node() {
     delete left;

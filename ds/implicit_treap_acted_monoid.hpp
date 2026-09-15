@@ -18,11 +18,11 @@ template <class S, class F, auto id> struct implicit_treap_acted_monoid_node {
   S val, prod;
   F lz = id();
   int sub = 1;
-  bool rev = false;
-  bool lzflag = false;
   unsigned long long priority;
   self* left = nullptr;
   self* right = nullptr;
+  bool rev = false;
+  bool lzflag = false;
 
   implicit_treap_acted_monoid_node() {}
   explicit implicit_treap_acted_monoid_node(const S& x)
@@ -32,11 +32,11 @@ template <class S, class F, auto id> struct implicit_treap_acted_monoid_node {
         prod(other.prod),
         lz(other.lz),
         sub(other.sub),
-        rev(other.rev),
-        lzflag(other.lzflag),
         priority(other.priority),
         left(other.left ? new self(*other.left) : nullptr),
-        right(other.right ? new self(*other.right) : nullptr) {}
+        right(other.right ? new self(*other.right) : nullptr),
+        rev(other.rev),
+        lzflag(other.lzflag) {}
   self& operator=(const self&) = delete;
   ~implicit_treap_acted_monoid_node() {
     delete left;

@@ -157,8 +157,8 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
   struct node {
     inline static memory_pool<node> pool;
     T key;
-    unsigned long long priority;
     int sub = 1;
+    unsigned long long priority;
     node* left = nullptr;
     node* right = nullptr;
     node() {}
