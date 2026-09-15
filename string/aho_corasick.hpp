@@ -11,69 +11,72 @@ namespace cp {
 
 template <int char_size, char offset = 'a'> class aho_corasick {
  public:
-  aho_corasick() : next(1), par(1, -1) { next[0].fill(-1); }
+  aho_corasick() { nodes.push_back(node(-1)); }
 
   int add(const std::string& s) {
     int v = 0;
     for (char c : s) {
       int i = c - offset;
       assert(0 <= i && i < char_size);
-      if (next[v][i] == -1) {
-        next[v][i] = size();
-        next.emplace_back();
-        next.back().fill(-1);
-        par.push_back(v);
+      if (nodes[v].to[i] == -1) {
+        nodes[v].to[i] = size();
+        nodes.push_back(node(v));
       }
-      v = next[v][i];
+      v = nodes[v].to[i];
     }
     return v;
   }
 
   void build() {
-    lnk.assign(size(), 0);
     simple_queue<int> que;
     for (int i = 0; i < char_size; i++) {
-      if (next[0][i] != -1) {
-        que.push(next[0][i]);
+      if (nodes[0].to[i] != -1) {
+        que.push(nodes[0].to[i]);
       } else {
-        next[0][i] = 0;
+        nodes[0].to[i] = 0;
       }
     }
     while (!que.empty()) {
       int v = que.front();
       que.pop();
       for (int i = 0; i < char_size; i++) {
-        int& u = next[v][i];
-        if (u != -1) {
-          lnk[u] = next[lnk[v]][i];
-          que.push(u);
+        int& nv = nodes[v].to[i];
+        if (nv == -1) {
+          nv = nodes[nodes[v].link].to[i];
         } else {
-          u = next[lnk[v]][i];
+          nodes[nv].link = nodes[nodes[v].link].to[i];
+          que.push(nv);
         }
       }
     }
   }
 
   const std::array<int, char_size>& operator[](int v) const {
-    assert(0 <= v && v < int(next.size()));
-    return next[v];
+    assert(0 <= v && v < size());
+    return nodes[v].to;
   }
   int parent(int v) const {
     assert(0 <= v && v < size());
-    return par[v];
+    return nodes[v].par;
   }
 
   int link(int v) const {
     assert(0 <= v && v < size());
-    return lnk[v];
+    return nodes[v].link;
   }
 
-  int size() const { return int(next.size()); }
+  int size() const { return int(nodes.size()); }
 
  private:
-  std::vector<std::array<int, char_size>> next;
-  std::vector<int> par;
-  std::vector<int> lnk;
+  struct node {
+    int par, link;
+    std::array<int, char_size> to;
+
+    node() : node(-1) {}
+    explicit node(int p) : par(p), link(0) { to.fill(-1); }
+  };
+
+  std::vector<node> nodes;
 };
 
 }  // namespace cp
