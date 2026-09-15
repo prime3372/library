@@ -34,7 +34,7 @@ template <class T> class memory_pool {
     char data[sizeof(T)];
     slot* next;
   };
-  static constexpr int chunk_size = 1 << 16;
+  static constexpr int chunk_size = 1 << 12;
 
   inline static std::vector<slot*> chunks;
   inline static slot* free_head = nullptr;
