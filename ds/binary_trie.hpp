@@ -19,7 +19,7 @@ class binary_trie : public trie<2, '0'> {
   bool erase(T x) { return base::erase(std::bitset<bit>(x).to_string()); }
   int count(T x) { return base::count(std::bitset<bit>(x).to_string()); }
   int prefix(T x) {
-    return base::count_prefix(std::bitset<bit>(x).to_string());
+    return base::prefix(std::bitset<bit>(x).to_string());
   }
 
  private:
