@@ -4,7 +4,6 @@
 #include <cassert>
 #include <cstddef>
 #include <iostream>
-#include <sstream>
 #include <string>
 #include <utility>
 #include <vector>
