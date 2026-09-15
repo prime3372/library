@@ -74,7 +74,7 @@
   "test/yosupo/data_structure/range_set_range_composite.test.cpp": "2026-09-15 20:54:56 +0900",
   "test/yosupo/data_structure/rectangle_add_point_get.test.cpp": "2026-09-15 20:54:56 +0900",
   "test/yosupo/data_structure/rectangle_sum.test.cpp": "2026-09-15 20:54:56 +0900",
-  "test/yosupo/data_structure/set_xor_min.test.cpp": "2026-09-15 21:40:39 +0900",
+  "test/yosupo/data_structure/set_xor_min.test.cpp": "2026-09-16 00:59:24 +0900",
   "test/yosupo/data_structure/static_range_frequency.test.cpp": "2026-09-15 20:54:56 +0900",
   "test/yosupo/data_structure/static_rmq.test.cpp": "2026-08-31 05:52:41 +0900",
   "test/yosupo/data_structure/union_find.test.cpp": "2026-08-19 08:32:04 +0900",
