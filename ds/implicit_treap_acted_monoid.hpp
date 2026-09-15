@@ -21,7 +21,7 @@ template <class S, class F, auto id> struct implicit_treap_acted_monoid_node {
 
   implicit_treap_acted_monoid_node() {}
   explicit implicit_treap_acted_monoid_node(const S& x)
-      : val(x), prod(x), priority(mt64()) {}
+      : val(x), prod(x), priority(rng()) {}
   implicit_treap_acted_monoid_node(const self& other)
       : val(other.val),
         prod(other.prod),

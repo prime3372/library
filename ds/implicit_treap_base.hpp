@@ -59,6 +59,7 @@ template <class node, class derived> class implicit_treap_base {
     auto s1 = split(root, k);
     auto s2 = split(s1.second, 1);
     s2.first->val = x;
+    derived::update(s2.first);
     root = merge(s1.first, merge(s2.first, s2.second));
   }
 

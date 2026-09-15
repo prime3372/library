@@ -10,29 +10,25 @@
 
 namespace cp {
 
-template <class> struct safe_hash {};
-
-namespace internal {
-
 static unsigned long long splitmix64(unsigned long long x) {
-  static const unsigned long long fixed_rand = mt64();
+  static const unsigned long long fixed_rand = rng();
   x += fixed_rand;
   x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;
   x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;
   return x ^ (x >> 31);
 }
 
+template <class> struct safe_hash {};
+
 template <class T> void hash_combine(unsigned long long& seed, const T& val) {
   seed ^= safe_hash<T>()(val) + (seed << 6) + (seed >> 2) + 0x9e3779b9ULL;
 }
-
-}  // namespace internal
 
 template <class T>
 requires(internal::is_integral_v<T> && !internal::is_128bit_int_v<T>)
 struct safe_hash<T> {
   unsigned long long operator()(const T& x) const {
-    return internal::splitmix64((unsigned long long)(x));
+    return splitmix64((unsigned long long)(x));
   }
 };
 
@@ -41,11 +37,11 @@ struct safe_hash<T> {
   unsigned long long operator()(const T& x) const {
     unsigned __int128 ux = x;
     if ((ux >> 64) == 0) {
-      return internal::splitmix64((unsigned long long)(ux));
+      return splitmix64((unsigned long long)(ux));
     }
     unsigned long long hs = 0;
-    internal::hash_combine(hs, (unsigned long long)(ux >> 64));
-    internal::hash_combine(hs, (unsigned long long)(ux));
+    hash_combine(hs, (unsigned long long)(ux >> 64));
+    hash_combine(hs, (unsigned long long)(ux));
     return hs;
   }
 };
@@ -60,7 +56,7 @@ struct safe_hash<T> {
 template <std::ranges::range Range> struct safe_hash<Range> {
   unsigned long long operator()(const Range& r) const {
     unsigned long long hs = 0;
-    for (const auto& x : r) internal::hash_combine(hs, x);
+    for (const auto& x : r) hash_combine(hs, x);
     return hs;
   }
 };
@@ -68,8 +64,8 @@ template <std::ranges::range Range> struct safe_hash<Range> {
 template <class T, class U> struct safe_hash<std::pair<T, U>> {
   unsigned long long operator()(const std::pair<T, U>& p) const {
     unsigned long long hs = 0;
-    internal::hash_combine(hs, p.first);
-    internal::hash_combine(hs, p.second);
+    hash_combine(hs, p.first);
+    hash_combine(hs, p.second);
     return hs;
   }
 };
@@ -78,7 +74,7 @@ template <class... Args> struct safe_hash<std::tuple<Args...>> {
   unsigned long long operator()(const std::tuple<Args...>& t) const {
     unsigned long long hs = 0;
     std::apply(
-        [&](const auto&... args) { (internal::hash_combine(hs, args), ...); },
+        [&](const auto&... args) { (hash_combine(hs, args), ...); },
         t);
     return hs;
   }
