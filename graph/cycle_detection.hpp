@@ -25,12 +25,12 @@ template <bool directed> class cycle_detection {
   bool detect() {
     vertices.clear();
     edges.clear();
-    std::vector<bool> processing(n), processed(n);
+    std::vector<bool> stacked(n), finished(n);
     auto dfs = [&](auto self, int v, int id) -> int {
-      if (processing[v]) return v;
-      processing[v] = true;
+      if (stacked[v]) return v;
+      stacked[v] = true;
       for (auto e : g[v]) {
-        if (processed[e.to] == true || e.id == id) continue;
+        if (finished[e.to] || e.id == id) continue;
         int ret = self(self, e.to, e.id);
         if (ret == -1) continue;
         if (ret == n) return n;
@@ -38,12 +38,12 @@ template <bool directed> class cycle_detection {
         edges.push_back(e.id);
         return ret == v ? n : ret;
       }
-      processing[v] = false;
-      processed[v] = true;
+      stacked[v] = false;
+      finished[v] = true;
       return -1;
     };
     for (int v = 0; v < n; v++) {
-      if (!processed[v] && dfs(dfs, v, -1) == n) break;
+      if (!finished[v] && dfs(dfs, v, -1) == n) break;
     }
     std::reverse(vertices.begin(), vertices.end());
     std::reverse(edges.begin(), edges.end());
