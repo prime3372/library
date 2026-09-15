@@ -1,16 +1,20 @@
 #pragma once
 
 #include <cassert>
+#include <cstddef>
 #include <functional>
 #include <memory>
 
 #include "ds/implicit_treap_base.hpp"
 #include "random/engine.hpp"
+#include "util/memory_pool.hpp"
 
 namespace cp {
 
 template <class T> struct implicit_treap_node {
   using self = implicit_treap_node;
+  inline static memory_pool<implicit_treap_node> pool;
+
   T val;
   int sub = 1;
   bool rev = false;
@@ -32,6 +36,8 @@ template <class T> struct implicit_treap_node {
     delete left;
     delete right;
   }
+  void* operator new(std::size_t) { return pool.malloc(); }
+  void operator delete(void* ptr) { return pool.free((self*)(ptr)); }
 };
 
 template <class T>

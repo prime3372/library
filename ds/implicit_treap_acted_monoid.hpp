@@ -1,20 +1,25 @@
 #pragma once
 
 #include <cassert>
+#include <cstddef>
 #include <functional>
 #include <memory>
 
 #include "ds/implicit_treap_base.hpp"
 #include "random/engine.hpp"
+#include "util/memory_pool.hpp"
 
 namespace cp {
 
 template <class S, class F, auto id> struct implicit_treap_acted_monoid_node {
   using self = implicit_treap_acted_monoid_node;
+  inline static memory_pool<implicit_treap_acted_monoid_node> pool;
+
   S val, prod;
   F lz = id();
   int sub = 1;
   bool rev = false;
+  bool lzflag = false;
   unsigned long long priority;
   self* left = nullptr;
   self* right = nullptr;
@@ -28,6 +33,7 @@ template <class S, class F, auto id> struct implicit_treap_acted_monoid_node {
         lz(other.lz),
         sub(other.sub),
         rev(other.rev),
+        lzflag(other.lzflag),
         priority(other.priority),
         left(other.left ? new self(*other.left) : nullptr),
         right(other.right ? new self(*other.right) : nullptr) {}
@@ -36,6 +42,8 @@ template <class S, class F, auto id> struct implicit_treap_acted_monoid_node {
     delete left;
     delete right;
   }
+  void* operator new(std::size_t) { return pool.malloc(); }
+  void operator delete(void* ptr) { return pool.free((self*)(ptr)); }
 };
 
 template <class S, auto op, auto e, class F, auto act, auto compose, auto id,
@@ -97,15 +105,19 @@ class implicit_treap_acted_monoid
       if (t->right) toggle(t->right);
       t->rev = false;
     }
-    if (t->left) all_apply(t->left, t->lz);
-    if (t->right) all_apply(t->right, t->lz);
-    t->lz = id();
+    if (t->lzflag) {
+      if (t->left) all_apply(t->left, t->lz);
+      if (t->right) all_apply(t->right, t->lz);
+      t->lz = id();
+      t->lzflag = false;
+    }
   }
 
   static void all_apply(node* t, const F& f) {
     t->lz = compose(f, t->lz);
     t->val = act(f, t->val);
     t->prod = act(f, t->prod);
+    t->lzflag = true;
   }
 };
 

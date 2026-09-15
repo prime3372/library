@@ -1,17 +1,21 @@
 #pragma once
 
 #include <cassert>
+#include <cstddef>
 #include <functional>
 #include <memory>
 #include <utility>
 
 #include "ds/implicit_treap_base.hpp"
 #include "random/engine.hpp"
+#include "util/memory_pool.hpp"
 
 namespace cp {
 
 template <class S> struct implicit_treap_monoid_node {
   using self = implicit_treap_monoid_node;
+  inline static memory_pool<implicit_treap_monoid_node> pool;
+
   S val, prod;
   int sub = 1;
   bool rev = false;
@@ -35,6 +39,8 @@ template <class S> struct implicit_treap_monoid_node {
     delete left;
     delete right;
   }
+  void* operator new(std::size_t) { return pool.malloc(); }
+  void operator delete(void* ptr) { return pool.free((self*)(ptr)); }
 };
 
 template <class S, auto op, auto e, auto reverse = std::identity()>
