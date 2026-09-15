@@ -18,9 +18,6 @@ class binary_trie : public trie<2, '0'> {
   int insert(T x) { return base::insert(std::bitset<bit>(x).to_string()); }
   bool erase(T x) { return base::erase(std::bitset<bit>(x).to_string()); }
   int count(T x) { return base::count(std::bitset<bit>(x).to_string()); }
-  int prefix(T x) {
-    return base::prefix(std::bitset<bit>(x).to_string());
-  }
 
  private:
   static constexpr int bit = std::numeric_limits<T>::digits;
