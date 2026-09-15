@@ -118,7 +118,7 @@
   "test/yosupo/string/number_of_substrings.test.cpp": "2026-09-04 03:07:09 +0900",
   "test/yosupo/string/suffix_array.test.cpp": "2026-09-03 22:57:22 +0900",
   "test/yosupo/string/wildcard_pattern_matching.test.cpp": "2026-09-14 21:45:22 +0900",
-  "test/yosupo/string/z_algorithm.test.cpp": "2026-08-18 12:37:20 +0900",
+  "test/yosupo/string/z_algorithm.test.cpp": "2026-09-16 01:38:59 +0900",
   "test/yosupo/tree/cartesian_tree.test.cpp": "2026-09-02 22:13:38 +0900",
   "test/yosupo/tree/frequency_table_of_tree_distance.test.cpp": "2026-09-14 21:45:22 +0900",
   "test/yosupo/tree/jump_on_tree.test.cpp": "2026-09-11 16:51:24 +0900",
