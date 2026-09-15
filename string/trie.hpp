@@ -26,8 +26,8 @@ template <int char_size, char offset = 'a'> class trie {
     return v;
   }
 
-  // @note Edges rendered unnecessary by this function are removed, but vertices
-  // are not.
+  // @note This function deletes edges that are no longer needed, but it does
+  // not delete vertices.
   bool erase(const std::string& s) {
     if (count(s) == 0) return false;
     int v = 0;
