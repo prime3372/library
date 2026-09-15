@@ -25,20 +25,20 @@ class xorshift64 {
 
  private:
   unsigned long long x;
-} rng(std::chrono::duration_cast<std::chrono::nanoseconds>(
-          std::chrono::high_resolution_clock::now().time_since_epoch())
-          .count());
+} xs64(std::chrono::duration_cast<std::chrono::nanoseconds>(
+           std::chrono::high_resolution_clock::now().time_since_epoch())
+           .count());
 
 template <class T> T uniform(T l, T r) {
   assert(l <= r);
-  return std::uniform_int_distribution<T>(l, r)(rng);
+  return std::uniform_int_distribution<T>(l, r)(xs64);
 }
 
 bool uniform_bool() { return uniform(0, 1) == 1; }
 
 double uniform01() {
   static std::uniform_real_distribution dist(0.0, 1.0);
-  return dist(rng);
+  return dist(xs64);
 }
 
 }  // namespace cp

@@ -11,7 +11,7 @@
 namespace cp {
 
 static unsigned long long splitmix64(unsigned long long x) {
-  static const unsigned long long fixed_rand = rng();
+  static const unsigned long long fixed_rand = xs64();
   x += fixed_rand;
   x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;
   x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;
@@ -73,9 +73,7 @@ template <class T, class U> struct safe_hash<std::pair<T, U>> {
 template <class... Args> struct safe_hash<std::tuple<Args...>> {
   unsigned long long operator()(const std::tuple<Args...>& t) const {
     unsigned long long hs = 0;
-    std::apply(
-        [&](const auto&... args) { (hash_combine(hs, args), ...); },
-        t);
+    std::apply([&](const auto&... args) { (hash_combine(hs, args), ...); }, t);
     return hs;
   }
 };

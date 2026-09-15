@@ -159,7 +159,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     node* left = nullptr;
     node* right = nullptr;
     node() {}
-    explicit node(const T& x) : key(x), priority(rng()) {}
+    explicit node(const T& x) : key(x), priority(xs64()) {}
     node(const node& other)
         : key(other.key),
           priority(other.priority),

@@ -95,7 +95,7 @@ std::vector<std::pair<int, int>> random_graph(int n, int m, int s = 0) {
           if (!used_edges.count(1LL * u * n + v)) candidates.emplace_back(u, v);
         }
       }
-      std::shuffle(candidates.begin(), candidates.end(), rng);
+      std::shuffle(candidates.begin(), candidates.end(), xs64);
       int needed = m - int(edges.size());
       for (int i = 0; i < needed; i++) {
         edges.emplace_back(candidates[i]);

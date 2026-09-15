@@ -36,7 +36,7 @@ std::vector<std::pair<int, int>> random_tree(int n) {
     edges.emplace_back(par[i], i);
   }
 
-  std::shuffle(edges.begin(), edges.end(), rng);
+  std::shuffle(edges.begin(), edges.end(), xs64);
   for (auto& [u, v] : edges) {
     if (uniform_bool()) std::swap(u, v);
   }
@@ -59,7 +59,7 @@ std::vector<std::pair<int, int>> random_forest(int n) {
     if (par[i] != i) edges.emplace_back(par[i], i);
   }
 
-  std::shuffle(edges.begin(), edges.end(), rng);
+  std::shuffle(edges.begin(), edges.end(), xs64);
   for (auto& [u, v] : edges) {
     if (uniform_bool()) std::swap(u, v);
   }

@@ -23,7 +23,7 @@ template <class T> struct implicit_treap_node {
   self* right = nullptr;
 
   implicit_treap_node() {}
-  explicit implicit_treap_node(const T& x) : val(x), priority(rng()) {}
+  explicit implicit_treap_node(const T& x) : val(x), priority(xs64()) {}
   implicit_treap_node(const self& other)
       : val(other.val),
         sub(other.sub),

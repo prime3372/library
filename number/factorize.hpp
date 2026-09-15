@@ -28,7 +28,7 @@ long long pollard_rho(long long n) {
   int r = int(kth_root(n, 8));
   while (true) {
     long long x = 0, y = 0, sx, sy, q = 1, d = 1;
-    c = dist(rng);
+    c = dist(xs64);
     while (d == 1) {
       sx = x;
       sy = y;
