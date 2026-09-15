@@ -48,7 +48,7 @@ template <int char_size, char offset = 'a'> class trie {
 
   int count(const std::string& s) const {
     int v = search(s);
-    return v == -1 ? 0 : count(v);
+    return v == -1 ? 0 : nodes[v].end;
   }
   int count(int v) const {
     assert(0 <= v && v < int(nodes.size()));
