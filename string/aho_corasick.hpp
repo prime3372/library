@@ -41,11 +41,11 @@ template <int char_size, char offset = 'a'> class aho_corasick {
       que.pop();
       for (int i = 0; i < char_size; i++) {
         int& nv = nodes[v].to[i];
-        if (nv == -1) {
-          nv = nodes[nodes[v].link].to[i];
-        } else {
+        if (nv != -1) {
           nodes[nv].link = nodes[nodes[v].link].to[i];
           que.push(nv);
+        } else {
+          nv = nodes[nodes[v].link].to[i];
         }
       }
     }
