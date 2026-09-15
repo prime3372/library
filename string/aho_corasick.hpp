@@ -58,7 +58,6 @@ template <int char_size, char offset = 'a'> class aho_corasick {
     assert(0 <= v && v < int(next.size()));
     return next[v];
   }
-
   int parent(int v) const {
     assert(0 <= v && v < size());
     return par[v];
