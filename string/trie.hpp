@@ -55,11 +55,11 @@ template <int char_size, char offset = 'a'> class trie {
     return nodes[v].end;
   }
 
-  int count_prefix(const std::string& s) const {
+  int prefix(const std::string& s) const {
     int v = search(s);
-    return v == -1 ? 0 : count_prefix(v);
+    return v == -1 ? 0 : prefix(v);
   }
-  int count_prefix(int v) const {
+  int prefix(int v) const {
     assert(0 <= v && v < int(nodes.size()));
     return nodes[v].mid;
   }
