@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cstddef>
 #include <functional>
 #include <iostream>
 #include <tuple>
@@ -11,6 +12,7 @@
 #include "ds/cartesian_tree.hpp"
 #include "random/engine.hpp"
 #include "util/io_utility.hpp"
+#include "util/memory_pool.hpp"
 
 namespace cp {
 
@@ -153,6 +155,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
 
  private:
   struct node {
+    inline static memory_pool<node> pool;
     T key;
     unsigned long long priority;
     int sub = 1;
@@ -171,6 +174,8 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
       delete left;
       delete right;
     }
+    void* operator new(std::size_t) { return pool.malloc(); }
+    void operator delete(void* ptr) { return pool.free((node*)(ptr)); }
   }* root = nullptr;
 
   static bool less(const T& x, const T& y) { return Comp()(x, y); }
