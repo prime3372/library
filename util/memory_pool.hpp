@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cassert>
-#include <memory>
 #include <new>
 #include <utility>
 #include <vector>
@@ -17,7 +16,7 @@ template <class T> class memory_pool {
       return ptr;
     }
     if (chunk_pos == chunk_size) {
-      chunks.push_back((T*)(::operator new(chunk_size * sizeof(T))));
+      chunks.push_back((T*)(::operator new(sizeof(T[chunk_size]))));
       chunk_pos = 0;
     }
     return reinterpret_cast<T*>(chunks.back() + (chunk_pos++));
