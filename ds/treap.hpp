@@ -171,8 +171,8 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
   int size() const { return size(root); }
   bool empty() const { return size() == 0; }
 
-  friend std::ostream& operator<<(std::ostream& os, const treap& tp) {
-    return os << tp.enumerate();
+  friend std::ostream& operator<<(std::ostream& os, const treap& t) {
+    return os << t.enumerate();
   }
 
  private:
