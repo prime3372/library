@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/set_xor_min"
 
 #include "ds/binary_trie.hpp"
+#include <bitset>
 #include <iostream>
 
 using namespace std;
@@ -11,28 +12,17 @@ int main() {
   cin.tie(nullptr);
   int q;
   cin >> q;
-  binary_trie<unsigned int> tr;
+  binary_trie<30> trie;
   while (q--) {
     int t;
-    unsigned int x;
-    cin >> t >> x;
+    unsigned int s;
+    cin >> t >> s;
     if (t == 0) {
-      if (tr.count(x) == 0) tr.insert(x);
+      if (trie.count(s) == 0) trie.insert(s);
     } else if (t == 1) {
-      tr.erase(x);
+      trie.erase(s);
     } else {
-      unsigned int ans = 0;
-      int v = 0;
-      for (int i = 31; i >= 0; i--) {
-        bool b = (x >> i) & 1;
-        if (tr[v][b] != -1) {
-          v = tr[v][b];
-        } else {
-          v = tr[v][!b];
-          ans |= 1U << i;
-        }
-      }
-      cout << ans << "\n";
+      cout << trie.min(s).to_ullong() << "\n";
     }
   }
 }
