@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <iostream>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "ds/hash_map.hpp"
@@ -18,6 +19,10 @@ template <class T> class hash_set {
     if (f) return false;
     sz++;
     return f = true;
+  }
+
+  template <class... Args> bool emplace(Args&&... args) {
+    insert(T(std::forward<Args>(args)...));
   }
 
   bool erase(const T& k) {

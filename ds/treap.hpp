@@ -88,6 +88,11 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
   }
 
+  template <class... Args>
+  std::conditional_t<multiset, void, bool> emplace(Args&&... args) {
+    insert(T(std::forward<Args>(args)...));
+  }
+
   bool erase(const T& k) { return erase(root, k); }
 
   const T& operator[](int i) const {

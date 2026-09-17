@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <iostream>
+#include <utility>
 #include <vector>
 
 #include "ds/hash_map.hpp"
@@ -15,6 +16,10 @@ template <class T> class hash_multiset {
   void insert(const T& k) {
     d[k]++;
     sz++;
+  }
+
+  template <class... Args> void emplace(Args&&... args) {
+    insert(T(std::forward<Args>(args)...));
   }
 
   bool erase(const T& k) {
