@@ -67,7 +67,7 @@ template <int char_size, char offset = 'a'> class trie {
   int search(const std::string& s, int v = 0) const {
     assert(0 <= v && v < int(nodes.size()));
     for (char c : s) {
-      v = (*this)[v][index(c)];
+      v = nodes[v].to[index(c)];
       if (v == -1) return -1;
     }
     return v;
