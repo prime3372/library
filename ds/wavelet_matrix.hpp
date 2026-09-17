@@ -79,7 +79,6 @@ class wavelet_matrix {
       for (int i = 0; i < n; i++) *(itr[data[h][i]]++) = cur[i];
       std::swap(cur, nxt);
     }
-    return *this;
   }
 
   const bit_vector& operator[](int h) const {
