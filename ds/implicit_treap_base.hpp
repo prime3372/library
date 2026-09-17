@@ -10,7 +10,6 @@
 #include <vector>
 
 #include "ds/cartesian_tree.hpp"
-#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -18,24 +17,6 @@ template <class node> class implicit_treap_base {
   using T = decltype(node::val);
 
  public:
-  implicit_treap_base() {}
-  implicit_treap_base(const implicit_treap_base& other) {
-    auto dfs = [&](auto self, node* t) -> node* {
-      if (!t) return nullptr;
-      node* res = new node(*t);
-      res->left = self(self, t->left);
-      res->right = self(self, t->right);
-      return res;
-    };
-    root = dfs(dfs, other.root);
-  }
-  implicit_treap_base(implicit_treap_base&& other) noexcept : root(other.root) {
-    other.root = nullptr;
-  }
-  implicit_treap_base& operator=(implicit_treap_base other) {
-    std::swap(root, other.root);
-    return *this;
-  }
   virtual ~implicit_treap_base() {
     auto dfs = [&](auto self, node* t) -> void {
       if (!t) return;
@@ -101,6 +82,25 @@ template <class node> class implicit_treap_base {
  protected:
   node* root = nullptr;
 
+  implicit_treap_base() {}
+  implicit_treap_base(const implicit_treap_base& other) {
+    auto dfs = [&](auto self, node* t) -> node* {
+      if (!t) return nullptr;
+      node* res = new node(*t);
+      res->left = self(self, t->left);
+      res->right = self(self, t->right);
+      return res;
+    };
+    root = dfs(dfs, other.root);
+  }
+  implicit_treap_base(implicit_treap_base&& other) : root(other.root) {
+    other.root = nullptr;
+  }
+  implicit_treap_base& operator=(implicit_treap_base other) {
+    std::swap(root, other.root);
+    return *this;
+  }
+
   void build(const std::vector<T>& v) {
     if (v.empty()) return;
     int n = int(v.size());
@@ -157,9 +157,9 @@ template <class node> class implicit_treap_base {
     }
   }
 
-  virtual void toggle(node*) { assert(false); };
-  virtual void update(node*) { assert(false); };
-  virtual void push(node*) { assert(false); };
+  virtual void toggle(node*) = 0;
+  virtual void update(node*) = 0;
+  virtual void push(node*) = 0;
 };
 
 }  // namespace cp

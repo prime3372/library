@@ -8,6 +8,7 @@
 
 #include "ds/implicit_treap_base.hpp"
 #include "random/engine.hpp"
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -42,6 +43,12 @@ class implicit_treap_monoid
     auto res = s2.first->prod;
     root = merge(s1.first, merge(s2.first, s2.second));
     return res;
+  }
+
+  friend std::ostream& operator<<(std::ostream& os, implicit_treap_monoid t) {
+    std::vector<S> v(t.size());
+    for (int i = 0; i < t.size(); i++) v[i] = t[i];
+    return os << v;
   }
 
  private:

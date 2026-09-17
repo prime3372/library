@@ -18,14 +18,14 @@ int main() {
   cin >> n >> q;
   vector<ll> a(n);
   for (ll& ai : a) cin >> ai;
-  implicit_treap_monoid<ll, op, e> tp(a);
+  implicit_treap_monoid<ll, op, e> seg(a);
   while (q--) {
     int t, l, r;
     cin >> t >> l >> r;
     if (t == 0) {
-      tp.reverse(l, r);
+      seg.reverse(l, r);
     } else {
-      cout << tp.prod(l, r) << "\n";
+      cout << seg.prod(l, r) << "\n";
     }
   }
 }

@@ -33,7 +33,7 @@ int main() {
     cin >> a[i].val;
     a[i].len = 1;
   }
-  implicit_treap_acted_monoid<S, op, e, F, act, compose, id> tp(a);
+  implicit_treap_acted_monoid<S, op, e, F, act, compose, id> seg(a);
   while (q--) {
     int t;
     cin >> t;
@@ -41,24 +41,24 @@ int main() {
       int i;
       mint x;
       cin >> i >> x;
-      tp.insert(i, {x, 1});
+      seg.insert(i, {x, 1});
     } else if (t == 1) {
       int i;
       cin >> i;
-      tp.erase(i);
+      seg.erase(i);
     } else if (t == 2) {
       int l, r;
       cin >> l >> r;
-      tp.reverse(l, r);
+      seg.reverse(l, r);
     } else if (t == 3) {
       int l, r;
       mint b, c;
       cin >> l >> r >> b >> c;
-      tp.apply(l, r, {b, c});
+      seg.apply(l, r, {b, c});
     } else if (t == 4) {
       int l, r;
       cin >> l >> r;
-      cout << tp.prod(l, r).val << "\n";
+      cout << seg.prod(l, r).val << "\n";
     }
   }
 }

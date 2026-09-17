@@ -7,6 +7,7 @@
 
 #include "ds/implicit_treap_base.hpp"
 #include "random/engine.hpp"
+#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -31,9 +32,9 @@ class implicit_treap : public implicit_treap_base<implicit_treap_node<T>> {
       : implicit_treap(std::vector<T>(n, val)) {}
   explicit implicit_treap(const std::vector<T>& v) { build(v); }
 
-  friend std::ostream& operator<<(std::ostream& os, implicit_treap tp) {
-    std::vector<T> v(tp.size());
-    for (int i = 0; i < tp.size(); i++) v[i] = tp[i];
+  friend std::ostream& operator<<(std::ostream& os, implicit_treap t) {
+    std::vector<T> v(t.size());
+    for (int i = 0; i < t.size(); i++) v[i] = t[i];
     return os << v;
   }
 
@@ -42,6 +43,7 @@ class implicit_treap : public implicit_treap_base<implicit_treap_node<T>> {
   using base = implicit_treap_base<node>;
   friend base;
   using base::build;
+  using base::root;
   using base::size;
 
   void toggle(node* t) override {
