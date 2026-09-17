@@ -41,9 +41,9 @@ std::ostream& operator<<(std::ostream& os, __float128 x) {
     x = -x;
   }
 
-  __float128 r = 1;
-  for (int i = 0; i < prec; i++) r *= 10;
-  x += __float128(0.5) / r;
+  __float128 p10 = 1;
+  for (int i = 0; i < prec; i++) p10 *= 10;
+  x += __float128(0.5) / p10;
 
   int int_len = 0;
   while (x >= 1) {
