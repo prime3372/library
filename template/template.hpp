@@ -45,6 +45,11 @@ using mint = cp::modint998244353;
 #define rrep4(i, a, b, c) for (ll i = ll(b) - 1; i >= ll(a); i -= (c))
 #define rrep(...) CHOOSE5(__VA_ARGS__, rrep4, rrep3, rrep2)(__VA_ARGS__)
 
+#define RREP2(i, n) for (ll i = ll(n); i >= 0; i--)
+#define RREP3(i, a, b) for (ll i = (b); i >= ll(a); i--)
+#define RREP4(i, a, b, c) for (ll i = (b); i >= ll(a); i -= (c))
+#define RREP(...) CHOOSE5(__VA_ARGS__, RREP4, RREP3, RREP2)(__VA_ARGS__)
+
 #define fore2(x, a) for (auto&& x : (a))
 #define fore3(x, y, a) for (auto&& [x, y] : (a))
 #define fore4(x, y, z, a) for (auto&& [x, y, z] : (a))
