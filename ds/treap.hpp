@@ -186,7 +186,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     return !Comp()(x, y) && !Comp()(y, x);
   }
 
-  int size(const node* t) { return t ? t->sub : 0; }
+  int size(const node* t) const { return t ? t->sub : 0; }
 
   void update(node* t) { t->sub = size(t->left) + size(t->right) + 1; }
 
