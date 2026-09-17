@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cstddef>
 #include <numeric>
+#include <ranges>
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -42,7 +43,7 @@ void rearrange(Container& a, const Indices& p) {
 // stable sort
 // @return let `b` be the sorted array, return `p` s.t. `b[i] = a[p[i]]`.
 template <class Container,
-          class Comp = std::less<typename std::decay_t<Container>::value_type>>
+          class Comp = std::less<std::ranges::range_value_t<Container>>>
 std::vector<int> sort(Container&& a, Comp comp = Comp()) {
   std::vector<int> p(a.size());
   std::iota(p.begin(), p.end(), 0);
@@ -54,7 +55,7 @@ std::vector<int> sort(Container&& a, Comp comp = Comp()) {
 }
 
 template <class Container,
-          class Comp = std::less<typename Container::value_type>>
+          class Comp = std::less<std::ranges::range_value_t<Container>>>
 void uniq(Container& a, Comp comp = Comp()) {
   std::sort(a.begin(), a.end(), comp);
   a.erase(std::unique(a.begin(), a.end(),
@@ -65,7 +66,7 @@ void uniq(Container& a, Comp comp = Comp()) {
 }
 
 template <class Container,
-          class Comp = std::less<typename Container::value_type>>
+          class Comp = std::less<std::ranges::range_value_t<Container>>>
 std::vector<int> compress(Container a, Comp comp = Comp()) {
   int n = int(a.size());
   std::vector<int> res(n);
@@ -78,14 +79,14 @@ std::vector<int> compress(Container a, Comp comp = Comp()) {
 }
 
 template <class Container,
-          class Comp = std::less<typename Container::value_type>>
+          class Comp = std::less<std::ranges::range_value_t<Container>>>
 int lower_bound(const Container& a, typename Container::value_type val,
                 Comp comp = Comp()) {
   return int(std::lower_bound(a.begin(), a.end(), val, comp) - a.begin());
 }
 
 template <class Container,
-          class Comp = std::less<typename Container::value_type>>
+          class Comp = std::less<std::ranges::range_value_t<Container>>>
 int upper_bound(const Container& a, typename Container::value_type val,
                 Comp comp = Comp()) {
   return int(std::upper_bound(a.begin(), a.end(), val, comp) - a.begin());
