@@ -12,7 +12,6 @@
 #include "ds/cartesian_tree.hpp"
 #include "random/engine.hpp"
 #include "util/io_utility.hpp"
-#include "util/memory_pool.hpp"
 
 namespace cp {
 
@@ -53,15 +52,33 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     dfs(dfs, root = ps[cart.root]);
   }
 
-  treap(const treap& other)
-      : root(other.root ? new node(*other.root) : nullptr) {}
+  treap(const treap& other) {
+    auto dfs = [&](auto self, node* t) -> node* {
+      if (!t) return nullptr;
+      node* res = new node(*t);
+      res->left = self(self, t->left);
+      res->right = self(self, t->right);
+      return res;
+    };
+    root = dfs(dfs, other.root);
+  }
+
   treap(treap&& other) noexcept : root(other.root) { other.root = nullptr; }
+
   treap& operator=(treap other) {
     std::swap(root, other.root);
     return *this;
   }
 
-  ~treap() { delete root; }
+  ~treap() {
+    auto dfs = [&](auto self, node* t) -> void {
+      if (!t) return;
+      self(self, t->left);
+      self(self, t->right);
+      delete t;
+    };
+    dfs(dfs, root);
+  }
 
   std::conditional_t<multiset, void, bool> insert(const T& k) {
     if constexpr (multiset) {
@@ -155,7 +172,6 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
 
  private:
   struct node {
-    inline static memory_pool<node> pool;
     T key;
     int sub = 1;
     unsigned long long priority;
@@ -163,19 +179,6 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     node* right = nullptr;
     node() {}
     explicit node(const T& x) : key(x), priority(xs64()) {}
-    node(const node& other)
-        : key(other.key),
-          priority(other.priority),
-          sub(other.sub),
-          left(other.left ? new node(*other.left) : nullptr),
-          right(other.right ? new node(*other.right) : nullptr) {}
-    node& operator=(const node& other) = delete;
-    ~node() {
-      delete left;
-      delete right;
-    }
-    void* operator new(std::size_t) { return pool.malloc(); }
-    void operator delete(void* ptr) { return pool.free((node*)(ptr)); }
   }* root = nullptr;
 
   static bool less(const T& x, const T& y) { return Comp()(x, y); }
@@ -183,11 +186,11 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     return !Comp()(x, y) && !Comp()(y, x);
   }
 
-  static int size(const node* t) { return t ? t->sub : 0; }
+  int size(const node* t) { return t ? t->sub : 0; }
 
-  static void update(node* t) { t->sub = size(t->left) + size(t->right) + 1; }
+  void update(node* t) { t->sub = size(t->left) + size(t->right) + 1; }
 
-  static std::pair<node*, node*> split(node* t, const T& k) {
+  std::pair<node*, node*> split(node* t, const T& k) {
     if (!t) return {nullptr, nullptr};
     if (less(k, t->key)) {
       auto s = split(t->left, k);
@@ -202,7 +205,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
   }
 
-  static node* merge(node* left, node* right) {
+  node* merge(node* left, node* right) {
     if (!left || !right) return left ? left : right;
     if (left->priority > right->priority) {
       left->right = merge(left->right, right);
@@ -215,7 +218,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
   }
 
-  static void insert(node*& t, node* p) {
+  void insert(node*& t, node* p) {
     if (!t) {
       t = p;
     } else if (p->priority > t->priority) {
@@ -228,7 +231,7 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     }
   }
 
-  static bool erase(node*& t, const T& k) {
+  bool erase(node*& t, const T& k) {
     if (!t) return false;
     if (equiv(t->key, k)) {
       node* t2 = merge(t->left, t->right);

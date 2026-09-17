@@ -8,14 +8,11 @@
 
 #include "ds/implicit_treap_base.hpp"
 #include "random/engine.hpp"
-#include "util/memory_pool.hpp"
 
 namespace cp {
 
 template <class S> struct implicit_treap_monoid_node {
   using self = implicit_treap_monoid_node;
-  inline static memory_pool<implicit_treap_monoid_node> pool;
-
   S val, prod;
   int sub = 1;
   unsigned long long priority;
@@ -26,32 +23,16 @@ template <class S> struct implicit_treap_monoid_node {
   implicit_treap_monoid_node() {}
   explicit implicit_treap_monoid_node(const S& x)
       : val(x), prod(x), priority(xs64()) {}
-  implicit_treap_monoid_node(const self& other)
-      : val(other.val),
-        prod(other.prod),
-        sub(other.sub),
-        priority(other.priority),
-        left(other.left ? new self(*other.left) : nullptr),
-        right(other.right ? new self(*other.right) : nullptr),
-        rev(other.rev) {}
-  self& operator=(const self&) = delete;
-  ~implicit_treap_monoid_node() {
-    delete left;
-    delete right;
-  }
-  void* operator new(std::size_t) { return pool.malloc(); }
-  void operator delete(void* ptr) { return pool.free((self*)(ptr)); }
 };
 
 template <class S, auto op, auto e, auto reverse = std::identity()>
 class implicit_treap_monoid
-    : public implicit_treap_base<implicit_treap_monoid_node<S>,
-                                 implicit_treap_monoid<S, op, e, reverse>> {
+    : public implicit_treap_base<implicit_treap_monoid_node<S>> {
  public:
   implicit_treap_monoid() {}
   explicit implicit_treap_monoid(int n, const S& val = e())
       : implicit_treap_monoid(std::vector<S>(n, val)) {}
-  explicit implicit_treap_monoid(const std::vector<S>& v) : base(v) {}
+  explicit implicit_treap_monoid(const std::vector<S>& v) { build(v); }
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
@@ -65,27 +46,28 @@ class implicit_treap_monoid
 
  private:
   using node = implicit_treap_monoid_node<S>;
-  using base = implicit_treap_base<node, implicit_treap_monoid>;
+  using base = implicit_treap_base<node>;
   friend base;
+  using base::build;
   using base::merge;
   using base::root;
   using base::size;
   using base::split;
 
-  static void toggle(node* t) {
+  void toggle(node* t) override {
     std::swap(t->left, t->right);
     t->prod = reverse(t->prod);
     t->rev = !t->rev;
   }
 
-  static void update(node* t) {
+  void update(node* t) override {
     t->sub = size(t->left) + size(t->right) + 1;
     t->prod = t->val;
     if (t->left) t->prod = op(t->left->prod, t->prod);
     if (t->right) t->prod = op(t->prod, t->right->prod);
   }
 
-  static void push(node* t) {
+  void push(node* t) override {
     if (t->rev) {
       if (t->left) toggle(t->left);
       if (t->right) toggle(t->right);
