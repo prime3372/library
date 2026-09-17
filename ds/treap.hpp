@@ -240,7 +240,6 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     if (!t) return false;
     if (equiv(t->key, k)) {
       node* t2 = merge(t->left, t->right);
-      t->left = t->right = nullptr;
       delete t;
       t = t2;
       return true;
