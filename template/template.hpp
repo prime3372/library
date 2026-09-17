@@ -55,7 +55,8 @@ using mint = cp::modint998244353;
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
-#define inrange(i, a, b) ((a) <= (i) && (i) < (b))
+template <class T> bool inrange(T i, T a, T b) { return a <= i && i < b; }
+template <class Container> int len(const Container& a) { return int(a.size()); }
 
 #define GET_STRING_SINGLE(a) #a
 #define GET_STRING(...)                                \
