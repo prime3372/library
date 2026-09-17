@@ -67,7 +67,7 @@ class wavelet_matrix {
     a[i] = x;
   }
 
-  wavelet_matrix build() {
+  void build() {
     data.assign(w, bit_vector(n));
     std::vector<T> cur = a, nxt(n);
     for (int h = w - 1; h >= 0; h--) {
