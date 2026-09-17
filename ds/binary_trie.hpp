@@ -71,12 +71,13 @@ template <int bit_size> class binary_trie {
     return res;
   }
 
-  bs min(bs xor_val = bs()) const { return kth_elem(0, xor_val); }
-  bs max(bs xor_val = bs()) const {
+  bs min(const bs& xor_val = bs()) const { return kth_elem(0, xor_val); }
+  bs max(const bs& xor_val = bs()) const {
     return kth_elem(nodes[0].sub - 1, xor_val);
   }
 
-  int range_count(bs lower, bs upper, bs xor_val = bs()) const {
+  int range_count(const bs& lower, const bs& upper,
+                  const bs& xor_val = bs()) const {
     assert(lower.to_string() <= upper.to_string());
     auto f = [&](const bs& s) {
       int v = 0, cnt = 0;
