@@ -29,12 +29,11 @@ using mint = cp::modint998244353;
 #define CHOOSE5(_1, _2, _3, _4, name, ...) name
 #define CHOOSE6(_1, _2, _3, _4, _5, name, ...) name
 
-#define loop(n) for (ll _ = 0; _ < ll(n); _++)
-
+#define rep1(n) for (ll _ = 0; _ < ll(n); _++)
 #define rep2(i, n) for (ll i = 0; i < ll(n); i++)
 #define rep3(i, a, b) for (ll i = (a); i < ll(b); i++)
 #define rep4(i, a, b, c) for (ll i = (a); i < ll(b); i += (c))
-#define rep(...) CHOOSE5(__VA_ARGS__, rep4, rep3, rep2)(__VA_ARGS__)
+#define rep(...) CHOOSE5(__VA_ARGS__, rep4, rep3, rep2, rep1)(__VA_ARGS__)
 
 #define REP2(i, n) for (ll i = 0; i <= ll(n); i++)
 #define REP3(i, a, b) for (ll i = (a); i <= ll(b); i++)
