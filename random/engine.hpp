@@ -34,7 +34,7 @@ template <class T> T uniform(T l, T r) {
   return std::uniform_int_distribution<T>(l, r)(xs64);
 }
 
-bool uniform_bool() { return uniform(0, 1) == 1; }
+bool uniform_bool() { return xs64() % 2; }
 
 double uniform01() {
   static std::uniform_real_distribution dist(0.0, 1.0);
