@@ -45,8 +45,8 @@ template <class T> class coordinate_compression {
   int size() const { return int(d.size()); }
 
  private:
-  bool initialized = false;
   std::vector<T> d;
+  bool initialized = false;
 };
 
 }  // namespace cp

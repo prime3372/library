@@ -72,11 +72,11 @@ class lowest_common_ancestor {
 
  private:
   int n;
-  bool initialized = false;
   std::vector<std::vector<int>> g;
   std::vector<int> dep;
   hl_decomposition hld;
-
+  bool initialized = false;
+  
   void dfs(int v, int pv, int d) {
     dep[v] = d;
     for (int nv : g[v]) {

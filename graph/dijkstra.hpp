@@ -63,7 +63,6 @@ template <class T> class dijkstra {
 
  private:
   int n, m = 0;
-  bool initialized = false;
   struct edge {
     int to, id;
     T cost;
@@ -71,6 +70,7 @@ template <class T> class dijkstra {
   std::vector<std::vector<edge>> g;
   std::vector<T> d;
   std::vector<int> prev_v, prev_e;
+  bool initialized = false;
 };
 
 }  // namespace cp
