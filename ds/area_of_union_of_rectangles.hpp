@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cassert>
 #include <limits>
+#include <vector>
 
 #include "ds/lazy_segtree.hpp"
 #include "util/algo_utility.hpp"
