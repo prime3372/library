@@ -3,6 +3,7 @@
 #include <bits/stdc++.h>
 
 #include "random/engine.hpp"
+#include "template/debug.hpp"
 #include "util/algo_utility.hpp"
 #include "util/io_float128.hpp"
 #include "util/io_int128.hpp"
@@ -31,6 +32,12 @@ using std::views::zip;
 
 using namespace cp;
 using mint = cp::modint998244353;
+
+#ifdef LOCAL
+#define local 1
+#else
+#define local 0
+#endif
 
 #define CHOOSE5(_1, _2, _3, _4, name, ...) name
 #define CHOOSE6(_1, _2, _3, _4, _5, name, ...) name
@@ -65,44 +72,13 @@ using mint = cp::modint998244353;
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
-template <class T> inline bool between(const T& i, const T& a, const T& b) {
-  return a <= i && i < b;
-}
+#define inrange(i, a, b) ((a) <= (i) && (i) < (b))
+
+#define yes(i) ((i) ? "yes" : "no")
+#define Yes(i) ((i) ? "Yes" : "No")
+#define YES(i) ((i) ? "YES" : "NO")
+
+constexpr int INF = int(1e9);
+constexpr ll LINF = ll(1e18);
+
 template <class T> inline int len(const T& a) { return int(a.size()); }
-
-#define GET_STRING_SINGLE(a) #a
-#define GET_STRING(...)                                \
-  []() {                                               \
-    std::string _s = GET_STRING_SINGLE((__VA_ARGS__)); \
-    return _s.substr(1, _s.size() - 2);                \
-  }()
-
-#ifdef LOCAL
-
-#define local 1
-
-#define dump(...)                                    \
-  [](const auto&... _args) {                         \
-    std::string _args_str = GET_STRING(__VA_ARGS__); \
-    _args_str.append(": ");                          \
-    std::cerr << _args_str;                          \
-    std::string _indent(_args_str.size(), ' ');      \
-    std::ostringstream _oss;                         \
-    _oss << std::make_tuple(_args...);               \
-    for (char _c : _oss.str()) {                     \
-      std::cerr << _c;                               \
-      if (_c == '\n') std::cerr << _indent;          \
-    }                                                \
-    std::cerr << "\n";                               \
-  }(__VA_ARGS__)
-#define write(...) \
-  [](const auto&... _args) -> void { (std::cerr << ... << _args); }(__VA_ARGS__)
-
-#else
-
-#define local 0
-
-#define dump(...)
-#define write(...)
-
-#endif
