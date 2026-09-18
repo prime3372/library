@@ -26,9 +26,11 @@ template <class T> class area_of_union_of_rectangles {
   T calc() {
     int n = int(x.size());
 
-    std::vector<int> p = sort(y);
-    std::vector<int> y_comp(n);
-    for (int i = 0; i < n; i++) y_comp[p[i]] = i;
+    std::vector<int> comp(n);
+    {
+      auto p = sort(y);
+      for (int i = 0; i < n; i++) comp[p[i]] = i;
+    }
 
     std::vector<S> init(n - 1);
     for (int i = 0; i < n - 1; i++) init[i] = {0, y[i + 1] - y[i]};
@@ -39,8 +41,8 @@ template <class T> class area_of_union_of_rectangles {
     std::vector<int> idx = sort(x);
     for (int i = 0; i < n - 1; i++) {
       int j = idx[i] / 2;
-      int d = y_comp[2 * j];
-      int u = y_comp[2 * j + 1];
+      int d = comp[2 * j];
+      int u = comp[2 * j + 1];
       T w = idx[i] % 2 ? -1 : 1;
       seg.apply(d, u, w);
 
