@@ -15,7 +15,7 @@
 
 namespace cp {
 
-template <class T, bool multiset, class Comp = std::less<T>> class treap {
+template <class T, bool multiset, class Compare = std::less<T>> class treap {
  public:
   treap() {}
   explicit treap(std::vector<T> v) {
@@ -186,9 +186,9 @@ template <class T, bool multiset, class Comp = std::less<T>> class treap {
     explicit node(const T& x) : key(x), priority(xs64()) {}
   }* root = nullptr;
 
-  static bool less(const T& x, const T& y) { return Comp()(x, y); }
+  static bool less(const T& x, const T& y) { return Compare()(x, y); }
   static bool equiv(const T& x, const T& y) {
-    return !Comp()(x, y) && !Comp()(y, x);
+    return !Compare()(x, y) && !Compare()(y, x);
   }
 
   int size(const node* t) const { return t ? t->sub : 0; }

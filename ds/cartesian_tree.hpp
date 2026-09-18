@@ -9,9 +9,10 @@ namespace cp {
 class cartesian_tree {
  public:
   cartesian_tree() {}
-  template <class T, class Comp = std::less<T>>
-  explicit cartesian_tree(const std::vector<T>& a, Comp comp = Comp()) {
-    build(a, comp);
+  template <class T, class Compare = std::less<T>>
+  explicit cartesian_tree(const std::vector<T>& a,
+                          Compare compare = Compare()) {
+    build(a, compare);
   }
 
   int root = -1;
@@ -20,8 +21,8 @@ class cartesian_tree {
   // @note The smallest element becomes the root.
   // @note For equivalent elements, the one with the smaller index is smaller.
   // @note `parent[root]` is `-1`.
-  template <class T, class Comp = std::less<T>>
-  void build(const std::vector<T>& a, Comp comp = Comp()) {
+  template <class T, class Compare = std::less<T>>
+  void build(const std::vector<T>& a, Compare compare = Compare()) {
     if (a.empty()) return;
     int n = int(a.size());
     left.assign(n, -1);
@@ -31,7 +32,7 @@ class cartesian_tree {
     std::vector<int> st;
     for (int i = 0; i < n; i++) {
       int k = -1;
-      while (!st.empty() && comp(a[i], a[st.back()])) {
+      while (!st.empty() && compare(a[i], a[st.back()])) {
         k = st.back();
         update(k);
         st.pop_back();
@@ -40,7 +41,7 @@ class cartesian_tree {
       left[i] = k;
       st.push_back(i);
     }
-    for (int i = int(st.size()) - 1; i >= 0; i--) update(st[i]);    
+    for (int i = int(st.size()) - 1; i >= 0; i--) update(st[i]);
     root = st[0];
     parent[root] = -1;
   }

@@ -86,9 +86,9 @@ std::ostream& operator<<(std::ostream& os, const Range& r);
 template <class T, class Container>
 std::ostream& operator<<(std::ostream& os, std::queue<T, Container> q);
 
-template <class T, class Container, class Comp>
+template <class T, class Container, class Compare>
 std::ostream& operator<<(std::ostream& os,
-                         std::priority_queue<T, Container, Comp> pq);
+                         std::priority_queue<T, Container, Compare> pq);
 
 template <class T, class Container>
 std::ostream& operator<<(std::ostream& os, std::stack<T, Container> st);
@@ -123,9 +123,9 @@ std::ostream& operator<<(std::ostream& os, std::queue<T, Container> q) {
   return os << v;
 }
 
-template <class T, class Container, class Comp>
+template <class T, class Container, class Compare>
 std::ostream& operator<<(std::ostream& os,
-                         std::priority_queue<T, Container, Comp> pq) {
+                         std::priority_queue<T, Container, Compare> pq) {
   std::vector<T> v;
   v.reserve(pq.size());
   while (!pq.empty()) {

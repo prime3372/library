@@ -43,53 +43,53 @@ void rearrange(Container& a, const Indices& p) {
 // stable sort
 // @return let `b` be the sorted array, return `p` s.t. `b[i] = a[p[i]]`.
 template <class Container,
-          class Comp = std::less<std::ranges::range_value_t<Container>>>
-std::vector<int> sort(Container&& a, Comp comp = Comp()) {
+          class Compare = std::less<std::ranges::range_value_t<Container>>>
+std::vector<int> sort(Container&& a, Compare compare = Compare()) {
   std::vector<int> p(a.size());
   std::iota(p.begin(), p.end(), 0);
   std::sort(p.begin(), p.end(), [&](int i, int j) {
-    return comp(a[i], a[j]) || (!comp(a[j], a[i]) && i < j);
+    return compare(a[i], a[j]) || (!compare(a[j], a[i]) && i < j);
   });
   rearrange(a, p);
   return p;
 }
 
 template <class Container,
-          class Comp = std::less<std::ranges::range_value_t<Container>>>
-void sort_unique(Container& a, Comp comp = Comp()) {
-  std::sort(a.begin(), a.end(), comp);
+          class Compare = std::less<std::ranges::range_value_t<Container>>>
+void sort_unique(Container& a, Compare compare = Compare()) {
+  std::sort(a.begin(), a.end(), compare);
   a.erase(std::unique(a.begin(), a.end(),
                       [&](const auto& x, const auto& y) {
-                        return !comp(x, y) && !comp(y, x);
+                        return !compare(arex, y) && !compare(y, x);
                       }),
           a.end());
 }
 
 template <class Container,
-          class Comp = std::less<std::ranges::range_value_t<Container>>>
-std::vector<int> compress(Container a, Comp comp = Comp()) {
+          class Compare = std::less<std::ranges::range_value_t<Container>>>
+std::vector<int> compress(Container a, Compare compare = Compare()) {
   int n = int(a.size());
   std::vector<int> res(n);
-  auto idx = sort(a, comp);
+  auto idx = sort(a, compare);
   for (int i = 0, j = 0; i < n; i++) {
-    if (i > 0 && comp(a[i - 1], a[i])) j++;
+    if (i > 0 && compare(a[i - 1], a[i])) j++;
     res[idx[i]] = j;
   }
   return res;
 }
 
 template <class Container,
-          class Comp = std::less<std::ranges::range_value_t<Container>>>
+          class Compare = std::less<std::ranges::range_value_t<Container>>>
 int lower_bound(const Container& a, typename Container::value_type val,
-                Comp comp = Comp()) {
-  return int(std::lower_bound(a.begin(), a.end(), val, comp) - a.begin());
+                Compare compare = Compare()) {
+  return int(std::lower_bound(a.begin(), a.end(), val, compare) - a.begin());
 }
 
 template <class Container,
-          class Comp = std::less<std::ranges::range_value_t<Container>>>
+          class Compare = std::less<std::ranges::range_value_t<Container>>>
 int upper_bound(const Container& a, typename Container::value_type val,
-                Comp comp = Comp()) {
-  return int(std::upper_bound(a.begin(), a.end(), val, comp) - a.begin());
+                Compare compare = Compare()) {
+  return int(std::upper_bound(a.begin(), a.end(), val, compare) - a.begin());
 }
 
 }  // namespace cp
