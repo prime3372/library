@@ -60,7 +60,7 @@ void sort_unique(Container& a, Compare compare = Compare()) {
   std::sort(a.begin(), a.end(), compare);
   a.erase(std::unique(a.begin(), a.end(),
                       [&](const auto& x, const auto& y) {
-                        return !compare(arex, y) && !compare(y, x);
+                        return !compare(x, y) && !compare(y, x);
                       }),
           a.end());
 }
