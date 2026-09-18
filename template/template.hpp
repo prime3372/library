@@ -51,6 +51,6 @@ using mint = cp::modint998244353;
 #define inrange(i, a, b) ((a) <= (i) && (i) < (b))
 
 constexpr int INF = int(1e9);
-constexpr ll LINF = ll(1e18);
+constexpr ll LINF = ll(2e18);
 
 template <class T> inline int len(const T& a) { return int(a.size()); }
