@@ -39,7 +39,7 @@ std::vector<int> sort(Container&& a, Compare compare = Compare()) {
   std::sort(p.begin(), p.end(), [&](int i, int j) {
     return compare(a[i], a[j]) || (!compare(a[j], a[i]) && i < j);
   });
-  Container b = std::move(a);
+  Container b = a;
   for (int i = 0; i < int(a.size()); i++) {
     a[i] = std::move(b[p[i]]);
   }
