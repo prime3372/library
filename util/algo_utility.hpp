@@ -29,17 +29,6 @@ template <class T> bool chmax(T& a, const T& b) {
   return b > a ? (a = b, true) : false;
 }
 
-// replace `a[i]` with `a[p[i]]`
-// @param p must be a permutation
-template <class Container, class Indices>
-void rearrange(Container& a, const Indices& p) {
-  assert(a.size() == p.size());
-  Container b = a;
-  for (int i = 0; i < int(p.size()); i++) {
-    a[i] = std::move(b[p[i]]);
-  }
-}
-
 // stable sort
 // @return let `b` be the sorted array, return `p` s.t. `b[i] = a[p[i]]`.
 template <class Container,
@@ -50,7 +39,10 @@ std::vector<int> sort(Container&& a, Compare compare = Compare()) {
   std::sort(p.begin(), p.end(), [&](int i, int j) {
     return compare(a[i], a[j]) || (!compare(a[j], a[i]) && i < j);
   });
-  rearrange(a, p);
+  Container b = std::move(a);
+  for (int i = 0; i < int(a.size()); i++) {
+    a[i] = std::move(b[p[i]]);
+  }
   return p;
 }
 
