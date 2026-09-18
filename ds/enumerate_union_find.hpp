@@ -15,7 +15,7 @@ class enumerate_union_find {
   }
 
   template <class F = void (*)(int, int)>
-  bool unite(int a, int b, F f = [](int, int) {}) {
+  bool unite(int a, int b, const F& f = [](int, int) {}) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
     a = find(a);

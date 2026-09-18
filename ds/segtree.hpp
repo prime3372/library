@@ -53,7 +53,7 @@ template <class S, auto op, auto e> class segtree {
 
   S all_prod() const { return d[1]; }
 
-  template <class F> int max_right(int l, F f) const {
+  template <class F> int max_right(int l, const F& f) const {
     assert(0 <= l && l <= n);
     assert(f(e()));
     if (l == n) return n;
@@ -77,7 +77,7 @@ template <class S, auto op, auto e> class segtree {
     return n;
   }
 
-  template <class F> int min_left(int r, F f) const {
+  template <class F> int min_left(int r, const F& f) const {
     assert(0 <= r && r <= n);
     assert(f(e()));
     if (r == 0) return 0;

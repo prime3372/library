@@ -14,7 +14,7 @@ template <class T> class weighted_union_find {
 
   // @return whether diff(a) - diff(b) = d is satisfiable.
   template <class F = void (*)(int, int)>
-  bool unite(int a, int b, T d, F f = [](int, int) {}) {
+  bool unite(int a, int b, T d, const F& f = [](int, int) {}) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
     d += weight(b) - weight(a);

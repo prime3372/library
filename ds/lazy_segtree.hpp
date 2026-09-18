@@ -104,7 +104,7 @@ class lazy_segtree {
     }
   }
 
-  template <class G> int max_right(int l, G g) {
+  template <class G> int max_right(int l, const G& g) {
     assert(0 <= l && l <= n);
     assert(g(e()));
     if (l == n) return n;
@@ -130,7 +130,7 @@ class lazy_segtree {
     return n;
   }
 
-  template <class G> int min_left(int r, G g) {
+  template <class G> int min_left(int r, const G& g) {
     assert(0 <= r && r <= n);
     assert(g(e()));
     if (r == 0) return 0;

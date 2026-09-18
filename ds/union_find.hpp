@@ -13,7 +13,7 @@ class union_find {
   explicit union_find(int _n) : n(_n), par_size(_n, -1) {}
 
   template <class F = void (*)(int, int)>
-  bool unite(int a, int b, F f = [](int, int) {}) {
+  bool unite(int a, int b, const F& f = [](int, int) {}) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
     a = find(a);
