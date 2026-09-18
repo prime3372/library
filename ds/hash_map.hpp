@@ -28,12 +28,12 @@ template <class Key, class Val> class hash_map {
     keys[i] = k;
     used[i] = true;
     sz++;
-    return vals[i] = default_value;
+    return vals[i] = default_val;
   }
 
   const Val& get(const Key& k) const {
     unsigned int i = index(k);
-    return used[i] ? vals[i] : default_value;
+    return used[i] ? vals[i] : default_val;
   }
 
   bool count(const Key& k) const {
@@ -51,7 +51,7 @@ template <class Key, class Val> class hash_map {
 
   int size() const { return sz; }
 
-  void set_default(const Val& v) { default_value = v; }
+  void set_default(const Val& v) { default_val = v; }
 
   friend std::ostream& operator<<(std::ostream& os, const hash_map& mp) {
     auto elems = mp.enumerate();
@@ -64,7 +64,7 @@ template <class Key, class Val> class hash_map {
   std::vector<Key> keys;
   std::vector<Val> vals;
   std::vector<bool> used;
-  Val default_value = Val();
+  Val default_val = Val();
 
   unsigned int hash(const Key& k) const {
     return (unsigned int)(safe_hash<Key>()(k) & (cap - 1));
