@@ -70,10 +70,10 @@ template <class Container,
 std::vector<int> compress(Container a, Compare compare = Compare()) {
   int n = int(a.size());
   std::vector<int> res(n);
-  auto idx = sort(a, compare);
+  auto p = sort(a, compare);
   for (int i = 0, j = 0; i < n; i++) {
     if (i > 0 && compare(a[i - 1], a[i])) j++;
-    res[idx[i]] = j;
+    res[p[i]] = j;
   }
   return res;
 }
