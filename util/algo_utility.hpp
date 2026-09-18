@@ -56,7 +56,7 @@ std::vector<int> sort(Container&& a, Comp comp = Comp()) {
 
 template <class Container,
           class Comp = std::less<std::ranges::range_value_t<Container>>>
-void uniq(Container& a, Comp comp = Comp()) {
+void sort_unique(Container& a, Comp comp = Comp()) {
   std::sort(a.begin(), a.end(), comp);
   a.erase(std::unique(a.begin(), a.end(),
                       [&](const auto& x, const auto& y) {
