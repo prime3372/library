@@ -33,7 +33,7 @@ template <class T, class Compare = std::less<T>> class coordinate_compression {
     return int(std::lower_bound(d.begin(), d.end(), x) - d.begin());
   }
 
-  T operator[](int i) const {
+  const T& operator[](int i) const {
     assert(initialized);
     assert(0 <= i && i < int(d.size()));
     return d[i];
