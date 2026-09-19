@@ -13,12 +13,12 @@ using ll = long long;
 
 void test(int n) {
   auto edges = random_tree(n);
+  assert(int(edges.size()) == n - 1);
   union_find uf(n);
-  for (auto e : edges) {
-    assert(!uf.same(e.first - 1, e.second - 1));
-    uf.unite(e.first - 1, e.second - 1);
+  for (auto [u, v] : edges) {
+    assert(!uf.same(u - 1, v - 1));
+    uf.unite(u - 1, v - 1);
   }
-  assert(uf.groups().size() == 1);
 }
 void large() { test(uniform(1, 100000)); }
 void small() { test(uniform(1, 10)); }
