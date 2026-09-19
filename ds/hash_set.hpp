@@ -18,7 +18,8 @@ template <class T> class hash_set {
     char& f = d[k];
     if (f) return false;
     sz++;
-    return f = true;
+    f = true;
+    return true;
   }
 
   template <class... Args> bool emplace(Args&&... args) {
