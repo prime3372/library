@@ -16,10 +16,11 @@ class bit_vector {
     block[i / 64] |= mask(i % 64);
   }
 
-  void build() {
+  void init() {
     for (int i = 0; i < int(block.size()) - 1; i++) {
       count[i + 1] = count[i] + std::popcount(block[i]);
     }
+    initialized = true;
   }
 
   bool operator[](int i) const {
@@ -28,10 +29,12 @@ class bit_vector {
   }
 
   int rank0(int i) const {
+    assert(initialized);
     assert(0 <= i && i <= n);
     return i - rank1(i);
   }
   int rank1(int i) const {
+    assert(initialized);
     assert(0 <= i && i <= n);
     return count[i / 64] + std::popcount(block[i / 64] & (mask(i % 64) - 1));
   }
@@ -40,6 +43,7 @@ class bit_vector {
   int n;
   std::vector<unsigned long long> block;
   std::vector<int> count;
+  bool initialized = false;
 
   static unsigned long long mask(int pos) { return 1ULL << pos; }
 };
