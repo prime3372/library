@@ -29,21 +29,39 @@ template <class T> bool chmax(T& a, const T& b) {
   return b > a ? (a = b, true) : false;
 }
 
-// stable sort
-// @return let `b` be the sorted array, return `p` s.t. `b[i] = a[p[i]]`.
+// replace `a[i]` with `a[p[i]]` by `std::swap`
+template <class Container, class Indices>
+const Indices& rearrange(Container& a, const Indices& p) {
+  assert(a.size() == p.size());
+  std::vector<bool> processed(a.size());
+  for (int i = 0; i < int(a.size()); i++) {
+    if (processed[i]) continue;
+    processed[i] = true;
+    for (int j = p[i]; j != i; j = p[j]) {
+      assert(!processed[j]);
+      processed[j] = true;
+      std::swap(a[j], a[p[j]]);
+    }
+  }
+  return p;
+}
+
 template <class Container,
           class Compare = std::less<std::ranges::range_value_t<Container>>>
-std::vector<int> sort(Container&& a, Compare compare = Compare()) {
+std::vector<int> sorted_indices(const Container& a,
+                                Compare compare = Compare()) {
   std::vector<int> p(a.size());
   std::iota(p.begin(), p.end(), 0);
   std::sort(p.begin(), p.end(), [&](int i, int j) {
     return compare(a[i], a[j]) || (!compare(a[j], a[i]) && i < j);
   });
-  auto b = a;
-  for (int i = 0; i < int(a.size()); i++) {
-    a[i] = std::move(b[p[i]]);
-  }
   return p;
+}
+
+template <class Container,
+          class Compare = std::less<std::ranges::range_value_t<Container>>>
+std::vector<int> sort(Container&& a, Compare compare = Compare()) {
+  return rearrange(a, sorted_indices(a, compare));
 }
 
 template <class Container,
@@ -72,16 +90,16 @@ std::vector<int> compress(Container a, Compare compare = Compare()) {
 
 template <class Container,
           class Compare = std::less<std::ranges::range_value_t<Container>>>
-int lower_bound(const Container& a, typename Container::value_type val,
-                Compare compare = Compare()) {
-  return int(std::lower_bound(a.begin(), a.end(), val, compare) - a.begin());
+auto lower_bound(const Container& a, std::ranges::range_value_t<Container> val,
+                 Compare compare = Compare()) {
+  return std::lower_bound(a.begin(), a.end(), val, compare);
 }
 
 template <class Container,
           class Compare = std::less<std::ranges::range_value_t<Container>>>
-int upper_bound(const Container& a, typename Container::value_type val,
-                Compare compare = Compare()) {
-  return int(std::upper_bound(a.begin(), a.end(), val, compare) - a.begin());
+auto upper_bound(const Container& a, std::ranges::range_value_t<Container> val,
+                 Compare compare = Compare()) {
+  return std::upper_bound(a.begin(), a.end(), val, compare);
 }
 
 }  // namespace cp
