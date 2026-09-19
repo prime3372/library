@@ -14,7 +14,8 @@ template <class T> class area_of_union_of_rectangles {
  public:
   area_of_union_of_rectangles() {}
 
-  // add [l, r] * [d, u]
+  // add `[l, r] * [d, u]`
+  // @note `(max(r) - min(l)) * (max(u) - min(d))` must be in `T`
   void add_rect(T l, T d, T r, T u) {
     assert(l <= r && d <= u);
     if (l == r || d == u) return;
@@ -24,7 +25,6 @@ template <class T> class area_of_union_of_rectangles {
     y.push_back(u);
   }
 
-  // @note The return value must be in `T`.
   T calc() {
     int n = int(x.size());
 
