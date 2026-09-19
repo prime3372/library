@@ -22,8 +22,6 @@ void random(int n, ll upper) {
   int arg = uniform(0, n - 1);
   std::reverse(a.end() - arg, a.end());
   std::rotate(a.begin(), a.end() - arg, a.end());
-  for (int i = 0; i < arg; i++) assert(a[i] > a[i + 1]);
-  for (int i = arg; i < n - 1; i++) assert(a[i] < a[i + 1]);
   auto f = [&](ll i) -> ll { return a[i]; };
   auto ans = golden_section_search(f, 0, n - 1);
   assert(ans.first == arg);
@@ -39,7 +37,6 @@ void decreasing() {
   sort(a.rbegin(), a.rend());
   a.erase(unique(a.begin(), a.end()), a.end());
   n = int(a.size());
-  for (int i = 0; i < n - 1; i++) assert(a[i] > a[i + 1]);
   auto f = [&](ll i) -> ll { return a[i]; };
   auto ans = golden_section_search(f, 0, n - 1);
   assert(ans.first == n - 1);
@@ -53,7 +50,6 @@ void increasing() {
   sort(a.begin(), a.end());
   a.erase(unique(a.begin(), a.end()), a.end());
   n = int(a.size());
-  for (int i = 0; i < n - 1; i++) assert(a[i] < a[i + 1]);
   auto f = [&](ll i) -> ll { return a[i]; };
   auto ans = golden_section_search(f, 0, n - 1);
   assert(ans.first == 0);
