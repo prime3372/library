@@ -205,7 +205,8 @@ class dynamic_bitset {
   }
 
   friend bool operator==(const dynamic_bitset& lhs, const dynamic_bitset& rhs) {
-    return lhs.n == rhs.n && lhs.a == rhs.a;
+    assert(lhs.n == rhs.n);
+    return lhs.a == rhs.a;
   }
   friend bool operator!=(const dynamic_bitset& lhs, const dynamic_bitset& rhs) {
     return !(lhs == rhs);
