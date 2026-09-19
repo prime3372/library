@@ -13,10 +13,10 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-int max_n = 10000;
+int max_n = 50000;
 ll max_a = 1000000000000000000LL;
 
-void large() {
+void max_random() {
   int n = uniform(1, max_n);
   vector<ll> a(n);
   for (ll& x : a) x = uniform(0LL, max_a);
@@ -29,6 +29,24 @@ void large() {
   for (int i = 0; i < x; i++) assert(a[i] > a[i + 1]);
   for (int i = x; i < n - 1; i++) assert(a[i] < a[i + 1]);
   auto f = [&](ll i) -> ll { return a[i]; };
+  auto ans = golden_section_search(f, 0, n - 1);
+  assert(ans.first == x);
+  assert(ans.second == a[x]);
+}
+
+void small() {
+  int n = uniform(1, 10);
+  vector<int> a(n);
+  for (int& x : a) x = uniform(0, 100);
+  sort(a.begin(), a.end());
+  a.erase(unique(a.begin(), a.end()), a.end());
+  n = int(a.size());
+  int x = uniform(0, n - 1);
+  std::reverse(a.end() - x, a.end());
+  std::rotate(a.begin(), a.end() - x, a.end());
+  for (int i = 0; i < x; i++) assert(a[i] > a[i + 1]);
+  for (int i = x; i < n - 1; i++) assert(a[i] < a[i + 1]);
+  auto f = [&](ll i) -> int { return a[i]; };
   auto ans = golden_section_search(f, 0, n - 1);
   assert(ans.first == x);
   assert(ans.second == a[x]);
@@ -63,7 +81,8 @@ void increasing() {
 }
 
 int main() {
-  for (int i = 0; i < 100; i++) large();
+  for (int i = 0; i < 100; i++) max_random();
+  for (int i = 0; i < 100; i++) small();
   for (int i = 0; i < 10; i++) decreasing();
   for (int i = 0; i < 10; i++) increasing();
   cout << "Hello World\n";
