@@ -19,7 +19,7 @@ template <class T, class Compare = std::less<T>> class coordinate_compression {
   void add(const T& x) { d.push_back(x); }
 
   void init() {
-    std::sort(d.begin(), d.end(), compare);
+    std::sort(d.begin(), d.end(), Compare());
     d.erase(std::unique(d.begin(), d.end(),
                         [&](const T& x, const T& y) {
                           return !Compare()(x, y) && !Compare()(y, x);
