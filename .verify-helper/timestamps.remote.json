@@ -45,6 +45,7 @@
   "test/aoj/NTL/1_B_power.test.cpp": "2026-09-20 00:50:59 +0900",
   "test/aoj/NTL/1_D_eulers_phi_function.test.cpp": "2026-09-20 00:50:59 +0900",
   "test/aoj/NTL/1_E_extended_euclid_algorithm.test.cpp": "2026-09-10 13:50:36 +0900",
+  "test/unittest/dynamic_bitset.test.cpp": "2026-09-20 02:53:27 +0900",
   "test/unittest/golden_section_search.test.cpp": "2026-09-20 02:42:29 +0900",
   "test/yosupo/convolution/bitwise_and_convolution.test.cpp": "2026-09-20 00:50:59 +0900",
   "test/yosupo/convolution/bitwise_xor_convolution.test.cpp": "2026-09-20 00:53:53 +0900",
