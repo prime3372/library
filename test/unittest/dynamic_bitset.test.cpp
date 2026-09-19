@@ -27,11 +27,11 @@ template <int k> void random(int n) {
       bs1.flip();
       bs2.flip();
     } else if (t == 2) {
-      bs1 ^= (bs1 >> x) | (bs1 << (k - x));
-      bs2 ^= (bs2 >> x) | (bs2 << (k - x));
-    } else {
-      bs1 &= (bs1 >> x) | (bs1 << (k - x));
-      bs2 &= (bs2 >> x) | (bs2 << (k - x));
+      bs1 ^= bs1 >> x;
+      bs2 ^= bs2 >> x;
+    } else if (t == 3) {
+      bs1 ^= bs1 << x;
+      bs2 ^= bs2 << x;
     }
     for (int j = 0; j < k; j++) assert(bs1[j] == bs2[j]);
     assert(bs1.count() == int(bs2.count()));
