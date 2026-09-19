@@ -9,6 +9,8 @@ template <class T, bool is_max = false> class convex_hull_trick {
  public:
   convex_hull_trick() {}
 
+  // @note When `is_max` is true, `a` must be non-decreasing. Otherwise, `a`
+  // must be non-increasing
   void add(T a, T b) {
     assert(ls.empty() || (is_max ? a >= ls.back().a : a <= ls.back().a));
     line l{a, b};
@@ -21,6 +23,7 @@ template <class T, bool is_max = false> class convex_hull_trick {
     ls.push_back(l);
   }
 
+  // @note `x` must be non-decreasing
   T query(T x) {
     assert(!ls.empty());
     T cur = ls[0](x);
