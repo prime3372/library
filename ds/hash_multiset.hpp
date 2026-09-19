@@ -13,10 +13,7 @@ template <class T> class hash_multiset {
  public:
   hash_multiset() {}
 
-  void insert(const T& k) {
-    d[k]++;
-    sz++;
-  }
+  void insert(const T& k) { d[k]++, sz++; }
 
   template <class... Args> void emplace(Args&&... args) {
     insert(T(std::forward<Args>(args)...));
@@ -25,8 +22,7 @@ template <class T> class hash_multiset {
   bool erase(const T& k) {
     int& num = d[k];
     if (num == 0) return false;
-    num--;
-    sz--;
+    num--, sz--;
     return true;
   }
 
