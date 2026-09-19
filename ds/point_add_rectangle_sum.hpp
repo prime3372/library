@@ -30,11 +30,8 @@ template <class T, class U> class point_add_rectangle_sum {
     }
     sort(points.begin(), points.end());
 
-    std::vector<int> comp(n);
-    {
-      auto q = sort(ys);
-      for (int i = 0; i < n; i++) comp[q[i]] = i;
-    }
+    auto comp = inverse(sort(ys));
+
     wm = wavelet_matrix<bit_size>(n);
     for (int i = 0; i < n; i++) wm.set(i, comp[p[i]]);
     wm.init();

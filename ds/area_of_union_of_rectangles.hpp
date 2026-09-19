@@ -27,13 +27,7 @@ template <class T> class area_of_union_of_rectangles {
 
   T calc() {
     int n = int(x.size());
-
-    std::vector<int> comp(n);
-    {
-      auto p = sort(y);
-      for (int i = 0; i < n; i++) comp[p[i]] = i;
-    }
-
+    std::vector<int> comp = inverse(sort(y));
     std::vector<S> init(n - 1);
     for (int i = 0; i < n - 1; i++) init[i] = {0, y[i + 1] - y[i]};
     lazy_segtree<S, op, e, T, act, compose, id> seg(init);

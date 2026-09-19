@@ -102,4 +102,15 @@ auto upper_bound(const Container& a, std::ranges::range_value_t<Container> val,
   return std::upper_bound(a.begin(), a.end(), val, compare);
 }
 
+template <class Container> Container inverse(const Container& p) {
+  Container q(p.size());
+  std::fill(q.begin(), q.end(), -1);
+  for (int i = 0; i < int(p.size()); i++) {
+    assert(0 <= p[i] && p[i] < int(p.size()));
+    assert(q[p[i]] == -1);
+    q[p[i]] = i;
+  }
+  return q;
+}
+
 }  // namespace cp
