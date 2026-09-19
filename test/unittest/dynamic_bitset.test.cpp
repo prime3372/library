@@ -37,11 +37,11 @@ template <int k> void random(int n) {
     assert(bs1.count() == int(bs2.count()));
   }
 }
-void width_1() { random<1>(100000); }
-void width_10() { random<10>(100000); }
-void width_255() { random<255>(100000); }
-void width_256() { random<256>(100000); }
-void width_257() { random<257>(100000); }
+void width_1() { random<1>(500000); }
+void width_10() { random<10>(500000); }
+void width_255() { random<255>(500000); }
+void width_256() { random<256>(500000); }
+void width_257() { random<257>(500000); }
 void width_1000() { random<1000>(10000); }
 void width_1000000() { random<1000000>(10); }
 
