@@ -13,8 +13,8 @@
 
 namespace cp {
 
-template <int bit_size> class wavelet_matrix {
-  static_assert(0 <= bit_size && bit_size <= 64);
+template <int bit_size> requires((0 <= bit_size && bit_size <= 64))
+class wavelet_matrix {
   using ull = unsigned long long;
 
  public:
