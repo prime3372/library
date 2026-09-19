@@ -45,22 +45,13 @@ template <class T, class U> class rectangle_sum {
   }
 
   // aggregate `[l, r) * [d, u)`
-  U query(T l, T d, T r, T u) {
+  U sum(T l, T d, T r, T u) {
     assert(initialized);
     assert(l <= r && d <= u);
-    return prefix_sum(l, r, u) - prefix_sum(l, r, d);
+    return lower_sum(l, r, u) - lower_sum(l, r, d);
   }
 
- private:
-  static constexpr int bit_size = 30;
-  int n = 0;
-  std::vector<T> xs, ys;
-  std::vector<U> ws;
-  wavelet_matrix<bit_size> wm;
-  std::vector<std::vector<U>> cum;
-  bool initialized = false;
-
-  U prefix_sum(T l, T r, T u) {
+  U lower_sum(T l, T r, T u) {
     int left = int(std::lower_bound(xs.begin(), xs.end(), l) - xs.begin());
     int right = int(std::lower_bound(xs.begin(), xs.end(), r) - xs.begin());
     int upper = int(std::lower_bound(ys.begin(), ys.end(), u) - ys.begin());
@@ -79,6 +70,15 @@ template <class T, class U> class rectangle_sum {
     }
     return ans;
   }
+
+ private:
+  static constexpr int bit_size = 30;
+  int n = 0;
+  std::vector<T> xs, ys;
+  std::vector<U> ws;
+  wavelet_matrix<bit_size> wm;
+  std::vector<std::vector<U>> cum;
+  bool initialized = false;
 };
 
 }  // namespace cp

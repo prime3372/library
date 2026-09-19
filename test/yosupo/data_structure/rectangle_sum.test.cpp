@@ -25,6 +25,6 @@ int main() {
   while (q--) {
     int l, d, r, u;
     cin >> l >> d >> r >> u;
-    cout << sum.query(l, d, r, u) << "\n";
+    cout << sum.sum(l, d, r, u) << "\n";
   }
 }

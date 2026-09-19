@@ -61,20 +61,10 @@ template <class T, class U> class offline_point_add_rectangle_sum {
 
   U sum(T l, T d, T r, T u) {
     assert(initialized);
-    return prefix_sum(l, r, u) - prefix_sum(l, r, d);
+    return lower_sum(l, r, u) - lower_sum(l, r, d);
   }
 
- private:
-  static constexpr int bit_size = 32;
-  int n = 0;
-  std::vector<T> xs, ys;
-  std::vector<U> ws;
-  std::vector<std::tuple<T, T, int>> points;
-  wavelet_matrix<bit_size> wm;
-  std::vector<fenwick_tree<U>> fw;
-  bool initialized = false;
-
-  U prefix_sum(T l, T r, T u) {
+  U lower_sum(T l, T r, T u) {
     int left = int(std::lower_bound(xs.begin(), xs.end(), l) - xs.begin());
     int right = int(std::lower_bound(xs.begin(), xs.end(), r) - xs.begin());
     int upper = int(std::lower_bound(ys.begin(), ys.end(), u) - ys.begin());
@@ -93,6 +83,16 @@ template <class T, class U> class offline_point_add_rectangle_sum {
     }
     return ans;
   }
+
+ private:
+  static constexpr int bit_size = 32;
+  int n = 0;
+  std::vector<T> xs, ys;
+  std::vector<U> ws;
+  std::vector<std::tuple<T, T, int>> points;
+  wavelet_matrix<bit_size> wm;
+  std::vector<fenwick_tree<U>> fw;
+  bool initialized = false;
 };
 
 }  // namespace cp

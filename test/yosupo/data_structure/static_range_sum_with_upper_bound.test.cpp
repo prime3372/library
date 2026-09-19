@@ -28,7 +28,7 @@ int main() {
   while (q--) {
     int l, r, x;
     cin >> l >> r >> x;
-    cout << cnt.query(l, 0, r, x + 1) << " ";
-    cout << sum.query(l, 0, r, x + 1) << "\n";
+    cout << cnt.lower_sum(l, r, x + 1) << " ";
+    cout << sum.lower_sum(l, r, x + 1) << "\n";
   }
 }
