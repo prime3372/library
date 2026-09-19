@@ -22,15 +22,15 @@ void random(int n, ll upper) {
   sort(a.begin(), a.end());
   a.erase(unique(a.begin(), a.end()), a.end());
   n = int(a.size());
-  int x = uniform(0, n - 1);
-  std::reverse(a.end() - x, a.end());
-  std::rotate(a.begin(), a.end() - x, a.end());
-  for (int i = 0; i < x; i++) assert(a[i] > a[i + 1]);
-  for (int i = x; i < n - 1; i++) assert(a[i] < a[i + 1]);
+  int arg = uniform(0, n - 1);
+  std::reverse(a.end() - arg, a.end());
+  std::rotate(a.begin(), a.end() - arg, a.end());
+  for (int i = 0; i < arg; i++) assert(a[i] > a[i + 1]);
+  for (int i = arg; i < n - 1; i++) assert(a[i] < a[i + 1]);
   auto f = [&](ll i) -> ll { return a[i]; };
   auto ans = golden_section_search(f, 0, n - 1);
-  assert(ans.first == x);
-  assert(ans.second == a[x]);
+  assert(ans.first == arg);
+  assert(ans.second == a[arg]);
 }
 void large() { random(uniform(1, max_n), max_a); }
 void small() { random(uniform(1, 10), 100); }
