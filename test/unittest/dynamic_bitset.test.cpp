@@ -39,13 +39,19 @@ template <int k> void random(int n) {
 }
 void width_1() { random<1>(100000); }
 void width_10() { random<10>(100000); }
+void width_255() { random<255>(100000); }
+void width_256() { random<256>(100000); }
+void width_257() { random<257>(100000); }
 void width_1000() { random<1000>(10000); }
 void width_1000000() { random<1000000>(10); }
 
 int main() {
-  for (int i = 0; i < 10; i++) width_1();
-  for (int i = 0; i < 10; i++) width_10();
-  for (int i = 0; i < 10; i++) width_1000();
-  for (int i = 0; i < 10; i++) width_1000000();
+  width_1();
+  width_10();
+  width_255();
+  width_256();
+  width_257();
+  width_1000();
+  width_1000000();
   cout << "Hello World\n";
 }
