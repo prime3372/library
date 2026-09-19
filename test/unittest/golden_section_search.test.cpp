@@ -13,9 +13,6 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-constexpr int max_n = 100000;
-constexpr ll max_a = ll(1e18);
-
 void random(int n, ll upper) {
   vector<ll> a(n);
   for (ll& x : a) x = uniform(0LL, upper);
@@ -32,13 +29,13 @@ void random(int n, ll upper) {
   assert(ans.first == arg);
   assert(ans.second == a[arg]);
 }
-void large() { random(uniform(1, max_n), max_a); }
+void large() { random(uniform(1, 100000), ll(1e18)); }
 void small() { random(uniform(1, 10), 100); }
 
 void decreasing() {
-  int n = uniform(1, max_n);
+  int n = uniform(1, 100000);
   vector<ll> a(n);
-  for (ll& x : a) x = uniform(0LL, max_a);
+  for (ll& x : a) x = uniform(0LL, ll(1e18));
   sort(a.rbegin(), a.rend());
   a.erase(unique(a.begin(), a.end()), a.end());
   n = int(a.size());
@@ -50,9 +47,9 @@ void decreasing() {
 }
 
 void increasing() {
-  int n = uniform(1, max_n);
+  int n = uniform(1, 100000);
   vector<ll> a(n);
-  for (ll& x : a) x = uniform(0LL, max_a);
+  for (ll& x : a) x = uniform(0LL, ll(1e18));
   sort(a.begin(), a.end());
   a.erase(unique(a.begin(), a.end()), a.end());
   n = int(a.size());
