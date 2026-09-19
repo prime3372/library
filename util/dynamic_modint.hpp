@@ -16,19 +16,23 @@ template <int id> class dynamic_modint {
  public:
   static int mod() { return bt.umod(); }
   static void set_mod(int m) {
+    assert(!initialized);
     assert(1 <= m);
     bt = barrett(m);
+    initialized = true;
   }
 
-  dynamic_modint() : v(0) {}
+  dynamic_modint() : v(0) { assert(initialized); }
   template <class T> requires(internal::is_signed_int_v<T>)
   dynamic_modint(T _v) {
+    assert(initialized);
     long long x = (long long)(_v % (long long)(mod()));
     if (x < 0) x += mod();
     v = (unsigned int)(x);
   }
   template <class T> requires(internal::is_unsigned_int_v<T>)
   dynamic_modint(T _v) {
+    assert(initialized);
     v = (unsigned int)(_v % mod());
   }
 
@@ -134,7 +138,8 @@ template <int id> class dynamic_modint {
 
  private:
   unsigned int v;
-  inline static barrett bt = barrett(998244353);
+  inline static barrett bt;
+  inline static bool initialized = false;
   static unsigned int umod() { return bt.umod(); }
 };
 

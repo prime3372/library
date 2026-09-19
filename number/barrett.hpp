@@ -5,6 +5,7 @@ namespace cp {
 // Barrett reduction
 class barrett {
  public:
+  constexpr barrett() : m(0) {}
   explicit constexpr barrett(unsigned int _m) : m(_m), im(-1ULL / _m + 1) {}
 
   constexpr unsigned int umod() const { return m; }
