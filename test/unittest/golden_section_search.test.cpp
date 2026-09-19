@@ -82,7 +82,7 @@ void increasing() {
 
 int main() {
   for (int i = 0; i < 100; i++) large();
-  for (int i = 0; i < 100; i++) small();
+  for (int i = 0; i < 10000; i++) small();
   for (int i = 0; i < 10; i++) decreasing();
   for (int i = 0; i < 10; i++) increasing();
   cout << "Hello World\n";
