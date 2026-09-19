@@ -54,7 +54,7 @@ template <class T, class U> class rectangle_sum {
   }
 
  private:
-  static constexpr int bit_size = 32;
+  static constexpr int bit_size = 30;
   int n = 0;
   std::vector<T> xs, ys;
   std::vector<U> ws;
