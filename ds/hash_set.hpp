@@ -23,7 +23,7 @@ template <class T> class hash_set {
   }
 
   template <class... Args> bool emplace(Args&&... args) {
-    insert(T(std::forward<Args>(args)...));
+    return insert(T(std::forward<Args>(args)...));
   }
 
   bool erase(const T& k) {
