@@ -32,7 +32,6 @@ void random(int n, ll upper) {
   assert(ans.first == x);
   assert(ans.second == a[x]);
 }
-
 void large() { random(uniform(1, max_n), max_a); }
 void small() { random(uniform(1, 10), 100); }
 
