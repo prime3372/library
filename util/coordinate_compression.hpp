@@ -34,6 +34,16 @@ template <class T, class Compare = std::less<T>> class coordinate_compression {
     assert(0 <= i && i < size());
     return d[i];
   }
+  const T& min() const {
+    assert(initialized);
+    assert(size());
+    return d[0];
+  }
+  const T& max() const {
+    assert(initialized);
+    assert(size());
+    return d.back();
+  }
 
   int size() const { return int(d.size()); }
 
