@@ -15,7 +15,7 @@ int main() {
   vector<int> l(q + 1), r(q + 1);
   vector<persistent_array<int>::node*> past(q + 1);
   persistent_array<int> s(q + 1);
-  past[0] = s.get_root();
+  past[0] = s.snapshot();
   l[0] = r[0] = 0;
   for (int i = 1; i <= q; i++) {
     int type;

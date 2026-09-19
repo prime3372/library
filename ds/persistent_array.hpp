@@ -57,7 +57,7 @@ template <class T> class persistent_array {
     return root = cur;
   }
 
-  node* get_root() { return root; }
+  node* snapshot() { return root; }
   void restore(node* new_root) { root = new_root; }
 
  private:
