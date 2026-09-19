@@ -28,7 +28,7 @@ template <class T> class range_kth_smallest {
     assert(0 <= l && l <= r && r <= n);
     assert(0 <= k && k < r - l);
     int ans = 0;
-    for (int h = 31; h >= 0; h--) {
+    for (int h = bit_size - 1; h >= 0; h--) {
       int l0 = wm.next0(h, l);
       int r0 = wm.next0(h, r);
       if (r0 - l0 > k) {
@@ -45,8 +45,9 @@ template <class T> class range_kth_smallest {
   }
 
  private:
+  static constexpr int bit_size = 30;
   int n = 0;
-  wavelet_matrix<32> wm;
+  wavelet_matrix<bit_size> wm;
   coordinate_compression<T> cc;
   bool initialized = false;
 };
