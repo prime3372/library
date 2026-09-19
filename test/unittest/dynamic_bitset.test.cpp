@@ -16,6 +16,7 @@ using ll = long long;
 template <int k> void random(int n) {
   dynamic_bitset bs1(k);
   std::bitset<k> bs2;
+  for (int i = 0; i < k; i++) bs1[i] = bs2[i] = uniform_bool();
   for (int i = 0; i < n; i++) {
     int t = uniform(0, 3);
     int x = uniform(0, k - 1);
@@ -32,19 +33,19 @@ template <int k> void random(int n) {
       bs1 &= (bs1 >> x) | (bs1 << (k - x));
       bs2 &= (bs2 >> x) | (bs2 << (k - x));
     }
-    for (int j = 0; j < k; j++) assert(bs1[j] == bool(bs2[j]));
+    for (int j = 0; j < k; j++) assert(bs1[j] == bs2[j]);
     assert(bs1.count() == int(bs2.count()));
   }
 }
 void width_1() { random<1>(100000); }
-void width_100() { random<100>(100000); }
-void width_10000() { random<10000>(1000); }
+void width_10() { random<10>(100000); }
+void width_1000() { random<1000>(10000); }
 void width_1000000() { random<1000000>(10); }
 
 int main() {
   for (int i = 0; i < 10; i++) width_1();
-  for (int i = 0; i < 10; i++) width_100();
-  for (int i = 0; i < 10; i++) width_10000();
+  for (int i = 0; i < 10; i++) width_10();
+  for (int i = 0; i < 10; i++) width_1000();
   for (int i = 0; i < 10; i++) width_1000000();
   cout << "Hello World\n";
 }
