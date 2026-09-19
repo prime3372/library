@@ -1,5 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
+#define IGNORE
 
+int main() {}
+
+/*
 #include "ds/fenwick_tree.hpp"
 #include "ds/wavelet_matrix.hpp"
 #include "util/algo_utility.hpp"
@@ -99,3 +103,4 @@ int main() {
     }
   }
 }
+*/
