@@ -11,9 +11,8 @@ namespace cp {
 
 // @param n `|a| = |b| = 2**n`
 // @note The mod must be an odd number.
-template <class mint> requires(internal::is_modint_v<mint>)
-std::vector<mint> xor_convolution(int n, std::vector<mint> a,
-                                  std::vector<mint> b) {
+template <class T>
+std::vector<T> xor_convolution(int n, std::vector<T> a, std::vector<T> b) {
   assert(int(a.size()) == (1 << n));
   assert(int(b.size()) == (1 << n));
 
@@ -22,8 +21,8 @@ std::vector<mint> xor_convolution(int n, std::vector<mint> a,
     int half = width / 2;
     for (int i = 0; i < (1 << n); i += width) {
       for (int j = 0; j < half; j++) {
-        mint l = a[i + j];
-        mint r = a[i + j + half];
+        T l = a[i + j];
+        T r = a[i + j + half];
         a[i + j] = l + r;
         a[i + j + half] = l - r;
       }
@@ -35,8 +34,8 @@ std::vector<mint> xor_convolution(int n, std::vector<mint> a,
     int half = width / 2;
     for (int i = 0; i < (1 << n); i += width) {
       for (int j = 0; j < half; j++) {
-        mint l = b[i + j];
-        mint r = b[i + j + half];
+        T l = b[i + j];
+        T r = b[i + j + half];
         b[i + j] = l + r;
         b[i + j + half] = l - r;
       }
@@ -45,16 +44,31 @@ std::vector<mint> xor_convolution(int n, std::vector<mint> a,
 
   for (int i = 0; i < (1 << n); i++) a[i] *= b[i];
 
-  mint inv2 = mint(2).inv();
-  for (int k = 1; k <= n; k++) {
-    int width = 1 << k;
-    int half = width / 2;
-    for (int i = 0; i < (1 << n); i += width) {
-      for (int j = 0; j < half; j++) {
-        mint l = a[i + j];
-        mint r = a[i + j + half];
-        a[i + j] = (l + r) * inv2;
-        a[i + j + half] = (l - r) * inv2;
+  if constexpr (internal::is_modint_v<T>) {
+    T inv2 = T(2).inv();
+    for (int k = 1; k <= n; k++) {
+      int width = 1 << k;
+      int half = width / 2;
+      for (int i = 0; i < (1 << n); i += width) {
+        for (int j = 0; j < half; j++) {
+          T l = a[i + j];
+          T r = a[i + j + half];
+          a[i + j] = (l + r) * inv2;
+          a[i + j + half] = (l - r) * inv2;
+        }
+      }
+    }
+  } else {
+    for (int k = 1; k <= n; k++) {
+      int width = 1 << k;
+      int half = width / 2;
+      for (int i = 0; i < (1 << n); i += width) {
+        for (int j = 0; j < half; j++) {
+          T l = a[i + j];
+          T r = a[i + j + half];
+          a[i + j] = (l + r) / 2;
+          a[i + j + half] = (l - r) / 2;
+        }
       }
     }
   }
