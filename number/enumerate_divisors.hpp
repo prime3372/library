@@ -10,7 +10,6 @@
 namespace cp {
 
 // @param n `1 <= n`
-// @note The order of the divisors is undefined.
 std::vector<long long> enumerate_divisors(long long n) {
   assert(1 <= n);
   std::vector<long long> ans = {1};
@@ -24,6 +23,7 @@ std::vector<long long> enumerate_divisors(long long n) {
       }
     }
   }
+  sort(ans.begin(), ans.end());
   return ans;
 }
 
