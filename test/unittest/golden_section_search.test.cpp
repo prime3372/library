@@ -13,7 +13,7 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-constexpr int max_n = 50000;
+constexpr int max_n = 100000;
 constexpr ll max_a = ll(1e18);
 
 void random(int n, ll upper) {
