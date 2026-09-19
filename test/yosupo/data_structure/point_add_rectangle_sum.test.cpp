@@ -1,8 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
 
-#include "ds/fenwick_tree.hpp"
-#include "ds/wavelet_matrix.hpp"
-#include "util/algo_utility.hpp"
+#include "ds/point_add_rectangle_sum.hpp"
 #include <iostream>
 #include <tuple>
 #include <vector>
@@ -12,21 +10,16 @@ using namespace cp;
 using ll = long long;
 
 int main() {
-  constexpr int bit_size = 32;
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-
-  vector<unsigned> xs, ys;
-  vector<ll> ws;
-
-  vector<tuple<unsigned int, unsigned int, ll>> init(n);
-  for (auto& [x, y, w] : init) {
+  point_add_rectangle_sum<int, ll> sum;
+  for (int i = 0; i < n; i++) {
+    int x, y;
+    ll w;
     cin >> x >> y >> w;
-    xs.push_back(x);
-    ys.push_back(y);
-    ws.push_back(w);
+    sum.add_point(x, y, w);
   }
 
   vector<int> t(q);
@@ -36,66 +29,22 @@ int main() {
     if (t[i] == 0) {
       auto& [x, y, w, a] = query[i];
       cin >> x >> y >> w;
-      xs.push_back(x);
-      ys.push_back(y);
-      ws.push_back(w);
+      sum.add_point(x, y);
     } else {
       auto& [l, d, r, u] = query[i];
       cin >> l >> d >> r >> u;
     }
   }
 
-  int m = int(xs.size());
-  auto p = sort(xs);
-  vector<int> ip(p.size());
-  for (int i = 0; i < int(p.size()); i++) ip[p[i]] = i;
+  sum.init();
 
-  wavelet_matrix<32> wm(m);
-  for (int i = 0; i < m; i++) wm.set(i, ys[p[i]]);
-  wm.init();
-
-  vector<fenwick_tree<ll>> fw(bit_size, fenwick_tree<ll>(m + 1));
-  for (int i = 0; i < n; i++) {
-    int k = ip[i];
-    for (int h = bit_size - 1; h >= 0; h--) {
-      k = wm.next(h, k);
-      fw[h].add(k, ws[i]);
-    }
-  }
-
-  auto add = [&](int k, ll w) -> void {
-    for (int h = bit_size - 1; h >= 0; h--) {
-      k = wm.next(h, k);
-      fw[h].add(k, w);
-    }
-  };
-  auto sum = [&](int l, int r, unsigned int u) -> ll {
-    ll ans = 0;
-    for (int h = bit_size - 1; h >= 0; h--) {
-      int l0 = wm.next0(h, l);
-      int r0 = wm.next0(h, r);
-      if ((u >> h) & 1) {
-        ans += fw[h].sum(l0, r0);
-        l = wm.next1(h, l);
-        r = wm.next1(h, r);
-      } else {
-        l = l0;
-        r = r0;
-      }
-    }
-    return ans;
-  };
-
-  for (int i = 0, j = 0; i < q; i++) {
+  for (int i = 0; i < q; i++) {
     if (t[i] == 0) {
       auto [x, y, w, a] = query[i];
-      add(ip[n + j], w);
-      j++;
+      sum.add(x, y, w);
     } else {
       auto [l, d, r, u] = query[i];
-      int l_lb = int(std::lower_bound(xs.begin(), xs.end(), l) - xs.begin());
-      int r_lb = int(std::lower_bound(xs.begin(), xs.end(), r) - xs.begin());
-      cout << sum(l_lb, r_lb, u) - sum(l_lb, r_lb, d) << "\n";
+      cout << sum.sum(l, d, r, u) << "\n";
     }
   }
 }
