@@ -51,7 +51,8 @@ template <class T, class U> class point_add_rectangle_sum {
   }
 
   void add(T x, T y, U w) {
-    auto lb = std::lower_bound(points.begin(), points.end(), std::make_tuple(x, y, U(0)));
+    auto lb = std::lower_bound(points.begin(), points.end(),
+                               std::make_tuple(x, y, U(0)));
     assert(lb != points.end());
     auto [x2, y2, i] = *lb;
     assert(x == x2 && y == y2);
