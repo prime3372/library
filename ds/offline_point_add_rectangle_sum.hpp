@@ -10,9 +10,9 @@
 
 namespace cp {
 
-template <class T, class U> class point_add_rectangle_sum {
+template <class T, class U> class offline_point_add_rectangle_sum {
  public:
-  point_add_rectangle_sum() {}
+  offline_point_add_rectangle_sum() {}
 
   void add_point(T x, T y, U w = 0) {
     xs.push_back(x);

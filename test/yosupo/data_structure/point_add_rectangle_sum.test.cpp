@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
 
-#include "ds/point_add_rectangle_sum.hpp"
+#include "ds/offline_point_add_rectangle_sum.hpp"
 #include <iostream>
 #include <tuple>
 #include <vector>
@@ -14,7 +14,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  point_add_rectangle_sum<int, ll> sum;
+  offline_point_add_rectangle_sum<int, ll> sum;
   for (int i = 0; i < n; i++) {
     int x, y;
     ll w;
