@@ -48,6 +48,7 @@ template <class T, class U> class rectangle_sum {
     initialized = true;
   }
 
+  // aggregate `[l, r) * [d, u)`
   U query(T l, T d, T r, T u) {
     assert(initialized);
     assert(l <= r);
