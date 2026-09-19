@@ -30,7 +30,8 @@ void random() {
   for (int i = x; i < n - 1; i++) assert(a[i] < a[i + 1]);
   auto f = [&](ll i) -> ll { return a[i]; };
   auto ans = golden_section_search(f, 0, n - 1);
-  assert(ans == make_pair(x, a[x]));
+  assert(ans.first == x);
+  assert(ans.second == a[x]);
 }
 
 void decreasing() {
@@ -43,7 +44,8 @@ void decreasing() {
   for (int i = 0; i < n - 1; i++) assert(a[i] > a[i + 1]);
   auto f = [&](ll i) -> ll { return a[i]; };
   auto ans = golden_section_search(f, 0, n - 1);
-  assert(ans == make_pair(n - 1, a[n - 1]));
+  assert(ans.first == n - 1);
+  assert(ans.second == a[n - 1]);
 }
 
 void increasing() {
@@ -56,7 +58,8 @@ void increasing() {
   for (int i = 0; i < n - 1; i++) assert(a[i] < a[i + 1]);
   auto f = [&](ll i) -> ll { return a[i]; };
   auto ans = golden_section_search(f, 0, n - 1);
-  assert(ans == make_pair(0, a[0]));
+  assert(ans.first == 0);
+  assert(ans.second == a[0]);
 }
 
 int main() {
