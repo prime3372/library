@@ -61,7 +61,7 @@
   "test/yosupo/data_structure/ordered_set.test.cpp": "2026-09-19 18:34:15 +0900",
   "test/yosupo/data_structure/persistent_queue.test.cpp": "2026-09-19 16:18:22 +0900",
   "test/yosupo/data_structure/point_add_range_sum.test.cpp": "2026-09-01 23:33:47 +0900",
-  "test/yosupo/data_structure/point_add_rectangle_sum.test.cpp": "2026-09-19 20:43:46 +0900",
+  "test/yosupo/data_structure/point_add_rectangle_sum.test.cpp": "2026-09-20 01:13:43 +0900",
   "test/yosupo/data_structure/point_set_range_composite.test.cpp": "2026-09-20 00:50:59 +0900",
   "test/yosupo/data_structure/point_set_range_composite_large_array.test.cpp": "2026-09-20 00:50:59 +0900",
   "test/yosupo/data_structure/point_set_range_frequency.test.cpp": "2026-09-19 18:34:15 +0900",
