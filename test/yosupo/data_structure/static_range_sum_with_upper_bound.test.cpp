@@ -9,24 +9,26 @@
 using namespace std;
 using namespace cp;
 using ll = long long;
-using i128 = __int128;
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  rectangle_sum<int, i128> sum;
+  rectangle_sum<int, int> cnt;
+  rectangle_sum<int, ll> sum;
   for (int i = 0; i < n; i++) {
     int ai;
     cin >> ai;
-    sum.add_point(i, ai, (i128(1) << 64) + ai);
+    cnt.add_point(i, ai, 1);
+    sum.add_point(i, ai, ai);
   }
+  cnt.init();
   sum.init();
   while (q--) {
     int l, r, x;
     cin >> l >> r >> x;
-    i128 ans = sum.query(l, 0, r, x + 1);
-    cout << ll(ans >> 64) << " " << ll(ans & -1ULL) << "\n";
+    cout << cnt.query(l, 0, r, x + 1) << " ";
+    cout << sum.query(l, 0, r, x + 1) << "\n";
   }
 }
