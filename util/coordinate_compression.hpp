@@ -11,14 +11,10 @@ namespace cp {
 template <class T, class Compare = std::less<T>> class coordinate_compression {
  public:
   coordinate_compression() {}
-  explicit coordinate_compression(const std::vector<T>& v) {
-    for (const T& x : v) add(x);
-    init();
-  }
+  explicit coordinate_compression(const std::vector<T>& v) { build(v); }
 
-  void add(const T& x) { d.push_back(x); }
-
-  void init() {
+  void build(const std::vector<T>& v) {
+    d = v;
     std::sort(d.begin(), d.end(), Compare());
     d.erase(std::unique(d.begin(), d.end(),
                         [&](const T& x, const T& y) {
