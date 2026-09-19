@@ -14,23 +14,24 @@
 namespace cp {
 
 template <int bit_size> class wavelet_matrix {
-  using bs = std::bitset<bit_size>;
+  static_assert(0 <= bit_size && bit_size <= 64);
+  using ull = unsigned long long;
 
  public:
   wavelet_matrix() : wavelet_matrix(0) {}
   explicit wavelet_matrix(int _n) : n(_n), a(_n) {}
 
-  void set(int i, const bs& x) {
+  void set(int i, ull x) {
     assert(0 <= i && i < n);
     a[i] = x;
   }
 
   void init() {
     data.assign(bit_size, bit_vector(n));
-    std::vector<bs> cur = a, nxt(n);
+    std::vector<ull> cur = a, nxt(n);
     for (int h = bit_size - 1; h >= 0; h--) {
       for (int i = 0; i < n; i++) {
-        if (cur[i][h]) data[h].set(i);
+        if ((cur[i] >> h) & 1) data[h].set(i);
       }
       data[h].init();
       std::array itr = {nxt.begin(), nxt.begin() + data[h].rank0(n)};
@@ -67,7 +68,7 @@ template <int bit_size> class wavelet_matrix {
 
  private:
   int n;
-  std::vector<bs> a;
+  std::vector<ull> a;
   std::vector<bit_vector> data;
   bool initialized = false;
 };
