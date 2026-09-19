@@ -27,8 +27,8 @@ template <int k> void random(int n) {
       bs1.flip();
       bs2.flip();
     } else if (t == 2) {
-      bs1 ^= bs1 >> x;
-      bs2 ^= bs2 >> x;
+      bs1 ^= (bs1 >> x) | (bs1 << (k - x));
+      bs2 ^= (bs2 >> x) | (bs2 << (k - x));
     } else {
       bs1 &= (bs1 >> x) | (bs1 << (k - x));
       bs2 &= (bs2 >> x) | (bs2 << (k - x));
