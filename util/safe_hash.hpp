@@ -11,7 +11,7 @@
 namespace cp {
 
 static unsigned long long splitmix64(unsigned long long x) {
-  static const unsigned long long fixed_rand = xs64();
+  static const unsigned long long fixed_rand = rng();
   x += fixed_rand;
   x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;
   x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;

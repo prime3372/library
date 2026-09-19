@@ -183,7 +183,7 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
     node* left = nullptr;
     node* right = nullptr;
 
-    node(const T& x) : key(x), priority(xs64()) {}
+    node(const T& x) : key(x), priority(rng()) {}
   }* root = nullptr;
 
   static bool less(const T& x, const T& y) { return Compare()(x, y); }

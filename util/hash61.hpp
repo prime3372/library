@@ -19,7 +19,7 @@ class hash61 {
     std::uniform_int_distribution dist(1ULL, m - 1);
     hash61 hs;
     do {
-      hs.v = dist(xs64);
+      hs.v = dist(rng);
     } while (!is_primitive(hs.v));
     return hs;
   }

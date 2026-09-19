@@ -23,7 +23,7 @@ template <class S, class F, auto id> struct implicit_treap_acted_monoid_node {
   bool lzflag = false;
 
   implicit_treap_acted_monoid_node(const S& x)
-      : val(x), prod(x), priority(xs64()) {}
+      : val(x), prod(x), priority(rng()) {}
 };
 
 template <class S, auto op, auto e, class F, auto act, auto compose, auto id,
