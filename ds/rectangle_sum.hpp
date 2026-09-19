@@ -50,6 +50,8 @@ template <class T, class U> class rectangle_sum {
 
   U query(T l, T d, T r, T u) {
     assert(initialized);
+    assert(l <= r);
+    assert(d <= u);
     return prefix_sum(l, r, u) - prefix_sum(l, r, d);
   }
 
