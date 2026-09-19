@@ -17,7 +17,7 @@ std::vector<T> max_plus_convolution(const std::vector<T>& a,
   if (n == 0 || m == 0) return {};
 
   for (int i = 0; i < n - 2; i++) {
-    assert(a[i + 1] - a[i] <= a[i + 2] - a[i + 1]);
+    assert(a[i + 1] - a[i] >= a[i + 2] - a[i + 1]);
   }
 
   auto f = [&](int k, int i) -> T {
