@@ -32,7 +32,7 @@ template <int bit_size> class wavelet_matrix {
       for (int i = 0; i < n; i++) {
         if (cur[i][h]) data[h].set(i);
       }
-      data[h].build();
+      data[h].init();
       std::array itr = {nxt.begin(), nxt.begin() + data[h].rank0(n)};
       for (int i = 0; i < n; i++) *(itr[data[h][i]]++) = cur[i];
       std::swap(cur, nxt);
