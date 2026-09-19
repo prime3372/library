@@ -22,8 +22,7 @@ template <class S, class F, auto id> struct implicit_treap_acted_monoid_node {
   bool rev = false;
   bool lzflag = false;
 
-  implicit_treap_acted_monoid_node() {}
-  explicit implicit_treap_acted_monoid_node(const S& x)
+  implicit_treap_acted_monoid_node(const S& x)
       : val(x), prod(x), priority(xs64()) {}
 };
 
@@ -56,7 +55,8 @@ class implicit_treap_acted_monoid
     root = merge(s1.first, merge(s2.first, s2.second));
   }
 
-  friend std::ostream& operator<<(std::ostream& os, implicit_treap_acted_monoid t) {
+  friend std::ostream& operator<<(std::ostream& os,
+                                  implicit_treap_acted_monoid t) {
     std::vector<S> v(t.size());
     for (int i = 0; i < t.size(); i++) v[i] = t[i];
     return os << v;

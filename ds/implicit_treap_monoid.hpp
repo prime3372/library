@@ -21,9 +21,7 @@ template <class S> struct implicit_treap_monoid_node {
   self* right = nullptr;
   bool rev = false;
 
-  implicit_treap_monoid_node() {}
-  explicit implicit_treap_monoid_node(const S& x)
-      : val(x), prod(x), priority(xs64()) {}
+  implicit_treap_monoid_node(const S& x) : val(x), prod(x), priority(xs64()) {}
 };
 
 template <class S, auto op, auto e, auto reverse = std::identity()>

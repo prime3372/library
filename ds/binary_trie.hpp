@@ -102,8 +102,7 @@ template <int bit_size> class binary_trie {
     int par, sub;
     std::array<int, 2> to;
 
-    node() : node(-1) {}
-    explicit node(int p) : par(p), sub(0) { to.fill(-1); }
+    node(int p) : par(p), sub(0) { to.fill(-1); }
   };
 
   std::vector<node> nodes;

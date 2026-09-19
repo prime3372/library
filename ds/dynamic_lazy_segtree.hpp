@@ -86,8 +86,8 @@ class dynamic_lazy_segtree {
     F lz = id();
     bool lzflag = false;
     node_ptr left, right;
-    node() {}
-    explicit node(const S& v) : val(v) {}
+
+    node(const S& v) : val(v) {}
   };
   ull n, sz;
   int log;
