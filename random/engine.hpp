@@ -11,7 +11,7 @@ class xorshift64 {
  public:
   using result_type = unsigned long long;
   static constexpr unsigned long long min() { return 0; }
-  static constexpr unsigned long long max() { return (unsigned long long)(-1); }
+  static constexpr unsigned long long max() { return -1ULL; }
 
   xorshift64() : x(88172645463325252ULL) {}
   explicit xorshift64(unsigned long long seed) : x(seed) {}
