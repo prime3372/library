@@ -11,9 +11,9 @@ namespace cp {
 template <class T, class Compare = std::less<T>> class coordinate_compression {
  public:
   coordinate_compression() {}
-  explicit coordinate_compression(const std::vector<T>& v) { build(v); }
+  explicit coordinate_compression(const std::vector<T>& v) { init(v); }
 
-  void build(const std::vector<T>& v) {
+  void init(const std::vector<T>& v) {
     d = v;
     std::sort(d.begin(), d.end(), Compare());
     d.erase(std::unique(d.begin(), d.end(),
