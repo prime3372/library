@@ -16,7 +16,7 @@ using ll = long long;
 int max_n = 50000;
 ll max_a = 1000000000000000000LL;
 
-void max_random() {
+void large() {
   int n = uniform(1, max_n);
   vector<ll> a(n);
   for (ll& x : a) x = uniform(0LL, max_a);
@@ -81,7 +81,7 @@ void increasing() {
 }
 
 int main() {
-  for (int i = 0; i < 100; i++) max_random();
+  for (int i = 0; i < 100; i++) large();
   for (int i = 0; i < 100; i++) small();
   for (int i = 0; i < 10; i++) decreasing();
   for (int i = 0; i < 10; i++) increasing();
