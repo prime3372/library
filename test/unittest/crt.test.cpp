@@ -40,15 +40,13 @@ void has_ans() {
   auto divs = enumerate_divisors(x);
   int n = int(divs.size());
   shuffle(divs.begin(), divs.end(), rng);
-  ll d = divs[uniform(0, n - 1)];
-  if (d == x) d = 0;
   vector<ll> r(n), m(n);
   for (int i = 0; i < n; i++) {
     m[i] = divs[i];
-    r[i] = d % m[i];
+    r[i] = divs[0] % m[i];
   }
   auto [ans_r, ans_m] = crt(r, m);
-  assert(ans_r == d && ans_m == x);
+  assert(ans_r == divs[0] % x && ans_m == x);
 }
 
 void empty() { assert(crt({}, {}) == make_pair(0LL, 1LL)); }
