@@ -16,10 +16,6 @@ class dynamic_bitset {
  public:
   dynamic_bitset() : n(0) {}
   explicit dynamic_bitset(int _n) : n(_n), a((_n + w - 1) / w) {}
-  explicit dynamic_bitset(const std::vector<bool>& v)
-      : n(int(v.size())), a((int(v.size()) + w - 1) / w) {
-    for (int i = 0; i < n; i++) a[i / w] |= ull(v[i]) << (i % w);
-  }
 
   class ref {
    public:
