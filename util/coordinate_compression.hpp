@@ -8,24 +8,21 @@
 
 namespace cp {
 
-template <class T> class coordinate_compression {
+template <class T, class Compare = std::less<T>> class coordinate_compression {
  public:
   coordinate_compression() {}
-  template <class Compare = std::less<T>>
-  explicit coordinate_compression(const std::vector<T>& v,
-                                  Compare compare = Compare()) {
+  explicit coordinate_compression(const std::vector<T>& v) {
     for (const T& x : v) add(x);
-    init(compare);
+    init();
   }
 
   void add(const T& x) { d.push_back(x); }
 
-  template <class Compare = std::less<T>>
-  void init(Compare compare = Compare()) {
+  void init() {
     std::sort(d.begin(), d.end(), compare);
     d.erase(std::unique(d.begin(), d.end(),
                         [&](const T& x, const T& y) {
-                          return !compare(x, y) && !compare(y, x);
+                          return !Compare()(x, y) && !Compare()(y, x);
                         }),
             d.end());
     initialized = true;
