@@ -25,7 +25,7 @@ template <int bit_size> class wavelet_matrix {
     a[i] = x;
   }
 
-  void build() {
+  void init() {
     data.assign(bit_size, bit_vector(n));
     std::vector<bs> cur = a, nxt(n);
     for (int h = bit_size - 1; h >= 0; h--) {
@@ -37,24 +37,29 @@ template <int bit_size> class wavelet_matrix {
       for (int i = 0; i < n; i++) *(itr[data[h][i]]++) = cur[i];
       std::swap(cur, nxt);
     }
+    initialized = true;
   }
 
   const bit_vector& operator[](int h) const {
+    assert(initialized);
     assert(0 <= h && h < bit_size);
     return data[h];
   }
 
   int next0(int h, int i) const {
+    assert(initialized);
     assert(0 <= h && h < bit_size);
     assert(0 <= i && i <= n);
     return data[h].rank0(i);
   }
   int next1(int h, int i) const {
+    assert(initialized);
     assert(0 <= h && h < bit_size);
     assert(0 <= i && i <= n);
     return data[h].rank0(n) + data[h].rank1(i);
   }
   int next(int h, int i) const {
+    assert(initialized);
     assert(0 <= h && h < bit_size);
     assert(0 <= i && i < n);
     return data[h][i] ? next1(h, i) : next0(h, i);
@@ -64,6 +69,7 @@ template <int bit_size> class wavelet_matrix {
   int n;
   std::vector<bs> a;
   std::vector<bit_vector> data;
+  bool initialized = false;
 };
 
 }  // namespace cp
