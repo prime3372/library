@@ -24,6 +24,7 @@ template <class T> class area_of_union_of_rectangles {
     y.push_back(u);
   }
 
+  // @note The return value must be in `T`.
   T calc() {
     int n = int(x.size());
 
