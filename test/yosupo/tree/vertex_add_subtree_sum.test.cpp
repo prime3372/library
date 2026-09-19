@@ -23,7 +23,8 @@ int main() {
     et.add_edge(i, p);
   }
   et.build();
-  auto in = et.in, out = et.out;
+  auto& in = et.in;
+  auto& out = et.out;
   fenwick_tree<ll> fw(n);
   for (int i = 0; i < n; i++) fw.add(in[i], a[i]);
   while (q--) {

@@ -40,8 +40,7 @@ int main() {
     } else {
       int u, v;
       cin >> u >> v;
-      u = ord[u];
-      v = ord[v];
+      u = ord[u], v = ord[v];
       ll ans = 0;
       while (head[u] != head[v]) {
         if (u > v) swap(u, v);
