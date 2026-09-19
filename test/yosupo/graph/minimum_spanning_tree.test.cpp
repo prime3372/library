@@ -20,6 +20,5 @@ int main() {
     g.add_edge(a, b, c);
   }
   cout << g.min() << "\n";
-  auto mst = g.mst();
-  for (int e : mst) cout << e << " ";
+  for (int e : g.mst()) cout << e << " ";
 }
