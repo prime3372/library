@@ -46,7 +46,7 @@ int main() {
   vector<ll> freq;
   vector<bool> removed(n);
   for (int i = 0; i < n; i++) {
-    int c = cd.dfs_order[i];
+    int c = cd.dfs_ord[i];
     vector<ll> fsum(1), f2sum;
     for (int j = 0; j < int(g[c].size()); j++) {
       vector<ll> f;

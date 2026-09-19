@@ -19,7 +19,7 @@ class centroid_decomposition {
     g[v].push_back(u);
   }
 
-  std::vector<int> parent, size, dfs_order;
+  std::vector<int> parent, size, dfs_ord;
 
   centroid_decomposition& build(int s = 0) {
     assert(0 <= s && s < n);
@@ -46,7 +46,7 @@ class centroid_decomposition {
     if (!ok || sz - res > sz / 2) return res;
     parent[v] = par;
     size[v] = sz;
-    dfs_order.push_back(v);
+    dfs_ord.push_back(v);
     removed[v] = true;
     for (auto nv : g[v]) {
       dfs(nv, v, dfs(nv, v, std::numeric_limits<int>::max(), v), v);
