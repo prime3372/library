@@ -16,7 +16,7 @@ namespace cp {
 template <bool directed = false, bool no_self_loops = false,
           bool no_multiple_edges = false, bool connected = false,
           bool one_indexed = true>
-std::vector<std::pair<int, int>> random_graph(int n, int m, int s = 0) {
+std::vector<std::pair<int, int>> random_graph(int n, int m, int s = -1) {
   assert(0 <= n && 0 <= m);
   if (n == 0) {
     assert(m == 0);
@@ -46,6 +46,7 @@ std::vector<std::pair<int, int>> random_graph(int n, int m, int s = 0) {
       }
     }
   }
+  if (!connected || !directed) assert(s == -1);
 
   auto next_edge = [&]() {
     int u, v;
