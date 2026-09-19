@@ -6,12 +6,9 @@
 #include <cassert>
 #include <bitset>
 #include <iostream>
-#include <utility>
-#include <vector>
 
 using namespace std;
 using namespace cp;
-using ll = long long;
 
 template <int k> void test(int n) {
   dynamic_bitset bs1(k);

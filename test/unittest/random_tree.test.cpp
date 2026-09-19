@@ -9,7 +9,6 @@
 
 using namespace std;
 using namespace cp;
-using ll = long long;
 
 void test(int n) {
   auto edges = random_tree(n);
@@ -20,11 +19,11 @@ void test(int n) {
     uf.unite(u - 1, v - 1);
   }
 }
-void large() { test(uniform(1, 100000)); }
 void small() { test(uniform(1, 10)); }
+void large() { test(uniform(1, 100000)); }
 
 int main() {
+  for (int i = 0; i < 100000; i++) small();
   for (int i = 0; i < 10; i++) large();
-  for (int i = 0; i < 1000; i++) small();
   cout << "Hello World\n";
 }

@@ -11,7 +11,6 @@
 
 using namespace std;
 using namespace cp;
-using ll = long long;
 
 void complete() {
   int n = uniform(1, 100);

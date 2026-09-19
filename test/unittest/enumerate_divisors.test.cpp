@@ -11,8 +11,7 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-void test() {
-  int n = uniform(1, 500000);
+void test(int n) {
   auto divs = enumerate_divisors(n);
   for (int i = 1; i < n; i++) {
     bool is_divisor = n % i == 0;
@@ -24,6 +23,7 @@ void test() {
 }
 
 int main() {
-  for (int i = 0; i < 100; i++) test();
+  for (int i = 1; i <= 1000; i++) test(i);
+  for (int i = 0; i < 100; i++) test(uniform(1001, 100000));
   cout << "Hello World\n";
 }

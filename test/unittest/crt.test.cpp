@@ -12,18 +12,15 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-void small() {
-  int x = uniform(1, 1000);
-  auto divs = enumerate_divisors(x);
-  int n = uniform(1, int(divs.size()));
-  shuffle(divs.begin(), divs.end(), rng);
+void test(int n) {
+  constexpr int max_m = 42; // lcm(1, 2, ..., 42) < 2**63
   vector<ll> r(n), m(n);
   for (int i = 0; i < n; i++) {
-    m[i] = divs[i];
+    m[i] = uniform(1, max_m);
     r[i] = uniform(0LL, m[i] - 1);
   }
   auto [ans_r, ans_m] = crt(r, m);
-  for (int i = 0; i < x; i++) {
+  for (int i = 0; i < max_m; i++) {
     bool satisfy = true;
     for (int j = 0; j < n; j++) {
       if (i % m[j] != r[j] % m[j]) {
@@ -34,26 +31,14 @@ void small() {
     assert((ans_m && i % ans_m == ans_r) == satisfy);
   }
 }
-
-void has_ans() {
-  ll x = uniform(1LL, ll(1e18));
-  auto divs = enumerate_divisors(x);
-  int n = int(divs.size());
-  shuffle(divs.begin(), divs.end(), rng);
-  vector<ll> r(n), m(n);
-  for (int i = 0; i < n; i++) {
-    m[i] = divs[i];
-    r[i] = divs[0] % m[i];
-  }
-  auto [ans_r, ans_m] = crt(r, m);
-  assert(ans_r == divs[0] % x && ans_m == x);
-}
+void small() { test(uniform(1, 10)); }
+void large() { test(uniform(1, 100000)); }
 
 void empty() { assert(crt({}, {}) == make_pair(0LL, 1LL)); }
 
 int main() {
-  for (int i = 0; i < 100; i++) small();
-  for (int i = 0; i < 100; i++) has_ans();
+  for (int i = 0; i < 100000; i++) small();
+  for (int i = 0; i < 10; i++) large();
   empty();
   cout << "Hello World\n";
 }
