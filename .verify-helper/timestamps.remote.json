@@ -48,7 +48,7 @@
   "test/unittest/crt.test.cpp": "2026-09-20 07:21:14 +0900",
   "test/unittest/dynamic_bitset.test.cpp": "2026-09-20 04:46:48 +0900",
   "test/unittest/golden_section_search.test.cpp": "2026-09-20 05:56:23 +0900",
-  "test/unittest/random_graph.test.cpp": "2026-09-20 07:24:52 +0900",
+  "test/unittest/random_graph.test.cpp": "2026-09-20 07:29:58 +0900",
   "test/unittest/random_tree.test.cpp": "2026-09-20 05:53:47 +0900",
   "test/yosupo/convolution/bitwise_and_convolution.test.cpp": "2026-09-20 00:50:59 +0900",
   "test/yosupo/convolution/bitwise_xor_convolution.test.cpp": "2026-09-20 00:53:53 +0900",
