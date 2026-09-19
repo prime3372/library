@@ -70,36 +70,6 @@ class dynamic_bitset {
     return res;
   }
 
-  // @param l `0 <= l <= size()`
-  // @return max `r` s.t. `l <= r <= size() && (*this)[l]+...+(*this)[r-1] == 0`
-  int next(int l) const {
-    assert(0 <= l && l <= n);
-    if (l == n) return n;
-    int i = l / w;
-    ull start = a[i];
-    start &= -1ULL << (l % w);
-    if (start) return i * w + std::countr_zero(start);
-    while (++i < int(a.size())) {
-      if (a[i]) return i * w + std::countr_zero(a[i]);
-    }
-    return n;
-  }
-
-  // @param r `0 <= r <= size()`
-  // @return min `l` s.t. `0 <= l <= r && (*this)[l]+...+(*this)[r-1] == 0`
-  int prev(int r) const {
-    assert(0 <= r && r <= n);
-    if (r == 0) return 0;
-    int i = (r - 1) / w;
-    ull start = a[i];
-    start &= -1ULL >> (w - 1 - ((r - 1) % w));
-    if (start) return i * w + (w - std::countl_zero(start));
-    while (--i >= 0) {
-      if (a[i]) return i * w + (w - std::countl_zero(a[i]));
-    }
-    return 0;
-  }
-
   int size() const { return n; }
 
   dynamic_bitset& operator^=(const dynamic_bitset& rhs) {
