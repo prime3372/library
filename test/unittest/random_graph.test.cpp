@@ -90,10 +90,13 @@ void reachable_from_s() {
   for (int i = 0; i < n; i++) assert(reached[i]);
 }
 
+void empty() { assert(random_graph(0, 0).empty()); }
+
 int main() {
   for (int i = 0; i < 1000; i++) complete();
   for (int i = 0; i < 1000; i++) undirected_simple_connected();
   for (int i = 0; i < 1000; i++) directed_simple();
   for (int i = 0; i < 1000; i++) reachable_from_s();
+  empty();
   cout << "Hello World\n";
 }
