@@ -90,16 +90,16 @@ std::vector<int> compress(Container a, Compare compare = Compare()) {
 
 template <class Container,
           class Compare = std::less<std::ranges::range_value_t<Container>>>
-auto lower_bound(const Container& a, std::ranges::range_value_t<Container> val,
+int lower_bound(const Container& a, std::ranges::range_value_t<Container> val,
                  Compare compare = Compare()) {
-  return std::lower_bound(a.begin(), a.end(), val, compare);
+  return int(std::lower_bound(a.begin(), a.end(), val, compare) - a.begin());
 }
 
 template <class Container,
           class Compare = std::less<std::ranges::range_value_t<Container>>>
-auto upper_bound(const Container& a, std::ranges::range_value_t<Container> val,
+int upper_bound(const Container& a, std::ranges::range_value_t<Container> val,
                  Compare compare = Compare()) {
-  return std::upper_bound(a.begin(), a.end(), val, compare);
+  return int(std::upper_bound(a.begin(), a.end(), val, compare) - a.begin());
 }
 
 template <class Container> Container inverse(const Container& p) {
