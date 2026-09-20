@@ -13,8 +13,7 @@ std::vector<int> lcp_array(const Str& s, const std::vector<int>& sa) {
   std::vector<int> rank(n + 1);
   for (int i = 0; i <= n; i++) rank[sa[i]] = i;
   std::vector<int> lcp(n);
-  int h = 0;
-  for (int i = 0; i <= n; i++) {
+  for (int h = 0, i = 0; i <= n; i++) {
     if (h > 0) h--;
     if (rank[i] == 0) continue;
     int j = sa[rank[i] - 1];
