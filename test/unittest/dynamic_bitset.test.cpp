@@ -10,11 +10,11 @@
 using namespace std;
 using namespace cp;
 
-template <int k> void test(int n) {
+template <int k> void test(int q) {
   dynamic_bitset bs1(k);
   std::bitset<k> bs2;
   for (int i = 0; i < k; i++) bs1[i] = bs2[i] = uniform_bool();
-  for (int i = 0; i < n; i++) {
+  while (q--) {
     int t = uniform(0, 3);
     int x = uniform(0, k - 1);
     if (t == 0) {
@@ -30,7 +30,7 @@ template <int k> void test(int n) {
       bs1 ^= bs1 << x;
       bs2 ^= bs2 << x;
     }
-    for (int j = 0; j < k; j++) assert(bs1[j] == bs2[j]);
+    for (int i = 0; i < k; i++) assert(bs1[i] == bs2[i]);
     assert(bs1.count() == int(bs2.count()));
   }
 }
