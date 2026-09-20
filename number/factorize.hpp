@@ -14,7 +14,7 @@
 
 namespace cp {
 
-// Pollard's Rho Algorithm
+// Pollard's rho algorithm
 // @param n `2 <= n`
 long long pollard_rho(long long n) {
   assert(2 <= n);
