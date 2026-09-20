@@ -1,8 +1,8 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
 
-#include "random/engine.hpp"
 #include "number/enumerate_divisors.hpp"
+#include "random/engine.hpp"
 #include <cassert>
 #include <iostream>
 #include <vector>
