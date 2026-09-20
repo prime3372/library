@@ -15,8 +15,9 @@ void test(int n) {
   assert(int(edges.size()) == n - 1);
   union_find uf(n);
   for (auto [u, v] : edges) {
-    assert(!uf.same(u - 1, v - 1));
-    uf.unite(u - 1, v - 1);
+    u--, v--;
+    assert(!uf.same(u, v));
+    uf.unite(u, v);
   }
 }
 void small() { test(uniform(1, 10)); }
