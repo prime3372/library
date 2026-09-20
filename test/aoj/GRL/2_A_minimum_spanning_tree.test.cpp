@@ -24,7 +24,10 @@ int main() {
   }
   int ans = g.min();
   int w_sum = 0;
-  for (int e : g.mst()) w_sum += weight[e];
+  for (int e : g.mst()) {
+    assert(0 <= e && e < m);
+    w_sum += weight[e];
+  }
   assert(w_sum == ans);
   cout << ans << "\n";
 }
