@@ -28,16 +28,12 @@ class cartesian_tree {
 
     left.assign(n, -1);
     right.assign(n, -1);
-    size.resize(n);
     std::vector<int> st;
     for (int i = 0; i < n; i++) {
       int k = -1;
       while (!st.empty() && compare(a[i], a[st.back()])) {
         k = st.back();
         st.pop_back();
-        size[k] = 1;
-        if (left[k] != -1) size[k] += size[left[k]];
-        if (right[k] != -1) size[k] += size[right[k]];
       }
       if (!st.empty()) right[st.back()] = i;
       left[i] = k;
@@ -51,6 +47,15 @@ class cartesian_tree {
       if (left[i] != -1) parent[left[i]] = i;
       if (right[i] != -1) parent[right[i]] = i;
     }
+
+    size.resize(n);
+    auto dfs = [&](auto self, int i) -> int {
+      size[i] = 1;
+      if (left[i] != -1) size[i] += self(self, left[i]);
+      if (right[i] != -1) size[i] += self(self, right[i]);
+      return size[i];
+    };
+    dfs(dfs, root);
   }
 };
 
