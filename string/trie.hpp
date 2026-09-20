@@ -10,12 +10,13 @@ template <int char_size, char offset = 'a'> class trie {
  public:
   class node {
    public:
-    int operator[](int i) {
+    int operator[](int i) const {
       assert(0 <= i && i < char_size);
       return to[i];
     }
-    int count() { return cnt; }
-    int subtree_sum() { return sub; }
+    int count() const { return cnt; }
+    int subtree_sum() const { return sub; }
+    int parent() const { return par; }
 
    private:
     friend trie;
@@ -65,10 +66,6 @@ template <int char_size, char offset = 'a'> class trie {
   const node& operator[](int v) const {
     assert(0 <= v && v < size());
     return nodes[v];
-  }
-  int parent(int v) const {
-    assert(0 <= v && v < size());
-    return nodes[v].par;
   }
 
   int size() const { return int(nodes.size()); }
