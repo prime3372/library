@@ -14,13 +14,11 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-template <bool directed, bool no_self_loops, bool no_multiple_edges,
-          bool connected>
-void test(int n, int m, int s = -1) {
-  auto edges =
-      random_graph<directed, no_self_loops, no_multiple_edges, connected>(n, m,
-                                                                          s);
+void test(int n, int m, random_graph_config config) {
+  auto [directed, no_self_loops, no_multiple_edges, connected, one_indexed,
+        start] = config;
 
+  auto edges = random_graph(n, m, config);
   assert(int(edges.size()) == m);
 
   union_find uf(n);
@@ -55,11 +53,11 @@ void test(int n, int m, int s = -1) {
     if (!directed) {
       assert(uf.groups().size() == 1);
     } else {
-      assert(s != -1);
+      assert(start != -1);
       vector<bool> reached(n, false);
       simple_queue<int> que;
-      que.push(s);
-      reached[s] = true;
+      que.push(start);
+      reached[start] = true;
       while (!que.empty()) {
         int v = que.front();
         que.pop();
@@ -75,9 +73,7 @@ void test(int n, int m, int s = -1) {
   }
 }
 
-template <bool directed, bool no_self_loops, bool no_multiple_edges,
-          bool connected>
-void run_cases() {
+void run_cases(random_graph_config config) {
   vector<pair<int, int>> cases = {
       {0, 0},           // empty
       {1, 0},           // point
@@ -89,30 +85,30 @@ void run_cases() {
   };
 
   for (auto [n, m] : cases) {
-    if (connected && directed && n == 0) continue;
-    ll max_m = directed ? (no_self_loops ? 1LL * n * (n - 1) : 1LL * n * n)
-                        : (no_self_loops ? 1LL * n * (n - 1) / 2
-                                         : 1LL * n * (n + 1) / 2);
+    if (config.connected && config.directed && n == 0) continue;
+    ll max_m = config.directed
+                   ? (config.no_self_loops ? 1LL * n * (n - 1) : 1LL * n * n)
+                   : (config.no_self_loops ? 1LL * n * (n - 1) / 2
+                                           : 1LL * n * (n + 1) / 2);
     if (m > max_m) m = int(max_m);
-    int s = (connected && directed) ? uniform(0, n - 1) : -1;
-    test<directed, no_self_loops, no_multiple_edges, connected>(n, m, s);
+    config.start =
+        (config.connected && config.directed) ? uniform(0, n - 1) : -1;
+    test(n, m, config);
   }
 }
 
-template <int mask> void run_all_combinations() {
-  constexpr bool directed = (mask >> 3) & 1;
-  constexpr bool no_self_loops = (mask >> 2) & 1;
-  constexpr bool no_multiple_edges = (mask >> 1) & 1;
-  constexpr bool connected = mask & 1;
-
-  run_cases<directed, no_self_loops, no_multiple_edges, connected>();
-
-  if constexpr (mask) {
-    run_all_combinations<mask - 1>();
+void run_all_combinations() {
+  for (int mask = 0; mask < 16; mask++) {
+    bool directed = (mask >> 0) & 1;
+    bool no_self_loops = (mask >> 1) & 1;
+    bool no_multiple_edges = (mask >> 2) & 1;
+    bool connected = (mask >> 3) & 1;
+    run_cases(random_graph_config{directed, no_self_loops, no_multiple_edges,
+                                  connected});
   }
 }
 
 int main() {
-  run_all_combinations<16>();
+  run_all_combinations();
   cout << "Hello World\n";
 }

@@ -13,13 +13,23 @@
 
 namespace cp {
 
-template <bool directed = false, bool no_self_loops = false,
-          bool no_multiple_edges = false, bool connected = false,
-          bool one_indexed = true>
-std::vector<std::pair<int, int>> random_graph(int n, int m, int s = -1) {
+struct random_graph_config {
+  bool directed = false;
+  bool no_self_loops = false;
+  bool no_multiple_edges = false;
+  bool connected = false;
+  bool one_indexed = true;
+  int start = -1;
+};
+
+std::vector<std::pair<int, int>> random_graph(int n, int m,
+                                              random_graph_config config = {}) {
+  auto [directed, no_self_loops, no_multiple_edges, connected, one_indexed,
+        start] = config;
+
   assert(0 <= n && 0 <= m);
   if (n == 0) {
-    assert(m == 0);    
+    assert(m == 0);
     assert(!directed || !connected);
     return {};
   } else if (n == 1) {
@@ -28,7 +38,7 @@ std::vector<std::pair<int, int>> random_graph(int n, int m, int s = -1) {
   }
 
   if (connected) assert(n - 1 <= m);
-  if (!connected || !directed) assert(s == -1);
+  if (!connected || !directed) assert(start == -1);
 
   long long max_m = directed ? (no_self_loops ? 1LL * n * (n - 1) : 1LL * n * n)
                              : (no_self_loops ? 1LL * n * (n - 1) / 2
@@ -41,10 +51,10 @@ std::vector<std::pair<int, int>> random_graph(int n, int m, int s = -1) {
 
   if (connected) {
     if (directed) {
-      assert(0 <= s && s < n);
-      auto tree = random_rooted_tree<false>(n, s);
+      assert(0 <= start && start < n);
+      auto tree = random_rooted_tree<false>(n, start);
       for (int i = 0; i < n; i++) {
-        if (i == s) continue;
+        if (i == start) continue;
         edges.emplace_back(tree[i], i);
       }
     } else {
