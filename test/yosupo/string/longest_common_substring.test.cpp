@@ -21,7 +21,7 @@ int main() {
   int max = 0, idx = -1;
   for (int i = 0; i < n + m + 1; i++) {
     if ((sa[i] < n) == (sa[i + 1] < n)) continue;
-    if (max < lcp[i]) {
+    if (lcp[i] > max) {
       max = lcp[i];
       idx = i;
     }
