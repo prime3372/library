@@ -15,7 +15,7 @@ int main() {
   int n, m;
   cin >> n >> m;
   kruscal<int> g(n);
-  std::vector<int> weight;
+  vector<int> weight;
   for (int i = 0; i < m; i++) {
     int s, t, w;
     cin >> s >> t >> w;
