@@ -25,7 +25,8 @@ int main() {
   }
   diam.build();
   ll dist = diam.dist;
-  auto v = diam.vertices, e = diam.edges;
+  auto& v = diam.vertices;
+  auto& e = diam.edges;
   cout << dist << " " << v.size() << "\n";
   for (int i = 0; i < int(v.size()); i++) {
     cout << v[i] << " ";
