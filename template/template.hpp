@@ -38,6 +38,8 @@ using mint = cp::modint998244353;
 #endif
 
 #define CHOOSE4(a, b, c, d, ...) d
+#define CHOOSE6(a, b, c, d, e, f, ...) f
+
 #define rep1(n) for (ll _ = 0; _ < ll(n); _++)
 #define rep2(i, n) for (ll i = 0; i < ll(n); i++)
 #define rep3(i, a, b) for (ll i = (a); i < ll(b); i++)
@@ -47,10 +49,14 @@ using mint = cp::modint998244353;
 #define rrep3(i, a, b) for (ll i = ll(b) - 1; i >= ll(a); i--)
 #define rrep(...) CHOOSE4(__VA_ARGS__, rep3, rep2)(__VA_ARGS__)
 
-#define REP(i, a, b) for (ll i = (a); i <= ll(b); i++)
-#define RREP(i, a, b) for (ll i = ll(b) - 1; i >= ll(a); i--)
+#define REP2(i, n) for (ll i = 0; i <= ll(n); i++)
+#define REP3(i, a, b) for (ll i = (a); i <= ll(b); i++)
+#define REP(...) CHOOSE4(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)
 
-#define CHOOSE6(a, b, c, d, e, f, ...) f
+#define RREP2(i, n) for (ll i = (n); i >= 0; i--)
+#define RREP3(i, a, b) for (ll i = (b); i >= ll(a); i--)
+#define RREP(...) CHOOSE4(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)
+
 #define fore2(x, a) for (auto&& x : a)
 #define fore3(x, y, a) for (auto&& [x, y] : a)
 #define fore4(x, y, z, a) for (auto&& [x, y, z] : a)
