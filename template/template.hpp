@@ -43,7 +43,10 @@ using mint = cp::modint998244353;
 #define rep3(i, a, b) for (ll i = (a); i < ll(b); i++)
 #define rep(...) CHOOSE4(__VA_ARGS__, rep3, rep2, rep1)(__VA_ARGS__)
 
-#define rrep(i, a, b) for (ll i = ll(b) - 1; i >= ll(a); i--)
+#define rrep2(i, n) for (ll i = ll(n) - 1; i >= 0; i--)
+#define rrep3(i, a, b) for (ll i = ll(b) - 1; i >= ll(a); i--)
+#define rrep(...) CHOOSE4(__VA_ARGS__, rep3, rep2)(__VA_ARGS__)
+
 #define REP(i, a, b) for (ll i = (a); i <= ll(b); i++)
 #define RREP(i, a, b) for (ll i = ll(b) - 1; i >= ll(a); i--)
 
