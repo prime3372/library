@@ -80,8 +80,7 @@ template <int char_size, char offset = 'a'> class trie {
     int par, end, mid;
     std::array<int, char_size> to;
 
-    node() : node(-1) {}
-    explicit node(int p) : par(p), end(0), mid(0) { to.fill(-1); }
+    node(int p) : par(p), end(0), mid(0) { to.fill(-1); }
   };
 
   std::vector<node> nodes;
