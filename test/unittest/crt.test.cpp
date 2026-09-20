@@ -12,8 +12,8 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-void test(int n) {
-  constexpr int max_m = 42; // lcm(1, 2, ..., 42) < 2**63
+void random_mod(int n) {
+  constexpr int max_m = 42;  // lcm(1, 2, ..., 42) < 2**63
   vector<ll> r(n), m(n);
   for (int i = 0; i < n; i++) {
     m[i] = uniform(1, max_m);
@@ -31,14 +31,29 @@ void test(int n) {
     assert((ans_m && i % ans_m == ans_r) == satisfy);
   }
 }
-void small() { test(uniform(1, 10)); }
-void large() { test(uniform(1, 100000)); }
+void small() { random_mod(uniform(1, 10)); }
+void large() { random_mod(uniform(1, 100000)); }
+
+void has_answer() {
+  ll x = uniform(1LL, ll(1e18));
+  auto divs = enumerate_divisors(x);
+  int n = int(divs.size());
+  shuffle(divs);
+  vector<ll> r(n), m(n);
+  for (int i = 0; i < n; i++) {
+    m[i] = divs[i];
+    r[i] = divs[0] % divs[i];
+  }
+  auto [ans_r, ans_m] = crt(r, m);
+  assert(ans_r == divs[0] % x && ans_m == x);
+}
 
 void empty() { assert(crt({}, {}) == make_pair(0LL, 1LL)); }
 
 int main() {
   for (int i = 0; i < 100000; i++) small();
   for (int i = 0; i < 10; i++) large();
+  for (int i = 0; i < 10; i++) has_answer();
   empty();
   cout << "Hello World\n";
 }
