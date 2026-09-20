@@ -32,7 +32,7 @@
   "test/aoj/GRL/3_B_bridges.test.cpp": "2026-09-04 03:07:09 +0900",
   "test/aoj/GRL/3_C_strongly_connected_components.test.cpp": "2026-09-04 03:07:09 +0900",
   "test/aoj/GRL/4_A_cycle_detection_for_a_directed_graph.test.cpp": "2026-09-16 00:23:34 +0900",
-  "test/aoj/GRL/5_A_diameter_of_a_tree.test.cpp": "2026-09-04 03:07:09 +0900",
+  "test/aoj/GRL/5_A_diameter_of_a_tree.test.cpp": "2026-09-20 18:46:07 +0900",
   "test/aoj/GRL/5_B_height_of_a_tree.test.cpp": "2026-09-04 03:07:09 +0900",
   "test/aoj/GRL/5_C_lowest_common_ancestor.test.cpp": "2026-09-18 19:44:39 +0900",
   "test/aoj/GRL/5_D_range_query_on_a_tree.test.cpp": "2026-09-11 16:51:24 +0900",
