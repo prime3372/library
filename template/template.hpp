@@ -37,11 +37,11 @@ using mint = cp::modint998244353;
 #define local 0
 #endif
 
-#define CHOOSE5(a, b, c, d, e, ...) e
+#define CHOOSE4(a, b, c, d, ...) d
 #define rep1(n) for (ll _ = 0; _ < ll(n); _++)
 #define rep2(i, n) for (ll i = 0; i < ll(n); i++)
 #define rep3(i, a, b) for (ll i = (a); i < ll(b); i++)
-#define rep(...) CHOOSE5(__VA_ARGS__, rep4, rep3, rep2, rep1)(__VA_ARGS__)
+#define rep(...) CHOOSE4(__VA_ARGS__, rep3, rep2, rep1)(__VA_ARGS__)
 
 #define rrep(i, a, b) for (ll i = ll(b) - 1; i >= ll(a); i--)
 #define REP(i, a, b) for (ll i = (a); i <= ll(b); i++)
