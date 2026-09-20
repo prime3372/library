@@ -14,18 +14,18 @@ int main() {
   int n, m;
   cin >> n >> m;
   cycle_detection<true> cycle(n);
-  vector<vector<int>> g(n);
+  vector<vector<int>> adj(n);
   vector<pair<int, int>> edges(m);
   for (int i = 0; i < m; i++) {
     int s, t;
     cin >> s >> t;
     cycle.add_edge(s, t);
-    g[s].push_back(t);
+    adj[s].push_back(t);
     edges[i] = {s, t};
   }
   bool ans = cycle.detect();
   if (!ans) {
-    assert(!topological_sort(g).empty());
+    assert(!topological_sort(adj).empty());
     cout << ans << "\n";
     return 0;
   }
