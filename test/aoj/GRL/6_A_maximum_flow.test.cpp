@@ -14,12 +14,12 @@ int main() {
   int n, m;
   cin >> n >> m;
   max_flow<int> mf(n);
-  vector<tuple<int, int, int>> edges;
+  vector<array<int, 3>> edges(m);
   for (int i = 0; i < m; i++) {
     int u, v, c;
     cin >> u >> v >> c;
     mf.add_edge(u, v, c);
-    edges.emplace_back(u, v, c);
+    edges[i] = {u, v, c};
   }
   int ans = mf.flow(0, n - 1);
   auto mf_edges = mf.edges();
