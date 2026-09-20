@@ -13,9 +13,9 @@ int main() {
   string t, p;
   cin >> t >> p;
   int n = int(t.size()), m = int(p.size());
-  rolling_hash rlh(t);
+  rolling_hash roll(t);
   hash61 h = rolling_hash::to_hash(p);
   for (int i = 0; i <= n - m; i++) {
-    if (rlh.get(i, i + m) == h) cout << i << "\n";
+    if (roll.get(i, i + m) == h) cout << i << "\n";
   }
 }
