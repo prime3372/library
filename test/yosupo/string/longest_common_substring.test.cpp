@@ -14,8 +14,8 @@ int main() {
   string s, t;
   cin >> s >> t;
   int n = int(s.size()), m = int(t.size());
-  s.push_back('$');
-  s += t;
+  s.push_back(-1);
+  s.append(t);
   auto sa = suffix_array(s);
   auto lcp = lcp_array(s, sa);
   int max = 0, idx = -1;
