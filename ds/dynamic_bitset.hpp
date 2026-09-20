@@ -33,14 +33,15 @@ class dynamic_bitset {
       return *this;
     }
     ref& operator=(const ref& other) { return *this = bool(other); }
+
+   private:
+    friend dynamic_bitset;
+    ull* d;
+    int pos;
     ref(dynamic_bitset& b, int i) {
       d = b.a.data() + i / w;
       pos = i % w;
     }
-
-   private:
-    ull* d;
-    int pos;
   };
 
   ref operator[](int i) {

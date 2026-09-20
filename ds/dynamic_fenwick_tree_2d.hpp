@@ -34,11 +34,12 @@ template <class T> class dynamic_fenwick_tree_2d {
       assert(j < ptr->m);
       return ptr->sum(i, j, i + 1, j + 1);
     }
-    ref(const dynamic_fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), i(_i) {}
 
    private:
+    friend dynamic_fenwick_tree_2d;
     const dynamic_fenwick_tree_2d* ptr;
     int i;
+    ref(const dynamic_fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), i(_i) {}
   };
 
   ref operator[](int i) const {

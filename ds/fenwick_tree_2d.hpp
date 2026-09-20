@@ -30,11 +30,12 @@ template <class T> class fenwick_tree_2d {
       assert(0 <= j && j < ptr->m);
       return ptr->sum(i, j, i + 1, j + 1);
     }
-    ref(const fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), i(_i) {}
 
    private:
+    friend fenwick_tree_2d;
     const fenwick_tree_2d* ptr;
     int i;
+    ref(const fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), i(_i) {}
   };
 
   ref operator[](int i) const {
