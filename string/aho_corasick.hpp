@@ -27,7 +27,7 @@ template <int char_size, char offset = 'a'> class aho_corasick {
     return v;
   }
 
-  void build() {
+  void init() {
     simple_queue<int> que;
     for (int i = 0; i < char_size; i++) {
       if (nodes[0].to[i] != -1) {
@@ -49,6 +49,7 @@ template <int char_size, char offset = 'a'> class aho_corasick {
         }
       }
     }
+    initialized = false;
   }
 
   const std::array<int, char_size>& operator[](int v) const {
@@ -61,6 +62,7 @@ template <int char_size, char offset = 'a'> class aho_corasick {
   }
 
   int link(int v) const {
+    assert(initialized);
     assert(0 <= v && v < size());
     return nodes[v].link;
   }
@@ -77,6 +79,7 @@ template <int char_size, char offset = 'a'> class aho_corasick {
   };
 
   std::vector<node> nodes;
+  bool initialized = false;
 };
 
 }  // namespace cp

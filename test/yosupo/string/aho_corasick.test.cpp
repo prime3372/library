@@ -20,7 +20,7 @@ int main() {
     cin >> s;
     v[i] = aho.add(s);
   }
-  aho.build();
+  aho.init();
   cout << aho.size() << "\n";
   for (int i = 1; i < aho.size(); i++) {
     cout << aho.parent(i) << " " << aho.link(i) << "\n";
