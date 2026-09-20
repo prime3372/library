@@ -8,11 +8,27 @@
 
 template <int char_size, char offset = 'a'> class trie {
  public:
+  class node {
+   public:
+    int operator[](int i) {
+      assert(0 <= i && i < char_size);
+      return to[i];
+    }
+    int count() { return cnt; }
+    int subtree_sum() { return sub; }
+
+   private:
+    friend trie;
+    int par, cnt, sub;
+    std::array<int, char_size> to;
+    node(int p) : par(p), cnt(0), sub(0) { to.fill(-1); }
+  };
+
   trie() { nodes.push_back(node(-1)); }
 
   int insert(const std::string& s) {
     int v = 0;
-    nodes[v].mid++;
+    nodes[v].sub++;
     for (char c : s) {
       int i = index(c);
       if (nodes[v].to[i] == -1) {
@@ -20,9 +36,9 @@ template <int char_size, char offset = 'a'> class trie {
         nodes.push_back(node(v));
       }
       v = nodes[v].to[i];
-      nodes[v].mid++;
+      nodes[v].sub++;
     }
-    nodes[v].end++;
+    nodes[v].cnt++;
     return v;
   }
 
@@ -31,58 +47,33 @@ template <int char_size, char offset = 'a'> class trie {
   bool erase(const std::string& s) {
     if (count(s) == 0) return false;
     int v = 0;
-    nodes[v].mid--;
+    nodes[v].sub--;
     for (char c : s) {
       int i = index(c);
       int nv = nodes[v].to[i];
-      nodes[nv].mid--;
-      if (nodes[nv].mid == 0) {
+      nodes[nv].sub--;
+      if (nodes[nv].sub == 0) {
         nodes[v].to[i] = -1;
         nodes[nv].par = -1;
       }
       v = nv;
     }
-    nodes[v].end--;
+    nodes[v].cnt--;
     return true;
   }
 
-  int count(const std::string& s) const {
-    int v = search(s);
-    return v == -1 ? 0 : nodes[v].end;
-  }
-  int count(int v) const {
-    assert(0 <= v && v < int(nodes.size()));
-    return nodes[v].end;
-  }
-
   const std::array<int, char_size>& operator[](int v) const {
-    assert(0 <= v && v < int(nodes.size()));
+    assert(0 <= v && v < size());
     return nodes[v].to;
   }
   int parent(int v) const {
-    assert(0 <= v && v < int(nodes.size()));
+    assert(0 <= v && v < size());
     return nodes[v].par;
-  }
-
-  int search(const std::string& s, int v = 0) const {
-    assert(0 <= v && v < int(nodes.size()));
-    for (char c : s) {
-      v = nodes[v].to[index(c)];
-      if (v == -1) return -1;
-    }
-    return v;
   }
 
   int size() const { return int(nodes.size()); }
 
  private:
-  struct node {
-    int par, end, mid;
-    std::array<int, char_size> to;
-
-    node(int p) : par(p), end(0), mid(0) { to.fill(-1); }
-  };
-
   std::vector<node> nodes;
 
   int index(char c) const {
