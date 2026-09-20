@@ -14,7 +14,7 @@ std::vector<int> random_perm(int n) {
   assert(0 <= n);
   std::vector<int> p(n);
   std::iota(p.begin(), p.end(), 0);
-  std::shuffle(p.begin(), p.end(), rng);
+  shuffle(p);
   return p;
 }
 

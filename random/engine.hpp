@@ -41,4 +41,8 @@ double uniform01() {
   return dist(rng);
 }
 
+template <class Container> void shuffle(Container& a) {
+  std::shuffle(a.begin(), a.end(), rng);
+}
+
 }  // namespace cp
