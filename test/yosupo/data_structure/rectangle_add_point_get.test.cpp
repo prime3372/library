@@ -45,7 +45,7 @@ int main() {
       auto [l, d, r, u, w] = query[i];
       fw.imos_add(cx(l), cy(d), cx(r), cy(u), w);
     } else {
-      auto& [x, y, a, b, c] = query[i];
+      auto [x, y, a, b, c] = query[i];
       cout << fw.imos_get(cx(x), cy(y)) << "\n";
     }
   }
