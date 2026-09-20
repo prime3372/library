@@ -41,7 +41,7 @@ class rolling_hash {
   }
 
  private:
-  static hash61 basis;
+  inline static hash61 basis = hash61::get_basis();
   int n;
   std::vector<hash61> hs, pw;
 
@@ -49,7 +49,5 @@ class rolling_hash {
     return safe_hash<T>()(c);
   }
 };
-
-hash61 rolling_hash::basis = hash61::get_basis();
 
 }  // namespace cp
