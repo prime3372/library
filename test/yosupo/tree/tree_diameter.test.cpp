@@ -31,6 +31,7 @@ int main() {
   for (int vi : v) cout << vi << " ";  
   assert(e.size() == v.size() - 1);
   for (int i = 0; i < int(v.size()) - 1; i++) {
+    assert(0 <= e[i] && e[i] < n - 1);
     auto p1 = make_pair(v[i], v[i + 1]);
     auto p2 = make_pair(v[i + 1], v[i]);
     assert(edges[e[i]] == p1 || edges[e[i]] == p2);
