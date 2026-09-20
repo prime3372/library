@@ -107,7 +107,9 @@ class max_flow {
       // If sink t is unreachable, no more augmenting paths exist.
       if (level[t] == -1) break;
       std::fill(iter.begin(), iter.end(), 0);
-      flow += dfs(dfs, t, flow_limit - flow);
+      Cap f = dfs(dfs, t, flow_limit - flow);
+      if (!f) break;
+      flow += f;
     }
     return flow;
   }
