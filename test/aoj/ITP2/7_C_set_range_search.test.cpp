@@ -33,9 +33,7 @@ int main() {
       int l, r;
       cin >> l >> r;
       int lb = s.lower_bound(l), ub = s.upper_bound(r);
-      for (int i = lb; i < ub; i++) {
-        cout << s[i] << "\n";
-      }
+      for (int i = lb; i < ub; i++) cout << s[i] << "\n";      
     }
   }
 }
