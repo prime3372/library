@@ -55,7 +55,7 @@ class strongly_connected_components {
     }
     for (int& x : id) x = group_num - 1 - x;
 
-    groups.resize(group_num);
+    groups.assign(group_num, {});
     for (int i = 0; i < n; i++) groups[id[i]].push_back(i);
 
     return *this;
