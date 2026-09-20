@@ -25,7 +25,7 @@ int main() {
       int x;
       cin >> x;
       cout << s.count(x) << "\n";
-    } else if (t == 2) {
+    } else {
       int x;
       cin >> x;
       s.erase(x);
