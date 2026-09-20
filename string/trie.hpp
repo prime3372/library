@@ -62,9 +62,9 @@ template <int char_size, char offset = 'a'> class trie {
     return true;
   }
 
-  const std::array<int, char_size>& operator[](int v) const {
+  const node& operator[](int v) const {
     assert(0 <= v && v < size());
-    return nodes[v].to;
+    return nodes[v];
   }
   int parent(int v) const {
     assert(0 <= v && v < size());
