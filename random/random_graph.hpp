@@ -19,7 +19,7 @@ struct random_graph_config {
   bool no_multiple_edges = false;
   bool connected = false;
   bool one_indexed = true;
-  int start = -1;
+  int start = 0;
 };
 
 std::vector<std::pair<int, int>> random_graph(int n, int m,
@@ -38,7 +38,6 @@ std::vector<std::pair<int, int>> random_graph(int n, int m,
   }
 
   if (connected) assert(n - 1 <= m);
-  if (!connected || !directed) assert(start == -1);
 
   long long max_m = directed ? (no_self_loops ? 1LL * n * (n - 1) : 1LL * n * n)
                              : (no_self_loops ? 1LL * n * (n - 1) / 2
