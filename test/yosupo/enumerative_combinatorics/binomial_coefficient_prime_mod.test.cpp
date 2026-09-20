@@ -14,7 +14,7 @@ int main() {
   int t, m;
   cin >> t >> m;
   modint::set_mod(m);
-  binom_mod<modint> binom(int(1e7));
+  binom_mod<modint> binom(min(int(1e7), m - 1));
   while (t--) {
     int n, k;
     cin >> n >> k;

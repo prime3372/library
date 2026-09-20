@@ -13,11 +13,14 @@ template <class mint> requires(internal::is_modint_v<mint>)
 class binom_mod {
  public:
   binom_mod() : binom_mod(1) {}
-  explicit binom_mod(int _n) : max_n(_n) {
+  explicit binom_mod(int _n) : n(_n) {
     int m = mint::mod();
     assert(is_prime(m));
-    assert(0 <= max_n);
-    int n = (max_n == 0 ? 1 : std::min(max_n, m - 1));
+    assert(0 <= n && n < m);
+    if (n == 0) {
+      f[0] = finv[0] = 1;
+      return;
+    }
     minv.resize(n + 1);
     f.resize(n + 1);
     finv.resize(n + 1);
@@ -31,40 +34,40 @@ class binom_mod {
     }
   }
 
-  mint operator()(int n, int r) const {
-    assert(0 <= n && n <= max_n && n < mint::mod());
-    if (r < 0 || n < r) return 0;
-    return f[n] * finv[n - r] * finv[r];
+  mint operator()(int k, int r) const {
+    assert(0 <= k && k <= n);
+    if (r < 0 || k < r) return 0;
+    return f[k] * finv[k - r] * finv[r];
   }
 
-  mint multichoose(int n, int r) const {
-    if (n == 0) return r == 0;
-    return (*this)(n + r - 1, r);
+  mint multichoose(int k, int r) const {
+    if (k == 0) return r == 0;
+    return (*this)(k + r - 1, r);
   }
 
-  mint perm(int n, int r) const {
-    assert(0 <= n && n <= max_n && n < mint::mod());
-    if (r < 0 || n < r) return 0;
-    return f[n] * finv[n - r];
+  mint perm(int k, int r) const {
+    assert(0 <= k && k <= n);
+    if (r < 0 || k < r) return 0;
+    return f[k] * finv[k - r];
   }
 
-  mint inv(int n) const {
-    assert(0 <= n && n <= max_n && n % mint::mod() != 0);
-    return minv[n % mint::mod()];
+  mint inv(int k) const {
+    assert(0 < k && k <= n);
+    return minv[k];
   }
 
-  mint fact(int n) const {
-    assert(0 <= n && n <= max_n);
-    return n < mint::mod() ? f[n] : 0;
+  mint fact(int k) const {
+    assert(0 <= k && k <= n);
+    return f[k];
   }
 
-  mint ifact(int n) const {
-    assert(0 <= n && n <= max_n && n < mint::mod());
-    return finv[n];
+  mint ifact(int k) const {
+    assert(0 <= k && k <= n);
+    return finv[k];
   }
 
  private:
-  int max_n;
+  int n;
   std::vector<mint> minv, f, finv;
 };
 
