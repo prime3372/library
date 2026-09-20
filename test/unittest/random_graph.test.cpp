@@ -74,6 +74,8 @@ void test(int n, int m, random_graph_config config) {
 }
 
 void run_cases(random_graph_config config) {
+  auto& [directed, no_self_loops, no_multiple_edges, connected, one_indexed,
+         start] = config;
   vector<pair<int, int>> cases = {
       {0, 0},           // empty
       {1, 0},           // point
@@ -85,14 +87,12 @@ void run_cases(random_graph_config config) {
   };
 
   for (auto [n, m] : cases) {
-    if (config.connected && config.directed && n == 0) continue;
-    ll max_m = config.directed
-                   ? (config.no_self_loops ? 1LL * n * (n - 1) : 1LL * n * n)
-                   : (config.no_self_loops ? 1LL * n * (n - 1) / 2
-                                           : 1LL * n * (n + 1) / 2);
+    if (connected && directed && n == 0) continue;
+    ll max_m = directed ? (no_self_loops ? 1LL * n * (n - 1) : 1LL * n * n)
+                        : (no_self_loops ? 1LL * n * (n - 1) / 2
+                                         : 1LL * n * (n + 1) / 2);
     if (m > max_m) m = int(max_m);
-    config.start =
-        (config.connected && config.directed) ? uniform(0, n - 1) : -1;
+    start = (connected && directed) ? uniform(0, n - 1) : -1;
     test(n, m, config);
   }
 }
@@ -103,8 +103,7 @@ void run_all_combinations() {
     bool no_self_loops = (mask >> 1) & 1;
     bool no_multiple_edges = (mask >> 2) & 1;
     bool connected = (mask >> 3) & 1;
-    run_cases(random_graph_config{directed, no_self_loops, no_multiple_edges,
-                                  connected});
+    run_cases({directed, no_self_loops, no_multiple_edges, connected});
   }
 }
 
