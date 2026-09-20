@@ -49,7 +49,7 @@ template <int char_size, char offset = 'a'> class aho_corasick {
         }
       }
     }
-    initialized = false;
+    initialized = true;
   }
 
   const std::array<int, char_size>& operator[](int v) const {
