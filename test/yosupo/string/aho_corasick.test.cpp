@@ -23,7 +23,7 @@ int main() {
   aho.init();
   cout << aho.size() << "\n";
   for (int i = 1; i < aho.size(); i++) {
-    cout << aho.parent(i) << " " << aho.link(i) << "\n";
+    cout << aho[i].parent() << " " << aho[i].link() << "\n";
   }
   for (int vi : v) cout << vi << " ";
 }
