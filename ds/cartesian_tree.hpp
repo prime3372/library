@@ -25,37 +25,31 @@ class cartesian_tree {
   void build(const std::vector<T>& a, Compare compare = Compare()) {
     if (a.empty()) return;
     int n = int(a.size());
+
     left.assign(n, -1);
     right.assign(n, -1);
-    parent.resize(n);
     size.resize(n);
     std::vector<int> st;
     for (int i = 0; i < n; i++) {
       int k = -1;
       while (!st.empty() && compare(a[i], a[st.back()])) {
         k = st.back();
-        update(k);
         st.pop_back();
+        size[k] = 1;
+        if (left[k] != -1) size[k] += size[left[k]];
+        if (right[k] != -1) size[k] += size[right[k]];
       }
       if (!st.empty()) right[st.back()] = i;
       left[i] = k;
       st.push_back(i);
     }
-    for (int i = int(st.size()) - 1; i >= 0; i--) update(st[i]);
     root = st[0];
-    parent[root] = -1;
-  }
 
- private:
-  void update(int k) {
-    size[k] = 1;
-    if (left[k] != -1) {
-      parent[left[k]] = k;
-      size[k] += size[left[k]];
-    }
-    if (right[k] != -1) {
-      parent[right[k]] = k;
-      size[k] += size[right[k]];
+    parent.resize(n);
+    parent[root] = -1;
+    for (int i = 0; i < n; i++) {
+      if (left[i] != -1) parent[left[i]] = i;
+      if (right[i] != -1) parent[right[i]] = i;
     }
   }
 };
