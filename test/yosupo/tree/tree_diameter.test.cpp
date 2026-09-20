@@ -28,9 +28,7 @@ int main() {
   auto& v = diam.vertices;
   auto& e = diam.edges;
   cout << dist << " " << v.size() << "\n";
-  for (int i = 0; i < int(v.size()); i++) {
-    cout << v[i] << " ";
-  }
+  for (int vi : v) cout << vi << " ";  
   assert(e.size() == v.size() - 1);
   for (int i = 0; i < int(v.size()) - 1; i++) {
     auto p1 = make_pair(v[i], v[i + 1]);
