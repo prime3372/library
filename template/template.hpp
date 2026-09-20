@@ -37,11 +37,22 @@ using mint = cp::modint998244353;
 #define local 0
 #endif
 
-#define rep(i, a, b) for (ll i = (a); i < ll(b); i++)
-#define REP(i, a, b) for (ll i = (a); i <= ll(b); i++)
+#define CHOOSE5(a, b, c, d, e, ...) e
+#define rep1(n) for (ll _ = 0; _ < ll(n); _++)
+#define rep2(i, n) for (ll i = 0; i < ll(n); i++)
+#define rep3(i, a, b) for (ll i = (a); i < ll(b); i++)
+#define rep(...) CHOOSE5(__VA_ARGS__, rep4, rep3, rep2, rep1)(__VA_ARGS__)
+
 #define rrep(i, a, b) for (ll i = ll(b) - 1; i >= ll(a); i--)
-#define RREP(i, a, b) for (ll i = (b); i >= ll(a); i--)
-#define fore(x, a) for (auto&& x : a)
+#define REP(i, a, b) for (ll i = (a); i <= ll(b); i++)
+#define RREP(i, a, b) for (ll i = ll(b) - 1; i >= ll(a); i--)
+
+#define CHOOSE6(a, b, c, d, e, f, ...) f
+#define fore2(x, a) for (auto&& x : a)
+#define fore3(x, y, a) for (auto&& [x, y] : a)
+#define fore4(x, y, z, a) for (auto&& [x, y, z] : a)
+#define fore5(x, y, z, w, a) for (auto&& [x, y, z, w] : a)
+#define fore(...) CHOOSE6(__VA_ARGS__, fore5, fore4, fore3, fore2)(__VA_ARGS__)
 
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
