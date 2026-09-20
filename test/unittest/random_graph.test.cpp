@@ -1,98 +1,118 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
 
+#include "ds/simple_queue.hpp"
+#include "ds/union_find.hpp"
 #include "random/engine.hpp"
 #include "random/random_graph.hpp"
-#include "ds/union_find.hpp"
-#include <cassert>
+#include <algorithm>
 #include <iostream>
-#include <utility>
 #include <vector>
+#include <cassert>
 
 using namespace std;
 using namespace cp;
+using ll = long long;
 
-void complete() {
-  int n = uniform(1, 100);
-  int m = n * (n - 1) / 2;
-  auto edges = random_graph<false, true, true, false>(n, n * (n - 1) / 2);
-  assert(int(edges.size()) == m);
-  vector<vector<bool>> exist(n, vector<bool>(n));
-  for (auto [u, v] : edges) {
-    assert(1 <= u && u <= n);
-    assert(1 <= v && v <= n);
-    if (u > v) swap(u, v);
-    u--, v--;
-    assert(!exist[u][v]);
-    exist[u][v] = true;
-  }
-}
+template <bool directed, bool no_self_loops, bool no_multiple_edges,
+          bool connected>
+void test(int n, int m, int s = -1) {
+  auto edges =
+      random_graph<directed, no_self_loops, no_multiple_edges, connected>(n, m,
+                                                                          s);
 
-void undirected_simple_connected() {
-  int n = uniform(1, 100);
-  int m = uniform(n - 1, n * (n - 1) / 2);
-  auto edges = random_graph<false, true, true, true>(n, m);
   assert(int(edges.size()) == m);
-  for (auto& [u, v] : edges) {
-    assert(1 <= u && u <= n);
-    assert(1 <= v && v <= n);
-    assert(u != v);
-    if (u > v) swap(u, v);
-  }
-  sort(edges.begin(), edges.end());
-  for (int i = 0; i < int(edges.size()) - 1; i++) {
-    assert(edges[i] != edges[i + 1]);
-  }
+
   union_find uf(n);
-  for (auto [u, v] : edges) uf.unite(u - 1, v - 1);
-  assert(uf.groups().size() == 1);
-}
-
-void directed_simple() {
-  int n = uniform(1, 100);
-  int m = uniform(n - 1, n * (n - 1) / 2);
-  auto edges = random_graph<false, true, true, false>(n, m);
-  assert(int(edges.size()) == m);
-  for (auto& [u, v] : edges) {
-    assert(1 <= u && u <= n);
-    assert(1 <= v && v <= n);
-    assert(u != v);
-  }
-  sort(edges.begin(), edges.end());
-  for (int i = 0; i < int(edges.size()) - 1; i++) {
-    assert(edges[i] != edges[i + 1]);
-  }
-}
-
-void reachable_from_s() {
-  int n = uniform(1, 100);
-  int m = uniform(n - 1, 100);
-  int s = uniform(0, n - 1);
-  auto edges = random_graph<true, false, false, true>(n, m, s);
-  assert(int(edges.size()) == m);
   vector<vector<int>> g(n);
+  vector<pair<int, int>> check_edges;
+  check_edges.reserve(m);
+
   for (auto [u, v] : edges) {
     assert(1 <= u && u <= n);
     assert(1 <= v && v <= n);
     u--, v--;
+
+    if (no_self_loops) assert(u != v);
+
+    int cu = u, cv = v;
+    if (!directed && cu > cv) swap(cu, cv);
+    check_edges.emplace_back(cu, cv);
+
+    uf.unite(u, v);
     g[u].push_back(v);
+    if (!directed) g[v].push_back(u);
   }
-  vector<bool> reached(n);
-  auto dfs = [&](auto self, int v) -> void {
-    assert(0 <= v && v < n);
-    reached[v] = true;
-    for (auto nv : g[v]) {
-      if (!reached[nv]) self(self, nv);
+
+  if (no_multiple_edges) {
+    sort(check_edges.begin(), check_edges.end());
+    int count_distinct = int(unique(check_edges.begin(), check_edges.end()) -
+                             check_edges.begin());
+    assert(count_distinct == m);
+  }
+
+  if (connected && n > 0) {
+    if (!directed) {
+      assert(uf.groups().size() == 1);
+    } else {
+      assert(s != -1);
+      vector<bool> reached(n, false);
+      simple_queue<int> que;
+      que.push(s);
+      reached[s] = true;
+      while (!que.empty()) {
+        int v = que.front();
+        que.pop();
+        for (int nv : g[v]) {
+          if (!reached[nv]) {
+            reached[nv] = true;
+            que.push(nv);
+          }
+        }
+      }
+      for (int i = 0; i < n; i++) assert(reached[i]);
     }
+  }
+}
+
+template <bool directed, bool no_self_loops, bool no_multiple_edges,
+          bool connected>
+void run_cases() {
+  vector<pair<int, int>> cases = {
+      {0, 0},           // empty
+      {1, 0},           // point
+      {10, 10},         // small-sparse
+      {10, 100},        // small-dense
+      {100, 10000},     // medium-dense
+      {1000, 1500},     // medium-sparse
+      {100000, 200000}  // large-sparse
   };
-  dfs(dfs, s);
-  for (int i = 0; i < n; i++) assert(reached[i]);
+
+  for (auto [n, m] : cases) {
+    if (connected && directed && n == 0) continue;
+    ll max_m = directed ? (no_self_loops ? 1LL * n * (n - 1) : 1LL * n * n)
+                        : (no_self_loops ? 1LL * n * (n - 1) / 2
+                                         : 1LL * n * (n + 1) / 2);
+    if (m > max_m) m = int(max_m);
+    int s = (connected && directed) ? uniform(0, n - 1) : -1;
+    test<directed, no_self_loops, no_multiple_edges, connected>(n, m, s);
+  }
+}
+
+template <int mask> void run_all_combinations() {
+  constexpr bool directed = (mask >> 3) & 1;
+  constexpr bool no_self_loops = (mask >> 2) & 1;
+  constexpr bool no_multiple_edges = (mask >> 1) & 1;
+  constexpr bool connected = mask & 1;
+
+  run_cases<directed, no_self_loops, no_multiple_edges, connected>();
+
+  if constexpr (mask) {
+    run_all_combinations<mask - 1>();
+  }
 }
 
 int main() {
-  for (int i = 0; i < 1000; i++) complete();
-  for (int i = 0; i < 1000; i++) undirected_simple_connected();
-  for (int i = 0; i < 1000; i++) directed_simple();
-  for (int i = 0; i < 1000; i++) reachable_from_s();
+  run_all_combinations<16>();
   cout << "Hello World\n";
 }

@@ -19,18 +19,27 @@ template <bool directed = false, bool no_self_loops = false,
 std::vector<std::pair<int, int>> random_graph(int n, int m, int s = -1) {
   assert(0 <= n && 0 <= m);
   if (n == 0) {
-    assert(m == 0);
+    assert(m == 0);    
+    assert(!directed || !connected);
     return {};
   } else if (n == 1) {
     if (m == 0) return {};
     assert(!no_self_loops);
   }
 
+  if (connected) assert(n - 1 <= m);
+  if (!connected || !directed) assert(s == -1);
+
+  long long max_m = directed ? (no_self_loops ? 1LL * n * (n - 1) : 1LL * n * n)
+                             : (no_self_loops ? 1LL * n * (n - 1) / 2
+                                              : 1LL * n * (n + 1) / 2);
+
+  if (no_multiple_edges) assert(m <= max_m);
+
   std::vector<std::pair<int, int>> edges;
   edges.reserve(m);
 
   if (connected) {
-    assert(n - 1 <= m);
     if (directed) {
       assert(0 <= s && s < n);
       auto tree = random_rooted_tree<false>(n, s);
@@ -46,46 +55,25 @@ std::vector<std::pair<int, int>> random_graph(int n, int m, int s = -1) {
       }
     }
   }
-  if (!connected || !directed) assert(s == -1);
 
   auto next_edge = [&]() {
-    int u, v;
-    if (directed) {
-      if (no_self_loops) {
-        u = uniform(0, n - 2);
-        v = uniform(u + 1, n - 1);
-        if (uniform_bool()) std::swap(u, v);
-      } else {
-        u = uniform(0, n - 1);
-        v = uniform(0, n - 1);
-      }
-    } else {
-      if (no_self_loops) {
-        u = uniform(0, n - 2);
-        v = uniform(u + 1, n - 1);
-      } else {
-        u = uniform(0, n - 1);
-        v = uniform(u, n - 1);
-      }
-    }
+    int u = uniform(0, n - 1);
+    int v = no_self_loops ? uniform(0, n - 2) : uniform(0, n - 1);
+    if (no_self_loops && u <= v) v++;
+    if (!directed && u > v) std::swap(u, v);
     return std::make_pair(u, v);
   };
 
   if (no_multiple_edges) {
-    long long max_m =
-        directed ? (no_self_loops ? 1LL * n * (n - 1) : 1LL * n * n)
-                 : (no_self_loops ? 1LL * n * (n - 1) / 2 : n * (n + 1) / 2);
-    assert(m <= max_m);
-
     hash_set<long long> used_edges;
     for (auto [u, v] : edges) used_edges.insert(1LL * u * n + v);
 
     if (m <= max_m / 2) {
       while (int(edges.size()) < m) {
         auto [u, v] = next_edge();
-        if (used_edges.count(1LL * u * n + v)) continue;
-        edges.emplace_back(u, v);
-        used_edges.insert(1LL * u * n + v);
+        if (used_edges.insert(1LL * u * n + v)) {
+          edges.emplace_back(u, v);
+        }
       }
     } else {
       std::vector<std::pair<int, int>> candidates;
@@ -98,9 +86,8 @@ std::vector<std::pair<int, int>> random_graph(int n, int m, int s = -1) {
       }
       shuffle(candidates);
       int needed = m - int(edges.size());
-      for (int i = 0; i < needed; i++) {
-        edges.emplace_back(candidates[i]);
-      }
+      edges.insert(edges.end(), candidates.begin(),
+                   candidates.begin() + needed);
     }
   } else {
     while (int(edges.size()) < m) {
@@ -108,14 +95,11 @@ std::vector<std::pair<int, int>> random_graph(int n, int m, int s = -1) {
     }
   }
 
-  if (!directed) {
-    for (auto& [u, v] : edges) {
-      if (uniform_bool()) std::swap(u, v);
-    }
+  for (auto& [u, v] : edges) {
+    if (!directed && uniform_bool()) std::swap(u, v);
+    if (one_indexed) u++, v++;
   }
-  if (one_indexed) {
-    for (auto& [u, v] : edges) u++, v++;
-  }
+
   return edges;
 }
 
