@@ -18,5 +18,15 @@ int main() {
     cin >> u >> v;
     bm.add_edge(u, v);
   }
-  cout << bm.max_matching() << "\n";
+  int ans = bm.max_matching();
+  auto edges = bm.edges();
+  assert(int(edges.size()) == ans);
+  vector<bool> chosen_x(x), chosen_y(y);
+  for (auto [u, v] : edges) {
+    assert(0 <= u && u < x);
+    assert(0 <= v && v < y);
+    assert(!chosen_x[u] && !chosen_y[v]);
+    chosen_x[u] = chosen_y[v] = true;
+  }
+  cout << ans << "\n";
 }
