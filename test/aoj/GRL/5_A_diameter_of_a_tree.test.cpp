@@ -28,7 +28,7 @@ int main() {
   int d = 0;
   auto& v = diam.vertices;
   auto& e = diam.edges;
-  assert(e.size() == v.size() - 1);
+  assert(v.size() == e.size() + 1);
   for (int i = 0; i < int(v.size()) - 1; i++) {
     assert(0 <= e[i] && e[i] < n - 1);
     d += weights[e[i]];
