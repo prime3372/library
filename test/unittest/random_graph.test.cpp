@@ -23,30 +23,21 @@ void test(int n, int m, random_graph_config config) {
 
   union_find uf(n);
   vector<vector<int>> g(n);
-  vector<pair<int, int>> check_edges;
-  check_edges.reserve(m);
 
-  for (auto [u, v] : edges) {
+  for (auto& [u, v] : edges) {
     assert(1 <= u && u <= n);
     assert(1 <= v && v <= n);
-    u--, v--;
-
     if (no_self_loops) assert(u != v);
-
-    int cu = u, cv = v;
-    if (!directed && cu > cv) swap(cu, cv);
-    check_edges.emplace_back(cu, cv);
-
+    if (!directed && u > v) std::swap(u, v);
+    u--, v--;
     uf.unite(u, v);
     g[u].push_back(v);
     if (!directed) g[v].push_back(u);
   }
 
   if (no_multiple_edges) {
-    sort(check_edges.begin(), check_edges.end());
-    ll count_distinct =
-        unique(check_edges.begin(), check_edges.end()) - check_edges.begin();
-    assert(count_distinct == m);
+    sort(edges.begin(), edges.end());
+    assert(unique(edges.begin(), edges.end()) == edges.end());
   }
 
   if (connected && n > 0) {
