@@ -17,10 +17,10 @@ int main() {
   int n = int(s.size()), m = int(t.size());
   vector<ll> a1(n), a2(n), a3(n), b1(m), b2(m), b3(m);
   for (int i = 0; i < n; i++) {
-    a1[i] = s[i] == '*' ? 0 : s[i] - 'a' + 1;
+    a1[i] = (s[i] == '*' ? 0 : s[i] - 'a' + 1);
   }
   for (int i = 0; i < m; i++) {
-    b1[i] = t[i] == '*' ? 0 : t[i] - 'a' + 1;
+    b1[i] = (t[i] == '*' ? 0 : t[i] - 'a' + 1);
   }
   for (int i = 0; i < n; i++) a2[i] = a1[i] * a1[i];
   for (int i = 0; i < n; i++) a3[i] = a2[i] * a1[i];
