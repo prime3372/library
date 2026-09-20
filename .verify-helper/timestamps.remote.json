@@ -49,7 +49,7 @@
   "test/unittest/dynamic_bitset.test.cpp": "2026-09-20 16:16:37 +0900",
   "test/unittest/enumerate_divisors.test.cpp": "2026-09-20 16:16:37 +0900",
   "test/unittest/golden_section_search.test.cpp": "2026-09-20 16:16:37 +0900",
-  "test/unittest/random_graph.test.cpp": "2026-09-20 17:32:46 +0900",
+  "test/unittest/random_graph.test.cpp": "2026-09-20 17:50:26 +0900",
   "test/unittest/random_tree.test.cpp": "2026-09-20 16:16:37 +0900",
   "test/yosupo/convolution/bitwise_and_convolution.test.cpp": "2026-09-20 00:50:59 +0900",
   "test/yosupo/convolution/bitwise_xor_convolution.test.cpp": "2026-09-20 00:53:53 +0900",
