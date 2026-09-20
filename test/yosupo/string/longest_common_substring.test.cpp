@@ -20,8 +20,8 @@ int main() {
   auto lcp = lcp_array(s, sa);
   int max = 0, idx = -1;
   for (int i = 0; i < n + m + 1; i++) {
-    bool different = (sa[i] < n) != (sa[i + 1] < n);
-    if (different && max < lcp[i]) {
+    if ((sa[i] < n) == (sa[i + 1] < n)) continue;
+    if (max < lcp[i]) {
       max = lcp[i];
       idx = i;
     }
