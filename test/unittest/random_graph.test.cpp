@@ -44,8 +44,8 @@ void test(int n, int m, random_graph_config config) {
 
   if (no_multiple_edges) {
     sort(check_edges.begin(), check_edges.end());
-    int count_distinct = int(unique(check_edges.begin(), check_edges.end()) -
-                             check_edges.begin());
+    ll count_distinct =
+        unique(check_edges.begin(), check_edges.end()) - check_edges.begin();
     assert(count_distinct == m);
   }
 
