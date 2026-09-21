@@ -25,7 +25,8 @@ int main() {
       cin >> t >> x;
       t++;
       s.restore(past[t]);
-      past[i] = s.set(r[t], x);
+      s.set(r[t], x);
+      past[i] = s.snapshot();
       l[i] = l[t];
       r[i] = r[t] + 1;
     } else {
