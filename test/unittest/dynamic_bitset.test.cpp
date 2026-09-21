@@ -24,11 +24,11 @@ template <int k> void test(int q) {
       bs1.flip();
       bs2.flip();
     } else if (t == 2) {
-      bs1 ^= bs1 >> x;
-      bs2 ^= bs2 >> x;
+      bs1 ^= (bs1 >> x) | bs1;
+      bs2 ^= (bs2 >> x) | bs2;
     } else if (t == 3) {
-      bs1 ^= bs1 << x;
-      bs2 ^= bs2 << x;
+      bs1 ^= (bs1 << x) & bs1;
+      bs2 ^= (bs2 << x) & bs2;
     }
     for (int i = 0; i < k; i++) assert(bs1[i] == bs2[i]);
     assert(bs1.count() == int(bs2.count()));
