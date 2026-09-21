@@ -14,9 +14,8 @@ class low_link {
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
     assert(0 <= v && v < n);
-    g[u].push_back(edge{v, m});
-    g[v].push_back(edge{u, m});
-    m++;
+    g[u].push_back(v);
+    g[v].push_back(u);
   }
 
   std::vector<int> low, ord;
@@ -28,16 +27,16 @@ class low_link {
     auto dfs = [&](auto self, int v, int pv) -> void {
       low[v] = ord[v] = now_ord++;
       bool multiple = false;
-      for (auto& e : g[v]) {
-        if (e.to == pv && !multiple) {
+      for (int nv : g[v]) {
+        if (nv == pv && !multiple) {
           multiple = true;
           continue;
         }
-        if (ord[e.to] == -1) {
-          self(self, e.to, v);
-          low[v] = std::min(low[v], low[e.to]);
+        if (ord[nv] == -1) {
+          self(self, nv, v);
+          low[v] = std::min(low[v], low[nv]);
         } else {
-          low[v] = std::min(low[v], ord[e.to]);
+          low[v] = std::min(low[v], ord[nv]);
         }
       }
     };
@@ -48,12 +47,8 @@ class low_link {
   }
 
  protected:
-  friend class two_edge_connected_components;
-  int n, m = 0;
-  struct edge {
-    int to, id;
-  };
-  std::vector<std::vector<edge>> g;
+  int n;
+  std::vector<std::vector<int>> g;
 };
 
 }  // namespace cp

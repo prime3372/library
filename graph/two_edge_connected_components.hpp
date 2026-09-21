@@ -10,11 +10,14 @@ namespace cp {
 class two_edge_connected_components {
  public:
   two_edge_connected_components() : n(0) {}
-  explicit two_edge_connected_components(int _n) : id(_n), n(_n), link(_n) {}
+  explicit two_edge_connected_components(int _n)
+      : id(_n), n(_n), g(_n), link(_n) {}
 
   void add_edge(int a, int b) {
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
+    g[a].push_back(b);
+    g[b].push_back(a);
     link.add_edge(a, b);
   }
 
@@ -26,14 +29,19 @@ class two_edge_connected_components {
     group_num = 0;
     std::fill(id.begin(), id.end(), -1);
     link.build();
-    auto dfs = [&](auto self, int v, int pv) -> void {
-      id[v] = (pv == -1 || link.ord[pv] < link.low[v] ? group_num++ : id[pv]);
-      for (auto& e : link.g[v]) {
-        if (id[e.to] == -1) self(self, e.to, v);
+    auto dfs = [&](auto self, int v) -> void {
+      id[v] = group_num;
+      for (int nv : g[v]) {
+        bool bridge = link.ord[v] < link.ord[nv] ? link.ord[v] < link.low[nv]
+                                                 : link.ord[nv] < link.low[v];
+        if (id[nv] == -1 && !bridge) self(self, nv);
       }
     };
     for (int i = 0; i < n; i++) {
-      if (id[i] == -1) dfs(dfs, i, -1);
+      if (id[i] == -1) {
+        dfs(dfs, i);
+        group_num++;
+      }
     }
     groups.assign(group_num, {});
     for (int i = 0; i < n; i++) groups[id[i]].push_back(i);
@@ -42,6 +50,7 @@ class two_edge_connected_components {
 
  private:
   int n;
+  std::vector<std::vector<int>> g;
   low_link link;
 };
 
