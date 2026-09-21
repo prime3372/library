@@ -28,10 +28,11 @@ template <class T> class tree_distance {
     initialized = true;
   }
 
-  int operator()(int a, int b) {
+  T operator()(int a, int b) {
     assert(initialized);
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
+    T ans = cost[a] + cost[b];
     a = hld.ord[a];
     b = hld.ord[b];
     while (hld.head[a] != hld.head[b]) {
@@ -39,7 +40,8 @@ template <class T> class tree_distance {
       b = hld.next[b];
     }
     int l = hld.vertex[std::min(a, b)];
-    return cost[a] + cost[b] - cost[l] * 2;
+    ans -= cost[l] * 2;
+    return ans;
   }
 
  private:
