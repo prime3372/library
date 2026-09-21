@@ -8,8 +8,8 @@ using namespace std;
 using namespace cp;
 
 int main() {
-   ios_base::sync_with_stdio(false);
-   cin.tie(nullptr);
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
   int q;
   cin >> q;
   vector<int> l(q + 1), r(q + 1);
