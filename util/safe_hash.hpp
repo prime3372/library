@@ -10,38 +10,39 @@
 
 namespace cp {
 
-unsigned long long splitmix64(unsigned long long x) {
-  static const unsigned long long fixed_rand = rng();
-  x += fixed_rand;
-  x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;
-  x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;
-  return x ^ (x >> 31);
-}
-
 template <class> struct safe_hash {};
 
 template <class T> void hash_combine(unsigned long long& seed, const T& val) {
   seed ^= safe_hash<T>()(val) + (seed << 6) + (seed >> 2) + 0x9e3779b9ULL;
 }
 
+template <> struct safe_hash<unsigned long long> {
+  unsigned long long operator()(unsigned long long x) const {
+    static const unsigned long long fixed_rand = rng();
+    x += fixed_rand;
+    x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;
+    x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;
+    return x ^ (x >> 31);
+  }
+};
+
 template <class T>
 requires(internal::is_integral_v<T> && !internal::is_128bit_int_v<T>)
 struct safe_hash<T> {
-  unsigned long long operator()(const T& x) const {
-    return splitmix64((unsigned long long)(x));
+  unsigned long long operator()(T x) const {
+    return safe_hash<unsigned long long>()(x);
   }
 };
 
 template <class T> requires(internal::is_128bit_int_v<T>)
 struct safe_hash<T> {
-  unsigned long long operator()(const T& x) const {
+  unsigned long long operator()(T x) const {
+    using ull = unsigned long long;
     unsigned __int128 ux = x;
-    if ((ux >> 64) == 0) {
-      return splitmix64((unsigned long long)(ux));
-    }
-    unsigned long long hs = 0;
-    hash_combine(hs, (unsigned long long)(ux >> 64));
-    hash_combine(hs, (unsigned long long)(ux));
+    if ((ux >> 64) == 0) return safe_hash<ull>()(ull(ux));
+    ull hs = 0;
+    hash_combine(hs, ull(ux));
+    hash_combine(hs, ull(ux >> 64));
     return hs;
   }
 };
