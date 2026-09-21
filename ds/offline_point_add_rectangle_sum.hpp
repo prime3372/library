@@ -51,8 +51,8 @@ template <class T, class U> class offline_point_add_rectangle_sum {
     auto lb = std::lower_bound(points.begin(), points.end(),
                                std::make_tuple(x, y, 0));
     assert(lb != points.end());
-    auto [x2, y2, i] = *lb;
-    assert(x == x2 && y == y2);
+    auto [lx, ly, i] = *lb;
+    assert(x == lx && y == ly);
     for (int k = i, h = bit_size - 1; h >= 0; h--) {
       k = wm.next(h, k);
       fw[h].add(k, w);
