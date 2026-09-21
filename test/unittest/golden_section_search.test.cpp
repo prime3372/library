@@ -13,9 +13,9 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-void test(int n, ll upper) {
+void test(int n, ll limit) {
   vector<ll> a(n);
-  for (ll& x : a) x = uniform(0LL, upper);
+  for (ll& x : a) x = uniform(-limit, limit);
   sort(a.begin(), a.end());
   a.erase(unique(a.begin(), a.end()), a.end());
   n = int(a.size());

@@ -17,13 +17,17 @@ void random_mod(int n) {
   vector<ll> r(n), m(n);
   for (int i = 0; i < n; i++) {
     m[i] = uniform(1, max_m);
-    r[i] = uniform(0LL, m[i] - 1);
+    r[i] = rng();
   }
   auto [ans_r, ans_m] = crt(r, m);
+  for (int i = 0; i < n; i++) {
+    r[i] %= m[i];
+    if (r[i] < 0) r[i] += m[i];
+  }
   for (int i = 0; i < max_m; i++) {
     bool satisfy = true;
     for (int j = 0; j < n; j++) {
-      if (i % m[j] != r[j] % m[j]) {
+      if (i % m[j] != r[j]) {
         satisfy = false;
         break;
       }
@@ -31,7 +35,7 @@ void random_mod(int n) {
     assert((ans_m && i % ans_m == ans_r) == satisfy);
   }
 }
-void small() { random_mod(uniform(1, 10)); }
+void small() { random_mod(uniform(1, 100)); }
 void large() { random_mod(uniform(1, 100000)); }
 
 void has_answer() {
@@ -52,8 +56,8 @@ void empty() { assert(crt({}, {}) == make_pair(0LL, 1LL)); }
 
 int main() {
   for (int i = 0; i < 100000; i++) small();
-  for (int i = 0; i < 10; i++) large();
-  for (int i = 0; i < 10; i++) has_answer();
+  for (int i = 0; i < 100; i++) large();
+  for (int i = 0; i < 100; i++) has_answer();
   empty();
   cout << "Hello World\n";
 }
