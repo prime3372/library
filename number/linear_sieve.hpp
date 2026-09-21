@@ -22,11 +22,6 @@ class linear_sieve {
     }
   }
 
-  bool is_prime(int k) const {
-    assert(k <= n);
-    return k < 2 ? false : f[k] == k;
-  }
-
   const std::vector<int>& primes() const { return ps; }
 
   std::vector<std::pair<int, int>> factorize(int k) const {
