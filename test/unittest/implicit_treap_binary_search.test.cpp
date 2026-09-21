@@ -3,6 +3,7 @@
 
 #include "ds/implicit_treap.hpp"
 #include "random/engine.hpp"
+#include <cassert>
 #include <iostream>
 #include <vector>
 

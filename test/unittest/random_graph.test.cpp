@@ -6,9 +6,9 @@
 #include "random/engine.hpp"
 #include "random/random_graph.hpp"
 #include <algorithm>
+#include <cassert>
 #include <iostream>
 #include <vector>
-#include <cassert>
 
 using namespace std;
 using namespace cp;
