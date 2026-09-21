@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T, auto add = std::plus(), auto mul = std::multiplies(),
+template <class T, auto add = std::plus<T>(), auto mul = std::multiplies<T>(),
           auto zero = []() { return T(0); }, auto one = []() { return T(1); }>
 class matrix : public std::vector<std::vector<T>> {
  public:
