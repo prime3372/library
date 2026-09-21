@@ -10,7 +10,7 @@ template <class T> class weighted_union_find {
  public:
   weighted_union_find() : n(0) {}
   explicit weighted_union_find(int _n)
-      : n(_n), parent_or_size(_n, -1), diff_weight(_n) {}
+      : n(_n), par_or_size(_n, -1), diff_weight(_n) {}
 
   // @return whether diff(a) - diff(b) = d is satisfiable.
   template <class F = void (*)(int, int)>
@@ -21,12 +21,12 @@ template <class T> class weighted_union_find {
     a = find(a);
     b = find(b);
     if (a == b) return d == 0;
-    if (-parent_or_size[a] < -parent_or_size[b]) {
+    if (-par_or_size[a] < -par_or_size[b]) {
       std::swap(a, b);
       d = -d;
     }
-    parent_or_size[a] += parent_or_size[b];
-    parent_or_size[b] = a;
+    par_or_size[a] += par_or_size[b];
+    par_or_size[b] = a;
     diff_weight[b] = -d;
     f(a, b);
     return true;
@@ -45,7 +45,7 @@ template <class T> class weighted_union_find {
 
   int size(int a) {
     assert(0 <= a && a < n);
-    return -parent_or_size[find(a)];
+    return -par_or_size[find(a)];
   }
 
   int size() const { return n; }
@@ -65,14 +65,14 @@ template <class T> class weighted_union_find {
 
  private:
   int n;
-  std::vector<int> parent_or_size;
+  std::vector<int> par_or_size;
   std::vector<T> diff_weight;
 
   int _find(int a) {
-    if (parent_or_size[a] < 0) return a;
-    int r = _find(parent_or_size[a]);
-    diff_weight[a] += diff_weight[parent_or_size[a]];
-    return parent_or_size[a] = r;
+    if (par_or_size[a] < 0) return a;
+    int r = _find(par_or_size[a]);
+    diff_weight[a] += diff_weight[par_or_size[a]];
+    return par_or_size[a] = r;
   }
 };
 

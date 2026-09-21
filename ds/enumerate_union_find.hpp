@@ -10,7 +10,7 @@ namespace cp {
 class enumerate_union_find {
  public:
   enumerate_union_find() : n(0) {}
-  explicit enumerate_union_find(int _n) : n(_n), par_size(_n, -1), nxt(_n) {
+  explicit enumerate_union_find(int _n) : n(_n), par_or_size(_n, -1), nxt(_n) {
     for (int i = 0; i < n; i++) nxt[i] = i;
   }
 
@@ -21,9 +21,9 @@ class enumerate_union_find {
     a = find(a);
     b = find(b);
     if (a == b) return false;
-    if (-par_size[a] < -par_size[b]) std::swap(a, b);
-    par_size[a] += par_size[b];
-    par_size[b] = a;
+    if (-par_or_size[a] < -par_or_size[b]) std::swap(a, b);
+    par_or_size[a] += par_or_size[b];
+    par_or_size[b] = a;
     f(a, b);
     std::swap(nxt[a], nxt[b]);
     return true;
@@ -42,7 +42,7 @@ class enumerate_union_find {
 
   int size(int a) {
     assert(0 <= a && a < n);
-    return -par_size[find(a)];
+    return -par_or_size[find(a)];
   }
 
   int size() const { return n; }
@@ -59,10 +59,10 @@ class enumerate_union_find {
 
  private:
   int n;
-  std::vector<int> par_size, nxt;
+  std::vector<int> par_or_size, nxt;
   int _find(int a) {
-    if (par_size[a] < 0) return a;
-    return par_size[a] = _find(par_size[a]);
+    if (par_or_size[a] < 0) return a;
+    return par_or_size[a] = _find(par_or_size[a]);
   }
 };
 
