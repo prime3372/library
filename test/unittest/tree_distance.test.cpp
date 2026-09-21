@@ -13,8 +13,6 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-#include "tree/lowest_common_ancestor.hpp"
-
 void test(int n, int q) {
   auto tree = random_tree(n);
   vector<vector<pair<int, ll>>> g(n);
