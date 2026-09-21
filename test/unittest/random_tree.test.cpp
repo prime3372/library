@@ -20,11 +20,11 @@ void test(int n) {
     uf.unite(u, v);
   }
 }
-void small() { test(uniform(1, 10)); }
+void small() { test(uniform(1, 100)); }
 void large() { test(uniform(1, 100000)); }
 
 int main() {
   for (int i = 0; i < 100000; i++) small();
-  for (int i = 0; i < 10; i++) large();
+  for (int i = 0; i < 100; i++) large();
   cout << "Hello World\n";
 }
