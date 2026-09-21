@@ -38,7 +38,7 @@ template <int k> void test(int q) {
 
 template <int i> void run_test() {
   constexpr int case_num = 7;
-  constexpr std::pair<int, int> cases[] = {
+  constexpr pair<int, int> cases[] = {
       {1, 500000},   {10, 500000},  {255, 500000}, {256, 500000},
       {257, 500000}, {1000, 10000}, {1000000, 10}};
 
