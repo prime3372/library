@@ -21,7 +21,6 @@ template <class S, class F, auto id> struct implicit_treap_acted_monoid_node {
   unsigned long long priority;
   bool rev = false;
   bool lzflag = false;
-
   implicit_treap_acted_monoid_node(const S& x)
       : val(x), prod(x), priority(rng()) {}
 };

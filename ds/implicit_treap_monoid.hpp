@@ -20,7 +20,6 @@ template <class S> struct implicit_treap_monoid_node {
   self* left = nullptr;
   self* right = nullptr;
   bool rev = false;
-
   implicit_treap_monoid_node(const S& x) : val(x), prod(x), priority(rng()) {}
 };
 

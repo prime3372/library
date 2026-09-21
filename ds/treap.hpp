@@ -182,7 +182,6 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
     unsigned long long priority;
     node* left = nullptr;
     node* right = nullptr;
-
     node(const T& x) : key(x), priority(rng()) {}
   }* root = nullptr;
 

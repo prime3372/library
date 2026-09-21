@@ -101,7 +101,6 @@ template <int bit_size> class binary_trie {
   struct node {
     int par, sub;
     std::array<int, 2> to;
-
     node(int p) : par(p), sub(0) { to.fill(-1); }
   };
 
