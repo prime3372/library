@@ -66,9 +66,10 @@ using mint = cp::modint998244353;
 #define all(a) (a).begin(), (a).end()
 #define rall(a) (a).rbegin(), (a).rend()
 
-#define inrange(i, a, b) ((a) <= (i) && (i) < (b))
-
 constexpr int INF = int(1e9);
 constexpr ll LINF = ll(2e18);
 
 template <class T> inline int len(const T& a) { return int(a.size()); }
+template <class T> bool inrange(const T& i, const T& a, const T& b) {
+  return a <= i && i < b;
+}
