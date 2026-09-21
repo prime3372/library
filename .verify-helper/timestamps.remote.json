@@ -54,6 +54,7 @@
   "test/unittest/implicit_treap_binary_search.test.cpp": "2026-09-21 19:01:26 +0900",
   "test/unittest/random_graph.test.cpp": "2026-09-21 20:56:11 +0900",
   "test/unittest/random_tree.test.cpp": "2026-09-21 20:56:11 +0900",
+  "test/unittest/tree_distance.test.cpp": "2026-09-21 21:21:06 +0900",
   "test/yosupo/convolution/bitwise_and_convolution.test.cpp": "2026-09-20 00:50:59 +0900",
   "test/yosupo/convolution/bitwise_xor_convolution.test.cpp": "2026-09-20 00:53:53 +0900",
   "test/yosupo/convolution/convolution.test.cpp": "2026-09-20 00:50:59 +0900",
