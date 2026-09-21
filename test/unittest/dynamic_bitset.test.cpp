@@ -13,7 +13,7 @@ using namespace cp;
 
 template <int k> void test(int q) {
   dynamic_bitset bs1(k);
-  std::bitset<k> bs2;
+  bitset<k> bs2;
   for (int i = 0; i < k; i++) bs1[i] = bs2[i] = uniform_bool();
   while (q--) {
     int t = uniform(0, 3);
