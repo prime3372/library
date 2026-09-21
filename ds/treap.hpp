@@ -55,9 +55,9 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
   treap(const treap& other) {
     auto dfs = [&](auto self, node* t) -> node* {
       if (!t) return nullptr;
-      node* res = new node(*t);
-      res->left = self(self, t->left);
-      res->right = self(self, t->right);
+      node* p = new node(*t);
+      p->left = self(self, t->left);
+      p->right = self(self, t->right);
       return res;
     };
     root = dfs(dfs, other.root);
