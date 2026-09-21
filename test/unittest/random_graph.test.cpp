@@ -15,8 +15,7 @@ using namespace cp;
 using ll = long long;
 
 void test(int n, int m, random_graph_config config) {
-  auto [directed, no_self_loops, no_multiple_edges, connected, one_indexed,
-        start] = config;
+  auto [directed, no_self_loops, no_multiple_edges, connected, start] = config;
 
   auto edges = random_graph(n, m, config);
   assert(int(edges.size()) == m);
@@ -25,11 +24,10 @@ void test(int n, int m, random_graph_config config) {
   vector<vector<int>> g(n);
 
   for (auto& [u, v] : edges) {
-    assert(1 <= u && u <= n);
-    assert(1 <= v && v <= n);
+    assert(0 <= u && u < n);
+    assert(0 <= v && v < n);
     if (no_self_loops) assert(u != v);
     if (!directed && u > v) std::swap(u, v);
-    u--, v--;
     uf.unite(u, v);
     g[u].push_back(v);
     if (!directed) g[v].push_back(u);
@@ -74,8 +72,7 @@ void run_cases(random_graph_config config) {
       {1000, 1500},     // medium-sparse
       {100000, 200000}  // large-sparse
   };
-  auto& [directed, no_self_loops, no_multiple_edges, connected, one_indexed,
-         start] = config;
+  auto& [directed, no_self_loops, no_multiple_edges, connected, start] = config;
 
   for (auto [n, m] : cases) {
     if (connected && directed && n == 0) continue;

@@ -18,14 +18,12 @@ struct random_graph_config {
   bool no_self_loops = false;
   bool no_multiple_edges = false;
   bool connected = false;
-  bool one_indexed = true;
   int start = 0;
 };
 
 std::vector<std::pair<int, int>> random_graph(int n, int m,
                                               random_graph_config config = {}) {
-  auto [directed, no_self_loops, no_multiple_edges, connected, one_indexed,
-        start] = config;
+  auto [directed, no_self_loops, no_multiple_edges, connected, start] = config;
 
   assert(0 <= n && 0 <= m);
   if (n == 0) {
@@ -51,13 +49,13 @@ std::vector<std::pair<int, int>> random_graph(int n, int m,
   if (connected) {
     if (directed) {
       assert(0 <= start && start < n);
-      auto tree = random_rooted_tree<false>(n, start);
+      auto tree = random_rooted_tree(n, start);
       for (int i = 0; i < n; i++) {
         if (i == start) continue;
         edges.emplace_back(tree[i], i);
       }
     } else {
-      auto tree = random_tree<false>(n);
+      auto tree = random_tree(n);
       for (auto [u, v] : tree) {
         if (u > v) std::swap(u, v);
         edges.emplace_back(u, v);
@@ -106,7 +104,6 @@ std::vector<std::pair<int, int>> random_graph(int n, int m,
 
   for (auto& [u, v] : edges) {
     if (!directed && uniform_bool()) std::swap(u, v);
-    if (one_indexed) u++, v++;
   }
 
   return edges;
