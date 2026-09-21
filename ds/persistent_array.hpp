@@ -38,7 +38,7 @@ template <class T> class persistent_array {
     return t ? t->val : init_val;
   }
 
-  node* set(ull k, const T& val) {
+  void set(ull k, const T& val) {
     assert(k < n);
     node* t = root;
     std::vector<std::pair<node*, int>> path(depth);
@@ -54,7 +54,17 @@ template <class T> class persistent_array {
       nxt->to[j] = cur;
       cur = nxt;
     }
-    return root = cur;
+    root = cur;
+  }
+
+  void destructive_set(int k, const T& val) {
+    assert(k < n);
+    node* t = root;
+    for (int i = 0; t && i < depth; i++) {
+      t = t->to[k & mask];
+      k >>= shift;
+    }
+    t->val = val;
   }
 
   node* snapshot() { return root; }
