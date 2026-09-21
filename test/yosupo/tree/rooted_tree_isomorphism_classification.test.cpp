@@ -22,6 +22,6 @@ int main() {
   }
   auto hash = t.build(0).hash;
   auto ans = compress(hash);
-  cout << max(ans) + 1 << "\n";
+  cout << *std::max_element(ans.begin(), ans.end()) + 1 << "\n";
   for (int x : ans) cout << x << " ";
 }
