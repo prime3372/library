@@ -102,10 +102,6 @@ constexpr long long LINF = (long long)(2e18);
 
 template <class T> inline int len(const T& a) { return int(a.size()); }
 
-template <class T> bool inrange(const T& i, const T& a, const T& b) {
-  return a <= i && i < b;
-}
-
 template <class T> bool chmin(T& a, const T& b) {
   return b < a ? (a = b, true) : false;
 }
@@ -141,4 +137,8 @@ template <class Container,
 int upper_bound(const Container& a, std::ranges::range_value_t<Container> val,
                 Compare compare = Compare()) {
   return int(std::upper_bound(a.begin(), a.end(), val, compare) - a.begin());
+}
+
+template <class T> bool inrange(const T& i, const T& a, const T& b) {
+  return a <= i && i < b;
 }
