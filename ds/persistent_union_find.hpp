@@ -11,7 +11,7 @@ namespace cp {
 
 class persistent_union_find {
  public:
-  using node = persistent_array<int>::node;
+  using version = persistent_array<int>::version;
 
   persistent_union_find() : n(0) {}
   explicit persistent_union_find(int _n) : n(_n), par_or_size(_n, -1) {}
@@ -48,8 +48,8 @@ class persistent_union_find {
 
   int size() const { return n; }
 
-  node* snapshot() { return par_or_size.snapshot(); }
-  void restore(node* p) { par_or_size.restore(p); }
+  version snapshot() { return par_or_size.snapshot(); }
+  void restore(version p) { par_or_size.restore(p); }
 
  private:
   int n;

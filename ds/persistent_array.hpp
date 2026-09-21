@@ -9,18 +9,10 @@ namespace cp {
 
 template <class T> class persistent_array {
   using ull = unsigned long long;
+  union node;
 
  public:
-  static constexpr int shift = 4;
-  static constexpr int mask = (1 << shift) - 1;
-  union node {
-   private:
-    friend persistent_array;
-    std::array<node*, 1 << shift> to;
-    T val;
-    node() { to.fill(nullptr); }
-    explicit node(const T& v) : val(v) {}
-  };
+  using version = node*;
 
   persistent_array() : n(0), depth(0), init_val() {}
   explicit persistent_array(ull _n, T val = T())
@@ -71,7 +63,16 @@ template <class T> class persistent_array {
   void restore(node* new_root) { root = new_root; }
 
  private:
-  node* root = nullptr;
+  static constexpr int shift = 4;
+  static constexpr int mask = (1 << shift) - 1;
+  union node {
+   private:
+    friend persistent_array;
+    std::array<node*, 1 << shift> to;
+    T val;
+    node() { to.fill(nullptr); }
+    explicit node(const T& v) : val(v) {}
+  }* root = nullptr;
   ull n;
   int depth;
   T init_val;
