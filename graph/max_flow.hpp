@@ -22,10 +22,10 @@ class max_flow {
     assert(0 <= to && to < n);
     assert(0 <= cap);
     int m = int(pos.size());
+    pos.emplace_back(from, int(g[from].size()));
     int from_id = int(g[from].size());
     int to_id = int(g[to].size());
     if (from == to) to_id++;
-    pos.emplace_back(from, from_id);
     g[from].push_back(_edge{to, to_id, cap});
     g[to].push_back(_edge{from, from_id, 0});
     return m;
@@ -43,15 +43,14 @@ class max_flow {
     auto re = g[e.to][e.rev];
     return edge{pos[i].first, e.to, e.cap + re.cap, re.cap};
   }
-
   std::vector<edge> edges() {
-    std::vector<edge> edges(pos.size());
+    std::vector<edge> res(pos.size());
     for (int i = 0; i < int(pos.size()); i++) {
       auto e = g[pos[i].first][pos[i].second];
       auto re = g[e.to][e.rev];
-      edges[i] = edge{pos[i].first, e.to, e.cap + re.cap, re.cap};
+      res[i] = edge{pos[i].first, e.to, e.cap + re.cap, re.cap};
     }
-    return edges;
+    return res;
   }
 
   Cap flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max()); }
@@ -61,12 +60,14 @@ class max_flow {
     assert(s != t);
 
     std::vector<int> level(n), iter(n);
+    simple_queue<int> que;
 
     // BFS to construct the level graph.
     auto bfs = [&]() {
-      simple_queue<int> que;
-      que.push(s);
+      std::fill(level.begin(), level.end(), -1);
       level[s] = 0;
+      que.clear();
+      que.push(s);
       while (!que.empty()) {
         int v = que.front();
         que.pop();
@@ -102,7 +103,6 @@ class max_flow {
 
     Cap flow = 0;
     while (flow < flow_limit) {
-      std::fill(level.begin(), level.end(), -1);
       bfs();
       // If sink t is unreachable, no more augmenting paths exist.
       if (level[t] == -1) break;
@@ -120,12 +120,14 @@ class max_flow {
     simple_queue<int> que;
     que.push(s);
     while (!que.empty()) {
-      int v = que.front();
-      if (visited[v]) continue;
-      visited[v] = true;
+      int p = que.front();
       que.pop();
-      for (auto e : g[v]) {
-        if (e.cap) que.push(e.to);
+      visited[p] = true;
+      for (auto e : g[p]) {
+        if (e.cap && !visited[e.to]) {
+          visited[e.to] = true;
+          que.push(e.to);
+        }
       }
     }
     return visited;
