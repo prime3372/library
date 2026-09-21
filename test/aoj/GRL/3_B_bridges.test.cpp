@@ -27,7 +27,7 @@ int main() {
   g.build();
   sort(edges.begin(), edges.end());
   for (int i = 0; i < m; i++) {
-    auto [u, v] = edges[i];
-    if (g.id[u] != g.id[v]) cout << u << " " << v << "\n";
+    auto [s, t] = edges[i];
+    if (g.id[s] != g.id[t]) cout << s << " " << t << "\n";
   }
 }
