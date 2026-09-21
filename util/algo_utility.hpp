@@ -2,32 +2,12 @@
 
 #include <algorithm>
 #include <cassert>
-#include <cstddef>
+#include <functional>
 #include <numeric>
 #include <ranges>
-#include <type_traits>
-#include <utility>
 #include <vector>
 
 namespace cp {
-
-template <class T> T min(const std::vector<T>& v) {
-  assert(!v.empty());
-  return *std::min_element(v.begin(), v.end());
-}
-
-template <class T> T max(const std::vector<T>& v) {
-  assert(!v.empty());
-  return *std::max_element(v.begin(), v.end());
-}
-
-template <class T> bool chmin(T& a, const T& b) {
-  return b < a ? (a = b, true) : false;
-}
-
-template <class T> bool chmax(T& a, const T& b) {
-  return b > a ? (a = b, true) : false;
-}
 
 // replace `a[i]` with `a[p[i]]` by `std::swap`
 template <class Container, class Indices>
@@ -86,20 +66,6 @@ std::vector<int> compress(Container a, Compare compare = Compare()) {
     res[p[i]] = j;
   }
   return res;
-}
-
-template <class Container,
-          class Compare = std::less<std::ranges::range_value_t<Container>>>
-int lower_bound(const Container& a, std::ranges::range_value_t<Container> val,
-                 Compare compare = Compare()) {
-  return int(std::lower_bound(a.begin(), a.end(), val, compare) - a.begin());
-}
-
-template <class Container,
-          class Compare = std::less<std::ranges::range_value_t<Container>>>
-int upper_bound(const Container& a, std::ranges::range_value_t<Container> val,
-                 Compare compare = Compare()) {
-  return int(std::upper_bound(a.begin(), a.end(), val, compare) - a.begin());
 }
 
 template <class Container> Container inverse(const Container& p) {
