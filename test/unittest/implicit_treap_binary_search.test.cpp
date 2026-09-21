@@ -25,7 +25,7 @@ void test(int n, int q, ll bound) {
            lower_bound(a.begin() + l, a.begin() + r, k) - a.begin());
   }
 }
-void small() { test(uniform(1, 100), 10000, 100); }
+void small() { test(uniform(1, 100), 100, 10000); }
 void large() { test(uniform(1, 100000), 100000, ll(1e18)); }
 void narrow() { test(uniform(1, 100000), 100000, 10); }
 

@@ -3,6 +3,7 @@
 
 #include "ds/hash_map.hpp"
 #include <iostream>
+#include <string>
 
 using namespace std;
 using namespace cp;
@@ -12,16 +13,17 @@ int main() {
   cin.tie(nullptr);
   int q;
   cin >> q;
-  hash_map<int, int> mp;
+  hash_map<string, int> mp;
   while (q--) {
     int t;
     cin >> t;
     if (t == 0) {
-      int k, x;
+      string k;
+      int x;
       cin >> k >> x;
       mp[k] = x;
     } else {
-      int k;
+      string k;
       cin >> k;
       cout << mp[k] << "\n";
     }
