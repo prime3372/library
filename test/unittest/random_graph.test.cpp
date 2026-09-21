@@ -65,9 +65,7 @@ void test(int n, int m, random_graph_config config) {
 }
 
 void run_cases(random_graph_config config) {
-  auto& [directed, no_self_loops, no_multiple_edges, connected, one_indexed,
-         start] = config;
-  vector<pair<int, int>> cases = {
+  constexpr pair<int, int> cases[] = {
       {0, 0},           // empty
       {1, 0},           // point
       {10, 10},         // small-sparse
@@ -76,6 +74,8 @@ void run_cases(random_graph_config config) {
       {1000, 1500},     // medium-sparse
       {100000, 200000}  // large-sparse
   };
+  auto& [directed, no_self_loops, no_multiple_edges, connected, one_indexed,
+         start] = config;
 
   for (auto [n, m] : cases) {
     if (connected && directed && n == 0) continue;
