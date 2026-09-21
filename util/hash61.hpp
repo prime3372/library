@@ -16,14 +16,13 @@ class hash61 {
 
  public:
   static hash61 get_basis() {
-    std::uniform_int_distribution dist(1ULL, m - 1);
     hash61 hs;
     do {
       hs.v = dist(rng);
     } while (!is_primitive(hs.v));
     return hs;
   }
-  static hash61 get_rand() { return hash61(uniform(1ULL, m - 1)); }
+  static hash61 get_rand() { return hash61(dist(rng)); }
 
   hash61() : v(0) {}
   template <class T> requires(internal::is_signed_int_v<T>)
@@ -134,7 +133,8 @@ class hash61 {
   }
 
  private:
-  static constexpr ull m = (1LL << 61) - 1;
+  static constexpr ull m = (1ULL << 61) - 1;
+  inline static auto dist = std::uniform_int_distribution(1ULL, m - 1);
   ull v;
 
   static ull pow(ull x, ull n) {
