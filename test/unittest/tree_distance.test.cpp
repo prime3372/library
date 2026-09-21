@@ -49,7 +49,6 @@ void small() { test(uniform(1, 100), 1000); }
 void medium() { test(uniform(1, 1000), 1000); }
 void large() { test(uniform(1, 100000), 10); }
 
-
 int main() {
   for (int i = 0; i < 100; i++) small();
   for (int i = 0; i < 10; i++) medium();
