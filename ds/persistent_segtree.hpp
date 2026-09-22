@@ -40,7 +40,7 @@ template <class S, auto op, auto e> class persistent_segtree {
       ps[h] = t;
       t = ((i >> h) & 1) ? t->right : t->left;
     }
-    node* cur = t ? (t->val = x, t) : new node(x);
+    node* cur = new node(x);
     for (int h = 0; h < log; h++) {
       node* nxt = ps[h] ? new node(*ps[h]) : new node();
       ((i >> h) & 1 ? nxt->right : nxt->left) = cur;
