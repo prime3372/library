@@ -82,6 +82,9 @@ template <class S, auto op, auto e> class persistent_segtree {
 
   ull size() const { return n; }
 
+  node* snapshot() const { return root; }
+  void restore(node* new_root) { root = new_root; }
+
   friend std::ostream& operator<<(std::ostream& os,
                                   const persistent_segtree& seg) {
     std::vector<S> v(seg.n);
