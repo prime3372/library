@@ -49,7 +49,7 @@ template <class T> class persistent_array {
     root = cur;
   }
 
-  void destructive_set(int k, const T& val) {
+  void destructive_set(ull k, const T& val) {
     assert(k < n);
     node* t = root;
     for (int i = 0; t && i < depth; i++) {
