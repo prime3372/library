@@ -38,10 +38,11 @@ int main() {
 
   sum.init();
 
-  for (int i = 0; i < q; i++) {
+  for (int i = 0, j = 0; i < q; i++) {
     if (t[i] == 0) {
       auto [x, y, w, a] = query[i];
-      sum.add(x, y, w);
+      sum.add(n + j, w);
+      j++;
     } else {
       auto [l, d, r, u] = query[i];
       cout << sum.sum(l, d, r, u) << "\n";

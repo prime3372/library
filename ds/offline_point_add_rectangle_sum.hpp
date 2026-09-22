@@ -14,26 +14,19 @@ template <class T, class U> class offline_point_add_rectangle_sum {
  public:
   offline_point_add_rectangle_sum() {}
 
-  void add_point(T x, T y, U w = 0) {
+  int add_point(T x, T y, U w = 0) {
     xs.push_back(x);
     ys.push_back(y);
     ws.push_back(w);
-    n++;
+    return n++;
   }
 
   void init() {
     auto p = sort(xs);
-
-    points.resize(n);
-    for (int i = 0; i < n; i++) {
-      points[i] = {xs[i], ys[p[i]], i};
-    }
-    sort(points.begin(), points.end());
-
-    auto comp = inverse(sort(ys));
-
+    auto q = inverse(sort(ys));
+    pos = inverse(p);
     wm = wavelet_matrix<bit_size>(n);
-    for (int i = 0; i < n; i++) wm.set(i, comp[p[i]]);
+    for (int i = 0; i < n; i++) wm.set(i, q[p[i]]);
     wm.init();
 
     fw.assign(bit_size, fenwick_tree<U>(n + 1));
@@ -47,13 +40,9 @@ template <class T, class U> class offline_point_add_rectangle_sum {
     initialized = true;
   }
 
-  void add(T x, T y, U w) {
-    auto lb = std::lower_bound(points.begin(), points.end(),
-                               std::make_tuple(x, y, 0));
-    assert(lb != points.end());
-    auto [lx, ly, i] = *lb;
-    assert(x == lx && y == ly);
-    for (int k = i, h = bit_size - 1; h >= 0; h--) {
+  void add(int i, U w) {
+    assert(0 <= i && i < n);
+    for (int k = pos[i], h = bit_size - 1; h >= 0; h--) {
       k = wm.next(h, k);
       fw[h].add(k, w);
     }
@@ -89,7 +78,7 @@ template <class T, class U> class offline_point_add_rectangle_sum {
   int n = 0;
   std::vector<T> xs, ys;
   std::vector<U> ws;
-  std::vector<std::tuple<T, T, int>> points;
+  std::vector<int> pos;
   wavelet_matrix<bit_size> wm;
   std::vector<fenwick_tree<U>> fw;
   bool initialized = false;
