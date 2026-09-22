@@ -81,7 +81,6 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
       return contains(k) ? false : (insert(root, new node(k)), true);
     }
   }
-
   template <class... Args>
   std::conditional_t<multiset, void, bool> emplace(Args&&... args) {
     insert(T(std::forward<Args>(args)...));
