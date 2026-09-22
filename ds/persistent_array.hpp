@@ -14,16 +14,16 @@ template <class T> class persistent_array {
  public:
   using node_ptr = node*;
 
-  persistent_array() : n(0), depth(0), init_val() {}
+  persistent_array() : n(0), log(0), init_val() {}
   explicit persistent_array(ull _n, T val = T())
-      : root(new node()), n(_n), depth(0), init_val(val) {
-    for (ull i = n; i; i >>= shift) depth++;
+      : n(_n), log(0), init_val(val) {
+    for (ull i = n; i; i >>= shift) log++;
   }
 
   const T& operator[](ull i) const {
     assert(i < n);
     node* t = root;
-    for (int d = 0; t && d < depth; d++) {
+    for (int k = 0; t && k < log; k++) {
       t = t->to[i & mask];
       i >>= shift;
     }
@@ -33,17 +33,15 @@ template <class T> class persistent_array {
   void set(ull i, const T& val) {
     assert(i < n);
     node* t = root;
-    std::vector<std::pair<node*, int>> path(depth);
-    for (int d = 0; d < depth; d++) {
-      path[d] = {t, i & mask};
-      t = t ? t->to[i & mask] : nullptr;
-      i >>= shift;
+    std::vector<node*> ps(log);
+    for (int k = 0; t && k < log; k++) {
+      ps[k] = t;
+      t = t->to[(i >> (k * shift)) & mask];
     }
     node* cur = new node(val);
-    for (int d = depth - 1; d >= 0; d--) {
-      auto [par, j] = path[d];
-      node* nxt = par ? new node(*par) : new node();
-      nxt->to[j] = cur;
+    for (int k = log - 1; k >= 0; k--) {
+      node* nxt = ps[k] ? new node(*ps[k]) : new node();
+      nxt->to[(i >> (k * shift)) & mask] = cur;
       cur = nxt;
     }
     root = cur;
@@ -52,11 +50,16 @@ template <class T> class persistent_array {
   void destructive_set(ull i, const T& val) {
     assert(i < n);
     node* t = root;
-    for (int d = 0; t && d < depth; d++) {
+    for (int k = 0; k < log; k++) {
+      if (!t) t = new node();
       t = t->to[i & mask];
       i >>= shift;
     }
-    t->val = val;
+    if (t) {
+      t->val = val;
+    } else {
+      t = new node(val);
+    }
   }
 
   node* snapshot() { return root; }
@@ -64,7 +67,7 @@ template <class T> class persistent_array {
 
  private:
   static constexpr int shift = 4;
-  static constexpr int mask = (1 << shift) - 1;
+  static constexpr ull mask = (1 << shift) - 1;
   union node {
    private:
     friend persistent_array;
@@ -74,7 +77,7 @@ template <class T> class persistent_array {
     explicit node(const T& v) : val(v) {}
   }* root = nullptr;
   ull n;
-  int depth;
+  int log;
   T init_val;
 };
 
