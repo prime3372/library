@@ -101,7 +101,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
     return prod(root, 0, sz, log, l, r);
   }
 
-  S all_prod() const { return root ? root->val : initial_vals.back(); }
+  S all_prod() const { return prod(0, n); }
 
   template <class F> ull max_right(ull l, F f) const {
     assert(l <= n);

@@ -74,7 +74,7 @@ class dynamic_lazy_segtree {
     node* t = root;
     std::vector<node*> ps(log);
     for (int h = log - 1; t && h >= 0; h--) {
-      push(t);
+      push(t, h + 1);
       ps[h] = t;
       t = !((i >> h) & 1) ? t->left : t->right;
     }
@@ -103,7 +103,7 @@ class dynamic_lazy_segtree {
     return prod(root, 0, sz, log, l, r);
   }
 
-  S all_prod() { return root ? root->val : initial_vals[log]; }
+  S all_prod() { return prod(0, n); }
 
   void apply(ull i, const F& f) {
     assert(i < n);
