@@ -20,28 +20,28 @@ template <class T> class persistent_array {
     for (ull i = n; i; i >>= shift) depth++;
   }
 
-  const T& operator[](ull k) const {
-    assert(k < n);
+  const T& operator[](ull i) const {
+    assert(i < n);
     node* t = root;
-    for (int i = 0; t && i < depth; i++) {
-      t = t->to[k & mask];
-      k >>= shift;
+    for (int d = 0; t && d < depth; d++) {
+      t = t->to[i & mask];
+      i >>= shift;
     }
     return t ? t->val : init_val;
   }
 
-  void set(ull k, const T& val) {
-    assert(k < n);
+  void set(ull i, const T& val) {
+    assert(i < n);
     node* t = root;
     std::vector<std::pair<node*, int>> path(depth);
-    for (int i = 0; i < depth; i++) {
-      path[i] = {t, k & mask};
-      t = t ? t->to[k & mask] : nullptr;
-      k >>= shift;
+    for (int d = 0; d < depth; d++) {
+      path[d] = {t, i & mask};
+      t = t ? t->to[i & mask] : nullptr;
+      i >>= shift;
     }
     node* cur = new node(val);
-    for (int i = depth - 1; i >= 0; i--) {
-      auto [par, j] = path[i];
+    for (int d = depth - 1; d >= 0; d--) {
+      auto [par, j] = path[d];
       node* nxt = par ? new node(*par) : new node();
       nxt->to[j] = cur;
       cur = nxt;
@@ -49,12 +49,12 @@ template <class T> class persistent_array {
     root = cur;
   }
 
-  void destructive_set(ull k, const T& val) {
-    assert(k < n);
+  void destructive_set(ull i, const T& val) {
+    assert(i < n);
     node* t = root;
-    for (int i = 0; t && i < depth; i++) {
-      t = t->to[k & mask];
-      k >>= shift;
+    for (int d = 0; t && d < depth; d++) {
+      t = t->to[i & mask];
+      i >>= shift;
     }
     t->val = val;
   }
