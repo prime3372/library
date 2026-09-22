@@ -48,8 +48,8 @@ class persistent_union_find {
 
   int size() const { return n; }
 
-  version snapshot() { return par_or_size.snapshot(); }
-  void restore(version p) { par_or_size.restore(p); }
+  node_ptr snapshot() { return par_or_size.snapshot(); }
+  void restore(node_ptr p) { par_or_size.restore(p); }
 
  private:
   int n;
