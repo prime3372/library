@@ -169,15 +169,15 @@ class lazy_segtree {
   std::vector<S> d;
   std::vector<F> lz;
 
-  void update(int k) { d[k] = op(d[2 * k], d[2 * k + 1]); }
-  void all_apply(int k, const F& f) {
-    d[k] = act(f, d[k]);
-    if (k < sz) lz[k] = compose(f, lz[k]);
+  void update(int i) { d[i] = op(d[2 * i], d[2 * i + 1]); }
+  void all_apply(int i, const F& f) {
+    d[i] = act(f, d[i]);
+    if (i < sz) lz[i] = compose(f, lz[i]);
   }
-  void push(int k) {
-    all_apply(2 * k, lz[k]);
-    all_apply(2 * k + 1, lz[k]);
-    lz[k] = id();
+  void push(int i) {
+    all_apply(2 * i, lz[i]);
+    all_apply(2 * i + 1, lz[i]);
+    lz[i] = id();
   }
 };
 

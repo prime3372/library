@@ -112,7 +112,7 @@ template <class S, auto op, auto e> class segtree {
   int n, sz, log;
   std::vector<S> d;
 
-  void update(int k) { d[k] = op(d[2 * k], d[2 * k + 1]); }
+  void update(int i) { d[i] = op(d[2 * i], d[2 * i + 1]); }
 };
 
 }  // namespace cp
