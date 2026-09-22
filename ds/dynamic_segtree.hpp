@@ -43,19 +43,19 @@ template <class S, auto op, auto e> class dynamic_segtree {
     root = dfs(dfs, other.root);
   }
   dynamic_segtree(dynamic_segtree&& other)
-      : n(other.n),
+      : root(other.root),
+        n(other.n),
         sz(other.sz),
         log(other.log),
-        initial_vals(std::move(other.initial_vals)),
-        root(other.root) {
+        initial_vals(std::move(other.initial_vals)) {
     other.root = nullptr;
   }
   dynamic_segtree operator=(dynamic_segtree other) {
+    std::swap(root, other.root);
     std::swap(n, other.n);
     std::swap(sz, other.sz);
     std::swap(log, other.log);
     std::swap(initial_vals, other.initial_vals);
-    std::swap(root, other.root);
     return *this;
   }
   ~dynamic_segtree() {
@@ -109,17 +109,15 @@ template <class S, auto op, auto e> class dynamic_segtree {
   }
 
  private:
-  struct node;
   struct node {
     S val;
     node* left = nullptr;
     node* right = nullptr;
     node(const S& v) : val(v) {}
-  };
+  }* root = nullptr;
   ull n, sz;
   int log;
   std::vector<S> initial_vals;
-  node* root = nullptr;
 
   void update(node* t, int h) {
     t->val = op(t->left ? t->left->val : initial_vals[h - 1],
