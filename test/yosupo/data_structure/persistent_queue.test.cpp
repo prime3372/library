@@ -13,7 +13,7 @@ int main() {
   int q;
   cin >> q;
   vector<int> l(q + 1), r(q + 1);
-  vector<persistent_array<int>::version> past(q + 1);
+  vector<persistent_array<int>::node_ptr> past(q + 1);
   persistent_array<int> s(q + 1);
   past[0] = s.snapshot();
   l[0] = r[0] = 0;

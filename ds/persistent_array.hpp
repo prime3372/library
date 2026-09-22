@@ -12,7 +12,7 @@ template <class T> class persistent_array {
   union node;
 
  public:
-  using version = node*;
+  using node_ptr = node*;
 
   persistent_array() : n(0), depth(0), init_val() {}
   explicit persistent_array(ull _n, T val = T())

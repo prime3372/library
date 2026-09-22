@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  vector<persistent_union_find::version> past(q + 1);
+  vector<persistent_union_find::node_ptr> past(q + 1);
   persistent_union_find uf(n);
   past[0] = uf.snapshot();
   for (int i = 1; i <= q; i++) {
