@@ -28,7 +28,7 @@ template <class S, auto op, auto e> class segtree {
     assert(0 <= i && i < n);
     i += sz;
     d[i] = x;
-    for (int j = 1; j <= log; j++) update(i >> j);
+    for (int h = 1; h <= log; h++) update(i >> h);
   }
 
   S operator[](int i) const {

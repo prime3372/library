@@ -29,15 +29,15 @@ class lazy_segtree {
   void set(int i, const S& x) {
     assert(0 <= i && i < n);
     i += sz;
-    for (int j = log; j >= 1; j--) push(i >> j);
+    for (int h = log; h >= 1; h--) push(i >> h);
     d[i] = x;
-    for (int j = 1; j <= log; j++) update(i >> j);
+    for (int h = 1; h <= log; h++) update(i >> h);
   }
 
   S operator[](int i) {
     assert(0 <= i && i < n);
     i += sz;
-    for (int j = log; j >= 1; j--) push(i >> j);
+    for (int h = log; h >= 1; h--) push(i >> h);
     return d[i];
   }
 
@@ -48,9 +48,9 @@ class lazy_segtree {
     l += sz;
     r += sz;
 
-    for (int i = log; i >= 1; i--) {
-      if (((l >> i) << i) != l) push(l >> i);
-      if (((r >> i) << i) != r) push((r - 1) >> i);
+    for (int h = log; h >= 1; h--) {
+      if (((l >> h) << h) != l) push(l >> h);
+      if (((r >> h) << h) != r) push((r - 1) >> h);
     }
 
     S sml = e(), smr = e();
@@ -69,9 +69,9 @@ class lazy_segtree {
   void apply(int i, const F& f) {
     assert(0 <= i && i < n);
     i += sz;
-    for (int j = log; j >= 1; j--) push(i >> j);
+    for (int h = log; h >= 1; h--) push(i >> h);
     d[i] = act(f, d[i]);
-    for (int j = 1; j <= log; j++) update(i >> j);
+    for (int h = 1; h <= log; h++) update(i >> h);
   }
 
   void apply(int l, int r, const F& f) {
@@ -81,9 +81,9 @@ class lazy_segtree {
     l += sz;
     r += sz;
 
-    for (int i = log; i >= 1; i--) {
-      if (((l >> i) << i) != l) push(l >> i);
-      if (((r >> i) << i) != r) push((r - 1) >> i);
+    for (int h = log; h >= 1; h--) {
+      if (((l >> h) << h) != l) push(l >> h);
+      if (((r >> h) << h) != r) push((r - 1) >> h);
     }
 
     {
@@ -98,9 +98,9 @@ class lazy_segtree {
       r = r2;
     }
 
-    for (int i = 1; i <= log; i++) {
-      if (((l >> i) << i) != l) update(l >> i);
-      if (((r >> i) << i) != r) update((r - 1) >> i);
+    for (int h = 1; h <= log; h++) {
+      if (((l >> h) << h) != l) update(l >> h);
+      if (((r >> h) << h) != r) update((r - 1) >> h);
     }
   }
 
@@ -109,7 +109,7 @@ class lazy_segtree {
     assert(g(e()));
     if (l == n) return n;
     l += sz;
-    for (int i = log; i >= 1; i--) push(l >> i);
+    for (int h = log; h >= 1; h--) push(l >> h);
     S sm = e();
     do {
       while (l % 2 == 0) l >>= 1;
@@ -135,7 +135,7 @@ class lazy_segtree {
     assert(g(e()));
     if (r == 0) return 0;
     r += sz;
-    for (int i = log; i >= 1; i--) push((r - 1) >> i);
+    for (int h = log; h >= 1; h--) push((r - 1) >> h);
     S sm = e();
     do {
       r--;
