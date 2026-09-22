@@ -30,7 +30,6 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
       v.erase(std::unique(v.begin(), v.end(), equiv), v.end());
       n = int(v.size());
     }
-
     std::vector<node*> ps(n);
     std::vector<unsigned long long> pr(n);
     for (int i = 0; i < n; i++) {
