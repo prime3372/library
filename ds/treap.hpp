@@ -149,23 +149,13 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
     return t;
   }
 
-  std::vector<T> enumerate() const {
-    std::vector<T> elems(size());
-    auto dfs = [&](auto self, const node* t, int i) {
-      if (!t) return;
-      elems[i + size(t->left)] = t->key;
-      self(self, t->left, i);
-      self(self, t->right, i + size(t->left) + 1);
-    };
-    dfs(dfs, root, 0);
-    return elems;
-  }
-
   int size() const { return size(root); }
   bool empty() const { return size() == 0; }
 
   friend std::ostream& operator<<(std::ostream& os, const treap& t) {
-    return os << t.enumerate();
+    std::vector<S> v(t.size());
+    for (int i = 0; i < t.size(); i++) v[i] = t[i];
+    return os << v;
   }
 
  private:
