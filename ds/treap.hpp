@@ -50,25 +50,21 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
     };
     dfs(dfs, root = ps[cart.root]);
   }
-
   treap(const treap& other) {
-    auto dfs = [&](auto self, node* t) -> node* {
+    auto dfs = [&](auto self, const node* t) -> node* {
       if (!t) return nullptr;
-      node* p = new node(*t);
-      p->left = self(self, t->left);
-      p->right = self(self, t->right);
-      return p;
+      node* ptr = new node(*t);
+      ptr->left = self(self, t->left);
+      ptr->right = self(self, t->right);
+      return ptr;
     };
     root = dfs(dfs, other.root);
   }
-
   treap(treap&& other) noexcept : root(other.root) { other.root = nullptr; }
-
   treap& operator=(treap other) {
     std::swap(root, other.root);
     return *this;
   }
-
   ~treap() {
     auto dfs = [&](auto self, node* t) -> void {
       if (!t) return;

@@ -100,12 +100,12 @@ template <class node> class implicit_treap_base {
 
   implicit_treap_base() {}
   implicit_treap_base(const implicit_treap_base& other) {
-    auto dfs = [&](auto self, node* t) -> node* {
+    auto dfs = [&](auto self, const node* t) -> node* {
       if (!t) return nullptr;
-      node* p = new node(*t);
-      p->left = self(self, t->left);
-      p->right = self(self, t->right);
-      return p;
+      node* ptr = new node(*t);
+      ptr->left = self(self, t->left);
+      ptr->right = self(self, t->right);
+      return ptr;
     };
     root = dfs(dfs, other.root);
   }
