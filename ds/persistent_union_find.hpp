@@ -11,7 +11,7 @@ namespace cp {
 
 class persistent_union_find {
  public:
-  using node_ptr = persistent_array<int>::node_ptr;
+  using node_ptr = typename persistent_array<int>::node_ptr;
 
   persistent_union_find() : n(0) {}
   explicit persistent_union_find(int _n) : n(_n), par_or_size(_n, -1) {}
