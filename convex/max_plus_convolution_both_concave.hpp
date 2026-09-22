@@ -25,7 +25,7 @@ std::vector<T> max_plus_convolution_both_concave(const std::vector<T>& a,
   }
   std::vector<T> dc(n + m - 2);
   for (int i = 0, j = 0, k = 0; k < n + m - 2; k++) {
-    dc[k] = (j == m - 1 || (i < n - 1 && da[i] > db[j]) ? da[i++] : db[j++]);
+    dc[k] = (j == m - 1 || (i < n - 1 && da[i] > db[j])) ? da[i++] : db[j++];
   }
   std::vector<T> c(n + m - 1);
   c[0] = a[0] + b[0];
