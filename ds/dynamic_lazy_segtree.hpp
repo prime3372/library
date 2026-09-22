@@ -28,6 +28,46 @@ class dynamic_lazy_segtree {
       val = op(val, val);
     }
   }
+  dynamic_lazy_segtree(const dynamic_lazy_segtree& other)
+      : n(other.n),
+        sz(other.sz),
+        log(other.log),
+        initial_vals(other.initial_vals) {
+    auto dfs = [&](auto self, const node* t) -> node* {
+      if (!t) return nullptr;
+      node* ptr = new node(*t);
+      ptr->left = self(self, t->left);
+      ptr->right = self(self, t->right);
+      return ptr;
+    };
+    root = dfs(dfs, other.root);
+  }
+  dynamic_lazy_segtree(dynamic_lazy_segtree&& other)
+      : root(other.root),
+        n(other.n),
+        sz(other.sz),
+        log(other.log),
+        initial_vals(std::move(other.initial_vals)) {
+    other.n = other.sz = other.log = 0;
+    other.root = nullptr;
+  }
+  dynamic_lazy_segtree operator=(dynamic_lazy_segtree other) {
+    std::swap(root, other.root);
+    std::swap(n, other.n);
+    std::swap(sz, other.sz);
+    std::swap(log, other.log);
+    std::swap(initial_vals, other.initial_vals);
+    return *this;
+  }
+  ~dynamic_lazy_segtree() {
+    auto dfs = [&](auto self, node* t) -> void {
+      if (!t) return;
+      self(self, t->left);
+      self(self, t->right);
+      delete t;
+    };
+    dfs(dfs, root);
+  }
 
   void set(ull i, const S& x) {
     assert(i < n);
@@ -79,41 +119,39 @@ class dynamic_lazy_segtree {
   }
 
  private:
-  struct node;
-  using node_ptr = std::unique_ptr<node>;
   struct node {
     S val;
     F lz = id();
     bool lzflag = false;
-    node_ptr left, right;
+    node* left = nullptr;
+    node* right = nullptr;
     node(const S& v) : val(v) {}
-  };
+  }* root = nullptr;
   ull n, sz;
   int log;
   std::vector<S> initial_vals;
-  node_ptr root = nullptr;
 
-  void update(node_ptr& t, int h) {
+  void update(node* t, int h) {
     t->val = op(t->left ? t->left->val : initial_vals[h - 1],
                 t->right ? t->right->val : initial_vals[h - 1]);
   }
-  void all_apply(node_ptr& t, const F& f) {
+  void all_apply(node* t, const F& f) {
     t->val = act(f, t->val);
     t->lz = compose(f, t->lz);
     t->lzflag = true;
   }
-  void push(node_ptr& t, int h) {
+  void push(node* t, int h) {
     if (!t->lzflag) return;
-    if (!t->left) t->left = std::make_unique<node>(initial_vals[h - 1]);
-    if (!t->right) t->right = std::make_unique<node>(initial_vals[h - 1]);
+    if (!t->left) t->left = new node(initial_vals[h - 1]);
+    if (!t->right) t->right = new node(initial_vals[h - 1]);
     all_apply(t->left, t->lz);
     all_apply(t->right, t->lz);
     t->lz = id();
     t->lzflag = false;
   }
 
-  void set(node_ptr& t, ull a, ull b, int h, ull i, const S& x) {
-    if (!t) t = std::make_unique<node>(initial_vals[h]);
+  void set(node*& t, ull a, ull b, int h, ull i, const S& x) {
+    if (!t) t = new node(initial_vals[h]);
     if (b - a == 1) {
       t->val = x;
       return;
@@ -128,7 +166,7 @@ class dynamic_lazy_segtree {
     update(t, h);
   }
 
-  S get(node_ptr& t, ull a, ull b, int h, ull i) {
+  S get(node* t, ull a, ull b, int h, ull i) {
     if (!t) return initial_vals[0];
     if (b - a == 1) return t->val;
     push(t, h);
@@ -140,7 +178,7 @@ class dynamic_lazy_segtree {
     }
   }
 
-  S prod(node_ptr& t, ull a, ull b, int h, ull l, ull r) {
+  S prod(node* t, ull a, ull b, int h, ull l, ull r) {
     if (b <= l || r <= a) return e();
     if (l <= a && b <= r) return t ? t->val : initial_vals[h];
     if (!t) {
@@ -158,8 +196,8 @@ class dynamic_lazy_segtree {
               prod(t->right, c, b, h - 1, l, r));
   }
 
-  void apply(node_ptr& t, ull a, ull b, int h, ull i, const F& f) {
-    if (!t) t = std::make_unique<node>(initial_vals[h]);
+  void apply(node*& t, ull a, ull b, int h, ull i, const F& f) {
+    if (!t) t = new node(initial_vals[h]);
     if (b - a == 1) {
       t->val = act(f, t->val);
       return;
@@ -174,9 +212,9 @@ class dynamic_lazy_segtree {
     update(t, h);
   }
 
-  void apply(node_ptr& t, ull a, ull b, int h, ull l, ull r, const F& f) {
+  void apply(node*& t, ull a, ull b, int h, ull l, ull r, const F& f) {
     if (b <= l || r <= a) return;
-    if (!t) t = std::make_unique<node>(initial_vals[h]);
+    if (!t) t = new node(initial_vals[h]);
     if (l <= a && b <= r) {
       all_apply(t, f);
       return;
@@ -189,8 +227,7 @@ class dynamic_lazy_segtree {
   }
 
   template <class G>
-  ull max_right(node_ptr& t, ull a, ull b, int h, ull l, const G& g,
-                S& product) {
+  ull max_right(node* t, ull a, ull b, int h, ull l, const G& g, S& product) {
     if (b <= l) return b;
     if (n <= a) return n;
     if (l <= a && b <= n) {
@@ -219,8 +256,7 @@ class dynamic_lazy_segtree {
   }
 
   template <class G>
-  ull min_left(node_ptr& t, ull a, ull b, int h, ull r, const G& g,
-               S& product) {
+  ull min_left(node* t, ull a, ull b, int h, ull r, const G& g, S& product) {
     if (r <= a) return a;
     if (b <= r) {
       S val = t ? t->val : initial_vals[h];
