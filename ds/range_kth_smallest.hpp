@@ -45,7 +45,7 @@ template <class T, class Compare = std::less<T>> class range_kth_smallest {
   }
 
  private:
-  static constexpr int bit_size = 30;
+  static constexpr int bit_size = 32;
   int n = 0;
   wavelet_matrix<bit_size> wm;
   coordinate_compression<T, Compare> cc;
