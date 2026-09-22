@@ -42,7 +42,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
     };
     root = dfs(dfs, other.root);
   }
-  dynamic_segtree(dynamic_segtree&& other)
+  dynamic_segtree(dynamic_segtree&& other) noexcept
       : root(other.root),
         n(other.n),
         sz(other.sz),

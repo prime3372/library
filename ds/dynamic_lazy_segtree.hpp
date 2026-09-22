@@ -42,7 +42,7 @@ class dynamic_lazy_segtree {
     };
     root = dfs(dfs, other.root);
   }
-  dynamic_lazy_segtree(dynamic_lazy_segtree&& other)
+  dynamic_lazy_segtree(dynamic_lazy_segtree&& other) noexcept
       : root(other.root),
         n(other.n),
         sz(other.sz),
