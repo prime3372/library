@@ -6,6 +6,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "util/io_utility.hpp"
@@ -26,6 +27,45 @@ template <class S, auto op, auto e> class dynamic_segtree {
       initial_vals[i] = val;
       val = op(val, val);
     }
+  }
+  dynamic_segtree(const dynamic_segtree& other)
+      : n(other.n),
+        sz(other.sz),
+        log(other.log),
+        initial_vals(other.initial_vals) {
+    auto dfs = [&](auto self, const node* t) -> node* {
+      if (!t) return nullptr;
+      node* ptr = new node(*t);
+      ptr->left = self(self, t->left);
+      ptr->right = self(self, t->right);
+      return ptr;
+    };
+    root = dfs(dfs, other.root);
+  }
+  dynamic_segtree(dynamic_segtree&& other)
+      : n(other.n),
+        sz(other.sz),
+        log(other.log),
+        initial_vals(std::move(other.initial_vals)),
+        root(other.root) {
+    other.root = nullptr;
+  }
+  dynamic_segtree operator=(dynamic_segtree other) {
+    std::swap(n, other.n);
+    std::swap(sz, other.sz);
+    std::swap(log, other.log);
+    std::swap(initial_vals, other.initial_vals);
+    std::swap(root, other.root);
+    return *this;
+  }
+  ~dynamic_segtree() {
+    auto dfs = [&](auto self, node* t) -> void {
+      if (!t) return;
+      self(self, t->left);
+      self(self, t->right);
+      delete t;
+    };
+    dfs(dfs, root);
   }
 
   void set(ull i, const S& x) {
@@ -70,24 +110,24 @@ template <class S, auto op, auto e> class dynamic_segtree {
 
  private:
   struct node;
-  using node_ptr = std::unique_ptr<node>;
   struct node {
     S val;
-    node_ptr left, right;
+    node* left = nullptr;
+    node* right = nullptr;
     node(const S& v) : val(v) {}
   };
   ull n, sz;
   int log;
   std::vector<S> initial_vals;
-  node_ptr root = nullptr;
+  node* root = nullptr;
 
-  void update(node_ptr& t, int h) {
+  void update(node* t, int h) {
     t->val = op(t->left ? t->left->val : initial_vals[h - 1],
                 t->right ? t->right->val : initial_vals[h - 1]);
   }
 
-  void set(node_ptr& t, ull a, ull b, int h, ull i, const S& x) {
-    if (!t) t = std::make_unique<node>(initial_vals[h]);
+  void set(node*& t, ull a, ull b, int h, ull i, const S& x) {
+    if (!t) t = new node(initial_vals[h]);
     if (b - a == 1) {
       t->val = x;
       return;
@@ -101,7 +141,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
     update(t, h);
   }
 
-  S get(const node_ptr& t, ull a, ull b, int h, ull i) const {
+  S get(const node* t, ull a, ull b, int h, ull i) const {
     if (!t) return initial_vals[0];
     if (b - a == 1) return t->val;
     ull c = (a + b) / 2;
@@ -112,7 +152,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
     }
   }
 
-  S prod(const node_ptr& t, ull a, ull b, int h, ull l, ull r) const {
+  S prod(const node* t, ull a, ull b, int h, ull l, ull r) const {
     if (b <= l || r <= a) return e();
     if (l <= a && b <= r) return t ? t->val : initial_vals[h];
     if (!t) {
@@ -131,7 +171,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
   }
 
   template <class F>
-  ull max_right(const node_ptr& t, ull a, ull b, int h, ull l, F f,
+  ull max_right(const node* t, ull a, ull b, int h, ull l, F f,
                 S& product) const {
     if (b <= l) return b;
     if (n <= a) return n;
@@ -160,7 +200,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
   }
 
   template <class F>
-  ull min_left(const node_ptr& t, ull a, ull b, int h, ull r, F f,
+  ull min_left(const node* t, ull a, ull b, int h, ull r, F f,
                S& product) const {
     if (r <= a) return a;
     if (b <= r) {
