@@ -107,7 +107,22 @@ class dynamic_lazy_segtree {
 
   void apply(ull i, const F& f) {
     assert(i < n);
-    apply(root, 0, sz, log, i, f);
+    node* t = root;
+    std::vector<node*> ps(log);
+    for (int h = log - 1; t && h >= 0; h--) {
+      push(t, h + 1);
+      ps[h] = t;
+      t = !((i >> h) & 1) ? t->left : t->right;
+    }
+    node* cur = t ? t : new node(initial_vals[0]);
+    act(f, cur->val);
+    for (int h = 0; h < log; h++) {
+      node* nxt = ps[h] ? ps[h] : new node();
+      (!((i >> h) & 1) ? nxt->left : nxt->right) = cur;
+      update(nxt, h + 1);
+      cur = nxt;
+    }
+    root = cur;
   }
 
   void apply(ull l, ull r, const F& f) {
@@ -185,22 +200,6 @@ class dynamic_lazy_segtree {
     ull c = (a + b) / 2;
     return op(prod(t->left, a, c, h - 1, l, r),
               prod(t->right, c, b, h - 1, l, r));
-  }
-
-  void apply(node*& t, ull a, ull b, int h, ull i, const F& f) {
-    if (!t) t = new node(initial_vals[h]);
-    if (b - a == 1) {
-      t->val = act(f, t->val);
-      return;
-    }
-    push(t, h);
-    ull c = (a + b) / 2;
-    if (i < c) {
-      apply(t->left, a, c, h - 1, i, f);
-    } else {
-      apply(t->right, c, b, h - 1, i, f);
-    }
-    update(t, h);
   }
 
   void apply(node*& t, ull a, ull b, int h, ull l, ull r, const F& f) {
