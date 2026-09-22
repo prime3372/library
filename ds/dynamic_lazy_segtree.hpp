@@ -100,7 +100,7 @@ class dynamic_lazy_segtree {
 
   S prod(ull l, ull r) {
     assert(l <= r && r <= n);
-    return prod(root, 0, sz, log, l, r);
+    return prod(root, 0, sz, l, r, log);
   }
 
   S all_prod() { return prod(0, n); }
@@ -127,21 +127,21 @@ class dynamic_lazy_segtree {
 
   void apply(ull l, ull r, const F& f) {
     assert(l <= r && r <= n);
-    apply(root, 0, sz, log, l, r, f);
+    apply(root, 0, sz, l, r, log, f);
   }
 
   template <class G> ull max_right(ull l, const G& g) {
     assert(l <= n);
     assert(g(e()));
     S product = e();
-    return max_right(root, 0, sz, log, l, g, product);
+    return max_right(root, 0, sz, l, log, g, product);
   }
 
   template <class G> ull min_left(ull r, const G& g) {
     assert(r <= n);
     assert(g(e()));
     S product = e();
-    return min_left(root, 0, sz, log, r, g, product);
+    return min_left(root, 0, sz, r, log, g, product);
   }
 
   ull size() const { return n; }
@@ -185,7 +185,7 @@ class dynamic_lazy_segtree {
     t->lzflag = false;
   }
 
-  S prod(node* t, ull a, ull b, int h, ull l, ull r) {
+  S prod(node* t, ull a, ull b, ull l, ull r, int h) {
     if (b <= l || r <= a) return e();
     if (l <= a && b <= r) return t ? t->val : initial_vals[h];
     if (!t) {
@@ -199,11 +199,11 @@ class dynamic_lazy_segtree {
     }
     push(t, h);
     ull c = (a + b) / 2;
-    return op(prod(t->left, a, c, h - 1, l, r),
-              prod(t->right, c, b, h - 1, l, r));
+    return op(prod(t->left, a, c, l, r, h - 1),
+              prod(t->right, c, b, l, r, h - 1));
   }
 
-  void apply(node*& t, ull a, ull b, int h, ull l, ull r, const F& f) {
+  void apply(node*& t, ull a, ull b, ull l, ull r, int h, const F& f) {
     if (b <= l || r <= a) return;
     if (!t) t = new node(initial_vals[h]);
     if (l <= a && b <= r) {
@@ -212,13 +212,13 @@ class dynamic_lazy_segtree {
     }
     push(t, h);
     ull c = (a + b) / 2;
-    apply(t->left, a, c, h - 1, l, r, f);
-    apply(t->right, c, b, h - 1, l, r, f);
+    apply(t->left, a, c, l, r, h - 1, f);
+    apply(t->right, c, b, l, r, h - 1, f);
     update(t, h);
   }
 
   template <class G>
-  ull max_right(node* t, ull a, ull b, int h, ull l, const G& g, S& product) {
+  ull max_right(node* t, ull a, ull b, ull l, int h, const G& g, S& product) {
     if (b <= l) return b;
     if (n <= a) return n;
     if (l <= a && b <= n) {
@@ -242,12 +242,12 @@ class dynamic_lazy_segtree {
     }
     push(t, h);
     ull c = (a + b) / 2;
-    ull test = max_right(t->left, a, c, h - 1, l, g, product);
-    return test < c ? test : max_right(t->right, c, b, h - 1, l, g, product);
+    ull test = max_right(t->left, a, c, l, h - 1, g, product);
+    return test < c ? test : max_right(t->right, c, b, l, h - 1, g, product);
   }
 
   template <class G>
-  ull min_left(node* t, ull a, ull b, int h, ull r, const G& g, S& product) {
+  ull min_left(node* t, ull a, ull b, ull r, int h, const G& g, S& product) {
     if (r <= a) return a;
     if (b <= r) {
       S val = t ? t->val : initial_vals[h];
@@ -270,8 +270,8 @@ class dynamic_lazy_segtree {
     }
     push(t, h);
     ull c = (a + b) / 2;
-    ull test = min_left(t->right, c, b, h - 1, r, g, product);
-    return test > c ? test : min_left(t->left, a, c, h - 1, r, g, product);
+    ull test = min_left(t->right, c, b, r, h - 1, g, product);
+    return test > c ? test : min_left(t->left, a, c, r, h - 1, g, product);
   }
 };
 
