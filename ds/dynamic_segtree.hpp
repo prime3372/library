@@ -51,7 +51,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
     other.root = nullptr;
     other.n = other.sz = other.log = 0;
   }
-  dynamic_segtree operator=(dynamic_segtree other) {
+  dynamic_segtree& operator=(dynamic_segtree other) {
     std::swap(root, other.root);
     std::swap(n, other.n);
     std::swap(sz, other.sz);
@@ -122,7 +122,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
   friend std::ostream& operator<<(std::ostream& os,
                                   const dynamic_segtree& seg) {
     std::vector<S> v(seg.n);
-    for (int i = 0; i < seg.n; i++) v[i] = seg[i];
+    for (ull i = 0; i < seg.n; i++) v[i] = seg[i];
     return os << v;
   }
 
@@ -155,7 +155,6 @@ template <class S, auto op, auto e> class dynamic_segtree {
       }
       return res;
     }
-    if (l <= a && b <= r) return t->val;
     ull c = (a + b) / 2;
     return op(prod(t->left, a, c, h - 1, l, r),
               prod(t->right, c, b, h - 1, l, r));

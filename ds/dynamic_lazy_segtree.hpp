@@ -51,7 +51,7 @@ class dynamic_lazy_segtree {
     other.root = nullptr;
     other.n = other.sz = other.log = 0;
   }
-  dynamic_lazy_segtree operator=(dynamic_lazy_segtree other) {
+  dynamic_lazy_segtree& operator=(dynamic_lazy_segtree other) {
     std::swap(root, other.root);
     std::swap(n, other.n);
     std::swap(sz, other.sz);
@@ -133,7 +133,7 @@ class dynamic_lazy_segtree {
 
   friend std::ostream& operator<<(std::ostream& os, dynamic_lazy_segtree seg) {
     std::vector<S> v(seg.n);
-    for (int i = 0; i < seg.n; i++) v[i] = seg[i];
+    for (ull i = 0; i < seg.n; i++) v[i] = seg[i];
     return os << v;
   }
 
