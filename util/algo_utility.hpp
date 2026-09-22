@@ -9,7 +9,7 @@
 
 namespace cp {
 
-// replace `a[i]` with `a[p[i]]` by `std::swap`
+// replace `a[i]` with `a[p[i]]` by the minimum number of `std::swap`
 template <class Container, class Indices>
 const Indices& rearrange(Container& a, const Indices& p) {
   assert(a.size() == p.size());
