@@ -52,8 +52,10 @@ std::ostream& operator<<(std::ostream& os, __float128 x) {
   }
   for (int i = 0; i < int_len; i++) {
     x *= 10;
-    os << int(x);
-    x -= int(x);
+    int d = int(x);
+    if (d > 9) d = 9;
+    os << d;
+    x -= d;
   }
   if (int_len == 0) os << 0;
 
@@ -61,8 +63,10 @@ std::ostream& operator<<(std::ostream& os, __float128 x) {
     os << '.';
     for (int i = 0; i < prec; i++) {
       x *= 10;
-      os << int(x);
-      x -= int(x);
+      int d = int(x);
+      if (d > 9) d = 9;
+      os << d;
+      x -= d;
     }
   }
 
