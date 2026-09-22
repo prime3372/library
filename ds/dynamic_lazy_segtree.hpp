@@ -125,7 +125,7 @@ class dynamic_lazy_segtree {
     bool lzflag = false;
     node* left = nullptr;
     node* right = nullptr;
-    node(const S& v) : val(v) {}
+    node(const S& x) : val(x) {}
   }* root = nullptr;
   ull n, sz;
   int log;
