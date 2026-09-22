@@ -83,7 +83,7 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
   }
   template <class... Args>
   std::conditional_t<multiset, void, bool> emplace(Args&&... args) {
-    insert(T(std::forward<Args>(args)...));
+    return insert(T(std::forward<Args>(args)...));
   }
 
   bool erase(const T& k) { return erase(root, k); }
@@ -213,7 +213,7 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
       update(p);
       t = p;
     } else {
-      insert(p->key < t->key ? t->left : t->right, p);
+      insert(less(p->key, t->key) ? t->left : t->right, p);
       update(t);
     }
   }
@@ -226,7 +226,7 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
       t = t2;
       return true;
     }
-    bool res = erase(k < t->key ? t->left : t->right, k);
+    bool res = erase(less(k, t->key) ? t->left : t->right, k);
     update(t);
     return res;
   }
