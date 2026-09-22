@@ -48,8 +48,8 @@ template <class S, auto op, auto e> class dynamic_segtree {
         sz(other.sz),
         log(other.log),
         initial_vals(std::move(other.initial_vals)) {
-    other.n = other.sz = other.log = 0;
     other.root = nullptr;
+    other.n = other.sz = other.log = 0;
   }
   dynamic_segtree operator=(dynamic_segtree other) {
     std::swap(root, other.root);
