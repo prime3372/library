@@ -78,9 +78,10 @@ template <class node> class implicit_treap_base {
 
   template <class F> int binary_search(int l, int r, const F& f) {
     assert(0 <= l && l <= r && r <= size());
-    const node* t = root;
+    node* t = root;
     int res = 0;
     while (t) {
+      push(t);
       int k = res + size(t->left);
       if (r <= k || (l <= k && !f(t->val))) {
         t = t->left;
