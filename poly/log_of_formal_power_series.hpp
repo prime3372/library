@@ -1,7 +1,7 @@
 #pragma once
 
 #include "poly/formal_power_series.hpp"
-#include "poly/fps_inv.hpp"
+#include "poly/inv_of_formal_power_series.hpp"
 
 namespace cp {
 

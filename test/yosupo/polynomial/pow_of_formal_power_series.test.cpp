@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/pow_of_formal_power_series"
 
 #include "poly/formal_power_series.hpp"
-#include "poly/fps_pow.hpp"
+#include "poly/pow_of_formal_power_series.hpp"
 #include "util/static_modint.hpp"
 #include <iostream>
 
