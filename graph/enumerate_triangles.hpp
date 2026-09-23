@@ -34,6 +34,7 @@ std::vector<std::array<int, 3>> enumerate_triangles(
     if (1LL * deg[u] * n + u > 1LL * deg[v] * n + v) std::swap(u, v);
     to[u].push_back(v);
   }
+  
   std::vector<int> mark(n, -1);
   std::vector<std::array<int, 3>> res;
   for (int u = 0; u < n; u++) {
