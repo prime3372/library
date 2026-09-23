@@ -5,9 +5,9 @@
 
 namespace cp {
 
-std::vector<int> manacher(const std::string& s) {
+template <class Str> std::vector<int> manacher(const Str& s) {
   int n = int(s.size());
-  std::string t(2 * n + 1, -1);
+  Str t(2 * n + 1, -1);
   for (int i = 0; i < n; i++) t[2 * i + 1] = s[i];
   n = 2 * n + 1;
   std::vector<int> rad(n);
