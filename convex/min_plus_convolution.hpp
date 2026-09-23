@@ -28,6 +28,7 @@ std::vector<T> min_plus_convolution(const std::vector<T>& a,
 
   std::vector<T> c(n + m - 1);
 
+  // monotone minima
   auto solve = [&](auto self, int l, int r, int opt_l, int opt_r) -> void {
     if (l > r) return;
     int mid = l + (r - l) / 2;
