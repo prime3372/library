@@ -12,7 +12,7 @@ namespace cp {
 template <class T>
 std::vector<T> min_plus_convolution(const std::vector<T>& a,
                                     const std::vector<T>& b) {
-  constexpr T inf = std::numeric_limits<T>::max();
+  constexpr T infty = std::numeric_limits<T>::max();
   int n = int(a.size()), m = int(b.size());
   if (n == 0 || m == 0) return {};
 
@@ -20,9 +20,9 @@ std::vector<T> min_plus_convolution(const std::vector<T>& a,
     assert(a[i + 1] - a[i] <= a[i + 2] - a[i + 1]);
   }
 
-  auto f = [&](int k, int i) -> T {
-    if (k - i < 0 || n <= k - i) return inf;
-    if (i < 0 || m <= i) return inf;
+  auto eval = [&](int k, int i) -> T {
+    if (k - i < 0 || n <= k - i) return infty;
+    if (i < 0 || m <= i) return infty;
     return a[k - i] + b[i];
   };
 
@@ -32,9 +32,9 @@ std::vector<T> min_plus_convolution(const std::vector<T>& a,
     if (l > r) return;
     int mid = l + (r - l) / 2;
     int opt_i = opt_l;
-    c[mid] = inf;
+    c[mid] = infty;
     for (int i = opt_l; i <= opt_r; i++) {
-      T val = f(mid, i);
+      T val = eval(mid, i);
       if (val < c[mid]) {
         c[mid] = val;
         opt_i = i;
