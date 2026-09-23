@@ -11,12 +11,14 @@ class complement_connected_components {
  public:
   complement_connected_components() : n(0) {}
   explicit complement_connected_components(int _n) : n(_n), g(_n) {}
+
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
     assert(0 <= v && v < n);
     g[u].push_back(v);
     g[v].push_back(u);
   }
+
   std::vector<std::vector<int>> calc() {
     if (n == 0) return {};
     int min_deg = int(g[0].size());
