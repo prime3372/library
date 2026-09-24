@@ -10,6 +10,8 @@ using namespace cp;
 using mint = modint998244353;
 
 int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
   int n;
   cin >> n;
   auto b = bell<mint>(n);
