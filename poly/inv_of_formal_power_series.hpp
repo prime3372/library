@@ -33,7 +33,7 @@ formal_power_series<mint> inv(const formal_power_series<mint>& f, int n) {
 
     // We then apply a cyclic convolution of size 2*k to g_k and g_k * f - 1.
     // Similarly, the lower k-1 terms become corrupted, but this poses no issue
-    // since the target value consists of the upper k terms of g_{2k}.
+    // since the target value consists of the upper k terms of g_{2*k}.
     internal::ntt(f2);
     for (int i = 0; i < 2 * k; i++) f2[i] *= g2[i];
     internal::intt(f2);
