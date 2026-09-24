@@ -45,11 +45,15 @@ class union_find {
   int size() const { return n; }
 
   std::vector<std::vector<int>> groups() {
-    std::vector<int> root(n);
+    std::vector<int> root(n), group_size;
     for (int i = 0; i < n; i++) {
       root[i] = find(i);
+      group_size[root[i]]++;
     }
     std::vector<std::vector<int>> res(n);
+    for (int i = 0; i < n; i++) {
+      res[i].reserve(group_size[i]);
+    }
     for (int i = 0; i < n; i++) {
       res[root[i]].push_back(i);
     }
