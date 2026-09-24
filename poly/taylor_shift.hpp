@@ -29,7 +29,6 @@ formal_power_series<mint> taylor_shift(formal_power_series<mint> f, mint c) {
     f[i] *= fact;
     g[i] = cpow * ifact[i];
   }
-
   std::reverse(g.begin(), g.end());
   f *= g;
   f >>= n - 1;
