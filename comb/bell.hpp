@@ -3,6 +3,7 @@
 #include <cassert>
 #include <vector>
 
+#include "comb/binom_mod.hpp"
 #include "poly/exp_of_formal_power_series.hpp"
 #include "poly/formal_power_series.hpp"
 #include "util/type_traits.hpp"
@@ -10,20 +11,13 @@
 namespace cp {
 
 template <class mint> std::vector<mint> bell(int n) {
-  constexpr int m = mint::mod();
   assert(0 <= n);
   if (n == 0) return {1};
-  std::vector<mint> inv(n + 1);
-  inv[1] = 1;
-  for (int i = 2; i <= n; i++) {
-    inv[i] = -inv[m % i] * (m / i);
-  }
+  binom_mod<mint> binom(n);
   formal_power_series<mint> f(n + 1);
-  mint ifact = 1;
-  for (int i = 1; i <= n; i++) f[i] = (ifact *= inv[i]);
+  for (int i = 1; i <= n; i++) f[i] = binom.ifact(i);
   auto ans = exp(f);
-  mint fact = 1;
-  for (int i = 1; i <= n; i++) ans[i] *= (fact *= i);
+  for (int i = 1; i <= n; i++) ans[i] *= binom.fact(i);
   return ans;
 }
 
