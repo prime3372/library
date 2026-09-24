@@ -6,12 +6,14 @@
 #include <iostream>
 #include <vector>
 
+#include "number/is_prime.hpp"
 #include "poly/convolution.hpp"
 #include "util/type_traits.hpp"
 
 namespace cp {
 
-template <class mint> requires(internal::is_static_modint_v<mint>)
+template <class mint>
+requires(internal::is_static_modint_v<mint> && is_prime(mint::mod()))
 class formal_power_series : public std::vector<mint> {
   using base = std::vector<mint>;
   using fps = formal_power_series;
