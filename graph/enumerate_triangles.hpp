@@ -30,7 +30,7 @@ std::vector<std::array<int, 3>> enumerate_triangles(
   for (auto [u, v] : edges) deg[u]++, deg[v]++;
   std::vector<std::vector<int>> to(n);
   for (auto [u, v] : edges) {
-    // Direct the edges such that deg[from] <= deg[to] holds.
+    // Direct the edges such that deg[i] <= deg[to[i]] holds.
     if (1LL * deg[u] * n + u > 1LL * deg[v] * n + v) std::swap(u, v);
     to[u].push_back(v);
   }
