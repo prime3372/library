@@ -105,6 +105,20 @@ template <class mint> void intt(std::vector<mint>& a) {
 }
 
 template <class mint>
+std::vector<mint> convolution_ntt(std::vector<mint> a, std::vector<mint> b) {
+  int n = int(a.size()), m = int(b.size());
+  int z = int(std::bit_ceil((unsigned int)(n + m - 1)));
+  a.resize(z);
+  ntt(a);
+  b.resize(z);
+  ntt(b);
+  for (int i = 0; i < z; i++) a[i] *= b[i];
+  intt(a);
+  a.resize(n + m - 1);
+  return a;
+}
+
+template <class mint>
 std::vector<mint> convolution_naive(const std::vector<mint>& a,
                                     const std::vector<mint>& b) {
   int n = int(a.size()), m = int(b.size());
@@ -123,20 +137,6 @@ std::vector<mint> convolution_naive(const std::vector<mint>& a,
     }
   }
   return ans;
-}
-
-template <class mint>
-std::vector<mint> convolution_ntt(std::vector<mint> a, std::vector<mint> b) {
-  int n = int(a.size()), m = int(b.size());
-  int z = int(std::bit_ceil((unsigned int)(n + m - 1)));
-  a.resize(z);
-  ntt(a);
-  b.resize(z);
-  ntt(b);
-  for (int i = 0; i < z; i++) a[i] *= b[i];
-  intt(a);
-  a.resize(n + m - 1);
-  return a;
 }
 
 }  // namespace internal
