@@ -15,6 +15,7 @@ formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
     auto iz = ig.prefix(2 * k);
     internal::ntt(iz);
 
+    // compute precision-2k inv of precision-k g
     auto ig1 = z;
     for (int i = 0; i < 2 * k; i++) ig1[i] *= iz[i];
     internal::intt(ig1);
@@ -24,12 +25,17 @@ formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
     internal::intt(ig1);
     for (int i = k; i < 2 * k; i++) ig.emplace_back(-ig1[i]);
 
-    auto h = integral(diff(g) * ig).prefix(2 * k) - f.prefix(2 * k);
+    // compute precision-2k log of precision-k g
+    auto log = integral(diff(g) * ig).prefix(2 * k);
+
+    // compute precision-2k g
+    auto h = log - f.prefix(2 * k);
     internal::ntt(h);
     for (int i = 0; i < 2 * k; i++) h[i] *= z[i];
     internal::intt(h);
     for (int i = k; i < std::min(2 * k, n); i++) g.emplace_back(-h[i]);
 
+    // compute precision-2k inv of precision-2k g
     auto ig2 = g.prefix(2 * k);
     internal::ntt(ig2);
     for (int i = 0; i < 2 * k; i++) ig2[i] *= iz[i];
