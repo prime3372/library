@@ -8,8 +8,7 @@
 
 namespace cp {
 
-template <class mint> requires(internal::is_static_modint_v<mint>)
-std::vector<mint> bell(int n) {
+template <class mint> std::vector<mint> bell(int n) {
   constexpr int m = mint::mod();
   if (n == 0) return {1};
   std::vector<mint> inv(n + 1);
