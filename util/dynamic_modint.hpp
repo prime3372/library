@@ -14,7 +14,10 @@ template <int id> class dynamic_modint {
   using mint = dynamic_modint;
 
  public:
-  static int mod() { return bt.umod(); }
+  static int mod() {
+    assert(configured);
+    return bt.umod();
+  }
   static void set_mod(int m) {
     assert(!configured);
     assert(1 <= m);
