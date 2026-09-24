@@ -5,7 +5,8 @@
 
 namespace cp {
 
-template <class T> std::vector<T> monmort(int n) {
+// https://en.wikipedia.org/wiki/Derangement#Counting_derangements
+template <class T> std::vector<T> montmort(int n) {
   assert(0 <= n);
   if (n == 0) return {1};
   std::vector<T> a(n + 1);

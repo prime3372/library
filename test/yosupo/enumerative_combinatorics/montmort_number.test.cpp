@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/montmort_number_mod"
 
-#include "comb/monmort.hpp"
+#include "comb/montmort.hpp"
 #include "util/dynamic_modint.hpp"
 #include <iostream>
 #include <vector>
@@ -14,6 +14,6 @@ int main() {
   int n, m;
   cin >> n >> m;
   modint::set_mod(m);
-  auto a = monmort<modint>(n);
+  auto a = montmort<modint>(n);
   for (int i = 1; i <= n; i++) cout << a[i] << " ";
 }
