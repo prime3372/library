@@ -10,6 +10,7 @@
 
 namespace cp {
 
+// https://en.wikipedia.org/wiki/Bell_number#Generating_function
 template <class mint> std::vector<mint> bell(int n) {
   assert(0 <= n);
   if (n == 0) return {1};
