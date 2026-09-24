@@ -9,6 +9,7 @@
 
 namespace cp {
 
+// https://en.wikipedia.org/wiki/Bernoulli_number#Generating_function
 template <class mint> std::vector<mint> bernoulli(int n) {
   assert(0 <= n);
   if (n == 0) return {1};
