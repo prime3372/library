@@ -8,6 +8,7 @@
 
 namespace cp {
 
+// https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Explicit_formula
 template <class mint> std::vector<mint> stirling_second(int n) {
   assert(0 <= n);
   binom_mod<mint> binom(n);
