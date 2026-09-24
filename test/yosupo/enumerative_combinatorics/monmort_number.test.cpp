@@ -4,6 +4,7 @@
 #include "util/dynamic_modint.hpp"
 #include <iostream>
 #include <vector>
+
 using namespace std;
 using namespace cp;
 
