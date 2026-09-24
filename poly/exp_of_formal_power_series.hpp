@@ -8,10 +8,8 @@ namespace cp {
 template <class mint>
 formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
   assert(f.empty() || f[0] == 0);
-  formal_power_series<mint> g = {1}, ig = {1};
+  formal_power_series<mint> g = {1}, ig = {1}, z = {1, 1};
   for (int k = 1;; k *= 2) {
-    auto z = g.prefix(2 * k);
-    internal::ntt(z);
     auto iz = ig.prefix(2 * k);
     internal::ntt(iz);
 
@@ -33,9 +31,12 @@ formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
     for (int i = k; i < std::min(2 * k, n); i++) g.emplace_back(-h[i]);
     if (int(g.size()) == n) break;
 
+    z = g.prefix(4 * k);
+    internal::ntt(z);
+
     // compute precision-2k inv of precision-2k g
-    formal_power_series<mint> ig2 = g.prefix(2 * k);
-    internal::ntt(ig2);
+    formal_power_series<mint> ig2(2 * k);
+    for (int i = 0; i < 2 * k; i++) ig2[i] = z[2 * i];
     for (int i = 0; i < 2 * k; i++) ig2[i] *= iz[i];
     internal::intt(ig2);
     for (int i = 0; i < k; i++) ig2[i] = 0;
