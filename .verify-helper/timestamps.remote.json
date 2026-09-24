@@ -111,6 +111,7 @@
   "test/yosupo/graph/two_edge_connected_components.test.cpp": "2026-09-21 19:55:20 +0900",
   "test/yosupo/linear_algebra/matrix_product.test.cpp": "2026-09-22 06:00:09 +0900",
   "test/yosupo/linear_algebra/pow_of_matrix.test.cpp": "2026-09-22 06:00:09 +0900",
+  "test/yosupo/number_theory/bernoulli.test.cpp": "2026-09-25 07:03:13 +0900",
   "test/yosupo/number_theory/counting_square_free_integers.test.cpp": "2026-09-22 06:00:09 +0900",
   "test/yosupo/number_theory/enumerate_primes.test.cpp": "2026-08-25 13:57:04 +0900",
   "test/yosupo/number_theory/enumerate_quotients.test.cpp": "2026-09-25 05:49:27 +0900",
