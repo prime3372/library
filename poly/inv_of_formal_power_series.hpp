@@ -22,7 +22,7 @@ formal_power_series<mint> inv(const formal_power_series<mint>& f, int n) {
     auto g2 = g.prefix(2 * k);
 
     // By applying NTT and INTT to g_k and f, we obtain a cyclic convolution of
-    // size 2*k. Although the values ​​of the lower k terms are corrupted,
+    // size 2*k. Although the values of the lower k terms are corrupted,
     // the fact that g_k * f = 1 (mod x**k) means that padding the lower k terms
     // with zeros yields g_k * f - 1.
     internal::ntt(f2);
