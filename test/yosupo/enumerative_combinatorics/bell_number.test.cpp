@@ -13,5 +13,5 @@ int main() {
   int n;
   cin >> n;
   auto b = bell<mint>(n);
-  for (mint& x) cout << x << " ";
+  for (mint& x : b) cout << x << " ";
 }
