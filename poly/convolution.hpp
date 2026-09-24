@@ -100,6 +100,8 @@ template <class mint> void intt(std::vector<mint>& a) {
   constexpr int g = primitive_root_ntt(mint::mod());
   constexpr int ig = inv_mod(g, mint::mod());
   cooley_tukey<mint, ig>(a);
+  mint isize = mint(a.size()).inv();
+  for (mint& x : a) x *= isize;
 }
 
 template <class mint>
@@ -134,8 +136,6 @@ std::vector<mint> convolution_ntt(std::vector<mint> a, std::vector<mint> b) {
   for (int i = 0; i < z; i++) a[i] *= b[i];
   intt(a);
   a.resize(n + m - 1);
-  mint iz = mint(z).inv();
-  for (int i = 0; i < n + m - 1; i++) a[i] *= iz;
   return a;
 }
 
