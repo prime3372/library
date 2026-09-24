@@ -54,7 +54,7 @@ template <class mint, int g> std::vector<mint> ntt_root() {
 
 // Cooley-Tukey FFT algorithm
 // https://en.wikipedia.org/wiki/Cooley%E2%80%93Tukey_FFT_algorithm
-template <class mint, int g> void ntt(std::vector<mint>& a) {
+template <class mint, int g> void cooley_tukey(std::vector<mint>& a) {
   static auto root = ntt_root<mint, g>();
   int n = int(a.size());
   int log = int(std::countr_zero((unsigned int)(n)));
@@ -91,27 +91,15 @@ template <class mint, int g> void ntt(std::vector<mint>& a) {
   }
 }
 
-template <class mint>
-std::vector<mint> convolution_ntt(std::vector<mint> a, std::vector<mint> b) {
-  static constexpr int g = internal::primitive_root_ntt(mint::mod());
-  static constexpr int ig = inv_mod(g, mint::mod());
+template <class mint> void ntt(std::vector<mint>& a) {
+  constexpr int g = primitive_root_ntt(mint::mod());
+  cooley_tukey<mint, g>(a);
+}
 
-  int n = int(a.size()), m = int(b.size());
-  int z = int(std::bit_ceil((unsigned int)(n + m - 1)));
-
-  a.resize(z);
-  internal::ntt<mint, g>(a);
-  b.resize(z);
-  internal::ntt<mint, g>(b);
-
-  for (int i = 0; i < z; i++) a[i] *= b[i];
-
-  internal::ntt<mint, ig>(a);
-  a.resize(n + m - 1);
-  mint iz = mint(z).inv();
-  for (int i = 0; i < n + m - 1; i++) a[i] *= iz;
-
-  return a;
+template <class mint> void intt(std::vector<mint>& a) {
+  constexpr int g = primitive_root_ntt(mint::mod());
+  constexpr int ig = inv_mod(g, mint::mod());
+  cooley_tukey<mint, ig>(a);
 }
 
 template <class mint>
@@ -133,6 +121,22 @@ std::vector<mint> convolution_naive(const std::vector<mint>& a,
     }
   }
   return ans;
+}
+
+template <class mint>
+std::vector<mint> convolution_ntt(std::vector<mint> a, std::vector<mint> b) {
+  int n = int(a.size()), m = int(b.size());
+  int z = int(std::bit_ceil((unsigned int)(n + m - 1)));
+  a.resize(z);
+  ntt(a);
+  b.resize(z);
+  ntt(b);
+  for (int i = 0; i < z; i++) a[i] *= b[i];
+  intt(a);
+  a.resize(n + m - 1);
+  mint iz = mint(z).inv();
+  for (int i = 0; i < n + m - 1; i++) a[i] *= iz;
+  return a;
 }
 
 }  // namespace internal
