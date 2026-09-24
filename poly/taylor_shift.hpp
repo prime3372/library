@@ -8,7 +8,8 @@ namespace cp {
 
 template <class mint>
 formal_power_series<mint> taylor_shift(formal_power_series<mint> f, mint c) {
-  int n = int(f.size()), m = mint::mod();
+  constexpr int m = mint::mod();
+  int n = int(f.size());
   if (n <= 1) return f;
 
   std::vector<mint> minv(n), ifact(n);
