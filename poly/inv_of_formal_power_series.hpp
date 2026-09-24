@@ -13,9 +13,9 @@ formal_power_series<mint> inv(const formal_power_series<mint>& f, int n) {
   formal_power_series<mint> g = {f[0].inv()};
   g.reserve(n);
   for (int k = 1; k < n; k *= 2) {
-    // Suppose we have already computed g_k := g mod x**k. We want to find
+    // Suppose we have already computed g_k := g mod x^k. We want to find
     // g_{2*k} using Newton's method:
-    // g_{2*k} = 2 * g_k - g_k * g_k * f (mod x**{2*k})
+    // g_{2*k} = 2 * g_k - g_k * g_k * f (mod x^{2*k})
     // Since g_k is already known, we only need to determine the upper
     // k terms of g_{2*k}.
     auto f2 = f.prefix(2 * k);
@@ -23,7 +23,7 @@ formal_power_series<mint> inv(const formal_power_series<mint>& f, int n) {
 
     // We obtain the cyclic convolution of g_k and f using NTT. Although the
     // values of the lower k terms are corrupted, the fact that g_k * f = 1 (mod
-    // x**k) means that padding the lower k terms with zeros yields g_k * f - 1.
+    // x^k) means that padding the lower k terms with zeros yields g_k * f - 1.
     internal::ntt(f2);
     internal::ntt(g2);
     for (int i = 0; i < 2 * k; i++) f2[i] *= g2[i];
