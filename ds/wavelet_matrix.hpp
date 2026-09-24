@@ -60,9 +60,6 @@ class wavelet_matrix {
     return data[h].rank0(n) + data[h].rank1(i);
   }
   int next(int h, int i) const {
-    assert(initialized);
-    assert(0 <= h && h < bit_size);
-    assert(0 <= i && i < n);
     return data[h][i] ? next1(h, i) : next0(h, i);
   }
 
