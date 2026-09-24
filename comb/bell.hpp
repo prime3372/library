@@ -18,13 +18,13 @@ std::vector<mint> bell(int n) {
     inv[i] = -inv[m % i] * (m / i);
   }
   mint ifact = 1;
-  formal_power_series<mint> fps(n + 1);
+  formal_power_series<mint> e(n + 1);
   for (int i = 1; i <= n; i++) {
     ifact *= inv[i];
-    fps[i] = ifact;
+    e[i] = ifact;
   }
   mint fact = 1;
-  auto ans = exp(fps);
+  auto ans = exp(e);
   for (int i = 1; i <= n; i++) {
     fact *= i;
     ans[i] *= fact;
