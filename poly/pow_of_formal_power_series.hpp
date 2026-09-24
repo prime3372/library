@@ -1,6 +1,6 @@
 #pragma once
 
-#include "poly/fps_exp.hpp"
+#include "poly/exp_of_formal_power_series.hpp"
 
 namespace cp {
 
