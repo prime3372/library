@@ -1,7 +1,7 @@
 #pragma once
 
+#include "poly/convolution.hpp"
 #include "poly/formal_power_series.hpp"
-#include "poly/log_of_formal_power_series.hpp"
 
 namespace cp {
 
