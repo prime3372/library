@@ -1,0 +1,16 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/bernoulli_number"
+
+#include "number/bernoulli.hpp"
+#include "util/static_modint.hpp"
+#include <iostream>
+
+using namespace std;
+using namespace cp;
+using mint = modint998244353;
+
+int main() {
+  int n;
+  cin >> n;
+  auto b = bernoulli<mint>(n);
+  for (mint& x : b) cout << x << " ";
+}
