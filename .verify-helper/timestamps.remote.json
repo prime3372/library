@@ -95,7 +95,7 @@
   "test/yosupo/data_structure/union_find_with_potential.test.cpp": "2026-08-20 08:48:32 +0900",
   "test/yosupo/data_structure/unionfind.test.cpp": "2026-09-21 22:45:42 +0900",
   "test/yosupo/data_structure/unionfind_with_potential.test.cpp": "2026-09-22 06:00:09 +0900",
-  "test/yosupo/enumerative_combinatorics/bell_number.test.cpp": "2026-09-25 05:32:20 +0900",
+  "test/yosupo/enumerative_combinatorics/bell_number.test.cpp": "2026-09-25 05:42:31 +0900",
   "test/yosupo/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp": "2026-09-24 13:47:28 +0900",
   "test/yosupo/enumerative_combinatorics/monmort_number.test.cpp": "2026-09-24 14:04:26 +0900",
   "test/yosupo/geometry/sort_points_by_argument.test.cpp": "2026-09-22 06:00:09 +0900",
