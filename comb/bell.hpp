@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <vector>
 
 #include "poly/exp_of_formal_power_series.hpp"
@@ -10,6 +11,7 @@ namespace cp {
 
 template <class mint> std::vector<mint> bell(int n) {
   constexpr int m = mint::mod();
+  assert(0 <= n);
   if (n == 0) return {1};
   std::vector<mint> inv(n + 1);
   inv[1] = 1;
