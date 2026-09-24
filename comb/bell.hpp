@@ -24,12 +24,9 @@ template <class mint> std::vector<mint> bell(int n) {
     ifact *= inv[i];
     f[i] = ifact;
   }
-  mint fact = 1;
   auto ans = exp(f);
-  for (int i = 1; i <= n; i++) {
-    fact *= i;
-    ans[i] *= fact;
-  }
+  mint fact = 1;
+  for (int i = 1; i <= n; i++) ans[i] *= (fact *= i);
   return ans;
 }
 
