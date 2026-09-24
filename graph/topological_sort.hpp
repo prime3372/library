@@ -7,6 +7,7 @@
 
 namespace cp {
 
+// @param g adjacency list of a graph
 // @note If g has cycles, return an empty vector.
 std::vector<int> topological_sort(const std::vector<std::vector<int>>& g) {
   int n = int(g.size());
