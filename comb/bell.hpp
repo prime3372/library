@@ -19,13 +19,13 @@ template <class mint> std::vector<mint> bell(int n) {
     inv[i] = -inv[m % i] * (m / i);
   }
   mint ifact = 1;
-  formal_power_series<mint> e(n + 1);
+  formal_power_series<mint> f(n + 1);
   for (int i = 1; i <= n; i++) {
     ifact *= inv[i];
-    e[i] = ifact;
+    f[i] = ifact;
   }
   mint fact = 1;
-  auto ans = exp(e);
+  auto ans = exp(f);
   for (int i = 1; i <= n; i++) {
     fact *= i;
     ans[i] *= fact;
