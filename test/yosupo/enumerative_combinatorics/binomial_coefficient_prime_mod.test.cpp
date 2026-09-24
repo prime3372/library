@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod"
 
-#include "number/binom_mod.hpp"
+#include "comb/binom_mod.hpp"
 #include "util/dynamic_modint.hpp"
 #include <algorithm>
 #include <iostream>
