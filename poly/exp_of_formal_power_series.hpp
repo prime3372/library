@@ -9,7 +9,7 @@ template <class mint>
 formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
   assert(f.empty() || f[0] == 0);
   formal_power_series<mint> g = {1}, ig = {1};
-  for (int k = 1; k < n; k *= 2) {
+  for (int k = 1;; k *= 2) {
     auto z = g.prefix(2 * k);
     internal::ntt(z);
     auto iz = ig.prefix(2 * k);
@@ -25,18 +25,16 @@ formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
     internal::intt(ig1);
     for (int i = k; i < 2 * k; i++) ig.emplace_back(-ig1[i]);
 
-    // compute precision-2k log of precision-k g
-    auto log = integral(diff(g) * ig).prefix(2 * k);
-
     // compute precision-2k g
-    auto h = log - f.prefix(2 * k);
+    auto h = integral(diff(g) * ig).prefix(2 * k) - f.prefix(2 * k);
     internal::ntt(h);
     for (int i = 0; i < 2 * k; i++) h[i] *= z[i];
     internal::intt(h);
     for (int i = k; i < std::min(2 * k, n); i++) g.emplace_back(-h[i]);
+    if (int(g.size()) == n) break;
 
     // compute precision-2k inv of precision-2k g
-    auto ig2 = g.prefix(2 * k);
+    formal_power_series<mint> ig2 = g.prefix(2 * k);
     internal::ntt(ig2);
     for (int i = 0; i < 2 * k; i++) ig2[i] *= iz[i];
     internal::intt(ig2);
@@ -47,7 +45,7 @@ formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
     ig.resize(k);
     for (int i = k; i < 2 * k; i++) ig.emplace_back(-ig2[i]);
   }
-  return g.prefix(n);
+  return g;
 }
 
 template <class mint>
