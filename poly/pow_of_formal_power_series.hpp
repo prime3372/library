@@ -8,10 +8,7 @@ template <class mint>
 formal_power_series<mint> pow(const formal_power_series<mint>& f, long long k,
                               int n) {
   assert(0 <= k);
-  if (k == 0) {
-    formal_power_series<mint> g = {1};
-    return g.prefix(n);
-  }
+  if (k == 0) return formal_power_series<mint>{1}.prefix(n);
   for (int i = 0; i * k < n; i++) {
     if (f[i] != 0) {
       auto g = exp(log((f * f[i].inv()) >> i, n - int(i * k)) * k);
