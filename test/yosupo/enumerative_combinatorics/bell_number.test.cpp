@@ -4,6 +4,7 @@
 #include "util/static_modint.hpp"
 #include <iostream>
 #include <vector>
+
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
