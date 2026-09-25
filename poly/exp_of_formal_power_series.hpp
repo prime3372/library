@@ -15,7 +15,7 @@ formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
     internal::ntt(g2);
     auto h = f.prefix(2 * k) - log(g, 2 * k);
     internal::ntt(h);
-    for (int i = 0; i < 2 * k; i++) h[i] *= g2[i];
+    for (int i = 0; i < 2 * k; i++) h[i] *= g2[i];  // cyclic convolution
     internal::intt(h);
     for (int i = k; i < std::min(2 * k, n); i++) g.emplace_back(h[i]);
   }
