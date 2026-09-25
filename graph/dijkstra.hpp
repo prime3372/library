@@ -23,20 +23,17 @@ template <class T> class dijkstra {
 
   void init(int from) {
     assert(0 <= from && from < n);
-    std::fill(d.begin(), d.end(), -1);
-    std::priority_queue<std::tuple<T, int, int, int>,
-                        std::vector<std::tuple<T, int, int, int>>,
-                        std::greater<std::tuple<T, int, int, int>>>
-        pq;
+    std::fill(d.begin(), d.end(), T(-1));
+    std::priority_queue<std::tuple<T, int, int, int>> pq;
     pq.emplace(0, from, from, -1);
     while (!pq.empty()) {
       auto [c, v, pv, pe] = pq.top();
       pq.pop();
       if (d[v] != -1) continue;
-      d[v] = c;
+      d[v] = -c;
       prev_v[v] = pv;
       prev_e[v] = pe;
-      for (auto e : g[v]) pq.emplace(c + e.cost, e.to, v, e.id);
+      for (auto e : g[v]) pq.emplace(c - e.cost, e.to, v, e.id);
     }
     initialized = true;
   }
@@ -50,7 +47,7 @@ template <class T> class dijkstra {
   std::pair<std::vector<int>, std::vector<int>> route(int to) const {
     assert(initialized);
     assert(0 <= to && to < n);
-    if (d[to] == -1) return {};
+    if (d[to] == T(-1)) return {};
     std::vector<int> vs, es;
     while (to != prev_v[to]) {
       vs.push_back(to);
