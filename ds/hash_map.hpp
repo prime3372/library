@@ -22,7 +22,7 @@ template <class Key, class Val> class hash_map {
     if (used[i]) return vals[i];
     if (sz + sz / 4 >= cap) {
       extend();
-      return (*this)[k];
+      i = index(k);
     }
     keys[i] = k;
     used[i] = true;
