@@ -15,5 +15,5 @@ int main() {
     n /= p;
     n *= (p - 1);
   }
-  return n;
+  cout << n << "\n";
 }
