@@ -19,7 +19,7 @@ template <bool directed> class cycle_detection {
     return m++;
   }
 
-  int len = 0;
+  int len = -1;
   std::vector<int> vertices, edges;
 
   bool detect() {
