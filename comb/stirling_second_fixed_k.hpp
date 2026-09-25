@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "comb/binom_mod.hpp"
-#include "poly/convolution.hpp"
 #include "poly/pow_of_formal_power_series.hpp"
 
 namespace cp {
