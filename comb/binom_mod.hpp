@@ -13,10 +13,13 @@ template <class mint> requires(internal::is_modint_v<mint>)
 class binom_mod {
  public:
   binom_mod() : binom_mod(1) {}
-  explicit binom_mod(int _n) : n(_n), minv(_n + 1), f(_n + 1), finv(_n + 1) {
+  explicit binom_mod(int _n) : n(_n) {
     int m = mint::mod();
     assert(is_prime(m));
     assert(0 <= n && n < m);
+    minv.resize(n + 1);
+    f.resize(n + 1);
+    finv.resize(n + 1);
     if (n == 0) {
       f[0] = finv[0] = 1;
       return;
