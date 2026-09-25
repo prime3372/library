@@ -32,9 +32,10 @@ class two_edge_connected_components {
     auto dfs = [&](auto self, int v) -> void {
       id[v] = group_num;
       for (int nv : g[v]) {
-        bool bridge = link.ord[v] < link.ord[nv] ? link.ord[v] < link.low[nv]
-                                                 : link.ord[nv] < link.low[v];
-        if (id[nv] == -1 && !bridge) self(self, nv);
+        bool is_bridge = link.ord[v] < link.ord[nv]
+                             ? link.ord[v] < link.low[nv]
+                             : link.ord[nv] < link.low[v];
+        if (id[nv] == -1 && !is_bridge) self(self, nv);
       }
     };
     for (int i = 0; i < n; i++) {
