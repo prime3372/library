@@ -98,7 +98,7 @@ class formal_power_series : public std::vector<mint> {
     return fps(lhs) -= rhs;
   }
   friend fps operator-(const mint& lhs, const fps& rhs) {
-    return fps({lhs}) -= rhs;
+    return fps{lhs} -= rhs;
   }
   friend fps operator-(const fps& lhs, const fps& rhs) {
     return fps(lhs) -= rhs;
