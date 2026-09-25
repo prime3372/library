@@ -139,7 +139,7 @@ formal_power_series<mint> diff(formal_power_series<mint> f) {
     f[i] *= coeff;
     coeff++;
   }
-  return f >>= 1;
+  return f >> 1;
 }
 
 template <class mint>
@@ -154,7 +154,7 @@ formal_power_series<mint> integral(formal_power_series<mint> f) {
   for (int i = 0; i < int(f.size()); i++) {
     f[i] *= minv[i + 1];
   }
-  return f <<= 1;
+  return f << 1;
 }
 
 }  // namespace cp
