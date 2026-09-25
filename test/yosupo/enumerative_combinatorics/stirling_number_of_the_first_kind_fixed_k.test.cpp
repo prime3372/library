@@ -14,6 +14,6 @@ int main() {
   cin.tie(nullptr);
   int n, k;
   cin >> n >> k;
-  auto s = stirling_first_kind_fixed_k<mint>(n, k);
+  auto s = stirling_first_kind_fixed_k<mint>(k, n);
   for (mint& x : s) cout << x << " ";
 }

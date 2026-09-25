@@ -11,7 +11,7 @@ namespace cp {
 // https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Generating_functions
 // @return {S(k, k), S(k+1, k), ..., S(max_n, k)}
 template <class mint>
-std::vector<mint> stirling_second_kind_fixed_k(int max_n, int k) {
+std::vector<mint> stirling_second_kind_fixed_k(int k, int max_n) {
   assert(0 <= k && k <= max_n);
   binom_mod<mint> binom(max_n);
   formal_power_series<mint> f(max_n + 1);
