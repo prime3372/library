@@ -24,8 +24,10 @@ template <class T> class dijkstra {
   void init(int from) {
     assert(0 <= from && from < n);
     std::fill(d.begin(), d.end(), -1);
-    using tup = std::tuple<T, int, int, int>;
-    std::priority_queue<tup, std::vector<tup>, std::greater<tup>> pq;
+    std::priority_queue<std::tuple<T, int, int, int>,
+                        std::vector<std::tuple<T, int, int, int>>,
+                        std::greater<std::tuple<T, int, int, int>>>
+        pq;
     pq.emplace(0, from, from, -1);
     while (!pq.empty()) {
       auto [c, v, pv, pe] = pq.top();
