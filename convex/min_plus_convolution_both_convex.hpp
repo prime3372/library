@@ -4,12 +4,14 @@
 #include <cassert>
 #include <vector>
 
+#include "util/type_traits.hpp"
+
 namespace cp {
 
 // @param a `a[i+1] - a[i] <= a[i+2] - a[i+1] (i = 0, ..., |a|-2)`
 // @param b `b[i+1] - b[i] <= b[i+2] - b[i+1] (i = 0, ..., |b|-2)`
 // @note The difference sequence of `a` and `b` must not overflow.
-template <class T>
+template <class T> requires(internal::is_signed_int_v<T>)
 std::vector<T> min_plus_convolution_both_convex(const std::vector<T>& a,
                                                 const std::vector<T>& b) {
   int n = int(a.size()), m = int(b.size());
