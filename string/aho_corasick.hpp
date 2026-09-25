@@ -9,6 +9,7 @@
 
 namespace cp {
 
+// Aho-Corasick automaton
 template <int char_size, char offset = 'a'> class aho_corasick {
  public:
   class node {
