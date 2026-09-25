@@ -114,8 +114,8 @@ class dynamic_lazy_segtree {
       ps[h] = t;
       t = !((i >> h) & 1) ? t->left : t->right;
     }
-    node* cur =
-        t ? (t->val = act(f, t->val), t) : new node(act(f, initial_vals[0]));
+    node* cur = t ? t : new node(initial_vals[0]);
+    cur->val = act(f, cur->val);
     for (int h = 0; h < log; h++) {
       node* nxt = ps[h] ? ps[h] : new node();
       (!((i >> h) & 1) ? nxt->left : nxt->right) = cur;
