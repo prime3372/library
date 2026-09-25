@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "number/kth_root.hpp"
-#include "number/enumerate_mobius.hpp"
+#include "number/mobius.hpp"
 #include "util/math_utility.hpp"
 
 namespace cp {
@@ -15,7 +15,7 @@ long long count_square_free(long long n) {
   assert(0 <= n);
   long long ans = 0;
   int Imax = int(kth_root(n, 5)), D = int(isqrt(n / Imax));
-  std::vector<int> mu = enumerate_mobius(D), M(D + 1);
+  std::vector<int> mu = mobius(D), M(D + 1);
 
   for (int i = 1; i <= D; i++) {
     ans += mu[i] * (n / i / i);

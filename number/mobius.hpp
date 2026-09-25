@@ -5,7 +5,7 @@
 
 namespace cp {
 
-std::vector<int> enumerate_mobius(int n) {
+std::vector<int> mobius(int n) {
   assert(0 <= n);
   std::vector<int> ans(n + 1, 1);
   std::vector<bool> prime(n + 1, true);
