@@ -29,4 +29,12 @@ template <class mint> std::vector<mint> stirling_first_kind(int n) {
   return internal::stirling_first_kind_recursive<mint>(n);
 }
 
+// c(n,k) = [x^k]x(x+1)...(x+n-1)
+template <class mint> std::vector<mint> unsigned_stirling_first_kind(int n) {
+  assert(0 <= n);
+  auto s = stirling_first_kind<mint>(n);
+  for (int i = n - 1; i >= 0; i -= 2) s[i] = -s[i];
+  return s;
+}
+
 }  // namespace cp
