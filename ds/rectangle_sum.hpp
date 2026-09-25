@@ -23,10 +23,10 @@ template <class T, class U> class rectangle_sum {
 
   void init() {
     auto p = sort(xs);
-    auto comp = inverse(sort(ys));
+    auto q = inverse(sort(ys));
 
     wm = wavelet_matrix<bit_size>(n);
-    for (int i = 0; i < n; i++) wm.set(i, comp[p[i]]);
+    for (int i = 0; i < n; i++) wm.set(i, q[p[i]]);
     wm.init();
 
     cum.assign(bit_size, std::vector<U>(n + 1));
