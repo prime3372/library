@@ -43,9 +43,9 @@ constexpr int primitive_root_ntt(int m) {
   }
 }
 
-template <class mint, int g> std::vector<mint> ntt_root() {
+template <class mint, int g> auto ntt_root() {
   constexpr int rank2 = std::countr_zero((unsigned int)(mint::mod() - 1));
-  std::vector<mint> root(rank2 + 1);
+  std::array<mint, rank2 + 1> root;
   root[rank2] = mint(g).pow((mint::mod() - 1) >> rank2);
   for (int i = rank2 - 1; i >= 0; i--) {
     root[i] = root[i + 1] * root[i + 1];
