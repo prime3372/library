@@ -11,11 +11,11 @@ formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
   assert(f.empty() || f[0] == 0);
   formal_power_series<mint> g = {1};
   for (int k = 1; k < n; k *= 2) {
-    auto z = g.prefix(2 * k);
-    internal::ntt(z);
+    auto g2 = g.prefix(2 * k);
+    internal::ntt(g2);
     auto h = f.prefix(2 * k) - log(g, 2 * k);
     internal::ntt(h);
-    for (int i = 0; i < 2 * k; i++) h[i] *= z[i];
+    for (int i = 0; i < 2 * k; i++) h[i] *= g2[i];
     internal::intt(h);
     for (int i = k; i < std::min(2 * k, n); i++) g.emplace_back(h[i]);
   }
