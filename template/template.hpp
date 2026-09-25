@@ -28,17 +28,17 @@
 #define rrep2(i, n) for (int i = int(n) - 1; i >= 0; i--)
 #define rrep3(i, a, b) for (int i = int(b) - 1; i >= int(a); i--)
 #define rrep4(i, a, b, c) for (int i = int(b) - 1; i >= int(a); i -= (c))
-#define rrep(...) __CHOOSE5(__VA_ARGS__, rep3, rep2)(__VA_ARGS__)
+#define rrep(...) __CHOOSE5(__VA_ARGS__, rep4, rep3, rep2)(__VA_ARGS__)
 
 #define REP2(i, n) for (int i = 0; i <= int(n); i++)
 #define REP3(i, a, b) for (int i = (a); i <= int(b); i++)
 #define REP4(i, a, b, c) for (int i = (a); i <= int(b); i += (c))
-#define REP(...) __CHOOSE5(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)
+#define REP(...) __CHOOSE5(__VA_ARGS__, REP4, REP3, REP2)(__VA_ARGS__)
 
 #define RREP2(i, n) for (int i = (n); i >= 0; i--)
 #define RREP3(i, a, b) for (int i = (b); i >= int(a); i--)
 #define RREP4(i, a, b, c) for (int i = (b); i >= int(a); i -= (c))
-#define RREP(...) __CHOOSE5(__VA_ARGS__, REP3, REP2)(__VA_ARGS__)
+#define RREP(...) __CHOOSE5(__VA_ARGS__, REP4, REP3, REP2)(__VA_ARGS__)
 
 #define fore2(x, a) for (auto&& x : a)
 #define fore3(x, y, a) for (auto&& [x, y] : a)
