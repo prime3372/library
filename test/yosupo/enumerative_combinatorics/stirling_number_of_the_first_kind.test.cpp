@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind"
 
-#include "comb/stirling_first.hpp"
+#include "comb/stirling_first_kind.hpp"
 #include "util/static_modint.hpp"
 #include <iostream>
 
@@ -14,6 +14,6 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  auto s = stirling_first<mint>(n);
+  auto s = stirling_first_kind<mint>(n);
   for (mint& x : s) cout << x << " ";
 }

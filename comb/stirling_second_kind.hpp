@@ -9,7 +9,7 @@
 namespace cp {
 
 // https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Explicit_formula
-template <class mint> std::vector<mint> stirling_second(int n) {
+template <class mint> std::vector<mint> stirling_second_kind(int n) {
   assert(0 <= n);
   binom_mod<mint> binom(n);
   std::vector<mint> a(n + 1), b(n + 1);

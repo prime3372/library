@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind_fixed_k"
 
-#include "comb/stirling_first_fixed_k.hpp"
+#include "comb/stirling_first_kind_fixed_k.hpp"
 #include "util/static_modint.hpp"
 #include <iostream>
 
@@ -14,6 +14,6 @@ int main() {
   cin.tie(nullptr);
   int n, k;
   cin >> n >> k;
-  auto s = stirling_first_fixed_k<mint>(n, k);
+  auto s = stirling_first_kind_fixed_k<mint>(n, k);
   for (mint& x : s) cout << x << " ";
 }
