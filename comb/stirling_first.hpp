@@ -23,6 +23,7 @@ formal_power_series<mint> stirling_first_recursive(int n) {
 
 }  // namespace internal
 
+// s(x,k) = [x^k]x(x-1)...(x-n+1)
 template <class mint> std::vector<mint> stirling_first(int n) {
   assert(0 <= n);
   return internal::stirling_first_recursive<mint>(n);
