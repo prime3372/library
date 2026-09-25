@@ -15,9 +15,8 @@ template <class mint>
 std::vector<mint> stirling_first_fixed_k(int max_n, int k) {
   assert(0 <= k && k <= max_n);
   binom_mod<mint> binom(max_n);
-  std::vector<mint> minv(n + 1);
-  formal_power_series<mint> f(n + 1);
-  for (int i = 1; i <= n; i++) f[i] = (i % 2 ? 1 : -1) * binom.inv(i);
+  formal_power_series<mint> f(max_n + 1);
+  for (int i = 1; i <= max_n; i++) f[i] = (i % 2 ? 1 : -1) * binom.inv(i);
   auto g = pow(f, k);
   for (int i = k; i <= max_n; i++) {
     g[i] *= binom.ifact(k);
