@@ -101,8 +101,8 @@ template <class mint> void intt(std::vector<mint>& a) {
   constexpr int g = primitive_root_ntt(mint::mod());
   constexpr int ig = inv_mod(g, mint::mod());
   cooley_tukey<mint, ig>(a);
-  mint isize = mint(a.size()).inv();
-  for (mint& x : a) x *= isize;
+  mint iz = mint(a.size()).inv();
+  for (mint& x : a) x *= iz;
 }
 
 template <class mint>
