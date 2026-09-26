@@ -19,6 +19,7 @@ std::istream& operator>>(std::istream& is, __float128& val) {
   bool has_dec = false;
   while (i < int(s.size()) && (std::isdigit(s[i]) || s[i] == '.')) {
     if (s[i] == '.') {
+      if (has_dec) break;
       has_dec = true;
     } else {
       val = val * 10 + (s[i] - '0');
