@@ -21,7 +21,7 @@
   "test/aoj/DSL/2_D_range_update_query.test.cpp": "2026-09-26 19:28:13 +0900",
   "test/aoj/DSL/2_E_range_add_query.test.cpp": "2026-09-04 03:07:09 +0900",
   "test/aoj/DSL/2_F_rmq_and_ruq.test.cpp": "2026-09-26 19:28:13 +0900",
-  "test/aoj/DSL/2_G_rsq_and_raq.test.cpp": "2026-09-26 19:28:13 +0900",
+  "test/aoj/DSL/2_G_rsq_and_raq.test.cpp": "2026-09-27 03:35:39 +0900",
   "test/aoj/DSL/2_H_rmq_and_raq.test.cpp": "2026-09-26 19:28:13 +0900",
   "test/aoj/DSL/2_I_rsq_and_ruq.test.cpp": "2026-09-26 19:28:13 +0900",
   "test/aoj/DSL/3_D_sliding_minimum_elements.test.cpp": "2026-09-04 03:07:09 +0900",
