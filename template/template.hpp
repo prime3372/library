@@ -104,7 +104,6 @@ template <class T> inline ll len(const T& a) { return a.size(); }
 template <class T> inline bool chmin(T& a, const T& b) {
   return b < a ? (a = b, true) : false;
 }
-
 template <class T> inline bool chmax(T& a, const T& b) {
   return b > a ? (a = b, true) : false;
 }
@@ -113,7 +112,6 @@ template <class T> inline T min(const std::vector<T>& v) {
   assert(!v.empty());
   return *std::min_element(v.begin(), v.end());
 }
-
 template <class T> inline T max(const std::vector<T>& v) {
   assert(!v.empty());
   return *std::max_element(v.begin(), v.end());
@@ -126,18 +124,17 @@ inline T accum(const std::vector<U>& v, U x, const F& f) {
 
 template <class Container,
           class Compare = std::less<std::ranges::range_value_t<Container>>>
-inline int lower_bound(const Container& a,
-                       std::ranges::range_value_t<Container> val,
-                       Compare compare = Compare()) {
-  return int(std::lower_bound(a.begin(), a.end(), val, compare) - a.begin());
+inline auto lowerb(const Container& a,
+                   std::ranges::range_value_t<Container> val,
+                   Compare compare = Compare()) {
+  return std::lower_bound(a.begin(), a.end(), val, compare);
 }
-
 template <class Container,
           class Compare = std::less<std::ranges::range_value_t<Container>>>
-inline int upper_bound(const Container& a,
-                       std::ranges::range_value_t<Container> val,
-                       Compare compare = Compare()) {
-  return int(std::upper_bound(a.begin(), a.end(), val, compare) - a.begin());
+inline auto upperb(const Container& a,
+                   std::ranges::range_value_t<Container> val,
+                   Compare compare = Compare()) {
+  return std::upper_bound(a.begin(), a.end(), val, compare);
 }
 
 template <class T> inline bool inrange(const T& i, const T& a, const T& b) {
