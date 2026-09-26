@@ -16,29 +16,28 @@
 #define local 0
 #endif
 
+#define __CHOOSE4(a, b, c, d, ...) d
 #define __CHOOSE5(a, b, c, d, e, ...) e
 #define __CHOOSE6(a, b, c, d, e, f, ...) f
 
-#define rep1(n) for (int _ = 0; _ < int(n); _++)
-#define rep2(i, n) for (int i = 0; i < int(n); i++)
-#define rep3(i, a, b) for (int i = (a); i < int(b); i++)
-#define rep4(i, a, b, c) for (int i = (a); i < int(b); i += (c))
+#define rep1(n) for (ll _ = 0; _ < ll(n); _++)
+#define rep2(i, n) for (ll i = 0; i < ll(n); i++)
+#define rep3(i, a, b) for (ll i = (a); i < ll(b); i++)
+#define rep4(i, a, b, c) for (ll i = (a); i < ll(b); i += (c))
 #define rep(...) __CHOOSE5(__VA_ARGS__, rep4, rep3, rep2, rep1)(__VA_ARGS__)
 
-#define rrep2(i, n) for (int i = int(n) - 1; i >= 0; i--)
-#define rrep3(i, a, b) for (int i = int(b) - 1; i >= int(a); i--)
-#define rrep4(i, a, b, c) for (int i = int(b) - 1; i >= int(a); i -= (c))
-#define rrep(...) __CHOOSE5(__VA_ARGS__, rep4, rep3, rep2)(__VA_ARGS__)
+#define rrep2(i, n) for (ll i = ll(n) - 1; i >= 0; i--)
+#define rrep3(i, a, b) for (ll i = ll(b) - 1; i >= ll(a); i--)
+#define rrep(...) __CHOOSE4(__VA_ARGS__, rrep3, rrep2)(__VA_ARGS__)
 
-#define REP2(i, n) for (int i = 0; i <= int(n); i++)
-#define REP3(i, a, b) for (int i = (a); i <= int(b); i++)
-#define REP4(i, a, b, c) for (int i = (a); i <= int(b); i += (c))
+#define REP2(i, n) for (ll i = 0; i <= ll(n); i++)
+#define REP3(i, a, b) for (ll i = (a); i <= ll(b); i++)
+#define REP4(i, a, b, c) for (ll i = (a); i <= ll(b); i += (c))
 #define REP(...) __CHOOSE5(__VA_ARGS__, REP4, REP3, REP2)(__VA_ARGS__)
 
-#define RREP2(i, n) for (int i = (n); i >= 0; i--)
-#define RREP3(i, a, b) for (int i = (b); i >= int(a); i--)
-#define RREP4(i, a, b, c) for (int i = (b); i >= int(a); i -= (c))
-#define RREP(...) __CHOOSE5(__VA_ARGS__, REP4, REP3, REP2)(__VA_ARGS__)
+#define RREP2(i, n) for (ll i = (n); i >= 0; i--)
+#define RREP3(i, a, b) for (ll i = (b); i >= ll(a); i--)
+#define RREP(...) __CHOOSE4(__VA_ARGS__, RREP3, RREP2)(__VA_ARGS__)
 
 #define fore2(x, a) for (auto&& x : a)
 #define fore3(x, y, a) for (auto&& [x, y] : a)
@@ -98,47 +97,49 @@ using mint = cp::modint998244353;
 using namespace cp;
 
 constexpr int INF = int(1e9);
-constexpr long long LINF = (long long)(2e18);
+constexpr ll LINF = (long long)(2e18);
 
-template <class T> inline int len(const T& a) { return int(a.size()); }
+template <class T> inline ll len(const T& a) { return a.size(); }
 
-template <class T> bool chmin(T& a, const T& b) {
+template <class T> inline bool chmin(T& a, const T& b) {
   return b < a ? (a = b, true) : false;
 }
 
-template <class T> bool chmax(T& a, const T& b) {
+template <class T> inline bool chmax(T& a, const T& b) {
   return b > a ? (a = b, true) : false;
 }
 
-template <class T> T min(const std::vector<T>& v) {
+template <class T> inline T min(const std::vector<T>& v) {
   assert(!v.empty());
   return *std::min_element(v.begin(), v.end());
 }
 
-template <class T> T max(const std::vector<T>& v) {
+template <class T> inline T max(const std::vector<T>& v) {
   assert(!v.empty());
   return *std::max_element(v.begin(), v.end());
 }
 
 template <class T, class U, class F = std::plus<T>>
-T accum(const std::vector<U>& v, U x, const F& f) {
+inline T accum(const std::vector<U>& v, U x, const F& f) {
   return std::accumulate(v.begin(), v.end(), x, f);
 }
 
 template <class Container,
           class Compare = std::less<std::ranges::range_value_t<Container>>>
-int lower_bound(const Container& a, std::ranges::range_value_t<Container> val,
-                Compare compare = Compare()) {
+inline int lower_bound(const Container& a,
+                       std::ranges::range_value_t<Container> val,
+                       Compare compare = Compare()) {
   return int(std::lower_bound(a.begin(), a.end(), val, compare) - a.begin());
 }
 
 template <class Container,
           class Compare = std::less<std::ranges::range_value_t<Container>>>
-int upper_bound(const Container& a, std::ranges::range_value_t<Container> val,
-                Compare compare = Compare()) {
+inline int upper_bound(const Container& a,
+                       std::ranges::range_value_t<Container> val,
+                       Compare compare = Compare()) {
   return int(std::upper_bound(a.begin(), a.end(), val, compare) - a.begin());
 }
 
-template <class T> bool inrange(const T& i, const T& a, const T& b) {
+template <class T> inline bool inrange(const T& i, const T& a, const T& b) {
   return a <= i && i < b;
 }
