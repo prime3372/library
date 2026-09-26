@@ -47,6 +47,8 @@ class enumerate_union_find {
 
   int size() const { return n; }
 
+  // @return the list of vertices contained in the connected component to which
+  // vertex a belongs
   // @note The order of vertices in the return value is undefined.
   std::vector<int> enumerate(int a) const {
     assert(0 <= a && a < n);
