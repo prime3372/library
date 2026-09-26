@@ -12,15 +12,15 @@ int main() {
   cin.tie(nullptr);
   int n, m, r;
   cin >> n >> m >> r;
-  dijkstra<int> g(n);
+  dijkstra<int> dist(n);
   for (int i = 0; i < m; i++) {
     int s, t, d;
     cin >> s >> t >> d;
-    g.add_edge(s, t, d);
+    dist.add_edge(s, t, d);
   }
-  g.init(r);
+  dist.init(r);
   for (int i = 0; i < n; i++) {
-    int ans = g.dist(i);
+    int ans = dist(i);
     if (ans == -1) {
       cout << "INF\n";
     } else {

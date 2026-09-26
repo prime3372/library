@@ -15,22 +15,22 @@ int main() {
   cin.tie(nullptr);
   int n, m, s, t;
   cin >> n >> m >> s >> t;
-  dijkstra<ll> g(n);
+  dijkstra<ll> dist(n);
   vector<pair<int, int>> edges(m);
   for (int i = 0; i < m; i++) {
     int a, b;
     ll c;
     cin >> a >> b >> c;
-    g.add_edge(a, b, c);
+    dist.add_edge(a, b, c);
     edges[i] = {a, b};
   }
-  g.init(s);
-  if (g.dist(t) == -1) {
+  dist.init(s);
+  if (dist(t) == -1) {
     cout << -1 << "\n";
     return 0;
   }
-  auto [v, e] = g.route(t);
-  cout << g.dist(t) << " " << v.size() - 1 << "\n";
+  auto [v, e] = dist.route(t);
+  cout << dist(t) << " " << v.size() - 1 << "\n";
   for (int i = 0; i < int(v.size()) - 1; i++) {
     cout << v[i] << " " << v[i + 1] << "\n";
     auto ei = make_pair(v[i], v[i + 1]);

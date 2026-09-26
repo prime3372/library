@@ -38,7 +38,7 @@ template <class T> class dijkstra {
     initialized = true;
   }
 
-  T dist(int to) const {
+  T operator()(int to) const {
     assert(initialized);
     assert(0 <= to && to < n);
     return d[to];
