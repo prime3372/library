@@ -11,10 +11,9 @@ std::istream& operator>>(std::istream& is, __int128& val) {
   std::string s;
   if (!(is >> s)) return is;
   val = 0;
-  int i = (s[0] == '+' || s[0] == '-');
-  while (i < int(s.size()) && std::isdigit(s[i])) {
+  for (int i = (s[0] == '+' || s[0] == '-'); i < int(s.size()); i++) {
+    if (!std::isdigit(s[i])) break;
     val = val * 10 + (s[i] - '0');
-    i++;
   }
   if (s[0] == '-') val = -val;
   return is;
@@ -24,10 +23,9 @@ std::istream& operator>>(std::istream& is, unsigned __int128& val) {
   std::string s;
   if (!(is >> s)) return is;
   val = 0;
-  int i = (s[0] == '+' || s[0] == '-');
-  while (i < int(s.size()) && std::isdigit(s[i])) {
+  for (int i = (s[0] == '+' || s[0] == '-'); i < int(s.size()); i++) {
+    if (!std::isdigit(s[i])) break;
     val = val * 10 + (s[i] - '0');
-    i++;
   }
   if (s[0] == '-') val = -val;
   return is;
