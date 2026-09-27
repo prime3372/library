@@ -15,15 +15,13 @@ template <class T> class range_add_range_sum {
   void add(int l, T w) {
     assert(0 <= l <= n);
     fw1.add(l, w);
-    fw1.add(r, -w);
     fw2.add(l, w * l);
-    fw2.add(r, -w * r);
   }
 
-  void add(int l, int r, T v) {
+  void add(int l, int r, T w) {
     assert(0 <= l && l <= r && r <= n);
-    add(l, v);
-    add(r, -v);
+    add(l, w);
+    add(r, -w);
   }
 
   // [0, r)
