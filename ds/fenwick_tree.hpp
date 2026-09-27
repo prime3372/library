@@ -11,11 +11,11 @@ template <class T> class fenwick_tree {
   fenwick_tree() : n(0) {}
   explicit fenwick_tree(int _n) : n(_n), d(_n) {}
 
-  void add(int i, T x) {
+  void add(int i, T w) {
     assert(0 <= i && i < n);
     i++;
     while (i <= n) {
-      d[i - 1] += x;
+      d[i - 1] += w;
       i += i & -i;
     }
   }

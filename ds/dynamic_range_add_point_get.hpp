@@ -11,10 +11,10 @@ template <class T> class dynamic_range_add_point_get {
   dynamic_range_add_point_get() : n(0) {}
   explicit dynamic_range_add_point_get(ull _n) : n(_n), fw(_n) {}
 
-  void add(ull l, ull r, T v) {
+  void add(ull l, ull r, T w) {
     assert(0 <= l && l <= r && r <= n);
-    if (l < n) fw.add(l, v);
-    if (r < n) fw.add(r, -v);
+    if (l < n) fw.add(l, w);
+    if (r < n) fw.add(r, -w);
   }
 
   T operator[](ull i) const {

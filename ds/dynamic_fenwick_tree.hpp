@@ -14,11 +14,11 @@ template <class T> class dynamic_fenwick_tree {
   dynamic_fenwick_tree() : n(0) {}
   explicit dynamic_fenwick_tree(ull _n) : n(_n) {}
 
-  void add(ull i, T x) {
+  void add(ull i, T w) {
     assert(i < n);
     i++;
     while (i <= n) {
-      d[i - 1] += x;
+      d[i - 1] += w;
       i += i & -i;
     }
   }

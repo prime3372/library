@@ -14,12 +14,12 @@ template <class T> class dynamic_range_add_range_sum {
   explicit dynamic_range_add_range_sum(ull _n)
       : n(_n), fw1(_n + 1), fw2(_n + 1) {}
 
-  void add(ull l, ull r, T v) {
+  void add(ull l, ull r, T w) {
     assert(0 <= l && l <= r && r <= n);
-    fw1.add(l, v);
-    fw1.add(r, -v);
-    fw2.add(l, v * l);
-    fw2.add(r, -v * r);
+    fw1.add(l, w);
+    fw1.add(r, -w);
+    fw2.add(l, w * l);
+    fw2.add(r, -w * r);
   }
 
   T sum(ull r) const {

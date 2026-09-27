@@ -11,14 +11,22 @@ template <class T> class range_add_range_sum {
   range_add_range_sum() : n(0) {}
   explicit range_add_range_sum(int _n) : n(_n), fw1(_n + 1), fw2(_n + 1) {}
 
-  void add(int l, int r, T v) {
-    assert(0 <= l && l <= r && r <= n);
-    fw1.add(l, v);
-    fw1.add(r, -v);
-    fw2.add(l, v * l);
-    fw2.add(r, -v * r);
+  // [l, n)
+  void add(int l, T x) {
+    assert(0 <= l <= n);
+    fw1.add(l, x);
+    fw1.add(r, -x);
+    fw2.add(l, x * l);
+    fw2.add(r, -x * r);
   }
 
+  void add(int l, int r, T v) {
+    assert(0 <= l && l <= r && r <= n);
+    add(l, v);
+    add(r, -v);
+  }
+
+  // [0, r)
   T sum(int r) const {
     assert(0 <= r && r <= n);
     return r * fw1.sum(r) - fw2.sum(r);
