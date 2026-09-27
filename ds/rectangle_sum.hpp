@@ -6,7 +6,6 @@
 
 #include "ds/wavelet_matrix.hpp"
 #include "util/algo_utility.hpp"
-#include "util/coordinate_compression.hpp"
 
 namespace cp {
 
