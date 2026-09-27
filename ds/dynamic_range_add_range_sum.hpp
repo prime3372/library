@@ -18,13 +18,13 @@ template <class T> class dynamic_range_add_range_sum {
     assert(0 <= l && l <= r && r <= n);
     fw1.add(l, w);
     fw1.add(r, -w);
-    fw2.add(l, w * l);
-    fw2.add(r, -w * r);
+    fw2.add(l, w * T(l));
+    fw2.add(r, -w * T(r));
   }
 
   T sum(ull r) const {
     assert(0 <= r && r <= n);
-    return r * fw1.sum(r) - fw2.sum(r);
+    return fw1.sum(r) * T(r) - fw2.sum(r);
   }
 
   T sum(ull l, ull r) const {
