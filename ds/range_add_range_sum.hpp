@@ -12,12 +12,12 @@ template <class T> class range_add_range_sum {
   explicit range_add_range_sum(int _n) : n(_n), fw1(_n + 1), fw2(_n + 1) {}
 
   // [l, n)
-  void add(int l, T x) {
+  void add(int l, T w) {
     assert(0 <= l <= n);
-    fw1.add(l, x);
-    fw1.add(r, -x);
-    fw2.add(l, x * l);
-    fw2.add(r, -x * r);
+    fw1.add(l, w);
+    fw1.add(r, -w);
+    fw2.add(l, w * l);
+    fw2.add(r, -w * r);
   }
 
   void add(int l, int r, T v) {
