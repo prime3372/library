@@ -71,7 +71,7 @@ class dynamic_lazy_segtree {
 
   void set(ull i, const S& x) {
     assert(i < n);
-    set(root, 0, sz, i, x, log);
+    set(root, i, x, log);
   }
 
   S operator[](ull i) {
@@ -93,7 +93,7 @@ class dynamic_lazy_segtree {
 
   void apply(ull i, const F& f) {
     assert(i < n);
-    apply(root, 0, sz, i, f, log);
+    apply(root, i, f, log);
   }
 
   void apply(ull l, ull r, const F& f) {
@@ -156,18 +156,17 @@ class dynamic_lazy_segtree {
     t->lzflag = false;
   }
 
-  void set(node*& t, ull a, ull b, ull i, S x, int h) {
+  void set(node*& t, ull i, S x, int h) {
     if (!t) t = new node();
-    if (b - a == 1) {
+    if (h == 0) {
       t->val = x;
       return;
     }
     push(t, h);
-    ull c = (a + b) / 2;
-    if (i < c) {
-      set(t->left, a, c, i, x, h - 1);
+    if ((i >> h) & 1) {
+      set(t->right, i, x, h - 1);
     } else {
-      set(t->right, c, b, i, x, h - 1);
+      set(t->left, i, x, h - 1);
     }
     update(t, h);
   }
@@ -190,18 +189,17 @@ class dynamic_lazy_segtree {
               prod(t->right, c, b, l, r, h - 1));
   }
 
-  void apply(node*& t, ull a, ull b, ull i, const F& f, int h) {
+  void apply(node*& t, ull i, const F& f, int h) {
     if (!t) t = new node();
-    if (b - a == 1) {
+    if (h == 0) {
       all_apply(t, f);
       return;
     }
     push(t, h);
-    ull c = (a + b) / 2;
-    if (i < c) {
-      apply(t->left, a, c, i, f, h - 1);
+    if ((i >> h) & 1) {
+      apply(t->right, i, f, h - 1);
     } else {
-      apply(t->right, c, b, i, f, h - 1);
+      apply(t->left, i, f, h - 1);
     }
     update(t, h);
   }

@@ -71,7 +71,7 @@ template <class S, auto op, auto e> class dynamic_segtree {
 
   void set(ull i, const S& x) {
     assert(i < n);
-    set(root, 0, sz, i, x, log);
+    set(root, i, x, log);
   }
 
   S operator[](ull i) const {
@@ -130,17 +130,16 @@ template <class S, auto op, auto e> class dynamic_segtree {
                 t->right ? t->right->val : initial_vals[h - 1]);
   }
 
-  void set(node*& t, ull a, ull b, ull i, const S& x, int h) {
+  void set(node*& t, ull i, const S& x, int h) {
     if (!t) t = new node();
-    if (b - a == 1) {
+    if (h == 0) {
       t->val = x;
       return;
     }
-    ull c = (a + b) / 2;
-    if (i < c) {
-      set(t->left, a, c, i, x, h - 1);
+    if ((i >> h) & 1) {
+      set(t->right, i, x, h - 1);
     } else {
-      set(t->right, c, b, i, x, h - 1);
+      set(t->left, i, x, h - 1);
     }
     update(t, h);
   }
