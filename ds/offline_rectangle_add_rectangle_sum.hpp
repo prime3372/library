@@ -94,8 +94,8 @@ template <class T, class U> struct offline_rectangle_add_rectangle_sum {
     qs.push_back(Q{r, u, id, neg});
   }
   void upper_right_add(T l, T d, U w) {
-    U wx = w * l;
-    ps.push_back(P{l, d, V{w, w * d, wx, wx * d}});
+    V v = {w, w * U(d), w * U(l), w * U(l) * U(d)};
+    ps.push_back(P{l, d, v});
     ys.push_back(d);
   }
 };
