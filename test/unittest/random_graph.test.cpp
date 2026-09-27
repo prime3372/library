@@ -66,6 +66,7 @@ void run_cases(random_graph_config config) {
   constexpr pair<int, int> cases[] = {
       {0, 0},           // empty
       {1, 0},           // point
+      {1, 10},          // point (with self-loops)
       {10, 10},         // small-sparse
       {10, 100},        // small-dense
       {100, 10000},     // medium-dense
@@ -76,6 +77,7 @@ void run_cases(random_graph_config config) {
 
   for (auto [n, m] : cases) {
     if (connected && directed && n == 0) continue;
+    if (no_self_loops && n == 1 && m > 0) continue;
     ll max_m = directed ? (no_self_loops ? 1LL * n * (n - 1) : 1LL * n * n)
                         : (no_self_loops ? 1LL * n * (n - 1) / 2
                                          : 1LL * n * (n + 1) / 2);
