@@ -46,8 +46,7 @@ long long sqrt_mod(long long n, long long p) {
   // -> (a + w)^p = a^p + w^p = a - w (in F_p^2)
 
   // z = (a + w)^{(p+1)/2} (in F_p^2)
-  // z^2 = (a + w)^(p+1)
-  //     = (a + w)(a + w)^p
+  // z^2 = (a + w)(a + w)^p
   //     = (a + w)(a - w)
   //     = a^2 - w^2 = n (in F_p^2)
   // Therefore z, -z are sqrt(n) in F_p^2.
