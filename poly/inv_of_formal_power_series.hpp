@@ -23,7 +23,7 @@ formal_power_series<mint> inv(const formal_power_series<mint>& f, int n) {
 
     // We obtain the cyclic convolution of size-2*k of g_k and f using NTT.
     // Although the values of the lower k-1 terms become corrupted, the
-    // definition of g_k implies that g_k * f = 1 (mod x^k); therefore, padding
+    // definition of g_k implies that g_k * f = 1 (mod x^k), so padding
     // the lower k-1 terms with zeros yields g_k * f - 1 (mod x^{2*k}).
     internal::ntt(f2);
     internal::ntt(g2);
