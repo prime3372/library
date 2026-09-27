@@ -40,6 +40,7 @@ template <class T, class U> class offline_point_add_rectangle_sum {
     initialized = true;
   }
 
+  // add w to the weight of the i-th added point.
   void add(int i, U w) {
     assert(0 <= i && i < n);
     for (int k = pos[i], h = bit_size - 1; h >= 0; h--) {
