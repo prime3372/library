@@ -15,7 +15,7 @@ template <class T> class range_add_range_sum {
   void add(int l, T w) {
     assert(0 <= l <= n);
     fw1.add(l, w);
-    fw2.add(l, w * l);
+    fw2.add(l, w * T(l));
   }
 
   void add(int l, int r, T w) {
@@ -27,7 +27,7 @@ template <class T> class range_add_range_sum {
   // [0, r)
   T sum(int r) const {
     assert(0 <= r && r <= n);
-    return r * fw1.sum(r) - fw2.sum(r);
+    return fw1.sum(r) * T(r) - fw2.sum(r);
   }
 
   T sum(int l, int r) const {
