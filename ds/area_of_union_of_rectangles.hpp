@@ -26,6 +26,8 @@ template <class T> class area_of_union_of_rectangles {
   }
 
   T calc() {
+    // Using the sweep line algorithm, sum up the areas where the rectangle does
+    // not exist and subtract them from the total area.
     int n = int(x.size());
     auto p = sort(x);
     auto q = inverse(sort(y));
