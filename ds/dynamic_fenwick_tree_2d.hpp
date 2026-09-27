@@ -17,12 +17,12 @@ template <class T> class dynamic_fenwick_tree_2d {
   explicit dynamic_fenwick_tree_2d(int _n, ull _m)
       : n(_n), m(_m), fw(_n, dynamic_fenwick_tree<T>(_m)) {}
 
-  void add(int i, ull j, T x) {
+  void add(int i, ull j, T w) {
     assert(0 <= i && i < n);
     assert(j < m);
     i++;
     while (i <= n) {
-      fw[i - 1].add(j, x);
+      fw[i - 1].add(j, w);
       i += i & -i;
     }
   }
@@ -63,13 +63,13 @@ template <class T> class dynamic_fenwick_tree_2d {
     return s;
   }
 
-  void imos_add(int l, ull d, int r, ull u, T x) {
+  void imos_add(int l, ull d, int r, ull u, T w) {
     assert(0 <= l && l <= r && r <= n);
     assert(d <= u && u <= m);
-    if (l < n && d < m) add(l, d, x);
-    if (l < n && u < m) add(l, u, -x);
-    if (r < n && d < m) add(r, d, -x);
-    if (r < n && u < m) add(r, u, x);
+    if (l < n && d < m) add(l, d, w);
+    if (l < n && u < m) add(l, u, -w);
+    if (r < n && d < m) add(r, d, -w);
+    if (r < n && u < m) add(r, u, w);
   }
 
   T imos_get(int i, ull j) const {
