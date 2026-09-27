@@ -29,6 +29,8 @@ template <class T> class range_add_range_sum {
     return sum(r) - sum(l);
   }
 
+  int size() const { return n; }
+
  private:
   int n;
   fenwick_tree<T> fw1, fw2;

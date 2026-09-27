@@ -32,6 +32,8 @@ template <class T> class dynamic_range_add_range_sum {
     return sum(r) - sum(l);
   }
 
+  ull size() const { return n; }
+
  private:
   ull n;
   dynamic_fenwick_tree<T> fw1, fw2;

@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/vertex_get_range_contour_add_on_tree"
 
-#include "ds/fenwick_tree.hpp"
+#include "ds/range_add_point_get.hpp"
 #include "tree/centroid_decomposition.hpp"
 #include "tree/lowest_common_ancestor.hpp"
 #include <iostream>
@@ -33,9 +33,9 @@ int main() {
   cd.build();
   lca.init();
 
-  vector<fenwick_tree<ll>> contour(n), contour_par(n);
+  vector<range_add_point_get<ll>> contour(n), contour_par(n);
   for (int i = 0; i < n; i++) {
-    contour[i] = contour_par[i] = fenwick_tree<ll>(cd.size[i] + 1);
+    contour[i] = contour_par[i] = range_add_point_get<ll>(cd.size[i] + 1);
   }
 
   auto query0 = [&](int p, int r, ll x) -> void {
@@ -43,13 +43,13 @@ int main() {
     while (true) {
       int d1 = lca.dist(cur, p);
       if (r - d1 > 0) {
-        contour[cur].imos_add(0, min(r - d1, contour[cur].size()), x);
+        contour[cur].add(0, min(r - d1, contour[cur].size()), x);
       }
       int par = cd.parent[cur];
       if (par == -1) break;
       int d2 = lca.dist(par, p);
       if (r - d2 > 0) {
-        contour_par[cur].imos_add(0, min(r - d2, contour_par[cur].size()), x);
+        contour_par[cur].add(0, min(r - d2, contour_par[cur].size()), x);
       }
       cur = par;
     }
@@ -58,10 +58,10 @@ int main() {
     ll ans = 0;
     int cur = p;
     while (true) {
-      ans += contour[cur].imos_get(lca.dist(cur, p));
+      ans += contour[cur][lca.dist(cur, p)];
       int par = cd.parent[cur];
       if (par == -1) break;
-      ans -= contour_par[cur].imos_get(lca.dist(par, p));
+      ans -= contour_par[cur][lca.dist(par, p)];
       cur = par;
     }
     return ans;
