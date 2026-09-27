@@ -56,7 +56,7 @@ template <class T, class U> struct offline_rectangle_add_rectangle_sum {
         j -= j & -j;
       }
       U v = s.a * q.x * q.y - s.b * q.x - s.c * q.y + s.d;
-      res[q.id] += (q.inv ? -v : v);
+      res[q.id] += (q.neg ? -v : v);
     }
     return res;
   }
@@ -80,7 +80,7 @@ template <class T, class U> struct offline_rectangle_add_rectangle_sum {
   struct Q {
     T x, y;
     int id;
-    bool inv;
+    bool neg;
     friend bool operator<(const Q& lhs, const Q& rhs) { return lhs.x < rhs.x; }
   };
 
@@ -90,8 +90,8 @@ template <class T, class U> struct offline_rectangle_add_rectangle_sum {
   int qn = 0;
   bool asked_sum = false;
 
-  void lower_left_sum(T r, T u, int id, bool inv) {
-    qs.push_back(Q{r, u, id, inv});
+  void lower_left_sum(T r, T u, int id, bool neg) {
+    qs.push_back(Q{r, u, id, neg});
   }
   void upper_right_add(T l, T d, U w) {
     U wx = w * l;
