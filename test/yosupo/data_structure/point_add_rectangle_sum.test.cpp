@@ -14,12 +14,12 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  offline_point_add_rectangle_sum<int, ll> sum;
+  offline_point_add_rectangle_sum<int, ll> data;
   for (int i = 0; i < n; i++) {
     int x, y;
     ll w;
     cin >> x >> y >> w;
-    sum.add_point(x, y, w);
+    data.add_point(x, y, w);
   }
 
   vector<int> t(q);
@@ -29,23 +29,23 @@ int main() {
     if (t[i] == 0) {
       auto& [x, y, w, a] = query[i];
       cin >> x >> y >> w;
-      sum.add_point(x, y);
+      data.add_point(x, y);
     } else {
       auto& [l, d, r, u] = query[i];
       cin >> l >> d >> r >> u;
     }
   }
 
-  sum.init();
+  data.init();
 
   for (int i = 0, j = 0; i < q; i++) {
     if (t[i] == 0) {
       auto [x, y, w, a] = query[i];
-      sum.add(n + j, w);
+      data.add(n + j, w);
       j++;
     } else {
       auto [l, d, r, u] = query[i];
-      cout << sum.sum(l, d, r, u) << "\n";
+      cout << data.sum(l, d, r, u) << "\n";
     }
   }
 }

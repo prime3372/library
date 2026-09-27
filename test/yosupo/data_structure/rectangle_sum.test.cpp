@@ -14,17 +14,17 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  rectangle_sum<int, ll> sum;
+  rectangle_sum<int, ll> data;
   for (int i = 0; i < n; i++) {
     int x, y;
     ll w;
     cin >> x >> y >> w;
-    sum.add_point(x, y, w);
+    data.add_point(x, y, w);
   }
-  sum.init();
+  data.init();
   while (q--) {
     int l, d, r, u;
     cin >> l >> d >> r >> u;
-    cout << sum.sum(l, d, r, u) << "\n";
+    cout << data.sum(l, d, r, u) << "\n";
   }
 }
