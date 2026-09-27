@@ -18,8 +18,8 @@ class cartesian_tree {
   int root = -1;
   std::vector<int> left, right, parent, size;
 
-  // @note The smallest element becomes the root.
-  // @note For equivalent elements, the one with the smaller index is smaller.
+  // @note The smallest element becomes the root. For equivalent elements, the
+  // one with the smaller index is smaller.
   // @note `parent[root]` is `-1`.
   template <class T, class Compare = std::less<T>>
   void build(const std::vector<T>& a, Compare compare = Compare()) {
