@@ -21,16 +21,13 @@ std::vector<int> random_rooted_tree(int n, int root = 0) {
 
 std::vector<std::pair<int, int>> random_tree(int n) {
   assert(1 <= n);
-
   auto par = random_rooted_tree(n, uniform(0, n - 1));
-
   std::vector<std::pair<int, int>> edges;
   edges.reserve(n - 1);
   for (int i = 0; i < n; i++) {
     if (par[i] == -1) continue;
     edges.emplace_back(par[i], i);
   }
-
   shuffle(edges);
   for (auto& [u, v] : edges) {
     if (uniform_bool()) std::swap(u, v);
@@ -41,15 +38,12 @@ std::vector<std::pair<int, int>> random_tree(int n) {
 std::vector<std::pair<int, int>> random_forest(int n) {
   assert(1 <= n);
   if (n == 1) return {};
-
   std::vector<int> par(n);
   for (int i = 0; i < n; i++) par[i] = uniform(0, i);
-
   std::vector<std::pair<int, int>> edges;
   for (int i = 0; i < n; i++) {
     if (par[i] != i) edges.emplace_back(par[i], i);
   }
-
   shuffle(edges);
   for (auto& [u, v] : edges) {
     if (uniform_bool()) std::swap(u, v);
