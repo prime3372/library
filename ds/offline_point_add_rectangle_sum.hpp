@@ -59,12 +59,12 @@ template <class T, class U> class offline_point_add_rectangle_sum {
     assert(l <= r);
     int left = int(std::lower_bound(xs.begin(), xs.end(), l) - xs.begin());
     int right = int(std::lower_bound(xs.begin(), xs.end(), r) - xs.begin());
-    int upper = int(std::lower_bound(ys.begin(), ys.end(), u) - ys.begin());
+    int up = int(std::lower_bound(ys.begin(), ys.end(), u) - ys.begin());
     U ans = 0;
     for (int h = bit_size - 1; h >= 0; h--) {
       int l0 = wm.next0(h, left);
       int r0 = wm.next0(h, right);
-      if ((upper >> h) & 1) {
+      if ((up >> h) & 1) {
         ans += fw[h].sum(l0, r0);
         left = wm.next1(h, left);
         right = wm.next1(h, right);
