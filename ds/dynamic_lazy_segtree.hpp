@@ -71,21 +71,7 @@ class dynamic_lazy_segtree {
 
   void set(ull i, const S& x) {
     assert(i < n);
-    node* t = root;
-    std::vector<node*> ps(log);
-    for (int h = log - 1; t && h >= 0; h--) {
-      push(t, h + 1);
-      ps[h] = t;
-      t = ((i >> h) & 1 ? t->right : t->left);
-    }
-    node* cur = t ? (t->val = x, t) : new node(x);
-    for (int h = 0; h < log; h++) {
-      node* nxt = ps[h] ? ps[h] : new node();
-      ((i >> h) & 1 ? nxt->right : nxt->left) = cur;
-      update(nxt, h + 1);
-      cur = nxt;
-    }
-    root = cur;
+    set(root, 0, sz, i, x, log);
   }
 
   S operator[](ull i) {
@@ -105,23 +91,28 @@ class dynamic_lazy_segtree {
 
   S all_prod() { return prod(0, n); }
 
+  void apply(ull i, const F& f) {
+    assert(i < n);
+    apply(root, 0, sz, i, f, log);
+  }
+
   void apply(ull l, ull r, const F& f) {
     assert(l <= r && r <= n);
-    apply(root, 0, sz, l, r, log, f);
+    apply(root, 0, sz, l, r, f, log);
   }
 
   template <class G> ull max_right(ull l, const G& g) {
     assert(l <= n);
     assert(g(e()));
     S product = e();
-    return max_right(root, 0, sz, l, log, g, product);
+    return max_right(root, 0, sz, l, g, log, product);
   }
 
   template <class G> ull min_left(ull r, const G& g) {
     assert(r <= n);
     assert(g(e()));
     S product = e();
-    return min_left(root, 0, sz, r, log, g, product);
+    return min_left(root, 0, sz, r, g, log, product);
   }
 
   ull size() const { return n; }
@@ -165,6 +156,22 @@ class dynamic_lazy_segtree {
     t->lzflag = false;
   }
 
+  void set(node*& t, ull a, ull b, ull i, S x, int h) {
+    if (!t) t = new node();
+    if (b - a == 1) {
+      t->val = x;
+      return;
+    }
+    push(t, h);
+    ull c = (a + b) / 2;
+    if (i < c) {
+      set(t->left, a, c, i, x, h - 1);
+    } else {
+      set(t->right, c, b, i, x, h - 1);
+    }
+    update(t, h);
+  }
+
   S prod(node* t, ull a, ull b, ull l, ull r, int h) {
     if (b <= l || r <= a) return e();
     if (l <= a && b <= r) return t ? t->val : initial_vals[h];
@@ -183,7 +190,23 @@ class dynamic_lazy_segtree {
               prod(t->right, c, b, l, r, h - 1));
   }
 
-  void apply(node*& t, ull a, ull b, ull l, ull r, int h, const F& f) {
+  void apply(node*& t, ull a, ull b, ull i, const F& f, int h) {
+    if (!t) t = new node();
+    if (b - a == 1) {
+      all_apply(t, f);
+      return;
+    }
+    push(t, h);
+    ull c = (a + b) / 2;
+    if (i < c) {
+      apply(t->left, a, c, i, f, h - 1);
+    } else {
+      apply(t->right, c, b, i, f, h - 1);
+    }
+    update(t, h);
+  }
+
+  void apply(node*& t, ull a, ull b, ull l, ull r, const F& f, int h) {
     if (b <= l || r <= a) return;
     if (!t) t = new node(initial_vals[h]);
     if (l <= a && b <= r) {
@@ -192,13 +215,13 @@ class dynamic_lazy_segtree {
     }
     push(t, h);
     ull c = (a + b) / 2;
-    apply(t->left, a, c, l, r, h - 1, f);
-    apply(t->right, c, b, l, r, h - 1, f);
+    apply(t->left, a, c, l, r, f, h - 1);
+    apply(t->right, c, b, l, r, f, h - 1);
     update(t, h);
   }
 
   template <class G>
-  ull max_right(node* t, ull a, ull b, ull l, int h, const G& g, S& product) {
+  ull max_right(node* t, ull a, ull b, ull l, const G& g, int h, S& product) {
     if (b <= l) return b;
     if (n <= a) return n;
     if (l <= a && b <= n) {
@@ -222,12 +245,12 @@ class dynamic_lazy_segtree {
     }
     push(t, h);
     ull c = (a + b) / 2;
-    ull test = max_right(t->left, a, c, l, h - 1, g, product);
-    return test < c ? test : max_right(t->right, c, b, l, h - 1, g, product);
+    ull test = max_right(t->left, a, c, l, g, h - 1, product);
+    return test < c ? test : max_right(t->right, c, b, l, g, h - 1, product);
   }
 
   template <class G>
-  ull min_left(node* t, ull a, ull b, ull r, int h, const G& g, S& product) {
+  ull min_left(node* t, ull a, ull b, ull r, const G& g, int h, S& product) {
     if (r <= a) return a;
     if (b <= r) {
       S val = t ? t->val : initial_vals[h];
@@ -250,8 +273,8 @@ class dynamic_lazy_segtree {
     }
     push(t, h);
     ull c = (a + b) / 2;
-    ull test = min_left(t->right, c, b, r, h - 1, g, product);
-    return test > c ? test : min_left(t->left, a, c, r, h - 1, g, product);
+    ull test = min_left(t->right, c, b, r, g, h - 1, product);
+    return test > c ? test : min_left(t->left, a, c, r, g, h - 1, product);
   }
 };
 
