@@ -19,6 +19,9 @@ struct random_graph_config {
   bool no_multiple_edges = false;
   bool connected = false;
   int start = 0;
+  // When both directed and connected are true, the generated graph is
+  // guaranteed to have all vertices reachable from start. Otherwise, the
+  // value of start has no significance.
 };
 
 std::vector<std::pair<int, int>> random_graph(int n, int m,
