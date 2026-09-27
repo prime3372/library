@@ -13,12 +13,12 @@ formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
   g.reserve(n);
   for (int k = 1; k < n; k *= 2) {
     auto g2 = g.prefix(2 * k);
-    internal::ntt(g2);
     auto h = f.prefix(2 * k) - log(g, 2 * k);
+    internal::ntt(g2);
     internal::ntt(h);
-    for (int i = 0; i < 2 * k; i++) h[i] *= g2[i];  // cyclic convolution
-    internal::intt(h);
-    for (int i = k; i < std::min(2 * k, n); i++) g.emplace_back(h[i]);
+    for (int i = 0; i < 2 * k; i++) g2[i] *= h[i];  // cyclic convolution
+    internal::intt(g2);
+    for (int i = k; i < std::min(2 * k, n); i++) g.emplace_back(g2[i]);
   }
   return g;
 }
