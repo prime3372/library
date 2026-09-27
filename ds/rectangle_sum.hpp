@@ -51,6 +51,7 @@ template <class T, class U> class rectangle_sum {
     return lower_sum(l, r, u) - lower_sum(l, r, d);
   }
 
+  // aggregate `[l, r) * [0, u)`
   U lower_sum(T l, T r, T u) {
     int left = int(std::lower_bound(xs.begin(), xs.end(), l) - xs.begin());
     int right = int(std::lower_bound(xs.begin(), xs.end(), r) - xs.begin());
