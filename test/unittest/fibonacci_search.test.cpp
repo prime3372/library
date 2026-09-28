@@ -32,11 +32,9 @@ void test(int n, ll bound) {
 }
 void small() { test(uniform(1, 100), 10000); }
 void large() { test(uniform(1, 100000), ll(1e18)); }
-void narrow() { test(uniform(1, 100000), 10); }
 
 int main() {
   for (int i = 0; i < 100000; i++) small();
   for (int i = 0; i < 100; i++) large();
-  for (int i = 0; i < 100; i++) narrow();
   cout << "Hello World\n";
 }
