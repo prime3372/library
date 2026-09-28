@@ -26,17 +26,13 @@ void test(f128 p10, int prec) {
   ss >> y;
   assert(abs(x - y) / x < 1e-32);
 }
-void tiny() { test(1e-30, 90); }
-void small() { test(1, 60); }
-void medium() { test(1e15, 45); }
-void large() { test(1e30, 15); }
-void huge() { test(1e60, 0); }
 
 int main() {
-  for (int i = 0; i < 10000; i++) tiny();
-  for (int i = 0; i < 10000; i++) small();
-  for (int i = 0; i < 10000; i++) medium();
-  for (int i = 0; i < 10000; i++) large();
-  for (int i = 0; i < 10000; i++) huge();
+  pair<f128, int> cases[] = {{1e-60, 120}, {1e-45, 105}, {1e-30, 90},
+                             {1e-15, 75},  {1, 60},      {1e15, 45},
+                             {1e30, 15},   {1e60, 0}};
+  for (auto [p10, prec] : cases) {
+    for (int i = 0; i < 10000; i++) test(p10, prec);
+  }                            
   cout << "Hello World\n";
 }
