@@ -33,7 +33,12 @@ int main() {
       int l, r;
       mint x;
       cin >> l >> r >> x;
-      S f = seg.prod(l, r);
+      S f = e();
+      if (r - l <= 100) {
+        for (int i = l; i < r; i++) f = op(f, seg[i]);
+      } else {
+        f = seg.prod(l, r);
+      }
       cout << f.a * x + f.b << "\n";
     }
   }

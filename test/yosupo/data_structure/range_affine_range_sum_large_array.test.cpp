@@ -35,11 +35,21 @@ int main() {
       int l, r;
       mint b, c;
       cin >> l >> r >> b >> c;
-      seg.apply(l, r, {b, c});
+      if (r - l <= 100) {
+        for (int i = l; i < r; i++) seg.apply(i, F{b, c});
+      } else {
+        seg.apply(l, r, F{b, c});
+      }
     } else {
       int l, r;
       cin >> l >> r;
-      cout << seg.prod(l, r).val << "\n";
+      S ans = e();
+      if (r - l <= 100) {
+        for (int i = l; i < r; i++) ans = op(ans, seg[i]);
+      } else {
+        ans = seg.prod(l, r);
+      }
+      cout << ans.val << "\n";
     }
   }
 }
