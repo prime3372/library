@@ -1,8 +1,8 @@
 #pragma once
 
-_Pragma("GCC target(\"avx2\")")
-_Pragma("GCC optimize(\"O3\")")
-_Pragma("GCC optimize(\"unroll-loops\")")
+_Pragma("GCC target(\"avx2\")");
+_Pragma("GCC optimize(\"O3\")");
+_Pragma("GCC optimize(\"unroll-loops\")");
 
 #include <bits/stdc++.h>
 
@@ -13,6 +13,55 @@ _Pragma("GCC optimize(\"unroll-loops\")")
 #include "util/io_utility.hpp"
 #include "util/math_utility.hpp"
 #include "util/static_modint.hpp"
+
+namespace cp {
+
+constexpr int INF = int(1e9);
+constexpr long long LINF = (long long)(2e18);
+
+template <class T> inline long long len(const T& a) { return a.size(); }
+
+template <class T> inline bool chmin(T& a, const T& b) {
+  return b < a ? (a = b, true) : false;
+}
+template <class T> inline bool chmax(T& a, const T& b) {
+  return b > a ? (a = b, true) : false;
+}
+
+template <class T> inline T min(const std::vector<T>& v) {
+  assert(!v.empty());
+  return *std::min_element(v.begin(), v.end());
+}
+template <class T> inline T max(const std::vector<T>& v) {
+  assert(!v.empty());
+  return *std::max_element(v.begin(), v.end());
+}
+
+template <class T, class U, class F = std::plus<T>>
+inline T accum(const std::vector<U>& v, U x, const F& f) {
+  return std::accumulate(v.begin(), v.end(), x, f);
+}
+
+template <class Container,
+          class Compare = std::less<std::ranges::range_value_t<Container>>>
+inline auto lowerb(const Container& a,
+                   std::ranges::range_value_t<Container> val,
+                   Compare compare = Compare()) {
+  return std::lower_bound(a.begin(), a.end(), val, compare);
+}
+template <class Container,
+          class Compare = std::less<std::ranges::range_value_t<Container>>>
+inline auto upperb(const Container& a,
+                   std::ranges::range_value_t<Container> val,
+                   Compare compare = Compare()) {
+  return std::upper_bound(a.begin(), a.end(), val, compare);
+}
+
+template <class T> inline bool inrange(const T& i, const T& a, const T& b) {
+  return a <= i && i < b;
+}
+
+}  // namespace cp
 
 #ifdef LOCAL
 #define local 1
@@ -99,48 +148,3 @@ using namespace std;
 
 using mint = cp::modint998244353;
 using namespace cp;
-
-constexpr int INF = int(1e9);
-constexpr ll LINF = (long long)(2e18);
-
-template <class T> inline ll len(const T& a) { return a.size(); }
-
-template <class T> inline bool chmin(T& a, const T& b) {
-  return b < a ? (a = b, true) : false;
-}
-template <class T> inline bool chmax(T& a, const T& b) {
-  return b > a ? (a = b, true) : false;
-}
-
-template <class T> inline T min(const std::vector<T>& v) {
-  assert(!v.empty());
-  return *std::min_element(v.begin(), v.end());
-}
-template <class T> inline T max(const std::vector<T>& v) {
-  assert(!v.empty());
-  return *std::max_element(v.begin(), v.end());
-}
-
-template <class T, class U, class F = std::plus<T>>
-inline T accum(const std::vector<U>& v, U x, const F& f) {
-  return std::accumulate(v.begin(), v.end(), x, f);
-}
-
-template <class Container,
-          class Compare = std::less<std::ranges::range_value_t<Container>>>
-inline auto lowerb(const Container& a,
-                   std::ranges::range_value_t<Container> val,
-                   Compare compare = Compare()) {
-  return std::lower_bound(a.begin(), a.end(), val, compare);
-}
-template <class Container,
-          class Compare = std::less<std::ranges::range_value_t<Container>>>
-inline auto upperb(const Container& a,
-                   std::ranges::range_value_t<Container> val,
-                   Compare compare = Compare()) {
-  return std::upper_bound(a.begin(), a.end(), val, compare);
-}
-
-template <class T> inline bool inrange(const T& i, const T& a, const T& b) {
-  return a <= i && i < b;
-}
