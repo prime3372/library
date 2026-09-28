@@ -4,6 +4,7 @@
 
 using namespace std;
 using namespace cp;
+using namespace io;
 
 int main() {
   ios_base::sync_with_stdio(false);
