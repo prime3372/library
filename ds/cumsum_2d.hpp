@@ -11,8 +11,6 @@ template <class T> class cumsum_2d {
   cumsum_2d() : n(0), m(0) {}
   explicit cumsum_2d(int _n, int _m)
       : n(_n), m(_m), val(_n, std::vector<T>(_m)) {}
-  explicit cumsum_2d(int _n, int _m, const T& x)
-      : n(_n), m(_m), val(_n, std::vector<T>(_m, x)) {}
 
   void accumulate() {
     cum.resize(n + 1, std::vector<T>(m + 1));
