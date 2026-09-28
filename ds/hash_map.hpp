@@ -7,7 +7,6 @@
 #include <utility>
 #include <vector>
 
-#include "util/io_utility.hpp"
 #include "util/safe_hash.hpp"
 
 namespace cp {
@@ -51,12 +50,6 @@ template <class Key, class Val> class hash_map {
   int size() const { return sz; }
 
   void set_default(const Val& v) { default_val = v; }
-
-  friend std::ostream& operator<<(std::ostream& os, const hash_map& mp) {
-    auto elems = mp.enumerate();
-    std::sort(elems.begin(), elems.end());
-    return os << elems;
-  }
 
  private:
   unsigned int cap, sz;

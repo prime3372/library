@@ -17,6 +17,7 @@ int main() {
   mint c;
   cin >> n >> c;
   fps f(n);
-  cin >> f;
-  cout << taylor_shift(f, c) << "\n";
+  for (mint& x : f) cin >> x;
+  auto g = taylor_shift(f, c);
+  for (mint& x : g) cout << x << " ";
 }

@@ -118,18 +118,6 @@ class formal_power_series : public std::vector<mint> {
 
   friend fps operator>>(const fps& f, int w) { return fps(f) >>= w; }
   friend fps operator<<(const fps& f, int w) { return fps(f) <<= w; }
-
-  friend std::istream& operator>>(std::istream& is, fps& rhs) {
-    for (mint& x : rhs) is >> x;
-    return is;
-  }
-  friend std::ostream& operator<<(std::ostream& os, const fps& rhs) {
-    for (int i = 0; i < int(rhs.size()); i++) {
-      os << rhs[i];
-      if (i != int(rhs.size()) - 1) os << " ";
-    }
-    return os;
-  }
 };
 
 template <class mint>

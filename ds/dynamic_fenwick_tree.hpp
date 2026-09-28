@@ -73,15 +73,6 @@ template <class T> class dynamic_fenwick_tree {
 
   ull size() const { return n; }
 
-  friend std::ostream& operator<<(std::ostream& os,
-                                  const dynamic_fenwick_tree& fw) {
-    for (ull i = 0; i < fw.n; i++) {
-      os << fw[i];
-      if (i != fw.n - 1) os << " ";
-    }
-    return os;
-  }
-
  private:
   ull n;
   hash_map<ull, T> d;

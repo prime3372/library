@@ -10,7 +10,6 @@
 
 #include "ds/cartesian_tree.hpp"
 #include "random/engine.hpp"
-#include "util/io_utility.hpp"
 
 namespace cp {
 
@@ -151,12 +150,6 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
 
   int size() const { return size(root); }
   bool empty() const { return size() == 0; }
-
-  friend std::ostream& operator<<(std::ostream& os, const treap& t) {
-    std::vector<T> v(t.size());
-    for (int i = 0; i < t.size(); i++) v[i] = t[i];
-    return os << v;
-  }
 
  private:
   struct node {

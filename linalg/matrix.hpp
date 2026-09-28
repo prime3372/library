@@ -85,25 +85,6 @@ class matrix : public std::vector<std::vector<T>> {
     }
     return r;
   }
-
-  friend std::istream& operator>>(std::istream& is, matrix& mat) {
-    for (int i = 0; i < mat.height(); i++) {
-      for (int j = 0; j < mat.width(); j++) {
-        is >> mat[i][j];
-      }
-    }
-    return is;
-  }
-  friend std::ostream& operator<<(std::ostream& os, const matrix& mat) {
-    for (int i = 0; i < mat.height(); i++) {
-      for (int j = 0; j < mat.width(); j++) {
-        os << mat[i][j];
-        if (j != mat.width() - 1) os << " ";
-      }
-      if (i != mat.height() - 1) os << "\n";
-    }
-    return os;
-  }
 };
 
 }  // namespace cp

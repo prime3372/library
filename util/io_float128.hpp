@@ -9,6 +9,8 @@
 
 namespace cp {
 
+namespace io {
+
 // fixed-point format only
 std::istream& operator>>(std::istream& is, __float128& val) {
   std::string s;
@@ -72,5 +74,7 @@ std::ostream& operator<<(std::ostream& os, __float128 x) {
 
   return os;
 }
+
+}  // namespace io
 
 }  // namespace cp

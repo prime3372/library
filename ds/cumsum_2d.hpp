@@ -67,17 +67,6 @@ template <class T> class cumsum_2d {
     return sum(i + 1, j + 1);
   }
 
-  friend std::ostream& operator<<(std::ostream& os, const cumsum_2d& sum) {
-    for (int i = 0; i < sum.n; i++) {
-      for (int j = 0; j < sum.m; j++) {
-        os << sum[i][j];
-        if (j != sum.m - 1) os << " ";
-      }
-      if (i != sum.n - 1) os << "\n";
-    }
-    return os;
-  }
-
  private:
   int n, m;
   bool accumulated = false;

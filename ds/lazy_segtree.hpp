@@ -7,8 +7,6 @@
 #include <string>
 #include <vector>
 
-#include "util/io_utility.hpp"
-
 namespace cp {
 
 template <class S, auto op, auto e, class F, auto act, auto compose, auto id>
@@ -157,12 +155,6 @@ class lazy_segtree {
   }
 
   int size() const { return n; }
-
-  friend std::ostream& operator<<(std::ostream& os, lazy_segtree seg) {
-    std::vector<S> v(seg.n);
-    for (int i = 0; i < seg.n; i++) v[i] = seg[i];
-    return os << v;
-  }
 
  private:
   int n, sz, log;

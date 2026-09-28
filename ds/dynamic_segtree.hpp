@@ -9,8 +9,6 @@
 #include <utility>
 #include <vector>
 
-#include "util/io_utility.hpp"
-
 namespace cp {
 
 template <class S, auto op, auto e> class dynamic_segtree {
@@ -105,13 +103,6 @@ template <class S, auto op, auto e> class dynamic_segtree {
   }
 
   ull size() const { return n; }
-
-  friend std::ostream& operator<<(std::ostream& os,
-                                  const dynamic_segtree& seg) {
-    std::vector<S> v(seg.n);
-    for (ull i = 0; i < seg.n; i++) v[i] = seg[i];
-    return os << v;
-  }
 
  private:
   struct node {

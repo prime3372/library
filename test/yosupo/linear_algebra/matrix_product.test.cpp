@@ -14,6 +14,15 @@ int main() {
   int n, m, k;
   cin >> n >> m >> k;
   matrix<mint> a(n, m), b(m, k);
-  cin >> a >> b;
-  cout << a * b << "\n";
+  for (auto& v : a) {
+    for (auto& x : v) cin >> x;
+  }
+  for (auto& v : b) {
+    for (auto& x : v) cin >> x;
+  }
+  a *= b;
+  for (auto& v : a) {
+    for (auto& x : v) cout << x << " ";
+    cout << "\n";
+  }
 }

@@ -7,8 +7,6 @@
 #include <string>
 #include <vector>
 
-#include "util/io_utility.hpp"
-
 namespace cp {
 
 template <class S, auto op, auto e> class segtree {
@@ -102,11 +100,6 @@ template <class S, auto op, auto e> class segtree {
   }
 
   int size() const { return n; }
-
-  friend std::ostream& operator<<(std::ostream& os, const segtree& seg) {
-    std::vector<S> v(seg.d.begin() + seg.sz, seg.d.begin() + seg.sz + seg.n);
-    return os << v;
-  }
 
  private:
   int n, sz, log;

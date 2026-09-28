@@ -75,17 +75,6 @@ template <class T> class fenwick_tree_2d {
     return sum(i + 1, j + 1);
   }
 
-  friend std::ostream& operator<<(std::ostream& os, const fenwick_tree_2d& fw) {
-    for (int i = 0; i < fw.n; i++) {
-      for (int j = 0; j < fw.m; j++) {
-        os << fw[i][j];
-        if (j != fw.m - 1) os << " ";
-      }
-      if (i != fw.n - 1) os << "\n";
-    }
-    return os;
-  }
-
  private:
   int n, m;
   std::vector<fenwick_tree<T>> fw;

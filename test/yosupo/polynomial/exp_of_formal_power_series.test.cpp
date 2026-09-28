@@ -16,6 +16,7 @@ int main() {
   int n;
   cin >> n;
   fps f(n);
-  cin >> f;
-  cout << exp(f) << "\n";
+  for (mint& x : f) cin >> x;
+  auto g = exp(f);
+  for (mint& x : g) cout << x << " ";
 }

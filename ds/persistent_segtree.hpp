@@ -9,8 +9,6 @@
 #include <utility>
 #include <vector>
 
-#include "util/io_utility.hpp"
-
 namespace cp {
 
 template <class S, auto op, auto e> class persistent_segtree {
@@ -84,13 +82,6 @@ template <class S, auto op, auto e> class persistent_segtree {
 
   node* snapshot() const { return root; }
   void restore(node* new_root) { root = new_root; }
-
-  friend std::ostream& operator<<(std::ostream& os,
-                                  const persistent_segtree& seg) {
-    std::vector<S> v(seg.n);
-    for (int i = 0; i < seg.n; i++) v[i] = seg[i];
-    return os << v;
-  }
 
  private:
   class node {

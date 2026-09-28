@@ -16,6 +16,7 @@ int main() {
   int n;
   cin >> n;
   fps f(n);
-  cin >> f;
-  cout << log(f) << "\n";
+  for (mint& x : f) cin >> x;
+  auto g = log(f);
+  for (mint& x : g) cout << x << " ";
 }

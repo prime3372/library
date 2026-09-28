@@ -17,6 +17,7 @@ int main() {
   long long m;
   cin >> n >> m;
   fps f(n);
-  cin >> f;
-  cout << pow(f, m) << "\n";
+  for (mint& x : f) cin >> x;
+  auto g = pow(f, m);
+  for (mint& x : g) cout << x << " ";
 }

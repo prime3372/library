@@ -16,6 +16,12 @@ int main() {
   ll k;
   cin >> n >> k;
   matrix<mint> a(n, n);
-  cin >> a;
-  cout << a.pow(k) << "\n";
+  for (auto& v : a) {
+    for (auto& x : v) cin >> x;
+  }
+  auto b = a.pow(k);
+  for (auto& v : b) {
+    for (auto& x : v) cout << x;
+    cout << "\n";
+  }
 }

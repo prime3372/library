@@ -21,7 +21,8 @@ int main() {
     int d;
     cin >> d;
     f[i].resize(d + 1);
-    cin >> f[i];
+    for (mint& x : f[i]) cin >> x;
   }
-  cout << prod(f) << "\n";
+  auto g = prod(f);
+  for (mint& x : g) cout << x << " ";
 }

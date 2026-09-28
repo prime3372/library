@@ -20,6 +20,8 @@
 
 namespace cp {
 
+namespace io {
+
 namespace internal {
 
 std::string combine_outputs(const std::vector<std::string>& outs) {
@@ -163,5 +165,7 @@ std::ostream& operator<<(std::ostream& os, const std::tuple<Args...>& t) {
       t);
   return os << internal::combine_outputs(outs);
 }
+
+}  // namespace io
 
 }  // namespace cp

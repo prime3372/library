@@ -178,11 +178,6 @@ class dynamic_bitset {
     return !(lhs == rhs);
   }
 
-  friend std::ostream& operator<<(std::ostream& os, const dynamic_bitset& s) {
-    for (int i = 0; i < s.n; i++) os << s[i];
-    return os;
-  }
-
  private:
   static constexpr int w = 64;
   int n;

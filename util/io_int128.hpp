@@ -7,6 +7,8 @@
 
 namespace cp {
 
+namespace io {
+
 std::istream& operator>>(std::istream& is, __int128& val) {
   std::string s;
   if (!(is >> s)) return is;
@@ -61,5 +63,7 @@ std::ostream& operator<<(std::ostream& os, unsigned __int128 val) {
   std::reverse(s.begin(), s.end());
   return os << s;
 }
+
+}  // namespace io
 
 }  // namespace cp
