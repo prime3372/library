@@ -30,9 +30,9 @@ void test(f128 p10, int prec) {
 int main() {
   pair<f128, int> cases[] = {{1e-60, 120}, {1e-45, 105}, {1e-30, 90},
                              {1e-15, 75},  {1, 60},      {1e15, 45},
-                             {1e30, 15},   {1e60, 0}};
+                             {1e30, 30},   {1e45, 15},   {1e60, 0}};
   for (auto [p10, prec] : cases) {
     for (int i = 0; i < 10000; i++) test(p10, prec);
-  }                            
+  }
   cout << "Hello World\n";
 }
