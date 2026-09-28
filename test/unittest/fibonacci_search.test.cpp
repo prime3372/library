@@ -2,7 +2,7 @@
   "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
 
 #include "random/engine.hpp"
-#include "util/golden_section_search.hpp"
+#include "util/fibonacci_search.hpp"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
@@ -23,7 +23,7 @@ void test(int n, ll bound) {
   std::reverse(a.end() - arg, a.end());
   std::rotate(a.begin(), a.end() - arg, a.end());
   auto f = [&](ll i) -> ll { return a[i]; };
-  auto ans = golden_section_search(f, 0, n - 1);
+  auto ans = fibonacci_search(f, 0, n - 1);
   assert(ans.first == arg);
   assert(ans.second == a[arg]);
 }

@@ -12,7 +12,7 @@ namespace cp {
 // [l, r]
 template <bool get_min = true, class F,
           class T = std::invoke_result_t<F, long long>>
-std::pair<long long, T> golden_section_search(F f, long long l, long long r) {
+std::pair<long long, T> fibonacci_search(F f, long long l, long long r) {
   assert(l <= r);
   long long a = l - 1, s = 1, t = 2;
   while (t < r - l + 2) std::swap(s += t, t);
