@@ -5,8 +5,6 @@
 #include <type_traits>
 #include <utility>
 
-#include "util/type_traits.hpp"
-
 namespace cp {
 
 // [l, r]
