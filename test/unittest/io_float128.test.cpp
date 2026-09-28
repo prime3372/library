@@ -19,9 +19,7 @@ f128 abs(f128 x) { return x < 0 ? -x : x; }
 void test(f128 p10, int prec) {
   stringstream ss;
   ss << fixed << setprecision(prec);
-  f128 x = uniform01();
-  x = x * x * x;
-  x *= p10;
+  f128 x = uniform01() * uniform01() * uniform01() * p10;
   if (uniform_bool()) x = -x;
   ss << x;
   f128 y;
