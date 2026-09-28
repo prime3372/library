@@ -74,7 +74,7 @@ std::vector<int> compress(Range a, Compare compare = Compare()) {
 template <class Range> requires(std::ranges::range<Range>)
 Range inverse(const Range& p) {
   Range q(p.size());
-  std::fill(q.begin(), q.end() - 1);
+  std::fill(q.begin(), q.end(), -1);
   for (int i = 0; i < int(p.size()); i++) {
     assert(0 <= p[i] && p[i] < int(p.size()));
     assert(q[p[i]] == -1);
