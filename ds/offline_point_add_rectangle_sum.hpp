@@ -10,7 +10,7 @@
 
 namespace cp {
 
-template <class T, class U> class offline_point_add_rectangle_sum {
+template <class T, class U, int bit_size = 25> class offline_point_add_rectangle_sum {
  public:
   offline_point_add_rectangle_sum() {}
 
@@ -80,7 +80,6 @@ template <class T, class U> class offline_point_add_rectangle_sum {
   }
 
  private:
-  static constexpr int bit_size = 32;
   int n = 0;
   std::vector<T> xs, ys;
   std::vector<U> ws;

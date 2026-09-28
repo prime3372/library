@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T, class U> class rectangle_sum {
+template <class T, class U, int bit_size = 25> class rectangle_sum {
  public:
   rectangle_sum() {}
 
@@ -74,7 +74,6 @@ template <class T, class U> class rectangle_sum {
   }
 
  private:
-  static constexpr int bit_size = 32;
   int n = 0;
   std::vector<T> xs, ys;
   std::vector<U> ws;

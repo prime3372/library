@@ -7,7 +7,8 @@
 
 namespace cp {
 
-template <class T, class Compare = std::less<T>> class range_kth_smallest {
+template <class T, class Compare = std::less<T>, int bit_size = 25>
+class range_kth_smallest {
  public:
   range_kth_smallest() {}
   explicit range_kth_smallest(const std::vector<T>& a) { init(a); }
@@ -45,7 +46,6 @@ template <class T, class Compare = std::less<T>> class range_kth_smallest {
   }
 
  private:
-  static constexpr int bit_size = 32;
   int n = 0;
   wavelet_matrix<bit_size> wm;
   coordinate_compression<T, Compare> cc;
