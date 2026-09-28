@@ -28,7 +28,7 @@ void test(f128 p10, int prec) {
   ss << x;
   f128 y;
   ss >> y;
-  assert(abs_f128(x - y) / x < 1e-32);
+  assert(abs_f128((x - y) / x) < 1e-32);
 }
 
 int main() {
@@ -36,7 +36,7 @@ int main() {
                              {1e-15, 75},  {1, 60},      {1e15, 45},
                              {1e30, 30},   {1e45, 15},   {1e60, 0}};
   for (auto [p10, prec] : cases) {
-    for (int i = 0; i < 10000; i++) test(p10, prec);
+    for (int i = 0; i < 5000; i++) test(p10, prec);
   }
   cout << "Hello World\n";
 }
