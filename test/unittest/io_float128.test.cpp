@@ -15,17 +15,20 @@ using namespace io;
 using ll = long long;
 using f128 = __float128;
 
-f128 abs(f128 x) { return x < 0 ? -x : x; }
+f128 abs_f128(f128 x) { return x < 0 ? -x : x; }
 
 void test(f128 p10, int prec) {
   stringstream ss;
   ss << fixed << setprecision(prec);
-  f128 x = uniform01() * uniform01() * uniform01() * p10;
+  f128 x = uniform01();
+  x *= uniform01();
+  x *= uniform01();
+  x *= p10;
   if (uniform_bool()) x = -x;
   ss << x;
   f128 y;
   ss >> y;
-  assert(abs(x - y) / x < 1e-32);
+  assert(abs_f128(x - y) / x < 1e-32);
 }
 
 int main() {
