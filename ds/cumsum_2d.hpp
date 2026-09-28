@@ -37,16 +37,15 @@ template <class T> class cumsum_2d {
   }
 
   T sum(int r, int u) {
+    assert(accumulated);
     assert(0 <= r && r <= n);
     assert(0 <= u && u <= m);
-    if (!accumulated) accumulate();
     return cum[r][u];
   }
-
   T sum(int l, int d, int r, int u) {
+    assert(accumulated);
     assert(0 <= l && l <= r && r <= n);
     assert(0 <= d && d <= u && u <= m);
-    if (!accumulated) accumulate();
     return cum[r][u] - cum[r][d] - cum[l][u] + cum[l][d];
   }
 
@@ -60,6 +59,7 @@ template <class T> class cumsum_2d {
   }
 
   T imos_get(int i, int j) {
+    assert(accumulated);
     assert(0 <= i && i < n);
     assert(0 <= j && j < m);
     return sum(i + 1, j + 1);
@@ -67,9 +67,9 @@ template <class T> class cumsum_2d {
 
  private:
   int n, m;
-  bool accumulated = false;
   std::vector<std::vector<T>> val;
   std::vector<std::vector<T>> cum;
+  bool accumulated = false;
 };
 
 }  // namespace cp

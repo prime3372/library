@@ -19,6 +19,7 @@ int main() {
     cin >> x1 >> y1 >> x2 >> y2;
     cum.imos_add(x1, y1, x2, y2, 1);
   }
+  cum.accumulate();
   int ans = 0;
   for (int i = 0; i <= 1000; i++) {
     for (int j = 0; j <= 1000; j++) {
