@@ -21,7 +21,7 @@ int main() {
   }
   auto b = a.pow(k);
   for (auto& v : b) {
-    for (auto& x : v) cout << x;
+    for (auto& x : v) cout << x << " ";
     cout << "\n";
   }
 }
