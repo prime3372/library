@@ -7,7 +7,7 @@
 
 namespace cp {
 
-template <class T, class Compare = std::less<T>, int bit_size = 25>
+template <class T, class Compare = std::less<T>, int bit_size = 24>
 class range_kth_smallest {
  public:
   range_kth_smallest() {}

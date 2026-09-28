@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T, class U, int bit_size = 25> class rectangle_sum {
+template <class T, class U, int bit_size = 24> class rectangle_sum {
  public:
   rectangle_sum() {}
 
