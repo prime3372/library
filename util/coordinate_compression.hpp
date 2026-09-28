@@ -16,10 +16,6 @@ template <class T, class Compare = std::less<T>> class coordinate_compression {
 
   void add(const T& x) { d.push_back(x); }
 
-  template <class... Args> void emplace(Args&&... args) {
-    d.emplace_back(std::forward<Args>(args)...);
-  }
-
   void init(const std::vector<T>& v = {}) {
     for (const T& x : v) add(x);
     std::sort(d.begin(), d.end(), Compare());
