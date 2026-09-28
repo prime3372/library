@@ -10,8 +10,8 @@
 namespace cp {
 
 // replace `a[i]` with `a[p[i]]` by the minimum number of `std::swap`
-template <class Container, class Indices>
-const Indices& rearrange(Container& a, const Indices& p) {
+template <class Range, class Indices> requires(std::ranges::range<Range>)
+const Indices& rearrange(Range& a, const Indices& p) {
   assert(a.size() == p.size());
   std::vector<bool> processed(a.size());
   for (int i = 0; i < int(a.size()); i++) {
@@ -26,10 +26,10 @@ const Indices& rearrange(Container& a, const Indices& p) {
   return p;
 }
 
-template <class Container,
-          class Compare = std::less<std::ranges::range_value_t<Container>>>
-std::vector<int> sorted_indices(const Container& a,
-                                Compare compare = Compare()) {
+template <class Range,
+          class Compare = std::less<std::ranges::range_value_t<Range>>>
+requires(std::ranges::range<Range>)
+std::vector<int> sorted_indices(const Range& a, Compare compare = Compare()) {
   std::vector<int> p(a.size());
   std::iota(p.begin(), p.end(), 0);
   std::sort(p.begin(), p.end(), [&](int i, int j) {
@@ -38,15 +38,17 @@ std::vector<int> sorted_indices(const Container& a,
   return p;
 }
 
-template <class Container,
-          class Compare = std::less<std::ranges::range_value_t<Container>>>
-std::vector<int> sort(Container&& a, Compare compare = Compare()) {
+template <class Range,
+          class Compare = std::less<std::ranges::range_value_t<Range>>>
+requires(std::ranges::range<Range>)
+std::vector<int> sort(Range& a, Compare compare = Compare()) {
   return rearrange(a, sorted_indices(a, compare));
 }
 
-template <class Container,
-          class Compare = std::less<std::ranges::range_value_t<Container>>>
-void sort_unique(Container& a, Compare compare = Compare()) {
+template <class Range,
+          class Compare = std::less<std::ranges::range_value_t<Range>>>
+requires(std::ranges::range<Range>)
+void sort_unique(Range& a, Compare compare = Compare()) {
   std::sort(a.begin(), a.end(), compare);
   a.erase(std::unique(a.begin(), a.end(),
                       [&](const auto& x, const auto& y) {
@@ -55,9 +57,10 @@ void sort_unique(Container& a, Compare compare = Compare()) {
           a.end());
 }
 
-template <class Container,
-          class Compare = std::less<std::ranges::range_value_t<Container>>>
-std::vector<int> compress(Container a, Compare compare = Compare()) {
+template <class Range,
+          class Compare = std::less<std::ranges::range_value_t<Range>>>
+requires(std::ranges::range<Range>)
+std::vector<int> compress(Range a, Compare compare = Compare()) {
   int n = int(a.size());
   std::vector<int> res(n);
   auto p = sort(a, compare);
@@ -68,9 +71,10 @@ std::vector<int> compress(Container a, Compare compare = Compare()) {
   return res;
 }
 
-template <class Container> Container inverse(const Container& p) {
-  Container q(p.size());
-  std::fill(q.begin(), q.end(), -1);
+template <class Range> requires(std::ranges::range<Range>)
+Range inverse(const Range& p) {
+  Range q(p.size());
+  std::fill(q.begin(), q.end() - 1);
   for (int i = 0; i < int(p.size()); i++) {
     assert(0 <= p[i] && p[i] < int(p.size()));
     assert(q[p[i]] == -1);
