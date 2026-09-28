@@ -22,7 +22,10 @@ void test(int n, ll bound) {
   int arg = uniform(0, n - 1);
   std::reverse(a.end() - arg, a.end());
   std::rotate(a.begin(), a.end() - arg, a.end());
-  auto f = [&](ll i) -> ll { return a[i]; };
+  auto f = [&](ll i) -> ll {
+    assert(0 <= i && i < n);
+    return a[i];
+  };
   auto ans = fibonacci_search(f, 0, n - 1);
   assert(ans.first == arg);
   assert(ans.second == a[arg]);
