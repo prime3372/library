@@ -78,7 +78,7 @@ class dynamic_lazy_segtree {
     assert(i < n);
     node* t = root;
     for (int h = log - 1; t && h >= 0; h--) {
-      push(t);
+      push(t, h + 1);
       t = ((i >> h) & 1 ? t->right : t->left);
     }
     return t ? t->val : initial_vals[0];
@@ -190,7 +190,7 @@ class dynamic_lazy_segtree {
   }
 
   void apply(node*& t, ull i, const F& f, int h) {
-    if (!t) t = new node();
+    if (!t) t = new node(initial_vals[h]);
     if (h == 0) {
       all_apply(t, f);
       return;
