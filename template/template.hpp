@@ -1,5 +1,9 @@
 #pragma once
 
+_Pragma("GCC target(\"avx2\")")
+_Pragma("GCC optimize(\"O3\")")
+_Pragma("GCC optimize(\"unroll-loops\")")
+
 #include <bits/stdc++.h>
 
 #include "random/engine.hpp"
