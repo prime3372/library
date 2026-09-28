@@ -11,6 +11,7 @@ template <class S, auto op, auto e> class slide_window_aggregation {
   slide_window_aggregation() : prod0(e()), prod1(e()) {}
 
   void push(const S& x) { push1(x); }
+
   void pop() {
     assert(!empty());
     if (val0.empty()) transfer();
@@ -19,10 +20,6 @@ template <class S, auto op, auto e> class slide_window_aggregation {
     prod0 = cum0.empty() ? e() : cum0.back();
   }
 
-  S front() const {
-    assert(!empty());
-    return val0.empty() ? val1.front() : val0.back();
-  }
   S prod() const { return op(prod0, prod1); }
 
   int size() const { return int(val0.size() + val1.size()); }

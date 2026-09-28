@@ -30,14 +30,6 @@ template <class S, auto op, auto e> class slide_window_aggregation_deque {
     prod1 = cum1.empty() ? e() : cum1.back();
   }
 
-  S front() const {
-    assert(!empty());
-    return val0.empty() ? val1.front() : val0.back();
-  }
-  S back() const {
-    assert(!empty());
-    return val1.empty() ? val0.front() : val1.back();
-  }
   S prod() const { return op(prod0, prod1); }
 
   int size() const { return int(val0.size() + val1.size()); }
