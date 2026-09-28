@@ -20,7 +20,7 @@ void test(f128 p10, int prec) {
   stringstream ss;
   ss << fixed << setprecision(prec);
   f128 x = uniform01();
-  x *= x;
+  x = x * x * x;
   x *= p10;
   if (uniform_bool()) x = -x;
   ss << x;
