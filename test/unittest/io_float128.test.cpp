@@ -11,6 +11,7 @@
 
 using namespace std;
 using namespace cp;
+using namespace io;
 using ll = long long;
 using f128 = __float128;
 
