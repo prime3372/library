@@ -58,7 +58,13 @@ int main() {
     } else if (t == 4) {
       int l, r;
       cin >> l >> r;
-      cout << seg.prod(l, r).val << "\n";
+      S ans = e();
+      if (r - l <= 100) {
+        for (int i = l; i < r; i++) ans = op(ans, seg[i]);
+      } else {
+        ans = seg.prod(l, r);
+      }
+      cout << ans.val << "\n";
     }
   }
 }
