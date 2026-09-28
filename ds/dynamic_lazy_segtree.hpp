@@ -163,7 +163,7 @@ class dynamic_lazy_segtree {
       return;
     }
     push(t, h);
-    if ((i >> h) & 1) {
+    if ((i >> (h - 1)) & 1) {
       set(t->right, i, x, h - 1);
     } else {
       set(t->left, i, x, h - 1);
@@ -196,7 +196,7 @@ class dynamic_lazy_segtree {
       return;
     }
     push(t, h);
-    if ((i >> h) & 1) {
+    if ((i >> (h - 1)) & 1) {
       apply(t->right, i, f, h - 1);
     } else {
       apply(t->left, i, f, h - 1);
