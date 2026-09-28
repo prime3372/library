@@ -23,7 +23,7 @@ class wavelet_matrix {
 
   void set(int i, ull x) {
     assert(0 <= i && i < n);
-    assert(bit_size == 64 || 0 <= x && x < (1ULL << bit_size));
+    assert(bit_size == 64 || x < (1ULL << bit_size));
     a[i] = x;
   }
 
