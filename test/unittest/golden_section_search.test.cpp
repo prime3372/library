@@ -2,7 +2,7 @@
   "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
 
 #include "random/engine.hpp"
-#include "util/golden_section_search.hpp"
+#include "other/golden_section_search.hpp"
 #include <iostream>
 #include <cmath>
 
