@@ -110,10 +110,12 @@ void no_edge() {
 }
 
 int main() {
-  for (int i = 0; i < 500; i++) {
+  for (int i = 0; i < 1000; i++) {
     bipartite_small_sparse();
-    bipartite_small_dense();
     nonbipartite_small_sparse();
+  }
+  for (int i = 0; i < 50; i++) {
+    bipartite_small_dense();
     nonbipartite_small_dense();
   }
   for (int i = 0; i < 5; i++) {
