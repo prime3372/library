@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <utility>
 #include <vector>
 
 namespace cp {
@@ -9,6 +10,9 @@ template <class T> class simple_queue {
  public:
   simple_queue() {}
   void push(const T& x) { payload.push_back(x); }
+  template <class... Args> void emplace(Args&&... args) {
+    push(T(std::forward<Args>(args)...));
+  }
   void pop() {
     assert(!empty());
     pos++;
