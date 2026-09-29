@@ -58,6 +58,23 @@ using is_integral = std::conditional_t<std::is_integral_v<T> ||
 
 template <class T> inline constexpr bool is_integral_v = is_integral<T>::value;
 
+// is_float128
+
+template <class T> using is_float128 = std::is_same<T, __float128>;
+
+template <class T> inline constexpr bool is_float128_v = is_float128<T>::value;
+
+// is_floating_point
+
+template <class T>
+using is_floating_point =
+    std::conditional_t<std::is_floating_point_v<T> ||
+                           is_float128_v<std::remove_cv_t<T>>,
+                       std::true_type, std::false_type>;
+
+template <class T>
+inline constexpr bool is_floating_point_v = is_floating_point<T>::value;
+
 // is_modint
 
 template <class> struct is_modint : public std::false_type {};
