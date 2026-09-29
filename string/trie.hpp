@@ -12,7 +12,6 @@ template <int char_size, char offset = 'a'> class trie {
    public:
     int parent() const { return par; }
     int count() const { return cnt; }
-    int subtree_sum() const { return sub; }
     int operator[](int i) const {
       assert(0 <= i && i < char_size);
       return to[i];
