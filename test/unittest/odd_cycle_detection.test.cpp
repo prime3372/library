@@ -27,23 +27,23 @@ void bipartite(int n, int m) {
   assert(detector.vertices.empty());
   assert(detector.edges.empty());
 }
-void bipartite_small() {
+void bipartite_small_sparse() {
   int n = uniform(2, 100);
-  int m = uniform(0, 100);
+  int m = uniform(0, 200);
   bipartite(n, m);
 }
-void bipartite_dense() {
+void bipartite_small_dense() {
   int n = uniform(2, 100);
-  int m = uniform(0, 100000);
+  int m = uniform(0, 50000);
   bipartite(n, m);
 }
-void bipartite_sparse() {
+void bipartite_large_sparse() {
   int n = uniform(2, 100000);
-  int m = uniform(0, 100000);
+  int m = uniform(0, 200000);
   bipartite(n, m);
 }
 
-void has_odd_cycle(int n, int m) {
+void nonbipartite(int n, int m) {
   int k = 2 * uniform(0, min(n - 1, m - 1) / 2) + 1;
   auto p = random_perm(n);
   std::vector<std::pair<int, int>> edges;
@@ -83,20 +83,20 @@ void has_odd_cycle(int n, int m) {
   std::sort(cycle_v.begin(), cycle_v.end());
   assert(std::unique(cycle_v.begin(), cycle_v.end()) == cycle_v.end());
 }
-void has_odd_cycle_small() {
-  int n = uniform(1, 100);
-  int m = uniform(1, 100);
-  has_odd_cycle(n, m);
+void nonbipartite_small_sparse() {
+  int n = uniform(2, 100);
+  int m = uniform(0, 200);
+  nonbipartite(n, m);
 }
-void has_odd_cycle_dense() {
-  int n = uniform(1, 100);
-  int m = uniform(1, 100000);
-  has_odd_cycle(n, m);
+void nonbipartite_small_dense() {
+  int n = uniform(2, 100);
+  int m = uniform(0, 50000);
+  nonbipartite(n, m);
 }
-void has_odd_cycle_sparse() {
-  int n = uniform(1, 100000);
-  int m = uniform(1, 100000);
-  has_odd_cycle(n, m);
+void nonbipartite_large_sparse() {
+  int n = uniform(2, 100000);
+  int m = uniform(0, 200000);
+  nonbipartite(n, m);
 }
 
 void no_edge() {
@@ -110,15 +110,15 @@ void no_edge() {
 }
 
 int main() {
-  for (int i = 0; i < 50000; i++) {
-    bipartite_small();
-    has_odd_cycle_small();
+  for (int i = 0; i < 500; i++) {
+    bipartite_small_sparse();
+    bipartite_small_dense();
+    nonbipartite_small_sparse();
+    nonbipartite_small_dense();
   }
   for (int i = 0; i < 5; i++) {
-    bipartite_dense();
-    bipartite_sparse();
-    has_odd_cycle_dense();
-    has_odd_cycle_sparse();
+    bipartite_large_sparse();
+    nonbipartite_large_sparse();
   }
   no_edge();
   cout << "Hello World\n";
