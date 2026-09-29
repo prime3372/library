@@ -77,14 +77,16 @@ template <bool directed> void has_odd_cycle(int n, int m) {
     int v = cycle_v[(i + 1) % cycle_len];
     assert(0 <= u && u < n);
     assert(0 <= v && v < n);
-    int eid = cycle_e[i];
-    assert(0 <= eid && eid < int(edges.size()));
-    int eu = edges[e_id].first;
-    int ev = edges[e_id].second;
+    int id = cycle_e[i];
+    assert(0 <= id && id < int(edges.size()));
+    int eu = edges[id].first;
+    int ev = edges[id].second;
     assert((u == eu && v == ev) || (u == ev && v == eu));
   }
   std::sort(cycle_v.begin(), cycle_v.end());
   assert(std::unique(cycle_v.begin(), cycle_v.end()) == cycle_v.end());
+  std::sort(cycle_e.begin(), cycle_e.end());
+  assert(std::unique(cycle_e.begin(), cycle_e.end()) == cycle_e.end());
 }
 void has_odd_cycle_small_sparse() {
   int n = uniform(2, 100);
