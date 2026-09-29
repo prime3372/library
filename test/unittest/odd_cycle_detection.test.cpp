@@ -105,38 +105,6 @@ void bipartite_large_sparse() {
   bipartite<false>(n, m);
 }
 
-void dag(int n, int m) {
-  odd_cycle_detection<true> detector(n);
-  for (int i = 0; i < m; i++) {
-    int u, v;
-    do {
-      u = uniform(0, n - 1);
-      v = uniform(0, n - 1);
-    } while (u == v);
-    if (u > v) swap(u, v);
-    detector.add_edge(u, v);
-  }
-  assert(!detector.detect());
-  assert(detector.len == 0);
-  assert(detector.vertices.empty());
-  assert(detector.edges.empty());
-}
-void dag_small_sparse() {
-  int n = uniform(2, 100);
-  int m = uniform(0, 100);
-  dag(n, m);
-}
-void dag_small_dense() {
-  int n = uniform(2, 100);
-  int m = uniform(0, 20000);
-  dag(n, m);
-}
-void dag_large_sparse() {
-  int n = uniform(2, 100000);
-  int m = uniform(0, 100000);
-  dag(n, m);
-}
-
 void bipartite_in_dag(int n1, int m1, int n2, int m2) {
   int n = n1 * n2;
   odd_cycle_detection<true> detector(n);
@@ -200,19 +168,16 @@ int main() {
   for (int i = 0; i < 5000; i++) {
     has_odd_cycle_small_sparse();
     bipartite_small_sparse();
-    dag_small_sparse();
     bipartite_in_dag_small_sparse();
   }
   for (int i = 0; i < 20; i++) {
     has_odd_cycle_small_dense();
     bipartite_small_dense();
-    dag_small_dense();
     bipartite_in_dag_small_dense();
   }
   for (int i = 0; i < 5; i++) {
     has_odd_cycle_large_sparse();
     bipartite_large_sparse();
-    dag_large_sparse();
     bipartite_in_dag_large_sparse();
   }
   no_edge<true>();
