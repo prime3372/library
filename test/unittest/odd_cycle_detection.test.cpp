@@ -19,6 +19,7 @@ void bipartite(int n, int m) {
   for (int i = 0; i < m; i++) {
     int u = p[uniform(0, l - 1)];
     int v = p[uniform(l, n - 1)];
+    if (uniform_bool()) swap(u, v);
     detector.add_edge(u, v);
   }
   assert(!detector.detect());
@@ -47,7 +48,10 @@ void has_odd_cycle(int n, int m) {
   auto p = random_perm(n);
   std::vector<std::pair<int, int>> edges;
   for (int i = 0; i < k; i++) {
-    edges.emplace_back(p[i], p[(i + 1) % k]);
+    int u = p[i];
+    int v = p[(i + 1) % k];
+    if (uniform_bool()) swap(u, v);
+    edges.emplace_back(u, v);
   }
   for (int i = 0; i < m - k; i++) {
     int u = uniform(0, n - 1);
