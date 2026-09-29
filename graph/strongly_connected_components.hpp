@@ -24,13 +24,13 @@ class strongly_connected_components {
 
   strongly_connected_components& build() {
     int now_ord = 0;
-    std::vector<int> visited, low(n), ord(n, -1);
-    visited.reserve(n);
+    std::vector<int> st, low(n), ord(n, -1);
+    st.reserve(n);
     group_num = 0;
 
     auto dfs = [&](auto self, int v) -> void {
       low[v] = ord[v] = now_ord++;
-      visited.push_back(v);
+      st.push_back(v);
       for (int to : g[v]) {
         if (ord[to] == -1) {
           self(self, to);
@@ -41,8 +41,8 @@ class strongly_connected_components {
       }
       if (low[v] == ord[v]) {
         while (true) {
-          int u = visited.back();
-          visited.pop_back();
+          int u = st.back();
+          st.pop_back();
           ord[u] = n;
           id[u] = group_num;
           if (u == v) break;
