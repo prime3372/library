@@ -18,4 +18,12 @@ std::vector<int> random_perm(int n) {
   return p;
 }
 
+std::vector<int> random_comb(int n, int r) {
+  assert(0 <= r && r <= n);
+  auto p = random_perm(n);
+  std::sort(p.begin(), p.begin() + r);
+  p.erase(p.begin() + r, p.end());
+  return p;
+}
+
 }  // namespace cp
