@@ -35,7 +35,7 @@ void bipartite_small_sparse() {
 }
 void bipartite_small_dense() {
   int n = uniform(2, 100);
-  int m = uniform(0, 20000);
+  int m = uniform(0, 10000);
   bipartite<true>(n, m);
   bipartite<false>(n, m);
 }
@@ -96,7 +96,7 @@ void has_odd_cycle_small_sparse() {
 }
 void has_odd_cycle_small_dense() {
   int n = uniform(2, 100);
-  int m = uniform(1, 20000);
+  int m = uniform(1, 10000);
   has_odd_cycle<true>(n, m);
   has_odd_cycle<false>(n, m);
 }
@@ -122,7 +122,7 @@ int main() {
     bipartite_small_sparse();
     has_odd_cycle_small_sparse();
   }
-  for (int i = 0; i < 50; i++) {
+  for (int i = 0; i < 100; i++) {
     bipartite_small_dense();
     has_odd_cycle_small_dense();
   }
