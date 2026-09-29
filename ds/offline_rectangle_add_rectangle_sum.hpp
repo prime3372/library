@@ -22,12 +22,12 @@ template <class T, class U> class offline_rectangle_add_rectangle_sum {
 
   void sum(T l, T d, T r, T u) {
     assert(l <= r && d <= u);
-    asked_sum = true;
     lower_left_sum(l, d, qn, false);
     lower_left_sum(l, u, qn, true);
     lower_left_sum(r, d, qn, true);
     lower_left_sum(r, u, qn, false);
     qn++;
+    asked_sum = true;
   }
 
   std::vector<U> run() {
