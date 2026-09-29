@@ -54,6 +54,7 @@ void has_odd_cycle(int n, int m) {
     int v = uniform(0, n - 1);
     edges.emplace_back(u, v);
   }
+  shuffle(edges);
   odd_cycle_detection detector(n);
   for (auto [u, v] : edges) detector.add_edge(u, v);
   assert(detector.detect());
