@@ -46,6 +46,38 @@ void bipartite_large_sparse() {
   bipartite<false>(n, m);
 }
 
+void dag(int n, int m) {
+  odd_cycle_detection<true> detector(n);
+  for (int i = 0; i < m; i++) {
+    int u, v;
+    do {
+      u = uniform(0, n - 1);
+      v = uniform(0, n - 1);
+    } while (u == v);
+    if (u > v) swap(u, v);
+    detector.add_edge(u, v);
+  }
+  assert(!detector.detect());
+  assert(detector.len == 0);
+  assert(detector.vertices.empty());
+  assert(detector.edges.empty());
+}
+void dag_small_sparse() {
+  int n = uniform(2, 100);
+  int m = uniform(0, 100);
+  dag(n, m);
+}
+void dag_small_dense() {
+  int n = uniform(2, 100);
+  int m = uniform(0, 20000);
+  dag(n, m);
+}
+void dag_large_sparse() {
+  int n = uniform(2, 100000);
+  int m = uniform(0, 100000);
+  dag(n, m);
+}
+
 template <bool directed> void has_odd_cycle(int n, int m) {
   int k = 2 * uniform(0, min(n - 1, m - 1) / 2) + 1;
   auto p = random_perm(n);
@@ -103,38 +135,6 @@ void has_odd_cycle_large_sparse() {
   int m = uniform(0, 100000);
   has_odd_cycle<true>(n, m);
   has_odd_cycle<false>(n, m);
-}
-
-void dag(int n, int m) {
-  odd_cycle_detection<true> detector(n);
-  for (int i = 0; i < m; i++) {
-    int u, v;
-    do {
-      u = uniform(0, n - 1);
-      v = uniform(0, n - 1);
-    } while (u == v);
-    if (u > v) swap(u, v);
-    detector.add_edge(u, v);
-  }
-  assert(!detector.detect());
-  assert(detector.len == 0);
-  assert(detector.vertices.empty());
-  assert(detector.edges.empty());
-}
-void dag_small_sparse() {
-  int n = uniform(2, 100);
-  int m = uniform(0, 100);
-  dag(n, m);
-}
-void dag_small_dense() {
-  int n = uniform(2, 100);
-  int m = uniform(0, 20000);
-  dag(n, m);
-}
-void dag_large_sparse() {
-  int n = uniform(2, 100000);
-  int m = uniform(0, 100000);
-  dag(n, m);
 }
 
 int main() {
