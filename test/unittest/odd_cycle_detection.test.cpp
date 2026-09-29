@@ -137,6 +137,16 @@ void has_odd_cycle_large_sparse() {
   has_odd_cycle<false>(n, m);
 }
 
+template <bool directed> void no_edge() {
+  for (int i = 0; i <= 10; i++) {
+    odd_cycle_detection<directed> detector(i);
+    assert(!detector.detect());
+    assert(detector.len == 0);
+    assert(detector.vertices.empty());
+    assert(detector.edges.empty());
+  }
+}
+
 int main() {
   for (int i = 0; i < 5000; i++) {
     bipartite_small_sparse();
@@ -153,5 +163,7 @@ int main() {
     dag_large_sparse();
     has_odd_cycle_large_sparse();
   }
+  no_edge<true>();
+  no_edge<false>();
   cout << "Hello World\n";
 }
