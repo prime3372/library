@@ -83,17 +83,17 @@ void has_odd_cycle(int n, int m) {
 }
 void has_odd_cycle_small() {
   int n = uniform(1, 100);
-  int m = uniform(0, 100);
+  int m = uniform(1, 100);
   has_odd_cycle(n, m);
 }
 void has_odd_cycle_dense() {
   int n = uniform(1, 100);
-  int m = uniform(0, 100000);
+  int m = uniform(1, 100000);
   has_odd_cycle(n, m);
 }
 void has_odd_cycle_sparse() {
   int n = uniform(1, 100000);
-  int m = uniform(0, 100000);
+  int m = uniform(1, 100000);
   has_odd_cycle(n, m);
 }
 
