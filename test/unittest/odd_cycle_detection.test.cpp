@@ -100,7 +100,7 @@ void has_odd_cycle_sparse() {
 }
 
 void no_edge() {
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i <= 10; i++) {
     odd_cycle_detection detector(i);
     assert(!detector.detect());
     assert(detector.len == 0);
