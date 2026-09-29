@@ -25,20 +25,19 @@ class odd_cycle_detection {
   bool detect() {
     vertices.clear();
     edges.clear();
-    std::vector<int> color(n, -1);
-    std::vector<bool> stacked(n);
+    std::vector<bool> color(n), stacked(n), finished(n);
     auto dfs = [&](auto self, int v, int id) -> int {
       stacked[v] = true;
       for (auto e : g[v]) {
         if (e.id == id) continue;
-        if (color[e.to] != -1) {
-          if (stacked[e.to] && color[e.to] == color[v]) {
+        if (stacked[e.to]) {
+          if (color[e.to] == color[v]) {
             vertices.push_back(v);
             edges.push_back(e.id);
             return e.to == v ? n : e.to;
           }
-        } else {
-          color[e.to] = 1 - color[v];
+        } else if (!finished[e.to]) {
+          color[e.to] = !color[v];
           int ret = self(self, e.to, e.id);
           if (ret == -1) continue;
           if (ret == n) return n;
@@ -48,12 +47,11 @@ class odd_cycle_detection {
         }
       }
       stacked[v] = false;
+      finished[v] = true;
       return -1;
     };
     for (int v = 0; v < n; v++) {
-      if (color[v] != -1) continue;
-      color[v] = 0;
-      if (dfs(dfs, v, -1) == n) break;
+      if (!finished[v] && dfs(dfs, v, -1) == n) break;
     }
     std::reverse(vertices.begin(), vertices.end());
     std::reverse(edges.begin(), edges.end());
