@@ -98,6 +98,14 @@ void has_odd_cycle_sparse() {
   has_odd_cycle(n, m);
 }
 
+void empty() {
+  odd_cycle_detection detector(0);
+  assert(!detector.detect());
+  assert(detector.len == 0);
+  assert(detector.vertices.empty());
+  assert(detector.edges.empty());
+}
+
 int main() {
   for (int i = 0; i < 50000; i++) {
     bipartite_small();
@@ -109,5 +117,6 @@ int main() {
     has_odd_cycle_dense();
     has_odd_cycle_sparse();
   }
+  empty();
   cout << "Hello World\n";
 }
