@@ -1,0 +1,72 @@
+#pragma once
+
+#include <algorithm>
+#include <cassert>
+#include <vector>
+
+namespace cp {
+
+class odd_cycle_detection {
+ public:
+  odd_cycle_detection() : n(0) {}
+  explicit odd_cycle_detection(int _n) : n(_n), g(_n) {}
+
+  int add_edge(int u, int v) {
+    assert(0 <= u && u < n);
+    assert(0 <= v && v < n);
+    g[u].push_back(edge{v, m});
+    g[v].push_back(edge{u, m});
+    return m++;
+  }
+
+  int len = -1;
+  std::vector<int> vertices, edges;
+
+  bool detect() {
+    vertices.clear();
+    edges.clear();
+    std::vector<int> color(n, -1);
+    std::vector<bool> stacked(n);
+    auto dfs = [&](auto self, int v, int id) -> int {
+      stacked[v] = true;
+      for (auto e : g[v]) {
+        if (e.id == id) continue;
+        if (color[e.to] != -1) {
+          if (stacked[e.to] && color[e.to] == color[v]) {
+            vertices.push_back(v);
+            edges.push_back(e.id);
+            return e.to == v ? n : e.to;
+          }
+        } else {
+          color[e.to] = 1 - color[v];
+          int ret = self(self, e.to, e.id);
+          if (ret == -1) continue;
+          if (ret == n) return n;
+          vertices.push_back(v);
+          edges.push_back(e.id);
+          return ret == v ? n : ret;
+        }
+      }
+      stacked[v] = false;
+      return -1;
+    };
+    for (int v = 0; v < n; v++) {
+      if (color[v] != -1) continue;
+      color[v] = 0;
+      if (dfs(dfs, v, -1) == n) break;
+    }
+    std::reverse(vertices.begin(), vertices.end());
+    std::reverse(edges.begin(), edges.end());
+    len = int(vertices.size());
+    return len != 0;
+  }
+
+ private:
+  int n, m = 0;
+  struct edge {
+    int to, id;
+  };
+  std::vector<std::vector<edge>> g;
+};
+
+}  // namespace cp
