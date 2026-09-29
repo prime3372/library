@@ -118,15 +118,15 @@ template <bool directed> void no_edge() {
 }
 
 int main() {
-  for (int i = 0; i < 5000; i++) {
+  for (int i = 0; i < 10000; i++) {
     bipartite_small_sparse();
     has_odd_cycle_small_sparse();
   }
-  for (int i = 0; i < 20; i++) {
+  for (int i = 0; i < 50; i++) {
     bipartite_small_dense();
     has_odd_cycle_small_dense();
   }
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 10; i++) {
     bipartite_large_sparse();
     has_odd_cycle_large_sparse();
   }
