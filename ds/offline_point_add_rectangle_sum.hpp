@@ -29,7 +29,7 @@ template <class T, class U, int bit_size = 24> class offline_point_add_rectangle
     for (int i = 0; i < n; i++) wm.set(i, q[p[i]]);
     wm.init();
 
-    fw.assign(bit_size, fenwick_tree<U>(n + 1));
+    fw.assign(bit_size, fenwick_tree<U>(n));
     for (int i = 0; i < n; i++) {
       int k = i;
       for (int h = bit_size - 1; h >= 0; h--) {
