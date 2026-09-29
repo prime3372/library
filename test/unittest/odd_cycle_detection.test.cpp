@@ -99,12 +99,14 @@ void has_odd_cycle_sparse() {
   has_odd_cycle(n, m);
 }
 
-void empty() {
-  odd_cycle_detection detector(0);
-  assert(!detector.detect());
-  assert(detector.len == 0);
-  assert(detector.vertices.empty());
-  assert(detector.edges.empty());
+void no_edge() {
+  for (int i = 0; i < 10; i++) {
+    odd_cycle_detection detector(i);
+    assert(!detector.detect());
+    assert(detector.len == 0);
+    assert(detector.vertices.empty());
+    assert(detector.edges.empty());
+  }
 }
 
 int main() {
@@ -118,6 +120,6 @@ int main() {
     has_odd_cycle_dense();
     has_odd_cycle_sparse();
   }
-  empty();
+  no_edge();
   cout << "Hello World\n";
 }
