@@ -7,8 +7,11 @@
 
 namespace cp {
 
-// `f` is called exactly `k + 2` times.
 // @return pair(argmin, min)
+// @note The error of argmin is at most 1/phi^k. (phi is the golden ratio)
+// @note k = 44 : error < 1e-9
+// @note k = 87 : error < 1e-18
+// @note f is called exactly k+2 times.
 template <class F, class T = std::invoke_result_t<F, long double>,
           class Compare = std::less<T>>
 std::pair<long double, T> golden_section_search(F f, long double l,
