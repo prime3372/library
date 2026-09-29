@@ -28,7 +28,7 @@ class odd_cycle_detection {
     std::vector<bool> color(n), stacked(n), finished(n);
     auto dfs = [&](auto self, int v, int id) -> int {
       stacked[v] = true;
-      for (auto e : g[v]) {
+      for (edge& e : g[v]) {
         if (e.id == id) continue;
         if (stacked[e.to]) {
           if (color[e.to] == color[v]) {
