@@ -12,28 +12,6 @@
 using namespace std;
 using namespace cp;
 
-void check_odd_cycle(int n, const std::vector<std::pair<int, int>>& edges,
-                     std::vector<int> cycle_v,
-                     const std::vector<int>& cycle_e) {
-  assert(!cycle_v.empty());
-  assert(cycle_v.size() == cycle_e.size());
-  assert(cycle_v.size() % 2 == 1);
-  int len = int(cycle_v.size());
-  for (int i = 0; i < len; ++i) {
-    int u = cycle_v[i];
-    int v = cycle_v[(i + 1) % len];
-    assert(0 <= u && u < n);
-    assert(0 <= v && v < n);
-    int e_id = cycle_e[i];
-    assert(0 <= e_id && e_id < int(edges.size()));
-    int eu = edges[e_id].first;
-    int ev = edges[e_id].second;
-    assert((u == eu && v == ev) || (u == ev && v == eu));
-  }
-  std::sort(cycle_v.begin(), cycle_v.end());
-  assert(std::unique(cycle_v.begin(), cycle_v.end()) == cycle_v.end());
-}
-
 void bipartite(int n, int m) {
   odd_cycle_detection detector(n);
   int l = uniform(1, n - 1);
@@ -65,13 +43,13 @@ void bipartite_sparse() {
 }
 
 void has_odd_cycle(int n, int m) {
-  int cycle_len = 2 * uniform(0, min(n - 1, m - 1) / 2) + 1;
+  int k = 2 * uniform(0, min(n - 1, m - 1) / 2) + 1;
   auto p = random_perm(n);
   std::vector<std::pair<int, int>> edges;
-  for (int i = 0; i < cycle_len; i++) {
-    edges.emplace_back(p[i], p[(i + 1) % cycle_len]);
+  for (int i = 0; i < k; i++) {
+    edges.emplace_back(p[i], p[(i + 1) % k]);
   }
-  for (int i = 0; i < m - cycle_len; i++) {
+  for (int i = 0; i < m - k; i++) {
     int u = uniform(0, n - 1);
     int v = uniform(0, n - 1);
     edges.emplace_back(u, v);
@@ -79,7 +57,26 @@ void has_odd_cycle(int n, int m) {
   odd_cycle_detection detector(n);
   for (auto [u, v] : edges) detector.add_edge(u, v);
   assert(detector.detect());
-  check_odd_cycle(n, edges, detector.vertices, detector.edges);
+  int cycle_len = detector.len;
+  auto& cycle_v = detector.vertices;
+  auto& cycle_e = detector.edges;
+  assert(!cycle_v.empty());
+  assert(int(cycle_v.size()) == cycle_len);
+  assert(int(cycle_e.size()) == cycle_len);
+  assert(cycle_v.size() % 2 == 1);
+  for (int i = 0; i < cycle_len; ++i) {
+    int u = cycle_v[i];
+    int v = cycle_v[(i + 1) % cycle_len];
+    assert(0 <= u && u < n);
+    assert(0 <= v && v < n);
+    int e_id = cycle_e[i];
+    assert(0 <= e_id && e_id < int(edges.size()));
+    int eu = edges[e_id].first;
+    int ev = edges[e_id].second;
+    assert((u == eu && v == ev) || (u == ev && v == eu));
+  }
+  std::sort(cycle_v.begin(), cycle_v.end());
+  assert(std::unique(cycle_v.begin(), cycle_v.end()) == cycle_v.end());
 }
 void has_odd_cycle_small() {
   int n = uniform(1, 100);
