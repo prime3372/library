@@ -12,7 +12,7 @@ using ll = long long;
 void test() {
   int c = uniform(1, int(1e9));
   auto f = [&](double x) -> double { return x + c / x; };
-  auto ans = golden_section_search(f, 0.0, 1e9 + 10, 60);
+  auto ans = golden_section_search(f, 0.0, 1e9 + 10, 100);
   double sq = sqrt(c);
   assert(abs((ans.first - sq) / sq) < 1e-6);
   assert(abs((ans.second - f(sq)) / f(sq)) < 1e-6);
