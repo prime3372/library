@@ -29,6 +29,7 @@ class cartesian_tree {
     left.assign(n, -1);
     right.assign(n, -1);
     std::vector<int> st;
+    st.reserve(n);
     for (int i = 0; i < n; i++) {
       int k = -1;
       while (!st.empty() && compare(a[i], a[st.back()])) {
