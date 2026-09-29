@@ -16,7 +16,7 @@ void bipartite(int n, int m) {
   odd_cycle_detection detector(n);
   int l = uniform(1, n - 1);
   auto p = random_perm(n);
-  for (int i = 0; i < m; ++i) {
+  for (int i = 0; i < m; i++) {
     int u = p[uniform(0, l - 1)];
     int v = p[uniform(l, n - 1)];
     detector.add_edge(u, v);
