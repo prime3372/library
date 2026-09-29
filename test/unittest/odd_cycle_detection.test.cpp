@@ -48,7 +48,7 @@ void bipartite_large_sparse() {
 
 template <bool directed> void has_odd_cycle(int n, int m) {
   int k = 2 * uniform(0, min(n - 1, m - 1) / 2) + 1;
-  std::vector<std::pair<int, int>> edges;
+  vector<pair<int, int>> edges;
   auto p = random_perm(n);
   for (int i = 0; i < k; i++) {
     int u = p[i];
@@ -83,26 +83,26 @@ template <bool directed> void has_odd_cycle(int n, int m) {
     int ev = edges[id].second;
     assert((u == eu && v == ev) || (u == ev && v == eu));
   }
-  std::sort(cycle_v.begin(), cycle_v.end());
-  assert(std::unique(cycle_v.begin(), cycle_v.end()) == cycle_v.end());
-  std::sort(cycle_e.begin(), cycle_e.end());
-  assert(std::unique(cycle_e.begin(), cycle_e.end()) == cycle_e.end());
+  sort(cycle_v.begin(), cycle_v.end());
+  assert(unique(cycle_v.begin(), cycle_v.end()) == cycle_v.end());
+  sort(cycle_e.begin(), cycle_e.end());
+  assert(unique(cycle_e.begin(), cycle_e.end()) == cycle_e.end());
 }
 void has_odd_cycle_small_sparse() {
   int n = uniform(2, 100);
-  int m = uniform(0, 100);
+  int m = uniform(1, 100);
   has_odd_cycle<true>(n, m);
   has_odd_cycle<false>(n, m);
 }
 void has_odd_cycle_small_dense() {
   int n = uniform(2, 100);
-  int m = uniform(0, 20000);
+  int m = uniform(1, 20000);
   has_odd_cycle<true>(n, m);
   has_odd_cycle<false>(n, m);
 }
 void has_odd_cycle_large_sparse() {
   int n = uniform(2, 100000);
-  int m = uniform(0, 100000);
+  int m = uniform(1, 100000);
   has_odd_cycle<true>(n, m);
   has_odd_cycle<false>(n, m);
 }
