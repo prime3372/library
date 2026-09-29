@@ -4,18 +4,22 @@
 #include <cassert>
 #include <vector>
 
+#include "ds/simple_queue.hpp"
+#include "graph/strongly_connected_components.hpp"
+
 namespace cp {
 
-class odd_cycle_detection {
+template <bool directed> class odd_cycle_detection {
  public:
   odd_cycle_detection() : n(0) {}
-  explicit odd_cycle_detection(int _n) : n(_n), g(_n) {}
+  explicit odd_cycle_detection(int _n) : n(_n), g(_n), scc(_n) {}
 
-  int add_edge(int u, int v) {
-    assert(0 <= u && u < n);
-    assert(0 <= v && v < n);
-    g[u].push_back(edge{v, m});
-    g[v].push_back(edge{u, m});
+  int add_edge(int from, int to) {
+    assert(0 <= from && from < n);
+    assert(0 <= to && to < n);
+    g[from].push_back(edge{to, m});
+    if (!directed) g[to].push_back(edge{from, m});
+    if (directed) scc.add_edge(from, to);
     return m++;
   }
 
@@ -25,38 +29,60 @@ class odd_cycle_detection {
   bool detect() {
     vertices.clear();
     edges.clear();
-    std::vector<bool> color(n), stacked(n), finished(n);
-    auto dfs = [&](auto self, int v, int id) -> int {
-      stacked[v] = true;
-      for (edge& e : g[v]) {
-        if (e.id == id) continue;
-        if (stacked[e.to]) {
-          if (color[e.to] == color[v]) {
-            vertices.push_back(v);
-            edges.push_back(e.id);
-            return e.to == v ? n : e.to;
+    if (directed) scc.build();
+    std::vector<int> dist(2 * n, 2 * n), prev_v(2 * n, -1), prev_e(2 * n, -1);
+    simple_queue<int> que;
+    for (int s = 0; s < n; s++) {
+      if (dist[2 * s + 0] < 2 * n) continue;
+      if (dist[2 * s + 1] < 2 * n) continue;
+      dist[2 * s + 0] = 0;
+      prev_v[2 * s + 0] = 2 * s + 0;
+      que.emplace(2 * s);
+      while (!que.empty()) {
+        int x = que.front();
+        que.pop();
+        int v = x / 2, parity = x % 2;
+        for (edge& e : g[v]) {
+          if (directed && scc.id[v] != scc.id[e.to]) continue;
+          int y = 2 * e.to + !parity;
+          if (dist[y] == 2 * n) {
+            dist[y] = dist[x] + 1;
+            prev_v[y] = x;
+            prev_e[y] = e.id;
+            que.push(y);
           }
-        } else if (!finished[e.to]) {
-          color[e.to] = !color[v];
-          int ret = self(self, e.to, e.id);
-          if (ret == -1) continue;
-          if (ret == n) return n;
-          vertices.push_back(v);
-          edges.push_back(e.id);
-          return ret == v ? n : ret;
         }
       }
-      stacked[v] = false;
-      finished[v] = true;
-      return -1;
-    };
-    for (int i = 0; i < n; i++) {
-      if (!finished[i] && dfs(dfs, i, -1) == n) break;
+      if (dist[2 * s + 1] == 2 * n) continue;
+
+      // found
+      for (int v = 2 * s + 1; v != 2 * s; v = prev_v[v]) {
+        vertices.push_back(v / 2);
+        edges.push_back(prev_e[v]);
+      }
+      vertices.push_back(s);
+      std::reverse(vertices.begin(), vertices.end());
+      std::reverse(edges.begin(), edges.end());
+
+      // walk -> cycle
+      std::vector<int> used(n, -1);
+      int l = -1, r = -1;
+      for (int i = 0; i < int(vertices.size()); i++) {
+        if (used[vertices[i]] == -1) {
+          used[vertices[i]] = i;
+        } else {
+          l = used[vertices[i]];
+          r = i;
+          break;
+        }
+      }
+      len = r - l;
+      vertices = std::vector(vertices.begin() + l, vertices.begin() + r);
+      edges = std::vector(edges.begin() + l, edges.begin() + r);
+      return true;
     }
-    std::reverse(vertices.begin(), vertices.end());
-    std::reverse(edges.begin(), edges.end());
-    len = int(vertices.size());
-    return len != 0;
+    len = 0;
+    return false;
   }
 
  private:
@@ -65,6 +91,7 @@ class odd_cycle_detection {
     int to, id;
   };
   std::vector<std::vector<edge>> g;
+  strongly_connected_components scc;
 };
 
 }  // namespace cp

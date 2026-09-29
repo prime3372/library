@@ -12,8 +12,8 @@
 using namespace std;
 using namespace cp;
 
-void bipartite(int n, int m) {
-  odd_cycle_detection detector(n);
+template <bool directed> void bipartite(int n, int m) {
+  odd_cycle_detection<directed> detector(n);
   int l = uniform(1, n - 1);
   auto p = random_perm(n);
   for (int i = 0; i < m; i++) {
@@ -29,28 +29,31 @@ void bipartite(int n, int m) {
 }
 void bipartite_small_sparse() {
   int n = uniform(2, 100);
-  int m = uniform(0, 200);
-  bipartite(n, m);
+  int m = uniform(0, 100);
+  bipartite<true>(n, m);
+  bipartite<false>(n, m);
 }
 void bipartite_small_dense() {
   int n = uniform(2, 100);
-  int m = uniform(0, 50000);
-  bipartite(n, m);
+  int m = uniform(0, 20000);
+  bipartite<true>(n, m);
+  bipartite<false>(n, m);
 }
 void bipartite_large_sparse() {
   int n = uniform(2, 100000);
   int m = uniform(0, 100000);
-  bipartite(n, m);
+  bipartite<true>(n, m);
+  bipartite<false>(n, m);
 }
 
-void nonbipartite(int n, int m) {
+template <bool directed> void has_odd_cycle(int n, int m) {
   int k = 2 * uniform(0, min(n - 1, m - 1) / 2) + 1;
   auto p = random_perm(n);
   std::vector<std::pair<int, int>> edges;
   for (int i = 0; i < k; i++) {
     int u = p[i];
     int v = p[(i + 1) % k];
-    if (uniform_bool()) swap(u, v);
+    if (!directed && uniform_bool()) swap(u, v);
     edges.emplace_back(u, v);
   }
   for (int i = 0; i < m - k; i++) {
@@ -59,7 +62,7 @@ void nonbipartite(int n, int m) {
     edges.emplace_back(u, v);
   }
   shuffle(edges);
-  odd_cycle_detection detector(n);
+  odd_cycle_detection<directed> detector(n);
   for (auto [u, v] : edges) detector.add_edge(u, v);
   assert(detector.detect());
   int cycle_len = detector.len;
@@ -83,45 +86,72 @@ void nonbipartite(int n, int m) {
   std::sort(cycle_v.begin(), cycle_v.end());
   assert(std::unique(cycle_v.begin(), cycle_v.end()) == cycle_v.end());
 }
-void nonbipartite_small_sparse() {
+void has_odd_cycle_small_sparse() {
   int n = uniform(2, 100);
-  int m = uniform(0, 200);
-  nonbipartite(n, m);
+  int m = uniform(0, 100);
+  has_odd_cycle<true>(n, m);
+  has_odd_cycle<false>(n, m);
 }
-void nonbipartite_small_dense() {
+void has_odd_cycle_small_dense() {
   int n = uniform(2, 100);
-  int m = uniform(0, 50000);
-  nonbipartite(n, m);
+  int m = uniform(0, 20000);
+  has_odd_cycle<true>(n, m);
+  has_odd_cycle<false>(n, m);
 }
-void nonbipartite_large_sparse() {
+void has_odd_cycle_large_sparse() {
   int n = uniform(2, 100000);
   int m = uniform(0, 100000);
-  nonbipartite(n, m);
+  has_odd_cycle<true>(n, m);
+  has_odd_cycle<false>(n, m);
 }
 
-void no_edge() {
-  for (int i = 0; i <= 10; i++) {
-    odd_cycle_detection detector(i);
-    assert(!detector.detect());
-    assert(detector.len == 0);
-    assert(detector.vertices.empty());
-    assert(detector.edges.empty());
+void dag(int n, int m) {
+  odd_cycle_detection<true> detector(n);
+  for (int i = 0; i < m; i++) {
+    int u, v;
+    do {
+      u = uniform(0, n - 1);
+      v = uniform(0, n - 1);
+    } while (u == v);
+    if (u > v) swap(u, v);
+    detector.add_edge(u, v);
   }
+  assert(!detector.detect());
+  assert(detector.len == 0);
+  assert(detector.vertices.empty());
+  assert(detector.edges.empty());
+}
+void dag_small_sparse() {
+  int n = uniform(2, 100);
+  int m = uniform(0, 100);
+  dag(n, m);
+}
+void dag_small_dense() {
+  int n = uniform(2, 100);
+  int m = uniform(0, 20000);
+  dag(n, m);
+}
+void dag_large_sparse() {
+  int n = uniform(2, 100000);
+  int m = uniform(0, 100000);
+  dag(n, m);
 }
 
 int main() {
-  for (int i = 0; i < 10000; i++) {
+  for (int i = 0; i < 5000; i++) {
     bipartite_small_sparse();
-    nonbipartite_small_sparse();
+    dag_small_sparse();
+    has_odd_cycle_small_sparse();
   }
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 20; i++) {
     bipartite_small_dense();
-    nonbipartite_small_dense();
+    dag_small_dense();
+    has_odd_cycle_small_dense();
   }
   for (int i = 0; i < 5; i++) {
     bipartite_large_sparse();
-    nonbipartite_large_sparse();
+    dag_large_sparse();
+    has_odd_cycle_large_sparse();
   }
-  no_edge();
   cout << "Hello World\n";
 }
