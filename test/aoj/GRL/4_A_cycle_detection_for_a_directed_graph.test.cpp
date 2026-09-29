@@ -13,24 +13,24 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  cycle_detection<true> cycle(n);
+  cycle_detection<true> detector(n);
   vector<vector<int>> adj(n);
   vector<pair<int, int>> edges(m);
   for (int i = 0; i < m; i++) {
     int s, t;
     cin >> s >> t;
-    cycle.add_edge(s, t);
+    detector.add_edge(s, t);
     adj[s].push_back(t);
     edges[i] = {s, t};
   }
-  bool ans = cycle.detect();
+  bool ans = detector.detect();
   if (!ans) {
     assert(!topological_sort(adj).empty());
     cout << ans << "\n";
     return 0;
   }
-  auto& v = cycle.vertices;
-  auto& e = cycle.edges;
+  auto& v = detector.vertices;
+  auto& e = detector.edges;
   assert(v.size() == e.size());
   for (int i = 0; i < int(e.size()); i++) {
     assert(0 <= e[i] && e[i] < m);

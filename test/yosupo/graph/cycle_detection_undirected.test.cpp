@@ -11,19 +11,19 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  cycle_detection<false> cycle(n);
+  cycle_detection<false> detector(n);
   for (int i = 0; i < m; i++) {
     int u, v;
     cin >> u >> v;
-    cycle.add_edge(u, v);
+    detector.add_edge(u, v);
   }
-  if (!cycle.detect()) {
+  if (!detector.detect()) {
     cout << -1 << "\n";
     return 0;
   }
-  cout << cycle.len << "\n";
-  for (int v : cycle.vertices) cout << v << " ";
+  cout << detector.len << "\n";
+  for (int v : detector.vertices) cout << v << " ";
   cout << "\n";
-  for (int e : cycle.edges) cout << e << " ";
+  for (int e : detector.edges) cout << e << " ";
   cout << "\n";
 }

@@ -14,21 +14,21 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  cycle_detection<true> cycle(n);
+  cycle_detection<true> detector(n);
   vector<pair<int, int>> edges(m);
   for (int i = 0; i < m; i++) {
     int u, v;
     cin >> u >> v;
-    cycle.add_edge(u, v);
+    detector.add_edge(u, v);
     edges[i] = {u, v};
   }
-  if (!cycle.detect()) {
+  if (!detector.detect()) {
     cout << -1 << "\n";
     return 0;
   }
-  int len = cycle.len;
-  auto& v = cycle.vertices;
-  auto& e = cycle.edges;
+  int len = detector.len;
+  auto& v = detector.vertices;
+  auto& e = detector.edges;
   cout << len << "\n";
   for (int i = 0; i < len; i++) {
     assert(edges[e[i]].first == v[i]);
