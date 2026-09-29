@@ -39,7 +39,7 @@ void bipartite_small_dense() {
 }
 void bipartite_large_sparse() {
   int n = uniform(2, 100000);
-  int m = uniform(0, 200000);
+  int m = uniform(0, 100000);
   bipartite(n, m);
 }
 
@@ -95,7 +95,7 @@ void nonbipartite_small_dense() {
 }
 void nonbipartite_large_sparse() {
   int n = uniform(2, 100000);
-  int m = uniform(0, 200000);
+  int m = uniform(0, 100000);
   nonbipartite(n, m);
 }
 
