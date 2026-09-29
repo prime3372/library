@@ -18,7 +18,7 @@ void test(int n) {
     auto lb = lower_bound(divs.begin(), divs.end(), i);
     auto ub = upper_bound(divs.begin(), divs.end(), i);
     assert(ub - lb <= 1);
-    assert((is_divisor) == (lb != ub));
+    assert(is_divisor == (lb != ub));
   }
 }
 
