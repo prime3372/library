@@ -48,8 +48,8 @@ void bipartite_large_sparse() {
 
 template <bool directed> void has_odd_cycle(int n, int m) {
   int k = 2 * uniform(0, min(n - 1, m - 1) / 2) + 1;
-  auto p = random_perm(n);
   std::vector<std::pair<int, int>> edges;
+  auto p = random_perm(n);
   for (int i = 0; i < k; i++) {
     int u = p[i];
     int v = p[(i + 1) % k];
