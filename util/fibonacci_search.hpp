@@ -8,6 +8,7 @@
 namespace cp {
 
 // [l, r]
+// @return pair(argmin, min)
 template <class F, class T = std::invoke_result_t<F, long long>,
           class Compare = std::less<T>>
 std::pair<long long, T> fibonacci_search(F f, long long l, long long r,
@@ -15,20 +16,20 @@ std::pair<long long, T> fibonacci_search(F f, long long l, long long r,
   assert(l <= r);
   long long s = 1, t = 2;
   while (t < r - l + 2) std::swap(s += t, t);
-  long long a = l - 1, x = a + t - s, b = a + t;
-  T fx = f(x), fy;
-  while (a + b != 2 * x) {
-    long long y = a + b - x;
-    if (r < y || (fy = f(y), compare(fx, fy))) {
+  long long a = l - 1, x1 = a + t - s, b = a + t;
+  T y1 = f(x1), y2;
+  while (a + b != x1 * 2) {
+    long long x2 = a + b - x1;
+    if (r < x2 || (y2 = f(x2), compare(y1, y2))) {
       b = a;
-      a = y;
+      a = x2;
     } else {
-      a = x;
-      x = y;
-      fx = fy;
+      a = x1;
+      x1 = x2;
+      y1 = y2;
     }
   }
-  return {x, fx};
+  return {x1, y1};
 }
 
 }  // namespace cp
