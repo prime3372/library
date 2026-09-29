@@ -114,7 +114,7 @@ int main() {
     bipartite_small_sparse();
     nonbipartite_small_sparse();
   }
-  for (int i = 0; i < 50; i++) {
+  for (int i = 0; i < 100; i++) {
     bipartite_small_dense();
     nonbipartite_small_dense();
   }
