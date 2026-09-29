@@ -19,7 +19,10 @@ class strongly_connected_components {
   }
 
   int group_num = -1;
+  // `id[u] == id[v]` : It is possible to go from u to v and from `v` to `u`.
+  // `id[u] < id[v]` : It is impossible to go from `v` to `u`.
   std::vector<int> id;
+  // Each `v` is contained in `groups[id[v]]`.
   std::vector<std::vector<int>> groups;
 
   strongly_connected_components& build() {
