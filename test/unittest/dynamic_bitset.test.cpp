@@ -38,12 +38,12 @@ template <int k> void test(int q) {
 
 template <int i> void run_test() {
   constexpr int case_num = 7;
-  constexpr pair<int, int> cases[] = {
-      {1, 500000},   {10, 500000},  {255, 500000}, {256, 500000},
-      {257, 500000}, {1000, 10000}, {1000000, 10}};
+  if constexpr (i < case_num) {
+    constexpr pair<int, int> cases[] = {
+        {1, 500000},   {10, 500000},  {255, 500000}, {256, 500000},
+        {257, 500000}, {1000, 10000}, {1000000, 10}};
 
-  test<cases[i].first>(cases[i].second);
-  if constexpr (i < case_num - 1) {
+    test<cases[i].first>(cases[i].second);
     run_test<i + 1>();
   }
 }
