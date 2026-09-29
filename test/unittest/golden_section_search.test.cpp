@@ -19,6 +19,6 @@ void test() {
 }
 
 int main() {
-  for (int i = 0; i < 500000; i++) test();
+  for (int i = 0; i < 1000000; i++) test();
   cout << "Hello World\n";
 }
