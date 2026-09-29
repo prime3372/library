@@ -64,15 +64,8 @@ void test(int n, int m, random_graph_config config) {
 
 void run_cases(random_graph_config config) {
   constexpr pair<int, int> cases[] = {
-      {0, 0},           // empty
-      {1, 0},           // point
-      {1, 10},          // point (with self-loops)
-      {10, 10},         // small-sparse
-      {10, 100},        // small-dense
-      {100, 10000},     // medium-dense
-      {1000, 1500},     // medium-sparse
-      {100000, 200000}  // large-sparse
-  };
+      {0, 0},     {1, 0},       {1, 10},      {10, 20},       {10, 100},
+      {100, 200}, {100, 10000}, {1000, 2000}, {1000, 100000}, {100000, 200000}};
   auto& [directed, no_self_loops, no_multiple_edges, connected, start] = config;
 
   for (auto [n, m] : cases) {
