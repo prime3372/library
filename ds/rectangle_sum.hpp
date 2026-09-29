@@ -46,11 +46,11 @@ template <class T, class U, int bit_size = 24> class rectangle_sum {
   // aggregate `[l, r) * [d, u)`
   U sum(T l, T d, T r, T u) {
     assert(initialized);
-
+    assert(l <= r && d <= u);
     return lower_sum(l, r, u) - lower_sum(l, r, d);
   }
 
-  // aggregate `[l, r) * [0, u)`
+  // aggregate `[l, r) * (-inf, u)`
   U lower_sum(T l, T r, T u) {
     assert(initialized);
     assert(l <= r);

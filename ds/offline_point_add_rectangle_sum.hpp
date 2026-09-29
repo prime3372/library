@@ -56,7 +56,7 @@ template <class T, class U, int bit_size = 24> class offline_point_add_rectangle
     return lower_sum(l, r, u) - lower_sum(l, r, d);
   }
 
-  // aggregate `[l, r) * [0, u)`
+  // aggregate `[l, r) * (-inf, u)`
   U lower_sum(T l, T r, T u) {
     assert(initialized);
     assert(l <= r);
