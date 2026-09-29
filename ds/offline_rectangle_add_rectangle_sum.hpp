@@ -6,8 +6,8 @@
 
 namespace cp {
 
-// rectangle add -> rectangle sum (offline)
-template <class T, class U> struct offline_rectangle_add_rectangle_sum {
+// preliminary rectangle add -> rectangle sum (both offline)
+template <class T, class U> class offline_rectangle_add_rectangle_sum {
  public:
   offline_rectangle_add_rectangle_sum() {}
 
