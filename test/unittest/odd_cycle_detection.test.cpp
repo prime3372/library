@@ -12,6 +12,65 @@
 using namespace std;
 using namespace cp;
 
+template <bool directed> void has_odd_cycle(int n, int m) {
+  int k = 2 * uniform(0, min(n - 1, m - 1) / 2) + 1;
+  auto p = random_perm(n);
+  std::vector<std::pair<int, int>> edges;
+  for (int i = 0; i < k; i++) {
+    int u = p[i];
+    int v = p[(i + 1) % k];
+    if (!directed && uniform_bool()) swap(u, v);
+    edges.emplace_back(u, v);
+  }
+  for (int i = 0; i < m - k; i++) {
+    int u = uniform(0, n - 1);
+    int v = uniform(0, n - 1);
+    edges.emplace_back(u, v);
+  }
+  shuffle(edges);
+  odd_cycle_detection<directed> detector(n);
+  for (auto [u, v] : edges) detector.add_edge(u, v);
+  assert(detector.detect());
+  int cycle_len = detector.len;
+  auto& cycle_v = detector.vertices;
+  auto& cycle_e = detector.edges;
+  assert(!cycle_v.empty());
+  assert(int(cycle_v.size()) == cycle_len);
+  assert(int(cycle_e.size()) == cycle_len);
+  assert(cycle_v.size() % 2 == 1);
+  for (int i = 0; i < cycle_len; i++) {
+    int u = cycle_v[i];
+    int v = cycle_v[(i + 1) % cycle_len];
+    assert(0 <= u && u < n);
+    assert(0 <= v && v < n);
+    int e_id = cycle_e[i];
+    assert(0 <= e_id && e_id < int(edges.size()));
+    int eu = edges[e_id].first;
+    int ev = edges[e_id].second;
+    assert((u == eu && v == ev) || (u == ev && v == eu));
+  }
+  std::sort(cycle_v.begin(), cycle_v.end());
+  assert(std::unique(cycle_v.begin(), cycle_v.end()) == cycle_v.end());
+}
+void has_odd_cycle_small_sparse() {
+  int n = uniform(2, 100);
+  int m = uniform(0, 100);
+  has_odd_cycle<true>(n, m);
+  has_odd_cycle<false>(n, m);
+}
+void has_odd_cycle_small_dense() {
+  int n = uniform(2, 100);
+  int m = uniform(0, 20000);
+  has_odd_cycle<true>(n, m);
+  has_odd_cycle<false>(n, m);
+}
+void has_odd_cycle_large_sparse() {
+  int n = uniform(2, 100000);
+  int m = uniform(0, 100000);
+  has_odd_cycle<true>(n, m);
+  has_odd_cycle<false>(n, m);
+}
+
 template <bool directed> void bipartite(int n, int m) {
   odd_cycle_detection<directed> detector(n);
   int l = uniform(1, n - 1);
@@ -127,65 +186,6 @@ void bipartite_in_dag_large_sparse() {
   bipartite_in_dag(n1, m1, n2, m2);
 }
 
-template <bool directed> void has_odd_cycle(int n, int m) {
-  int k = 2 * uniform(0, min(n - 1, m - 1) / 2) + 1;
-  auto p = random_perm(n);
-  std::vector<std::pair<int, int>> edges;
-  for (int i = 0; i < k; i++) {
-    int u = p[i];
-    int v = p[(i + 1) % k];
-    if (!directed && uniform_bool()) swap(u, v);
-    edges.emplace_back(u, v);
-  }
-  for (int i = 0; i < m - k; i++) {
-    int u = uniform(0, n - 1);
-    int v = uniform(0, n - 1);
-    edges.emplace_back(u, v);
-  }
-  shuffle(edges);
-  odd_cycle_detection<directed> detector(n);
-  for (auto [u, v] : edges) detector.add_edge(u, v);
-  assert(detector.detect());
-  int cycle_len = detector.len;
-  auto& cycle_v = detector.vertices;
-  auto& cycle_e = detector.edges;
-  assert(!cycle_v.empty());
-  assert(int(cycle_v.size()) == cycle_len);
-  assert(int(cycle_e.size()) == cycle_len);
-  assert(cycle_v.size() % 2 == 1);
-  for (int i = 0; i < cycle_len; i++) {
-    int u = cycle_v[i];
-    int v = cycle_v[(i + 1) % cycle_len];
-    assert(0 <= u && u < n);
-    assert(0 <= v && v < n);
-    int e_id = cycle_e[i];
-    assert(0 <= e_id && e_id < int(edges.size()));
-    int eu = edges[e_id].first;
-    int ev = edges[e_id].second;
-    assert((u == eu && v == ev) || (u == ev && v == eu));
-  }
-  std::sort(cycle_v.begin(), cycle_v.end());
-  assert(std::unique(cycle_v.begin(), cycle_v.end()) == cycle_v.end());
-}
-void has_odd_cycle_small_sparse() {
-  int n = uniform(2, 100);
-  int m = uniform(0, 100);
-  has_odd_cycle<true>(n, m);
-  has_odd_cycle<false>(n, m);
-}
-void has_odd_cycle_small_dense() {
-  int n = uniform(2, 100);
-  int m = uniform(0, 20000);
-  has_odd_cycle<true>(n, m);
-  has_odd_cycle<false>(n, m);
-}
-void has_odd_cycle_large_sparse() {
-  int n = uniform(2, 100000);
-  int m = uniform(0, 100000);
-  has_odd_cycle<true>(n, m);
-  has_odd_cycle<false>(n, m);
-}
-
 template <bool directed> void no_edge() {
   for (int i = 0; i <= 10; i++) {
     odd_cycle_detection<directed> detector(i);
@@ -198,22 +198,22 @@ template <bool directed> void no_edge() {
 
 int main() {
   for (int i = 0; i < 5000; i++) {
+    has_odd_cycle_small_sparse();
     bipartite_small_sparse();
     dag_small_sparse();
     bipartite_in_dag_small_sparse();
-    has_odd_cycle_small_sparse();
   }
   for (int i = 0; i < 20; i++) {
+    has_odd_cycle_small_dense();
     bipartite_small_dense();
     dag_small_dense();
     bipartite_in_dag_small_dense();
-    has_odd_cycle_small_dense();
   }
   for (int i = 0; i < 5; i++) {
+    has_odd_cycle_large_sparse();
     bipartite_large_sparse();
     dag_large_sparse();
     bipartite_in_dag_large_sparse();
-    has_odd_cycle_large_sparse();
   }
   no_edge<true>();
   no_edge<false>();
