@@ -69,7 +69,7 @@ void nonbipartite(int n, int m) {
   assert(int(cycle_v.size()) == cycle_len);
   assert(int(cycle_e.size()) == cycle_len);
   assert(cycle_v.size() % 2 == 1);
-  for (int i = 0; i < cycle_len; ++i) {
+  for (int i = 0; i < cycle_len; i++) {
     int u = cycle_v[i];
     int v = cycle_v[(i + 1) % cycle_len];
     assert(0 <= u && u < n);
