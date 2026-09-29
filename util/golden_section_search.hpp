@@ -9,7 +9,7 @@ namespace cp {
 
 // `f` is called exactly `k + 2` times.
 // @return pair(argmin, min)
-template <class F, class Real, class T = std::invoke_result_t<F, long long>,
+template <class F, class Real, class T = std::invoke_result_t<F, Real>,
           class Compare = std::less<T>>
 std::pair<Real, T> golden_section_search(F f, Real l, Real r, int k,
                                          Compare compare = Compare()) {
