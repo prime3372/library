@@ -27,7 +27,11 @@ template <int k> void test(int q) {
     } else if (t == 2) {
       bs1 ^= (bs1 >> x) | bs1;
       bs2 ^= (bs2 >> x) | bs2;
+      bs1 ^= (bs1 << x) | bs1;
+      bs2 ^= (bs2 << x) | bs2;
     } else if (t == 3) {
+      bs1 ^= (bs1 >> x) & bs1;
+      bs2 ^= (bs2 >> x) & bs2;
       bs1 ^= (bs1 << x) & bs1;
       bs2 ^= (bs2 << x) & bs2;
     }
