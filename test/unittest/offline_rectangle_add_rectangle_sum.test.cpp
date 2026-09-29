@@ -45,13 +45,17 @@ void test(int n, int q, int x, int y) {
   assert(ans == data.run());
 }
 void small() {
-  int n = uniform(0, 10), q = uniform(0, 10);
-  int x = uniform(0, 100), y = uniform(0, 100);
+  int n = uniform(0, 10);
+  int q = uniform(0, 10);
+  int x = uniform(0, 100);
+  int y = uniform(0, 100);
   test(n, q, x, y);
 }
 void large() {
-  int n = uniform(0, 100), q = uniform(0, 100);
-  int x = uniform(0, 1000), y = uniform(0, 1000);
+  int n = uniform(0, 100);
+  int q = uniform(0, 100);
+  int x = uniform(0, 1000);
+  int y = uniform(0, 1000);
   test(n, q, x, y);
 }
 
