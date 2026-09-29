@@ -35,4 +35,6 @@ int main() {
     assert(edges[e[i]].second == v[(i + 1) % len]);
     cout << e[i] << "\n";
   }
+  sort(v.begin(), v.end());
+  assert(unique(v.begin(), v.end()) == v.end());
 }
