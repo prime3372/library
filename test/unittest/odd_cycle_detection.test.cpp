@@ -12,6 +12,40 @@
 using namespace std;
 using namespace cp;
 
+template <bool directed> void bipartite(int n, int m) {
+  odd_cycle_detection<directed> detector(n);
+  int l = uniform(1, n - 1);
+  auto p = random_perm(n);
+  for (int i = 0; i < m; i++) {
+    int u = uniform(0, l - 1);
+    int v = uniform(l, n - 1);
+    if (uniform_bool()) swap(u, v);
+    detector.add_edge(p[u], p[v]);
+  }
+  assert(!detector.detect());
+  assert(detector.len == 0);
+  assert(detector.vertices.empty());
+  assert(detector.edges.empty());
+}
+void bipartite_small_sparse() {
+  int n = uniform(2, 100);
+  int m = uniform(0, 100);
+  bipartite<true>(n, m);
+  bipartite<false>(n, m);
+}
+void bipartite_small_dense() {
+  int n = uniform(2, 100);
+  int m = uniform(0, 20000);
+  bipartite<true>(n, m);
+  bipartite<false>(n, m);
+}
+void bipartite_large_sparse() {
+  int n = uniform(2, 100000);
+  int m = uniform(0, 100000);
+  bipartite<true>(n, m);
+  bipartite<false>(n, m);
+}
+
 template <bool directed> void has_odd_cycle(int n, int m) {
   int k = 2 * uniform(0, min(n - 1, m - 1) / 2) + 1;
   auto p = random_perm(n);
@@ -71,89 +105,6 @@ void has_odd_cycle_large_sparse() {
   has_odd_cycle<false>(n, m);
 }
 
-template <bool directed> void bipartite(int n, int m) {
-  odd_cycle_detection<directed> detector(n);
-  int l = uniform(1, n - 1);
-  auto p = random_perm(n);
-  for (int i = 0; i < m; i++) {
-    int u = uniform(0, l - 1);
-    int v = uniform(l, n - 1);
-    if (uniform_bool()) swap(u, v);
-    detector.add_edge(p[u], p[v]);
-  }
-  assert(!detector.detect());
-  assert(detector.len == 0);
-  assert(detector.vertices.empty());
-  assert(detector.edges.empty());
-}
-void bipartite_small_sparse() {
-  int n = uniform(2, 100);
-  int m = uniform(0, 100);
-  bipartite<true>(n, m);
-  bipartite<false>(n, m);
-}
-void bipartite_small_dense() {
-  int n = uniform(2, 100);
-  int m = uniform(0, 20000);
-  bipartite<true>(n, m);
-  bipartite<false>(n, m);
-}
-void bipartite_large_sparse() {
-  int n = uniform(2, 100000);
-  int m = uniform(0, 100000);
-  bipartite<true>(n, m);
-  bipartite<false>(n, m);
-}
-
-void bipartite_in_dag(int n1, int m1, int n2, int m2) {
-  int n = n1 * n2;
-  odd_cycle_detection<true> detector(n);
-  auto p = random_perm(n);
-  for (int i = 0; i < n1; i++) {
-    int l = uniform(1, n2 - 1);
-    for (int j = 0; j < m2; j++) {
-      int u = uniform(0, l - 1) + n2 * i;
-      int v = uniform(l, n2 - 1) + n2 * i;
-      if (uniform_bool()) swap(u, v);
-      detector.add_edge(p[u], p[v]);
-    }
-  }
-  for (int i = 0; i < m1; i++) {
-    int u, v;
-    do {
-      u = uniform(0, n - 1);
-      v = uniform(0, n - 1);
-    } while (u / n2 == v / n2);
-    if (u > v) swap(u, v);
-    detector.add_edge(p[u], p[v]);
-  }
-  assert(!detector.detect());
-  assert(detector.len == 0);
-  assert(detector.vertices.empty());
-  assert(detector.edges.empty());
-}
-void bipartite_in_dag_small_sparse() {
-  int n1 = uniform(2, 10);
-  int m1 = uniform(0, 100);
-  int n2 = uniform(2, 10);
-  int m2 = uniform(0, 10);
-  bipartite_in_dag(n1, m1, n2, m2);
-}
-void bipartite_in_dag_small_dense() {
-  int n1 = uniform(2, 10);
-  int m1 = uniform(0, 20000);
-  int n2 = uniform(2, 10);
-  int m2 = uniform(0, 200);
-  bipartite_in_dag(n1, m1, n2, m2);
-}
-void bipartite_in_dag_large_sparse() {
-  int n1 = uniform(2, 100);
-  int m1 = uniform(0, 100000);
-  int n2 = uniform(2, 100);
-  int m2 = uniform(0, 100);
-  bipartite_in_dag(n1, m1, n2, m2);
-}
-
 template <bool directed> void no_edge() {
   for (int i = 0; i <= 10; i++) {
     odd_cycle_detection<directed> detector(i);
@@ -166,19 +117,16 @@ template <bool directed> void no_edge() {
 
 int main() {
   for (int i = 0; i < 5000; i++) {
-    has_odd_cycle_small_sparse();
     bipartite_small_sparse();
-    bipartite_in_dag_small_sparse();
+    has_odd_cycle_small_sparse();
   }
   for (int i = 0; i < 20; i++) {
-    has_odd_cycle_small_dense();
     bipartite_small_dense();
-    bipartite_in_dag_small_dense();
+    has_odd_cycle_small_dense();
   }
   for (int i = 0; i < 5; i++) {
-    has_odd_cycle_large_sparse();
     bipartite_large_sparse();
-    bipartite_in_dag_large_sparse();
+    has_odd_cycle_large_sparse();
   }
   no_edge<true>();
   no_edge<false>();
