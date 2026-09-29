@@ -77,8 +77,8 @@ template <bool directed> void has_odd_cycle(int n, int m) {
     int v = cycle_v[(i + 1) % cycle_len];
     assert(0 <= u && u < n);
     assert(0 <= v && v < n);
-    int e_id = cycle_e[i];
-    assert(0 <= e_id && e_id < int(edges.size()));
+    int eid = cycle_e[i];
+    assert(0 <= eid && eid < int(edges.size()));
     int eu = edges[e_id].first;
     int ev = edges[e_id].second;
     assert((u == eu && v == ev) || (u == ev && v == eu));
