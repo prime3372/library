@@ -50,8 +50,8 @@ class odd_cycle_detection {
       finished[v] = true;
       return -1;
     };
-    for (int v = 0; v < n; v++) {
-      if (!finished[v] && dfs(dfs, v, -1) == n) break;
+    for (int i = 0; i < n; i++) {
+      if (!finished[i] && dfs(dfs, i, -1) == n) break;
     }
     std::reverse(vertices.begin(), vertices.end());
     std::reverse(edges.begin(), edges.end());
