@@ -34,6 +34,6 @@ void solve() {
 
 int main() {
   for (int i = 0; i < 1000; i++) test1();
-  for (int i = 0; i < 500000; i++) test2();
+  for (int i = 0; i < 1000000; i++) test2();
   solve();
 }

@@ -42,8 +42,8 @@ void test(int n, int q) {
     assert(dist(s, t) == d);
   }
 }
-void small() { test(uniform(1, 100), 100); }
-void large() { test(uniform(1, 100000), 10); }
+void small() { test(uniform(1, 100), 200); }
+void large() { test(uniform(1, 100000), 20); }
 void many_query() { test(uniform(1, 100), 10000); }
 
 void solve() {

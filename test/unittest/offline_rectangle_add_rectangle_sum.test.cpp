@@ -44,15 +44,15 @@ void test(int n, int q, int x, int y) {
   assert(ans == data.run());
 }
 void small() {
-  int n = uniform(0, 10);
-  int q = uniform(0, 10);
+  int n = uniform(0, 50);
+  int q = uniform(0, 50);
   int x = uniform(0, 100);
   int y = uniform(0, 100);
   test(n, q, x, y);
 }
 void large() {
-  int n = uniform(0, 100);
-  int q = uniform(0, 100);
+  int n = uniform(0, 500);
+  int q = uniform(0, 500);
   int x = uniform(0, 1000);
   int y = uniform(0, 1000);
   test(n, q, x, y);

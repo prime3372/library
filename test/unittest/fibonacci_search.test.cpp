@@ -39,7 +39,7 @@ void solve() {
 }
 
 int main() {
-  for (int i = 0; i < 100000; i++) small();
-  for (int i = 0; i < 100; i++) large();
+  for (int i = 0; i < 200000; i++) small();
+  for (int i = 0; i < 200; i++) large();
   solve();
 }

@@ -29,6 +29,6 @@ void solve() {
 
 int main() {
   for (int i = 0; i < 100000; i++) small();
-  for (int i = 0; i < 100; i++) large();
+  for (int i = 0; i < 500; i++) large();
   solve();
 }

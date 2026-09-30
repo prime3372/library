@@ -29,6 +29,6 @@ void solve() {
 
 int main() {
   for (int i = 1; i <= 1000; i++) test(i);
-  for (int i = 0; i < 100; i++) test(uniform(1001, 100000));
+  for (int i = 0; i < 300; i++) test(uniform(1001, 1000000));
   solve();
 }
