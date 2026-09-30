@@ -166,7 +166,7 @@ std::vector<T> convolution(const std::vector<T>& a, const std::vector<T>& b) {
   for (int i = 0; i < n; i++) a2[i] = mint(a[i]);
   for (int i = 0; i < m; i++) b2[i] = mint(b[i]);
 
-  auto c2 = convolution(std::move(a2), std::move(b2));
+  auto c2 = convolution(a2, b2);
   std::vector<T> c(n + m - 1);
   for (int i = 0; i < n + m - 1; i++) c[i] = c2[i].val();
   return c;
