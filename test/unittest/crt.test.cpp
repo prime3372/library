@@ -42,6 +42,8 @@ void stress() {
          (ans_r >= 0 && ans_m > 0 && gcd(ans_r, ans_m) == 1));
 }
 
+void empty() { assert((crt({}, {}) == std::pair{0LL, 1LL})); }
+
 void solve() {
   int a, b;
   cin >> a >> b;
@@ -51,5 +53,6 @@ void solve() {
 int main() {
   for (int i = 0; i < 1000; i++) test();
   for (int i = 0; i < 1000; i++) stress();
+  empty();
   solve();
 }
