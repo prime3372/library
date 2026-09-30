@@ -12,6 +12,8 @@ formal_power_series<mint> exp(const formal_power_series<mint>& f, int n) {
   formal_power_series<mint> g = {1};
   g.reserve(n);
   for (int k = 1; k < n; k *= 2) {
+    // Newton's method:
+    // g_{2*k} = g_k * (f - log(g_k) + 1) (mod x^{2*k})
     auto g2 = g.prefix(2 * k);
     auto h = f.prefix(2 * k) - log(g, 2 * k);
     internal::ntt(g2);
