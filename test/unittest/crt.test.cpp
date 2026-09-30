@@ -38,8 +38,7 @@ void stress() {
     r[i] = rng();
   }
   auto [ans_r, ans_m] = crt(r, m);
-  assert((ans_r == 0 && ans_m == 0) ||
-         (ans_r >= 0 && ans_m > 0 && gcd(ans_r, ans_m) == 1));
+  assert((ans_m == 0 && ans_r == 0) || (0 <= ans_r && ans_r < ans_m));
 }
 
 void empty() { assert((crt({}, {}) == std::pair{0LL, 1LL})); }
