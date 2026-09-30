@@ -36,7 +36,6 @@ template <class T> class dynamic_range_add_range_sum {
     fw1.add(l, w);
     fw2.add(l, w * T(l));
   }
-
   // [0, r)
   T sum(ull r) const {
     assert(0 <= r && r <= n);
