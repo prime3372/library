@@ -12,7 +12,7 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-void test(int n, int q) {
+void check(int n, int q) {
   auto tree = random_tree(n);
   vector<vector<pair<int, ll>>> g(n);
   tree_distance<ll> dist(n);
@@ -42,9 +42,27 @@ void test(int n, int q) {
     assert(dist(s, t) == d);
   }
 }
-void small() { test(uniform(1, 100), 200); }
-void large() { test(uniform(1, 100000), 20); }
-void many_query() { test(uniform(1, 100), 10000); }
+void small() { check(uniform(1, 100), 200); }
+void large() { check(uniform(1, 100000), 20); }
+void many_query() { check(uniform(1, 100), 10000); }
+
+void stress() {
+  int n = 100000;
+  int q = 100000;
+  auto tree = random_tree(n);
+  tree_distance<ll> dist(n);
+  for (auto [u, v] : tree) {
+    ll w = uniform(ll(-1e9), ll(1e9));
+    dist.add_edge(u, v, w);
+  }
+  dist.init();
+  while (q--) {
+    int s = uniform(0, n - 1);
+    int t = uniform(0, n - 1);
+    ll d = dist(s, t);
+    assert(ll(-1e14) <= d && d <= ll(1e14));
+  }
+}
 
 void solve() {
   int a, b;
@@ -56,5 +74,6 @@ int main() {
   for (int i = 0; i < 1000; i++) small();
   for (int i = 0; i < 10; i++) large();
   for (int i = 0; i < 10; i++) many_query();
+  for (int i = 0; i < 10; i++) stress();
   solve();
 }

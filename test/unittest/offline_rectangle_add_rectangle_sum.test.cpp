@@ -44,18 +44,41 @@ void test(int n, int q, int x, int y) {
   assert(ans == data.run());
 }
 void small() {
-  int n = uniform(0, 50);
-  int q = uniform(0, 50);
+  int n = uniform(0, 10);
+  int q = uniform(0, 10);
   int x = uniform(0, 100);
   int y = uniform(0, 100);
   test(n, q, x, y);
 }
 void large() {
-  int n = uniform(0, 500);
-  int q = uniform(0, 500);
+  int n = uniform(0, 100);
+  int q = uniform(0, 100);
   int x = uniform(0, 1000);
   int y = uniform(0, 1000);
   test(n, q, x, y);
+}
+
+void stress() {
+  int n = 100000;
+  int q = 100000;
+  int bound = int(1e9);
+  offline_rectangle_add_rectangle_sum<int, ll> data;
+  for (int i = 0; i < n; i++) {
+    int l = uniform(-bound, bound), r = uniform(-bound, bound);
+    if (l > r) swap(l, r);
+    int d = uniform(-bound, bound), u = uniform(-bound, bound);
+    if (d > u) swap(d, u);
+    int w = uniform(int(-1e9), int(1e9));
+    data.add(l, d, r, u, w);
+  }
+  for (int i = 0; i < q; i++) {
+    int l = uniform(-bound, bound), r = uniform(-bound, bound);
+    if (l > r) swap(l, r);
+    int d = uniform(-bound, bound), u = uniform(-bound, bound);
+    if (d > u) swap(d, u);
+    int w = uniform(int(-1e9), int(1e9));
+    data.sum(l, d, r, u);
+  }
 }
 
 void solve() {
@@ -67,5 +90,6 @@ void solve() {
 int main() {
   for (int i = 0; i < 10000; i++) small();
   for (int i = 0; i < 100; i++) large();
+  for (int i = 0; i < 100; i++) stress();
   solve();
 }

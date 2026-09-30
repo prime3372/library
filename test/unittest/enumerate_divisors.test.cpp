@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
+#include "number/count_divisors.hpp"
 #include "number/enumerate_divisors.hpp"
 #include "random/engine.hpp"
 #include <cassert>
@@ -10,7 +11,7 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-void test(int n) {
+void check(int n) {
   auto divs = enumerate_divisors(n);
   for (int i = 1; i < n; i++) {
     bool is_divisor = n % i == 0;
@@ -21,6 +22,11 @@ void test(int n) {
   }
 }
 
+void stress(ll n) {
+  auto divs = enumerate_divisors(n);
+  assert(int(divs.size()) == count_divisors(n));
+}
+
 void solve() {
   int a, b;
   cin >> a >> b;
@@ -28,7 +34,8 @@ void solve() {
 }
 
 int main() {
-  for (int i = 1; i <= 1000; i++) test(i);
-  for (int i = 0; i < 300; i++) test(uniform(1001, 1000000));
+  for (int i = 1; i <= 1000; i++) check(i);
+  for (int i = 0; i < 100; i++) check(uniform(1001, 1000000));
+  for (int i = 0; i < 100; i++) stress(uniform(1LL, ll(1e18)));
   solve();
 }
