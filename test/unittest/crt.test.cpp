@@ -17,16 +17,19 @@ void test() {
   auto divs = enumerate_divisors(x);
   int n = int(divs.size());
   shuffle(divs);
-  int k = uniform(1, n);
+  n = uniform(1, n);
   ll l = 1;
-  vector<ll> r(k), m(k);
-  for (int i = 0; i < k; i++) {
+  vector<ll> r(n), m(n);
+  for (int i = 0; i < n; i++) {
     m[i] = divs[i];
-    r[i] = divs[0] % divs[i];
     l = lcm(l, divs[i]);
   }
+  ll c = uniform(0LL, l - 1);
+  for (int i = 0; i < n; i++) {
+    r[i] = (divs[0] + c) % divs[i];
+  }
   auto [ans_r, ans_m] = crt(r, m);
-  assert(ans_r == divs[0] % l && ans_m == l);
+  assert(ans_r == (divs[0] + c) % l && ans_m == l);
 }
 
 void stress() {
