@@ -43,13 +43,13 @@ void test(int n, int q) {
     assert(dist(s, t) == d);
   }
 }
-void small() { test(uniform(1, 100), 1000); }
-void medium() { test(uniform(1, 1000), 1000); }
+void small() { test(uniform(1, 100), 100); }
 void large() { test(uniform(1, 100000), 10); }
+void many_query() { test(uniform(1, 100), 10000); }
 
 int main() {
-  for (int i = 0; i < 100; i++) small();
-  for (int i = 0; i < 10; i++) medium();
+  for (int i = 0; i < 1000; i++) small();
   for (int i = 0; i < 10; i++) large();
+  for (int i = 0; i < 10; i++) many_query();
   cout << "Hello World\n";
 }
