@@ -1,5 +1,4 @@
-#define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "ds/dynamic_bitset.hpp"
 #include "random/engine.hpp"
@@ -51,7 +50,13 @@ template <int i> void run_test() {
   }
 }
 
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << "\n";
+}
+
 int main() {
   run_test<0>();
-  cout << "Hello World\n";
+  solve();
 }

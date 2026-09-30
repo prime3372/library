@@ -1,5 +1,4 @@
-#define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "number/enumerate_divisors.hpp"
 #include "random/engine.hpp"
@@ -22,8 +21,14 @@ void test(int n) {
   }
 }
 
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << "\n";
+}
+
 int main() {
   for (int i = 1; i <= 1000; i++) test(i);
   for (int i = 0; i < 100; i++) test(uniform(1001, 100000));
-  cout << "Hello World\n";
+  solve();
 }

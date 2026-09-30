@@ -1,5 +1,4 @@
-#define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "random/engine.hpp"
 #include "random/random_tree.hpp"
@@ -47,9 +46,15 @@ void small() { test(uniform(1, 100), 100); }
 void large() { test(uniform(1, 100000), 10); }
 void many_query() { test(uniform(1, 100), 10000); }
 
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << "\n";
+}
+
 int main() {
   for (int i = 0; i < 1000; i++) small();
   for (int i = 0; i < 10; i++) large();
   for (int i = 0; i < 10; i++) many_query();
-  cout << "Hello World\n";
+  solve();
 }

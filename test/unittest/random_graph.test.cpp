@@ -1,5 +1,4 @@
-#define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "ds/simple_queue.hpp"
 #include "ds/union_find.hpp"
@@ -90,7 +89,13 @@ void run_all_combinations() {
   }
 }
 
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << "\n";
+}
+
 int main() {
   run_all_combinations();
-  cout << "Hello World\n";
+  solve();
 }

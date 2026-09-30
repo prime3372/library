@@ -1,5 +1,4 @@
-#define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "number/enumerate_primes.hpp"
 #include "number/factorize.hpp"
@@ -25,8 +24,14 @@ void test(int n) {
   }
 }
 
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << "\n";
+}
+
 int main() {
   for (int i = 0; i <= 1000; i++) test(i);
   for (int i = 0; i < 10; i++) test(uniform(10001, 100000));
-  cout << "Hello World\n";
+  solve();
 }

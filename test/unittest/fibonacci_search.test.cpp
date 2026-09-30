@@ -1,5 +1,4 @@
-#define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "random/engine.hpp"
 #include "other/fibonacci_search.hpp"
@@ -33,8 +32,14 @@ void test(int n, ll bound) {
 void small() { test(uniform(1, 100), 10000); }
 void large() { test(uniform(1, 100000), ll(1e18)); }
 
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << "\n";
+}
+
 int main() {
   for (int i = 0; i < 100000; i++) small();
   for (int i = 0; i < 100; i++) large();
-  cout << "Hello World\n";
+  solve();
 }

@@ -1,5 +1,4 @@
-#define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "ds/offline_rectangle_add_rectangle_sum.hpp"
 #include "random/engine.hpp"
@@ -59,8 +58,14 @@ void large() {
   test(n, q, x, y);
 }
 
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << "\n";
+}
+
 int main() {
   for (int i = 0; i < 10000; i++) small();
   for (int i = 0; i < 100; i++) large();
-  cout << "Hello World\n";
+  solve();
 }

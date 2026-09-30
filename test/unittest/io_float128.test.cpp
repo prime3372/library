@@ -1,5 +1,4 @@
-#define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "random/engine.hpp"
 #include "util/io_float128.hpp"
@@ -31,6 +30,12 @@ void test(f128 p10, int prec) {
   assert(abs_f128((x - y) / x) < 1e-32);
 }
 
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << "\n";
+}
+
 int main() {
   pair<f128, int> cases[] = {{1e-60, 120}, {1e-45, 105}, {1e-30, 90},
                              {1e-15, 75},  {1, 60},      {1e15, 45},
@@ -38,5 +43,5 @@ int main() {
   for (auto [p10, prec] : cases) {
     for (int i = 0; i < 5000; i++) test(p10, prec);
   }
-  cout << "Hello World\n";
+  solve();
 }

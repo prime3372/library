@@ -1,5 +1,4 @@
-#define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "random/engine.hpp"
 #include "other/golden_section_search.hpp"
@@ -27,8 +26,14 @@ void test2() {
   assert(0 <= ans.second && ans.second < 1e-9);
 }
 
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << "\n";
+}
+
 int main() {
   for (int i = 0; i < 1000; i++) test1();
   for (int i = 0; i < 500000; i++) test2();
-  cout << "Hello World\n";
+  solve();
 }

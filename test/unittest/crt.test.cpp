@@ -1,5 +1,4 @@
-#define PROBLEM \
-  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/1/ITP1_1_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "number/crt.hpp"
 #include "number/enumerate_divisors.hpp"
@@ -54,10 +53,16 @@ void has_answer() {
 
 void empty() { assert(crt({}, {}) == make_pair(0LL, 1LL)); }
 
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << "\n";
+}
+
 int main() {
   for (int i = 0; i < 100000; i++) small();
   for (int i = 0; i < 100; i++) large();
   for (int i = 0; i < 100; i++) has_answer();
   empty();
-  cout << "Hello World\n";
+  solve();
 }
