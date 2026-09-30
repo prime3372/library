@@ -31,14 +31,17 @@ void test() {
 
 void stress() {
   int max_m = 42;  // lcm(1, 2, ..., 42) < 2**63
-  int n = 100000;
-  vector<ll> r(n), m(n);
-  for (int i = 0; i < n; i++) {
-    m[i] = uniform(1, max_m);
-    r[i] = rng();
+  int t = 1000000;
+  while (t--) {
+    int n = uniform(1, 100);
+    vector<ll> r(n), m(n);
+    for (int i = 0; i < n; i++) {
+      m[i] = uniform(1, max_m);
+      r[i] = rng();
+    }
+    auto [ans_r, ans_m] = crt(r, m);
+    assert((ans_m == 0 && ans_r == 0) || (0 <= ans_r && ans_r < ans_m));
   }
-  auto [ans_r, ans_m] = crt(r, m);
-  assert((ans_m == 0 && ans_r == 0) || (0 <= ans_r && ans_r < ans_m));
 }
 
 void empty() { assert((crt({}, {}) == std::pair{0LL, 1LL})); }
@@ -51,7 +54,7 @@ void solve() {
 
 int main() {
   for (int i = 0; i < 1000; i++) test();
-  for (int i = 0; i < 1000; i++) stress();
+  stress();
   empty();
   solve();
 }
