@@ -25,7 +25,7 @@ template <class T> class dijkstra {
     assert(0 <= from && from < n);
     std::fill(d.begin(), d.end(), T(-1));
     std::priority_queue<std::tuple<T, int, int, int>> pq;
-    pq.emplace(0, from, from, -1);
+    pq.emplace(0, from, -1, -1);
     while (!pq.empty()) {
       auto [c, v, pv, pe] = pq.top();
       pq.pop();
@@ -49,7 +49,7 @@ template <class T> class dijkstra {
     assert(0 <= to && to < n);
     if (d[to] == T(-1)) return {};
     std::vector<int> vs, es;
-    while (to != prev_v[to]) {
+    while (prev_v[to] != -1) {
       vs.push_back(to);
       es.push_back(prev_e[to]);
       to = prev_v[to];

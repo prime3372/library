@@ -33,10 +33,8 @@ template <bool directed> class odd_cycle_detection {
     std::vector<int> dist(2 * n, 2 * n), prev_v(2 * n, -1), prev_e(2 * n, -1);
     simple_queue<int> que;
     for (int s = 0; s < n; s++) {
-      if (dist[2 * s] < 2 * n) continue;
-      if (dist[2 * s + 1] < 2 * n) continue;
+      if (dist[2 * s] < 2 * n || dist[2 * s + 1] < 2 * n) continue;
       dist[2 * s] = 0;
-      prev_v[2 * s] = 2 * s;
       que.emplace(2 * s);
       while (!que.empty()) {
         int x = que.front();
