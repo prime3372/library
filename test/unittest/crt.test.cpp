@@ -17,7 +17,6 @@ void test() {
   auto divs = enumerate_divisors(x);
   int n = int(divs.size());
   shuffle(divs);
-  int k = uniform(0, n - 1);
   n = uniform(1, n);
   ll l = 1;
   vector<ll> r(n), m(n);
@@ -25,11 +24,12 @@ void test() {
     m[i] = divs[i];
     l = lcm(l, divs[i]);
   }
+  ll c = uniform(0LL, l - 1);
   for (int i = 0; i < n; i++) {
-    r[i] = divs[k] % divs[i];
+    r[i] = c % divs[i];
   }
   auto [ans_r, ans_m] = crt(r, m);
-  assert(ans_r == divs[k] % l && ans_m == l);
+  assert(ans_r == c && ans_m == l);
 }
 
 void stress() {
