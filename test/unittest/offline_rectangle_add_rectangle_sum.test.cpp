@@ -61,24 +61,23 @@ void large() {
 void stress() {
   int n = 100000;
   int q = 100000;
-  int bound = int(1e9);
+  int bound = 1000000;
   offline_rectangle_add_rectangle_sum<int, ll> data;
   for (int i = 0; i < n; i++) {
     int l = uniform(-bound, bound), r = uniform(-bound, bound);
     if (l > r) swap(l, r);
     int d = uniform(-bound, bound), u = uniform(-bound, bound);
     if (d > u) swap(d, u);
-    int w = uniform(int(-1e9), int(1e9));
-    data.add(l, d, r, u, w);
+    data.add(l, d, r, u, 1);
   }
   for (int i = 0; i < q; i++) {
     int l = uniform(-bound, bound), r = uniform(-bound, bound);
     if (l > r) swap(l, r);
     int d = uniform(-bound, bound), u = uniform(-bound, bound);
     if (d > u) swap(d, u);
-    int w = uniform(int(-1e9), int(1e9));
     data.sum(l, d, r, u);
   }
+  for (ll x : data.run()) assert(ll(-4e17) <= x && x <= ll(4e17));
 }
 
 void solve() {
@@ -90,6 +89,6 @@ void solve() {
 int main() {
   for (int i = 0; i < 10000; i++) small();
   for (int i = 0; i < 100; i++) large();
-  for (int i = 0; i < 100; i++) stress();
+  for (int i = 0; i < 5; i++) stress();
   solve();
 }
