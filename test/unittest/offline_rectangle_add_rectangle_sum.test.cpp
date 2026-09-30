@@ -10,33 +10,33 @@ using namespace std;
 using namespace cp;
 using ll = long long;
 
-void test(int n, int q, int x, int y) {
+void check(int n, int q, int x, int y) {
   offline_rectangle_add_rectangle_sum<int, ll> data;
-  vector<vector<ll>> grid(x, vector<ll>(y));
+  vector<vector<ll>> grid(2 * x + 1, vector<ll>(2 * y + 1));
   for (int i = 0; i < n; i++) {
-    int l = uniform(0, x), r = uniform(0, x);
+    int l = uniform(-x, x), r = uniform(-x, x);
     if (l > r) swap(l, r);
-    int d = uniform(0, y), u = uniform(0, y);
+    int d = uniform(-y, y), u = uniform(-y, y);
     if (d > u) swap(d, u);
     int w = uniform(int(-1e9), int(1e9));
     data.add(l, d, r, u, w);
     for (int j = l; j < r; j++) {
       for (int k = d; k < u; k++) {
-        grid[j][k] += w;
+        grid[j + x][k + y] += w;
       }
     }
   }
   vector<ll> ans(q);
   for (int i = 0; i < q; i++) {
-    int l = uniform(0, x), r = uniform(0, x);
+    int l = uniform(-x, x), r = uniform(-x, x);
     if (l > r) swap(l, r);
-    int d = uniform(0, y), u = uniform(0, y);
+    int d = uniform(-y, y), u = uniform(-y, y);
     if (d > u) swap(d, u);
     data.sum(l, d, r, u);
     ll s = 0;
     for (int j = l; j < r; j++) {
       for (int k = d; k < u; k++) {
-        s += grid[j][k];
+        s += grid[j + x][k + y];
       }
     }
     ans[i] = s;
@@ -48,14 +48,14 @@ void small() {
   int q = uniform(0, 10);
   int x = uniform(0, 100);
   int y = uniform(0, 100);
-  test(n, q, x, y);
+  check(n, q, x, y);
 }
 void large() {
   int n = uniform(0, 100);
   int q = uniform(0, 100);
   int x = uniform(0, 1000);
   int y = uniform(0, 1000);
-  test(n, q, x, y);
+  check(n, q, x, y);
 }
 
 void stress() {
