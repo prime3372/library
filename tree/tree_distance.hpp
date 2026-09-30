@@ -32,16 +32,13 @@ template <class T> class tree_distance {
     assert(initialized);
     assert(0 <= a && a < n);
     assert(0 <= b && b < n);
-    T ans = cost[a] + cost[b];
-    a = hld.ord[a];
-    b = hld.ord[b];
-    while (hld.head[a] != hld.head[b]) {
-      if (a > b) std::swap(a, b);
-      b = hld.next[b];
+    int s = hld.ord[a], t = hld.ord[b];
+    while (hld.head[s] != hld.head[t]) {
+      if (s > t) std::swap(s, t);
+      t = hld.next[t];
     }
-    int l = hld.vertex[std::min(a, b)];
-    ans -= cost[l] * 2;
-    return ans;
+    int l = hld.vertex[std::min(s, t)];
+    return cost[a] + cost[b] - cost[l] * 2;
   }
 
  private:
