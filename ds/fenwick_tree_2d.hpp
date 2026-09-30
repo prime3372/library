@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <utility>
 #include <vector>
 
 #include "ds/fenwick_tree.hpp"
@@ -74,6 +75,8 @@ template <class T> class fenwick_tree_2d {
     assert(0 <= j && j < m);
     return sum(i + 1, j + 1);
   }
+
+  std::pair<int, int> size() { return {n, m}; }
 
  private:
   int n, m;

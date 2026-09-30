@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_5_D"
 
-#include "ds/range_add_point_get.hpp"
+#include "ds/fenwick_tree.hpp"
 #include "tree/euler_tour.hpp"
 #include <iostream>
 
@@ -28,7 +28,7 @@ int main() {
 
   int q;
   cin >> q;
-  range_add_point_get<ll> data(n);
+  fenwick_tree<ll> data(n);
   while (q--) {
     int t;
     cin >> t;
@@ -36,11 +36,11 @@ int main() {
       int v;
       ll w;
       cin >> v >> w;
-      data.add(et.in[v], et.out[v], w);
+      data.imos_add(et.in[v], et.out[v], w);
     } else {
       int u;
       cin >> u;
-      cout << data[et.in[u]] << "\n";
+      cout << data.imos_get(et.in[u]) << "\n";
     }
   }
 }

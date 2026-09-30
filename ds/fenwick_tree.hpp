@@ -40,6 +40,17 @@ template <class T> class fenwick_tree {
     return s;
   }
 
+  void imos_add(int l, int r, T w) {
+    assert(l <= r && r <= n);
+    if (l < n) add(l, w);
+    if (r < n) add(r, -w);
+  }
+
+  T imos_get(int i) {
+    assert(i < n);
+    return sum(i + 1);
+  }
+
   int lower_bound(T w) const {
     if (w <= 0) return 0;
     int lb = 0, k = 1;

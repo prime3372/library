@@ -78,6 +78,8 @@ template <class T> class dynamic_fenwick_tree_2d {
     return sum(i + 1, j + 1);
   }
 
+  std::pair<int, ull> size() { return {n, m}; }
+
  private:
   int n;
   ull m;
