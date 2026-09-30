@@ -18,6 +18,7 @@ void test() {
   int n = int(divs.size());
   shuffle(divs);
   n = uniform(1, n);
+  int k = uniform(0, n - 1);
   ll l = 1;
   vector<ll> r(n), m(n);
   for (int i = 0; i < n; i++) {
@@ -26,10 +27,10 @@ void test() {
   }
   ll c = uniform(0LL, l - 1);
   for (int i = 0; i < n; i++) {
-    r[i] = (divs[0] + c) % divs[i];
+    r[i] = (divs[k] + c) % divs[i];
   }
   auto [ans_r, ans_m] = crt(r, m);
-  assert(ans_r == (divs[0] + c) % l && ans_m == l);
+  assert(ans_r == (divs[k] + c) % l && ans_m == l);
 }
 
 void stress() {
