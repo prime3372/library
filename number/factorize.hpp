@@ -24,11 +24,10 @@ long long pollard_rho(long long n) {
   long long c;
   auto f = [&](__int128 x) { return (long long)((x * x + c) % n); };
 
-  std::uniform_int_distribution dist(2LL, n - 1);
   int r = int(kth_root(n, 8));
   while (true) {
     long long x = 0, y = 0, px, py, q = 1, d = 1;
-    c = dist(rng);
+    c = uniform(2LL, n - 1);
     while (d == 1) {
       px = x;
       py = y;
