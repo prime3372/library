@@ -7,8 +7,9 @@
 
 namespace cp {
 
-// M. Forisek and J. Jancina,
-// Fast Primality Testing for Integers That Fit into a Machine Word
+// Miller–Rabin primality test
+// https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
+// https://docslib.org/doc/5395180/fast-primality-testing-for-integers-that-fit-into-a-machine-word
 constexpr bool is_prime(long long n) {
   if (n <= 2) return n == 2;
   if (n % 2 == 0) return false;
@@ -28,13 +29,13 @@ constexpr bool is_prime(long long n) {
   for (int i = 0; i < base_num; i++) {
     long long a = bases[i];
     if (a % n == 0) continue;
+    __int128 x = pow_mod(a, d, n);
     long long t = d;
-    __int128 y = pow_mod(a, d, n);
-    while (t != n - 1 && y != 1 && y != n - 1) {
-      y = y * y % n;
+    while (t != n - 1 && x != 1 && x != n - 1) {
+      x = x * x % n;
       t *= 2;
     }
-    if (y != n - 1 && t % 2 == 0) return false;
+    if (x != n - 1 && t % 2 == 0) return false;
   }
   return true;
 }
