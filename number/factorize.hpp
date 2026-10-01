@@ -27,11 +27,11 @@ long long pollard_rho(long long n) {
   std::uniform_int_distribution dist(2LL, n - 1);
   int r = int(kth_root(n, 8));
   while (true) {
-    long long x = 0, y = 0, sx, sy, q = 1, d = 1;
+    long long x = 0, y = 0, px, py, q = 1, d = 1;
     c = dist(rng);
     while (d == 1) {
-      sx = x;
-      sy = y;
+      px = x;
+      py = y;
       for (int i = 0; i < r; i++) {
         x = f(x);
         y = f(f(y));
@@ -41,8 +41,8 @@ long long pollard_rho(long long n) {
       d = std::gcd(q, n);
     }
     if (d == n) {
-      x = sx;
-      y = sy;
+      x = px;
+      y = py;
       do {
         x = f(x);
         y = f(f(y));
