@@ -12,8 +12,6 @@ namespace cp {
 constexpr bool is_prime(long long n) {
   if (n <= 2) return n == 2;
   if (n % 2 == 0) return false;
-  long long d = n - 1;
-  while (d % 2 == 0) d /= 2;
 
   int base_num;
   std::array<long long, 7> bases;
@@ -25,6 +23,8 @@ constexpr bool is_prime(long long n) {
     bases = {2, 325, 9375, 28178, 450775, 9780504, 1795265022};
   }
 
+  long long d = n - 1;
+  while (d % 2 == 0) d /= 2;
   for (int i = 0; i < base_num; i++) {
     long long a = bases[i];
     if (a % n == 0) continue;
