@@ -32,7 +32,7 @@ constexpr bool is_prime(long long n) {
     __int128 y = pow_mod(a, d, n);
     while (t != n - 1 && y != 1 && y != n - 1) {
       y = y * y % n;
-      t <<= 1;
+      t *= 2;
     }
     if (y != n - 1 && t % 2 == 0) return false;
   }
