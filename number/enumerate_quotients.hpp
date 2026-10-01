@@ -15,9 +15,7 @@ std::vector<long long> enumerate_quotients(long long n) {
   std::vector<long long> ans(n / (r + 1));
   std::iota(ans.begin(), ans.end(), 1);
   ans.reserve(n / (r + 1) + r);
-  for (long long i = r; i >= 1; i--) {
-    ans.push_back(n / i);
-  }
+  for (long long i = r; i >= 1; i--) ans.push_back(n / i);
   return ans;
 }
 

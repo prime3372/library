@@ -81,9 +81,7 @@ std::vector<std::pair<int, int>> random_graph(int n, int m,
     if (m <= max_m / 2) {
       while (int(edges.size()) < m) {
         auto [u, v] = next_edge();
-        if (used_edges.insert(1LL * u * n + v)) {
-          edges.emplace_back(u, v);
-        }
+        if (used_edges.insert(1LL * u * n + v)) edges.emplace_back(u, v);
       }
     } else {
       std::vector<std::pair<int, int>> candidates;
@@ -100,9 +98,7 @@ std::vector<std::pair<int, int>> random_graph(int n, int m,
                    candidates.begin() + needed);
     }
   } else {
-    while (int(edges.size()) < m) {
-      edges.emplace_back(next_edge());
-    }
+    while (int(edges.size()) < m) edges.emplace_back(next_edge());
   }
 
   for (auto& [u, v] : edges) {

@@ -16,9 +16,7 @@ std::vector<int> mobius(int n) {
       ans[j] *= -1;
       prime[j] = false;
     }
-    for (long long j = 1LL * i * i; j <= n; j += 1LL * i * i) {
-      ans[j] = 0;
-    }
+    for (long long j = 1LL * i * i; j <= n; j += 1LL * i * i) ans[j] = 0;
   }
   ans[0] = 0;
   return ans;

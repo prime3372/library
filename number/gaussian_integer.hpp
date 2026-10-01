@@ -74,9 +74,7 @@ class gaussian_integer {
   friend bool operator<(const gint& lhs, const gint& rhs) {
     return lhs.x < rhs.x || (lhs.x == rhs.x && lhs.y < rhs.y);
   }
-  friend bool operator>(const gint& lhs, const gint& rhs) {
-    return rhs < lhs;
-  }
+  friend bool operator>(const gint& lhs, const gint& rhs) { return rhs < lhs; }
   friend bool operator<=(const gint& lhs, const gint& rhs) {
     return !(lhs > rhs);
   }

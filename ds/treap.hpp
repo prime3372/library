@@ -142,9 +142,7 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
   }
   bool contains(const T& k) const {
     const node* t = root;
-    while (t && !equiv(t->key, k)) {
-      t = less(k, t->key) ? t->left : t->right;
-    }
+    while (t && !equiv(t->key, k)) t = less(k, t->key) ? t->left : t->right;
     return t;
   }
 

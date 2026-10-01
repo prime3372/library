@@ -17,9 +17,7 @@ template <class mint> std::vector<mint> partition(int n) {
   if (n == 0) return {1};
   std::vector<mint> minv(n + 1);
   minv[1] = 1;
-  for (int i = 2; i <= n; i++) {
-    minv[i] = -minv[m % i] * (m / i);
-  }
+  for (int i = 2; i <= n; i++) minv[i] = -minv[m % i] * (m / i);
   formal_power_series<mint> f(n + 1);
   for (int i = 1; i <= n; i++) {
     for (int j = 1; i * j <= n; j++) {

@@ -127,11 +127,10 @@ template <class S, auto op, auto e> class dynamic_segtree {
       t->val = x;
       return;
     }
-    if ((i >> (h - 1)) & 1) {
+    if ((i >> (h - 1)) & 1)
       set(t->right, i, x, h - 1);
-    } else {
+    else
       set(t->left, i, x, h - 1);
-    }
     update(t, h);
   }
 

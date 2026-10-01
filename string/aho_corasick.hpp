@@ -47,11 +47,10 @@ template <int char_size, char offset = 'a'> class aho_corasick {
   void init() {
     simple_queue<int> que;
     for (int i = 0; i < char_size; i++) {
-      if (nodes[0].to[i] != -1) {
+      if (nodes[0].to[i] != -1)
         que.push(nodes[0].to[i]);
-      } else {
+      else
         nodes[0].to[i] = 0;
-      }
     }
     while (!que.empty()) {
       int v = que.front();

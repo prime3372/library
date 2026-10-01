@@ -55,11 +55,10 @@ template <class T> class persistent_array {
       t = t->to[i & mask];
       i >>= shift;
     }
-    if (t) {
+    if (t)
       t->val = val;
-    } else {
+    else
       t = new node(val);
-    }
   }
 
   node* snapshot() { return root; }

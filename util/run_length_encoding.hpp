@@ -11,11 +11,10 @@ std::vector<std::pair<T, int>> run_length_encoding(const std::vector<T>& v) {
   std::vector<std::pair<T, int>> res;
   res.reserve(v.size());
   for (const T& x : v) {
-    if (res.empty() || res.back().first != x) {
+    if (res.empty() || res.back().first != x)
       res.emplace_back(x, 1);
-    } else {
+    else
       res.back().second++;
-    }
   }
   return res;
 }

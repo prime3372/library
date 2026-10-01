@@ -24,11 +24,10 @@ class dynamic_bitset {
       return *this;
     }
     ref& operator=(bool x) {
-      if (x) {
+      if (x)
         *d |= mask(pos);
-      } else {
+      else
         *d &= ~mask(pos);
-      }
       return *this;
     }
     ref& operator=(const ref& other) { return *this = bool(other); }
@@ -54,9 +53,7 @@ class dynamic_bitset {
 
   dynamic_bitset& flip() {
     if (n == 0) return *this;
-    for (int i = 0; i < int(a.size()); i++) {
-      a[i] = ~a[i];
-    }
+    for (int i = 0; i < int(a.size()); i++) a[i] = ~a[i];
     if (n % w) a.back() &= mask(n % w) - 1;
     return *this;
   }
@@ -64,9 +61,7 @@ class dynamic_bitset {
 
   int count() const {
     int res = 0;
-    for (int i = 0; i < int(a.size()); i++) {
-      res += std::popcount(a[i]);
-    }
+    for (int i = 0; i < int(a.size()); i++) res += std::popcount(a[i]);
     return res;
   }
 
@@ -74,23 +69,17 @@ class dynamic_bitset {
 
   dynamic_bitset& operator^=(const dynamic_bitset& rhs) {
     assert(n == rhs.n);
-    for (int i = 0; i < int(a.size()); i++) {
-      a[i] ^= rhs.a[i];
-    }
+    for (int i = 0; i < int(a.size()); i++) a[i] ^= rhs.a[i];
     return *this;
   }
   dynamic_bitset& operator|=(const dynamic_bitset& rhs) {
     assert(n == rhs.n);
-    for (int i = 0; i < int(a.size()); i++) {
-      a[i] |= rhs.a[i];
-    }
+    for (int i = 0; i < int(a.size()); i++) a[i] |= rhs.a[i];
     return *this;
   }
   dynamic_bitset& operator&=(const dynamic_bitset& rhs) {
     assert(n == rhs.n);
-    for (int i = 0; i < int(a.size()); i++) {
-      a[i] &= rhs.a[i];
-    }
+    for (int i = 0; i < int(a.size()); i++) a[i] &= rhs.a[i];
     return *this;
   }
 

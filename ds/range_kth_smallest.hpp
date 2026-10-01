@@ -17,9 +17,7 @@ class range_kth_smallest {
     n = int(a.size());
     wm = wavelet_matrix<bit_size>(n);
     cc.init(a);
-    for (int i = 0; i < n; i++) {
-      wm.set(i, cc(a[i]));
-    }
+    for (int i = 0; i < n; i++) wm.set(i, cc(a[i]));
     wm.init();
     initialized = true;
   }

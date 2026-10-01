@@ -28,11 +28,10 @@ class linear_sieve {
     assert(1 <= k && k <= n);
     std::vector<std::pair<int, int>> ans;
     while (k != 1) {
-      if (ans.empty() || ans.back().first != f[k]) {
+      if (ans.empty() || ans.back().first != f[k])
         ans.emplace_back(f[k], 1);
-      } else {
+      else
         ans.back().second++;
-      }
       k /= f[k];
     }
     return ans;

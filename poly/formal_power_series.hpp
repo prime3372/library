@@ -134,14 +134,11 @@ template <class mint>
 formal_power_series<mint> integral(formal_power_series<mint> f) {
   constexpr int m = mint::mod();
   if (f.empty()) return f;
-  std::vector<mint> minv(f.size() + 1);
+  int n = int(f.size());
+  std::vector<mint> minv(n + 1);
   minv[1] = 1;
-  for (int i = 2; i <= int(f.size()); i++) {
-    minv[i] = -minv[m % i] * (m / i);
-  }
-  for (int i = 0; i < int(f.size()); i++) {
-    f[i] *= minv[i + 1];
-  }
+  for (int i = 2; i <= n; i++) minv[i] = -minv[m % i] * (m / i);
+  for (int i = 0; i < n; i++) f[i] *= minv[i + 1];
   return f << 1;
 }
 

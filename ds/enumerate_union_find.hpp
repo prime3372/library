@@ -53,9 +53,7 @@ class enumerate_union_find {
   std::vector<int> enumerate(int a) const {
     assert(0 <= a && a < n);
     std::vector<int> res = {a};
-    for (int i = nxt[a]; i != a; i = nxt[i]) {
-      res.push_back(i);
-    }
+    for (int i = nxt[a]; i != a; i = nxt[i]) res.push_back(i);
     return res;
   }
 

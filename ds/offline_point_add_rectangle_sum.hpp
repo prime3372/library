@@ -10,7 +10,8 @@
 
 namespace cp {
 
-template <class T, class U, int bit_size = 24> class offline_point_add_rectangle_sum {
+template <class T, class U, int bit_size = 24>
+class offline_point_add_rectangle_sum {
  public:
   offline_point_add_rectangle_sum() {}
 

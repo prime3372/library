@@ -34,9 +34,7 @@ std::istream& operator>>(std::istream& is, unsigned __int128& val) {
 }
 
 std::ostream& operator<<(std::ostream& os, __int128 val) {
-  if (val == (long long)(val)) {
-    return os << (long long)(val);
-  }
+  if (val == (long long)(val)) return os << (long long)(val);
   unsigned __int128 uval = val;
   if (val < 0) {
     os << '-';
@@ -52,9 +50,7 @@ std::ostream& operator<<(std::ostream& os, __int128 val) {
 }
 
 std::ostream& operator<<(std::ostream& os, unsigned __int128 val) {
-  if (val == (unsigned long long)(val)) {
-    return os << (unsigned long long)(val);
-  }
+  if (val == (unsigned long long)(val)) return os << (unsigned long long)(val);
   std::string s;
   while (val) {
     s.push_back(char('0' + (val % 10)));

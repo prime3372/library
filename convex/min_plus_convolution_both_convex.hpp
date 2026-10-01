@@ -31,9 +31,7 @@ std::vector<T> min_plus_convolution_both_convex(const std::vector<T>& a,
   }
   std::vector<T> c(n + m - 1);
   c[0] = a[0] + b[0];
-  for (int i = 0; i < n + m - 2; i++) {
-    c[i + 1] += c[i] + dc[i];
-  }
+  for (int i = 0; i < n + m - 2; i++) c[i + 1] += c[i] + dc[i];
   return c;
 }
 
