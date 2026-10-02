@@ -9,7 +9,6 @@
 #include <vector>
 
 #include "ds/bit_vector.hpp"
-#include "util/type_traits.hpp"
 
 namespace cp {
 
