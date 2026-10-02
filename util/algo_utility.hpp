@@ -48,18 +48,6 @@ std::vector<int> sort(Range& a, Compare compare = Compare()) {
 template <class Range,
           class Compare = std::less<std::ranges::range_value_t<Range>>>
 requires(std::ranges::range<Range>)
-void sort_unique(Range& a, Compare compare = Compare()) {
-  std::sort(a.begin(), a.end(), compare);
-  a.erase(std::unique(a.begin(), a.end(),
-                      [&](const auto& x, const auto& y) {
-                        return !compare(x, y) && !compare(y, x);
-                      }),
-          a.end());
-}
-
-template <class Range,
-          class Compare = std::less<std::ranges::range_value_t<Range>>>
-requires(std::ranges::range<Range>)
 std::vector<int> compress(Range a, Compare compare = Compare()) {
   int n = int(a.size());
   std::vector<int> res(n);

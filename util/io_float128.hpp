@@ -5,8 +5,6 @@
 #include <iostream>
 #include <string>
 
-#include "util/io_int128.hpp"
-
 namespace cp {
 
 namespace io {
