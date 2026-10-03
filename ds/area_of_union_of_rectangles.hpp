@@ -60,8 +60,7 @@ template <class T> class area_of_union_of_rectangles {
   };
   static S op(S x, S y) {
     if (x.min == y.min) return {x.min, x.cnt + y.cnt};
-    if (x.min < y.min) return {x.min, x.cnt};
-    return {y.min, y.cnt};
+    return x.min < y.min ? x : y;
   }
   static S e() { return {std::numeric_limits<T>::max(), 0}; }
   static S act(T f, S x) { return {x.min + f, x.cnt}; }
