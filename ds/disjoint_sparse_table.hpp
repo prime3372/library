@@ -10,12 +10,9 @@ namespace cp {
 
 template <class S, auto op, auto e> class disjoint_sparse_table {
  public:
-  disjoint_sparse_table() : n(0), log(0) {}
-  explicit disjoint_sparse_table(const std::vector<S>& _a) {
-    n = int(_a.size());
-    log = std::countr_zero(std::bit_ceil((unsigned int)(n)));
-    a = _a;
-
+  disjoint_sparse_table() : n(0) {}
+  explicit disjoint_sparse_table(const std::vector<S>& _a) : n(int(_a.size())), a(_a) {
+    int log = std::countr_zero(std::bit_ceil((unsigned int)(n)));
     table.resize(log);
     for (int k = 0; k < log; k++) {
       table[k] = a;
@@ -55,7 +52,7 @@ template <class S, auto op, auto e> class disjoint_sparse_table {
   int size() const { return n; }
 
  private:
-  int n, log;
+  int n;
   std::vector<S> a;
   std::vector<std::vector<S>> table;
   std::vector<int> log_table;
