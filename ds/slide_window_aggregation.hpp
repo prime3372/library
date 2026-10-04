@@ -27,7 +27,7 @@ template <class S, auto op, auto e> class slide_window_aggregation {
 
  private:
   std::vector<S> val0, val1, cum0, cum1;
-  S prod0, prod1;
+  S prod0 = e(), prod1 = e();
 
   void push0(S x) {
     val0.push_back(x);

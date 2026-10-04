@@ -10,7 +10,7 @@ namespace cp {
 
 template <class S, auto op, auto e> class slide_window_aggregation_deque {
  public:
-  slide_window_aggregation_deque() : prod0(e()), prod1(e()) {}
+  slide_window_aggregation_deque() {}
 
   void push_front(const S& x) { push0(x); }
   void push_back(const S& x) { push1(x); }
@@ -37,7 +37,7 @@ template <class S, auto op, auto e> class slide_window_aggregation_deque {
 
  private:
   std::vector<S> val0, val1, cum0, cum1;
-  S prod0, prod1;
+  S prod0 = e(), prod1 = e();
 
   void push0(S x) {
     val0.push_back(x);
