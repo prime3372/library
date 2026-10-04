@@ -18,11 +18,10 @@ int main() {
     ll l = 0, r = m;
     while (r - l > 1) {
       ll mid = (l + r) / 2;
-      if (floor_sum(n, m, a, b) == floor_sum(n, m, a, b - mid)) {
+      if (floor_sum(n, m, a, b) == floor_sum(n, m, a, b - mid))
         l = mid;
-      } else {
+      else
         r = mid;
-      }
     }
     cout << l << "\n";
   }
