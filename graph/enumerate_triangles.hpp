@@ -41,15 +41,10 @@ std::vector<std::array<int, 3>> enumerate_triangles(
     for (int v : to[u]) mark[v] = u;
     for (int v : to[u]) {
       for (int w : to[v]) {
-        // Let m be the total number of edges, and define a vertex with a degree
-        // of at least sqrt(m) as a heavy vertex.
-        // [1] If v is not a heavy vertex, the total number of w is obviously at
-        //     most sqrt(m).
-        // [2] If v is a heavy vertex, w is also a heavy vertex, based on how
-        //     the edges is directed. Since the sum of the degrees of w is at
-        //     most 2*m (by the Handshaking Lemma), the total number of w is at
-        //     most 2*sqrt(m).
-        // Therefore, this for-loop executes only O(sqrt(m)) times.
+        // For all w in to[v], the condition deg[v] <= deg[w] holds. By the
+        // handshaking lemma, the sum of deg[w] does not exceed 2m, so
+        // deg[v] does not exceed 2*sqrt(m). Therefore, the number of times this
+        // for-loop executes is limited to O(sqrt(m)).
         if (mark[w] == u) res.push_back({u, v, w});
       }
     }
