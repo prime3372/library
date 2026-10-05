@@ -20,7 +20,7 @@ std::vector<int> topological_sort(const std::vector<std::vector<int>>& g) {
   }
   simple_queue<int> que;
   std::vector<int> res;
-  for (int i = 0; i < n; ++i) {
+  for (int i = 0; i < n; i++) {
     if (in_deg[i] == 0) que.push(i);
   }
   while (!que.empty()) {
