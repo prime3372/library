@@ -10,8 +10,7 @@ namespace cp {
 class two_edge_connected_components {
  public:
   two_edge_connected_components() : n(0) {}
-  explicit two_edge_connected_components(int _n)
-      : id(_n), n(_n), g(_n), link(_n) {}
+  explicit two_edge_connected_components(int _n) : n(_n), g(_n), link(_n) {}
 
   void add_edge(int a, int b) {
     assert(0 <= a && a < n);
@@ -27,7 +26,7 @@ class two_edge_connected_components {
 
   two_edge_connected_components& build() {
     group_num = 0;
-    std::fill(id.begin(), id.end(), -1);
+    id.assign(n, -1);
     link.build();
     auto dfs = [&](auto self, int v) -> void {
       id[v] = group_num;
@@ -44,7 +43,7 @@ class two_edge_connected_components {
         group_num++;
       }
     }
-    groups.assign(group_num, {});
+    groups.assign(group_num, std::vector<int>{});
     for (int i = 0; i < n; i++) groups[id[i]].push_back(i);
     return *this;
   }

@@ -59,7 +59,7 @@ class strongly_connected_components {
     }
     for (int& x : id) x = group_num - 1 - x;
 
-    groups.assign(group_num, {});
+    groups.assign(group_num, std::vector<int>{});
     for (int i = 0; i < n; i++) groups[id[i]].push_back(i);
 
     return *this;
