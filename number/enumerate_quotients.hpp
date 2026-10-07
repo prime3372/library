@@ -11,7 +11,7 @@ namespace cp {
 
 // @param n `1 <= n`
 // @return vector of (q,l,r) s.t. q is a quotient and [n/i] = d is equivalent to
-// l <= d <=r
+// l <= d <= r
 std::vector<std::array<long long, 3>> enumerate_quotients(long long n) {
   assert(1 <= n);
   long long r = isqrt(n);
