@@ -29,7 +29,7 @@ template <class T> class dijkstra {
     while (!pq.empty()) {
       auto [c, v, pv, pe] = pq.top();
       pq.pop();
-      if (d[v] != -1) continue;
+      if (d[v] != T(-1)) continue;
       d[v] = -c;
       prev_v[v] = pv;
       prev_e[v] = pe;
