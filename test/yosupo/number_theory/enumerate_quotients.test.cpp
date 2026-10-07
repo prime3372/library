@@ -14,5 +14,5 @@ int main() {
   cin >> n;
   auto qs = enumerate_quotients(n);
   cout << qs.size() << "\n";
-  for (ll q : qs) cout << q << " ";
+  for (auto& q : qs) cout << q[0] << " ";
 }
