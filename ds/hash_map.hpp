@@ -56,7 +56,7 @@ template <class Key, class Val> class hash_map {
   std::vector<Key> keys;
   std::vector<Val> vals;
   std::vector<bool> used;
-  Val default_val = Val();
+  Val default_val{};
 
   unsigned int hash(const Key& k) const {
     return (unsigned int)(safe_hash<Key>()(k) & (cap - 1));
