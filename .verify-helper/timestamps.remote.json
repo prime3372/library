@@ -126,7 +126,7 @@
   "test/yosupo/number_theory/bernoulli_number.test.cpp": "2026-10-01 15:27:20 +0900",
   "test/yosupo/number_theory/counting_square_free_integers.test.cpp": "2026-10-01 13:03:49 +0900",
   "test/yosupo/number_theory/enumerate_primes.test.cpp": "2026-08-25 13:57:04 +0900",
-  "test/yosupo/number_theory/enumerate_quotients.test.cpp": "2026-10-01 13:03:49 +0900",
+  "test/yosupo/number_theory/enumerate_quotients.test.cpp": "2026-10-07 16:16:27 +0900",
   "test/yosupo/number_theory/factorize.test.cpp": "2026-10-01 15:27:20 +0900",
   "test/yosupo/number_theory/gcd_of_gaussian_integers.test.cpp": "2026-10-01 13:03:49 +0900",
   "test/yosupo/number_theory/kth_root_integer.test.cpp": "2026-08-18 11:17:44 +0900",
