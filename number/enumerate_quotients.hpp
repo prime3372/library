@@ -20,7 +20,9 @@ std::vector<std::array<long long, 3>> enumerate_quotients(long long n) {
   for (long long i = r; i >= 1; i--) quots.push_back(n / i);
   std::vector<std::array<long long, 3>> ans(n / (r + 1) + r);
   for (int i = 0; i < n / (r + 1) + r; i++) {
-    ans[i] = {quots[i], n / (quots[i] + 1) + 1, n / quots[i] + 1};
+    ans[i][0] = quots[i];
+    ans[i][1] = n / (quots[i] + 1) + 1;
+    ans[i][2] = n / quots[i] + 1;
   }
   return ans;
 }
