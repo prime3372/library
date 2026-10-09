@@ -10,7 +10,7 @@ namespace cp {
 // Miller–Rabin primality test
 // https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
 // https://docslib.org/doc/5395180/fast-primality-testing-for-integers-that-fit-into-a-machine-word
-constexpr bool is_prime(long long n) {
+bool is_prime(long long n) {
   if (n <= 2) return n == 2;
   if (n % 2 == 0) return false;
 
