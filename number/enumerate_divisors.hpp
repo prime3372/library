@@ -27,7 +27,7 @@ std::vector<long long> enumerate_divisors(long long n) {
       }
     }
   }
-  sort(ans.begin(), ans.end());
+  std::sort(ans.begin(), ans.end());
   return ans;
 }
 
