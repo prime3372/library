@@ -30,7 +30,7 @@ template <class block> class sqrt_decomposition {
       for (int i = lblock + 1; i <= rblock - 1; i++) ans = d[i].query_all(ans);
       if (rblock < block_num) ans = d[rblock].query_part(0, r % b, ans);
     }
-    return ans
+    return ans;
   }
 
   template <class T> T fold_right(int l, int r, T init) {
