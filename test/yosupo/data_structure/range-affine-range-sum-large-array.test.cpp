@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/range_affine_range_sum_large_array"
 
-#include "ds/dynamic-lazy-segtree.hpp"
+#include "ds/dynamic-lazy-segment-tree.hpp"
 #include "util/static-modint.hpp"
 #include <iostream>
 
@@ -27,7 +27,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  dynamic_lazy_segtree<S, op, e, F, act, compose, id> seg(n, S{0, 1});
+  DynamicLazySegmentTree<S, op, e, F, act, compose, id> seg(n, S{0, 1});
   while (q--) {
     int t;
     cin >> t;

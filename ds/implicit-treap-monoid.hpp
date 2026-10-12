@@ -5,30 +5,30 @@
 #include <memory>
 #include <utility>
 
-#include "ds/implicit-treap-base.hpp"
+#include "ds/implicit-Treap-Base.hpp"
 #include "random/engine.hpp"
 
 namespace cp {
 
-template <class S> struct implicit_treap_monoid_node {
-  using self = implicit_treap_monoid_node;
+template <class S> struct ImplicitTreapMonoidNode {
+  using Self = ImplicitTreapMonoidNode;
   S val, prod;
   int sub = 1;
   unsigned long long priority;
-  self* left = nullptr;
-  self* right = nullptr;
+  Self* left = nullptr;
+  Self* right = nullptr;
   bool rev = false;
-  implicit_treap_monoid_node(const S& x) : val(x), prod(x), priority(rng()) {}
+  ImplicitTreapMonoidNode(const S& x) : val(x), prod(x), priority(rng()) {}
 };
 
 template <class S, auto op, auto e, auto reverse = std::identity()>
-class implicit_treap_monoid
-    : public implicit_treap_base<implicit_treap_monoid_node<S>> {
+class ImplicitTreapMonoid
+    : public ImplicitTreapBase<ImplicitTreapMonoidNode<S>> {
  public:
-  implicit_treap_monoid() {}
-  explicit implicit_treap_monoid(int n, const S& val = e())
-      : implicit_treap_monoid(std::vector<S>(n, val)) {}
-  explicit implicit_treap_monoid(const std::vector<S>& v) { build(v); }
+  ImplicitTreapMonoid() {}
+  explicit ImplicitTreapMonoid(int n, const S& val = e())
+      : ImplicitTreapMonoid(std::vector<S>(n, val)) {}
+  explicit ImplicitTreapMonoid(const std::vector<S>& v) { build(v); }
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
@@ -41,29 +41,29 @@ class implicit_treap_monoid
   }
 
  private:
-  using node = implicit_treap_monoid_node<S>;
-  using base = implicit_treap_base<node>;
-  friend base;
-  using base::build;
-  using base::merge;
-  using base::root;
-  using base::size;
-  using base::split;
+  using Node = ImplicitTreapMonoidNode<S>;
+  using Base = ImplicitTreapBase<Node>;
+  friend Base;
+  using Base::build;
+  using Base::merge;
+  using Base::root;
+  using Base::size;
+  using Base::split;
 
-  void toggle(node* t) override {
+  void toggle(Node* t) override {
     std::swap(t->left, t->right);
     t->prod = reverse(t->prod);
     t->rev = !t->rev;
   }
 
-  void update(node* t) override {
+  void update(Node* t) override {
     t->sub = size(t->left) + size(t->right) + 1;
     t->prod = t->val;
     if (t->left) t->prod = op(t->left->prod, t->prod);
     if (t->right) t->prod = op(t->prod, t->right->prod);
   }
 
-  void push(node* t) override {
+  void push(Node* t) override {
     if (t->rev) {
       if (t->left) toggle(t->left);
       if (t->right) toggle(t->right);

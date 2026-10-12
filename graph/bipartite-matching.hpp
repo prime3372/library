@@ -8,10 +8,10 @@
 
 namespace cp {
 
-class bipartite_matching {
+class BipartiteMatching {
  public:
-  bipartite_matching() : bipartite_matching(0, 0) {}
-  explicit bipartite_matching(int _l, int _r)
+  BipartiteMatching() : BipartiteMatching(0, 0) {}
+  explicit BipartiteMatching(int _l, int _r)
       : l(_l), r(_r), s(l + r), t(l + r + 1), mf(l + r + 2) {
     for (int i = 0; i < l; i++) mf.add_edge(s, i);
     for (int i = 0; i < r; i++) mf.add_edge(l + i, t);
@@ -36,7 +36,7 @@ class bipartite_matching {
 
  private:
   int l, r, s, t;
-  max_flow<int> mf;
+  MaxFlow<int> mf;
 };
 
 }  // namespace cp

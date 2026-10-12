@@ -15,7 +15,7 @@ int main() {
   cin.tie(nullptr);
   int n, l;
   cin >> n >> l;
-  slide_window_aggregation<int, op, e> swag;
+  SlideWindowAggregation<int, op, e> swag;
   for (int i = 0; i < l; i++) {
     int a;
     cin >> a;

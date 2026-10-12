@@ -5,14 +5,14 @@
 
 namespace cp {
 
-point<long double> reflection(const point<long double>& p,
-                              const line<long double>& l) {
+Point<long double> reflection(const Point<long double>& p,
+                              const Line<long double>& l) {
   return 2 * projection(p, l) - p;
 }
 
 template <class T, class U>
-point<long double> reflection(const point<T>& p, const line<U>& l) {
-  return reflection(point<long double>(p), line<long double>(l));
+Point<long double> reflection(const Point<T>& p, const Line<U>& l) {
+  return reflection(Point<long double>(p), Line<long double>(l));
 }
 
 }  // namespace cp

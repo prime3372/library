@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  hash_map<int, vector<int>> idx;
+  HashMap<int, vector<int>> idx;
   for (int i = 0; i < n; i++) {
     int a;
     cin >> a;

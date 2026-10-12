@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/aho_corasick"
+#define PROBLEM "https://judge.yosupo.jp/problem/AhoCorasick"
 
 #include "string/aho-corasick.hpp"
 #include <iostream>
@@ -13,7 +13,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  aho_corasick<26> aho;
+  AhoCorasick<26> aho;
   vector<int> v(n);
   for (int i = 0; i < n; i++) {
     string s;

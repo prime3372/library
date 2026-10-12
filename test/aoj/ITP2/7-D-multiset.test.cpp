@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_7_D"
 
-#include "ds/treap.hpp"
+#include "ds/Treap.hpp"
 #include <iostream>
 
 using namespace std;
@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int q;
   cin >> q;
-  treap<int, true> s;
+  Treap<int, true> s;
   while (q--) {
     int t;
     cin >> t;

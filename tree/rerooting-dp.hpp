@@ -6,12 +6,12 @@
 
 namespace cp {
 
-template <class S, auto op, auto e, class F, auto act> class rerooting_dp {
+template <class S, auto op, auto e, class F, auto act> class RerootingDP {
  public:
-  rerooting_dp() : n(0) {}
-  explicit rerooting_dp(int _n) : rerooting_dp(std::vector<S>(_n, e())) {}
-  explicit rerooting_dp(int _n, S val) : rerooting_dp(std::vector<S>(n, val)) {}
-  explicit rerooting_dp(const std::vector<S>& v)
+  RerootingDP() : n(0) {}
+  explicit RerootingDP(int _n) : RerootingDP(std::vector<S>(_n, e())) {}
+  explicit RerootingDP(int _n, S val) : RerootingDP(std::vector<S>(n, val)) {}
+  explicit RerootingDP(const std::vector<S>& v)
       : n(int(v.size())), g(int(v.size())), vals(v) {}
 
   void add_edge(int from, int to, F f) { add_edge(from, to, f, f); }
@@ -20,14 +20,14 @@ template <class S, auto op, auto e, class F, auto act> class rerooting_dp {
     assert(0 <= to && to < n);
     int from_id = int(g[from].size());
     int to_id = int(g[to].size());
-    g[from].push_back(edge{to, to_id, f});
-    g[to].push_back(edge{from, from_id, rf});
+    g[from].push_back(Edge{to, to_id, f});
+    g[to].push_back(Edge{from, from_id, rf});
   }
 
   std::vector<std::vector<S>> dp;
   std::vector<S> ans;
 
-  rerooting_dp& build() {
+  RerootingDP& build() {
     assert(1 <= n);
 
     std::vector<int> par(n, -1), ord(n);
@@ -83,11 +83,11 @@ template <class S, auto op, auto e, class F, auto act> class rerooting_dp {
 
  private:
   int n;
-  struct edge {
+  struct Edge {
     int to, rev;
     F f;
   };
-  std::vector<std::vector<edge>> g;
+  std::vector<std::vector<Edge>> g;
   std::vector<S> vals;
 };
 

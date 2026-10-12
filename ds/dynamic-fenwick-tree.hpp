@@ -7,12 +7,12 @@
 
 namespace cp {
 
-template <class T> class dynamic_fenwick_tree {
+template <class T> class DynamicFenwickTree {
   using ull = unsigned long long;
 
  public:
-  dynamic_fenwick_tree() : n(0) {}
-  explicit dynamic_fenwick_tree(ull _n) : n(_n) {}
+  DynamicFenwickTree() : n(0) {}
+  explicit DynamicFenwickTree(ull _n) : n(_n) {}
 
   void add(ull i, T w) {
     assert(i < n);
@@ -86,7 +86,7 @@ template <class T> class dynamic_fenwick_tree {
 
  private:
   ull n;
-  hash_map<ull, T> d;
+  HashMap<ull, T> d;
 };
 
 }  // namespace cp

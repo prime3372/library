@@ -9,7 +9,7 @@
 namespace cp {
 
 template <class mint>
-formal_power_series<mint> prod(std::vector<formal_power_series<mint>> f) {
+FormalPowerSeries<mint> prod(std::vector<FormalPowerSeries<mint>> f) {
   if (f.empty()) return {1};
   std::priority_queue<std::pair<int, int>> que;
   for (int i = 0; i < int(f.size()); i++) {

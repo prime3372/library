@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  lowest_common_ancestor lca(n);
+  LowestCommonAncestor lca(n);
   for (int i = 0; i < n; i++) {
     int k;
     cin >> k;

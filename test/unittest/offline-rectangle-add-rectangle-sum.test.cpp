@@ -11,7 +11,7 @@ using namespace cp;
 using ll = long long;
 
 void check(int n, int q, int x, int y) {
-  offline_rectangle_add_rectangle_sum<int, ll> data;
+  OfflineRectangleAddRectangleSum<int, ll> data;
   vector<vector<ll>> grid(2 * x + 1, vector<ll>(2 * y + 1));
   for (int i = 0; i < n; i++) {
     int l = uniform(-x, x), r = uniform(-x, x);
@@ -62,7 +62,7 @@ void stress() {
   int n = 100000;
   int q = 100000;
   int bound = 1000000;
-  offline_rectangle_add_rectangle_sum<int, ll> data;
+  OfflineRectangleAddRectangleSum<int, ll> data;
   for (int i = 0; i < n; i++) {
     int l = uniform(-bound, bound), r = uniform(-bound, bound);
     if (l > r) swap(l, r);

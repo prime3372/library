@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_3_B"
 
-#include "graph/two-edge-connected-components.hpp"
+#include "graph/two-Edge-connected-components.hpp"
 #include <algorithm>
 #include <iostream>
 #include <utility>
@@ -15,7 +15,7 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  two_edge_connected_components g(n);
+  TwoEdgeConnectedComponents g(n);
   vector<pair<int, int>> edges;
   for (int i = 0; i < m; i++) {
     int s, t;

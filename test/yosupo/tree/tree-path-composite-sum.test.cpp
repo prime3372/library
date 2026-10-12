@@ -30,7 +30,7 @@ int main() {
     cin >> ai.val;
     ai.len = 1;
   }
-  rerooting_dp<S, op, e, F, act> rerooting(a);
+  RerootingDP<S, op, e, F, act> rerooting(a);
   for (int i = 0; i < n - 1; i++) {
     int u, v;
     mint b, c;

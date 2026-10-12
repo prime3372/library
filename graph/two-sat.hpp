@@ -7,10 +7,10 @@
 
 namespace cp {
 
-class two_sat {
+class TwoSat {
  public:
-  two_sat() : two_sat(0) {}
-  explicit two_sat(int _n) : n(_n), scc(2 * _n) {}
+  TwoSat() : TwoSat(0) {}
+  explicit TwoSat(int _n) : n(_n), scc(2 * _n) {}
 
   void add_clause(int i, bool f, int j, bool g) {
     assert(0 <= i && i < n);
@@ -31,7 +31,7 @@ class two_sat {
 
  private:
   int n;
-  strongly_connected_components scc;
+  StronglyConnectedComponents scc;
 };
 
 }  // namespace cp

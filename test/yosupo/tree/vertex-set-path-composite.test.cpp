@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
 
-#include "ds/segtree.hpp"
+#include "ds/segment-tree.hpp"
 #include "util/static-modint.hpp"
 #include "tree/hl-decomposition.hpp"
 #include <iostream>
@@ -27,7 +27,7 @@ int main() {
   cin >> n >> q;
   vector<S> a(n);
   for (auto& f : a) cin >> f.a >> f.b;
-  hl_decomposition hld(n);
+  HeavyLightDecomposition hld(n);
   for (int i = 0; i < n - 1; i++) {
     int u, v;
     cin >> u >> v;
@@ -37,8 +37,8 @@ int main() {
   auto& ord = hld.ord;
   auto& head = hld.head;
   auto& next = hld.next;
-  segtree<S, op, e> seg(n);
-  segtree<S, rop, e> rseg(n);
+  SegmentTree<S, op, e> seg(n);
+  SegmentTree<S, rop, e> rseg(n);
   for (int i = 0; i < n; i++) {
     seg.set(ord[i], a[i]);
     rseg.set(ord[i], a[i]);

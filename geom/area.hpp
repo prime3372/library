@@ -7,7 +7,7 @@
 
 namespace cp {
 
-template <class T> long double signed_area(const std::vector<point<T>>& p) {
+template <class T> long double signed_area(const std::vector<Point<T>>& p) {
   long double ans = 0;
   for (int i = 0; i < int(p.size()); i++) {
     ans += cross(p[i], p[(i + 1) % p.size()]);
@@ -15,7 +15,7 @@ template <class T> long double signed_area(const std::vector<point<T>>& p) {
   return ans * 0.5;
 }
 
-template <class T> long double area(const std::vector<point<T>>& p) {
+template <class T> long double area(const std::vector<Point<T>>& p) {
   return std::abs(signed_area(p));
 }
 

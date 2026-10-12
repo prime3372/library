@@ -16,7 +16,7 @@ int main() {
   int n, q;
   cin >> n >> q;
   vector<ll> a(n);
-  hl_decomposition hld(n);
+  HeavyLightDecomposition hld(n);
   for (ll& ai : a) cin >> ai;
   for (int i = 0; i < n - 1; i++) {
     int u, v;
@@ -27,7 +27,7 @@ int main() {
   auto& ord = hld.ord;
   auto& head = hld.head;
   auto& next = hld.next;
-  fenwick_tree<ll> fw(n);
+  FenwickTree<ll> fw(n);
   for (int i = 0; i < n; i++) fw.add(ord[i], a[i]);
   while (q--) {
     int t;

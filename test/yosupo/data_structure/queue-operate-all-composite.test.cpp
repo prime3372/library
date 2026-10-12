@@ -19,7 +19,7 @@ int main() {
   cin.tie(nullptr);
   int q;
   cin >> q;
-  slide_window_aggregation<S, op, e> swag;
+  SlideWindowAggregation<S, op, e> swag;
   while (q--) {
     int t;
     cin >> t;

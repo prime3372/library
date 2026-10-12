@@ -19,7 +19,7 @@ int main() {
   cin.tie(nullptr);
   int q;
   cin >> q;
-  slide_window_aggregation_deque<S, op, e> swag;
+  SlideWindowAggregationDeque<S, op, e> swag;
   while (q--) {
     int t;
     cin >> t;

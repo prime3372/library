@@ -2,17 +2,16 @@
 
 #include <array>
 #include <cassert>
+#include <queue>
 #include <string>
 #include <vector>
-
-#include "ds/simple-queue.hpp"
 
 namespace cp {
 
 // Aho-Corasick automaton
-template <int char_size, char offset = 'a'> class aho_corasick {
+template <int char_size, char offset = 'a'> class AhoCorasick {
  public:
-  class node {
+  class Node {
    public:
     int parent() const { return par; }
     int link() const { return lnk; }
@@ -22,13 +21,13 @@ template <int char_size, char offset = 'a'> class aho_corasick {
     }
 
    private:
-    friend aho_corasick;
+    friend AhoCorasick;
     int par, lnk;
     std::array<int, char_size> to;
-    node(int p) : par(p), lnk(0) { to.fill(-1); }
+    Node(int p) : par(p), lnk(0) { to.fill(-1); }
   };
 
-  aho_corasick() { nodes.push_back(node(-1)); }
+  AhoCorasick() { nodes.push_back(Node(-1)); }
 
   int add(const std::string& s) {
     int v = 0;
@@ -37,7 +36,7 @@ template <int char_size, char offset = 'a'> class aho_corasick {
       assert(0 <= i && i < char_size);
       if (nodes[v].to[i] == -1) {
         nodes[v].to[i] = size();
-        nodes.push_back(node(v));
+        nodes.push_back(Node(v));
       }
       v = nodes[v].to[i];
     }
@@ -45,7 +44,7 @@ template <int char_size, char offset = 'a'> class aho_corasick {
   }
 
   void init() {
-    simple_queue<int> que;
+    std::queue<int> que;
     for (int i = 0; i < char_size; i++) {
       if (nodes[0].to[i] != -1)
         que.push(nodes[0].to[i]);
@@ -68,7 +67,7 @@ template <int char_size, char offset = 'a'> class aho_corasick {
     initialized = true;
   }
 
-  const node& operator[](int v) const {
+  const Node& operator[](int v) const {
     assert(0 <= v && v < size());
     return nodes[v];
   }
@@ -76,7 +75,7 @@ template <int char_size, char offset = 'a'> class aho_corasick {
   int size() const { return int(nodes.size()); }
 
  private:
-  std::vector<node> nodes;
+  std::vector<Node> nodes;
   bool initialized = false;
 };
 

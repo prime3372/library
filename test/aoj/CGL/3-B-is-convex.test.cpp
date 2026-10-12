@@ -15,7 +15,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  vector<point<ll>> p(n);
+  vector<Point<ll>> p(n);
   for (int i = 0; i < n; i++) cin >> p[i];
   cout << is_convex(p) << "\n";
 }

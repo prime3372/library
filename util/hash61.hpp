@@ -11,105 +11,105 @@
 
 namespace cp {
 
-class hash61 {
+class Hash61 {
   using ull = unsigned long long;
 
  public:
-  static hash61 get_basis() {
-    hash61 hs;
+  static Hash61 get_basis() {
+    Hash61 hs;
     do {
       hs.v = uniform(2ULL, m - 1);
     } while (!is_primitive(hs.v));
     return hs;
   }
-  static hash61 get_rand() { return hash61(uniform(0ULL, m - 1)); }
+  static Hash61 get_rand() { return Hash61(uniform(0ULL, m - 1)); }
 
-  hash61() : v(0) {}
+  Hash61() : v(0) {}
   template <class T> requires(internal::is_signed_int_v<T>)
-  hash61(T _v) {
+  Hash61(T _v) {
     long long x = (long long)(_v % m);
     if (x < 0) x += m;
     v = x;
   }
   template <class T> requires(internal::is_unsigned_int_v<T>)
-  hash61(T _v) {
+  Hash61(T _v) {
     v = (ull)(_v % m);
   }
 
   ull val() const { return v; }
 
-  hash61& operator++() {
+  Hash61& operator++() {
     v++;
     if (v == m) v = 0;
     return *this;
   }
-  hash61& operator--() {
+  Hash61& operator--() {
     if (v == 0) v = m;
     v--;
     return *this;
   }
-  hash61 operator++(int) {
-    hash61 res = *this;
+  Hash61 operator++(int) {
+    Hash61 res = *this;
     ++*this;
     return res;
   }
-  hash61 operator--(int) {
-    hash61 res = *this;
+  Hash61 operator--(int) {
+    Hash61 res = *this;
     --*this;
     return res;
   }
 
-  hash61& operator+=(const hash61& rhs) {
+  Hash61& operator+=(const Hash61& rhs) {
     v += rhs.v;
     if (v >= m) v -= m;
     return *this;
   }
-  hash61& operator-=(const hash61& rhs) {
+  Hash61& operator-=(const Hash61& rhs) {
     v += m - rhs.v;
     if (v >= m) v -= m;
     return *this;
   }
-  hash61& operator*=(const hash61& rhs) {
+  Hash61& operator*=(const Hash61& rhs) {
     v = mul(v, rhs.v);
     return *this;
   }
-  hash61& operator/=(const hash61& rhs) { return *this = *this * rhs.inv(); }
+  Hash61& operator/=(const Hash61& rhs) { return *this = *this * rhs.inv(); }
 
-  hash61 operator+() const { return *this; }
-  hash61 operator-() const { return hash61() - *this; }
+  Hash61 operator+() const { return *this; }
+  Hash61 operator-() const { return Hash61() - *this; }
 
-  friend hash61 operator+(const hash61& lhs, const hash61& rhs) {
-    return hash61(lhs) += rhs;
+  friend Hash61 operator+(const Hash61& lhs, const Hash61& rhs) {
+    return Hash61(lhs) += rhs;
   }
-  friend hash61 operator-(const hash61& lhs, const hash61& rhs) {
-    return hash61(lhs) -= rhs;
+  friend Hash61 operator-(const Hash61& lhs, const Hash61& rhs) {
+    return Hash61(lhs) -= rhs;
   }
-  friend hash61 operator*(const hash61& lhs, const hash61& rhs) {
-    return hash61(lhs) *= rhs;
+  friend Hash61 operator*(const Hash61& lhs, const Hash61& rhs) {
+    return Hash61(lhs) *= rhs;
   }
 
-  friend bool operator==(const hash61& lhs, const hash61& rhs) {
+  friend bool operator==(const Hash61& lhs, const Hash61& rhs) {
     return lhs.v == rhs.v;
   }
-  friend bool operator!=(const hash61& lhs, const hash61& rhs) {
+  friend bool operator!=(const Hash61& lhs, const Hash61& rhs) {
     return lhs.v != rhs.v;
   }
-  friend bool operator<(const hash61& lhs, const hash61& rhs) {
+  friend bool operator<(const Hash61& lhs, const Hash61& rhs) {
     return lhs.v < rhs.v;
   }
-  friend bool operator>(const hash61& lhs, const hash61& rhs) {
+  friend bool operator>(const Hash61& lhs, const Hash61& rhs) {
     return lhs.v > rhs.v;
   }
-  friend bool operator<=(const hash61& lhs, const hash61& rhs) {
+  friend bool operator<=(const Hash61& lhs, const Hash61& rhs) {
     return lhs.v <= rhs.v;
   }
-  friend bool operator>=(const hash61& lhs, const hash61& rhs) {
+  friend bool operator>=(const Hash61& lhs, const Hash61& rhs) {
     return lhs.v >= rhs.v;
   }
 
-  hash61 pow(long long k) const {
+  Hash61 pow(long long k) const {
     assert(0 <= k);
-    hash61 x = *this, r = 1;
+    Hash61 x = *this, r = 1;
     while (k) {
       if (k & 1) r *= x;
       x *= x;
@@ -117,18 +117,18 @@ class hash61 {
     }
     return r;
   }
-  hash61 inv() const {
+  Hash61 inv() const {
     assert(v);
     return pow(m - 2);
   }
 
-  friend std::istream& operator>>(std::istream& is, hash61& hs) {
+  friend std::istream& operator>>(std::istream& is, Hash61& hs) {
     long long t;
     is >> t;
     hs = t;
     return is;
   }
-  friend std::ostream& operator<<(std::ostream& os, const hash61& hs) {
+  friend std::ostream& operator<<(std::ostream& os, const Hash61& hs) {
     return os << hs.v;
   }
 

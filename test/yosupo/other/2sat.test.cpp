@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
+#define PROBLEM "https://judge.yosupo.jp/problem/TwoSat"
 
 #include "graph/two-sat.hpp"
 #include <iostream>
@@ -16,7 +16,7 @@ int main() {
   }
   int n, m;
   cin >> n >> m;
-  two_sat sat(n);
+  TwoSat sat(n);
   for (int i = 0; i < m; i++) {
     int a, b, dummy;
     cin >> a >> b >> dummy;

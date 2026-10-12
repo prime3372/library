@@ -17,7 +17,7 @@ int main() {
   while (t--) {
     int n;
     cin >> n;
-    vector<point<ll>> p(n);
+    vector<Point<ll>> p(n);
     for (auto& pi : p) cin >> pi;
     auto ch = convex_hull(p);
     cout << ch.size() << "\n";

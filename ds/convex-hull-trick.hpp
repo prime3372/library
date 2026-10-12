@@ -5,9 +5,9 @@
 
 namespace cp {
 
-template <class T, bool is_max> class convex_hull_trick {
+template <class T, bool is_max> struct ConvexHullTrick {
  public:
-  convex_hull_trick() {}
+  ConvexHullTrick() {}
 
   // @note When `is_max` is true, `a` must be non-decreasing. Otherwise, `a`
   // must be non-increasing.

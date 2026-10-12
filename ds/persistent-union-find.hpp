@@ -9,12 +9,12 @@
 
 namespace cp {
 
-class persistent_union_find {
+class PersistentUnionFind {
  public:
-  using node_ptr = typename persistent_array<int>::node_ptr;
+  using node_ptr = typename PersistentArray<int>::node_ptr;
 
-  persistent_union_find() : n(0) {}
-  explicit persistent_union_find(int _n) : n(_n), par_or_size(_n, -1) {}
+  PersistentUnionFind() : n(0) {}
+  explicit PersistentUnionFind(int _n) : n(_n), par_or_size(_n, -1) {}
 
   template <class F = void (*)(int, int)>
   bool unite(int a, int b, const F& f = [](int, int) {}) {
@@ -53,7 +53,7 @@ class persistent_union_find {
 
  private:
   int n;
-  persistent_array<int> par_or_size;
+  PersistentArray<int> par_or_size;
   int _find(int a) {
     if (par_or_size[a] < 0) return a;
     int res = _find(par_or_size[a]);

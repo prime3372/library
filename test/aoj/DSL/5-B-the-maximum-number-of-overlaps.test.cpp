@@ -13,7 +13,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  cumsum_2d<int> cum(1001, 1001);
+  Cumsum2D<int> cum(1001, 1001);
   for (int i = 0; i < n; i++) {
     int x1, y1, x2, y2;
     cin >> x1 >> y1 >> x2 >> y2;

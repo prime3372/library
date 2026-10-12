@@ -8,10 +8,11 @@
 
 namespace cp {
 
-template <class S, auto op, auto e> class disjoint_sparse_table {
+template <class S, auto op, auto e> struct DisjointSparseTable {
  public:
-  disjoint_sparse_table() : n(0) {}
-  explicit disjoint_sparse_table(const std::vector<S>& _a) : n(int(_a.size())), a(_a) {
+  DisjointSparseTable() : n(0) {}
+  explicit DisjointSparseTable(const std::vector<S>& _a)
+      : n(int(_a.size())), a(_a) {
     int log = std::countr_zero(std::bit_ceil((unsigned int)(n)));
     table.resize(log);
     for (int k = 0; k < log; k++) {

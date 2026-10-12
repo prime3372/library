@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/point_set_range_composite_large_array"
 
-#include "ds/dynamic-segtree.hpp"
+#include "ds/dynamic-segment-tree.hpp"
 #include "util/static-modint.hpp"
 #include <iostream>
 
@@ -20,7 +20,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  dynamic_segtree<S, op, e> seg(n);
+  DynamicSegmentTree<S, op, e> seg(n);
   while (q--) {
     int t;
     cin >> t;

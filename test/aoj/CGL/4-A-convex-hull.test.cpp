@@ -17,7 +17,7 @@ int main() {
   cout << fixed << setprecision(1);
   int n;
   cin >> n;
-  vector<point<ll>> p(n);
+  vector<Point<ll>> p(n);
   for (auto& pi : p) cin >> pi;
   auto ch = convex_hull<true>(p);
   int m = int(ch.size()), j = 0;

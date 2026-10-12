@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite"
 
-#include "ds/segtree.hpp"
+#include "ds/segment-tree.hpp"
 #include "util/static-modint.hpp"
 #include <iostream>
 #include <vector>
@@ -22,7 +22,7 @@ int main() {
   cin >> n >> q;
   vector<S> a(n);
   for (auto& ai : a) cin >> ai.a >> ai.b;
-  segtree<S, op, e> seg(a);
+  SegmentTree<S, op, e> seg(a);
   while (q--) {
     int t;
     cin >> t;

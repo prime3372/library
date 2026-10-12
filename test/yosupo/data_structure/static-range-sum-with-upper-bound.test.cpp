@@ -15,8 +15,8 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  rectangle_sum<int, int> cnt;
-  rectangle_sum<int, ll> sum;
+  RectangleSum<int, int> cnt;
+  RectangleSum<int, ll> sum;
   for (int i = 0; i < n; i++) {
     int ai;
     cin >> ai;

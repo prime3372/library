@@ -11,7 +11,7 @@ using namespace std;
 using namespace cp;
 
 template <int k> void test(int q) {
-  dynamic_bitset bs1(k);
+  DynamicBitset bs1(k);
   bitset<k> bs2;
   for (int i = 0; i < k; i++) bs1[i] = bs2[i] = uniform_bool();
   while (q--) {

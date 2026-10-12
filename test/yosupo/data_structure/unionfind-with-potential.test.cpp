@@ -13,7 +13,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  weighted_union_find<mint> uf(n);
+  WeightedUnionFind<mint> uf(n);
   while (q--) {
     int t;
     cin >> t;

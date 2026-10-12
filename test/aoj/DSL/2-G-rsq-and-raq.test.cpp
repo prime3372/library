@@ -13,7 +13,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  range_add_range_sum<ll> d(n);
+  RangeAddRangeSum<ll> d(n);
   while (q--) {
     int com;
     cin >> com;

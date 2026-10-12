@@ -24,7 +24,7 @@ int main() {
   for (int i = 2; i <= t; i++) {
     minv[i] = -minv[m % i] * (m / i);
   }
-  formal_power_series<mint> f(t + 1);
+  FormalPowerSeries<mint> f(t + 1);
   for (int i = 1; i <= t; i++) {
     for (int j = 1; i * j <= t; j++) {
       f[i * j] += cnt[i] * (j % 2 ? 1 : -1) * minv[j];

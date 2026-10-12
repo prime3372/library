@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int q;
   cin >> q;
-  hash_set<int> s;
+  HashSet<int> s;
   while (q--) {
     int t;
     cin >> t;

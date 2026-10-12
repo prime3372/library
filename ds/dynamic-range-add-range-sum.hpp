@@ -6,30 +6,26 @@
 
 namespace cp {
 
-template <class T> class dynamic_range_add_range_sum {
+template <class T> class DynamicRangeAddRangeSum {
   using ull = unsigned long long;
 
  public:
-  dynamic_range_add_range_sum() : n(0) {}
-  explicit dynamic_range_add_range_sum(ull _n)
-      : n(_n), fw1(_n + 1), fw2(_n + 1) {}
-
+  DynamicRangeAddRangeSum() : n(0) {}
+  explicit DynamicRangeAddRangeSum(ull _n) : n(_n), fw1(_n + 1), fw2(_n + 1) {}
   void add(ull l, ull r, T w) {
     assert(0 <= l && l <= r && r <= n);
     add(l, w);
     add(r, -w);
   }
-
   T sum(ull l, ull r) const {
     assert(0 <= l && l <= r && r <= n);
     return sum(r) - sum(l);
   }
-
   ull size() const { return n; }
 
  private:
   ull n;
-  dynamic_fenwick_tree<T> fw1, fw2;
+  DynamicFenwickTree<T> fw1, fw2;
 
   // [l, n)
   T add(ull l) {

@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_D"
 
-#include "ds/lazy-segtree.hpp"
+#include "ds/lazy-segment-tree.hpp"
 #include <climits>
 #include <iostream>
 
@@ -19,7 +19,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  lazy_segtree<int, op, e, int, act, compose, id> seg(n);
+  LazySegmentTree<int, op, e, int, act, compose, id> seg(n);
   while (q--) {
     int com;
     cin >> com;

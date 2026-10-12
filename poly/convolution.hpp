@@ -157,7 +157,7 @@ std::vector<mint> convolution(const std::vector<mint>& a,
 template <int mod = 998244353, class T>
 requires(is_prime(mod) && internal::is_integral_v<T>)
 std::vector<T> convolution(const std::vector<T>& a, const std::vector<T>& b) {
-  using mint = static_modint<mod>;
+  using mint = StaticModInt<mod>;
   int n = int(a.size()), m = int(b.size());
 
   std::vector<mint> a2(n), b2(m);

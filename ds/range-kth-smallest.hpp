@@ -8,14 +8,14 @@
 namespace cp {
 
 template <class T, class Compare = std::less<T>, int bit_size = 24>
-class range_kth_smallest {
+class RangeKthSmallest {
  public:
-  range_kth_smallest() {}
-  explicit range_kth_smallest(const std::vector<T>& a) { init(a); }
+  RangeKthSmallest() {}
+  explicit RangeKthSmallest(const std::vector<T>& a) { init(a); }
 
   void init(const std::vector<T>& a) {
     n = int(a.size());
-    wm = wavelet_matrix<bit_size>(n);
+    wm = WaveletMatrix<bit_size>(n);
     cc.init(a);
     for (int i = 0; i < n; i++) wm.set(i, cc(a[i]));
     wm.init();
@@ -45,8 +45,8 @@ class range_kth_smallest {
 
  private:
   int n = 0;
-  wavelet_matrix<bit_size> wm;
-  coordinate_compression<T, Compare> cc;
+  WaveletMatrix<bit_size> wm;
+  CoordinateCompression<T, Compare> cc;
   bool initialized = false;
 };
 

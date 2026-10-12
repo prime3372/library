@@ -6,10 +6,10 @@
 
 namespace cp {
 
-class bit_vector {
+struct BitVector {
  public:
-  bit_vector() {}
-  explicit bit_vector(int _n) : n(_n), block(n / 64 + 1), count(n / 64 + 1) {}
+  BitVector() {}
+  explicit BitVector(int _n) : n(_n), block(n / 64 + 1), count(n / 64 + 1) {}
 
   void set(int i) {
     assert(0 <= i && i < n);

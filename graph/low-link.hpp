@@ -6,10 +6,10 @@
 
 namespace cp {
 
-class low_link {
+class LowLink {
  public:
-  low_link() : low_link(0) {}
-  explicit low_link(int _n) : low(_n), ord(_n), n(_n), g(_n) {}
+  LowLink() : LowLink(0) {}
+  explicit LowLink(int _n) : low(_n), ord(_n), n(_n), g(_n) {}
 
   void add_edge(int u, int v) {
     assert(0 <= u && u < n);
@@ -20,7 +20,7 @@ class low_link {
 
   std::vector<int> low, ord;
 
-  low_link& build() {
+  LowLink& build() {
     std::fill(low.begin(), low.end(), n);
     std::fill(ord.begin(), ord.end(), -1);
     int now_ord = 0;

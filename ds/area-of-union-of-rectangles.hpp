@@ -5,14 +5,14 @@
 #include <limits>
 #include <vector>
 
-#include "ds/lazy-segtree.hpp"
+#include "ds/lazy-segment-tree.hpp"
 #include "util/algo-utility.hpp"
 
 namespace cp {
 
-template <class T> class area_of_union_of_rectangles {
+template <class T> struct AreaOfUnionOfRectangles {
  public:
-  area_of_union_of_rectangles() {}
+  AreaOfUnionOfRectangles() {}
 
   // add `[l, r] * [d, u]`
   // @note `(max(r) - min(l)) * (max(u) - min(d))` must be in `T`
@@ -33,7 +33,7 @@ template <class T> class area_of_union_of_rectangles {
     auto q = inverse(sort(y));
     std::vector<S> init(n - 1);
     for (int i = 0; i < n - 1; i++) init[i] = {0, y[i + 1] - y[i]};
-    lazy_segtree<S, op, e, T, act, compose, id> seg(init);
+    LazySegmentTree<S, op, e, T, act, compose, id> seg(init);
     T ans = 0;
     T total = y[n - 1] - y[0];
     for (int i = 0; i < n - 1; i++) {

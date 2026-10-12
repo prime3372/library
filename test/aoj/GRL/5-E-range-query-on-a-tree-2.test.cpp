@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_5_E"
 
-#include "ds/lazy-segtree.hpp"
+#include "ds/lazy-segment-tree.hpp"
 #include "tree/hl-decomposition.hpp"
 #include <iostream>
 
@@ -24,7 +24,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  hl_decomposition hld(n);
+  HeavyLightDecomposition hld(n);
   for (int i = 0; i < n; i++) {
     int k;
     cin >> k;
@@ -38,7 +38,7 @@ int main() {
 
   int q;
   cin >> q;
-  lazy_segtree<S, op, e, ll, act, compose, id> seg(n, {0, 1});
+  LazySegmentTree<S, op, e, ll, act, compose, id> seg(n, {0, 1});
   while (q--) {
     int t;
     cin >> t;

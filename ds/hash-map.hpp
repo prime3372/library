@@ -12,9 +12,9 @@
 namespace cp {
 
 // @note `Val` cannot be `bool`
-template <class Key, class Val> class hash_map {
+template <class Key, class Val> class HashMap {
  public:
-  hash_map() : cap(8), sz(0), keys(cap), vals(cap), used(cap) {}
+  HashMap() : cap(8), sz(0), keys(cap), vals(cap), used(cap) {}
 
   Val& operator[](const Key& k) {
     unsigned int i = index(k);
@@ -59,7 +59,7 @@ template <class Key, class Val> class hash_map {
   Val default_val{};
 
   unsigned int hash(const Key& k) const {
-    return (unsigned int)(safe_hash<Key>()(k) & (cap - 1));
+    return (unsigned int)(SafeHash<Key>()(k) & (cap - 1));
   }
 
   unsigned int index(const Key& k) const {

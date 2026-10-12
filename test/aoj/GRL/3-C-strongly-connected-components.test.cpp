@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  strongly_connected_components scc(n);
+  StronglyConnectedComponents scc(n);
   for (int i = 0; i < m; i++) {
     int s, t;
     cin >> s >> t;

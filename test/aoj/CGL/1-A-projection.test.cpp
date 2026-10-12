@@ -16,11 +16,11 @@ int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   cout << fixed << setprecision(10);
-  line<ll> l;
+  Line<ll> l;
   int q;
   cin >> l >> q;
   while (q--) {
-    point<ll> p;
+    Point<ll> p;
     cin >> p;
     cout << projection(p, l) << "\n";
   }

@@ -18,7 +18,7 @@ int main() {
   int q;
   cin >> q;
   while (q--) {
-    line<ll> l, m;
+    Line<ll> l, m;
     cin >> l >> m;
     cout << cross_point(l, m) << "\n";
   }

@@ -14,7 +14,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  offline_point_add_rectangle_sum<int, ll> data;
+  OfflinePointAddRectangleSum<int, ll> data;
   for (int i = 0; i < n; i++) {
     int x, y;
     ll w;

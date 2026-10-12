@@ -16,7 +16,7 @@ int main() {
   cin >> n >> q;
   vector<ll> a(n);
   for (ll& ai : a) cin >> ai;
-  euler_tour et(n);
+  EulerTour et(n);
   for (int i = 1; i < n; i++) {
     int p;
     cin >> p;
@@ -25,7 +25,7 @@ int main() {
   et.build();
   auto& in = et.in;
   auto& out = et.out;
-  fenwick_tree<ll> fw(n);
+  FenwickTree<ll> fw(n);
   for (int i = 0; i < n; i++) fw.add(in[i], a[i]);
   while (q--) {
     int t;

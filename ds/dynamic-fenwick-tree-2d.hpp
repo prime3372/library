@@ -9,13 +9,13 @@
 
 namespace cp {
 
-template <class T> class dynamic_fenwick_tree_2d {
+template <class T> class DynamicFenwickTree2D {
   using ull = unsigned long long;
 
  public:
-  dynamic_fenwick_tree_2d() : n(0), m(0) {}
-  explicit dynamic_fenwick_tree_2d(int _n, ull _m)
-      : n(_n), m(_m), fw(_n, dynamic_fenwick_tree<T>(_m)) {}
+  DynamicFenwickTree2D() : n(0), m(0) {}
+  explicit DynamicFenwickTree2D(int _n, ull _m)
+      : n(_n), m(_m), fw(_n, DynamicFenwickTree<T>(_m)) {}
 
   void add(int i, ull j, T w) {
     assert(0 <= i && i < n);
@@ -35,10 +35,10 @@ template <class T> class dynamic_fenwick_tree_2d {
     }
 
    private:
-    friend dynamic_fenwick_tree_2d;
-    const dynamic_fenwick_tree_2d* ptr;
+    friend DynamicFenwickTree2D;
+    const DynamicFenwickTree2D* ptr;
     int i;
-    ref(const dynamic_fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), i(_i) {}
+    ref(const DynamicFenwickTree2D* _ptr, int _i) : ptr(_ptr), i(_i) {}
   };
 
   ref operator[](int i) const {
@@ -83,7 +83,7 @@ template <class T> class dynamic_fenwick_tree_2d {
  private:
   int n;
   ull m;
-  std::vector<dynamic_fenwick_tree<T>> fw;
+  std::vector<DynamicFenwickTree<T>> fw;
 };
 
 }  // namespace cp

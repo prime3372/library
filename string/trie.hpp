@@ -6,9 +6,9 @@
 #include <type_traits>
 #include <vector>
 
-template <int char_size, char offset = 'a'> class trie {
+template <int char_size, char offset = 'a'> class Trie {
  public:
-  class node {
+  class Node {
    public:
     int parent() const { return par; }
     int count() const { return cnt; }
@@ -18,13 +18,13 @@ template <int char_size, char offset = 'a'> class trie {
     }
 
    private:
-    friend trie;
+    friend Trie;
     int par, cnt, sub;
     std::array<int, char_size> to;
-    node(int p) : par(p), cnt(0), sub(0) { to.fill(-1); }
+    Node(int p) : par(p), cnt(0), sub(0) { to.fill(-1); }
   };
 
-  trie() { nodes.push_back(node(-1)); }
+  Trie() { nodes.push_back(Node(-1)); }
 
   int insert(const std::string& s) {
     int v = 0;
@@ -33,7 +33,7 @@ template <int char_size, char offset = 'a'> class trie {
       int i = index(c);
       if (nodes[v].to[i] == -1) {
         nodes[v].to[i] = size();
-        nodes.push_back(node(v));
+        nodes.push_back(Node(v));
       }
       v = nodes[v].to[i];
       nodes[v].sub++;
@@ -62,7 +62,7 @@ template <int char_size, char offset = 'a'> class trie {
     return true;
   }
 
-  const node& operator[](int v) const {
+  const Node& operator[](int v) const {
     assert(0 <= v && v < size());
     return nodes[v];
   }
@@ -70,7 +70,7 @@ template <int char_size, char offset = 'a'> class trie {
   int size() const { return int(nodes.size()); }
 
  private:
-  std::vector<node> nodes;
+  std::vector<Node> nodes;
 
   int index(char c) const {
     int i = c - offset;

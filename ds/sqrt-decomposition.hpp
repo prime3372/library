@@ -7,10 +7,10 @@
 
 namespace cp {
 
-template <class block> class sqrt_decomposition {
+template <class block> class SqrtDecomposition {
  public:
-  sqrt_decomposition() : n(0), block_size(0), block_num(0) {}
-  explicit sqrt_decomposition(int _n, int b)
+  SqrtDecomposition() : n(0), block_size(0), block_num(0) {}
+  explicit SqrtDecomposition(int _n, int b)
       : n(_n), block_size(b), block_num((_n + b - 1) / b) {}
 
   block& get_block(int i) {

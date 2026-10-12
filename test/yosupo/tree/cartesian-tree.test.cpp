@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
+#define PROBLEM "https://judge.yosupo.jp/problem/CartesianTree"
 
 #include "ds/cartesian-tree.hpp"
 #include <iostream>
@@ -14,7 +14,7 @@ int main() {
   cin >> n;
   vector<int> a(n);
   for (int& ai : a) cin >> ai;
-  cartesian_tree cart(a);
+  CartesianTree cart(a);
   for (int p : cart.parent) {
     cout << (p == -1 ? cart.root : p) << " ";
   }

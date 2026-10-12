@@ -8,16 +8,16 @@
 
 namespace cp {
 
-template <class T> class dijkstra {
+template <class T> class Dijkstra {
  public:
-  dijkstra() : dijkstra(0) {}
-  explicit dijkstra(int _n) : n(_n), g(_n), d(_n), prev_v(_n), prev_e(_n) {}
+  Dijkstra() : Dijkstra(0) {}
+  explicit Dijkstra(int _n) : n(_n), g(_n), d(_n), prev_v(_n), prev_e(_n) {}
 
   int add_edge(int from, int to, T cost) {
     assert(0 <= from && from < n);
     assert(0 <= to && to < n);
     assert(0 <= cost);
-    g[from].push_back(edge{to, m, cost});
+    g[from].push_back(Edge{to, m, cost});
     return m++;
   }
 
@@ -62,11 +62,11 @@ template <class T> class dijkstra {
 
  private:
   int n, m = 0;
-  struct edge {
+  struct Edge {
     int to, id;
     T cost;
   };
-  std::vector<std::vector<edge>> g;
+  std::vector<std::vector<Edge>> g;
   std::vector<T> d;
   std::vector<int> prev_v, prev_e;
   bool initialized = false;

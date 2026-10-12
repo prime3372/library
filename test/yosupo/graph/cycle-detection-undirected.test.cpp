@@ -11,7 +11,7 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  cycle_detection<false> detector(n);
+  CycleDetection<false> detector(n);
   for (int i = 0; i < m; i++) {
     int u, v;
     cin >> u >> v;

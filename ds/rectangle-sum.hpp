@@ -9,9 +9,9 @@
 
 namespace cp {
 
-template <class T, class U, int bit_size = 24> class rectangle_sum {
+template <class T, class U, int bit_size = 24> class RectangleSum {
  public:
-  rectangle_sum() {}
+  RectangleSum() {}
 
   void add_point(T x, T y, U w) {
     xs.push_back(x);
@@ -24,7 +24,7 @@ template <class T, class U, int bit_size = 24> class rectangle_sum {
     auto p = sort(xs);
     auto q = inverse(sort(ys));
 
-    wm = wavelet_matrix<bit_size>(n);
+    wm = WaveletMatrix<bit_size>(n);
     for (int i = 0; i < n; i++) wm.set(i, q[p[i]]);
     wm.init();
 
@@ -77,7 +77,7 @@ template <class T, class U, int bit_size = 24> class rectangle_sum {
   int n = 0;
   std::vector<T> xs, ys;
   std::vector<U> ws;
-  wavelet_matrix<bit_size> wm;
+  WaveletMatrix<bit_size> wm;
   std::vector<std::vector<U>> cum;
   bool initialized = false;
 };

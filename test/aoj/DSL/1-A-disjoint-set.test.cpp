@@ -10,7 +10,7 @@ using namespace cp;
 int main() {
   int n, q;
   cin >> n >> q;
-  union_find uf(n);
+  UnionFind uf(n);
   while (q--) {
     int com, x, y;
     cin >> com >> x >> y;

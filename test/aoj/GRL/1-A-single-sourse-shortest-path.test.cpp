@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_1_A"
 
-#include "graph/dijkstra.hpp"
+#include "graph/Dijkstra.hpp"
 #include <iostream>
 
 using namespace std;
@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int n, m, r;
   cin >> n >> m >> r;
-  dijkstra<int> dist(n);
+  Dijkstra<int> dist(n);
   for (int i = 0; i < m; i++) {
     int s, t, d;
     cin >> s >> t >> d;

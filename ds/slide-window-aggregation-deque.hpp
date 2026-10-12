@@ -8,9 +8,9 @@
 
 namespace cp {
 
-template <class S, auto op, auto e> class slide_window_aggregation_deque {
+template <class S, auto op, auto e> class SlideWindowAggregationDeque {
  public:
-  slide_window_aggregation_deque() {}
+  SlideWindowAggregationDeque() {}
 
   void push_front(const S& x) { push0(x); }
   void push_back(const S& x) { push1(x); }

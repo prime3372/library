@@ -17,7 +17,7 @@ int main() {
   cin >> n >> q;
   vector<int> a(n);
   for (int& ai : a) cin >> ai;
-  disjoint_sparse_table<int, op, e> dst(a);
+  DisjointSparseTable<int, op, e> dst(a);
   while (q--) {
     int l, r;
     cin >> l >> r;

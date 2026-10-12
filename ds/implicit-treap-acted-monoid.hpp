@@ -4,34 +4,33 @@
 #include <functional>
 #include <memory>
 
-#include "ds/implicit-treap-base.hpp"
+#include "ds/implicit-Treap-Base.hpp"
 #include "random/engine.hpp"
 
 namespace cp {
 
-template <class S, class F, auto id> struct implicit_treap_acted_monoid_node {
-  using self = implicit_treap_acted_monoid_node;
+template <class S, class F, auto id> struct ImplicitTreapActedMonoidNode {
+  using Self = ImplicitTreapActedMonoidNode;
   S val, prod;
   F lz = id();
-  self* left = nullptr;
-  self* right = nullptr;
+  Self* left = nullptr;
+  Self* right = nullptr;
   int sub = 1;
   unsigned long long priority;
   bool rev = false;
   bool lzflag = false;
-  implicit_treap_acted_monoid_node(const S& x)
-      : val(x), prod(x), priority(rng()) {}
+  ImplicitTreapActedMonoidNode(const S& x) : val(x), prod(x), priority(rng()) {}
 };
 
 template <class S, auto op, auto e, class F, auto act, auto compose, auto id,
           auto reverse = std::identity()>
-class implicit_treap_acted_monoid
-    : public implicit_treap_base<implicit_treap_acted_monoid_node<S, F, id>> {
+class ImplicitTreapActedMonoid
+    : public ImplicitTreapBase<ImplicitTreapActedMonoidNode<S, F, id>> {
  public:
-  implicit_treap_acted_monoid() {}
-  explicit implicit_treap_acted_monoid(int n, const S& val = e())
-      : implicit_treap_acted_monoid(std::vector<S>(n, val)) {}
-  explicit implicit_treap_acted_monoid(const std::vector<S>& v) { build(v); }
+  ImplicitTreapActedMonoid() {}
+  explicit ImplicitTreapActedMonoid(int n, const S& val = e())
+      : ImplicitTreapActedMonoid(std::vector<S>(n, val)) {}
+  explicit ImplicitTreapActedMonoid(const std::vector<S>& v) { build(v); }
 
   S prod(int l, int r) {
     assert(0 <= l && l <= r && r <= size());
@@ -53,29 +52,29 @@ class implicit_treap_acted_monoid
   }
 
  private:
-  using node = implicit_treap_acted_monoid_node<S, F, id>;
-  using base = implicit_treap_base<node>;
-  friend base;
-  using base::build;
-  using base::merge;
-  using base::root;
-  using base::size;
-  using base::split;
+  using Node = ImplicitTreapActedMonoidNode<S, F, id>;
+  using Base = ImplicitTreapBase<Node>;
+  friend Base;
+  using Base::build;
+  using Base::merge;
+  using Base::root;
+  using Base::size;
+  using Base::split;
 
-  void toggle(node* t) override {
+  void toggle(Node* t) override {
     std::swap(t->left, t->right);
     t->prod = reverse(t->prod);
     t->rev = !t->rev;
   }
 
-  void update(node* t) override {
+  void update(Node* t) override {
     t->sub = size(t->left) + size(t->right) + 1;
     t->prod = t->val;
     if (t->left) t->prod = op(t->left->prod, t->prod);
     if (t->right) t->prod = op(t->prod, t->right->prod);
   }
 
-  void push(node* t) override {
+  void push(Node* t) override {
     if (t->rev) {
       if (t->left) toggle(t->left);
       if (t->right) toggle(t->right);
@@ -89,7 +88,7 @@ class implicit_treap_acted_monoid
     }
   }
 
-  void all_apply(node* t, const F& f) {
+  void all_apply(Node* t, const F& f) {
     t->lz = compose(f, t->lz);
     t->val = act(f, t->val);
     t->prod = act(f, t->prod);

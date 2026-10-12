@@ -11,9 +11,9 @@
 namespace cp {
 
 template <class T, class U, int bit_size = 24>
-class offline_point_add_rectangle_sum {
+class OfflinePointAddRectangleSum {
  public:
-  offline_point_add_rectangle_sum() {}
+  OfflinePointAddRectangleSum() {}
 
   int add_point(T x, T y, U w = 0) {
     xs.push_back(x);
@@ -26,11 +26,11 @@ class offline_point_add_rectangle_sum {
     auto p = sort(xs);
     auto q = inverse(sort(ys));
     pos = inverse(p);
-    wm = wavelet_matrix<bit_size>(n);
+    wm = WaveletMatrix<bit_size>(n);
     for (int i = 0; i < n; i++) wm.set(i, q[p[i]]);
     wm.init();
 
-    fw.assign(bit_size, fenwick_tree<U>(n));
+    fw.assign(bit_size, FenwickTree<U>(n));
     for (int i = 0; i < n; i++) {
       int k = i;
       for (int h = bit_size - 1; h >= 0; h--) {
@@ -85,8 +85,8 @@ class offline_point_add_rectangle_sum {
   std::vector<T> xs, ys;
   std::vector<U> ws;
   std::vector<int> pos;
-  wavelet_matrix<bit_size> wm;
-  std::vector<fenwick_tree<U>> fw;
+  WaveletMatrix<bit_size> wm;
+  std::vector<FenwickTree<U>> fw;
   bool initialized = false;
 };
 

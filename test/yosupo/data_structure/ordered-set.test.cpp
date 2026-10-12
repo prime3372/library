@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/ordered_set"
 
-#include "ds/treap.hpp"
+#include "ds/Treap.hpp"
 
 #include <iostream>
 #include <vector>
@@ -15,7 +15,7 @@ int main() {
   cin >> n >> q;
   vector<int> a(n);
   for (int& x : a) cin >> x;
-  treap<int, false> s(a);
+  Treap<int, false> s(a);
   while (q--) {
     int t;
     cin >> t;

@@ -11,7 +11,7 @@ int main() {
   cin.tie(nullptr);
   int l, r, m;
   cin >> l >> r >> m;
-  bipartite_matching bm(l, r);
+  BipartiteMatching bm(l, r);
   for (int i = 0; i < m; i++) {
     int a, b;
     cin >> a >> b;

@@ -13,7 +13,7 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  max_flow<int> mf(n);
+  MaxFlow<int> mf(n);
   vector<array<int, 3>> edges(m);
   for (int i = 0; i < m; i++) {
     int u, v, c;

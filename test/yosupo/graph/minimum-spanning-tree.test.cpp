@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/minimum_spanning_tree"
 
-#include "graph/kruscal.hpp"
+#include "graph/Kruscal.hpp"
 #include <iostream>
 
 using namespace std;
@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  kruscal<ll> g(n);
+  Kruscal<ll> g(n);
   for (int i = 0; i < m; i++) {
     int a, b;
     ll c;

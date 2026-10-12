@@ -8,9 +8,9 @@
 
 namespace cp {
 
-template <class T> class hash_multiset {
+template <class T> class HashMultiset {
  public:
-  hash_multiset() {}
+  HashMultiset() {}
 
   void insert(const T& k) { d[k]++, sz++; }
 
@@ -40,7 +40,7 @@ template <class T> class hash_multiset {
 
  private:
   int sz = 0;
-  hash_map<T, int> d;
+  HashMap<T, int> d;
 };
 
 }  // namespace cp

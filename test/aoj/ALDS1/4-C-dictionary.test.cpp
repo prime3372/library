@@ -12,7 +12,7 @@ using namespace cp;
 int main() {
   int n;
   cin >> n;
-  hash_set<string> s;
+  HashSet<string> s;
   while (n--) {
     string t, str;
     cin >> t >> str;

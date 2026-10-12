@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/matrix_product"
+#define PROBLEM "https://judge.yosupo.jp/problem/Matrix_product"
 
 #include "linalg/matrix.hpp"
 #include "util/static-modint.hpp"
@@ -13,7 +13,7 @@ int main() {
   cin.tie(nullptr);
   int n, m, k;
   cin >> n >> m >> k;
-  matrix<mint> a(n, m), b(m, k);
+  Matrix<mint> a(n, m), b(m, k);
   for (auto& v : a) {
     for (auto& x : v) cin >> x;
   }

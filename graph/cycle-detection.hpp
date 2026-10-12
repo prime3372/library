@@ -6,16 +6,16 @@
 
 namespace cp {
 
-template <bool directed> class cycle_detection {
+template <bool directed> class CycleDetection {
  public:
-  cycle_detection() : n(0) {}
-  explicit cycle_detection(int _n) : n(_n), g(_n) {}
+  CycleDetection() : n(0) {}
+  explicit CycleDetection(int _n) : n(_n), g(_n) {}
 
   int add_edge(int from, int to) {
     assert(0 <= from && from < n);
     assert(0 <= to && to < n);
-    g[from].push_back(edge{to, m});
-    if (!directed) g[to].push_back(edge{from, m});
+    g[from].push_back(Edge{to, m});
+    if (!directed) g[to].push_back(Edge{from, m});
     return m++;
   }
 
@@ -53,10 +53,10 @@ template <bool directed> class cycle_detection {
 
  private:
   int n, m = 0;
-  struct edge {
+  struct Edge {
     int to, id;
   };
-  std::vector<std::vector<edge>> g;
+  std::vector<std::vector<Edge>> g;
 };
 
 }  // namespace cp

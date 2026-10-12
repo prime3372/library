@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_add_range_min"
 
-#include "ds/lazy-segtree.hpp"
+#include "ds/lazy-segment-tree.hpp"
 #include <iostream>
 #include <vector>
 
@@ -21,7 +21,7 @@ int main() {
   cin >> n >> q;
   vector<ll> a(n);
   for (ll& ai : a) cin >> ai;
-  lazy_segtree<ll, op, e, ll, act, compose, id> seg(a);
+  LazySegmentTree<ll, op, e, ll, act, compose, id> seg(a);
   while (q--) {
     int t;
     cin >> t;

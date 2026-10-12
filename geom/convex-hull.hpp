@@ -9,16 +9,16 @@ namespace cp {
 
 // counter-clockwise order
 template <bool include_boundary = false, class T>
-std::vector<point<T>> convex_hull(std::vector<point<T>> p) {
+std::vector<Point<T>> convex_hull(std::vector<Point<T>> p) {
   std::sort(p.begin(), p.end());
   p.erase(std::unique(p.begin(), p.end()), p.end());
   int n = int(p.size());
   if (n <= 2) return p;
 
-  std::vector<point<T>> ch;
-  auto check_convex = [&](const point<T>& q) {
-    const point<T>& p1 = ch[ch.size() - 1];
-    const point<T>& p0 = ch[ch.size() - 2];
+  std::vector<Point<T>> ch;
+  auto check_convex = [&](const Point<T>& q) {
+    const Point<T>& p1 = ch[ch.size() - 1];
+    const Point<T>& p0 = ch[ch.size() - 2];
     return include_boundary ? internal::less_equal<T>(0, cross(p1 - p0, q - p1))
                             : internal::less<T>(0, cross(p1 - p0, q - p1));
   };

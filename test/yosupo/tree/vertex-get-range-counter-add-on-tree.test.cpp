@@ -20,8 +20,8 @@ int main() {
   vector<ll> a(n);
   for (ll& ai : a) cin >> ai;
   vector<vector<int>> tree(n);
-  centroid_decomposition cd(n);
-  lowest_common_ancestor lca(n);
+  CentroidDecomposition cd(n);
+  LowestCommonAncestor lca(n);
   for (int i = 0; i < n - 1; i++) {
     int u, v;
     cin >> u >> v;
@@ -33,9 +33,9 @@ int main() {
   cd.build();
   lca.init();
 
-  vector<fenwick_tree<ll>> contour(n), contour_par(n);
+  vector<FenwickTree<ll>> contour(n), contour_par(n);
   for (int i = 0; i < n; i++) {
-    contour[i] = contour_par[i] = fenwick_tree<ll>(cd.size[i] + 1);
+    contour[i] = contour_par[i] = FenwickTree<ll>(cd.size[i] + 1);
   }
 
   auto query0 = [&](int p, int r, ll x) -> void {

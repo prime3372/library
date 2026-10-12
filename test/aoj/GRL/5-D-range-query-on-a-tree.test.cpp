@@ -14,7 +14,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  euler_tour et(n);
+  EulerTour et(n);
   for (int i = 0; i < n; i++) {
     int k;
     cin >> k;
@@ -28,7 +28,7 @@ int main() {
 
   int q;
   cin >> q;
-  fenwick_tree<ll> data(n);
+  FenwickTree<ll> data(n);
   while (q--) {
     int t;
     cin >> t;

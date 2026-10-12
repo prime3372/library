@@ -7,10 +7,10 @@
 
 namespace cp {
 
-class enumerate_union_find {
+class EnumerateUnionFind {
  public:
-  enumerate_union_find() : n(0) {}
-  explicit enumerate_union_find(int _n) : n(_n), par_or_size(_n, -1), nxt(_n) {
+  EnumerateUnionFind() : n(0) {}
+  explicit EnumerateUnionFind(int _n) : n(_n), par_or_size(_n, -1), nxt(_n) {
     for (int i = 0; i < n; i++) nxt[i] = i;
   }
 

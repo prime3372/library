@@ -7,10 +7,10 @@
 namespace cp {
 
 // Tarjan's strongly connected components algorithm
-class strongly_connected_components {
+class StronglyConnectedComponents {
  public:
-  strongly_connected_components() : strongly_connected_components(0) {}
-  explicit strongly_connected_components(int _n) : n(_n), g(_n) {}
+  StronglyConnectedComponents() : StronglyConnectedComponents(0) {}
+  explicit StronglyConnectedComponents(int _n) : n(_n), g(_n) {}
 
   void add_edge(int from, int to) {
     assert(0 <= from && from < n);
@@ -25,7 +25,7 @@ class strongly_connected_components {
   // Each `v` is contained in `groups[id[v]]`.
   std::vector<std::vector<int>> groups;
 
-  strongly_connected_components& build() {
+  StronglyConnectedComponents& build() {
     int now_ord = 0;
     std::vector<int> st, low(n), ord(n, -1);
     st.reserve(n);

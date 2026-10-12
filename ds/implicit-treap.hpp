@@ -4,24 +4,24 @@
 #include <functional>
 #include <vector>
 
-#include "ds/implicit-treap-base.hpp"
+#include "ds/implicit-Treap-Base.hpp"
 #include "random/engine.hpp"
 
 namespace cp {
 
-template <class T> struct implicit_treap_node {
-  using self = implicit_treap_node;
+template <class T> struct ImplicitTreapNode {
+  using Self = ImplicitTreapNode;
   T val;
   int sub = 1;
   unsigned long long priority;
-  self* left = nullptr;
-  self* right = nullptr;
+  Self* left = nullptr;
+  Self* right = nullptr;
   bool rev = false;
-  implicit_treap_node(const T& x) : val(x), priority(rng()) {}
+  ImplicitTreapNode(const T& x) : val(x), priority(rng()) {}
 };
 
 template <class T>
-class implicit_treap : public implicit_treap_base<implicit_treap_node<T>> {
+class implicit_treap : public ImplicitTreapBase<ImplicitTreapNode<T>> {
  public:
   implicit_treap() {}
   explicit implicit_treap(int n, const T& val = T())
@@ -29,21 +29,21 @@ class implicit_treap : public implicit_treap_base<implicit_treap_node<T>> {
   explicit implicit_treap(const std::vector<T>& v) { build(v); }
 
  private:
-  using node = implicit_treap_node<T>;
-  using base = implicit_treap_base<node>;
-  friend base;
-  using base::build;
-  using base::root;
-  using base::size;
+  using Node = ImplicitTreapNode<T>;
+  using Base = ImplicitTreapBase<Node>;
+  friend Base;
+  using Base::build;
+  using Base::root;
+  using Base::size;
 
-  void toggle(node* t) override {
+  void toggle(Node* t) override {
     std::swap(t->left, t->right);
     t->rev = !t->rev;
   }
 
-  void update(node* t) override { t->sub = size(t->left) + size(t->right) + 1; }
+  void update(Node* t) override { t->sub = size(t->left) + size(t->right) + 1; }
 
-  void push(node* t) override {
+  void push(Node* t) override {
     if (t->rev) {
       if (t->left) toggle(t->left);
       if (t->right) toggle(t->right);

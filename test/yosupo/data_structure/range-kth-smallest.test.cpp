@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/range_kth_smallest"
+#define PROBLEM "https://judge.yosupo.jp/problem/RangeKthSmallest"
 
 #include "ds/range-kth-smallest.hpp"
 #include <iostream>
@@ -13,7 +13,7 @@ int main() {
   cin >> n >> q;
   std::vector<int> a(n);
   for (int& ai : a) cin >> ai;
-  range_kth_smallest kth(a);
+  RangeKthSmallest kth(a);
   while (q--) {
     int l, r, k;
     cin >> l >> r >> k;

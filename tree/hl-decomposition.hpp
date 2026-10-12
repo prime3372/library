@@ -6,10 +6,10 @@
 
 namespace cp {
 
-class hl_decomposition {
+class HeavyLightDecomposition {
  public:
-  hl_decomposition() : n(0) {}
-  explicit hl_decomposition(int _n)
+  HeavyLightDecomposition() : n(0) {}
+  explicit HeavyLightDecomposition(int _n)
       : ord(_n), vertex(_n), head(_n), next(_n), n(_n), g(_n), size(_n) {}
 
   void add_edge(int a, int b) {
@@ -21,7 +21,7 @@ class hl_decomposition {
 
   std::vector<int> ord, vertex, head, next;
 
-  hl_decomposition& build(int r = 0) {
+  HeavyLightDecomposition& build(int r = 0) {
     assert(0 <= r && r < n);
 
     auto first_dfs = [&](auto self, int v, int pv) -> void {

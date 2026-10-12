@@ -12,11 +12,11 @@ using ll = long long;
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
-  point<ll> p0, p1;
+  Point<ll> p0, p1;
   int q;
   cin >> p0 >> p1 >> q;
   while (q--) {
-    point<ll> p2;
+    Point<ll> p2;
     cin >> p2;
     int c = ccw(p0, p1, p2);
     if (c == 1) {

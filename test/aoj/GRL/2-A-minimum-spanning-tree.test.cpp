@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_2_A"
 
-#include "graph/kruscal.hpp"
+#include "graph/Kruscal.hpp"
 #include <cassert>
 #include <iostream>
 #include <vector>
@@ -14,7 +14,7 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  kruscal<int> g(n);
+  Kruscal<int> g(n);
   vector<int> weight;
   for (int i = 0; i < m; i++) {
     int s, t, w;

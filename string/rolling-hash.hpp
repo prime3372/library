@@ -27,13 +27,13 @@ class rolling_hash {
     }
   }
 
-  hash61 get(int l, int r) const {
+  Hash61 get(int l, int r) const {
     assert(0 <= l && l <= r && r <= n);
     return hs[r] - hs[l] * pw[r - l];
   }
 
-  template <class Str> static hash61 to_hash(const Str& s) {
-    hash61 h = 0;
+  template <class Str> static Hash61 to_hash(const Str& s) {
+    Hash61 h = 0;
     for (int i = 0; i < int(s.size()); i++) {
       h = h * basis + hash_char(s[i]);
     }
@@ -41,12 +41,12 @@ class rolling_hash {
   }
 
  private:
-  inline static hash61 basis = hash61::get_basis();
+  inline static Hash61 basis = Hash61::get_basis();
   int n;
-  std::vector<hash61> hs, pw;
+  std::vector<Hash61> hs, pw;
 
   template <class T> static unsigned long long hash_char(const T& c) {
-    return safe_hash<T>()(c);
+    return SafeHash<T>()(c);
   }
 };
 

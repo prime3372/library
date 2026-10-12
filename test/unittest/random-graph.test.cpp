@@ -1,25 +1,25 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
-#include "ds/simple-queue.hpp"
 #include "ds/union-find.hpp"
 #include "random/engine.hpp"
 #include "random/random-graph.hpp"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <queue>
 #include <vector>
 
 using namespace std;
 using namespace cp;
 using ll = long long;
 
-void test(int n, int m, random_graph_config config) {
+void test(int n, int m, RandomGraphConfig config) {
   auto [directed, no_self_loops, no_multiple_edges, connected, start] = config;
 
   auto edges = random_graph(n, m, config);
   assert(int(edges.size()) == m);
 
-  union_find uf(n);
+  UnionFind uf(n);
   vector<vector<int>> g(n);
 
   for (auto& [u, v] : edges) {
@@ -43,7 +43,7 @@ void test(int n, int m, random_graph_config config) {
     } else {
       assert(start != -1);
       vector<bool> reached(n, false);
-      simple_queue<int> que;
+      std::queue<int> que;
       que.push(start);
       reached[start] = true;
       while (!que.empty()) {
@@ -61,7 +61,7 @@ void test(int n, int m, random_graph_config config) {
   }
 }
 
-void run_cases(random_graph_config config) {
+void run_cases(RandomGraphConfig config) {
   constexpr pair<int, int> cases[] = {
       {0, 0},     {1, 0},       {1, 10},      {10, 20},       {10, 100},
       {100, 200}, {100, 10000}, {1000, 2000}, {1000, 100000}, {100000, 200000}};

@@ -6,10 +6,10 @@
 
 namespace cp {
 
-template <class T> class cumsum_2d {
+template <class T> struct Cumsum2D {
  public:
-  cumsum_2d() : n(0), m(0) {}
-  explicit cumsum_2d(int _n, int _m)
+  Cumsum2D() : n(0), m(0) {}
+  explicit Cumsum2D(int _n, int _m)
       : n(_n), m(_m), val(_n, std::vector<T>(_m)) {}
 
   void accumulate() {

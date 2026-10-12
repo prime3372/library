@@ -9,12 +9,12 @@
 
 namespace cp {
 
-class dynamic_bitset {
+struct DynamicBitset {
   using ull = unsigned long long;
 
  public:
-  dynamic_bitset() : n(0) {}
-  explicit dynamic_bitset(int _n) : n(_n), a((_n + w - 1) / w) {}
+  DynamicBitset() : n(0) {}
+  explicit DynamicBitset(int _n) : n(_n), a((_n + w - 1) / w) {}
 
   class ref {
    public:
@@ -33,10 +33,10 @@ class dynamic_bitset {
     ref& operator=(const ref& other) { return *this = bool(other); }
 
    private:
-    friend dynamic_bitset;
+    friend DynamicBitset;
     ull* d;
     int pos;
-    ref(dynamic_bitset& b, int i) {
+    ref(DynamicBitset& b, int i) {
       d = b.a.data() + i / w;
       pos = i % w;
     }
@@ -51,13 +51,13 @@ class dynamic_bitset {
     return (a[i / w] & mask(i % w)) != 0;
   }
 
-  dynamic_bitset& flip() {
+  DynamicBitset& flip() {
     if (n == 0) return *this;
     for (int i = 0; i < int(a.size()); i++) a[i] = ~a[i];
     if (n % w) a.back() &= mask(n % w) - 1;
     return *this;
   }
-  dynamic_bitset operator~() const { return dynamic_bitset(*this).flip(); }
+  DynamicBitset operator~() const { return DynamicBitset(*this).flip(); }
 
   int count() const {
     int res = 0;
@@ -67,23 +67,23 @@ class dynamic_bitset {
 
   int size() const { return n; }
 
-  dynamic_bitset& operator^=(const dynamic_bitset& rhs) {
+  DynamicBitset& operator^=(const DynamicBitset& rhs) {
     assert(n == rhs.n);
     for (int i = 0; i < int(a.size()); i++) a[i] ^= rhs.a[i];
     return *this;
   }
-  dynamic_bitset& operator|=(const dynamic_bitset& rhs) {
+  DynamicBitset& operator|=(const DynamicBitset& rhs) {
     assert(n == rhs.n);
     for (int i = 0; i < int(a.size()); i++) a[i] |= rhs.a[i];
     return *this;
   }
-  dynamic_bitset& operator&=(const dynamic_bitset& rhs) {
+  DynamicBitset& operator&=(const DynamicBitset& rhs) {
     assert(n == rhs.n);
     for (int i = 0; i < int(a.size()); i++) a[i] &= rhs.a[i];
     return *this;
   }
 
-  dynamic_bitset& operator<<=(int shift) {
+  DynamicBitset& operator<<=(int shift) {
     assert(0 <= shift);
     if (n == 0) return *this;
     if (shift >= n) {
@@ -112,7 +112,7 @@ class dynamic_bitset {
     return *this;
   }
 
-  dynamic_bitset& operator>>=(int shift) {
+  DynamicBitset& operator>>=(int shift) {
     assert(0 <= shift);
     if (n == 0) return *this;
     if (shift >= n) {
@@ -140,30 +140,30 @@ class dynamic_bitset {
     return *this;
   }
 
-  friend dynamic_bitset operator^(const dynamic_bitset& lhs,
-                                  const dynamic_bitset& rhs) {
-    return dynamic_bitset(lhs) ^= rhs;
+  friend DynamicBitset operator^(const DynamicBitset& lhs,
+                                 const DynamicBitset& rhs) {
+    return DynamicBitset(lhs) ^= rhs;
   }
-  friend dynamic_bitset operator|(const dynamic_bitset& lhs,
-                                  const dynamic_bitset& rhs) {
-    return dynamic_bitset(lhs) |= rhs;
+  friend DynamicBitset operator|(const DynamicBitset& lhs,
+                                 const DynamicBitset& rhs) {
+    return DynamicBitset(lhs) |= rhs;
   }
-  friend dynamic_bitset operator&(const dynamic_bitset& lhs,
-                                  const dynamic_bitset& rhs) {
-    return dynamic_bitset(lhs) &= rhs;
+  friend DynamicBitset operator&(const DynamicBitset& lhs,
+                                 const DynamicBitset& rhs) {
+    return DynamicBitset(lhs) &= rhs;
   }
-  friend dynamic_bitset operator<<(const dynamic_bitset& lhs, int shift) {
-    return dynamic_bitset(lhs) <<= shift;
+  friend DynamicBitset operator<<(const DynamicBitset& lhs, int shift) {
+    return DynamicBitset(lhs) <<= shift;
   }
-  friend dynamic_bitset operator>>(const dynamic_bitset& lhs, int shift) {
-    return dynamic_bitset(lhs) >>= shift;
+  friend DynamicBitset operator>>(const DynamicBitset& lhs, int shift) {
+    return DynamicBitset(lhs) >>= shift;
   }
 
-  friend bool operator==(const dynamic_bitset& lhs, const dynamic_bitset& rhs) {
+  friend bool operator==(const DynamicBitset& lhs, const DynamicBitset& rhs) {
     assert(lhs.n == rhs.n);
     return lhs.a == rhs.a;
   }
-  friend bool operator!=(const dynamic_bitset& lhs, const dynamic_bitset& rhs) {
+  friend bool operator!=(const DynamicBitset& lhs, const DynamicBitset& rhs) {
     return !(lhs == rhs);
   }
 

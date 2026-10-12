@@ -13,10 +13,10 @@
 
 namespace cp {
 
-template <class T, bool multiset, class Compare = std::less<T>> class treap {
+template <class T, bool multiset, class Compare = std::less<T>> class Treap {
  public:
-  treap() {}
-  explicit treap(std::vector<T> v) {
+  Treap() {}
+  explicit Treap(std::vector<T> v) {
     if (v.empty()) return;
     int n = int(v.size());
     for (int i = 0; i < n - 1; i++) {
@@ -29,18 +29,18 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
       v.erase(std::unique(v.begin(), v.end(), equiv), v.end());
       n = int(v.size());
     }
-    std::vector<node*> ps(n);
+    std::vector<Node*> ps(n);
     std::vector<unsigned long long> pr(n);
     for (int i = 0; i < n; i++) {
-      ps[i] = new node(v[i]);
+      ps[i] = new Node(v[i]);
       pr[i] = ps[i]->priority;
     }
-    cartesian_tree cart(pr, std::greater<unsigned long long>());
+    CartesianTree cart(pr, std::greater<unsigned long long>());
     for (int i = 0; i < n; i++) {
       if (cart.left[i] != -1) ps[i]->left = ps[cart.left[i]];
       if (cart.right[i] != -1) ps[i]->right = ps[cart.right[i]];
     }
-    auto dfs = [&](auto self, node* t) -> void {
+    auto dfs = [&](auto self, Node* t) -> void {
       if (!t) return;
       self(self, t->left);
       self(self, t->right);
@@ -48,23 +48,23 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
     };
     dfs(dfs, root = ps[cart.root]);
   }
-  treap(const treap& other) {
-    auto dfs = [&](auto self, const node* t) -> node* {
+  Treap(const Treap& other) {
+    auto dfs = [&](auto self, const Node* t) -> Node* {
       if (!t) return nullptr;
-      node* ptr = new node(*t);
+      Node* ptr = new Node(*t);
       ptr->left = self(self, t->left);
       ptr->right = self(self, t->right);
       return ptr;
     };
     root = dfs(dfs, other.root);
   }
-  treap(treap&& other) noexcept : root(other.root) { other.root = nullptr; }
-  treap& operator=(treap other) {
+  Treap(Treap&& other) noexcept : root(other.root) { other.root = nullptr; }
+  Treap& operator=(Treap other) {
     std::swap(root, other.root);
     return *this;
   }
-  ~treap() {
-    auto dfs = [&](auto self, node* t) -> void {
+  ~Treap() {
+    auto dfs = [&](auto self, Node* t) -> void {
       if (!t) return;
       self(self, t->left);
       self(self, t->right);
@@ -75,9 +75,9 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
 
   std::conditional_t<multiset, void, bool> insert(const T& k) {
     if constexpr (multiset) {
-      insert(root, new node(k));
+      insert(root, new Node(k));
     } else {
-      return contains(k) ? false : (insert(root, new node(k)), true);
+      return contains(k) ? false : (insert(root, new Node(k)), true);
     }
   }
   template <class... Args>
@@ -89,7 +89,7 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
 
   const T& operator[](int i) const {
     assert(0 <= i && i < size());
-    const node* t = root;
+    const Node* t = root;
     while (size(t->left) != i) {
       if (i < size(t->left)) {
         t = t->left;
@@ -110,7 +110,7 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
   }
 
   int lower_bound(const T& k) const {
-    const node* t = root;
+    const Node* t = root;
     int res = 0;
     while (t) {
       if (!less(t->key, k)) {
@@ -123,7 +123,7 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
     return res;
   }
   int upper_bound(const T& k) const {
-    const node* t = root;
+    const Node* t = root;
     int res = 0;
     while (t) {
       if (less(k, t->key)) {
@@ -141,7 +141,7 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
     return upper_bound(k) - lower_bound(k);
   }
   bool contains(const T& k) const {
-    const node* t = root;
+    const Node* t = root;
     while (t && !equiv(t->key, k)) t = less(k, t->key) ? t->left : t->right;
     return t;
   }
@@ -150,13 +150,13 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
   bool empty() const { return size() == 0; }
 
  private:
-  struct node {
+  struct Node {
     T key;
     int sub = 1;
     unsigned long long priority;
-    node* left = nullptr;
-    node* right = nullptr;
-    node(const T& x) : key(x), priority(rng()) {}
+    Node* left = nullptr;
+    Node* right = nullptr;
+    Node(const T& x) : key(x), priority(rng()) {}
   }* root = nullptr;
 
   static bool less(const T& x, const T& y) { return Compare()(x, y); }
@@ -164,11 +164,11 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
     return !Compare()(x, y) && !Compare()(y, x);
   }
 
-  int size(const node* t) const { return t ? t->sub : 0; }
+  int size(const Node* t) const { return t ? t->sub : 0; }
 
-  void update(node* t) { t->sub = size(t->left) + size(t->right) + 1; }
+  void update(Node* t) { t->sub = size(t->left) + size(t->right) + 1; }
 
-  std::pair<node*, node*> split(node* t, const T& k) {
+  std::pair<Node*, Node*> split(Node* t, const T& k) {
     if (!t) return {nullptr, nullptr};
     if (less(k, t->key)) {
       auto s = split(t->left, k);
@@ -183,7 +183,7 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
     }
   }
 
-  node* merge(node* left, node* right) {
+  Node* merge(Node* left, Node* right) {
     if (!left || !right) return left ? left : right;
     if (left->priority > right->priority) {
       left->right = merge(left->right, right);
@@ -196,7 +196,7 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
     }
   }
 
-  void insert(node*& t, node* p) {
+  void insert(Node*& t, Node* p) {
     if (!t) {
       t = p;
     } else if (p->priority > t->priority) {
@@ -209,10 +209,10 @@ template <class T, bool multiset, class Compare = std::less<T>> class treap {
     }
   }
 
-  bool erase(node*& t, const T& k) {
+  bool erase(Node*& t, const T& k) {
     if (!t) return false;
     if (equiv(t->key, k)) {
-      node* t2 = merge(t->left, t->right);
+      Node* t2 = merge(t->left, t->right);
       delete t;
       t = t2;
       return true;

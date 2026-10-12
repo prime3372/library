@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
 
-#include "ds/segtree.hpp"
+#include "ds/segment-tree.hpp"
 #include <iostream>
 
 using namespace std;
@@ -14,7 +14,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  segtree<bool, op, e> seg(n);
+  SegmentTree<bool, op, e> seg(n);
   for (int i = 0; i < n; i++) {
     char ti;
     cin >> ti;

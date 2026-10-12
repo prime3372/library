@@ -11,7 +11,7 @@ using namespace std;
 using namespace cp;
 
 void test(int n) {
-  linear_sieve sieve(n);
+  LinearSieve sieve(n);
   assert(sieve.primes() == enumerate_primes(n));
   for (int i = 1; i <= n; i++) {
     auto f1 = sieve.factorize(i);

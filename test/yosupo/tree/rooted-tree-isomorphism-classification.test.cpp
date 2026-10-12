@@ -14,7 +14,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  rooted_tree_hash t(n);
+  RootedTreeHash t(n);
   for (int i = 1; i < n; i++) {
     int p;
     cin >> p;

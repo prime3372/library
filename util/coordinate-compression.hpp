@@ -9,10 +9,10 @@
 
 namespace cp {
 
-template <class T, class Compare = std::less<T>> class coordinate_compression {
+template <class T, class Compare = std::less<T>> class CoordinateCompression {
  public:
-  coordinate_compression() {}
-  explicit coordinate_compression(const std::vector<T>& v) { init(v); }
+  CoordinateCompression() {}
+  explicit CoordinateCompression(const std::vector<T>& v) { init(v); }
 
   void add(const T& x) { d.push_back(x); }
 

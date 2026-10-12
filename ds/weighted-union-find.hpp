@@ -6,10 +6,10 @@
 
 namespace cp {
 
-template <class T> class weighted_union_find {
+template <class T> class WeightedUnionFind {
  public:
-  weighted_union_find() : n(0) {}
-  explicit weighted_union_find(int _n)
+  WeightedUnionFind() : n(0) {}
+  explicit WeightedUnionFind(int _n)
       : n(_n), par_or_size(_n, -1), diff_weight(_n) {}
 
   // @return whether diff(a) - diff(b) = d is satisfiable.

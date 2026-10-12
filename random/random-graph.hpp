@@ -13,7 +13,7 @@
 
 namespace cp {
 
-struct random_graph_config {
+struct RandomGraphConfig {
   bool directed = false;
   bool no_self_loops = false;
   bool no_multiple_edges = false;
@@ -25,7 +25,7 @@ struct random_graph_config {
 };
 
 std::vector<std::pair<int, int>> random_graph(int n, int m,
-                                              random_graph_config config = {}) {
+                                              RandomGraphConfig config = {}) {
   auto [directed, no_self_loops, no_multiple_edges, connected, start] = config;
 
   assert(0 <= n && 0 <= m);
@@ -75,7 +75,7 @@ std::vector<std::pair<int, int>> random_graph(int n, int m,
   };
 
   if (no_multiple_edges) {
-    hash_set<long long> used_edges;
+    HashSet<long long> used_edges;
     for (auto [u, v] : edges) used_edges.insert(1LL * u * n + v);
 
     if (m <= max_m / 2) {

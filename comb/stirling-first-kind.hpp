@@ -11,7 +11,7 @@ namespace cp {
 namespace internal {
 
 template <class mint>
-formal_power_series<mint> stirling_first_kind_recursive(int n) {
+FormalPowerSeries<mint> stirling_first_kind_recursive(int n) {
   if (n == 0) return {1};
   if (n == 1) return {0, 1};
   auto f = stirling_first_kind_recursive<mint>(n / 2);

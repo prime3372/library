@@ -16,7 +16,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  rerooting_dp<int, op, e, int, act> rerooting(n);
+  RerootingDP<int, op, e, int, act> rerooting(n);
   for (int i = 0; i < n - 1; i++) {
     int s, t, w;
     cin >> s >> t >> w;

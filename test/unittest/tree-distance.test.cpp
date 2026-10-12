@@ -15,7 +15,7 @@ using ll = long long;
 void check(int n, int q) {
   auto tree = random_tree(n);
   vector<vector<pair<int, ll>>> g(n);
-  tree_distance<ll> dist(n);
+  TreeDistance<ll> dist(n);
   for (auto [u, v] : tree) {
     ll w = uniform(ll(-1e9), ll(1e9));
     g[u].emplace_back(v, w);
@@ -50,7 +50,7 @@ void stress() {
   int n = 100000;
   int q = 100000;
   auto tree = random_tree(n);
-  tree_distance<ll> dist(n);
+  TreeDistance<ll> dist(n);
   for (auto [u, v] : tree) {
     ll w = uniform(ll(-1e9), ll(1e9));
     dist.add_edge(u, v, w);

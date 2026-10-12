@@ -12,7 +12,7 @@ using namespace std;
 using namespace cp;
 
 template <bool directed> void bipartite(int n, int m) {
-  odd_cycle_detection<directed> detector(n);
+  OddCycleDetection<directed> detector(n);
   int l = uniform(1, n - 1);
   auto p = random_perm(n);
   for (int i = 0; i < m; i++) {
@@ -61,7 +61,7 @@ template <bool directed> void has_odd_cycle(int n, int m) {
     edges.emplace_back(u, v);
   }
   shuffle(edges);
-  odd_cycle_detection<directed> detector(n);
+  OddCycleDetection<directed> detector(n);
   for (auto [u, v] : edges) detector.add_edge(u, v);
   assert(detector.detect());
   int cycle_len = detector.len;
@@ -108,7 +108,7 @@ void has_odd_cycle_large_sparse() {
 
 template <bool directed> void no_edge() {
   for (int i = 0; i <= 10; i++) {
-    odd_cycle_detection<directed> detector(i);
+    OddCycleDetection<directed> detector(i);
     assert(!detector.detect());
     assert(detector.len == 0);
     assert(detector.vertices.empty());

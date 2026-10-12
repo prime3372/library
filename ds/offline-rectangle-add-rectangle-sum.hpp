@@ -7,9 +7,9 @@
 namespace cp {
 
 // preliminary rectangle add -> rectangle sum (both offline)
-template <class T, class U> class offline_rectangle_add_rectangle_sum {
+template <class T, class U> class OfflineRectangleAddRectangleSum {
  public:
-  offline_rectangle_add_rectangle_sum() {}
+  OfflineRectangleAddRectangleSum() {}
 
   void add(T l, T d, T r, T u, U w) {
     assert(!asked_sum);

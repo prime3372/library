@@ -14,21 +14,21 @@ namespace cp {
 
 template <class mint>
 requires(internal::is_static_modint_v<mint> && is_prime(mint::mod()))
-class formal_power_series : public std::vector<mint> {
-  using base = std::vector<mint>;
-  using fps = formal_power_series;
+class FormalPowerSeries : public std::vector<mint> {
+  using Base = std::vector<mint>;
+  using fps = FormalPowerSeries;
 
  public:
-  using base::base;
-  using base::begin;
-  using base::empty;
-  using base::erase;
-  using base::insert;
-  using base::resize;
-  using base::size;
+  using Base::Base;
+  using Base::begin;
+  using Base::empty;
+  using Base::erase;
+  using Base::insert;
+  using Base::resize;
+  using Base::size;
 
-  explicit formal_power_series(const std::vector<mint>& a) : base(a) {}
-  formal_power_series(std::initializer_list<std::pair<int, mint>> il) {
+  explicit FormalPowerSeries(const std::vector<mint>& a) : Base(a) {}
+  FormalPowerSeries(std::initializer_list<std::pair<int, mint>> il) {
     int n = 0;
     for (const auto& p : il) n = std::max(n, p.first);
     resize(n + 1);
@@ -120,8 +120,7 @@ class formal_power_series : public std::vector<mint> {
   friend fps operator<<(const fps& f, int w) { return fps(f) <<= w; }
 };
 
-template <class mint>
-formal_power_series<mint> diff(formal_power_series<mint> f) {
+template <class mint> FormalPowerSeries<mint> diff(FormalPowerSeries<mint> f) {
   mint coeff = 1;
   for (int i = 1; i < int(f.size()); i++) {
     f[i] *= coeff;
@@ -131,7 +130,7 @@ formal_power_series<mint> diff(formal_power_series<mint> f) {
 }
 
 template <class mint>
-formal_power_series<mint> integral(formal_power_series<mint> f) {
+FormalPowerSeries<mint> integral(FormalPowerSeries<mint> f) {
   constexpr int m = mint::mod();
   if (f.empty()) return f;
   int n = int(f.size());

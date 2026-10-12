@@ -13,12 +13,12 @@
 
 namespace cp {
 
-template <class node> class implicit_treap_base {
-  using T = decltype(node::val);
+template <class Node> class ImplicitTreapBase {
+  using T = decltype(Node::val);
 
  public:
-  virtual ~implicit_treap_base() {
-    auto dfs = [&](auto self, node* t) -> void {
+  virtual ~ImplicitTreapBase() {
+    auto dfs = [&](auto self, Node* t) -> void {
       if (!t) return;
       self(self, t->left);
       self(self, t->right);
@@ -56,7 +56,7 @@ template <class node> class implicit_treap_base {
   void insert(int k, const T& x) {
     assert(0 <= k && k <= size());
     auto s = split(root, k);
-    root = merge(merge(s.first, new node(x)), s.second);
+    root = merge(merge(s.first, new Node(x)), s.second);
   }
 
   void erase(int k) {
@@ -80,23 +80,23 @@ template <class node> class implicit_treap_base {
   bool empty() const { return size() == 0; }
 
  protected:
-  node* root = nullptr;
+  Node* root = nullptr;
 
-  implicit_treap_base() {}
-  implicit_treap_base(const implicit_treap_base& other) {
-    auto dfs = [&](auto self, const node* t) -> node* {
+  ImplicitTreapBase() {}
+  ImplicitTreapBase(const ImplicitTreapBase& other) {
+    auto dfs = [&](auto self, const Node* t) -> Node* {
       if (!t) return nullptr;
-      node* ptr = new node(*t);
+      Node* ptr = new Node(*t);
       ptr->left = self(self, t->left);
       ptr->right = self(self, t->right);
       return ptr;
     };
     root = dfs(dfs, other.root);
   }
-  implicit_treap_base(implicit_treap_base&& other) : root(other.root) {
+  ImplicitTreapBase(ImplicitTreapBase&& other) : root(other.root) {
     other.root = nullptr;
   }
-  implicit_treap_base& operator=(implicit_treap_base other) {
+  ImplicitTreapBase& operator=(ImplicitTreapBase other) {
     std::swap(root, other.root);
     return *this;
   }
@@ -104,18 +104,18 @@ template <class node> class implicit_treap_base {
   void build(const std::vector<T>& v) {
     if (v.empty()) return;
     int n = int(v.size());
-    std::vector<node*> ps(n);
+    std::vector<Node*> ps(n);
     std::vector<unsigned long long> pr(n);
     for (int i = 0; i < n; i++) {
-      ps[i] = new node(v[i]);
+      ps[i] = new Node(v[i]);
       pr[i] = ps[i]->priority;
     }
-    cartesian_tree cart(pr, std::greater<unsigned long long>());
+    CartesianTree cart(pr, std::greater<unsigned long long>());
     for (int i = 0; i < n; i++) {
       if (cart.left[i] != -1) ps[i]->left = ps[cart.left[i]];
       if (cart.right[i] != -1) ps[i]->right = ps[cart.right[i]];
     }
-    auto dfs = [&](auto self, node* t) -> void {
+    auto dfs = [&](auto self, Node* t) -> void {
       if (!t) return;
       self(self, t->left);
       self(self, t->right);
@@ -124,9 +124,9 @@ template <class node> class implicit_treap_base {
     dfs(dfs, root = ps[cart.root]);
   }
 
-  int size(const node* t) const { return t ? t->sub : 0; }
+  int size(const Node* t) const { return t ? t->sub : 0; }
 
-  std::pair<node*, node*> split(node* t, int k) {
+  std::pair<Node*, Node*> split(Node* t, int k) {
     if (!t) return {nullptr, nullptr};
     push(t);
     if (k <= size(t->left)) {
@@ -142,7 +142,7 @@ template <class node> class implicit_treap_base {
     }
   }
 
-  node* merge(node* left, node* right) {
+  Node* merge(Node* left, Node* right) {
     if (!left || !right) return left ? left : right;
     if (left->priority > right->priority) {
       push(left);
@@ -157,9 +157,9 @@ template <class node> class implicit_treap_base {
     }
   }
 
-  virtual void toggle(node*) = 0;
-  virtual void update(node*) = 0;
-  virtual void push(node*) = 0;
+  virtual void toggle(Node*) = 0;
+  virtual void update(Node*) = 0;
+  virtual void push(Node*) = 0;
 };
 
 }  // namespace cp

@@ -6,18 +6,18 @@
 
 namespace cp {
 
-template <class T> class tree_diameter {
+template <class T> class TreeDiameter {
  public:
-  tree_diameter() : n(0) {}
-  explicit tree_diameter(int _n) : n(_n), g(_n) {}
+  TreeDiameter() : n(0) {}
+  explicit TreeDiameter(int _n) : n(_n), g(_n) {}
 
   int add_edge(int u, int v, T c = 1) {
     assert(0 <= u && u < n);
     assert(0 <= v && v < n);
     int m = int(co.size());
     co.push_back(c);
-    g[u].push_back(edge{v, m, c});
-    g[v].push_back(edge{u, m, c});
+    g[u].push_back(Edge{v, m, c});
+    g[v].push_back(Edge{u, m, c});
     return m;
   }
 
@@ -26,7 +26,7 @@ template <class T> class tree_diameter {
   T dist = 0;
   std::vector<int> vertices, edges;
 
-  tree_diameter& build(int s = 0) {
+  TreeDiameter& build(int s = 0) {
     assert(0 <= s && s < n);
     vertices.clear();
     edges.clear();
@@ -53,12 +53,12 @@ template <class T> class tree_diameter {
 
  private:
   int n;
-  struct edge {
+  struct Edge {
     int to, id;
     T cost;
   };
   std::vector<T> co;
-  std::vector<std::vector<edge>> g;
+  std::vector<std::vector<Edge>> g;
 
   std::pair<T, int> farthest(int v, int pv) {
     std::pair<T, int> res = {0, v};

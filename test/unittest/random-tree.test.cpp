@@ -12,7 +12,7 @@ using namespace cp;
 void test(int n) {
   auto edges = random_tree(n);
   assert(int(edges.size()) == n - 1);
-  union_find uf(n);
+  UnionFind uf(n);
   for (auto [u, v] : edges) {
     assert(!uf.same(u, v));
     uf.unite(u, v);

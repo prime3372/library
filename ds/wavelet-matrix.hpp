@@ -13,12 +13,12 @@
 namespace cp {
 
 template <int bit_size> requires(0 <= bit_size && bit_size <= 64)
-class wavelet_matrix {
+class WaveletMatrix {
   using ull = unsigned long long;
 
  public:
-  wavelet_matrix() : wavelet_matrix(0) {}
-  explicit wavelet_matrix(int _n) : n(_n), a(_n) {}
+  WaveletMatrix() : WaveletMatrix(0) {}
+  explicit WaveletMatrix(int _n) : n(_n), a(_n) {}
 
   void set(int i, ull x) {
     assert(0 <= i && i < n);
@@ -27,7 +27,7 @@ class wavelet_matrix {
   }
 
   void init() {
-    data.assign(bit_size, bit_vector(n));
+    data.assign(bit_size, BitVector(n));
     std::vector<ull> cur = a, nxt(n);
     for (int h = bit_size - 1; h >= 0; h--) {
       for (int i = 0; i < n; i++) {
@@ -41,7 +41,7 @@ class wavelet_matrix {
     initialized = true;
   }
 
-  const bit_vector& operator[](int h) const {
+  const BitVector& operator[](int h) const {
     assert(initialized);
     assert(0 <= h && h < bit_size);
     return data[h];
@@ -66,7 +66,7 @@ class wavelet_matrix {
  private:
   int n;
   std::vector<ull> a;
-  std::vector<bit_vector> data;
+  std::vector<BitVector> data;
   bool initialized = false;
 };
 

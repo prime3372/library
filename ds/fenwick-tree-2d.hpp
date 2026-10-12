@@ -9,11 +9,11 @@
 
 namespace cp {
 
-template <class T> class fenwick_tree_2d {
+template <class T> class FenwickTree2D {
  public:
-  fenwick_tree_2d() : n(0), m(0) {}
-  explicit fenwick_tree_2d(int _n, int _m)
-      : n(_n), m(_m), fw(_n, fenwick_tree<T>(m)) {}
+  FenwickTree2D() : n(0), m(0) {}
+  explicit FenwickTree2D(int _n, int _m)
+      : n(_n), m(_m), fw(_n, FenwickTree<T>(m)) {}
 
   void add(int i, int j, T w) {
     assert(0 <= i && i < n);
@@ -33,10 +33,10 @@ template <class T> class fenwick_tree_2d {
     }
 
    private:
-    friend fenwick_tree_2d;
-    const fenwick_tree_2d* ptr;
+    friend FenwickTree2D;
+    const FenwickTree2D* ptr;
     int i;
-    ref(const fenwick_tree_2d* _ptr, int _i) : ptr(_ptr), i(_i) {}
+    ref(const FenwickTree2D* _ptr, int _i) : ptr(_ptr), i(_i) {}
   };
 
   ref operator[](int i) const {
@@ -80,7 +80,7 @@ template <class T> class fenwick_tree_2d {
 
  private:
   int n, m;
-  std::vector<fenwick_tree<T>> fw;
+  std::vector<FenwickTree<T>> fw;
 };
 
 }  // namespace cp

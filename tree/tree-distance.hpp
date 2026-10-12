@@ -8,10 +8,10 @@
 
 namespace cp {
 
-template <class T> class tree_distance {
+template <class T> class TreeDistance {
  public:
-  tree_distance() : n(0) {}
-  explicit tree_distance(int _n) : n(_n), g(_n), cost(_n), hld(_n) {}
+  TreeDistance() : n(0) {}
+  explicit TreeDistance(int _n) : n(_n), g(_n), cost(_n), hld(_n) {}
 
   void add_edge(int a, int b, T c) {
     assert(0 <= a && a < n);
@@ -46,7 +46,7 @@ template <class T> class tree_distance {
   bool initialized = false;
   std::vector<std::vector<std::pair<int, T>>> g;
   std::vector<T> cost;
-  hl_decomposition hld;
+  HeavyLightDecomposition hld;
 
   void dfs(int v, int pv, T c) {
     cost[v] = c;

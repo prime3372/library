@@ -13,7 +13,7 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  cycle_detection<true> detector(n);
+  CycleDetection<true> detector(n);
   vector<vector<int>> adj(n);
   vector<pair<int, int>> edges(m);
   for (int i = 0; i < m; i++) {

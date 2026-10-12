@@ -14,7 +14,7 @@ template <class mint>
 std::vector<mint> stirling_second_kind_fixed_k(int k, int max_n) {
   assert(0 <= k && k <= max_n);
   binom_mod<mint> binom(max_n);
-  formal_power_series<mint> f(max_n + 1);
+  FormalPowerSeries<mint> f(max_n + 1);
   for (int i = 1; i <= max_n; i++) f[i] = binom.ifact(i);
   auto g = pow(f, k);
   for (int i = k; i <= max_n; i++) {

@@ -33,7 +33,7 @@ int main() {
   int n;
   cin >> n;
   vector<vector<int>> g(n);
-  centroid_decomposition cd(n);
+  CentroidDecomposition cd(n);
   for (int i = 0; i < n - 1; i++) {
     int a, b;
     cin >> a >> b;

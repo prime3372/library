@@ -7,10 +7,10 @@
 
 namespace cp {
 
-class union_find {
+class UnionFind {
  public:
-  union_find() : n(0) {}
-  explicit union_find(int _n) : n(_n), par_or_size(_n, -1) {}
+  UnionFind() : n(0) {}
+  explicit UnionFind(int _n) : n(_n), par_or_size(_n, -1) {}
 
   template <class F = void (*)(int, int)>
   bool unite(int a, int b, F f = [](int, int) {}) {

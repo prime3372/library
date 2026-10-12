@@ -6,10 +6,10 @@
 
 namespace cp {
 
-class euler_tour {
+class EulerTour {
  public:
-  euler_tour() : n(0) {}
-  explicit euler_tour(int _n) : in(_n), out(_n), tour(_n), n(_n), g(_n) {}
+  EulerTour() : n(0) {}
+  explicit EulerTour(int _n) : in(_n), out(_n), tour(_n), n(_n), g(_n) {}
 
   void add_edge(int a, int b) {
     assert(0 <= a && a < n);
@@ -20,7 +20,7 @@ class euler_tour {
 
   std::vector<int> in, out, tour;
 
-  euler_tour& build(int r = 0) {
+  EulerTour& build(int r = 0) {
     assert(0 <= r && r < n);
     auto dfs = [&](auto self, int v, int pv) -> void {
       in[v] = now_ord;

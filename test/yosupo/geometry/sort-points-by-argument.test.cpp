@@ -17,7 +17,7 @@ int main() {
   cout << fixed << setprecision(0);
   int n;
   cin >> n;
-  vector<point<ll>> ps(n);
+  vector<Point<ll>> ps(n);
   for (auto& p : ps) cin >> p;
   argument_sort(ps);
   for (auto& p : ps) cout << p << "\n";

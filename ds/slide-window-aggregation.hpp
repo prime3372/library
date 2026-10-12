@@ -6,9 +6,9 @@
 
 namespace cp {
 
-template <class S, auto op, auto e> class slide_window_aggregation {
+template <class S, auto op, auto e> class SlideWindowAggregation {
  public:
-  slide_window_aggregation() : prod0(e()), prod1(e()) {}
+  SlideWindowAggregation() : prod0(e()), prod1(e()) {}
 
   void push(const S& x) { push1(x); }
 

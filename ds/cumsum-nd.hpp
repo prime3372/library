@@ -6,10 +6,10 @@
 
 namespace cp {
 
-template <class T, int dim> class cumsum_nd {
+template <class T, int dim> struct CumsumND {
  public:
-  cumsum_nd() {}
-  explicit cumsum_nd(const std::array<int, dim>& sh) : shape(sh) {
+  CumsumND() {}
+  explicit CumsumND(const std::array<int, dim>& sh) : shape(sh) {
     for (int i = 0; i < dim; i++) assert(0 <= shape[i]);
     int size = 1;
     for (int i = dim - 1; i >= 0; i--) {

@@ -9,12 +9,12 @@
 
 namespace cp {
 
-template <class S, auto op, auto e> class segtree {
+template <class S, auto op, auto e> class SegmentTree {
  public:
-  segtree() : segtree(0) {}
-  explicit segtree(int _n, const S& val = e())
-      : segtree(std::vector<S>(_n, val)) {}
-  explicit segtree(const std::vector<S>& v) : n(int(v.size())) {
+  SegmentTree() : SegmentTree(0) {}
+  explicit SegmentTree(int _n, const S& val = e())
+      : SegmentTree(std::vector<S>(_n, val)) {}
+  explicit SegmentTree(const std::vector<S>& v) : n(int(v.size())) {
     sz = int(std::bit_ceil((unsigned int)(n)));
     log = std::countr_zero((unsigned int)(sz));
     d = std::vector<S>(2 * sz);

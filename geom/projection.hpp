@@ -5,14 +5,14 @@
 
 namespace cp {
 
-point<long double> projection(const point<long double>& p,
-                              const line<long double>& l) {
+Point<long double> projection(const Point<long double>& p,
+                              const Line<long double>& l) {
   return l.p + (l.q - l.p) * dot(l.q - l.p, p - l.p) / norm(l.q - l.p);
 }
 
 template <class T, class U>
-point<long double> projection(const point<T>& p, const line<U>& l) {
-  return projection(point<long double>(p), line<long double>(l));
+Point<long double> projection(const Point<T>& p, const Line<U>& l) {
+  return projection(Point<long double>(p), Line<long double>(l));
 }
 
 }  // namespace cp

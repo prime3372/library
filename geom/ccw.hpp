@@ -10,7 +10,7 @@ namespace cp {
 // -2: p0-p1-p2
 //  0: p0-p2-p1
 template <class T>
-int ccw(const point<T>& p0, const point<T>& p1, const point<T>& p2) {
+int ccw(const Point<T>& p0, const Point<T>& p1, const Point<T>& p2) {
   auto c = cross(p1 - p0, p2 - p0);
   if (internal::less<T>(0, c))
     return 1;

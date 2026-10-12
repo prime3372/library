@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/area_of_union_of_rectangles"
+#define PROBLEM "https://judge.yosupo.jp/problem/AreaOfUnionOfRectangles"
 
 #include "ds/area-of-union-of-rectangles.hpp"
 #include <iostream>
@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  area_of_union_of_rectangles<ll> area;
+  AreaOfUnionOfRectangles<ll> area;
   for (int i = 0; i < n; i++) {
     ll l, d, r, u;
     cin >> l >> d >> r >> u;

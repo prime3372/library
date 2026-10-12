@@ -10,7 +10,7 @@ using namespace cp;
 int main() {
   int n, q;
   cin >> n >> q;
-  weighted_union_find<int> uf(n);
+  WeightedUnionFind<int> uf(n);
   while (q--) {
     int com;
     cin >> com;

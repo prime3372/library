@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int x, y, m;
   cin >> x >> y >> m;
-  bipartite_matching bm(x, y);
+  BipartiteMatching bm(x, y);
   for (int i = 0; i < m; i++) {
     int u, v;
     cin >> u >> v;

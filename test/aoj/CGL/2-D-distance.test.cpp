@@ -18,7 +18,7 @@ int main() {
   int q;
   cin >> q;
   while (q--) {
-    segment<ll> l, m;
+    Segment<ll> l, m;
     cin >> l >> m;
     cout << dist(l, m) << "\n";
   }

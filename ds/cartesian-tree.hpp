@@ -9,15 +9,14 @@ namespace cp {
 // @note The smallest element becomes the root. For equivalent elements, the
 // one with the smaller index is smaller.
 // @note `parent[root]` is `-1`.
-class cartesian_tree {
+struct CartesianTree {
  public:
   int root = -1;
   std::vector<int> left, right, parent, size, lsize, rsize;
 
-  cartesian_tree() {}
+  CartesianTree() {}
   template <class T, class Compare = std::less<T>>
-  explicit cartesian_tree(const std::vector<T>& a,
-                          Compare compare = Compare()) {
+  explicit CartesianTree(const std::vector<T>& a, Compare compare = Compare()) {
     if (a.empty()) return;
     int n = int(a.size());
 

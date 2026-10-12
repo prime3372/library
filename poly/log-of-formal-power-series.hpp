@@ -6,13 +6,13 @@
 namespace cp {
 
 template <class mint>
-formal_power_series<mint> log(const formal_power_series<mint>& f, int n) {
+FormalPowerSeries<mint> log(const FormalPowerSeries<mint>& f, int n) {
   assert(!f.empty() && f[0] == 1);
   return integral(diff(f) * inv(f, n)).prefix(n);
 }
 
 template <class mint>
-formal_power_series<mint> log(const formal_power_series<mint>& f) {
+FormalPowerSeries<mint> log(const FormalPowerSeries<mint>& f) {
   return log(f, int(f.size()));
 }
 

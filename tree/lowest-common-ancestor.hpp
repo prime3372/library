@@ -9,10 +9,10 @@
 
 namespace cp {
 
-class lowest_common_ancestor {
+class LowestCommonAncestor {
  public:
-  lowest_common_ancestor() : n(0) {}
-  explicit lowest_common_ancestor(int _n) : n(_n), g(_n), dep(_n), hld(_n) {}
+  LowestCommonAncestor() : n(0) {}
+  explicit LowestCommonAncestor(int _n) : n(_n), g(_n), dep(_n), hld(_n) {}
 
   void add_edge(int a, int b) {
     assert(0 <= a && a < n);
@@ -74,9 +74,9 @@ class lowest_common_ancestor {
   int n;
   std::vector<std::vector<int>> g;
   std::vector<int> dep;
-  hl_decomposition hld;
+  HeavyLightDecomposition hld;
   bool initialized = false;
-  
+
   void dfs(int v, int pv, int d) {
     dep[v] = d;
     for (int nv : g[v]) {

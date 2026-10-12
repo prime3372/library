@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int q;
   cin >> q;
-  hash_map<ll, ll> mp;
+  HashMap<ll, ll> mp;
   while (q--) {
     int t;
     cin >> t;

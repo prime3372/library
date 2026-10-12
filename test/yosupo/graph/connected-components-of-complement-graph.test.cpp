@@ -1,4 +1,5 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/connected_components_of_complement_graph"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/connected_components_of_complement_graph"
 
 #include "graph/complement-connected-components.hpp"
 #include <iostream>
@@ -11,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  complement_connected_components cc(n);
+  ComplementConnectedComponents cc(n);
   for (int i = 0; i < m; i++) {
     int a, b;
     cin >> a >> b;

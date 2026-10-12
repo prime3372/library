@@ -2,23 +2,23 @@
 
 #include <algorithm>
 #include <cassert>
+#include <queue>
 #include <vector>
 
-#include "ds/simple-queue.hpp"
 #include "graph/strongly-connected-components.hpp"
 
 namespace cp {
 
-template <bool directed> class odd_cycle_detection {
+template <bool directed> class OddCycleDetection {
  public:
-  odd_cycle_detection() : n(0) {}
-  explicit odd_cycle_detection(int _n) : n(_n), g(_n), scc(_n) {}
+  OddCycleDetection() : n(0) {}
+  explicit OddCycleDetection(int _n) : n(_n), g(_n), scc(_n) {}
 
   int add_edge(int from, int to) {
     assert(0 <= from && from < n);
     assert(0 <= to && to < n);
-    g[from].push_back(edge{to, m});
-    if (!directed) g[to].push_back(edge{from, m});
+    g[from].push_back(Edge{to, m});
+    if (!directed) g[to].push_back(Edge{from, m});
     if (directed) scc.add_edge(from, to);
     return m++;
   }
@@ -31,7 +31,7 @@ template <bool directed> class odd_cycle_detection {
     edges.clear();
     if (directed) scc.build();
     std::vector<int> dist(2 * n, 2 * n), prev_v(2 * n, -1), prev_e(2 * n, -1);
-    simple_queue<int> que;
+    std::queue<int> que;
     for (int s = 0; s < n; s++) {
       if (dist[2 * s] < 2 * n || dist[2 * s + 1] < 2 * n) continue;
       dist[2 * s] = 0;
@@ -40,7 +40,7 @@ template <bool directed> class odd_cycle_detection {
         int x = que.front();
         que.pop();
         int v = x / 2, parity = x % 2;
-        for (edge& e : g[v]) {
+        for (Edge& e : g[v]) {
           if (directed && scc.id[v] != scc.id[e.to]) continue;
           int y = 2 * e.to + !parity;
           if (dist[y] == 2 * n) {
@@ -85,11 +85,11 @@ template <bool directed> class odd_cycle_detection {
 
  private:
   int n, m = 0;
-  struct edge {
+  struct Edge {
     int to, id;
   };
-  std::vector<std::vector<edge>> g;
-  strongly_connected_components scc;
+  std::vector<std::vector<Edge>> g;
+  StronglyConnectedComponents scc;
 };
 
 }  // namespace cp

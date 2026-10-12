@@ -6,10 +6,10 @@
 
 namespace cp {
 
-class centroid_decomposition {
+class CentroidDecomposition {
  public:
-  centroid_decomposition() : n(0) {}
-  explicit centroid_decomposition(int _n)
+  CentroidDecomposition() : n(0) {}
+  explicit CentroidDecomposition(int _n)
       : parent(_n, -1), size(_n), n(_n), g(_n), removed(_n) {}
 
   void add_edge(int u, int v) {
@@ -21,7 +21,7 @@ class centroid_decomposition {
 
   std::vector<int> parent, size, dfs_ord;
 
-  centroid_decomposition& build(int s = 0) {
+  CentroidDecomposition& build(int s = 0) {
     assert(0 <= s && s < n);
     dfs(s, -1, n, -1);
     return *this;

@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_7_C"
 
-#include "ds/treap.hpp"
+#include "ds/Treap.hpp"
 #include <iostream>
 
 using namespace std;
@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int q;
   cin >> q;
-  treap<int, false> s;
+  Treap<int, false> s;
   while (q--) {
     int t;
     cin >> t;
@@ -33,7 +33,7 @@ int main() {
       int l, r;
       cin >> l >> r;
       int lb = s.lower_bound(l), ub = s.upper_bound(r);
-      for (int i = lb; i < ub; i++) cout << s[i] << "\n";      
+      for (int i = lb; i < ub; i++) cout << s[i] << "\n";
     }
   }
 }

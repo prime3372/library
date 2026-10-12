@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/cycle_detection"
+#define PROBLEM "https://judge.yosupo.jp/problem/CycleDetection"
 
 #include "graph/cycle-detection.hpp"
 #include <cassert>
@@ -14,7 +14,7 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  cycle_detection<true> detector(n);
+  CycleDetection<true> detector(n);
   vector<pair<int, int>> edges(m);
   for (int i = 0; i < m; i++) {
     int u, v;

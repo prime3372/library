@@ -17,7 +17,7 @@ int main() {
   cout << fixed << setprecision(1);
   int n;
   cin >> n;
-  vector<point<ll>> ps(n);
+  vector<Point<ll>> ps(n);
   for (auto& p : ps) cin >> p;
   cout << area(ps) << "\n";
 }

@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
 
-#include "graph/dijkstra.hpp"
+#include "graph/Dijkstra.hpp"
 #include <cassert>
 #include <iostream>
 #include <utility>
@@ -15,7 +15,7 @@ int main() {
   cin.tie(nullptr);
   int n, m, s, t;
   cin >> n >> m >> s >> t;
-  dijkstra<ll> dist(n);
+  Dijkstra<ll> dist(n);
   vector<pair<int, int>> edges(m);
   for (int i = 0; i < m; i++) {
     int a, b;

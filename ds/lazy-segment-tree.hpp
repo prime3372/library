@@ -10,12 +10,12 @@
 namespace cp {
 
 template <class S, auto op, auto e, class F, auto act, auto compose, auto id>
-class lazy_segtree {
+class LazySegmentTree {
  public:
-  lazy_segtree() : lazy_segtree(0) {}
-  explicit lazy_segtree(int _n, const S& val = e())
-      : lazy_segtree(std::vector<S>(_n, val)) {}
-  explicit lazy_segtree(const std::vector<S>& v) : n(int(v.size())) {
+  LazySegmentTree() : LazySegmentTree(0) {}
+  explicit LazySegmentTree(int _n, const S& val = e())
+      : LazySegmentTree(std::vector<S>(_n, val)) {}
+  explicit LazySegmentTree(const std::vector<S>& v) : n(int(v.size())) {
     sz = int(std::bit_ceil((unsigned int)(n)));
     log = std::countr_zero((unsigned int)(sz));
     d = std::vector<S>(2 * sz);

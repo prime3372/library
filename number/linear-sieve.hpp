@@ -6,10 +6,10 @@
 
 namespace cp {
 
-class linear_sieve {
+class LinearSieve {
  public:
-  linear_sieve() : linear_sieve(0) {}
-  explicit linear_sieve(int _n) : n(_n), f(_n + 1) {
+  LinearSieve() : LinearSieve(0) {}
+  explicit LinearSieve(int _n) : n(_n), f(_n + 1) {
     for (int i = 2; i <= n; i++) {
       if (!f[i]) {
         f[i] = i;

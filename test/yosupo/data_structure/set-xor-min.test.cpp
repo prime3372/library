@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int q;
   cin >> q;
-  binary_trie<30> trie;
+  BinaryTrie<30> trie;
   while (q--) {
     int t;
     unsigned int s;

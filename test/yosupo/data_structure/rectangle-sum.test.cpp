@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/rectangle_sum"
+#define PROBLEM "https://judge.yosupo.jp/problem/RectangleSum"
 
 #include "ds/rectangle-sum.hpp"
 #include <iostream>
@@ -14,7 +14,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  rectangle_sum<int, ll> data;
+  RectangleSum<int, ll> data;
   for (int i = 0; i < n; i++) {
     int x, y;
     ll w;

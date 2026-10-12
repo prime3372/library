@@ -8,10 +8,10 @@
 
 namespace cp {
 
-template <class T> class kruscal {
+template <class T> class Kruscal {
  public:
-  kruscal() : kruscal(0) {}
-  explicit kruscal(int _n) : n(_n) {}
+  Kruscal() : Kruscal(0) {}
+  explicit Kruscal(int _n) : n(_n) {}
 
   int add_edge(int u, int v, T cost) {
     assert(0 <= u && u < n);
@@ -31,18 +31,18 @@ template <class T> class kruscal {
     return greedy();
   }
 
-  // @return edge ids
+  // @return Edge ids
   const std::vector<int>& mst() { return tree; }
 
  private:
-  using edge = std::tuple<T, int, int, int>;
+  using Edge = std::tuple<T, int, int, int>;
   int n;
-  std::vector<edge> edges;
+  std::vector<Edge> edges;
   std::vector<int> tree;
 
   T greedy() {
     T cost = 0;
-    union_find uf(n);
+    UnionFind uf(n);
     tree.clear();
     for (auto [c, u, v, id] : edges) {
       if (!uf.same(u, v)) {

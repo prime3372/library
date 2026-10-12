@@ -14,7 +14,7 @@ namespace cp {
 template <class mint> std::vector<mint> partition(int n) {
   assert(0 <= n);
   if (n == 0) return {1};
-  formal_power_series<mint> f(n + 1);
+  FormalPowerSeries<mint> f(n + 1);
   for (int i = 0; 1LL * i * (3 * i - 1) / 2 <= n; i++) {
     f[i * (3 * i - 1) / 2] = (i % 2 ? -1 : 1);
   }

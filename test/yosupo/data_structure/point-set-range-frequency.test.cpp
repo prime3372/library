@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_frequency"
 
 #include "ds/hash-map.hpp"
-#include "ds/treap.hpp"
+#include "ds/Treap.hpp"
 #include <iostream>
 #include <vector>
 
@@ -14,7 +14,7 @@ int main() {
   int n, q;
   cin >> n >> q;
   vector<int> a(n);
-  hash_map<int, treap<int, false>> idx;
+  HashMap<int, Treap<int, false>> idx;
   for (int i = 0; i < n; i++) {
     cin >> a[i];
     idx[a[i]].insert(i);

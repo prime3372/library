@@ -9,9 +9,9 @@
 
 namespace cp {
 
-template <class T> class hash_set {
+template <class T> class HashSet {
  public:
-  hash_set() {}
+  HashSet() {}
 
   bool insert(const T& k) {
     char& f = d[k];
@@ -48,7 +48,7 @@ template <class T> class hash_set {
 
  private:
   int sz = 0;
-  hash_map<T, char> d;
+  HashMap<T, char> d;
 };
 
 }  // namespace cp

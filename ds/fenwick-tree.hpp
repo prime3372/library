@@ -6,10 +6,10 @@
 
 namespace cp {
 
-template <class T> class fenwick_tree {
+template <class T> class FenwickTree {
  public:
-  fenwick_tree() : n(0) {}
-  explicit fenwick_tree(int _n) : n(_n), d(_n) {}
+  FenwickTree() : n(0) {}
+  explicit FenwickTree(int _n) : n(_n), d(_n) {}
 
   void add(int i, T w) {
     assert(0 <= i && i < n);

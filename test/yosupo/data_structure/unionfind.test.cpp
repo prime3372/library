@@ -11,7 +11,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  union_find uf(n);
+  UnionFind uf(n);
   while (q--) {
     int t, u, v;
     cin >> t >> u >> v;

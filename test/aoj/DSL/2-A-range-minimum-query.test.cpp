@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A"
 
-#include "ds/segtree.hpp"
+#include "ds/segment-tree.hpp"
 #include <climits>
 #include <iostream>
 
@@ -16,7 +16,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  segtree<int, op, e> seg(n);
+  SegmentTree<int, op, e> seg(n);
   while (q--) {
     int com, x, y;
     cin >> com >> x >> y;

@@ -35,8 +35,8 @@ int main() {
     }
   }
 
-  coordinate_compression cx(xs), cy(ys);
-  dynamic_fenwick_tree_2d<ll> fw(cx.size(), cy.size());
+  CoordinateCompression cx(xs), cy(ys);
+  DynamicFenwickTree2D<ll> fw(cx.size(), cy.size());
   for (auto [l, d, r, u, w] : init) {
     fw.imos_add(cx(l), cy(d), cx(r), cy(u), w);
   }

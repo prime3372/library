@@ -10,13 +10,13 @@
 
 namespace cp {
 
-template <class> struct safe_hash {};
+template <class> struct SafeHash {};
 
 template <class T> void hash_combine(unsigned long long& seed, const T& val) {
-  seed ^= safe_hash<T>()(val) + (seed << 6) + (seed >> 2) + 0x9e3779b9ULL;
+  seed ^= SafeHash<T>()(val) + (seed << 6) + (seed >> 2) + 0x9e3779b9ULL;
 }
 
-template <> struct safe_hash<unsigned long long> {
+template <> struct SafeHash<unsigned long long> {
   unsigned long long operator()(unsigned long long x) const {
     static const unsigned long long fixed_rand = rng();
     x += fixed_rand;
@@ -28,18 +28,18 @@ template <> struct safe_hash<unsigned long long> {
 
 template <class T>
 requires(internal::is_integral_v<T> && !internal::is_128bit_int_v<T>)
-struct safe_hash<T> {
+struct SafeHash<T> {
   unsigned long long operator()(T x) const {
-    return safe_hash<unsigned long long>()(x);
+    return SafeHash<unsigned long long>()(x);
   }
 };
 
 template <class T> requires(internal::is_128bit_int_v<T>)
-struct safe_hash<T> {
+struct SafeHash<T> {
   unsigned long long operator()(T x) const {
     using ull = unsigned long long;
     unsigned __int128 ux = x;
-    if ((ux >> 64) == 0) return safe_hash<ull>()(ull(ux));
+    if ((ux >> 64) == 0) return SafeHash<ull>()(ull(ux));
     ull hs = 0;
     hash_combine(hs, ull(ux));
     hash_combine(hs, ull(ux >> 64));
@@ -48,13 +48,13 @@ struct safe_hash<T> {
 };
 
 template <class T> requires(internal::is_modint_v<T>)
-struct safe_hash<T> {
+struct SafeHash<T> {
   unsigned long long operator()(const T& x) const {
-    return safe_hash<int>()(x.val());
+    return SafeHash<int>()(x.val());
   }
 };
 
-template <std::ranges::range Range> struct safe_hash<Range> {
+template <std::ranges::range Range> struct SafeHash<Range> {
   unsigned long long operator()(const Range& r) const {
     unsigned long long hs = 0;
     for (const auto& x : r) hash_combine(hs, x);
@@ -62,7 +62,7 @@ template <std::ranges::range Range> struct safe_hash<Range> {
   }
 };
 
-template <class T, class U> struct safe_hash<std::pair<T, U>> {
+template <class T, class U> struct SafeHash<std::pair<T, U>> {
   unsigned long long operator()(const std::pair<T, U>& p) const {
     unsigned long long hs = 0;
     hash_combine(hs, p.first);
@@ -71,7 +71,7 @@ template <class T, class U> struct safe_hash<std::pair<T, U>> {
   }
 };
 
-template <class... Args> struct safe_hash<std::tuple<Args...>> {
+template <class... Args> struct SafeHash<std::tuple<Args...>> {
   unsigned long long operator()(const std::tuple<Args...>& t) const {
     unsigned long long hs = 0;
     std::apply([&](const auto&... args) { (hash_combine(hs, args), ...); }, t);

@@ -1,6 +1,6 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
+#define PROBLEM "https://judge.yosupo.jp/problem/TwoEdgeConnectedComponents"
 
-#include "graph/two-edge-connected-components.hpp"
+#include "graph/two-Edge-connected-components.hpp"
 #include <iostream>
 
 using namespace std;
@@ -11,7 +11,7 @@ int main() {
   cin.tie(nullptr);
   int n, m;
   cin >> n >> m;
-  two_edge_connected_components g(n);
+  TwoEdgeConnectedComponents g(n);
   for (int i = 0; i < m; i++) {
     int a, b;
     cin >> a >> b;

@@ -11,19 +11,19 @@ namespace cp {
 
 template <class T, auto add = std::plus<T>(), auto mul = std::multiplies<T>(),
           auto zero = []() { return T(0); }, auto one = []() { return T(1); }>
-class matrix : public std::vector<std::vector<T>> {
+class Matrix : public std::vector<std::vector<T>> {
  public:
-  using base = std::vector<std::vector<T>>;
-  using base::empty;
-  using base::size;
+  using Base = std::vector<std::vector<T>>;
+  using Base::empty;
+  using Base::size;
 
-  matrix() {}
-  explicit matrix(int _h, int _w) : base(_h, std::vector<T>(_w, zero())) {}
+  Matrix() {}
+  explicit Matrix(int _h, int _w) : Base(_h, std::vector<T>(_w, zero())) {}
 
   int height() const { return int(size()); }
   int width() const { return empty() ? 0 : int((*this)[0].size()); }
 
-  matrix& operator+=(const matrix& rhs) {
+  Matrix& operator+=(const Matrix& rhs) {
     assert(height() == rhs.height() && width() == rhs.width());
     for (int i = 0; i < height(); i++) {
       for (int j = 0; j < width(); j++) {
@@ -33,7 +33,7 @@ class matrix : public std::vector<std::vector<T>> {
     return *this;
   }
 
-  matrix& operator*=(const T& rhs) {
+  Matrix& operator*=(const T& rhs) {
     for (int i = 0; i < height(); i++) {
       for (int j = 0; j < width(); j++) {
         (*this)[i][j] = mul((*this)[i][j], rhs);
@@ -42,9 +42,9 @@ class matrix : public std::vector<std::vector<T>> {
     return *this;
   }
 
-  matrix operator*=(const matrix& rhs) {
+  Matrix operator*=(const Matrix& rhs) {
     assert(width() == rhs.height());
-    matrix res(height(), rhs.width());
+    Matrix res(height(), rhs.width());
     for (int i = 0; i < height(); i++) {
       for (int k = 0; k < width(); k++) {
         for (int j = 0; j < rhs.width(); j++) {
@@ -55,29 +55,29 @@ class matrix : public std::vector<std::vector<T>> {
     return *this = res;
   }
 
-  friend matrix operator+(const matrix& lhs, const matrix& rhs) {
-    return matrix(lhs) += rhs;
+  friend Matrix operator+(const Matrix& lhs, const Matrix& rhs) {
+    return Matrix(lhs) += rhs;
   }
-  friend matrix operator*(const matrix& lhs, const T& rhs) {
-    return matrix(lhs) *= rhs;
+  friend Matrix operator*(const Matrix& lhs, const T& rhs) {
+    return Matrix(lhs) *= rhs;
   }
-  friend matrix operator*(const T& lhs, const matrix& rhs) {
-    return matrix(rhs) *= lhs;
+  friend Matrix operator*(const T& lhs, const Matrix& rhs) {
+    return Matrix(rhs) *= lhs;
   }
-  friend matrix operator*(const matrix& lhs, const matrix& rhs) {
-    return matrix(lhs) *= rhs;
+  friend Matrix operator*(const Matrix& lhs, const Matrix& rhs) {
+    return Matrix(lhs) *= rhs;
   }
 
-  static matrix unit(int n) {
-    matrix res(n, n);
+  static Matrix unit(int n) {
+    Matrix res(n, n);
     for (int i = 0; i < n; i++) res[i][i] = one();
     return res;
   }
 
-  matrix pow(long long n) const {
+  Matrix pow(long long n) const {
     assert(height() == width());
     assert(0 <= n);
-    matrix r = unit(height()), mat = *this;
+    Matrix r = unit(height()), mat = *this;
     while (n) {
       if (n & 1) r *= mat;
       mat *= mat;

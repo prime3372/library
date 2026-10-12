@@ -11,7 +11,7 @@ using ll = long long;
 int main() {
   int n;
   cin >> n;
-  area_of_union_of_rectangles<ll> area;
+  AreaOfUnionOfRectangles<ll> area;
   for (int i = 0; i < n; i++) {
     ll x1, y1, x2, y2;
     cin >> x1 >> y1 >> x2 >> y2;

@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
+#define PROBLEM "https://judge.yosupo.jp/problem/TreeDiameter"
 
 #include "tree/tree-diameter.hpp"
 #include <cassert>
@@ -15,7 +15,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  tree_diameter<ll> diam(n);
+  TreeDiameter<ll> diam(n);
   vector<pair<int, int>> edges(n - 1);
   for (int i = 0; i < n - 1; i++) {
     int a, b, c;
@@ -28,7 +28,7 @@ int main() {
   auto& v = diam.vertices;
   auto& e = diam.edges;
   cout << dist << " " << v.size() << "\n";
-  for (int vi : v) cout << vi << " ";  
+  for (int vi : v) cout << vi << " ";
   assert(e.size() == v.size() - 1);
   for (int i = 0; i < int(v.size()) - 1; i++) {
     assert(0 <= e[i] && e[i] < n - 1);

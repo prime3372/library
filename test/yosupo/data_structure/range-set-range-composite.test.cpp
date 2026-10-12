@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_set_range_composite"
 
-#include "ds/lazy-segtree.hpp"
+#include "ds/lazy-segment-tree.hpp"
 #include "util/static-modint.hpp"
 #include <iostream>
 #include <vector>
@@ -46,7 +46,7 @@ int main() {
     cin >> x.a >> x.b;
     x.len = 1;
   }
-  lazy_segtree<S, op, e, F, act, compose, id> seg(a);
+  LazySegmentTree<S, op, e, F, act, compose, id> seg(a);
   while (q--) {
     int t;
     cin >> t;

@@ -8,10 +8,10 @@
 
 namespace cp {
 
-class rooted_tree_hash {
+class RootedTreeHash {
  public:
-  rooted_tree_hash(int _n) : hash(_n), depth(_n), n(_n), g(_n) {
-    while (int(xs.size()) <= n) xs.push_back(hash61::get_rand());
+  RootedTreeHash(int _n) : hash(_n), depth(_n), n(_n), g(_n) {
+    while (int(xs.size()) <= n) xs.push_back(Hash61::get_rand());
   }
 
   void add_edge(int a, int b) {
@@ -21,17 +21,17 @@ class rooted_tree_hash {
     g[b].push_back(a);
   }
 
-  std::vector<hash61> hash;
+  std::vector<Hash61> hash;
   std::vector<int> depth;
 
-  rooted_tree_hash& build(int r = 0) {
+  RootedTreeHash& build(int r = 0) {
     assert(0 <= r && r < n);
     dfs(r, -1);
     return *this;
   }
 
  private:
-  inline static std::vector<hash61> xs;
+  inline static std::vector<Hash61> xs;
   int n;
   std::vector<std::vector<int>> g;
 
@@ -40,7 +40,7 @@ class rooted_tree_hash {
     for (int nv : g[v]) {
       if (nv != pv) dep = std::max(dep, dfs(nv, v) + 1);
     }
-    hash61 x = xs[dep], h = 1;
+    Hash61 x = xs[dep], h = 1;
     for (int nv : g[v]) {
       if (nv != pv) h = h * (x + hash[nv]);
     }

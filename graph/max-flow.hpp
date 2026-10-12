@@ -3,19 +3,19 @@
 #include <algorithm>
 #include <cassert>
 #include <limits>
+#include <queue>
 #include <vector>
 
-#include "ds/simple-queue.hpp"
 #include "util/type-traits.hpp"
 
 namespace cp {
 
 // Dinic's Algorithm
 template <class Cap> requires(internal::is_integral_v<Cap>)
-class max_flow {
+class MaxFlow {
  public:
-  max_flow() : max_flow(0) {}
-  explicit max_flow(int _n) : n(_n), g(_n) {}
+  MaxFlow() : MaxFlow(0) {}
+  explicit MaxFlow(int _n) : n(_n), g(_n) {}
 
   int add_edge(int from, int to, Cap cap = 1) {
     assert(0 <= from && from < n);
@@ -26,29 +26,29 @@ class max_flow {
     int from_id = int(g[from].size());
     int to_id = int(g[to].size());
     if (from == to) to_id++;
-    g[from].push_back(_edge{to, to_id, cap});
-    g[to].push_back(_edge{from, from_id, 0});
+    g[from].push_back(_Edge{to, to_id, cap});
+    g[to].push_back(_Edge{from, from_id, 0});
     return m;
   }
 
-  struct edge {
+  struct Edge {
     int from, to;
     Cap cap, flow;
   };
 
-  edge get_edge(int i) {
+  Edge get_edge(int i) {
     int m = int(pos.size());
     assert(0 <= i && i < m);
     auto e = g[pos[i].first][pos[i].second];
     auto re = g[e.to][e.rev];
-    return edge{pos[i].first, e.to, e.cap + re.cap, re.cap};
+    return Edge{pos[i].first, e.to, e.cap + re.cap, re.cap};
   }
-  std::vector<edge> edges() {
-    std::vector<edge> res(pos.size());
+  std::vector<Edge> edges() {
+    std::vector<Edge> res(pos.size());
     for (int i = 0; i < int(pos.size()); i++) {
       auto e = g[pos[i].first][pos[i].second];
       auto re = g[e.to][e.rev];
-      res[i] = edge{pos[i].first, e.to, e.cap + re.cap, re.cap};
+      res[i] = Edge{pos[i].first, e.to, e.cap + re.cap, re.cap};
     }
     return res;
   }
@@ -60,13 +60,12 @@ class max_flow {
     assert(s != t);
 
     std::vector<int> level(n), iter(n);
-    simple_queue<int> que;
 
     // BFS to construct the level graph.
     auto bfs = [&]() {
       std::fill(level.begin(), level.end(), -1);
       level[s] = 0;
-      que.clear();
+      std::queue<int> que;
       que.push(s);
       while (!que.empty()) {
         int v = que.front();
@@ -86,8 +85,8 @@ class max_flow {
       if (v == s) return up;
 
       Cap res = 0;
-      // Current-edge optimization:
-      // resume loop from the last visited edge index.
+      // Current-Edge optimization:
+      // resume loop from the last visited Edge index.
       for (int& i = iter[v]; i < int(g[v].size()); i++) {
         auto& e = g[v][i];
         if (g[e.to][e.rev].cap == 0 || level[v] <= level[e.to]) continue;
@@ -117,7 +116,7 @@ class max_flow {
   std::vector<bool> min_cut(int s) {
     assert(0 <= s && s < n);
     std::vector<bool> visited(n);
-    simple_queue<int> que;
+    std::queue<int> que;
     que.push(s);
     while (!que.empty()) {
       int p = que.front();
@@ -134,13 +133,13 @@ class max_flow {
   }
 
  private:
-  struct _edge {
+  struct _Edge {
     int to, rev;
     Cap cap;
   };
   int n;
   std::vector<std::pair<int, int>> pos;
-  std::vector<std::vector<_edge>> g;
+  std::vector<std::vector<_Edge>> g;
 };
 
 }  // namespace cp

@@ -8,9 +8,9 @@
 namespace cp {
 
 template <class mint>
-formal_power_series<mint> inv(const formal_power_series<mint>& f, int n) {
+FormalPowerSeries<mint> inv(const FormalPowerSeries<mint>& f, int n) {
   assert(!f.empty() && f[0] != 0);
-  formal_power_series<mint> g = {f[0].inv()};
+  FormalPowerSeries<mint> g = {f[0].inv()};
   g.reserve(n);
   for (int k = 1; k < n; k *= 2) {
     // Newton's method:
@@ -31,7 +31,7 @@ formal_power_series<mint> inv(const formal_power_series<mint>& f, int n) {
 }
 
 template <class mint>
-formal_power_series<mint> inv(const formal_power_series<mint>& f) {
+FormalPowerSeries<mint> inv(const FormalPowerSeries<mint>& f) {
   return inv(f, int(f.size()));
 }
 

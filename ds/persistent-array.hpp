@@ -7,22 +7,21 @@
 
 namespace cp {
 
-template <class T> class persistent_array {
+template <class T> class PersistentArray {
   using ull = unsigned long long;
-  union node;
+  union Node;
 
  public:
-  using node_ptr = node*;
+  using node_ptr = Node*;
 
-  persistent_array() : n(0), log(0), init_val() {}
-  explicit persistent_array(ull _n, T val = T())
-      : n(_n), log(0), init_val(val) {
+  PersistentArray() : n(0), log(0), init_val() {}
+  explicit PersistentArray(ull _n, T val = T()) : n(_n), log(0), init_val(val) {
     for (ull i = n; i; i >>= shift) log++;
   }
 
   const T& operator[](ull i) const {
     assert(i < n);
-    node* t = root;
+    Node* t = root;
     for (int k = 0; t && k < log; k++) {
       t = t->to[i & mask];
       i >>= shift;
@@ -32,15 +31,15 @@ template <class T> class persistent_array {
 
   void set(ull i, const T& val) {
     assert(i < n);
-    node* t = root;
-    std::vector<node*> ps(log);
+    Node* t = root;
+    std::vector<Node*> ps(log);
     for (int k = 0; t && k < log; k++) {
       ps[k] = t;
       t = t->to[(i >> (k * shift)) & mask];
     }
-    node* cur = new node(val);
+    Node* cur = new Node(val);
     for (int k = log - 1; k >= 0; k--) {
-      node* nxt = ps[k] ? new node(*ps[k]) : new node();
+      Node* nxt = ps[k] ? new Node(*ps[k]) : new Node();
       nxt->to[(i >> (k * shift)) & mask] = cur;
       cur = nxt;
     }
@@ -49,31 +48,31 @@ template <class T> class persistent_array {
 
   void destructive_set(ull i, const T& val) {
     assert(i < n);
-    node* t = root;
+    Node* t = root;
     for (int k = 0; k < log; k++) {
-      if (!t) t = new node();
+      if (!t) t = new Node();
       t = t->to[i & mask];
       i >>= shift;
     }
     if (t)
       t->val = val;
     else
-      t = new node(val);
+      t = new Node(val);
   }
 
-  node* snapshot() { return root; }
-  void restore(node* new_root) { root = new_root; }
+  Node* snapshot() { return root; }
+  void restore(Node* new_root) { root = new_root; }
 
  private:
   static constexpr int shift = 4;
   static constexpr ull mask = (1 << shift) - 1;
-  union node {
+  union Node {
    private:
-    friend persistent_array;
-    std::array<node*, 1 << shift> to;
+    friend PersistentArray;
+    std::array<Node*, 1 << shift> to;
     T val;
-    node() { to.fill(nullptr); }
-    explicit node(const T& v) : val(v) {}
+    Node() { to.fill(nullptr); }
+    explicit Node(const T& v) : val(v) {}
   }* root = nullptr;
   ull n;
   int log;

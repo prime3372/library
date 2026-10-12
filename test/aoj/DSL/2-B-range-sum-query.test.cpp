@@ -12,7 +12,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  fenwick_tree<int> fw(n);
+  FenwickTree<int> fw(n);
   while (q--) {
     int com, x, y;
     cin >> com >> x >> y;

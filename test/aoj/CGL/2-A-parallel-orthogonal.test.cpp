@@ -14,7 +14,7 @@ int main() {
   int q;
   cin >> q;
   while (q--) {
-    line<ll> l, m;
+    Line<ll> l, m;
     cin >> l >> m;
     if (is_parallel(l, m)) {
       cout << 2 << "\n";

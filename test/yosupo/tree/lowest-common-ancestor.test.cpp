@@ -11,7 +11,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  lowest_common_ancestor lca(n);
+  LowestCommonAncestor lca(n);
   for (int i = 1; i < n; i++) {
     int p;
     cin >> p;

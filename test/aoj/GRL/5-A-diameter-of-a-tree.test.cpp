@@ -14,7 +14,7 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  tree_diameter<int> diam(n);
+  TreeDiameter<int> diam(n);
   vector<pair<int, int>> edges(n - 1);
   vector<int> weights(n - 1);
   for (int i = 0; i < n - 1; i++) {

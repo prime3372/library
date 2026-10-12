@@ -9,7 +9,7 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using fps = formal_power_series<mint>;
+using fps = FormalPowerSeries<mint>;
 
 int main() {
   ios_base::sync_with_stdio(false);
