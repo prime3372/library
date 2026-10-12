@@ -1,0 +1,90 @@
+#pragma once
+
+#include <algorithm>
+#include <cassert>
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
+
+#include "util/safe-hash.hpp"
+
+namespace cp {
+
+// @note `Val` cannot be `bool`
+template <class Key, class Val> class hash_map {
+ public:
+  hash_map() : cap(8), sz(0), keys(cap), vals(cap), used(cap) {}
+
+  Val& operator[](const Key& k) {
+    unsigned int i = index(k);
+    if (used[i]) return vals[i];
+    if (sz + sz / 4 >= cap) {
+      extend();
+      i = index(k);
+    }
+    keys[i] = k;
+    used[i] = true;
+    sz++;
+    return vals[i] = default_val;
+  }
+
+  const Val& get(const Key& k) const {
+    unsigned int i = index(k);
+    return used[i] ? vals[i] : default_val;
+  }
+
+  bool count(const Key& k) const {
+    unsigned int i = index(k);
+    return used[i];
+  }
+
+  std::vector<std::pair<Key, Val>> enumerate() const {
+    std::vector<std::pair<Key, Val>> res;
+    for (unsigned int i = 0; i < cap; i++) {
+      if (used[i]) res.emplace_back(keys[i], vals[i]);
+    }
+    return res;
+  }
+
+  int size() const { return sz; }
+
+  void set_default(const Val& v) { default_val = v; }
+
+ private:
+  unsigned int cap, sz;
+  std::vector<Key> keys;
+  std::vector<Val> vals;
+  std::vector<bool> used;
+  Val default_val{};
+
+  unsigned int hash(const Key& k) const {
+    return (unsigned int)(safe_hash<Key>()(k) & (cap - 1));
+  }
+
+  unsigned int index(const Key& k) const {
+    unsigned int hs = hash(k);
+    while (used[hs] && keys[hs] != k) hs = (hs + 1) & (cap - 1);
+    return hs;
+  }
+
+  void extend() {
+    cap <<= 1;
+    std::vector<Key> k(cap);
+    std::vector<Val> v(cap);
+    std::vector<bool> u(cap);
+    for (int i = 0; i < int(keys.size()); i++) {
+      if (!used[i]) continue;
+      unsigned int hs = hash(keys[i]);
+      while (u[hs]) hs = (hs + 1) & (cap - 1);
+      k[hs] = std::move(keys[i]);
+      v[hs] = std::move(vals[i]);
+      u[hs] = true;
+    }
+    keys.swap(k);
+    vals.swap(v);
+    used.swap(u);
+  }
+};
+
+}  // namespace cp

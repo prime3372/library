@@ -8,7 +8,7 @@
 #include <utility>
 #include <vector>
 
-#include "ds/cartesian_tree.hpp"
+#include "ds/cartesian-tree.hpp"
 #include "random/engine.hpp"
 
 namespace cp {

@@ -4,7 +4,7 @@
 #include <utility>
 #include <vector>
 
-#include "number/ext_gcd.hpp"
+#include "number/ext-gcd.hpp"
 
 namespace cp {
 

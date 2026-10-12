@@ -1,0 +1,19 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/many_aplusb_128bit"
+
+#include "util/io-int128.hpp"
+
+using namespace std;
+using namespace cp;
+using namespace io;
+
+int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int t;
+  cin >> t;
+  while (t--) {
+    __int128 x, y;
+    cin >> x >> y;
+    cout << x + y << "\n";
+  }
+}

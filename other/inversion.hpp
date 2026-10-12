@@ -3,8 +3,8 @@
 #include <utility>
 #include <vector>
 
-#include "ds/fenwick_tree.hpp"
-#include "util/algo_utility.hpp"
+#include "ds/fenwick-tree.hpp"
+#include "util/algo-utility.hpp"
 
 namespace cp {
 

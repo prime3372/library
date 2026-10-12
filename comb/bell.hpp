@@ -3,10 +3,10 @@
 #include <cassert>
 #include <vector>
 
-#include "comb/binom_mod.hpp"
-#include "poly/exp_of_formal_power_series.hpp"
-#include "poly/formal_power_series.hpp"
-#include "util/type_traits.hpp"
+#include "comb/binom-mod.hpp"
+#include "poly/exp-of-formal-power-series.hpp"
+#include "poly/formal-power-series.hpp"
+#include "util/type-traits.hpp"
 
 namespace cp {
 

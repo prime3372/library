@@ -1,0 +1,79 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
+
+#include "random/engine.hpp"
+#include "random/random-tree.hpp"
+#include "tree/tree-distance.hpp"
+#include <cassert>
+#include <iostream>
+#include <utility>
+#include <vector>
+
+using namespace std;
+using namespace cp;
+using ll = long long;
+
+void check(int n, int q) {
+  auto tree = random_tree(n);
+  vector<vector<pair<int, ll>>> g(n);
+  tree_distance<ll> dist(n);
+  for (auto [u, v] : tree) {
+    ll w = uniform(ll(-1e9), ll(1e9));
+    g[u].emplace_back(v, w);
+    g[v].emplace_back(u, w);
+    dist.add_edge(u, v, w);
+  }
+  dist.init();
+  while (q--) {
+    int s = uniform(0, n - 1);
+    int t = uniform(0, n - 1);
+    ll d = 0;
+    auto dfs = [&](auto self, int v, int pv) -> bool {
+      if (v == t) return true;
+      for (auto [nv, c] : g[v]) {
+        if (nv != pv) {
+          d += c;
+          if (self(self, nv, v)) return true;
+          d -= c;
+        }
+      }
+      return false;
+    };
+    dfs(dfs, s, -1);
+    assert(dist(s, t) == d);
+  }
+}
+void small() { check(uniform(1, 100), 200); }
+void large() { check(uniform(1, 100000), 20); }
+void many_query() { check(uniform(1, 100), 10000); }
+
+void stress() {
+  int n = 100000;
+  int q = 100000;
+  auto tree = random_tree(n);
+  tree_distance<ll> dist(n);
+  for (auto [u, v] : tree) {
+    ll w = uniform(ll(-1e9), ll(1e9));
+    dist.add_edge(u, v, w);
+  }
+  dist.init();
+  while (q--) {
+    int s = uniform(0, n - 1);
+    int t = uniform(0, n - 1);
+    ll d = dist(s, t);
+    assert(ll(-1e14) <= d && d <= ll(1e14));
+  }
+}
+
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << "\n";
+}
+
+int main() {
+  for (int i = 0; i < 1000; i++) small();
+  for (int i = 0; i < 10; i++) large();
+  for (int i = 0; i < 10; i++) many_query();
+  for (int i = 0; i < 10; i++) stress();
+  solve();
+}

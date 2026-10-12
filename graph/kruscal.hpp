@@ -4,7 +4,7 @@
 #include <utility>
 #include <vector>
 
-#include "ds/union_find.hpp"
+#include "ds/union-find.hpp"
 
 namespace cp {
 

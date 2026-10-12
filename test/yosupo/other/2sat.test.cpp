@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
 
-#include "graph/two_sat.hpp"
+#include "graph/two-sat.hpp"
 #include <iostream>
 #include <string>
 

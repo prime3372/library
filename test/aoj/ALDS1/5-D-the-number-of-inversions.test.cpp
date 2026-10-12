@@ -1,0 +1,17 @@
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_5_D"
+
+#include "other/inversion.hpp"
+#include <iostream>
+#include <vector>
+
+using namespace std;
+using namespace cp;
+
+int main() {
+  int n;
+  cin >> n;
+  vector<int> a(n);
+  for (int& x : a) cin >> x;
+  cout << inversion(a) << "\n";
+}

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "number/crt.hpp"
-#include "number/enumerate_divisors.hpp"
+#include "number/enumerate-divisors.hpp"
 #include "random/engine.hpp"
 #include <cassert>
 #include <iostream>

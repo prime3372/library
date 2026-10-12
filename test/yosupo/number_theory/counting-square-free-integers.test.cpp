@@ -1,0 +1,14 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/counting_squarefrees"
+
+#include "number/count-square-free.hpp"
+#include <iostream>
+
+using namespace std;
+using namespace cp;
+using ll = long long;
+
+int main() {
+  ll n;
+  cin >> n;
+  cout << count_square_free(n) << "\n";
+}

@@ -1,0 +1,70 @@
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum"
+
+#include "ds/implicit-treap-acted-monoid.hpp"
+#include "util/static-modint.hpp"
+#include <iostream>
+#include <vector>
+
+using namespace std;
+using namespace cp;
+using mint = modint998244353;
+
+struct S {
+  mint val;
+  int len;
+};
+S op(S x, S y) { return {x.val + y.val, x.len + y.len}; }
+S e() { return {0, 0}; }
+struct F {
+  mint a, b;
+};
+S act(F f, S x) { return {f.a * x.val + f.b * x.len, x.len}; }
+F compose(F g, F f) { return {g.a * f.a, g.a * f.b + g.b}; }
+F id() { return {1, 0}; }
+
+int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int n, q;
+  cin >> n >> q;
+  vector<S> a(n);
+  for (int i = 0; i < n; i++) {
+    cin >> a[i].val;
+    a[i].len = 1;
+  }
+  implicit_treap_acted_monoid<S, op, e, F, act, compose, id> seg(a);
+  while (q--) {
+    int t;
+    cin >> t;
+    if (t == 0) {
+      int i;
+      mint x;
+      cin >> i >> x;
+      seg.insert(i, {x, 1});
+    } else if (t == 1) {
+      int i;
+      cin >> i;
+      seg.erase(i);
+    } else if (t == 2) {
+      int l, r;
+      cin >> l >> r;
+      seg.reverse(l, r);
+    } else if (t == 3) {
+      int l, r;
+      mint b, c;
+      cin >> l >> r >> b >> c;
+      seg.apply(l, r, {b, c});
+    } else if (t == 4) {
+      int l, r;
+      cin >> l >> r;
+      S ans = e();
+      if (r - l <= 100) {
+        for (int i = l; i < r; i++) ans = op(ans, seg[i]);
+      } else {
+        ans = seg.prod(l, r);
+      }
+      cout << ans.val << "\n";
+    }
+  }
+}

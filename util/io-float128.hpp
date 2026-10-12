@@ -1,0 +1,78 @@
+#pragma once
+
+#include <cassert>
+#include <cctype>
+#include <iostream>
+#include <string>
+
+namespace cp {
+
+namespace io {
+
+// fixed-point format only
+std::istream& operator>>(std::istream& is, __float128& val) {
+  std::string s;
+  if (!(is >> s)) return is;
+  val = 0;
+  __float128 p10 = 1;
+  bool has_dec = false;
+  for (int i = (s[0] == '+' || s[0] == '-'); i < int(s.size()); i++) {
+    if (s[i] == '.') {
+      if (has_dec) break;
+      has_dec = true;
+    } else {
+      if (!std::isdigit(s[i])) break;
+      val = val * 10 + (s[i] - '0');
+      if (has_dec) p10 *= 10;
+    }
+  }
+  val /= p10;
+  if (s[0] == '-') val = -val;
+  return is;
+}
+
+// output in fixed-point format
+std::ostream& operator<<(std::ostream& os, __float128 x) {
+  assert(!__builtin_isnan(x) && !__builtin_isinf(x));
+  int prec = int(os.precision());
+
+  if (x < 0) {
+    os << '-';
+    x = -x;
+  }
+
+  __float128 p10 = 1;
+  for (int i = 0; i < prec; i++) p10 *= 10;
+  x += __float128(0.5) / p10;
+
+  int int_len = 0;
+  while (x >= 1) {
+    x /= 10;
+    int_len++;
+  }
+  for (int i = 0; i < int_len; i++) {
+    x *= 10;
+    int d = int(x);
+    if (d > 9) d = 9;
+    os << d;
+    x -= d;
+  }
+  if (int_len == 0) os << 0;
+
+  if (prec > 0) {
+    os << '.';
+    for (int i = 0; i < prec; i++) {
+      x *= 10;
+      int d = int(x);
+      if (d > 9) d = 9;
+      os << d;
+      x -= d;
+    }
+  }
+
+  return os;
+}
+
+}  // namespace io
+
+}  // namespace cp

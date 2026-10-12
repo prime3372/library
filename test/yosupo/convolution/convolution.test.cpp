@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
 #include "poly/convolution.hpp"
-#include "util/static_modint.hpp"
+#include "util/static-modint.hpp"
 #include <iostream>
 #include <vector>
 

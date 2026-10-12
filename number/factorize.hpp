@@ -7,10 +7,10 @@
 #include <utility>
 #include <vector>
 
-#include "number/is_prime.hpp"
-#include "number/kth_root.hpp"
+#include "number/is-prime.hpp"
+#include "number/kth-root.hpp"
 #include "random/engine.hpp"
-#include "util/run_length_encoding.hpp"
+#include "util/run-length-encoding.hpp"
 
 namespace cp {
 

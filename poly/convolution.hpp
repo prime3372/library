@@ -4,11 +4,11 @@
 #include <bit>
 #include <vector>
 
-#include "number/ext_gcd.hpp"
-#include "number/is_prime.hpp"
-#include "number/pow_mod.hpp"
-#include "util/static_modint.hpp"
-#include "util/type_traits.hpp"
+#include "number/ext-gcd.hpp"
+#include "number/is-prime.hpp"
+#include "number/pow-mod.hpp"
+#include "util/static-modint.hpp"
+#include "util/type-traits.hpp"
 
 namespace cp {
 

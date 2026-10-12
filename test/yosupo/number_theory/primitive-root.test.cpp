@@ -1,0 +1,20 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/primitive_root"
+
+#include "number/primitive-root.hpp"
+#include <iostream>
+
+using namespace std;
+using namespace cp;
+using ll = long long;
+
+int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  int q;
+  cin >> q;
+  while (q--) {
+    ll p;
+    cin >> p;
+    cout << primitive_root(p) << "\n";
+  }
+}

@@ -3,9 +3,9 @@
 #include <cassert>
 #include <vector>
 
-#include "comb/binom_mod.hpp"
-#include "poly/formal_power_series.hpp"
-#include "poly/inv_of_formal_power_series.hpp"
+#include "comb/binom-mod.hpp"
+#include "poly/formal-power-series.hpp"
+#include "poly/inv-of-formal-power-series.hpp"
 
 namespace cp {
 
