@@ -7,14 +7,14 @@
 
 namespace cp {
 
-class gaussian_integer {
-  using gint = gaussian_integer;
+class GaussianInteger {
+  using gint = GaussianInteger;
 
  public:
   long long x, y;
-  gaussian_integer() : x(0), y(0) {}
-  gaussian_integer(long long _x) : x(_x), y(0) {}
-  gaussian_integer(long long _x, long long _y) : x(_x), y(_y) {}
+  GaussianInteger() : x(0), y(0) {}
+  GaussianInteger(long long _x) : x(_x), y(0) {}
+  GaussianInteger(long long _x, long long _y) : x(_x), y(_y) {}
 
   gint conj() const { return gint(x, -y); }
   long long norm() const { return x * x + y * y; }
