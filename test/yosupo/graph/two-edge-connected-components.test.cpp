@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/TwoEdgeConnectedComponents"
+#define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 
 #include "graph/two-Edge-connected-components.hpp"
 #include <iostream>

@@ -16,35 +16,35 @@ struct DynamicBitset {
   DynamicBitset() : n(0) {}
   explicit DynamicBitset(int _n) : n(_n), a((_n + w - 1) / w) {}
 
-  class ref {
+  class Ref {
    public:
     operator bool() const { return (*d & mask(pos)) != 0; }
-    ref& flip() {
+    Ref& flip() {
       *d ^= mask(pos);
       return *this;
     }
-    ref& operator=(bool x) {
+    Ref& operator=(bool x) {
       if (x)
         *d |= mask(pos);
       else
         *d &= ~mask(pos);
       return *this;
     }
-    ref& operator=(const ref& other) { return *this = bool(other); }
+    Ref& operator=(const Ref& other) { return *this = bool(other); }
 
    private:
     friend DynamicBitset;
     ull* d;
     int pos;
-    ref(DynamicBitset& b, int i) {
+    Ref(DynamicBitset& b, int i) {
       d = b.a.data() + i / w;
       pos = i % w;
     }
   };
 
-  ref operator[](int i) {
+  Ref operator[](int i) {
     assert(0 <= i && i < n);
-    return ref(*this, i);
+    return Ref(*this, i);
   }
   bool operator[](int i) const {
     assert(0 <= i && i < n);

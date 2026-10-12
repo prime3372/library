@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T> class FenwickTree2D {
+template <class T> struct FenwickTree2D {
  public:
   FenwickTree2D() : n(0), m(0) {}
   explicit FenwickTree2D(int _n, int _m)
@@ -25,7 +25,7 @@ template <class T> class FenwickTree2D {
     }
   }
 
-  class ref {
+  struct Ref {
    public:
     T operator[](int j) const {
       assert(0 <= j && j < ptr->m);
@@ -36,12 +36,12 @@ template <class T> class FenwickTree2D {
     friend FenwickTree2D;
     const FenwickTree2D* ptr;
     int i;
-    ref(const FenwickTree2D* _ptr, int _i) : ptr(_ptr), i(_i) {}
+    Ref(const FenwickTree2D* _ptr, int _i) : ptr(_ptr), i(_i) {}
   };
 
-  ref operator[](int i) const {
+  Ref operator[](int i) const {
     assert(0 <= i && i < n);
-    return ref(this, i);
+    return Ref(this, i);
   }
 
   T sum(int l, int d, int r, int u) const {

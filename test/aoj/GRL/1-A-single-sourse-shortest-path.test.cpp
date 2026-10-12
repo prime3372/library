@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_1_A"
 
-#include "graph/Dijkstra.hpp"
+#include "graph/dijkstra.hpp"
 #include <iostream>
 
 using namespace std;

@@ -7,7 +7,7 @@
 
 namespace cp {
 
-template <class T> class DynamicFenwickTree {
+template <class T> struct DynamicFenwickTree {
   using ull = unsigned long long;
 
  public:

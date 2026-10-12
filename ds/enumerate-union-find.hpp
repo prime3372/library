@@ -7,7 +7,7 @@
 
 namespace cp {
 
-class EnumerateUnionFind {
+struct EnumerateUnionFind {
  public:
   EnumerateUnionFind() : n(0) {}
   explicit EnumerateUnionFind(int _n) : n(_n), par_or_size(_n, -1), nxt(_n) {

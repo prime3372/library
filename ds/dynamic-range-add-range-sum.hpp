@@ -6,7 +6,7 @@
 
 namespace cp {
 
-template <class T> class DynamicRangeAddRangeSum {
+template <class T> struct DynamicRangeAddRangeSum {
   using ull = unsigned long long;
 
  public:

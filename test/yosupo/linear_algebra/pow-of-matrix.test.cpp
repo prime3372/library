@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/pow_of_Matrix"
+#define PROBLEM "https://judge.yosupo.jp/problem/pow_of_matrix"
 
 #include "linalg/matrix.hpp"
 #include "util/static-modint.hpp"

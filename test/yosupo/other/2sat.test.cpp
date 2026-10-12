@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/TwoSat"
+#define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
 
 #include "graph/two-sat.hpp"
 #include <iostream>

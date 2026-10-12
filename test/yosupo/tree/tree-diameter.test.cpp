@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/TreeDiameter"
+#define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
 
 #include "tree/tree-diameter.hpp"
 #include <cassert>

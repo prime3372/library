@@ -11,7 +11,7 @@
 
 namespace cp {
 
-template <class S, auto op, auto e> class DynamicSegmentTree {
+template <class S, auto op, auto e> struct DynamicSegmentTree {
   using ull = unsigned long long;
 
  public:

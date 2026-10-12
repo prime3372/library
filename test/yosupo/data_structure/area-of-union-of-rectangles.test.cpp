@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/AreaOfUnionOfRectangles"
+#define PROBLEM "https://judge.yosupo.jp/problem/area_of_union_of_rectangles"
 
 #include "ds/area-of-union-of-rectangles.hpp"
 #include <iostream>

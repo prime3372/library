@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/AhoCorasick"
+#define PROBLEM "https://judge.yosupo.jp/problem/aho_corasick"
 
 #include "string/aho-corasick.hpp"
 #include <iostream>

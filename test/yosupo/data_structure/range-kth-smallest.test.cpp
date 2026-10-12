@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/RangeKthSmallest"
+#define PROBLEM "https://judge.yosupo.jp/problem/range_kth_smallest"
 
 #include "ds/range-kth-smallest.hpp"
 #include <iostream>

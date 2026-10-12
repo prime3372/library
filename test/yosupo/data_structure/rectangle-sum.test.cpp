@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/RectangleSum"
+#define PROBLEM "https://judge.yosupo.jp/problem/rectangle_sum"
 
 #include "ds/rectangle-sum.hpp"
 #include <iostream>

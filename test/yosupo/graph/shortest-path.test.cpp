@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
 
-#include "graph/Dijkstra.hpp"
+#include "graph/dijkstra.hpp"
 #include <cassert>
 #include <iostream>
 #include <utility>

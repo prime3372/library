@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T> class DynamicFenwickTree2D {
+template <class T> struct DynamicFenwickTree2D {
   using ull = unsigned long long;
 
  public:
@@ -27,7 +27,7 @@ template <class T> class DynamicFenwickTree2D {
     }
   }
 
-  class ref {
+  class Ref {
    public:
     T operator[](ull j) const {
       assert(j < ptr->m);
@@ -38,12 +38,12 @@ template <class T> class DynamicFenwickTree2D {
     friend DynamicFenwickTree2D;
     const DynamicFenwickTree2D* ptr;
     int i;
-    ref(const DynamicFenwickTree2D* _ptr, int _i) : ptr(_ptr), i(_i) {}
+    Ref(const DynamicFenwickTree2D* _ptr, int _i) : ptr(_ptr), i(_i) {}
   };
 
-  ref operator[](int i) const {
+  Ref operator[](int i) const {
     assert(0 <= i && i < n);
-    return ref(this, i);
+    return Ref(this, i);
   }
 
   T sum(int l, ull d, int r, ull u) const {
