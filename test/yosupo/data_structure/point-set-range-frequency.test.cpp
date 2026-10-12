@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_frequency"
 
 #include "ds/hash-map.hpp"
-#include "ds/Treap.hpp"
+#include "ds/treap.hpp"
 #include <iostream>
 #include <vector>
 

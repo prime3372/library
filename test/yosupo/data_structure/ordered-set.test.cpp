@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/ordered_set"
 
-#include "ds/Treap.hpp"
+#include "ds/treap.hpp"
 
 #include <iostream>
 #include <vector>
