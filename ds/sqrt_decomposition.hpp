@@ -20,30 +20,31 @@ template <class block> class sqrt_decomposition {
 
   template <class T> T fold_left(int l, int r, T init) {
     assert(0 <= l && l <= r && r <= n);
-    int lblock = l / b;
-    int rblock = r / b;
+    int lblock = l / block_size;
+    int rblock = r / block_size;
     T ans = init;
     if (lblock == rblock && rblock < block_num) {
-      ans = d[lblock].query_part(l % b, r % b, ans);
+      ans = d[lblock].query_part(l % block_size, r % block_size, ans);
     } else {
-      ans = d[lblock].query_part(l % b, b, ans);
+      ans = d[lblock].query_part(l % block_size, block_size, ans);
       for (int i = lblock + 1; i <= rblock - 1; i++) ans = d[i].query_all(ans);
-      if (rblock < block_num) ans = d[rblock].query_part(0, r % b, ans);
+      if (rblock < block_num)
+        ans = d[rblock].query_part(0, r % block_size, ans);
     }
     return ans;
   }
 
   template <class T> T fold_right(int l, int r, T init) {
     assert(0 <= l && l <= r && r <= n);
-    int lblock = l / b;
-    int rblock = r / b;
+    int lblock = l / block_size;
+    int rblock = r / block_size;
     T ans = init;
     if (lblock == rblock && rblock < block_num) {
-      ans = d[lblock].query_part(l % b, r % b, ans);
+      ans = d[lblock].query_part(l % block_size, r % block_size, ans);
     } else {
-      if (rblock < block_num) ans = d[rblock].query_part(0, r % b, ans);
+      if (rblock < block_num) ans = d[rblock].query_part(0, r % block_size, ans);
       for (int i = rblock - 1; i >= lblock + 1; i--) ans = d[i].query_all(ans);
-      ans = d[lblock].query_part(l % b, b, ans);
+      ans = d[lblock].query_part(l % block_size, block_size, ans);
     }
     return ans;
   }
