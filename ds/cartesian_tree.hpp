@@ -12,7 +12,7 @@ namespace cp {
 class cartesian_tree {
  public:
   int root = -1;
-  std::vector<int> left, right, parent, size;
+  std::vector<int> left, right, parent, size, lsize, rsize;
 
   cartesian_tree() {}
   template <class T, class Compare = std::less<T>>
@@ -52,6 +52,13 @@ class cartesian_tree {
       return size[i];
     };
     dfs(dfs, root);
+
+    lsize.assign(n, 0);
+    rsize.assign(n, 0);
+    for (int i = 0; i < n; i++) {
+      if (left[i] != -1) lsize[i] = size[left[i]];
+      if (right[i] != -1) rsize[i] = size[right[i]];
+    }
   }
 };
 
