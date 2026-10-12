@@ -140,9 +140,9 @@ template <int id> class DynamicModInt {
   }
 
  private:
-  unsigned int v;
   inline static Barrett bt;
   inline static bool configured = false;
+  unsigned int v;
   static unsigned int umod() { return bt.umod(); }
 };
 
