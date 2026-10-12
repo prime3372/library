@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/minimum_spanning_tree"
 
-#include "graph/Kruscal.hpp"
+#include "graph/kruscal.hpp"
 #include <iostream>
 
 using namespace std;

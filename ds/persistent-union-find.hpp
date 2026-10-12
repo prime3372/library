@@ -9,7 +9,7 @@
 
 namespace cp {
 
-class PersistentUnionFind {
+struct PersistentUnionFind {
  public:
   using node_ptr = typename PersistentArray<int>::node_ptr;
 

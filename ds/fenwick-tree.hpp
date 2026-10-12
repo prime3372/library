@@ -6,7 +6,7 @@
 
 namespace cp {
 
-template <class T> class FenwickTree {
+template <class T> struct FenwickTree {
  public:
   FenwickTree() : n(0) {}
   explicit FenwickTree(int _n) : n(_n), d(_n) {}

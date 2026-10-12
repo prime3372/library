@@ -11,7 +11,7 @@
 namespace cp {
 
 template <class T, class U, int bit_size = 24>
-class OfflinePointAddRectangleSum {
+struct OfflinePointAddRectangleSum {
  public:
   OfflinePointAddRectangleSum() {}
 

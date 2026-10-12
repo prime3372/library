@@ -4,7 +4,7 @@
 #include <functional>
 #include <vector>
 
-#include "ds/implicit-Treap-Base.hpp"
+#include "ds/implicit-treap-Base.hpp"
 #include "random/engine.hpp"
 
 namespace cp {
@@ -21,7 +21,7 @@ template <class T> struct ImplicitTreapNode {
 };
 
 template <class T>
-class implicit_treap : public ImplicitTreapBase<ImplicitTreapNode<T>> {
+struct implicit_treap : public ImplicitTreapBase<ImplicitTreapNode<T>> {
  public:
   implicit_treap() {}
   explicit implicit_treap(int n, const T& val = T())

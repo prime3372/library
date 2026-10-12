@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum"
 
-#include "ds/implicit-Treap-acted-monoid.hpp"
+#include "ds/implicit-treap-acted-monoid.hpp"
 #include "util/static-modint.hpp"
 #include <iostream>
 #include <vector>

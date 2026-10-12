@@ -85,7 +85,7 @@ class MaxFlow {
       if (v == s) return up;
 
       Cap res = 0;
-      // Current-Edge optimization:
+      // Current-edge optimization:
       // resume loop from the last visited Edge index.
       for (int& i = iter[v]; i < int(g[v].size()); i++) {
         auto& e = g[v][i];

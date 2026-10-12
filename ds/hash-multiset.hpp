@@ -8,7 +8,7 @@
 
 namespace cp {
 
-template <class T> class HashMultiset {
+template <class T> struct HashMultiset {
  public:
   HashMultiset() {}
 

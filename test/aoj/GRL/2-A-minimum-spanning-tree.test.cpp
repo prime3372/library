@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_2_A"
 
-#include "graph/Kruscal.hpp"
+#include "graph/kruscal.hpp"
 #include <cassert>
 #include <iostream>
 #include <vector>

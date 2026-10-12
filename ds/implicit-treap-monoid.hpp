@@ -5,7 +5,7 @@
 #include <memory>
 #include <utility>
 
-#include "ds/implicit-Treap-Base.hpp"
+#include "ds/implicit-treap-Base.hpp"
 #include "random/engine.hpp"
 
 namespace cp {
@@ -22,7 +22,7 @@ template <class S> struct ImplicitTreapMonoidNode {
 };
 
 template <class S, auto op, auto e, auto reverse = std::identity()>
-class ImplicitTreapMonoid
+struct ImplicitTreapMonoid
     : public ImplicitTreapBase<ImplicitTreapMonoidNode<S>> {
  public:
   ImplicitTreapMonoid() {}

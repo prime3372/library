@@ -13,7 +13,7 @@
 
 namespace cp {
 
-template <class Node> class ImplicitTreapBase {
+template <class Node> struct ImplicitTreapBase {
   using T = decltype(Node::val);
 
  public:

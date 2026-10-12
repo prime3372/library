@@ -10,7 +10,7 @@
 namespace cp {
 
 template <class S, auto op, auto e, class F, auto act, auto compose, auto id>
-class LazySegmentTree {
+struct LazySegmentTree {
  public:
   LazySegmentTree() : LazySegmentTree(0) {}
   explicit LazySegmentTree(int _n, const S& val = e())

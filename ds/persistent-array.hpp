@@ -7,7 +7,7 @@
 
 namespace cp {
 
-template <class T> class PersistentArray {
+template <class T> struct PersistentArray {
   using ull = unsigned long long;
   union Node;
 

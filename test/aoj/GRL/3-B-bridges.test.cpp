@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_3_B"
 
-#include "graph/two-Edge-connected-components.hpp"
+#include "graph/two-edge-connected-components.hpp"
 #include <algorithm>
 #include <iostream>
 #include <utility>

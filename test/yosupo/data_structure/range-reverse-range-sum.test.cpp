@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_reverse_range_sum"
 
-#include "ds/implicit-Treap-monoid.hpp"
+#include "ds/implicit-treap-monoid.hpp"
 #include <iostream>
 #include <vector>
 

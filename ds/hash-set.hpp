@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T> class HashSet {
+template <class T> struct HashSet {
  public:
   HashSet() {}
 

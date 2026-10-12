@@ -4,7 +4,7 @@
 #include <functional>
 #include <memory>
 
-#include "ds/implicit-Treap-Base.hpp"
+#include "ds/implicit-treap-Base.hpp"
 #include "random/engine.hpp"
 
 namespace cp {

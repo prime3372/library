@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 
-#include "graph/two-Edge-connected-components.hpp"
+#include "graph/two-edge-connected-components.hpp"
 #include <iostream>
 
 using namespace std;

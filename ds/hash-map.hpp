@@ -12,7 +12,7 @@
 namespace cp {
 
 // @note `Val` cannot be `bool`
-template <class Key, class Val> class HashMap {
+template <class Key, class Val> struct HashMap {
  public:
   HashMap() : cap(8), sz(0), keys(cap), vals(cap), used(cap) {}
 
