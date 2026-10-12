@@ -81,7 +81,7 @@ class MaxFlow {
 
     // DFS to push augment flow backward from t to s along the level graph.
     auto dfs = [&](auto self, int v, Cap up) {
-      // Base case: reached the source s.
+      // base case: reached the source s.
       if (v == s) return up;
 
       Cap res = 0;

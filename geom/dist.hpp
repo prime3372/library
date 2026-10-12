@@ -7,7 +7,7 @@
 
 namespace cp {
 
-// Point-Line
+// point-line
 
 long double dist(const Point<long double>& p, const Line<long double>& l) {
   return std::abs(cross(p - l.p, l.q - l.p)) / abs(l.q - l.p);
@@ -18,7 +18,7 @@ long double dist(const Point<T>& p, const Line<U>& l) {
   return dist(Point<long double>(p), Line<long double>(l));
 }
 
-// Point-Segment
+// point-segment
 
 long double dist(const Point<long double>& p, const Segment<long double>& s) {
   Point<long double> h = projection(p, Line<long double>(s));
@@ -31,7 +31,7 @@ long double dist(const Point<T>& p, const Segment<U>& s) {
   return dist(Point<long double>(p), Segment<long double>(s));
 }
 
-// Line-Segment
+// line-segment
 
 long double dist(const Line<long double>& l, const Segment<long double>& s) {
   if (intersect(l, s)) return 0;
@@ -43,7 +43,7 @@ long double dist(const Line<T>& l, const Segment<U>& s) {
   return dist(Line<long double>(l), Segment<long double>(s));
 }
 
-// Segment-Segment
+// segment-segment
 
 long double dist(const Segment<long double>& s, const Segment<long double>& t) {
   if (intersect(s, t)) return 0;
