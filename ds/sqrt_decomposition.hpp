@@ -42,7 +42,8 @@ template <class block> class sqrt_decomposition {
     if (lblock == rblock && rblock < block_num) {
       ans = d[lblock].query_part(l % block_size, r % block_size, ans);
     } else {
-      if (rblock < block_num) ans = d[rblock].query_part(0, r % block_size, ans);
+      if (rblock < block_num)
+        ans = d[rblock].query_part(0, r % block_size, ans);
       for (int i = rblock - 1; i >= lblock + 1; i--) ans = d[i].query_all(ans);
       ans = d[lblock].query_part(l % block_size, block_size, ans);
     }
