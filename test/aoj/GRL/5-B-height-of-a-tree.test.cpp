@@ -9,14 +9,14 @@ using namespace cp;
 
 int op(int x, int y) { return max(x, y); }
 int e() { return 0; }
-int act(int f, int x) { return x + f; }
+int mapping(int f, int x) { return x + f; }
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n;
   cin >> n;
-  RerootingDP<int, op, e, int, act> rerooting(n);
+  RerootingDP<int, op, e, int, mapping> rerooting(n);
   for (int i = 0; i < n - 1; i++) {
     int s, t, w;
     cin >> s >> t >> w;

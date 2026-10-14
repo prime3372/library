@@ -26,8 +26,8 @@ template <class S,
           auto op,
           auto e,
           class F,
-          auto act,
-          auto compose,
+          auto mapping,
+          auto composition,
           auto id,
           auto reverse = std::identity{}>
 struct ImplicitTreapActedMonoid
@@ -106,9 +106,9 @@ struct ImplicitTreapActedMonoid
   }
 
   void all_apply(Node* t, const F& f) {
-    t->lz = compose(f, t->lz);
-    t->val = act(f, t->val);
-    t->prod = act(f, t->prod);
+    t->lz = composition(f, t->lz);
+    t->val = mapping(f, t->val);
+    t->prod = mapping(f, t->prod);
     t->lzflag = true;
   }
 };

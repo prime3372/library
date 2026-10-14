@@ -10,8 +10,8 @@ using namespace cp;
 
 int op(int x, int y) { return min(x, y); }
 int e() { return INT_MAX; }
-int act(int f, int x) { return f == -1 ? x : f; }
-int compose(int g, int f) { return g == -1 ? f : g; }
+int mapping(int f, int x) { return f == -1 ? x : f; }
+int composition(int g, int f) { return g == -1 ? f : g; }
 int id() { return -1; }
 
 int main() {
@@ -19,7 +19,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  LazySegmentTree<int, op, e, int, act, compose, id> seg(n);
+  LazySegmentTree<int, op, e, int, mapping, composition, id> seg(n);
   while (q--) {
     int com;
     cin >> com;

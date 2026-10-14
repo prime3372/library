@@ -15,8 +15,8 @@ struct S {
 };
 S op(S x, S y) { return {x.val + y.val, x.len + y.len}; }
 S e() { return {0, 0}; }
-S act(ll f, S x) { return {x.val + f * x.len, x.len}; }
-ll compose(ll g, ll f) { return g + f; }
+S mapping(ll f, S x) { return {x.val + f * x.len, x.len}; }
+ll composition(ll g, ll f) { return g + f; }
 ll id() { return 0; }
 
 int main() {
@@ -38,7 +38,7 @@ int main() {
 
   int q;
   cin >> q;
-  LazySegmentTree<S, op, e, ll, act, compose, id> seg(n, {0, 1});
+  LazySegmentTree<S, op, e, ll, mapping, composition, id> seg(n, {0, 1});
   while (q--) {
     int t;
     cin >> t;

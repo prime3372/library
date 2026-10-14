@@ -12,8 +12,8 @@ struct S {
 };
 S op(S x, S y) { return {x.val + y.val, x.len + y.len}; }
 S e() { return {0, 0}; }
-S act(int f, S x) { return f == -1001 ? x : S{f * x.len, x.len}; }
-int compose(int g, int f) { return g == -1001 ? f : g; }
+S mapping(int f, S x) { return f == -1001 ? x : S{f * x.len, x.len}; }
+int composition(int g, int f) { return g == -1001 ? f : g; }
 int id() { return -1001; }
 
 int main() {
@@ -21,7 +21,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  LazySegmentTree<S, op, e, int, act, compose, id> seg(n, {0, 1});
+  LazySegmentTree<S, op, e, int, mapping, composition, id> seg(n, {0, 1});
   while (q--) {
     int com;
     cin >> com;

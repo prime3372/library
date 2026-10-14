@@ -28,12 +28,12 @@ F power(F f, int n) {
   }
   return g;
 }
-S act(F f, S x) {
+S mapping(F f, S x) {
   if (f.a == 0) return x;
   auto g = power(f, x.len);
   return {g.a, g.b, x.len};
 }
-F compose(F g, F f) { return g.a == 0 ? f : g; }
+F composition(F g, F f) { return g.a == 0 ? f : g; }
 F id() { return {0, 0}; }
 
 int main() {
@@ -46,7 +46,7 @@ int main() {
     cin >> x.a >> x.b;
     x.len = 1;
   }
-  LazySegmentTree<S, op, e, F, act, compose, id> seg(a);
+  LazySegmentTree<S, op, e, F, mapping, composition, id> seg(a);
   while (q--) {
     int t;
     cin >> t;

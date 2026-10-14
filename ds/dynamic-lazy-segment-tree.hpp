@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class S, auto op, auto e, class F, auto act, auto compose, auto id>
+template <class S, auto op, auto e, class F, auto mapping, auto, auto id>
 struct DynamicLazySegmentTree {
   static_assert(std::is_invocable_r_v<S, decltype(op), S, S>,
                 "op must work as S(S, S)");
@@ -142,8 +142,8 @@ struct DynamicLazySegmentTree {
                 t->right ? t->right->val : initial_vals[h - 1]);
   }
   void all_apply(Node* t, const F& f) {
-    t->val = act(f, t->val);
-    t->lz = compose(f, t->lz);
+    t->val = mapping(f, t->val);
+    t->lz = composition(f, t->lz);
     t->lzflag = true;
   }
   void push(Node* t, int h) {

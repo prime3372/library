@@ -19,8 +19,8 @@ S e() { return {0, 0}; }
 struct F {
   mint a, b;
 };
-S act(F f, S x) { return {f.a * x.val + f.b * x.len, x.len}; }
-F compose(F g, F f) { return {g.a * f.a, g.a * f.b + g.b}; }
+S mapping(F f, S x) { return {f.a * x.val + f.b * x.len, x.len}; }
+F composition(F g, F f) { return {g.a * f.a, g.a * f.b + g.b}; }
 F id() { return {1, 0}; }
 
 int main() {
@@ -33,7 +33,7 @@ int main() {
     cin >> a[i].val;
     a[i].len = 1;
   }
-  ImplicitTreapActedMonoid<S, op, e, F, act, compose, id> seg(a);
+  ImplicitTreapActedMonoid<S, op, e, F, mapping, composition, id> seg(a);
   while (q--) {
     int t;
     cin >> t;

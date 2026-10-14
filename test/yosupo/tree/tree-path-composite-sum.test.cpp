@@ -18,7 +18,7 @@ S e() { return {0, 0}; }
 struct F {
   mint a, b;
 };
-S act(F f, S x) { return {f.a * x.val + f.b * x.len, x.len}; }
+S mapping(F f, S x) { return {f.a * x.val + f.b * x.len, x.len}; }
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -30,7 +30,7 @@ int main() {
     cin >> ai.val;
     ai.len = 1;
   }
-  RerootingDP<S, op, e, F, act> rerooting(a);
+  RerootingDP<S, op, e, F, mapping> rerooting(a);
   for (int i = 0; i < n - 1; i++) {
     int u, v;
     mint b, c;

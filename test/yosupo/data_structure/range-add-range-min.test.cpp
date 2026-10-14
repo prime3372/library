@@ -10,8 +10,8 @@ using ll = long long;
 
 ll op(ll x, ll y) { return min(x, y); }
 ll e() { return ll(1e18); }
-ll act(ll f, ll x) { return x + f; }
-ll compose(ll g, ll f) { return g + f; }
+ll mapping(ll f, ll x) { return x + f; }
+ll composition(ll g, ll f) { return g + f; }
 ll id() { return 0; }
 
 int main() {
@@ -21,7 +21,7 @@ int main() {
   cin >> n >> q;
   vector<ll> a(n);
   for (ll& ai : a) cin >> ai;
-  LazySegmentTree<ll, op, e, ll, act, compose, id> seg(a);
+  LazySegmentTree<ll, op, e, ll, mapping, composition, id> seg(a);
   while (q--) {
     int t;
     cin >> t;

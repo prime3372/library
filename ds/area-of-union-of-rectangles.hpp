@@ -33,7 +33,7 @@ template <class T> struct AreaOfUnionOfRectangles {
     auto q = inverse(sort(y));
     std::vector<S> init(n - 1);
     for (int i = 0; i < n - 1; i++) init[i] = {0, y[i + 1] - y[i]};
-    LazySegmentTree<S, op, e, T, act, compose, id> seg(init);
+    LazySegmentTree<S, op, e, T, mapping, composition, id> seg(init);
     T ans = 0;
     T total = y[n - 1] - y[0];
     for (int i = 0; i < n - 1; i++) {
@@ -63,8 +63,8 @@ template <class T> struct AreaOfUnionOfRectangles {
     return x.min < y.min ? x : y;
   }
   static S e() { return {std::numeric_limits<T>::max(), 0}; }
-  static S act(T f, S x) { return {x.min + f, x.cnt}; }
-  static T compose(T g, T f) { return g + f; }
+  static S mapping(T f, S x) { return {x.min + f, x.cnt}; }
+  static T composition(T g, T f) { return g + f; }
   static T id() { return 0; }
 };
 

@@ -18,8 +18,8 @@ S e() { return {0, 0}; }
 struct F {
   mint a, b;
 };
-S act(F f, S x) { return {f.a * x.val + f.b * x.len, x.len}; }
-F compose(F g, F f) { return {g.a * f.a, g.a * f.b + g.b}; }
+S mapping(F f, S x) { return {f.a * x.val + f.b * x.len, x.len}; }
+F composition(F g, F f) { return {g.a * f.a, g.a * f.b + g.b}; }
 F id() { return {1, 0}; }
 
 int main() {
@@ -27,7 +27,7 @@ int main() {
   cin.tie(nullptr);
   int n, q;
   cin >> n >> q;
-  DynamicLazySegmentTree<S, op, e, F, act, compose, id> seg(n, S{0, 1});
+  DynamicLazySegmentTree<S, op, e, F, mapping, composition, id> seg(n, S{0, 1});
   while (q--) {
     int t;
     cin >> t;
