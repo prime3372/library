@@ -14,7 +14,7 @@ namespace cp {
 template <class mint> std::vector<mint> bell(int n) {
   assert(0 <= n);
   if (n == 0) return {1};
-  binom_mod<mint> binom(n);
+  BinomMod<mint> binom(n);
   FormalPowerSeries<mint> f(n + 1);
   for (int i = 1; i <= n; i++) f[i] = binom.ifact(i);
   auto ans = exp(f);

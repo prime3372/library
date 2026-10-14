@@ -11,10 +11,10 @@ namespace cp {
 // binomial coefficient mod prime
 template <class mint>
   requires(internal::is_modint_v<mint>)
-class binom_mod {
+class BinomMod {
  public:
-  binom_mod() : binom_mod(1) {}
-  explicit binom_mod(int _n) : n(_n) {
+  BinomMod() : BinomMod(1) {}
+  explicit BinomMod(int _n) : n(_n) {
     int m = mint::mod();
     assert(is_prime(m));
     assert(0 <= n && n < m);

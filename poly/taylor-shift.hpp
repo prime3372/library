@@ -14,7 +14,7 @@ FormalPowerSeries<mint> taylor_shift(FormalPowerSeries<mint> f, mint c) {
   //        = sum_i sum_k f[i](i!/k!(i-k)!)c^{i-k}x^k
   //        = sum_{i-j=k} f[i](i!/k!j!)c^jx^k
   int n = int(f.size());
-  binom_mod<mint> binom(n);
+  BinomMod<mint> binom(n);
   FormalPowerSeries<mint> g(n);
   mint cpow = 1;
   g[0] = 1;

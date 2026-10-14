@@ -14,7 +14,7 @@ namespace cp {
 template <class mint>
 std::vector<mint> stirling_first_kind_fixed_k(int k, int max_n) {
   assert(0 <= k && k <= max_n);
-  binom_mod<mint> binom(max_n);
+  BinomMod<mint> binom(max_n);
   FormalPowerSeries<mint> f(max_n + 1);
   for (int i = 1; i <= max_n; i++) f[i] = (i % 2 ? 1 : -1) * binom.inv(i);
   auto g = pow(f, k);
@@ -30,7 +30,7 @@ std::vector<mint> stirling_first_kind_fixed_k(int k, int max_n) {
 template <class mint>
 std::vector<mint> unsigned_stirling_first_kind_fixed_k(int k, int max_n) {
   assert(0 <= k && k <= max_n);
-  binom_mod<mint> binom(max_n);
+  BinomMod<mint> binom(max_n);
   FormalPowerSeries<mint> f(max_n + 1);
   for (int i = 1; i <= max_n; i++) f[i] = binom.inv(i);
   auto g = pow(f, k);
