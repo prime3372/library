@@ -21,7 +21,7 @@ template <class S> struct ImplicitTreapMonoidNode {
   ImplicitTreapMonoidNode(const S& x) : val(x), prod(x), priority(rng()) {}
 };
 
-template <class S, auto op, auto e, auto reverse = std::identity()>
+template <class S, auto op, auto e, auto reverse = std::identity{}>
 struct ImplicitTreapMonoid
     : public ImplicitTreapBase<ImplicitTreapMonoidNode<S>> {
  public:
