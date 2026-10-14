@@ -45,10 +45,11 @@ template <bool directed> struct CycleDetection {
     for (int i = 0; i < n; i++) {
       if (!finished[i] && dfs(dfs, i, -1) == n) break;
     }
+    if (vertices.empty()) return false;
     std::reverse(vertices.begin(), vertices.end());
     std::reverse(edges.begin(), edges.end());
     len = int(vertices.size());
-    return len != 0;
+    return true;
   }
 
  private:

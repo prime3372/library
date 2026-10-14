@@ -30,7 +30,9 @@ template <bool directed> struct OddCycleDetection {
     vertices.clear();
     edges.clear();
     if (directed) scc.build();
-    std::vector<int> dist(2 * n, 2 * n), prev_v(2 * n, -1), prev_e(2 * n, -1);
+    std::vector<int> dist(2 * n, 2 * n);
+    std::vector<int> prev_v(2 * n, -1);
+    std::vector<int> prev_e(2 * n, -1);
     std::queue<int> que;
     for (int s = 0; s < n; s++) {
       if (dist[2 * s] < 2 * n || dist[2 * s + 1] < 2 * n) continue;
@@ -53,7 +55,6 @@ template <bool directed> struct OddCycleDetection {
       }
       if (dist[2 * s + 1] == 2 * n) continue;
 
-      // found
       for (int v = 2 * s + 1; v != 2 * s; v = prev_v[v]) {
         vertices.push_back(v / 2);
         edges.push_back(prev_e[v]);
@@ -62,7 +63,6 @@ template <bool directed> struct OddCycleDetection {
       std::reverse(vertices.begin(), vertices.end());
       std::reverse(edges.begin(), edges.end());
 
-      // walk -> cycle
       std::vector<int> used(n, -1);
       int l = -1, r = -1;
       for (int i = 0; i < int(vertices.size()); i++) {
@@ -79,7 +79,6 @@ template <bool directed> struct OddCycleDetection {
       edges = std::vector(edges.begin() + l, edges.begin() + r);
       return true;
     }
-    len = 0;
     return false;
   }
 

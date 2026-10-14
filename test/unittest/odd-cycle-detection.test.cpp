@@ -22,7 +22,7 @@ template <bool directed> void bipartite(int n, int m) {
     detector.add_edge(p[u], p[v]);
   }
   assert(!detector.detect());
-  assert(detector.len == 0);
+  assert(detector.len == -1);
   assert(detector.vertices.empty());
   assert(detector.edges.empty());
 }
@@ -110,7 +110,7 @@ template <bool directed> void no_edge() {
   for (int i = 0; i <= 10; i++) {
     OddCycleDetection<directed> detector(i);
     assert(!detector.detect());
-    assert(detector.len == 0);
+    assert(detector.len == -1);
     assert(detector.vertices.empty());
     assert(detector.edges.empty());
   }
