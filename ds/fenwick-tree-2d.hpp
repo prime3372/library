@@ -25,25 +25,6 @@ template <class T> struct FenwickTree2D {
     }
   }
 
-  struct Ref {
-   public:
-    T operator[](int j) const {
-      assert(0 <= j && j < ptr->m);
-      return ptr->sum(i, j, i + 1, j + 1);
-    }
-
-   private:
-    friend FenwickTree2D;
-    const FenwickTree2D* ptr;
-    int i;
-    Ref(const FenwickTree2D* _ptr, int _i) : ptr(_ptr), i(_i) {}
-  };
-
-  Ref operator[](int i) const {
-    assert(0 <= i && i < n);
-    return Ref(this, i);
-  }
-
   T sum(int l, int d, int r, int u) const {
     assert(0 <= l && l <= r && r <= n);
     assert(0 <= d && d <= u && u <= m);

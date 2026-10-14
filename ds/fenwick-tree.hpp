@@ -20,11 +20,6 @@ template <class T> struct FenwickTree {
     }
   }
 
-  T operator[](int i) const {
-    assert(0 <= i && i < n);
-    return sum(i + 1) - sum(i);
-  }
-
   T sum(int l, int r) const {
     assert(0 <= l && l <= r && r <= n);
     return sum(r) - sum(l);

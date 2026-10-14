@@ -23,11 +23,6 @@ template <class T> struct DynamicFenwickTree {
     }
   }
 
-  T operator[](ull i) const {
-    assert(i < n);
-    return sum(i + 1) - sum(i);
-  }
-
   T sum(ull l, ull r) const {
     assert(l <= r && r <= n);
     return sum(r) - sum(l);
