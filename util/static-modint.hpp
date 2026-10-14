@@ -141,6 +141,7 @@ template <int m> struct static_modint {
  private:
   static constexpr bool prime = is_prime(m);
   static constexpr unsigned int umod() { return m; }
+
   unsigned int v;
 };
 
