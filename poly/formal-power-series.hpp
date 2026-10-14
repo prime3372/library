@@ -15,8 +15,8 @@ namespace cp {
 template <class mint>
   requires(internal::is_static_modint_v<mint> && is_prime(mint::mod()))
 class FormalPowerSeries : public std::vector<mint> {
-  using Base = std::vector<mint>;
   using Self = FormalPowerSeries;
+  using Base = std::vector<mint>;
 
  public:
   using Base::Base;
