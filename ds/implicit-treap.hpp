@@ -21,12 +21,12 @@ template <class T> struct ImplicitTreapNode {
 };
 
 template <class T>
-struct implicit_treap : public ImplicitTreapBase<ImplicitTreapNode<T>> {
+struct ImplicitTreap : public ImplicitTreapBase<ImplicitTreapNode<T>> {
  public:
-  implicit_treap() {}
-  explicit implicit_treap(int n, const T& val = T{})
-      : implicit_treap(std::vector<T>(n, val)) {}
-  explicit implicit_treap(const std::vector<T>& v) { build(v); }
+  ImplicitTreap() {}
+  explicit ImplicitTreap(int n, const T& val = T{})
+      : ImplicitTreap(std::vector<T>(n, val)) {}
+  explicit ImplicitTreap(const std::vector<T>& v) { build(v); }
 
  private:
   using Node = ImplicitTreapNode<T>;
