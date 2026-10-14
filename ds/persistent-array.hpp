@@ -15,7 +15,7 @@ template <class T> struct PersistentArray {
   using node_ptr = Node*;
 
   PersistentArray() : n(0), log(0), init_val() {}
-  explicit PersistentArray(ull _n, T val = T()) : n(_n), log(0), init_val(val) {
+  explicit PersistentArray(ull _n, T val = T{}) : n(_n), log(0), init_val(val) {
     for (ull i = n; i; i >>= shift) log++;
   }
 
