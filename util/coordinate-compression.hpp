@@ -18,10 +18,10 @@ template <class T, class Compare = std::less<T>> class CoordinateCompression {
 
   void init(const std::vector<T>& v = {}) {
     for (const T& x : v) add(x);
-    std::sort(d.begin(), d.end(), Compare());
+    std::sort(d.begin(), d.end(), Compare{});
     d.erase(std::unique(d.begin(), d.end(),
                         [&](const T& x, const T& y) {
-                          return !Compare()(x, y) && !Compare()(y, x);
+                          return !Compare{}(x, y) && !Compare{}(y, x);
                         }),
             d.end());
     initialized = true;

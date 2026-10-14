@@ -16,7 +16,7 @@ struct CartesianTree {
 
   CartesianTree() {}
   template <class T, class Compare = std::less<T>>
-  explicit CartesianTree(const std::vector<T>& a, Compare compare = Compare()) {
+  explicit CartesianTree(const std::vector<T>& a, Compare compare = Compare{}) {
     if (a.empty()) return;
     int n = int(a.size());
 

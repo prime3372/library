@@ -16,7 +16,7 @@ template <class F, class T = std::invoke_result_t<F, long double>,
           class Compare = std::less<T>>
 std::pair<long double, T> golden_section_search(F f, long double l,
                                                 long double r, int k,
-                                                Compare compare = Compare()) {
+                                                Compare compare = Compare{}) {
   assert(l <= r);
   long double inv_phi = (std::sqrt(5) - 1.0) * 0.5;
   long double inv_phi_2 = inv_phi * inv_phi;

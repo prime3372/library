@@ -12,7 +12,7 @@ namespace cp {
 template <class F, class T = std::invoke_result_t<F, long long>,
           class Compare = std::less<T>>
 std::pair<long long, T> fibonacci_search(F f, long long l, long long r,
-                                         Compare compare = Compare()) {
+                                         Compare compare = Compare{}) {
   assert(l <= r);
   long long s = 1, t = 2;
   while (t < r - l + 2) std::swap(s += t, t);
