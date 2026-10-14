@@ -12,7 +12,7 @@ template <class T> struct PersistentArray {
   union Node;
 
  public:
-  using node_ptr = Node*;
+  using NodePtr = Node*;
 
   PersistentArray() : n(0), log(0), init_val() {}
   explicit PersistentArray(ull _n, T val = T{}) : n(_n), log(0), init_val(val) {

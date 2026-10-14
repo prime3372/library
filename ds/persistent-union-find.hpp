@@ -11,7 +11,7 @@ namespace cp {
 
 struct PersistentUnionFind {
  public:
-  using node_ptr = typename PersistentArray<int>::node_ptr;
+  using NodePtr = typename PersistentArray<int>::NodePtr;
 
   PersistentUnionFind() : n(0) {}
   explicit PersistentUnionFind(int _n) : n(_n), par_or_size(_n, -1) {}
@@ -48,8 +48,8 @@ struct PersistentUnionFind {
 
   int size() const { return n; }
 
-  node_ptr snapshot() { return par_or_size.snapshot(); }
-  void restore(node_ptr p) { par_or_size.restore(p); }
+  NodePtr snapshot() { return par_or_size.snapshot(); }
+  void restore(NodePtr p) { par_or_size.restore(p); }
 
  private:
   int n;
