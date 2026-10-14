@@ -24,10 +24,9 @@ int main() {
     adj[s].push_back(t);
     edges[i] = {s, t};
   }
-  bool ans = detector.detect();
-  if (!ans) {
+  if (!detector.detect()) {
     assert(!topological_sort(adj).empty());
-    cout << ans << "\n";
+    cout << "0\n";
     return 0;
   }
   auto& v = detector.vertices;
@@ -37,5 +36,5 @@ int main() {
     assert(0 <= e[i] && e[i] < m);
     assert(edges[e[i]] == make_pair(v[i], v[(i + 1) % e.size()]));
   }
-  cout << ans << "\n";
+  cout << "1\n";
 }
