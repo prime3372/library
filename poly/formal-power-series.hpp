@@ -16,7 +16,7 @@ template <class mint>
 requires(internal::is_static_modint_v<mint> && is_prime(mint::mod()))
 class FormalPowerSeries : public std::vector<mint> {
   using Base = std::vector<mint>;
-  using fps = FormalPowerSeries;
+  using Self = FormalPowerSeries;
 
  public:
   using Base::Base;
@@ -35,89 +35,89 @@ class FormalPowerSeries : public std::vector<mint> {
     for (const auto& p : il) (*this)[p.first] = p.second;
   }
 
-  fps& operator+=(const mint& rhs) {
+  Self& operator+=(const mint& rhs) {
     if (empty()) resize(1);
     (*this)[0] += rhs;
     return *this;
   }
-  fps& operator+=(const fps& rhs) {
+  Self& operator+=(const Self& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
     for (int i = 0; i < int(rhs.size()); i++) (*this)[i] += rhs[i];
     return *this;
   }
-  fps& operator-=(const mint& rhs) {
+  Self& operator-=(const mint& rhs) {
     if (empty()) resize(1);
     (*this)[0] += rhs;
     return *this;
   }
-  fps& operator-=(const fps& rhs) {
+  Self& operator-=(const Self& rhs) {
     if (rhs.size() > size()) resize(rhs.size());
     for (int i = 0; i < int(rhs.size()); i++) (*this)[i] -= rhs[i];
     return *this;
   }
-  fps& operator*=(const mint& rhs) {
+  Self& operator*=(const mint& rhs) {
     for (int i = 0; i < int(size()); i++) (*this)[i] *= rhs;
     return *this;
   }
-  fps& operator*=(const fps& rhs) {
-    return *this = fps(convolution(*this, rhs));
+  Self& operator*=(const Self& rhs) {
+    return *this = Self(convolution(*this, rhs));
   }
-  fps& operator/=(const mint& rhs) {
+  Self& operator/=(const mint& rhs) {
     for (int i = 0; i < int(size()); i++) (*this)[i] /= rhs;
     return *this;
   }
 
-  fps& operator>>=(int w) {
+  Self& operator>>=(int w) {
     erase(begin(), begin() + std::min(w, int(size())));
     return *this;
   }
-  fps& operator<<=(int w) {
+  Self& operator<<=(int w) {
     insert(begin(), w, 0);
     return *this;
   }
 
-  fps operator+() const { return *this; }
-  fps operator-() const { return fps() - *this; }
+  Self operator+() const { return *this; }
+  Self operator-() const { return Self() - *this; }
 
-  fps prefix(int n) const {
-    fps b(begin(), begin() + std::min(n, int(size())));
+  Self prefix(int n) const {
+    Self b(begin(), begin() + std::min(n, int(size())));
     b.resize(n);
     return b;
   }
 
-  friend fps operator+(const fps& lhs, const mint& rhs) {
-    return fps(lhs) += rhs;
+  friend Self operator+(const Self& lhs, const mint& rhs) {
+    return Self(lhs) += rhs;
   }
-  friend fps operator+(const mint& lhs, const fps& rhs) {
-    return fps(rhs) += lhs;
+  friend Self operator+(const mint& lhs, const Self& rhs) {
+    return Self(rhs) += lhs;
   }
-  friend fps operator+(const fps& lhs, const fps& rhs) {
-    return fps(lhs) += rhs;
+  friend Self operator+(const Self& lhs, const Self& rhs) {
+    return Self(lhs) += rhs;
   }
-  friend fps operator-(const fps& lhs, const mint& rhs) {
-    return fps(lhs) -= rhs;
+  friend Self operator-(const Self& lhs, const mint& rhs) {
+    return Self(lhs) -= rhs;
   }
-  friend fps operator-(const mint& lhs, const fps& rhs) {
-    return fps{lhs} -= rhs;
+  friend Self operator-(const mint& lhs, const Self& rhs) {
+    return Self{lhs} -= rhs;
   }
-  friend fps operator-(const fps& lhs, const fps& rhs) {
-    return fps(lhs) -= rhs;
+  friend Self operator-(const Self& lhs, const Self& rhs) {
+    return Self(lhs) -= rhs;
   }
-  friend fps operator*(const fps& lhs, const mint& rhs) {
-    return fps(lhs) *= rhs;
+  friend Self operator*(const Self& lhs, const mint& rhs) {
+    return Self(lhs) *= rhs;
   }
-  friend fps operator*(const mint& lhs, const fps& rhs) {
-    return fps(rhs) *= lhs;
+  friend Self operator*(const mint& lhs, const Self& rhs) {
+    return Self(rhs) *= lhs;
   }
-  friend fps operator*(const fps& lhs, const fps& rhs) {
-    return fps(lhs) *= rhs;
+  friend Self operator*(const Self& lhs, const Self& rhs) {
+    return Self(lhs) *= rhs;
   }
-  friend fps operator/(const fps& lhs, const mint& rhs) {
-    return fps(lhs) /= rhs;
+  friend Self operator/(const Self& lhs, const mint& rhs) {
+    return Self(lhs) /= rhs;
   }
 
-  friend fps operator>>(const fps& f, int w) { return fps(f) >>= w; }
-  friend fps operator<<(const fps& f, int w) { return fps(f) <<= w; }
+  friend Self operator>>(const Self& f, int w) { return Self(f) >>= w; }
+  friend Self operator<<(const Self& f, int w) { return Self(f) <<= w; }
 };
 
 template <class mint> FormalPowerSeries<mint> diff(FormalPowerSeries<mint> f) {
