@@ -53,7 +53,7 @@ template <int bit_size> struct BinaryTrie {
     return nodes[v].sub;
   }
 
-  Bitset kth_elem(int k, const Bitset& xor_val = Bitset()) const {
+  Bitset kth_elem(int k, const Bitset& xor_val = Bitset{}) const {
     assert(0 <= k && k < nodes[0].sub);
     int v = 0;
     Bitset res;
@@ -71,15 +71,15 @@ template <int bit_size> struct BinaryTrie {
     return res;
   }
 
-  Bitset min(const Bitset& xor_val = Bitset()) const {
+  Bitset min(const Bitset& xor_val = Bitset{}) const {
     return kth_elem(0, xor_val);
   }
-  Bitset max(const Bitset& xor_val = Bitset()) const {
+  Bitset max(const Bitset& xor_val = Bitset{}) const {
     return kth_elem(nodes[0].sub - 1, xor_val);
   }
 
   int range_count(const Bitset& lower, const Bitset& upper,
-                  const Bitset& xor_val = Bitset()) const {
+                  const Bitset& xor_val = Bitset{}) const {
     assert(lower.to_string() <= upper.to_string());
     auto f = [&](const Bitset& s) {
       int v = 0, cnt = 0;
