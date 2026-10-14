@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class S, auto op, auto e, class F, auto mapping, auto, auto id>
+template <class S, auto op, auto e, class F, auto mapping, auto composition, auto id>
 struct DynamicLazySegmentTree {
   static_assert(std::is_invocable_r_v<S, decltype(op), S, S>,
                 "op must work as S(S, S)");
