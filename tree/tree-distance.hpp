@@ -4,7 +4,7 @@
 #include <utility>
 #include <vector>
 
-#include "tree/hl-decomposition.hpp"
+#include "tree/heavy-light-decomposition.hpp"
 
 namespace cp {
 

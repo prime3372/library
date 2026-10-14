@@ -2,7 +2,7 @@
 
 #include "ds/segment-tree.hpp"
 #include "util/static-modint.hpp"
-#include "tree/hl-decomposition.hpp"
+#include "tree/heavy-light-decomposition.hpp"
 #include <iostream>
 #include <vector>
 
