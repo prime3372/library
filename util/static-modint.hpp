@@ -11,23 +11,23 @@ namespace cp {
 
 template <int m>
   requires(1 <= m)
-struct StaticModInt {
+struct static_modint {
  public:
-  using mint = StaticModInt;
+  using mint = static_modint;
 
   static constexpr int mod() { return m; }
 
-  StaticModInt() : v(0) {}
+  static_modint() : v(0) {}
   template <class T>
     requires(internal::is_signed_int_v<T>)
-  StaticModInt(T _v) {
+  static_modint(T _v) {
     long long x = (long long)(_v % (long long)(umod()));
     if (x < 0) x += umod();
     v = (unsigned int)(x);
   }
   template <class T>
     requires(internal::is_unsigned_int_v<T>)
-  StaticModInt(T _v) {
+  static_modint(T _v) {
     v = (unsigned int)(_v % umod());
   }
 
@@ -144,14 +144,14 @@ struct StaticModInt {
   unsigned int v;
 };
 
-using modint998244353 = StaticModInt<998244353>;
-using modint1000000007 = StaticModInt<1000000007>;
+using modint998244353 = static_modint<998244353>;
+using modint1000000007 = static_modint<1000000007>;
 
 namespace internal {
 
-template <int m> struct is_modint<StaticModInt<m>> : public std::true_type {};
+template <int m> struct is_modint<static_modint<m>> : public std::true_type {};
 template <int m>
-struct is_static_modint<StaticModInt<m>> : public std::true_type {};
+struct is_static_modint<static_modint<m>> : public std::true_type {};
 
 }  // namespace internal
 

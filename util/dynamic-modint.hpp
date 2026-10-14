@@ -10,9 +10,9 @@
 
 namespace cp {
 
-template <int id> struct DynamicModInt {
+template <int id> struct dynamic_modint {
  public:
-  using mint = DynamicModInt;
+  using mint = dynamic_modint;
 
   static int mod() {
     assert(configured);
@@ -25,10 +25,10 @@ template <int id> struct DynamicModInt {
     configured = true;
   }
 
-  DynamicModInt() : v(0) { assert(configured); }
+  dynamic_modint() : v(0) { assert(configured); }
   template <class T>
     requires(internal::is_signed_int_v<T>)
-  DynamicModInt(T _v) {
+  dynamic_modint(T _v) {
     assert(configured);
     long long x = (long long)(_v % (long long)(mod()));
     if (x < 0) x += mod();
@@ -36,7 +36,7 @@ template <int id> struct DynamicModInt {
   }
   template <class T>
     requires(internal::is_unsigned_int_v<T>)
-  DynamicModInt(T _v) {
+  dynamic_modint(T _v) {
     assert(configured);
     v = (unsigned int)(_v % mod());
   }
@@ -148,13 +148,13 @@ template <int id> struct DynamicModInt {
   static unsigned int umod() { return bt.umod(); }
 };
 
-using modint = DynamicModInt<-1>;
+using modint = dynamic_modint<-1>;
 
 namespace internal {
 
-template <int id> struct is_modint<DynamicModInt<id>> : std::true_type {};
+template <int id> struct is_modint<dynamic_modint<id>> : std::true_type {};
 template <int id>
-struct is_dynamic_modint<DynamicModInt<id>> : std::true_type {};
+struct is_dynamic_modint<dynamic_modint<id>> : std::true_type {};
 
 }  // namespace internal
 
