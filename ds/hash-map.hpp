@@ -59,7 +59,7 @@ template <class Key, class Val> struct HashMap {
   Val default_val{};
 
   unsigned int hash(const Key& k) const {
-    return (unsigned int)(SafeHash<Key>()(k) & (cap - 1));
+    return (unsigned int)(SafeHash<Key>{}(k) & (cap - 1));
   }
 
   unsigned int index(const Key& k) const {

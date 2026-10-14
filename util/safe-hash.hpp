@@ -13,7 +13,7 @@ namespace cp {
 template <class> struct SafeHash {};
 
 template <class T> void hash_combine(unsigned long long& seed, const T& val) {
-  seed ^= SafeHash<T>()(val) + (seed << 6) + (seed >> 2) + 0x9e3779b9ULL;
+  seed ^= SafeHash<T>{}(val) + (seed << 6) + (seed >> 2) + 0x9e3779b9ULL;
 }
 
 template <> struct SafeHash<unsigned long long> {
@@ -30,7 +30,7 @@ template <class T>
   requires(internal::is_integral_v<T> && !internal::is_128bit_int_v<T>)
 struct SafeHash<T> {
   unsigned long long operator()(T x) const {
-    return SafeHash<unsigned long long>()(x);
+    return SafeHash<unsigned long long>{}(x);
   }
 };
 
@@ -40,7 +40,7 @@ struct SafeHash<T> {
   unsigned long long operator()(T x) const {
     using ull = unsigned long long;
     unsigned __int128 ux = x;
-    if ((ux >> 64) == 0) return SafeHash<ull>()(ull(ux));
+    if ((ux >> 64) == 0) return SafeHash<ull>{}(ull(ux));
     ull hs = 0;
     hash_combine(hs, ull(ux));
     hash_combine(hs, ull(ux >> 64));
@@ -52,7 +52,7 @@ template <class T>
   requires(internal::is_modint_v<T>)
 struct SafeHash<T> {
   unsigned long long operator()(const T& x) const {
-    return SafeHash<int>()(x.val());
+    return SafeHash<int>{}(x.val());
   }
 };
 
