@@ -214,7 +214,7 @@
   "test/yosupo/geometry/sort_points_by_argument.test.cpp": "2026-09-29 10:20:20 +0900",
   "test/yosupo/geometry/static-convex-hull.test.cpp": "2026-10-14 17:55:01 +0900",
   "test/yosupo/geometry/static_convex_hull.test.cpp": "2026-09-19 17:20:20 +0900",
-  "test/yosupo/graph/connected-components-of-complement-graph.test.cpp": "2026-10-14 17:55:01 +0900",
+  "test/yosupo/graph/connected-components-of-complement-graph.test.cpp": "2026-10-14 20:22:10 +0900",
   "test/yosupo/graph/connected_components_of_complement_graph.test.cpp": "2026-10-09 20:43:33 +0900",
   "test/yosupo/graph/cycle-detection-directed.test.cpp": "2026-10-14 18:12:08 +0900",
   "test/yosupo/graph/cycle-detection-undirected.test.cpp": "2026-10-14 18:12:08 +0900",
