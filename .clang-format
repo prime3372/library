@@ -1,17 +1,8 @@
-Language: Cpp
-Standard: c++20
-BasedOnStyle: Google
-
-ColumnLimit: 80
+BasedOnStyle: Chromium
 IndentWidth: 2
 AccessModifierOffset: -1
-
-AlignAfterOpenBracket: true
-AllowAllArgumentsOnNextLine: false
-AllowShortBlocksOnASingleLine: Never
 AllowShortFunctionsOnASingleLine: All
-AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortIfStatementsOnASingleLine: true
 AllowShortLoopsOnASingleLine: true
 AlwaysBreakTemplateDeclarations: false
-BreakBeforeBraces: Attach
-RequiresClausePosition: WithPreceding
+ColumnLimit: 80

@@ -24,7 +24,5 @@ int main() {
   while (j < m && ch[j].y > ch[j + 1].y) j++;
   cout << m << "\n";
   cout << ch[j] << "\n";
-  for (int i = j + 1; i != j; i = (i + 1) % m) {
-    cout << ch[i] << "\n";
-  }
+  for (int i = j + 1; i != j; i = (i + 1) % m) cout << ch[i] << "\n";
 }

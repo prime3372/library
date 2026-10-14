@@ -15,7 +15,5 @@ int main() {
   vector<int> a(n);
   for (int& ai : a) cin >> ai;
   CartesianTree cart(a);
-  for (int p : cart.parent) {
-    cout << (p == -1 ? cart.root : p) << " ";
-  }
+  for (int p : cart.parent) cout << (p == -1 ? cart.root : p) << " ";
 }

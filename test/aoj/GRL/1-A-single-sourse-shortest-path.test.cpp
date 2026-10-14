@@ -21,10 +21,9 @@ int main() {
   dist.init(r);
   for (int i = 0; i < n; i++) {
     int ans = dist(i);
-    if (ans == -1) {
+    if (ans == -1)
       cout << "INF\n";
-    } else {
+    else
       cout << ans << "\n";
-    }
   }
 }

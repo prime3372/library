@@ -9,7 +9,8 @@
 namespace cp {
 
 // binomial coefficient mod prime
-template <class mint> requires(internal::is_modint_v<mint>)
+template <class mint>
+  requires(internal::is_modint_v<mint>)
 class binom_mod {
  public:
   binom_mod() : binom_mod(1) {}

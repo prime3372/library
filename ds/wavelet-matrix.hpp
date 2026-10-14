@@ -12,7 +12,8 @@
 
 namespace cp {
 
-template <int bit_size> requires(0 <= bit_size && bit_size <= 64)
+template <int bit_size>
+  requires(0 <= bit_size && bit_size <= 64)
 class WaveletMatrix {
   using ull = unsigned long long;
 

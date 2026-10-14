@@ -21,11 +21,10 @@ int main() {
     } else {
       int x, y;
       cin >> x >> y;
-      if (!uf.same(x, y)) {
+      if (!uf.same(x, y))
         cout << "?" << "\n";
-      } else {
+      else
         cout << uf.diff(y, x) << "\n";
-      }
     }
   }
 }

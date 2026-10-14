@@ -37,5 +37,6 @@ int main() {
     cin >> u >> v >> b >> c;
     rerooting.add_edge(u, v, {b, c});
   }
-  for (auto p : rerooting.build().ans) cout << p.val << " ";
+  rerooting.build();
+  for (auto p : rerooting.ans) cout << p.val << " ";
 }

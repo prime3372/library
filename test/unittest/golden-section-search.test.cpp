@@ -2,6 +2,7 @@
 
 #include "random/engine.hpp"
 #include "other/golden-section-search.hpp"
+#include <cassert>
 #include <iostream>
 #include <cmath>
 

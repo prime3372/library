@@ -15,10 +15,9 @@ int main() {
   while (q--) {
     int t, u, v;
     cin >> t >> u >> v;
-    if (t == 0) {
+    if (t == 0)
       uf.unite(u, v);
-    } else {
+    else
       cout << uf.same(u, v) << "\n";
-    }
   }
 }

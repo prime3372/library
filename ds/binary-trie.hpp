@@ -78,7 +78,8 @@ template <int bit_size> struct BinaryTrie {
     return kth_elem(nodes[0].sub - 1, xor_val);
   }
 
-  int range_count(const Bitset& lower, const Bitset& upper,
+  int range_count(const Bitset& lower,
+                  const Bitset& upper,
                   const Bitset& xor_val = Bitset{}) const {
     assert(lower.to_string() <= upper.to_string());
     auto f = [&](const Bitset& s) {

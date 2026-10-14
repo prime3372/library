@@ -3,6 +3,7 @@
 
 #include "graph/cycle-detection.hpp"
 #include "graph/topological-sort.hpp"
+#include <cassert>
 #include <iostream>
 
 using namespace std;

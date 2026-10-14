@@ -12,7 +12,8 @@ namespace cp {
 
 // Enumerate the triples of vertices that form a cycle.
 std::vector<std::array<int, 3>> enumerate_triangles(
-    int n, std::vector<std::pair<int, int>> edges) {
+    int n,
+    std::vector<std::pair<int, int>> edges) {
   assert(0 <= n);
   for (auto& [u, v] : edges) {
     assert(0 <= u && u < n);

@@ -2,6 +2,7 @@
   "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_5_A"
 
 #include "tree/tree-diameter.hpp"
+#include <cassert>
 #include <iostream>
 #include <utility>
 #include <vector>

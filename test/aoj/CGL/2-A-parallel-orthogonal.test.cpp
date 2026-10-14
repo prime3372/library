@@ -16,12 +16,11 @@ int main() {
   while (q--) {
     Line<ll> l, m;
     cin >> l >> m;
-    if (is_parallel(l, m)) {
+    if (is_parallel(l, m))
       cout << 2 << "\n";
-    } else if (is_orthogonal(l, m)) {
+    else if (is_orthogonal(l, m))
       cout << 1 << "\n";
-    } else {
+    else
       cout << 0 << "\n";
-    }
   }
 }

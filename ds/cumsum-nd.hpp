@@ -58,7 +58,8 @@ template <class T, int dim> struct CumsumND {
     return res;
   }
 
-  void imos_add(const std::array<int, dim>& l, const std::array<int, dim>& r,
+  void imos_add(const std::array<int, dim>& l,
+                const std::array<int, dim>& r,
                 T w) {
     for (int i = 0; i < dim; i++) {
       assert(0 <= l[i] && l[i] <= r[i] && r[i] <= shape[i]);

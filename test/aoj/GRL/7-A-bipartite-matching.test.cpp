@@ -2,6 +2,7 @@
   "https://onlinejudge.u-aizu.ac.jp/courses/library/3/GRL/all/GRL_7_A"
 
 #include "graph/bipartite-matching.hpp"
+#include <cassert>
 #include <iostream>
 
 using namespace std;

@@ -24,7 +24,8 @@ struct RandomGraphConfig {
   // value of start has no significance.
 };
 
-std::vector<std::pair<int, int>> random_graph(int n, int m,
+std::vector<std::pair<int, int>> random_graph(int n,
+                                              int m,
                                               RandomGraphConfig config = {}) {
   auto [directed, no_self_loops, no_multiple_edges, connected, start] = config;
 

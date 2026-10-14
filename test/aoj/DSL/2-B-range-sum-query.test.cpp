@@ -17,10 +17,9 @@ int main() {
     int com, x, y;
     cin >> com >> x >> y;
     x--;
-    if (com == 0) {
+    if (com == 0)
       fw.add(x, y);
-    } else {
+    else
       cout << fw.sum(x, y) << "\n";
-    }
   }
 }

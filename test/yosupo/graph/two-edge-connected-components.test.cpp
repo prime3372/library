@@ -17,9 +17,9 @@ int main() {
     cin >> a >> b;
     g.add_edge(a, b);
   }
-  auto groups = g.build().groups;
-  cout << groups.size() << "\n";
-  for (auto group : groups) {
+  g.build();
+  cout << g.group_num << "\n";
+  for (auto group : g.groups) {
     cout << group.size() << " ";
     for (auto v : group) cout << v << " ";
     cout << "\n";

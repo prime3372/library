@@ -9,8 +9,11 @@
 
 namespace cp {
 
-template <class T, auto add = std::plus<T>(), auto mul = std::multiplies<T>(),
-          auto zero = []() { return T(0); }, auto one = []() { return T(1); }>
+template <class T,
+          auto add = std::plus<T>(),
+          auto mul = std::multiplies<T>(),
+          auto zero = []() { return T(0); },
+          auto one = []() { return T(1); }>
 class Matrix : public std::vector<std::vector<T>> {
  public:
   using Base = std::vector<std::vector<T>>;

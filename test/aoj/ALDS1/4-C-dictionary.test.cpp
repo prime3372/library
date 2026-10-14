@@ -16,10 +16,9 @@ int main() {
   while (n--) {
     string t, str;
     cin >> t >> str;
-    if (t == "insert") {
+    if (t == "insert")
       s.insert(str);
-    } else {
+    else
       cout << (s.count(str) ? "yes\n" : "no\n");
-    }
   }
 }

@@ -152,8 +152,8 @@ template <class S, auto op, auto e> struct DynamicSegmentTree {
   }
 
   template <class F>
-  ull max_right(const Node* t, ull a, ull b, ull l, F f, int h,
-                S& product) const {
+  ull max_right(const Node* t, ull a, ull b, ull l, F f, int h, S& product)
+      const {
     if (b <= l) return b;
     if (n <= a) return n;
     if (l <= a && b <= n) {
@@ -181,8 +181,8 @@ template <class S, auto op, auto e> struct DynamicSegmentTree {
   }
 
   template <class F>
-  ull min_left(const Node* t, ull a, ull b, ull r, F f, int h,
-               S& product) const {
+  ull min_left(const Node* t, ull a, ull b, ull r, F f, int h, S& product)
+      const {
     if (r <= a) return a;
     if (b <= r) {
       S val = t ? t->val : initial_vals[h];

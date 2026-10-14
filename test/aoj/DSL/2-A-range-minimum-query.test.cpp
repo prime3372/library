@@ -20,10 +20,9 @@ int main() {
   while (q--) {
     int com, x, y;
     cin >> com >> x >> y;
-    if (com == 0) {
+    if (com == 0)
       seg.set(x, y);
-    } else {
+    else
       cout << seg.prod(x, y + 1) << "\n";
-    }
   }
 }

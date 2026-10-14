@@ -14,10 +14,9 @@ int main() {
   while (q--) {
     int com, x, y;
     cin >> com >> x >> y;
-    if (com == 0) {
+    if (com == 0)
       uf.unite(x, y);
-    } else {
+    else
       cout << uf.same(x, y) << "\n";
-    }
   }
 }

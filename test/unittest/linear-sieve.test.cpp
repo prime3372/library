@@ -4,6 +4,7 @@
 #include "number/factorize.hpp"
 #include "number/is-prime.hpp"
 #include "number/linear-sieve.hpp"
+#include <cassert>
 #include <iostream>
 #include <vector>
 
