@@ -13,10 +13,10 @@ template <class T, bool is_max> struct ConvexHullTrick {
   // must be non-increasing.
   void add(T a, T b) {
     assert(ls.empty() || (is_max ? a >= ls.back().a : a <= ls.back().a));
-    line l = {a, b};
+    Line l = {a, b};
     while (ls.size() >= 2) {
-      const line& l1 = ls[ls.size() - 2];
-      const line& l2 = ls.back();
+      const Line& l1 = ls[ls.size() - 2];
+      const Line& l2 = ls.back();
       if ((l.a - l2.a) * (l1.b - l2.b) < (l2.a - l1.a) * (l2.b - l.b)) break;
       ls.pop_back();
     }
@@ -37,11 +37,11 @@ template <class T, bool is_max> struct ConvexHullTrick {
   }
 
  private:
-  struct line {
+  struct Line {
     T a, b;
     T operator()(T x) const { return a * x + b; }
   };
-  std::deque<line> ls;
+  std::deque<Line> ls;
 };
 
 }  // namespace cp
