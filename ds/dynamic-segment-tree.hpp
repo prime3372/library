@@ -3,9 +3,8 @@
 #include <algorithm>
 #include <bit>
 #include <cassert>
-#include <iostream>
-#include <memory>
 #include <string>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -13,6 +12,10 @@ namespace cp {
 
 template <class S, auto op, auto e> struct DynamicSegmentTree {
  public:
+  static_assert(std::is_invocable_r_v<S, decltype(op), S, S>,
+                "op must work as S(S, S)");
+  static_assert(std::is_invocable_r_v<S, decltype(e)>, "e must work as S()");
+
   using ull = unsigned long long;
 
   DynamicSegmentTree() : DynamicSegmentTree(0) {}

@@ -3,13 +3,17 @@
 #include <algorithm>
 #include <bit>
 #include <cassert>
-#include <iostream>
 #include <string>
+#include <type_traits>
 #include <vector>
 
 namespace cp {
 
 template <class S, auto op, auto e> struct SegmentTree {
+  static_assert(std::is_invocable_r_v<S, decltype(op), S, S>,
+                "op must work as S(S, S)");
+  static_assert(std::is_invocable_r_v<S, decltype(e)>, "e must work as S()");
+
  public:
   SegmentTree() : SegmentTree(0) {}
   explicit SegmentTree(int _n, const S& val = e())

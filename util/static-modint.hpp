@@ -9,9 +9,9 @@
 
 namespace cp {
 
-template <int m>
-  requires(1 <= m)
-struct static_modint {
+template <int m> struct static_modint {
+  static_assert(1 <= m, "modulo must be positive.");
+
  public:
   using mint = static_modint;
 

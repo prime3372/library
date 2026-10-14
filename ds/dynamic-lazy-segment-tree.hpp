@@ -3,15 +3,23 @@
 #include <algorithm>
 #include <bit>
 #include <cassert>
-#include <iostream>
-#include <memory>
 #include <string>
+#include <type_traits>
 #include <vector>
 
 namespace cp {
 
 template <class S, auto op, auto e, class F, auto act, auto compose, auto id>
 struct DynamicLazySegmentTree {
+  static_assert(std::is_invocable_r_v<S, decltype(op), S, S>,
+                "op must work as S(S, S)");
+  static_assert(std::is_invocable_r_v<S, decltype(e)>, "e must work as S()");
+  static_assert(std::is_invocable_r_v<S, decltype(mapping), F, S>,
+                "mapping must work as S(F, S)");
+  static_assert(std::is_invocable_r_v<F, decltype(composition), F, F>,
+                "composition must work as F(F, F)");
+  static_assert(std::is_invocable_r_v<F, decltype(id)>, "id must work as F()");
+
  public:
   using ull = unsigned long long;
 

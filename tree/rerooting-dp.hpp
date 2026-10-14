@@ -2,11 +2,18 @@
 
 #include <algorithm>
 #include <cassert>
+#include <type_traits>
 #include <vector>
 
 namespace cp {
 
-template <class S, auto op, auto e, class F, auto act> struct RerootingDP {
+template <class S, auto op, auto e, class F, auto mapping> struct RerootingDP {
+  static_assert(std::is_invocable_r_v<S, decltype(op), S, S>,
+                "op must work as S(S, S)");
+  static_assert(std::is_invocable_r_v<S, decltype(e)>, "e must work as S()");
+  static_assert(std::is_invocable_r_v<S, decltype(mapping), F, S>,
+                "mapping must work as S(F, S)");
+
  public:
   RerootingDP() : n(0) {}
   explicit RerootingDP(int _n) : RerootingDP(std::vector<S>(_n, e())) {}
@@ -58,7 +65,7 @@ template <class S, auto op, auto e, class F, auto act> struct RerootingDP {
       }
       if (par_id == -1) continue;
       int rev = g[v][par_id].rev;
-      dp[par[v]][rev] = act(g[par[v]][rev].f, op(cum, vals[v]));
+      dp[par[v]][rev] = mapping(g[par[v]][rev].f, op(cum, vals[v]));
     }
 
     ans.resize(n);
@@ -73,7 +80,7 @@ template <class S, auto op, auto e, class F, auto act> struct RerootingDP {
       S cum = e();
       for (int j = 0; j < int(g[v].size()); j++) {
         int to = g[v][j].to, rev = g[v][j].rev;
-        dp[to][rev] = act(g[to][rev].f, op(op(cum, rcum[j + 1]), vals[v]));
+        dp[to][rev] = mapping(g[to][rev].f, op(op(cum, rcum[j + 1]), vals[v]));
         cum = op(cum, dp[v][j]);
       }
       ans[v] = op(cum, vals[v]);

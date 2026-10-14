@@ -2,7 +2,6 @@
 
 #include <algorithm>
 #include <cassert>
-#include <iostream>
 #include <vector>
 
 #include "ds/dynamic-fenwick-tree.hpp"

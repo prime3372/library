@@ -1,12 +1,16 @@
 #pragma once
 
 #include <cassert>
-#include <iostream>
+#include <type_traits>
 #include <vector>
 
 namespace cp {
 
 template <class S, auto op, auto e> struct SlideWindowAggregation {
+  static_assert(std::is_invocable_r_v<S, decltype(op), S, S>,
+                "op must work as S(S, S)");
+  static_assert(std::is_invocable_r_v<S, decltype(e)>, "e must work as S()");
+
  public:
   SlideWindowAggregation() : prod0(e()), prod1(e()) {}
 

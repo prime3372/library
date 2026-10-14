@@ -2,7 +2,6 @@
 
 #include <cassert>
 #include <functional>
-#include <iostream>
 #include <vector>
 
 #include "util/type-traits.hpp"

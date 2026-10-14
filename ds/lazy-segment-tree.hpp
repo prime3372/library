@@ -3,14 +3,29 @@
 #include <algorithm>
 #include <bit>
 #include <cassert>
-#include <iostream>
 #include <string>
+#include <type_traits>
 #include <vector>
 
 namespace cp {
 
-template <class S, auto op, auto e, class F, auto act, auto compose, auto id>
+template <class S,
+          auto op,
+          auto e,
+          class F,
+          auto mapping,
+          auto composition,
+          auto id>
 struct LazySegmentTree {
+  static_assert(std::is_invocable_r_v<S, decltype(op), S, S>,
+                "op must work as S(S, S)");
+  static_assert(std::is_invocable_r_v<S, decltype(e)>, "e must work as S()");
+  static_assert(std::is_invocable_r_v<S, decltype(mapping), F, S>,
+                "mapping must work as S(F, S)");
+  static_assert(std::is_invocable_r_v<F, decltype(composition), F, F>,
+                "composition must work as F(F, F)");
+  static_assert(std::is_invocable_r_v<F, decltype(id)>, "id must work as F()");
+
  public:
   LazySegmentTree() : LazySegmentTree(0) {}
   explicit LazySegmentTree(int _n, const S& val = e())
@@ -68,7 +83,7 @@ struct LazySegmentTree {
     assert(0 <= i && i < n);
     i += sz;
     for (int h = log; h >= 1; h--) push(i >> h);
-    d[i] = act(f, d[i]);
+    d[i] = mapping(f, d[i]);
     for (int h = 1; h <= log; h++) update(i >> h);
   }
 
@@ -163,8 +178,8 @@ struct LazySegmentTree {
 
   void update(int i) { d[i] = op(d[2 * i], d[2 * i + 1]); }
   void all_apply(int i, const F& f) {
-    d[i] = act(f, d[i]);
-    if (i < sz) lz[i] = compose(f, lz[i]);
+    d[i] = mapping(f, d[i]);
+    if (i < sz) lz[i] = composition(f, lz[i]);
   }
   void push(int i) {
     all_apply(2 * i, lz[i]);

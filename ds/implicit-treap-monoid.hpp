@@ -2,7 +2,7 @@
 
 #include <cassert>
 #include <functional>
-#include <memory>
+#include <type_traits>
 #include <utility>
 
 #include "ds/implicit-treap-base.hpp"
@@ -24,6 +24,12 @@ template <class S> struct ImplicitTreapMonoidNode {
 template <class S, auto op, auto e, auto reverse = std::identity{}>
 struct ImplicitTreapMonoid
     : public ImplicitTreapBase<ImplicitTreapMonoidNode<S>> {
+  static_assert(std::is_invocable_r_v<S, decltype(op), S, S>,
+                "op must work as S(S, S)");
+  static_assert(std::is_invocable_r_v<S, decltype(e)>, "e must work as S()");
+  static_assert(std::is_invocable_r_v<S, decltype(reverse), S>,
+                "reverse must work as S(S)");
+
  public:
   ImplicitTreapMonoid() {}
   explicit ImplicitTreapMonoid(int n, const S& val = e())

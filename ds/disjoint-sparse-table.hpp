@@ -3,12 +3,16 @@
 #include <algorithm>
 #include <bit>
 #include <cassert>
-#include <iostream>
+#include <type_traits>
 #include <vector>
 
 namespace cp {
 
 template <class S, auto op, auto e> struct DisjointSparseTable {
+  static_assert(std::is_invocable_r_v<S, decltype(op), S, S>,
+                "op must work as S(S, S)");
+  static_assert(std::is_invocable_r_v<S, decltype(e)>, "e must work as S()");
+
  public:
   DisjointSparseTable() : n(0) {}
   explicit DisjointSparseTable(const std::vector<S>& _a)
