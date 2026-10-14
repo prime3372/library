@@ -52,11 +52,12 @@ template <class T> struct TreeDiameter {
   }
 
  private:
-  int n;
   struct Edge {
     int to, id;
     T cost;
   };
+
+  int n;
   std::vector<T> co;
   std::vector<std::vector<Edge>> g;
 

@@ -81,11 +81,12 @@ template <class S, auto op, auto e, class F, auto act> struct RerootingDP {
   }
 
  private:
-  int n;
   struct Edge {
     int to, rev;
     F f;
   };
+
+  int n;
   std::vector<std::vector<Edge>> g;
   std::vector<S> vals;
 };

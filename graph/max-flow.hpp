@@ -138,6 +138,7 @@ class MaxFlow {
     int to, rev;
     Cap cap;
   };
+
   int n;
   std::vector<std::pair<int, int>> pos;
   std::vector<std::vector<_Edge>> g;

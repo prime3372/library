@@ -83,10 +83,11 @@ template <bool directed> struct OddCycleDetection {
   }
 
  private:
-  int n, m = 0;
   struct Edge {
     int to, id;
   };
+
+  int n, m = 0;
   std::vector<std::vector<Edge>> g;
   StronglyConnectedComponents scc;
 };

@@ -53,10 +53,11 @@ template <bool directed> struct CycleDetection {
   }
 
  private:
-  int n, m = 0;
   struct Edge {
     int to, id;
   };
+
+  int n, m = 0;
   std::vector<std::vector<Edge>> g;
 };
 

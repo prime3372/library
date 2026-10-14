@@ -61,11 +61,12 @@ template <class T> struct Dijkstra {
   }
 
  private:
-  int n, m = 0;
   struct Edge {
     int to, id;
     T cost;
   };
+
+  int n, m = 0;
   std::vector<std::vector<Edge>> g;
   std::vector<T> d;
   std::vector<int> prev_v, prev_e;
