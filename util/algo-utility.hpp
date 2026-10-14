@@ -10,7 +10,8 @@
 namespace cp {
 
 // replace `a[i]` with `a[p[i]]` by the minimum number of `std::swap`
-template <class Range, class Indices> requires(std::ranges::range<Range>)
+template <class Range, class Indices>
+  requires(std::ranges::range<Range>)
 const Indices& rearrange(Range& a, const Indices& p) {
   assert(a.size() == p.size());
   std::vector<bool> processed(a.size());
@@ -28,7 +29,7 @@ const Indices& rearrange(Range& a, const Indices& p) {
 
 template <class Range,
           class Compare = std::less<std::ranges::range_value_t<Range>>>
-requires(std::ranges::range<Range>)
+  requires(std::ranges::range<Range>)
 std::vector<int> sorted_indices(const Range& a, Compare compare = Compare{}) {
   std::vector<int> p(a.size());
   std::iota(p.begin(), p.end(), 0);
@@ -40,14 +41,14 @@ std::vector<int> sorted_indices(const Range& a, Compare compare = Compare{}) {
 
 template <class Range,
           class Compare = std::less<std::ranges::range_value_t<Range>>>
-requires(std::ranges::range<Range>)
+  requires(std::ranges::range<Range>)
 std::vector<int> sort(Range& a, Compare compare = Compare{}) {
   return rearrange(a, sorted_indices(a, compare));
 }
 
 template <class Range,
           class Compare = std::less<std::ranges::range_value_t<Range>>>
-requires(std::ranges::range<Range>)
+  requires(std::ranges::range<Range>)
 std::vector<int> compress(Range a, Compare compare = Compare{}) {
   int n = int(a.size());
   std::vector<int> res(n);
@@ -59,7 +60,8 @@ std::vector<int> compress(Range a, Compare compare = Compare{}) {
   return res;
 }
 
-template <class Range> requires(std::ranges::range<Range>)
+template <class Range>
+  requires(std::ranges::range<Range>)
 Range inverse(const Range& p) {
   Range q(p.size());
   std::fill(q.begin(), q.end(), -1);

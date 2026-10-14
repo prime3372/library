@@ -27,14 +27,15 @@ template <> struct SafeHash<unsigned long long> {
 };
 
 template <class T>
-requires(internal::is_integral_v<T> && !internal::is_128bit_int_v<T>)
+  requires(internal::is_integral_v<T> && !internal::is_128bit_int_v<T>)
 struct SafeHash<T> {
   unsigned long long operator()(T x) const {
     return SafeHash<unsigned long long>()(x);
   }
 };
 
-template <class T> requires(internal::is_128bit_int_v<T>)
+template <class T>
+  requires(internal::is_128bit_int_v<T>)
 struct SafeHash<T> {
   unsigned long long operator()(T x) const {
     using ull = unsigned long long;
@@ -47,14 +48,17 @@ struct SafeHash<T> {
   }
 };
 
-template <class T> requires(internal::is_modint_v<T>)
+template <class T>
+  requires(internal::is_modint_v<T>)
 struct SafeHash<T> {
   unsigned long long operator()(const T& x) const {
     return SafeHash<int>()(x.val());
   }
 };
 
-template <std::ranges::range Range> struct SafeHash<Range> {
+template <class Range>
+  requires(std::ranges::range<Range>)
+struct SafeHash<Range> {
   unsigned long long operator()(const Range& r) const {
     unsigned long long hs = 0;
     for (const auto& x : r) hash_combine(hs, x);

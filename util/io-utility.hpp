@@ -81,8 +81,9 @@ std::istream& operator>>(std::istream& is, std::vector<T, Alloc>& v) {
   return is;
 }
 
-template <std::ranges::range Range>
-requires(!std::is_convertible_v<Range, std::string>)
+template <class Range>
+  requires(std::ranges::range<Range> &&
+           !std::is_convertible_v<Range, std::string>)
 std::ostream& operator<<(std::ostream& os, const Range& r);
 
 template <class T, class Container>
@@ -101,8 +102,9 @@ std::ostream& operator<<(std::ostream& os, const std::pair<T, U>& p);
 template <class... Args>
 std::ostream& operator<<(std::ostream& os, const std::tuple<Args...>& t);
 
-template <std::ranges::range Range>
-requires(!std::is_convertible_v<Range, std::string>)
+template <class Range>
+  requires(std::ranges::range<Range> &&
+           !std::is_convertible_v<Range, std::string>)
 std::ostream& operator<<(std::ostream& os, const Range& r) {
   std::vector<std::string> outs;
   std::ostringstream oss;
