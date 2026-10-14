@@ -25,7 +25,7 @@ class StronglyConnectedComponents {
   // Each `v` is contained in `groups[id[v]]`.
   std::vector<std::vector<int>> groups;
 
-  StronglyConnectedComponents& build() {
+  void build() {
     int now_ord = 0;
     std::vector<int> st, low(n), ord(n, -1);
     st.reserve(n);
@@ -61,8 +61,6 @@ class StronglyConnectedComponents {
 
     groups.assign(group_num, std::vector<int>{});
     for (int i = 0; i < n; i++) groups[id[i]].push_back(i);
-
-    return *this;
   }
 
  private:

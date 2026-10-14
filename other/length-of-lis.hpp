@@ -9,7 +9,7 @@
 namespace cp {
 
 template <bool strong = true, class T, class Compare = std::less<T>>
-int length_of_lis(const std::vector<T>& a, Compare compare = Compare()) {
+int length_of_lis(const std::vector<T>& a, Compare compare = Compare{}) {
   int n = int(a.size());
   std::vector<T> dp(n, std::numeric_limits<T>::max());
   int ans = 0;

@@ -20,7 +20,7 @@ class LowLink {
 
   std::vector<int> low, ord;
 
-  LowLink& build() {
+  void build() {
     std::fill(low.begin(), low.end(), n);
     std::fill(ord.begin(), ord.end(), -1);
     int now_ord = 0;
@@ -43,7 +43,6 @@ class LowLink {
     for (int i = 0; i < n; i++) {
       if (ord[i] == -1) dfs(dfs, i, -1);
     }
-    return *this;
   }
 
  protected:

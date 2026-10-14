@@ -24,7 +24,7 @@ class TwoEdgeConnectedComponents {
   std::vector<int> id;
   std::vector<std::vector<int>> groups;
 
-  TwoEdgeConnectedComponents& build() {
+  void build() {
     group_num = 0;
     id.assign(n, -1);
     link.build();
@@ -45,7 +45,6 @@ class TwoEdgeConnectedComponents {
     }
     groups.assign(group_num, std::vector<int>{});
     for (int i = 0; i < n; i++) groups[id[i]].push_back(i);
-    return *this;
   }
 
  private:

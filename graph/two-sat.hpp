@@ -21,10 +21,10 @@ class TwoSat {
 
   std::vector<bool> solve() {
     std::vector<bool> ans(n);
-    auto id = scc.build().id;
+    scc.build();
     for (int i = 0; i < n; i++) {
-      if (id[2 * i] == id[2 * i + 1]) return {};
-      ans[i] = id[2 * i] < id[2 * i + 1];
+      if (scc.id[2 * i] == scc.id[2 * i + 1]) return {};
+      ans[i] = scc.id[2 * i] < scc.id[2 * i + 1];
     }
     return ans;
   }

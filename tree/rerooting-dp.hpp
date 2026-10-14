@@ -27,7 +27,7 @@ template <class S, auto op, auto e, class F, auto act> class RerootingDP {
   std::vector<std::vector<S>> dp;
   std::vector<S> ans;
 
-  RerootingDP& build() {
+  void build() {
     assert(1 <= n);
 
     std::vector<int> par(n, -1), ord(n);
@@ -78,7 +78,6 @@ template <class S, auto op, auto e, class F, auto act> class RerootingDP {
       }
       ans[v] = op(cum, vals[v]);
     }
-    return *this;
   }
 
  private:
