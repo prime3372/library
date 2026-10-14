@@ -9,14 +9,13 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using fps = FormalPowerSeries<mint>;
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   int n;
   cin >> n;
-  vector<fps> f(n);
+  vector<FormalPowerSeries<mint>> f(n);
   for (int i = 0; i < n; i++) {
     int d;
     cin >> d;

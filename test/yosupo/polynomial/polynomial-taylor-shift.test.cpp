@@ -8,7 +8,6 @@
 using namespace std;
 using namespace cp;
 using mint = modint998244353;
-using fps = FormalPowerSeries<mint>;
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -16,7 +15,7 @@ int main() {
   int n;
   mint c;
   cin >> n >> c;
-  fps f(n);
+  FormalPowerSeries<mint> f(n);
   for (mint& x : f) cin >> x;
   auto g = taylor_shift(f, c);
   for (mint& x : g) cout << x << " ";
