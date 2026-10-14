@@ -6,7 +6,7 @@
 
 namespace cp {
 
-template <class T> class WeightedUnionFind {
+template <class T> struct WeightedUnionFind {
  public:
   WeightedUnionFind() : n(0) {}
   explicit WeightedUnionFind(int _n)

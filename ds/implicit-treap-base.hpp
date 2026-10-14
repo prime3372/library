@@ -14,9 +14,9 @@
 namespace cp {
 
 template <class Node> struct ImplicitTreapBase {
+ public:
   using T = decltype(Node::val);
 
- public:
   virtual ~ImplicitTreapBase() {
     auto dfs = [&](auto self, Node* t) -> void {
       if (!t) return;

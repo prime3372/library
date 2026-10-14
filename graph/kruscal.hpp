@@ -8,7 +8,7 @@
 
 namespace cp {
 
-template <class T> class Kruscal {
+template <class T> struct Kruscal {
  public:
   Kruscal() : Kruscal(0) {}
   explicit Kruscal(int _n) : n(_n) {}

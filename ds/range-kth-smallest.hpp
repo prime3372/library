@@ -8,7 +8,7 @@
 namespace cp {
 
 template <class T, class Compare = std::less<T>, int bit_size = 24>
-class RangeKthSmallest {
+struct RangeKthSmallest {
  public:
   RangeKthSmallest() {}
   explicit RangeKthSmallest(const std::vector<T>& a) { init(a); }

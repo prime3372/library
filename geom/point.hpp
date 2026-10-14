@@ -14,7 +14,7 @@ template <class T> bool less_equal(T x, T y) { return x < y + eps; }
 
 }  // namespace internal
 
-template <class T> class Point {
+template <class T> struct Point {
  public:
   T x, y;
   Point() : x(0), y(0) {}

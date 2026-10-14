@@ -30,7 +30,7 @@ template <class S,
           auto compose,
           auto id,
           auto reverse = std::identity{}>
-class ImplicitTreapActedMonoid
+struct ImplicitTreapActedMonoid
     : public ImplicitTreapBase<ImplicitTreapActedMonoidNode<S, F, id>> {
  public:
   ImplicitTreapActedMonoid() {}

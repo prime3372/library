@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T> class Segment {
+template <class T> struct Segment {
  public:
   Point<T> p, q;
   Segment() {}

@@ -6,7 +6,7 @@
 
 namespace cp {
 
-template <bool directed> class CycleDetection {
+template <bool directed> struct CycleDetection {
  public:
   CycleDetection() : n(0) {}
   explicit CycleDetection(int _n) : n(_n), g(_n) {}

@@ -13,7 +13,7 @@
 
 namespace cp {
 
-template <class T, bool multiset, class Compare = std::less<T>> class Treap {
+template <class T, bool multiset, class Compare = std::less<T>> struct Treap {
  public:
   Treap() {}
   explicit Treap(std::vector<T> v) {

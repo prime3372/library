@@ -7,9 +7,9 @@
 namespace cp {
 
 template <class T> struct DynamicRangeAddRangeSum {
+ public:
   using ull = unsigned long long;
 
- public:
   DynamicRangeAddRangeSum() : n(0) {}
   explicit DynamicRangeAddRangeSum(ull _n) : n(_n), fw1(_n + 1), fw2(_n + 1) {}
   void add(ull l, ull r, T w) {

@@ -7,10 +7,10 @@
 
 namespace cp {
 
-class GaussianInteger {
+struct GaussianInteger {
+ public:
   using gint = GaussianInteger;
 
- public:
   long long x, y;
   GaussianInteger() : x(0), y(0) {}
   GaussianInteger(long long _x) : x(_x), y(0) {}

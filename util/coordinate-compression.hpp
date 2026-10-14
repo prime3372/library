@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T, class Compare = std::less<T>> class CoordinateCompression {
+template <class T, class Compare = std::less<T>> struct CoordinateCompression {
  public:
   CoordinateCompression() {}
   explicit CoordinateCompression(const std::vector<T>& v) { init(v); }

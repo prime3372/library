@@ -8,7 +8,7 @@
 
 namespace cp {
 
-class xorshift64 {
+struct xorshift64 {
  public:
   using result_type = unsigned long long;
   static constexpr unsigned long long min() { return 0; }

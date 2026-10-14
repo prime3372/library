@@ -9,7 +9,7 @@
 namespace cp {
 
 // Aho-Corasick automaton
-template <int char_size, char offset = 'a'> class AhoCorasick {
+template <int char_size, char offset = 'a'> struct AhoCorasick {
  public:
   class Node {
    public:

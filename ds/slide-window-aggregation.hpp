@@ -6,7 +6,7 @@
 
 namespace cp {
 
-template <class S, auto op, auto e> class SlideWindowAggregation {
+template <class S, auto op, auto e> struct SlideWindowAggregation {
  public:
   SlideWindowAggregation() : prod0(e()), prod1(e()) {}
 

@@ -8,7 +8,7 @@
 
 namespace cp {
 
-template <class S, auto op, auto e> class SlideWindowAggregationDeque {
+template <class S, auto op, auto e> struct SlideWindowAggregationDeque {
  public:
   SlideWindowAggregationDeque() {}
 

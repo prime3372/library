@@ -6,7 +6,7 @@
 #include <type_traits>
 #include <vector>
 
-template <int char_size, char offset = 'a'> class Trie {
+template <int char_size, char offset = 'a'> struct Trie {
  public:
   class Node {
    public:

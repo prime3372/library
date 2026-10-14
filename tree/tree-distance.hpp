@@ -8,7 +8,7 @@
 
 namespace cp {
 
-template <class T> class TreeDistance {
+template <class T> struct TreeDistance {
  public:
   TreeDistance() : n(0) {}
   explicit TreeDistance(int _n) : n(_n), g(_n), cost(_n), hld(_n) {}

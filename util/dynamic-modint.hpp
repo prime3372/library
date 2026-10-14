@@ -10,10 +10,10 @@
 
 namespace cp {
 
-template <int id> class DynamicModInt {
+template <int id> struct DynamicModInt {
+ public:
   using mint = DynamicModInt;
 
- public:
   static int mod() {
     assert(configured);
     return bt.umod();
@@ -26,14 +26,16 @@ template <int id> class DynamicModInt {
   }
 
   DynamicModInt() : v(0) { assert(configured); }
-  template <class T> requires(internal::is_signed_int_v<T>)
+  template <class T>
+    requires(internal::is_signed_int_v<T>)
   DynamicModInt(T _v) {
     assert(configured);
     long long x = (long long)(_v % (long long)(mod()));
     if (x < 0) x += mod();
     v = (unsigned int)(x);
   }
-  template <class T> requires(internal::is_unsigned_int_v<T>)
+  template <class T>
+    requires(internal::is_unsigned_int_v<T>)
   DynamicModInt(T _v) {
     assert(configured);
     v = (unsigned int)(_v % mod());

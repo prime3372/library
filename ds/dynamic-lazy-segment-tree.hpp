@@ -12,9 +12,9 @@ namespace cp {
 
 template <class S, auto op, auto e, class F, auto act, auto compose, auto id>
 struct DynamicLazySegmentTree {
+ public:
   using ull = unsigned long long;
 
- public:
   DynamicLazySegmentTree() : DynamicLazySegmentTree(0) {}
   explicit DynamicLazySegmentTree(ull _n, S val = e()) : n(_n) {
     assert(n <= (1ULL << 63));

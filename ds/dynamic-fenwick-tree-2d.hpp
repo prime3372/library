@@ -10,9 +10,9 @@
 namespace cp {
 
 template <class T> struct DynamicFenwickTree2D {
+ public:
   using ull = unsigned long long;
 
- public:
   DynamicFenwickTree2D() : n(0), m(0) {}
   explicit DynamicFenwickTree2D(int _n, ull _m)
       : n(_n), m(_m), fw(_n, DynamicFenwickTree<T>(_m)) {}

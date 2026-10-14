@@ -9,21 +9,24 @@
 
 namespace cp {
 
-template <int m> requires(1 <= m)
-class StaticModInt {
+template <int m>
+  requires(1 <= m)
+struct StaticModInt {
+ public:
   using mint = StaticModInt;
 
- public:
   static constexpr int mod() { return m; }
 
   StaticModInt() : v(0) {}
-  template <class T> requires(internal::is_signed_int_v<T>)
+  template <class T>
+    requires(internal::is_signed_int_v<T>)
   StaticModInt(T _v) {
     long long x = (long long)(_v % (long long)(umod()));
     if (x < 0) x += umod();
     v = (unsigned int)(x);
   }
-  template <class T> requires(internal::is_unsigned_int_v<T>)
+  template <class T>
+    requires(internal::is_unsigned_int_v<T>)
   StaticModInt(T _v) {
     v = (unsigned int)(_v % umod());
   }

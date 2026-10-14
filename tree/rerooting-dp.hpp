@@ -6,7 +6,7 @@
 
 namespace cp {
 
-template <class S, auto op, auto e, class F, auto act> class RerootingDP {
+template <class S, auto op, auto e, class F, auto act> struct RerootingDP {
  public:
   RerootingDP() : n(0) {}
   explicit RerootingDP(int _n) : RerootingDP(std::vector<S>(_n, e())) {}

@@ -9,9 +9,9 @@
 namespace cp {
 
 template <int bit_size> struct BinaryTrie {
+ public:
   using Bitset = std::bitset<bit_size>;
 
- public:
   BinaryTrie() { nodes.push_back(Node(-1)); }
 
   int insert(const Bitset& s) {

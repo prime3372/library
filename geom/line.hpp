@@ -7,7 +7,7 @@
 
 namespace cp {
 
-template <class T> class Line {
+template <class T> struct Line {
  public:
   Point<T> p, q;
   Line() : p(0, 0), q(1, 0) {}

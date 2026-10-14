@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class S, auto op, auto e> class SegmentTree {
+template <class S, auto op, auto e> struct SegmentTree {
  public:
   SegmentTree() : SegmentTree(0) {}
   explicit SegmentTree(int _n, const S& val = e())

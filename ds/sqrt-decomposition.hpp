@@ -7,7 +7,7 @@
 
 namespace cp {
 
-template <class block> class SqrtDecomposition {
+template <class block> struct SqrtDecomposition {
  public:
   SqrtDecomposition() : n(0), block_size(0), block_num(0) {}
   explicit SqrtDecomposition(int _n, int b)

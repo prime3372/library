@@ -6,7 +6,7 @@
 
 namespace cp {
 
-template <class T> class RangeAddRangeSum {
+template <class T> struct RangeAddRangeSum {
  public:
   RangeAddRangeSum() : n(0) {}
   explicit RangeAddRangeSum(int _n) : n(_n), fw1(_n + 1), fw2(_n + 1) {}

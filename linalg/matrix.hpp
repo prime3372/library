@@ -14,7 +14,7 @@ template <class T,
           auto mul = std::multiplies<T>(),
           auto zero = []() { return T(0); },
           auto one = []() { return T(1); }>
-class Matrix : public std::vector<std::vector<T>> {
+struct Matrix : public std::vector<std::vector<T>> {
  public:
   using Base = std::vector<std::vector<T>>;
   using Base::empty;

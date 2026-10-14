@@ -11,10 +11,10 @@
 
 namespace cp {
 
-class Hash61 {
+struct Hash61 {
+ public:
   using ull = unsigned long long;
 
- public:
   static Hash61 get_basis() {
     Hash61 hs;
     do {
@@ -25,13 +25,15 @@ class Hash61 {
   static Hash61 get_rand() { return Hash61(uniform(0ULL, m - 1)); }
 
   Hash61() : v(0) {}
-  template <class T> requires(internal::is_signed_int_v<T>)
+  template <class T>
+    requires(internal::is_signed_int_v<T>)
   Hash61(T _v) {
     long long x = (long long)(_v % m);
     if (x < 0) x += m;
     v = x;
   }
-  template <class T> requires(internal::is_unsigned_int_v<T>)
+  template <class T>
+    requires(internal::is_unsigned_int_v<T>)
   Hash61(T _v) {
     v = (ull)(_v % m);
   }

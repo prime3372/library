@@ -14,10 +14,10 @@ namespace cp {
 
 template <int bit_size>
   requires(0 <= bit_size && bit_size <= 64)
-class WaveletMatrix {
+struct WaveletMatrix {
+ public:
   using ull = unsigned long long;
 
- public:
   WaveletMatrix() : WaveletMatrix(0) {}
   explicit WaveletMatrix(int _n) : n(_n), a(_n) {}
 

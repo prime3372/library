@@ -9,7 +9,7 @@
 
 namespace cp {
 
-template <class T, class U, int bit_size = 24> class RectangleSum {
+template <class T, class U, int bit_size = 24> struct RectangleSum {
  public:
   RectangleSum() {}
 

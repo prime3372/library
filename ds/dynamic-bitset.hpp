@@ -10,9 +10,9 @@
 namespace cp {
 
 struct DynamicBitset {
+ public:
   using ull = unsigned long long;
 
- public:
   DynamicBitset() : n(0) {}
   explicit DynamicBitset(int _n) : n(_n), a((_n + w - 1) / w) {}
 

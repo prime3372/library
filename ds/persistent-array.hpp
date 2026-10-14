@@ -8,10 +8,11 @@
 namespace cp {
 
 template <class T> struct PersistentArray {
-  using ull = unsigned long long;
+ private:
   union Node;
 
  public:
+  using ull = unsigned long long;
   using NodePtr = Node*;
 
   PersistentArray() : n(0), log(0), init_val() {}
