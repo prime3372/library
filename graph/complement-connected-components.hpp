@@ -33,15 +33,15 @@ class ComplementConnectedComponents {
     std::vector<bool> c(n);
     for (int i : g[min_deg_v]) c[i] = true;
     for (int i = 0; i < n; i++) {
-      if (!c[i]) {
-        // Vertices not connected to min_deg_v by an Edge belong to the same
-        // connected component in the complement graph.
-        uf.unite(min_deg_v, i);
-        continue;
-      }
+      // Vertices not connected to min_deg_v by an Edge belong to the same
+      // connected component in the complement graph.
       // For the vertices that are connected to min_deg_v by an Edge, we execute
       // an O(N^2) brute-force solution. Since min_deg = O(|E|/|V|), the
       // computational complexity is bounded by O(|E|^2/|V|^2) = O(|E|).
+      if (!c[i]) {
+        uf.unite(min_deg_v, i);
+        continue;
+      }
       std::vector<bool> ci(n);
       for (int j : g[i]) ci[j] = true;
       for (int j = 0; j < n; j++) {
