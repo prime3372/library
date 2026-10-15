@@ -11,11 +11,11 @@
 namespace cp {
 
 template <class S, auto op, auto e> struct DynamicSegmentTree {
- public:
   static_assert(std::is_invocable_r_v<S, decltype(op), S, S>,
                 "op must work as S(S, S)");
   static_assert(std::is_invocable_r_v<S, decltype(e)>, "e must work as S()");
 
+ public:
   using ull = unsigned long long;
 
   DynamicSegmentTree() : DynamicSegmentTree(0) {}
