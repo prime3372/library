@@ -9,7 +9,8 @@
 
 namespace cp {
 
-template <class T = long long> requires(internal::is_integral_v<T>)
+template <class T = long long>
+  requires(internal::is_integral_v<T>)
 T ipow(long long x, long long n) {
   assert(0 <= n);
   T r = 1, t = x;
@@ -21,7 +22,8 @@ T ipow(long long x, long long n) {
   return r;
 }
 
-template <class T> requires(internal::is_integral_v<T>)
+template <class T>
+  requires(internal::is_integral_v<T>)
 T isqrt(T x) {
   assert(0 <= x);
   T y = T(std::sqrt(double(x)));
@@ -31,7 +33,8 @@ T isqrt(T x) {
   return y;
 }
 
-template <class T> requires(internal::is_integral_v<T>)
+template <class T>
+  requires(internal::is_integral_v<T>)
 T icbrt(T x) {
   T y = T(std::cbrt(double(x)));
   while (y != 0 && y * y > x / y) y--;
@@ -42,7 +45,7 @@ T icbrt(T x) {
 template <class T> int sign(T x) { return x < 0 ? -1 : x == 0 ? 0 : 1; }
 
 template <class T, class U>
-requires(internal::is_integral_v<T> && internal::is_integral_v<U>)
+  requires(internal::is_integral_v<T> && internal::is_integral_v<U>)
 std::common_type_t<T, U> floor(T n, U d) {
   assert(d != 0);
   if (d < 0) {
@@ -54,13 +57,13 @@ std::common_type_t<T, U> floor(T n, U d) {
 }
 
 template <class T, class U>
-requires(internal::is_integral_v<T> && internal::is_integral_v<U>)
+  requires(internal::is_integral_v<T> && internal::is_integral_v<U>)
 std::common_type_t<T, U> ceil(T n, U d) {
   return floor(n - sign(d), d) + 1;
 }
 
 template <class T, class U>
-requires(internal::is_integral_v<T> && internal::is_integral_v<U>)
+  requires(internal::is_integral_v<T> && internal::is_integral_v<U>)
 std::common_type_t<T, U> mod(T n, U m) {
   return n - floor(n, m) * m;
 }
