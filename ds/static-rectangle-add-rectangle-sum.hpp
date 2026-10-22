@@ -7,9 +7,9 @@
 namespace cp {
 
 // preliminary rectangle add -> rectangle sum (both offline)
-template <class T, class U> struct OfflineRectangleAddRectangleSum {
+template <class T, class U> struct StaticRectangleAddRectangleSum {
  public:
-  OfflineRectangleAddRectangleSum() {}
+  StaticRectangleAddRectangleSum() {}
 
   void add(T l, T d, T r, T u, U w) {
     assert(!asked_sum);
