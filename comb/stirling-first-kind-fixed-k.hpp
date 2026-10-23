@@ -12,7 +12,7 @@ namespace cp {
 // https://en.wikipedia.org/wiki/Stirling_numbers_of_the_first_kind#Generating_functions
 // @return {s(k, k), s(k+1, k), ..., s(max_n, k)}
 template <class mint>
-std::vector<mint> stirling_first_kind_fixed_k(int k, int max_n) {
+std::vector<mint> signed_stirling_first_kind_fixed_k(int k, int max_n) {
   assert(0 <= k && k <= max_n);
   BinomMod<mint> binom(max_n);
   FormalPowerSeries<mint> f(max_n + 1);
