@@ -182,6 +182,7 @@
   "test/yosupo/data_structure/set_xor_min.test.cpp": "2026-09-21 22:31:55 +0900",
   "test/yosupo/data_structure/static-range-frequency.test.cpp": "2026-10-14 18:39:03 +0900",
   "test/yosupo/data_structure/static-range-sum-with-upper-bound.test.cpp": "2026-10-14 18:15:27 +0900",
+  "test/yosupo/data_structure/static-rectangle-add-rectangle-sum.test.cpp": "2026-10-22 19:32:38 +0900",
   "test/yosupo/data_structure/static-rmq.test.cpp": "2026-10-14 18:39:03 +0900",
   "test/yosupo/data_structure/static_range_frequency.test.cpp": "2026-10-07 14:48:24 +0900",
   "test/yosupo/data_structure/static_range_sum_with_upper_bound.test.cpp": "2026-10-02 11:35:54 +0900",
