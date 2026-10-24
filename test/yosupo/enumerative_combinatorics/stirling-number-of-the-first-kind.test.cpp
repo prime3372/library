@@ -14,6 +14,6 @@ int main() {
   cin.tie(nullptr);
   int n;
   cin >> n;
-  auto s = stirling_first_kind<mint>(n);
+  auto s = signed_stirling_first_kind<mint>(n);
   for (mint& x : s) cout << x << " ";
 }
