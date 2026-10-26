@@ -10,17 +10,17 @@
 
 using namespace std;
 using namespace cp;
-using ll = long long;
+using ld = long double;
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   cout << fixed << setprecision(10);
-  Line<ll> l;
+  Line<ld> l;
   int q;
   cin >> l >> q;
   while (q--) {
-    Point<ll> p;
+    Point<ld> p;
     cin >> p;
     cout << projection(p, l) << "\n";
   }

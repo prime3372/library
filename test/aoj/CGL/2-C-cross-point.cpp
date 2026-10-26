@@ -9,7 +9,7 @@
 
 using namespace std;
 using namespace cp;
-using ll = long long;
+using ld = long double;
 
 int main() {
   ios_base::sync_with_stdio(false);
@@ -18,7 +18,7 @@ int main() {
   int q;
   cin >> q;
   while (q--) {
-    Line<ll> l, m;
+    Line<ld> l, m;
     cin >> l >> m;
     cout << cross_point(l, m) << "\n";
   }
