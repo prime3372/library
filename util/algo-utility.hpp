@@ -42,7 +42,7 @@ std::vector<int> sorted_indices(const Range& a, Compare compare = Compare{}) {
 template <class Range,
           class Compare = std::less<std::ranges::range_value_t<Range>>>
   requires(std::ranges::range<Range>)
-std::vector<int> sort(Range& a, Compare compare = Compare{}) {
+std::vector<int> sort(Range&& a, Compare compare = Compare{}) {
   return rearrange(a, sorted_indices(a, compare));
 }
 
