@@ -10,7 +10,8 @@ namespace cp {
 
 class RootedTreeHash {
  public:
-  RootedTreeHash(int _n) : hash(_n), depth(_n), n(_n), g(_n) {
+  RootedTreeHash() : n(0) {}
+  explicit RootedTreeHash(int _n) : hash(_n), depth(_n), n(_n), g(_n) {
     while (int(xs.size()) <= n) xs.push_back(Hash61::get_rand());
   }
 
