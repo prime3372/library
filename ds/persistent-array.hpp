@@ -2,7 +2,6 @@
 
 #include <array>
 #include <cassert>
-#include <utility>
 #include <vector>
 
 namespace cp {

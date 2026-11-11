@@ -1,10 +1,6 @@
 #pragma once
 
-#include <array>
-#include <tuple>
 #include <type_traits>
-#include <utility>
-#include <vector>
 
 namespace cp {
 

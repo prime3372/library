@@ -1,11 +1,6 @@
 #pragma once
 
-#include <algorithm>
-#include <array>
-#include <bitset>
 #include <cassert>
-#include <limits>
-#include <utility>
 #include <vector>
 
 #include "ds/bit-vector.hpp"

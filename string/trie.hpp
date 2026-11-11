@@ -3,7 +3,6 @@
 #include <array>
 #include <cassert>
 #include <string>
-#include <type_traits>
 #include <vector>
 
 template <int char_size, char offset = 'a'> struct Trie {

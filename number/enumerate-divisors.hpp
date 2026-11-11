@@ -2,7 +2,6 @@
 
 #include <algorithm>
 #include <cassert>
-#include <utility>
 #include <vector>
 
 #include "number/factorize.hpp"

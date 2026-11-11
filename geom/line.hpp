@@ -3,7 +3,6 @@
 #include <iostream>
 
 #include "geom/point.hpp"
-#include "util/type-traits.hpp"
 
 namespace cp {
 

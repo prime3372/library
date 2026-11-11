@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <cassert>
 #include <string>
-#include <utility>
 #include <vector>
 
 namespace cp {
