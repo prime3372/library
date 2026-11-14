@@ -1,7 +1,7 @@
 #pragma once
 
-#include <algorithm>
 #include <bit>
+#include <cassert>
 #include <vector>
 
 #include "number/ext-gcd.hpp"
