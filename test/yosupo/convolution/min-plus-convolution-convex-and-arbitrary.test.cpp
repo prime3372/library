@@ -3,6 +3,7 @@
 
 #include "convex/max-plus-convolution.hpp"
 #include "convex/min-plus-convolution.hpp"
+#include <cassert>
 #include <iostream>
 #include <vector>
 
