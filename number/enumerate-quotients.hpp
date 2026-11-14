@@ -1,8 +1,8 @@
 #pragma once
 
+#include <array>
 #include <cassert>
 #include <numeric>
-#include <tuple>
 #include <vector>
 
 #include "util/math-utility.hpp"
