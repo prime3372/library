@@ -2,7 +2,6 @@
 
 #include "number/partition.hpp"
 #include <iostream>
-#include <vector>
 
 using namespace std;
 using namespace cp;
